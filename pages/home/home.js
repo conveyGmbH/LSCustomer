@@ -13,6 +13,41 @@
 
     var pageName = Application.getPagePath("home");
 
+    WinJS.Namespace.define("Application.EventListLayout", {
+        EventsLayout: WinJS.Class.derive(WinJS.UI.GridLayout, function (options) {
+            WinJS.UI.GridLayout.apply(this, [options]);
+            this._site = null;
+            this._surface = null;
+        },
+        {
+            // This sets up any state and CSS layout on the surface of the custom layout
+            initialize: function (site) {
+                if (this.__proto__ &&
+                    typeof this.__proto__.initialize === "function") {
+                    this.__proto__.initialize(site);
+                }
+                this._site = site;
+                this._surface = this._site.surface;
+
+                // Add a CSS class to control the surface level layout
+                WinJS.Utilities.addClass(this._surface, "eventlistLayout");
+
+                return WinJS.UI.Orientation.vertical;
+            },
+
+            // Reset the layout to its initial state
+            uninitialize: function () {
+                WinJS.Utilities.removeClass(this._surface, "eventlistLayout");
+                this._site = null;
+                this._surface = null;
+                if (this.__proto__ &&
+                    typeof this.__proto__.uninitialize === "function") {
+                    this.__proto__.uninitialize();
+                }
+            }
+        })
+    });
+
     WinJS.UI.Pages.define(pageName, {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
@@ -32,6 +67,26 @@
                     contentarea.style.backgroundColor = Colors.tileBackgroundColor;
                 }
             }
+            // insert body-content
+            var contentHeader = element.querySelector(".content-header");
+            if (contentHeader && contentHeader.parentElement) {
+                var bodyContent = Application.navigator.pageElement &&
+                    Application.navigator.pageElement.querySelector(".body-content");
+                if (bodyContent) {
+                    bodyContent.parentElement.removeChild(bodyContent);
+                } else {
+                    bodyContent = document.createElement("DIV");
+                    bodyContent.setAttribute("class", "body-content");
+                    var sibling = document.body.firstElementChild;
+                    while (sibling && sibling.id !== "ls-customer-host") {
+                        var nextSibling = sibling.nextElementSibling;
+                        document.body.removeChild(sibling);
+                        bodyContent.appendChild(sibling);
+                        sibling = nextSibling;
+                    }
+                }
+                contentHeader.parentElement.insertBefore(bodyContent, contentHeader);
+            }
 
             this.inResize = 0;
             this.prevWidth = 0;
@@ -44,6 +99,7 @@
                 // general event listener for hardware back button, too!
                 this.controller.addRemovableEventListener(document, "backbutton", this.controller.eventHandlers.clickBack.bind(this.controller));
             }
+            document.body.style.overflowY = "visible";
             Log.ret(Log.l.trace);
         },
 
@@ -51,6 +107,11 @@
             Log.call(Log.l.trace, pageName + ".");
             // TODO: Respond to navigations away from this page.
             this.controller = null;
+            var splitViewRoot = Application.navigator && Application.navigator.splitViewRoot;
+            if (splitViewRoot && splitViewRoot.style) {
+                splitViewRoot.style.height = "";
+                document.body.style.overflowY = "";
+            }
             Log.ret(Log.l.trace);
         },
 
@@ -68,49 +129,18 @@
                         if (contentArea) {
                             var width = contentArea.clientWidth;
                             var height = contentArea.clientHeight;
-                            var contentHeader = element.querySelector(".content-header");
-                            if (contentHeader) {
-                                height -= contentHeader.clientHeight;
-                            }
                             if (width !== that.prevWidth || height !== that.prevHeight) {
-                                var tilesContainer = element.querySelector(".tiles-container");
                                 var listView = element.querySelector("#homeEvents.listview");
-                                if (listView && listView.style && 
-                                    tilesContainer && tilesContainer.style) {
-                                    var count = that.controller.binding && that.controller.binding.count;
-                                    if (count > 0) {
-                                        var itemWidth = 240;
-                                        var itemHeight = 480;
-                                        var margin = 30;
-                                        var containerItem = listView.querySelector(".win-container");
-                                        if (containerItem) {
-                                            margin = 2 * (containerItem.offsetLeft % containerItem.clientWidth);
-                                            itemWidth = containerItem.clientWidth + margin;
-                                            itemHeight = containerItem.clientHeight + margin;
-                                        }
-                                        if (itemWidth > 0 && itemHeight > 0) {
-                                            var itemsPerLine = Math.min(Math.max(Math.floor(width / itemWidth),1),5);
-                                            var itemLines = Math.floor(count / itemsPerLine + 0.99);
-                                            var listHeight = itemLines * itemHeight;
-                                            var listWidth = itemsPerLine * itemWidth;
-                                            if (tilesContainer.clientHeight !== listHeight) {
-                                                tilesContainer.style.height = listHeight + "px";
-                                            }
-                                            if (listView.clientWidth !== listWidth && listWidth < width) {
-                                                listView.style.width = listWidth + "px";
-                                                listView.style.marginLeft = "calc(50% - " + (listWidth/2) + "px)";
-                                            }
-                                        }
+                                if (listView && listView.style) {
+                                    if (listView.clientWidth !== width) {
+                                        listView.style.width = width + "px";
+                                        that.prevWidth = width;
                                     }
-                                    var verticalSpace = height - tilesContainer.clientHeight;
-                                    if (verticalSpace > 0) {
-                                        tilesContainer.style.marginTop = Math.max((verticalSpace / 2),0) + "px";
-                                    } else {
-                                        tilesContainer.style.marginTop = "";
+                                    if (listView.clientHeight !== height) {
+                                        listView.style.height = height + "px";
+                                        that.prevHeight = height;
                                     }
                                 }
-                                that.prevWidth = width;
-                                that.prevHeight = height;
                             }
                         }
                     }

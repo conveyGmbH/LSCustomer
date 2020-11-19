@@ -1,0 +1,10 @@
+﻿/*
+    appHeader styles now in index.css!
+
+*/
+.appHeader header[role=banner] {
+    height: 0;
+}
+.appHeader .titlearea {
+    height: 0;
+}

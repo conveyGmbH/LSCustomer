@@ -31,6 +31,15 @@
 
             var progress = null;
             var counter = null;
+            var layout = null;
+
+            if (listView && listView.winControl) {
+                layout = new Application.EventListLayout.EventsLayout;
+                listView.winControl.layout = {
+                    type: layout,
+                    orientation: WinJS.UI.Orientation.vertical
+                };
+            }
 
             var maxLeadingPages = 0;
             var maxTrailingPages = 0;
@@ -88,13 +97,6 @@
                                     counter.style.display = "inline";
                                 }
                                 that.loading = false;
-                                WinJS.Promise.timeout(50).then(function() {
-                                    if (pageElement.winControl) {
-                                        pageElement.winControl.prevWidth = 0;
-                                        pageElement.winControl.prevHeight = 0;
-                                        pageElement.winControl.updateLayout.call(pageElement.winControl, pageElement);
-                                    }
-                                });
                             }
                         }
                     }
@@ -105,16 +107,6 @@
                     if (eventInfo && eventInfo.detail) {
                         var visible = eventInfo.detail.visible;
                         if (visible) {
-                            var contentHeader = listView.querySelector(".content-header");
-                            if (contentHeader) {
-                                var halfCircle = contentHeader.querySelector(".half-circle");
-                                if (halfCircle && halfCircle.style) {
-                                    if (halfCircle.style.visibility === "hidden") {
-                                        halfCircle.style.visibility = "";
-                                        WinJS.UI.Animation.enterPage(halfCircle);
-                                    }
-                                }
-                            }
                         }
                     }
                     Log.ret(Log.l.trace);

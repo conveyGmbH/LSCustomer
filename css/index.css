@@ -649,20 +649,7 @@ html.win-hoverable .win-disabled .win-splitviewcommand-button:hover.win-pressed 
     .user-name-container {
         padding-top: 4px;
     }
-    /*
-    .event-line {
-        width: calc(100% - 180px);
-        display: block;
-        position: absolute;
-        top: 13px;
-        left: 0;
-    }
-    .event-name-static {
-        position: relative;
-        top: -5px;
-    }
 
-    */
     .event-name {
         font-size: 15px;
     }

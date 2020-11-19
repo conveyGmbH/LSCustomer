@@ -72,7 +72,7 @@
     }
     function createRootElement(rootId) {
         var customerElement = document.querySelector(rootId);
-        if (customerElement) {
+        if (customerElement && customerElement.parentElement) {
             var data = getDataset(customerElement);
             if (data) {
                 AppData.customer = data.customer;
@@ -107,7 +107,7 @@
             barHorizontalTextGray.appendChild(barHorizontalInnerTextGray);
             barHorizontalItem.appendChild(barHorizontalTextGray);
             barHorizontalTemplate.appendChild(barHorizontalItem);
-            customerElement.appendChild(barHorizontalTemplate);
+            customerElement.parentElement.insertBefore(barHorizontalTemplate, customerElement.nextElementSibling);
 
             var barVerticalTemplate = document.createElement("DIV");
             barVerticalTemplate.setAttribute("class", "navigationbar-vertical-template");
@@ -132,11 +132,17 @@
             barVerticalTextGray.appendChild(barVerticalInnerTextGray);
             barVerticalItem.appendChild(barVerticalTextGray);
             barVerticalTemplate.appendChild(barVerticalItem);
-            customerElement.appendChild(barVerticalTemplate);
+            customerElement.parentElement.insertBefore(barVerticalTemplate, barHorizontalTemplate.nextElementSibling);
+
+            // App Header 
+            var appHeader = document.createElement("DIV");
+            appHeader.id = "headerhost";
+            appHeader.setAttribute("class", "headerhost-container");
+            customerElement.parentElement.insertBefore(appHeader, barVerticalTemplate.nextElementSibling);
 
             var splitView = document.createElement("DIV");
             splitView.id = "root-split-view";
-            splitView.setAttribute("class", "splitView");
+            splitView.setAttribute("class", "win-splitview splitView");
             var splitViewContent = document.createElement("DIV");
             splitViewContent.setAttribute("class", "win-splitview-content");
 
@@ -170,12 +176,13 @@
             // Page Content
             var contenthost = document.createElement("DIV");
             contenthost.id = "contenthost";
+            contenthost.setAttribute("class", "contenthost-container");
             contenthost.setAttribute("data-win-control", "Application.PageControlNavigator");
             contenthost.setAttribute("data-win-options", "{home: Application.startPage}");
             splitViewContent.appendChild(contenthost);
 
             splitView.appendChild(splitViewContent);
-            customerElement.appendChild(splitView);
+            customerElement.parentElement.insertBefore(splitView, appHeader.nextElementSibling);
 
             // AppBar for Page Commands
             var appbar = document.createElement("DIV");

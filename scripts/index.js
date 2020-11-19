@@ -69,6 +69,8 @@
     Application.navigationMasterDetail = [
     ];
 
+    Application.query = getQueryStringParameters();
+
     // init page for app startup
     Application.initPage = Application.getPagePath("home");
     // home page of app

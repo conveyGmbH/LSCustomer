@@ -8,11 +8,9 @@
 
 .home .tiles-container {
     width: 100%;
-    height: 100%;
 }
 .home .listview {
-    margin-left: calc(50% - 405px);
-    width: 810px;
+    width: 100%;
     height: 100%;
 }
 .home .event-item {
@@ -103,3 +101,4 @@
 */
 
 
+.view-size-small 
