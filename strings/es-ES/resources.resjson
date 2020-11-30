@@ -1,4 +1,8 @@
 ﻿{
     "flyout.ok"             : "OK",
-    "flyout.cancel"         : "Anular"
+    "flyout.cancel"         : "Anular",
+
+    "events.title"          : "Series",
+
+    "event.title"           : "Event"
 }			

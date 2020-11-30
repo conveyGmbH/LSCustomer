@@ -75,10 +75,13 @@
     // init page for app startup
     //Application.initPage = Application.getPagePath("dbinit");
     // home page of app
-    Application.startPage = Application.getPagePath("events");
+    Application.startPage = Application.getPagePath("home");
 
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
+        if (id === "home") {
+            id = "events";
+        }
         // ensure login 
         if (AppData && 
             AppData._persistentStates && 

@@ -1,4 +1,8 @@
 ﻿{
     "flyout.ok"             : "OK",
-    "flyout.cancel"         : "Abbrechen"
+    "flyout.cancel"         : "Abbrechen",
+
+	"events.title"          : "Serie",
+
+    "event.title"           : "Veranstaltung"
 }			

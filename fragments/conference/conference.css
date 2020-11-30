@@ -1,0 +1,10 @@
+﻿#conferenceController .doc-container {
+    float: left;
+}
+
+#conference.mediaview {
+    width: 100%;
+    height: calc(100% - 8px);
+}
+
+

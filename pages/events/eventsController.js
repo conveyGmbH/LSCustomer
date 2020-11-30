@@ -55,12 +55,13 @@
                 },
                 onItemInvoked: function (eventInfo) {
                     Log.call(Log.l.trace, "Events.Controller.");
-                    if (eventInfo && eventInfo.detail) {
+                    if (eventInfo && eventInfo.detail && that.records) {
                         Log.print(Log.l.trace, "itemIndex=" + eventInfo.detail.itemIndex);
-                        //var item = Events.eventView.getAt(eventInfo.detail.itemIndex);
-                        //if (item && item.page) {
-                        //    Application.navigateById(item.page, event);
-                        //}
+                        var item = that.records.getAt(eventInfo.detail.itemIndex);
+                        if (item && item.VeranstaltungVIEWID) {
+                            AppData.setRecordId("Veranstaltung", item.VeranstaltungVIEWID);
+                            Application.navigateById("event", eventInfo);
+                        }
                     }
                     Log.ret(Log.l.trace);
                 },
