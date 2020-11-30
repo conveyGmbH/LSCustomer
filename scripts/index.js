@@ -56,13 +56,15 @@
 
     // static array of menu groups for the split view pane
     Application.navigationBarGroups = [
-        { id: "home", group: 1, svg: "home", disabled: false }
+        { id: "home", group: 1, svg: "home", disabled: false },
+        { id: "events", group: 2, svg: "calendar_clock", disabled: false }
     ];
 
     // static array of pages for the navigation bar
     Application.navigationBarPages = [
         { id: "home", group: -1, disabled: false },
-        { id: "events", group: -1, disabled: false }
+        { id: "events", group: 2, disabled: false },
+        { id: "event", group: 2, disabled: false }
     ];
 
 

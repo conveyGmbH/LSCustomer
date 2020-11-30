@@ -2,6 +2,10 @@
     "flyout.ok"             : "OK",
     "flyout.cancel"         : "Annuler",
 
+    "label.home"            : "Start",
+    "label.events"          : "Series",
+    "label.event"           : "Event",
+
     "events.title"          : "Series",
 
     "event.title"           : "Event"
