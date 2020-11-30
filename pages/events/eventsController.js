@@ -10,16 +10,16 @@
 (function () {
     "use strict";
 
-    WinJS.Namespace.define("Home", {
+    WinJS.Namespace.define("Events", {
         Controller: WinJS.Class.derive(Application.RecordsetController, function Controller(pageElement, commandList) {
-            Log.call(Log.l.trace, "Home.Controller.");
+            Log.call(Log.l.trace, "Events.Controller.");
 
             // ListView control
-            var listView = pageElement.querySelector("#homeEvents.listview");
+            var listView = pageElement.querySelector("#events.listview");
 
             Application.RecordsetController.apply(this, [pageElement, {
                 count: 0
-            }, commandList, false, Home.eventView, null, listView]);
+            }, commandList, false, Events.eventView, null, listView]);
 
             var that = this;
 
@@ -31,6 +31,15 @@
 
             var progress = null;
             var counter = null;
+            var layout = null;
+
+            if (listView && listView.winControl) {
+                layout = new Application.EventListLayout.EventsLayout;
+                listView.winControl.layout = {
+                    type: layout,
+                    orientation: WinJS.UI.Orientation.vertical
+                };
+            }
 
             var maxLeadingPages = 0;
             var maxTrailingPages = 0;
@@ -38,17 +47,17 @@
             // define handlers
             this.eventHandlers = {
                 clickBack: function (event) {
-                    Log.call(Log.l.trace, "Home.Controller.");
+                    Log.call(Log.l.trace, "Events.Controller.");
                     if (WinJS.Navigation.canGoBack === true) {
                         WinJS.Navigation.back(1).done( /* Your success and error handlers */);
                     }
                     Log.ret(Log.l.trace);
                 },
                 onItemInvoked: function (eventInfo) {
-                    Log.call(Log.l.trace, "Home.Controller.");
+                    Log.call(Log.l.trace, "Events.Controller.");
                     if (eventInfo && eventInfo.detail) {
                         Log.print(Log.l.trace, "itemIndex=" + eventInfo.detail.itemIndex);
-                        //var item = Home.eventView.getAt(eventInfo.detail.itemIndex);
+                        //var item = Events.eventView.getAt(eventInfo.detail.itemIndex);
                         //if (item && item.page) {
                         //    Application.navigateById(item.page, event);
                         //}
@@ -56,7 +65,7 @@
                     Log.ret(Log.l.trace);
                 },
                 onLoadingStateChanged: function (eventInfo) {
-                    Log.call(Log.l.trace, "Home.Controller.");
+                    Log.call(Log.l.trace, "Events.Controller.");
                     if (listView && listView.winControl) {
                         Log.print(Log.l.trace, "loadingState=" + listView.winControl.loadingState);
                         // single list selection
@@ -94,7 +103,7 @@
                     Log.ret(Log.l.trace);
                 },
                 onHeaderVisibilityChanged: function (eventInfo) {
-                    Log.call(Log.l.trace, "Home.Controller.");
+                    Log.call(Log.l.trace, "Events.Controller.");
                     if (eventInfo && eventInfo.detail) {
                         var visible = eventInfo.detail.visible;
                         if (visible) {
@@ -103,7 +112,7 @@
                     Log.ret(Log.l.trace);
                 },
                 onFooterVisibilityChanged: function (eventInfo) {
-                    Log.call(Log.l.trace, "Home.Controller.");
+                    Log.call(Log.l.trace, "Events.Controller.");
                     if (eventInfo && eventInfo.detail) {
                         progress = listView.querySelector(".list-footer .progress");
                         counter = listView.querySelector(".list-footer .counter");

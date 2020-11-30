@@ -6,12 +6,47 @@
 /// <reference path="~/www/lib/convey/scripts/logging.js" />
 /// <reference path="~/www/lib/convey/scripts/navigator.js" />
 /// <reference path="~/www/lib/convey/scripts/appbar.js" />
-/// <reference path="~/www/pages/home/homeController.js" />
+/// <reference path="~/www/pages/events/eventsController.js" />
 
 (function () {
     "use strict";
 
-    var pageName = Application.getPagePath("home");
+    var pageName = Application.getPagePath("events");
+
+    WinJS.Namespace.define("Application.EventListLayout", {
+        EventsLayout: WinJS.Class.derive(WinJS.UI.GridLayout, function (options) {
+            WinJS.UI.GridLayout.apply(this, [options]);
+            this._site = null;
+            this._surface = null;
+        },
+        {
+            // This sets up any state and CSS layout on the surface of the custom layout
+            initialize: function (site) {
+                if (this.__proto__ &&
+                    typeof this.__proto__.initialize === "function") {
+                    this.__proto__.initialize(site);
+                }
+                this._site = site;
+                this._surface = this._site.surface;
+
+                // Add a CSS class to control the surface level layout
+                WinJS.Utilities.addClass(this._surface, "eventlistLayout");
+
+                return WinJS.UI.Orientation.vertical;
+            },
+
+            // Reset the layout to its initial state
+            uninitialize: function () {
+                WinJS.Utilities.removeClass(this._surface, "eventlistLayout");
+                this._site = null;
+                this._surface = null;
+                if (this.__proto__ &&
+                    typeof this.__proto__.uninitialize === "function") {
+                    this.__proto__.uninitialize();
+                }
+            }
+        })
+    });
 
     WinJS.UI.Pages.define(pageName, {
         // This function is called whenever a user navigates to this page. It
@@ -59,7 +94,7 @@
 
             var commandList = [];
 
-            this.controller = new Home.Controller(element, commandList);
+            this.controller = new Events.Controller(element, commandList);
             if (this.controller.eventHandlers) {
                 // general event listener for hardware back button, too!
                 this.controller.addRemovableEventListener(document, "backbutton", this.controller.eventHandlers.clickBack.bind(this.controller));
@@ -95,7 +130,7 @@
                             var width = contentArea.clientWidth;
                             var height = contentArea.clientHeight;
                             if (width !== that.prevWidth || height !== that.prevHeight) {
-                                var listView = element.querySelector("#homeEvents.listview");
+                                var listView = element.querySelector("#events.listview");
                                 if (listView && listView.style) {
                                     if (listView.clientWidth !== width) {
                                         listView.style.width = width + "px";

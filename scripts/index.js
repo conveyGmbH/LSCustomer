@@ -61,7 +61,8 @@
 
     // static array of pages for the navigation bar
     Application.navigationBarPages = [
-        { id: "home", group: -1, disabled: false }
+        { id: "home", group: -1, disabled: false },
+        { id: "events", group: -1, disabled: false }
     ];
 
 
@@ -72,9 +73,9 @@
     Application.query = getQueryStringParameters();
 
     // init page for app startup
-    Application.initPage = Application.getPagePath("home");
+    //Application.initPage = Application.getPagePath("dbinit");
     // home page of app
-    Application.startPage = Application.getPagePath("home");
+    Application.startPage = Application.getPagePath("events");
 
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
