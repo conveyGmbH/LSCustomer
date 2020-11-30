@@ -7,5 +7,23 @@
     "use strict";
 
     WinJS.Namespace.define("Event", {
+        _eventView: {
+            get: function () {
+                return AppData.getFormatView("Veranstaltung", 20620);
+            }
+        },
+        eventView: {
+            select: function (complete, error, recordId) {
+                Log.call(Log.l.trace, "eventView.");
+                var ret = Event._eventView.selectById(complete, error, recordId);
+                Log.ret(Log.l.trace);
+                return ret;
+            },
+            defaultValue: {
+                Name: "",
+                Titel: "",
+                Untertitel: ""
+            }
+        }
     });
 })();

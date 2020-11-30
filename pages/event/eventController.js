@@ -15,10 +15,24 @@
             Log.call(Log.l.trace, "Event.Controller.");
 
             Application.Controller.apply(this, [pageElement, {
-                showConference: true
+                showConference: true,
+                eventId: AppData.getRecordId("Veranstaltung"),
+                dataEvent: {}
             }, commandList]);
 
             var that = this;
+
+            var setDataEvent = function (newDataEvent) {
+                var prevNotifyModified = AppBar.notifyModified;
+                AppBar.notifyModified = false;
+                that.binding.dataEvent = newDataEvent;
+                // convert Startdatum 
+                that.binding.dataEvent.dateBegin = getDateObject(newDataEvent.Startdatum);
+                AppBar.modified = false;
+                AppBar.notifyModified = prevNotifyModified;
+                AppBar.triggerDisableHandlers();
+            };
+            this.setDataEvent = setDataEvent;
 
             // define handlers
             this.eventHandlers = {
@@ -45,11 +59,10 @@
             var loadConference = function() {
                 var ret;
                 Log.call(Log.l.trace, "Event.Controller.");
-                var eventId = AppData.getRecordId("Veranstaltung");
-                if (eventId) {
+                if (that.binding.eventId) {
                     var parentElement = pageElement.querySelector("#conferencehost");
                     if (parentElement) {
-                        ret = Application.loadFragmentById(parentElement, "conference", { eventId: eventId });
+                        ret = Application.loadFragmentById(parentElement, "conference", { eventId: that.binding.eventId });
                     }
                 }
                 Log.ret(Log.l.trace);
@@ -57,9 +70,41 @@
             }
             this.loadConference = loadConference;
 
+            var loadData = function () {
+                Log.call(Log.l.trace, "Event.Controller.");
+                AppData.setErrorMsg(that.binding);
+                var ret = new WinJS.Promise.as().then(function () {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select eventView...");
+                        return Event.eventView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "eventView: success!");
+                            if (json && json.d) {
+                                // now always edit!
+                                that.setDataEvent(json.d);
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
+                    AppBar.notifyModified = true;
+                    return WinJS.Promise.as();
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            };
+            this.loadData = loadData;
+
             // finally, load the data
             that.processAll().then(function() {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
+                return that.loadData();
+            }).then(function () {
+                Log.print(Log.l.trace, "Data loaded");
                 return that.loadConference();
             }).then(function () {
                 Log.print(Log.l.trace, "Conference loaded");
