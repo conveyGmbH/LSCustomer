@@ -44,13 +44,13 @@
                     url: ""
                 };
                 var ret = new WinJS.Promise.as().then(function () {
-                /*    options.url = "https://conference.germanywestcentral.cloudapp.azure.com/bigbluebutton/api/create?allowStartStopRecording=true&attendeePW=ap&autoStartRecording=false&lockSettingsLockedLayout=true&logoutURL=https%3A%2F%2Fsecure.convey.de%2Fbbb%2F&meetingID=random-2448579&moderatorPW=mp&name=random-2448579&record=true&voiceBridge=75209&welcome=%3Cbr%3EWelcome+to+%3Cb%3E%25%25CONFNAME%25%25%3C%2Fb%3E%21&checksum=4cda190f6de04150a35bf846bc8d94b24e9c9ab9";
+                    options.url = "https://conference.germanywestcentral.cloudapp.azure.com/bigbluebutton/api/create?allowStartStopRecording=true&attendeePW=ap&autoStartRecording=false&lockSettingsLockedLayout=true&logoutURL=https%3A%2F%2Fsecure.convey.de%2Fbbb%2F&meetingID=random-2448579&moderatorPW=mp&name=random-2448579&record=true&voiceBridge=75209&welcome=%3Cbr%3EWelcome+to+%3Cb%3E%25%25CONFNAME%25%25%3C%2Fb%3E%21&checksum=4cda190f6de04150a35bf846bc8d94b24e9c9ab9";
                     return WinJS.xhr(options).then(function xhrSuccess(response) {
                         Log.print(Log.l.trace, "GET create? success!");
                     }, function (errorResponse) {
                         AppData.setErrorMsg(AppBar.scope.binding, errorResponse);
                     });
-                }).then(function () {*/
+                }).then(function () {
                     options.url = "https://conference.germanywestcentral.cloudapp.azure.com/bigbluebutton/api/join?fullName=Attendee+Frame&lockSettingsDisablePublicChat=true&meetingID=random-2448579&password=ap&redirect=false&checksum=acdd99ffd9ee1bfaa3b6c3db7950d939e2d235f3";
                     return WinJS.xhr(options).then(function xhrSuccess(response) {
                         Log.print(Log.l.trace, "GET join? success!");
