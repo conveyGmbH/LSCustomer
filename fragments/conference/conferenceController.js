@@ -23,28 +23,28 @@
 
             var that = this;
 
-            var loadData = function () {
-                Log.call(Log.l.trace, "Conference.Controller.");
-                AppData.setErrorMsg(AppBar.scope.binding);
-                // Ersetze mit neuer Prozedur
-                /*var ret = AppData.call("PRC_STARTCARDOCREX",
-                    {
-                        pAktionStatus: pAktionStatus
-                    },
-                    function (json) {
-                        Log.print(Log.l.trace, "PRC_STARTCARDOCREX success!");
+            var conference = fragmentElement.querySelector("#conference");
 
-                    },
-                    function (error) {
-                        Log.print(Log.l.error, "PRC_STARTCARDOCREX error! ");
-                    })*/
+            var loadData = function () {
                 var meetingUrl = "";
                 var options = {
                     type: "GET",
                     url: ""
                 };
+                Log.call(Log.l.trace, "Conference.Controller.");
+                AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    options.url = "https://conference.germanywestcentral.cloudapp.azure.com/bigbluebutton/api/create?allowStartStopRecording=true&attendeePW=ap&autoStartRecording=false&lockSettingsLockedLayout=true&logoutURL=https%3A%2F%2Fsecure.convey.de%2Fbbb%2F&meetingID=random-2448579&moderatorPW=mp&name=random-2448579&record=true&voiceBridge=75209&welcome=%3Cbr%3EWelcome+to+%3Cb%3E%25%25CONFNAME%25%25%3C%2Fb%3E%21&checksum=4cda190f6de04150a35bf846bc8d94b24e9c9ab9";
+                    return AppData.call("PRC_BBBConferenceLink", {
+                        pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71'
+                    }, function(json) {
+                        if (json && json.d && json.d.results && json.d.results[0]) {
+                            meetingUrl = json.d.results[0].URL;
+                        }
+                        Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
+                    }, function(error) {
+                        Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
+                    });
+                    /*options.url = "https://conference.germanywestcentral.cloudapp.azure.com/bigbluebutton/api/create?allowStartStopRecording=true&attendeePW=ap&autoStartRecording=false&lockSettingsLockedLayout=true&logoutURL=https%3A%2F%2Fsecure.convey.de%2Fbbb%2F&meetingID=random-2448579&moderatorPW=mp&name=random-2448579&record=true&voiceBridge=75209&welcome=%3Cbr%3EWelcome+to+%3Cb%3E%25%25CONFNAME%25%25%3C%2Fb%3E%21&checksum=4cda190f6de04150a35bf846bc8d94b24e9c9ab9";
                     return WinJS.xhr(options).then(function xhrSuccess(response) {
                         Log.print(Log.l.trace, "GET create? success!");
                     }, function (errorResponse) {
@@ -70,15 +70,30 @@
                         }
                     }, function (errorResponse) {
                         AppData.setErrorMsg(AppBar.scope.binding, errorResponse);
-                    });
+                    });*/
                 }).then(function () {
                     if (meetingUrl) {
+                        //return WinJS.UI.Fragments.render(meetingUrl, conference);
                         options.url = meetingUrl;
                         return WinJS.xhr(options).then(function xhrSuccess(response) {
                             Log.print(Log.l.trace, "GET url? success!");
                             try {
                                 if (response) {
-                                    that.binding.dataConference.media = response.responseText;
+                                    var getFragmentContents = WinJS.UI.Fragments._getFragmentContents;
+                                    WinJS.UI.Fragments._getFragmentContents = function(value) {
+                                        return WinJS.Promise.as().then(function() {
+                                            return value;
+                                        });
+                                    }
+                                    var html5Client = response.responseText
+                                        //.replaceAll(/href="\/html5client/g,'href="https://conference.germanywestcentral.cloudapp.azure.com/html5client')
+                                        //.replaceAll(/src="\/html5client/g,'src="https://conference.germanywestcentral.cloudapp.azure.com/html5client')
+                                        .replaceAll(/src="compatibility/g,'src="/www/lib/compatibility/scripts');
+                                    
+                                    WinJS.UI.Fragments.render(html5Client, conference).done(function() {
+                                        WinJS.UI.Fragments._getFragmentContents = getFragmentContents;
+                                    });
+                                    //that.binding.dataConference.media = response.responseText;
                                 }
                             } catch (exception) {
                                 Log.print(Log.l.error, "resource parse error " + (exception && exception.message) + " success / " + " errors");
