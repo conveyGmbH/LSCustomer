@@ -57,16 +57,17 @@
             };
 
             var loadConference = function() {
-                var ret;
                 Log.call(Log.l.trace, "Event.Controller.");
-                if (that.binding.eventId) {
+                var ret = new WinJS.Promise.as().then(function() {
                     var parentElement = pageElement.querySelector("#conferencehost");
-                    if (parentElement) {
-                        ret = Application.loadFragmentById(parentElement, "conference", { eventId: that.binding.eventId });
+                    if (parentElement && that.binding.eventId) {
+                        return Application.loadFragmentById(parentElement, "conference", { eventId: that.binding.eventId });
+                    } else {
+                        WinJS.Promise.as();
                     }
-                }
+                });
                 Log.ret(Log.l.trace);
-                return ret || WinJS.Promise.as();
+                return ret;
             }
             this.loadConference = loadConference;
 
