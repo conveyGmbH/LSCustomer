@@ -28,9 +28,9 @@
         iconStrokeWidth: 150,
         loadRemoteResource: true,
         odata: {
-            https: false,
-            hostName: "deimos.convey.de",
-            onlinePort: 8080,
+            https: true,
+            hostName: "localhost",
+            onlinePort: 44346,
             urlSuffix: null,
             onlinePath: "odata_online", // serviceRoot online requests
             login: "",

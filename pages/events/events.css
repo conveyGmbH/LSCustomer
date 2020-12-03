@@ -12,8 +12,8 @@
 }
 
 .events .event-item {
-    width: 240px;
-    height: 480px;
+    width: 480px;
+    height: 360px;
 }
 
 .events .event-image {
@@ -22,7 +22,7 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 120px;
+    height: 270px;
     padding: 20px;
 }
 
@@ -34,7 +34,7 @@
     display: inline-block;
     position: absolute;
     left: 0;
-    top: 120px;
+    top: 270px;
     width: 100%;
     height: calc(100% - 120px);
     padding-left: 10px;
