@@ -31,10 +31,26 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    return AppData.call("PRC_RegisterContact", { //PRC_BBBConferenceLink
+                // pUUID: window.device && window.device.uuid
+                    function create_UUID() {
+                        var dt = new Date().getTime();
+                        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                            var r = (dt + Math.random() * 16) % 16 | 0;
+                            dt = Math.floor(dt / 16);
+                            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                        });
+                        return uuid;
+                    }
+
+                    if (!AppData._persistentStates.odata.uuid) {
+                        AppData._persistentStates.odata.uuid = create_UUID();
+                        AppData._persistentStates.savePersistentStates();
+                    }
+
+                    return AppData.call("PRC_RegisterContact", { 
                         pVeranstaltungID: that.binding.eventId,
                         pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71',
-                        pEMAil: that.binding.dataRegister.Email,
+                        pEMail: that.binding.dataRegister.Email,
                         pAddressDaten: null
                     }, function (json) {
                         if (json && json.d && json.d.results) {
