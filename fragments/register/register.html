@@ -38,14 +38,16 @@
                             <span class="label landscape_only"
                                   data-win-res="{textContent: 'register.email'}"></span>
                             <input class="input_field win-textbox" type="text"
-                                   data-win-bind="value: dataRegister.Email Binding.Mode.twoway" />
+                                   data-win-bind="value: dataRegister.Email Binding.Mode.twoway" 
+                                   data-win-bind-onevent="oninput"/>
                         </div>
                         <div class="field_line field_line_full">
                             <div class="button_line">
                                 <div class="button-element">
                                     <button id="loginButton"
                                             class="text-lightcolor titlearea-bkg win-button"
-                                            onclick="AppBar.handleEvent('click', 'clickOk', event)">
+                                            onclick="AppBar.handleEvent('click', 'clickOk', event)"
+                                            data-win-bind="disabled: loginDisabled">
                                         <span class="win-type-title"
                                               data-win-res="{textContent: 'register.register'}"></span>
                                     </button>

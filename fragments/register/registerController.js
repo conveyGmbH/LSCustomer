@@ -20,7 +20,8 @@
                 eventId: options ? options.eventId : null,
                 dataRegister: {
                     Email: ""
-                }
+                },
+                loginDisabled: true
             }, commandList]);
 
             var that = this;
@@ -51,7 +52,7 @@
                         pVeranstaltungID: that.binding.eventId,
                         pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71',
                         pEMail: that.binding.dataRegister.Email,
-                        pAddressDaten: null
+                        pAddressData: null
                     }, function (json) {
                         if (json && json.d && json.d.results) {
                             that.binding.dataRegister = json.d.results[0];
@@ -67,18 +68,46 @@
             }
             this.loadData = loadData;
 
+            var saveData = function (complete, error) {
+                var err;
+                Log.call(Log.l.trace, "Register.Controller.");
+                AppData.setErrorMsg(that.binding);
+                AppBar.busy = true;
+                var ret = AppData.call("PRC_RegisterContact", {
+                    pVeranstaltungID: that.binding.eventId,
+                    pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71',
+                    pEMail: that.binding.dataRegister.Email,
+                    pAddressData: null
+                }, function (json) {
+                    if (json && json.d && json.d.results) {
+                        that.binding.dataRegister = json.d.results[0];
+                    }
+                    that.binding.dataRegister.Email = "";
+                    Log.print(Log.l.trace, "PRC_RegisterContact success!");
+                }, function (error) {
+                    Log.print(Log.l.error, "PRC_RegisterContact error! ");
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.saveData = saveData;
             // define handlers
             this.eventHandlers = {
                 clickOk: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    //Application.navigateById("start", event);
+                    that.saveData(function (response) {
+                        // called asynchronously if ok
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
                     Log.ret(Log.l.trace);
                 }
             };
 
             this.disableHandlers = {
                 clickOk: function () {
-                    return false;
+                    that.binding.loginDisabled = AppBar.busy || that.binding.dataRegister.Email.length === 0;
+                    return that.binding.loginDisabled;
                 }
             };
 
