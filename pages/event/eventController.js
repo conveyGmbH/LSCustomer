@@ -71,6 +71,21 @@
             }
             this.loadConference = loadConference;
 
+            var loadRegister = function () {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var ret = new WinJS.Promise.as().then(function () {
+                    var parentElement = pageElement.querySelector("#registerhost");
+                    if (parentElement && that.binding.eventId) {
+                        return Application.loadFragmentById(parentElement, "register", { eventId: that.binding.eventId });
+                    } else {
+                        WinJS.Promise.as();
+                    }
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadRegister = loadRegister;
+
             var loadData = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
                 AppData.setErrorMsg(that.binding);
@@ -107,6 +122,9 @@
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 return that.loadConference();
+            }).then(function () {
+                Log.print(Log.l.trace, "Data loaded");
+                return that.loadRegister();
             }).then(function () {
                 Log.print(Log.l.trace, "Conference loaded");
             });

@@ -8,5 +8,8 @@
 
     "events.title"          : "Serie",
 
-    "event.title"           : "Veranstaltung"
+    "event.title"           : "Veranstaltung",
+
+    "register.email"		: "Email",
+    "register.register"		: "Registrieren"
 }			
