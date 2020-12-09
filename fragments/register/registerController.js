@@ -28,15 +28,14 @@
             var register = fragmentElement.querySelector("#register");
 
             var loadData = function () {
-                var options = {
-                    type: "GET",
-                    url: ""
-                };
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     return AppData.call("PRC_RegisterContact", { //PRC_BBBConferenceLink
-                        //pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71'
+                        pVeranstaltungID: that.binding.eventId,
+                        pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71',
+                        pEMAil: that.binding.dataRegister.Email,
+                        pAddressDaten: null
                     }, function (json) {
                         if (json && json.d && json.d.results) {
                             that.binding.dataRegister = json.d.results[0];
