@@ -231,7 +231,18 @@
         }, 20);
     }
 
-    var newBaseHref = "https://localhost:44346/www/"; /*"https://deimos.convey.de/www/";*/
+    var newBaseHref = null;
+    var scripts = document.getElementsByTagName("script");
+    for (var i = 0; i < scripts.length; i++) {
+        if (scripts[i] && scripts[i].src) {
+            var pos = scripts[i].src.indexOf("scripts/convey.js");
+            if (pos > 0) {
+                newBaseHref = scripts[i].src.substr(0, pos);
+                break;
+            }
+        }
+    }
+
     var prevBaseHref = "";
     if (newBaseHref) {
         var head = document.head || document.getElementsByTagName("base")[0];
