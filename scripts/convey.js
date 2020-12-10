@@ -231,6 +231,21 @@
         }, 20);
     }
 
+    var newBaseHref = "https://localhost:44346/www/"; /*"https://deimos.convey.de/www/";*/
+    var prevBaseHref = "";
+    if (newBaseHref) {
+        var head = document.head || document.getElementsByTagName("base")[0];
+        var base = document.getElementsByTagName("base")[0] || document.getElementsByTagName("BASE")[0];
+        if (base) {
+            prevBaseHref = base.getAttribute("href");
+            base.setAttribute("href", newBaseHref);
+        } else if (head) {
+            base = document.createElement("base");
+            base.setAttribute("href", newBaseHref);
+            head.insertBefore(base, head.firstElementChild);
+        }
+    }
+    
     // WinJS references 
     include("lib/WinJS/scripts/base.min.js").then(function() {
         return include("lib/WinJS/scripts/ui.js");
