@@ -75,13 +75,14 @@
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
-                    pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71',
+                    pUserToken: AppData._persistentStates.odata.uuid,
                     pEMail: that.binding.dataRegister.Email,
                     pAddressData: null
                 }, function (json) {
                     if (json && json.d && json.d.results) {
                         that.binding.dataRegister = json.d.results[0];
                     }
+                    AppBar.busy = false;
                     that.binding.dataRegister.Email = "";
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");
                 }, function (error) {
