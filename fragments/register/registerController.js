@@ -44,7 +44,7 @@
                         if (ctrl) {
                             ctrl.innerHTML = "Fetching data...";
                         }
-
+                        that.binding.registerStatus = "Fetching data...";
                         // Everything's alright, fetch user's mail address...
                         that.fetchMail(response);
                     } else if (response.status === "not_authorized") {
@@ -53,12 +53,14 @@
                         if (ctrl) {
                             ctrl.innerHTML = "App not authorized";
                         }
+                        that.binding.registerStatus = "App not authorized";
                     } else {
                         // User is not logged in to Facebook
                         var ctrl = document.getElementById("statustext");
                         if (ctrl) {
                             ctrl.innerHTML = "Not logged in to Facebook";
                         }
+                        that.binding.registerStatus = "Not logged in to Facebook";
                     }
                 });
             };
@@ -141,9 +143,10 @@
                         pAddressData: null
                     }, function (json) {
                         if (json && json.d && json.d.results) {
-                            that.binding.dataRegister = json.d.results[0];
+                           // that.binding.dataRegister = json.d.results[0];
+                            var result = json.d.results[0];
                         }
-                        that.binding.dataRegister.Email = "";
+                        //that.binding.dataRegister.Email = "";
                         Log.print(Log.l.trace, "PRC_RegisterContact success!");
                     }, function(error) {
                         Log.print(Log.l.error, "PRC_RegisterContact error! ");
@@ -178,6 +181,7 @@
                 return ret;
             }
             this.saveData = saveData;
+
             // define handlers
             this.eventHandlers = {
                 clickOk: function (event) {
@@ -206,7 +210,7 @@
                         // called asynchronously on error
                     });
                     Log.ret(Log.l.trace);
-                },
+                }
             };
 
             this.disableHandlers = {
