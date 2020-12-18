@@ -6,5 +6,8 @@
     width: 100%;
     height: calc(100% - 8px);
 }
+.titlearea-bkg {
+	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
+}
 
 

@@ -19,7 +19,8 @@
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataRegister: {
-                    Email: ""
+                    Email: "",
+					Name: ""
                 },
                 registerStatus: "Not logged in to Facebook",
                 loginDisabled: true
@@ -66,12 +67,14 @@
                 var vAccessToken = response.authResponse.accessToken;
                 FB.api('/me', 'GET', { "fields": "name, first_name, last_name, email", "access_token": vAccessToken },
                     function (response) {
+						var ctrl = document.getElementById("statustext");
                         if (response.email) {
-                            var ctrl = document.getElementById("statustext");
+							that.binding.dataRegister.Email = response.email;
+                            that.binding.dataRegister.Name = response.name;
                             if (ctrl) {
-                                ctrl.innerHTML = "Hello " + response.name + ", your mail address is " + response.email;
+                                ctrl.innerHTML = "Hello " + that.binding.dataRegister.Name + ", your mail address is " + that.binding.dataRegister.Email;
                             }
-                            ctrl = document.getElementById("loginbutton");
+                            ctrl = document.getElementById("loginFBbutton");
                             ctrl.style.display = "none";
 
                             ctrl = document.getElementById("logoutbutton");
@@ -95,7 +98,7 @@
 
              var doLogout = function() {
                 FB.logout(function (response) {
-                    var ctrl = document.getElementById("loginbutton");
+                    var ctrl = document.getElementById("loginFBbutton");
                     ctrl.style.display = "";
 
                     ctrl = document.getElementById("logoutbutton");
@@ -105,6 +108,8 @@
                     if (ctrl) {
                         ctrl.innerHTML = "You are now logged out.";
                     }
+					that.binding.dataRegister.Email = "";
+                    that.binding.dataRegister.Name = "";
                 });
             }
             this.doLogout = doLogout;
