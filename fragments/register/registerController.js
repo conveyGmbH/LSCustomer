@@ -21,12 +21,93 @@
                 dataRegister: {
                     Email: ""
                 },
+                registerStatus: "Not logged in to Facebook",
                 loginDisabled: true
             }, commandList]);
 
             var that = this;
 
             var register = fragmentElement.querySelector("#register");
+
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1889799884567520',
+                    autoLogAppEvents: true,
+                    xfbml: false, // Only needed for "Social Plugins"
+                    version: 'v9.0',
+                    status: true
+                });
+                FB.getLoginStatus(function (response) {
+                    if (response.status === "connected") {
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "Fetching data...";
+                        }
+
+                        // Everything's alright, fetch user's mail address...
+                        that.fetchMail(response);
+                    } else if (response.status === "not_authorized") {
+                        // User logged in to Facebook but application is not (yet) authorized
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "App not authorized";
+                        }
+                    } else {
+                        // User is not logged in to Facebook
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "Not logged in to Facebook";
+                        }
+                    }
+                });
+            };
+
+            var fetchMail = function(response) {
+                var vAccessToken = response.authResponse.accessToken;
+                FB.api('/me', 'GET', { "fields": "name, first_name, last_name, email", "access_token": vAccessToken },
+                    function (response) {
+                        if (response.email) {
+                            var ctrl = document.getElementById("statustext");
+                            if (ctrl) {
+                                ctrl.innerHTML = "Hello " + response.name + ", your mail address is " + response.email;
+                            }
+                            ctrl = document.getElementById("loginbutton");
+                            ctrl.style.display = "none";
+
+                            ctrl = document.getElementById("logoutbutton");
+                            ctrl.style.display = "";
+                        } else {
+                            ctrl.innerHTML = "Hello " + response.name + ", your mail address is not accessible, please log in once more";
+                        }
+                    }
+                );
+            }
+            this.fetchMail = fetchMail;
+
+            var doLogin = function() {
+                FB.login(function (response) {
+                    fetchMail(response);
+                }, {
+                    scope: 'email', return_scopes: true
+                });
+            }
+            this.doLogin = doLogin;
+
+             var doLogout = function() {
+                FB.logout(function (response) {
+                    var ctrl = document.getElementById("loginbutton");
+                    ctrl.style.display = "";
+
+                    ctrl = document.getElementById("logoutbutton");
+                    ctrl.style.display = "none";
+
+                    ctrl = document.getElementById("statustext");
+                    if (ctrl) {
+                        ctrl.innerHTML = "You are now logged out.";
+                    }
+                });
+            }
+            this.doLogout = doLogout;
 
             var loadData = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
@@ -80,7 +161,7 @@
                     pAddressData: null
                 }, function (json) {
                     if (json && json.d && json.d.results) {
-                        that.binding.dataRegister = json.d.results[0];
+                        var result = json.d.results[0];
                     }
                     AppBar.busy = false;
                     that.binding.dataRegister.Email = "";
@@ -102,7 +183,25 @@
                         // called asynchronously on error
                     });
                     Log.ret(Log.l.trace);
-                }
+                },
+                clickFacebookLogin: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.doLogin(function (response) {
+                        // called asynchronously if ok
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
+                    Log.ret(Log.l.trace);
+                },
+                clickFacebookLogout: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.doLogout(function (response) {
+                        // called asynchronously if ok
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
+                    Log.ret(Log.l.trace);
+                },
             };
 
             this.disableHandlers = {

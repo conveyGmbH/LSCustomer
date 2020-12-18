@@ -6,6 +6,8 @@
     <script type="text/javascript" src="registerService.js"></script>
     <script type="text/javascript" src="registerController.js"></script>
     <script type="text/javascript" src="register.js"></script>
+    <!-- Load language specific scripts -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </head>
 <body class="win-type-body">
     <div class="register fragment">
@@ -53,6 +55,35 @@
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                        <div class="field_line field_line_full">
+                            <div class="button_line">
+                                <div class="button-element">
+                                    <button id="loginButton"
+                                            class="text-lightcolor titlearea-bkg win-button"
+                                            onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)">
+                                        <span class="win-type-title"
+                                              data-win-res="{textContent: 'register.registerFacebook'}"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field_line field_line_full">
+                            <div class="button_line">
+                                <div class="button-element">
+                                    <button id="logoutbutton"
+                                            class="text-lightcolor titlearea-bkg win-button"
+                                            onclick="AppBar.handleEvent('click', 'clickFacebookLogout', event)"
+                                            style="display:none">
+                                        <span class="win-type-title"
+                                              data-win-res="{textContent: 'register.logoutFacebook'}"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field_line field_line_full">
+                            <!--<span data-win-bind="textContent: registerStatus"></span>-->
+                            <span id="statustext">Connecting to Facebook...</span>
                         </div>
                     </div>
                     <!--<div class="doc-container">
