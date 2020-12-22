@@ -19,14 +19,102 @@
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataRegister: {
-                    Email: ""
+                    Email: "",
+					Name: ""
                 },
+                registerStatus: "Not logged in to Facebook",
                 loginDisabled: true
             }, commandList]);
 
             var that = this;
 
             var register = fragmentElement.querySelector("#register");
+
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1889799884567520',
+                    autoLogAppEvents: true,
+                    xfbml: false, // Only needed for "Social Plugins"
+                    version: 'v9.0',
+                    status: true
+                });
+                FB.getLoginStatus(function (response) {
+                    if (response.status === "connected") {
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "Fetching data...";
+                        }
+                        that.binding.registerStatus = "Fetching data...";
+                        // Everything's alright, fetch user's mail address...
+                        that.fetchMail(response);
+                    } else if (response.status === "not_authorized") {
+                        // User logged in to Facebook but application is not (yet) authorized
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "App not authorized";
+                        }
+                        that.binding.registerStatus = "App not authorized";
+                    } else {
+                        // User is not logged in to Facebook
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "Not logged in to Facebook";
+                        }
+                        that.binding.registerStatus = "Not logged in to Facebook";
+                    }
+                });
+            };
+
+            var fetchMail = function(response) {
+                var vAccessToken = response.authResponse.accessToken;
+                FB.api('/me', 'GET', { "fields": "name, first_name, last_name, email", "access_token": vAccessToken },
+                    function (response) {
+						var ctrl = document.getElementById("statustext");
+                        if (response.email) {
+							that.binding.dataRegister.Email = response.email;
+                            that.binding.dataRegister.Name = response.name;
+                            if (ctrl) {
+                                ctrl.innerHTML = "Hello " + that.binding.dataRegister.Name + ", your mail address is " + that.binding.dataRegister.Email;
+                            }
+                            ctrl = document.getElementById("loginFBbutton");
+                            ctrl.style.display = "none";
+
+                            ctrl = document.getElementById("logoutbutton");
+                            ctrl.style.display = "";
+                        } else {
+                            ctrl.innerHTML = "Hello " + response.name + ", your mail address is not accessible, please log in once more";
+                        }
+                    }
+                );
+            }
+            this.fetchMail = fetchMail;
+
+            var doLogin = function() {
+                FB.login(function (response) {
+                    fetchMail(response);
+                }, {
+                    scope: 'email', return_scopes: true
+                });
+            }
+            this.doLogin = doLogin;
+
+             var doLogout = function() {
+                FB.logout(function (response) {
+                    var ctrl = document.getElementById("loginFBbutton");
+                    ctrl.style.display = "";
+
+                    ctrl = document.getElementById("logoutbutton");
+                    ctrl.style.display = "none";
+
+                    ctrl = document.getElementById("statustext");
+                    if (ctrl) {
+                        ctrl.innerHTML = "You are now logged out.";
+                    }
+					that.binding.dataRegister.Email = "";
+                    that.binding.dataRegister.Name = "";
+                });
+            }
+            this.doLogout = doLogout;
 
             var loadData = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
@@ -55,9 +143,10 @@
                         pAddressData: null
                     }, function (json) {
                         if (json && json.d && json.d.results) {
-                            that.binding.dataRegister = json.d.results[0];
+                           // that.binding.dataRegister = json.d.results[0];
+                            var result = json.d.results[0];
                         }
-                        that.binding.dataRegister.Email = "";
+                        //that.binding.dataRegister.Email = "";
                         Log.print(Log.l.trace, "PRC_RegisterContact success!");
                     }, function(error) {
                         Log.print(Log.l.error, "PRC_RegisterContact error! ");
@@ -80,7 +169,7 @@
                     pAddressData: null
                 }, function (json) {
                     if (json && json.d && json.d.results) {
-                        that.binding.dataRegister = json.d.results[0];
+                        var result = json.d.results[0];
                     }
                     AppBar.busy = false;
                     that.binding.dataRegister.Email = "";
@@ -92,11 +181,30 @@
                 return ret;
             }
             this.saveData = saveData;
+
             // define handlers
             this.eventHandlers = {
                 clickOk: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     that.saveData(function (response) {
+                        // called asynchronously if ok
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
+                    Log.ret(Log.l.trace);
+                },
+                clickFacebookLogin: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.doLogin(function (response) {
+                        // called asynchronously if ok
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
+                    Log.ret(Log.l.trace);
+                },
+                clickFacebookLogout: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.doLogout(function (response) {
                         // called asynchronously if ok
                     }, function (errorResponse) {
                         // called asynchronously on error

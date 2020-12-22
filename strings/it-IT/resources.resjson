@@ -11,5 +11,7 @@
     "event.title"           : "Event",
 
     "register.email"		: "Email",	
-    "register.register"     : "Registrati"
+    "register.register"     : "Registrati",
+    "register.registerFacebook" : "Registrati con Facebook",
+    "register.logoutFacebook" : "Log Out"
 }
