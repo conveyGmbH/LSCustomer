@@ -12,7 +12,33 @@
     }
     event.eventName = "deviceready";
 
-    var prefix = "";
+    var newBaseHref = null;
+    var scripts = document.getElementsByTagName("script");
+    for (var i = 0; i < scripts.length; i++) {
+        if (scripts[i] && scripts[i].src) {
+            var pos = scripts[i].src.indexOf("scripts/convey.js");
+            if (pos > 0) {
+                newBaseHref = scripts[i].src.substr(0, pos);
+                break;
+            }
+        }
+    }
+
+    var prevBaseHref = "";
+    if (newBaseHref) {
+        var head = document.head || document.getElementsByTagName("base")[0];
+        var base = document.getElementsByTagName("base")[0] || document.getElementsByTagName("BASE")[0];
+        if (base) {
+            prevBaseHref = base.getAttribute("href");
+            base.setAttribute("href", newBaseHref);
+        } else if (head) {
+            base = document.createElement("base");
+            base.setAttribute("href", newBaseHref);
+            head.insertBefore(base, head.firstElementChild);
+        }
+    } else {
+        newBaseHref = "";
+    }
 
     var include = function(file, fnc) {
         var n, s, l, e = {
@@ -48,7 +74,7 @@
             window.setTimeout(function() {
                 s = document.createElement("SCRIPT");
                 s.type = "text/javascript";
-                s.src = prefix + file;
+                s.src = newBaseHref + file;
                 l = e.load;
                 s.addEventListener("load", l);
                 document.head.appendChild(s);
@@ -231,32 +257,6 @@
         }, 20);
     }
 
-    var newBaseHref = null;
-    var scripts = document.getElementsByTagName("script");
-    for (var i = 0; i < scripts.length; i++) {
-        if (scripts[i] && scripts[i].src) {
-            var pos = scripts[i].src.indexOf("scripts/convey.js");
-            if (pos > 0) {
-                newBaseHref = scripts[i].src.substr(0, pos);
-                break;
-            }
-        }
-    }
-
-    var prevBaseHref = "";
-    if (newBaseHref) {
-        var head = document.head || document.getElementsByTagName("base")[0];
-        var base = document.getElementsByTagName("base")[0] || document.getElementsByTagName("BASE")[0];
-        if (base) {
-            prevBaseHref = base.getAttribute("href");
-            base.setAttribute("href", newBaseHref);
-        } else if (head) {
-            base = document.createElement("base");
-            base.setAttribute("href", newBaseHref);
-            head.insertBefore(base, head.firstElementChild);
-        }
-    }
-    
     // WinJS references 
     include("lib/WinJS/scripts/base.min.js").then(function() {
         return include("lib/WinJS/scripts/ui.js");
@@ -295,6 +295,7 @@
         return include("scripts/index.js");
     }).then(function() {
         checkForDeviceReady();
+        Application.baseHref = newBaseHref;
     });
 
 

@@ -398,14 +398,20 @@ var __meteor_runtime_config__;
                     var url = that.binding.dataConference && that.binding.dataConference.URL;
                     if (url) {
                         var query = url.split("?")[1];
-                        if (window.history) {
+                        if (window.history && query) {
                             var state = {};
                             var title = "";
-                            var location = window.location.href.split("?")[0] + "?page=" + Application.getPageId(nav.location);
-                            if (query) {
-                                location += "&" + query;
+                            var location = window.location.href;
+                            var key = query.split("=")[0];
+                            if (key) {
+                                var posKey = location.indexOf(key + "=");
+                                if (posKey > 0) {
+                                    location = location.substr(0, posKey) + query;
+                                } else {
+                                    location += "&" + query;
+                                }
+                                window.history.pushState(state, title, location);
                             }
-                            window.history.pushState(state, title, location);
                         };
                         options.url = url.replaceAll(/https:\/\/conference.germanywestcentral.cloudapp.azure.com\/html5client/g,'/html5client');
                         return renderImpl(options.url, conference, false);

@@ -10,6 +10,8 @@
 (function () {
     "use strict";
 
+    var nav = WinJS.Navigation;
+
     WinJS.Namespace.define("Event", {
         Controller: WinJS.Class.derive(Application.Controller, function Controller(pageElement, commandList) {
             Log.call(Log.l.trace, "Event.Controller.");
@@ -29,6 +31,24 @@
                 // convert Startdatum 
                 that.binding.dataEvent.dateBegin = getDateObject(newDataEvent.Startdatum);
                 AppBar.modified = false;
+                if (newDataEvent.VeranstaltungVIEWID && window.history) {
+                    var key = "event";
+                    var query = key + "=" + newDataEvent.VeranstaltungVIEWID;
+                    var state = {};
+                    var title = "";
+                    var location = window.location.href;
+                    var posKey = location.indexOf(key + "=");
+                    if (posKey > 0) {
+                        var otherParams = location.substr(posKey).split('&')[1];
+                        location = location.substr(0, posKey) + query;
+                        if (otherParams) {
+                            location += "&" + otherParams;
+                        }
+                    } else {
+                        location += "&" + query;
+                    }
+                    window.history.pushState(state, title, location);
+                }
                 AppBar.notifyModified = prevNotifyModified;
                 AppBar.triggerDisableHandlers();
             };
@@ -63,7 +83,7 @@
                     if (parentElement && that.binding.eventId) {
                         return Application.loadFragmentById(parentElement, "conference", { eventId: that.binding.eventId });
                     } else {
-                        WinJS.Promise.as();
+                        return WinJS.Promise.as();
                     }
                 });
                 Log.ret(Log.l.trace);
@@ -78,7 +98,7 @@
                     if (parentElement && that.binding.eventId) {
                         return Application.loadFragmentById(parentElement, "register", { eventId: that.binding.eventId });
                     } else {
-                        WinJS.Promise.as();
+                        return WinJS.Promise.as();
                     }
                 });
                 Log.ret(Log.l.trace);
