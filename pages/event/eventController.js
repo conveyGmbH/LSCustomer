@@ -16,6 +16,10 @@
         Controller: WinJS.Class.derive(Application.Controller, function Controller(pageElement, commandList) {
             Log.call(Log.l.trace, "Event.Controller.");
 
+            if (Application.query && Application.query.event) {
+                AppData.setRecordId("Veranstaltung", Application.query.event);
+            }
+
             Application.Controller.apply(this, [pageElement, {
                 showConference: true,
                 eventId: AppData.getRecordId("Veranstaltung"),
