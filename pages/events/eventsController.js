@@ -59,7 +59,11 @@
                         Log.print(Log.l.trace, "itemIndex=" + eventInfo.detail.itemIndex);
                         var item = that.records.getAt(eventInfo.detail.itemIndex);
                         if (item && item.VeranstaltungVIEWID) {
-                            AppData.setRecordId("Veranstaltung", item.VeranstaltungVIEWID);
+                            if (Application.query) {
+                                Application.query.event = item.VeranstaltungVIEWID;
+                            } else {
+                                AppData.setRecordId("Veranstaltung", item.VeranstaltungVIEWID);
+                            }
                             Application.navigateById("event", eventInfo);
                         }
                     }

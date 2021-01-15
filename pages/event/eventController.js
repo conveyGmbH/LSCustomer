@@ -35,22 +35,11 @@
                 // convert Startdatum 
                 that.binding.dataEvent.dateBegin = getDateObject(newDataEvent.Startdatum);
                 AppBar.modified = false;
-                if (newDataEvent.VeranstaltungVIEWID && window.history) {
-                    var key = "event";
-                    var query = key + "=" + newDataEvent.VeranstaltungVIEWID;
+                if (newDataEvent.VeranstaltungVIEWID && Application.query && window.history) {
                     var state = {};
                     var title = "";
-                    var location = window.location.href;
-                    var posKey = location.indexOf(key + "=");
-                    if (posKey > 0) {
-                        var otherParams = location.substr(posKey).split('&')[1];
-                        location = location.substr(0, posKey) + query;
-                        if (otherParams) {
-                            location += "&" + otherParams;
-                        }
-                    } else {
-                        location += "&" + query;
-                    }
+                    Application.query.event = newDataEvent.VeranstaltungVIEWID;
+                    var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
                     window.history.pushState(state, title, location);
                 }
                 AppBar.notifyModified = prevNotifyModified;
