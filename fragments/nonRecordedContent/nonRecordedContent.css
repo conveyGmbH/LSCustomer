@@ -1,0 +1,15 @@
+﻿#nonRecordedContentController .doc-container {
+    float: left;
+}
+
+#nonRecordedContentConfirm.mediaview {
+    width: 100%;
+    height: calc(100% - 8px);
+}
+
+.nonRecordedContent-container {
+    width: 100%;
+}
+
+
+

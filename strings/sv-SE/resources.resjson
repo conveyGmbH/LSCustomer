@@ -13,5 +13,10 @@
     "register.email"		: "Email",
     "register.register"     : "Register",
     "register.registerFacebook" : "Register with Facebook",
-    "register.logoutFacebook" : "Log Out"
+    "register.logoutFacebook" : "Log Out",
+    "register.registerConfirm" : "BESTÄTIGT",
+    "register.days"			: "Tag",
+    "register.hours"	    : "Stunden",
+    "register.minutes"	    : "Minuten",
+    "register.seconds"		: "Sekunden"
 }

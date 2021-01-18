@@ -1,0 +1,15 @@
+﻿#recordedContentController .doc-container {
+    float: left;
+}
+
+#recordedContent.mediaview {
+    width: 100%;
+    height: calc(100% - 8px);
+}
+
+.recordedContent-container {
+    width: 100%;
+}
+
+
+

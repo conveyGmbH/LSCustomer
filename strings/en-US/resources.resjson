@@ -13,5 +13,11 @@
     "register.email"		: "Email",
     "register.register": "Register",
     "register.registerFacebook" : "Register with Facebook",
-    "register.logoutFacebook" : "Log Out"
+    "register.logoutFacebook" : "Log Out",
+    "register.registerConfirm": "CONFIRMED",
+    "register.days": "day",
+    "register.hours": "hours",
+    "register.minutes": "minutes",
+    "register.seconds": "seconds",
+    "register.waitMessage": "Unfortunately you have to wait. We're starting in"
 }

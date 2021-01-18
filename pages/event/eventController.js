@@ -21,7 +21,11 @@
             }
 
             Application.Controller.apply(this, [pageElement, {
-                showConference: true,
+                showTeaser: true,
+                showRegister: true,
+                showCountdown: false,
+                showConference: false,
+                //showRegisterConfirm: false,
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {}
             }, commandList]);
@@ -55,6 +59,33 @@
                         WinJS.Navigation.back(1).done( /* Your success and error handlers */);
                     }
                     Log.ret(Log.l.trace);
+                },
+                clickOk: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.saveData(function (response) {
+                        // called asynchronously if ok
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
+                    Log.ret(Log.l.trace);
+                },
+                clickFacebookLogin: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.doLogin(function (response) {
+                        // called asynchronously if ok
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
+                    Log.ret(Log.l.trace);
+                },
+                clickFacebookLogout: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.doLogout(function (response) {
+                        // called asynchronously if ok
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
+                    Log.ret(Log.l.trace);
                 }
             };
 
@@ -69,9 +100,40 @@
                 }
             };
 
-            var loadConference = function() {
+            var loadTeaser = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
+                    var parentElement = pageElement.querySelector("#teaserhost");
+                    if (parentElement && that.binding.eventId) {
+                        return Application.loadFragmentById(parentElement, "teaser", { eventId: that.binding.eventId });
+                    } else {
+                        WinJS.Promise.as();
+                    }
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadTeaser = loadTeaser;
+
+            /* countdownhost*/
+            var loadCountdown = function () {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var ret = new WinJS.Promise.as().then(function () {
+                    var parentElement = pageElement.querySelector("#countdownhost");
+                    if (parentElement && that.binding.eventId) {
+                        return Application.loadFragmentById(parentElement, "countdown", { eventId: that.binding.eventId });
+                    } else {
+                        WinJS.Promise.as();
+                    }
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadCountdown = loadCountdown;
+
+            var loadConference = function () {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var ret = new WinJS.Promise.as().then(function () {
                     var parentElement = pageElement.querySelector("#conferencehost");
                     if (parentElement && that.binding.eventId) {
                         return Application.loadFragmentById(parentElement, "conference", { eventId: that.binding.eventId });
@@ -98,6 +160,21 @@
                 return ret;
             }
             this.loadRegister = loadRegister;
+
+            var loadRegisterConfirm = function () {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var ret = new WinJS.Promise.as().then(function () {
+                    var parentElement = pageElement.querySelector("#registerConfirmhost");
+                    if (parentElement && that.binding.eventId) {
+                        return Application.loadFragmentById(parentElement, "registerConfirm", { eventId: that.binding.eventId });
+                    } else {
+                        WinJS.Promise.as();
+                    }
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadRegisterConfirm = loadRegisterConfirm;
 
             var loadData = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
@@ -128,19 +205,58 @@
             };
             this.loadData = loadData;
 
+            var saveData = function (complete, error) {
+                var err;
+                Log.call(Log.l.trace, "Register.Controller.");
+                AppData.setErrorMsg(that.binding);
+                AppBar.busy = true;
+                //getfragmentController 
+                var registerFragmentControl = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("registerConfirm"));
+                var ret = AppData.call("PRC_RegisterContact", {
+                    pVeranstaltungID: that.binding.eventId,
+                    pUserToken: AppData._persistentStates.odata.uuid,
+                    pEMail: "", //that.binding.dataRegister.Email
+                    pAddressData: null
+                }, function (json) {
+                    if (json && json.d && json.d.results) {
+                        var result = json.d.results[0];
+                    }
+                    AppBar.busy = false;
+                    //that.binding.dataRegister.Email = "";
+                    that.binding.showRegister = false;
+                    that.binding.showRegisterConfirm = true;
+                    //Event.Controller.binding.showRegister = false;
+                    Log.print(Log.l.trace, "PRC_RegisterContact success!");
+                }, function (error) {
+                    Log.print(Log.l.error, "PRC_RegisterContact error! ");
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.saveData = saveData;
+
             // finally, load the data
             that.processAll().then(function() {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
+                return that.loadTeaser();
+            }).then(function () {
+                Log.print(Log.l.trace, "Data loaded");
+                return that.loadCountdown();
+            }).then(function () {
+                Log.print(Log.l.trace, "Data loaded");
                 return that.loadConference();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 return that.loadRegister();
-            }).then(function () {
-                Log.print(Log.l.trace, "Conference loaded");
-            });
+            })/*.then(function () {
+                Log.print(Log.l.trace, "Data loaded");
+                return that.loadRegisterConfirm();
+            })*/.then(function () {
+                    Log.print(Log.l.trace, "Conference loaded");
+                });
             Log.ret(Log.l.trace);
         })
     });

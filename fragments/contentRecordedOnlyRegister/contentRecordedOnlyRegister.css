@@ -1,0 +1,15 @@
+﻿#contentRecordedOnlyRegisterController .doc-container {
+    float: left;
+}
+
+#contentRecordedOnlyRegisterConfirm.mediaview {
+    width: 100%;
+    height: calc(100% - 8px);
+}
+
+.contentRecordedOnlyRegister-container {
+    width: 100%;
+}
+
+
+

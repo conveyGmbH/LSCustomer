@@ -65,76 +65,97 @@
                         <span class="large_field"
                               data-win-res="{textContent: 'register.commentEmail'}"></span>
                     </div>
-                    <!--<div class="line-separator"></div>
-                    <div class="field_line field_line_odd">
-                        <span class="label win-type-caption portrait_only"
-                              data-win-res="{textContent: 'register.email'}"></span>
-                        <span class="label landscape_only"
-                              data-win-res="{textContent: 'register.email'}"></span>
-                        <input class="input_field win-textbox" type="text"
-                               data-win-bind="value: dataRegister.Email Binding.Mode.twoway" />
-                        <span class="input_field win-type-subtitle"
-                              data-win-bind="textContent: dataRegister.Email"></span>
-                    </div>-->
                     <div class="centerarea">
-                        <div class="line-separator"
-                             data-win-bind="style.display: hideLoginData Binding.Converter.toDisplayNone"></div>
-                        <div class="field_line field_line_odd"
-                             data-win-bind="style.display: hideLoginData Binding.Converter.toDisplayNone">
-                            <span class="label win-type-caption portrait_only"
-                                  data-win-res="{textContent: 'register.email'}"></span>
-                            <span class="label landscape_only"
-                                  data-win-res="{textContent: 'register.email'}"></span>
-                            <input class="input_field win-textbox" type="text"
-                                   data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
-                                   data-win-bind-onevent="oninput" />
-                        </div>
-                        <div class="field_line field_line_full">
-                            <div class="button_line">
-                                <div class="button-element">
-                                    <button id="loginButton"
-                                            class="text-lightcolor titlearea-bkg win-button"
-                                            onclick="AppBar.handleEvent('click', 'clickOk', event)"
-                                            data-win-bind="disabled: loginDisabled">
-                                        <span class="win-type-title"
-                                              data-win-res="{textContent: 'register.register'}"></span>
-                                    </button>
+                        <div class="registermail-container" data-win-bind="style.display: showRegisterMail Binding.Converter.toDisplay">
+                            <!--<div class="field_line field_line_full register-email">
+                                <span class="large_field"
+                                      data-win-bind="textContent: registerMessage"></span>
+                            </div>-->
+                            <div class="line-separator"
+                                 data-win-bind="style.display: hideLoginData Binding.Converter.toDisplayNone"></div>
+                            <div class="field_line field_line_odd"
+                                 data-win-bind="style.display: hideLoginData Binding.Converter.toDisplayNone">
+                                <span class="label win-type-caption portrait_only"
+                                      data-win-res="{textContent: 'register.email'}"></span>
+                                <span class="label landscape_only"
+                                      data-win-res="{textContent: 'register.email'}"></span>
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput"/>
+                            </div>
+                            <div class="field_line field_line_full">
+                                <div class="button_line">
+                                    <div class="button-element">
+                                        <button id="loginButton"
+                                                class="text-lightcolor titlearea-bkg win-button"
+                                                onclick="AppBar.handleEvent('click', 'clickOk', event)"
+                                                data-win-bind="disabled: loginDisabled">
+                                            <span class="win-type-title"
+                                                  data-win-res="{textContent: 'register.register'}"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add font icons -->
+                            <div class="field_line field_line_full">
+                                <div class="button_line">
+                                    <a class="fa fa-facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
+                                    <a class="fa fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
+                                </div>
+                            </div>
+                            <div class="field_line field_line_full">
+                                <div class="button_line">
+                                    <div class="button-element">
+                                        <button id="logoutbutton"
+                                                class="text-lightcolor titlearea-bkg win-button"
+                                                onclick="AppBar.handleEvent('click', 'clickFacebookLogout', event)"
+                                                style="display: none">
+                                            <span class="win-type-title"
+                                                  data-win-res="{textContent: 'register.logoutFacebook'}"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="field_line field_line_full">
-                            <div class="button_line">
-                                <div class="button-element">
-                                    <button id="loginFBButton"
-                                            class="text-lightcolor titlearea-bkg win-button"
-                                            onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)">
-                                        <span class="win-type-title"
-                                              data-win-res="{textContent: 'register.registerFacebook'}"></span>
-                                    </button>
+                        <div class="resend-editable-mail-container" data-win-bind="style.display: showResendEtiableMail Binding.Converter.toDisplay">
+                            <div class="field_line field_line_full register-email">
+                                <span class="large_field"
+                                      data-win-bind="textContent: registerMessage"></span>
+                            </div>
+                            <div class="field_line field_line_odd"
+                                 data-win-bind="style.display: hideLoginData Binding.Converter.toDisplayNone">
+                                <span class="label win-type-caption portrait_only"
+                                      data-win-res="{textContent: 'register.email'}"></span>
+                                <span class="label landscape_only"
+                                      data-win-res="{textContent: 'register.email'}"></span>
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput" disabled/>
+                            </div>
+                            <div class="field_line field_line_full">
+                                <div class="button_line">
+                                    <div class="button-element">
+                                        <button id="resendButton"
+                                                class="text-lightcolor titlearea-bkg win-button"
+                                                onclick="AppBar.handleEvent('click', 'clickResend', event)"
+                                                data-win-bind="disabled: resendDisabled">
+                                            <span class="win-type-title"
+                                                  data-win-res="{textContent: 'register.resend'}"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>-->
-                        <!-- Add font icons -->
-                        <div class="field_line field_line_full">
-                            <div class="button_line">
-                                <a class="fa fa-facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
-                                <a class="fa fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
-                            </div>
-                            <!--<a href="#" class="fa fa-twitter"></a>
-                            <a href="#" class="fa fa-google"></a>
-                            <a href="#" class="fa fa-instagram"></a>
-                            <!--<a href="#" class="fa fa-skype"></a>-->
-                        </div>
-                        <div class="field_line field_line_full">
-                            <div class="button_line">
-                                <div class="button-element">
-                                    <button id="logoutbutton"
-                                            class="text-lightcolor titlearea-bkg win-button"
-                                            onclick="AppBar.handleEvent('click', 'clickFacebookLogout', event)"
-                                            style="display:none">
-                                        <span class="win-type-title"
-                                              data-win-res="{textContent: 'register.logoutFacebook'}"></span>
-                                    </button>
+                            <div class="field_line field_line_full">
+                                <div class="button_line">
+                                    <div class="button-element">
+                                        <button id="editButton"
+                                                class="text-lightcolor titlearea-bkg win-button"
+                                                onclick="AppBar.handleEvent('click', 'clickEdit', event)"
+                                                data-win-bind="disabled: editDisabled">
+                                            <span class="win-type-title"
+                                                  data-win-res="{textContent: 'register.edit'}"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

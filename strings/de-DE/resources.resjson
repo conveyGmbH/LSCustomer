@@ -10,8 +10,25 @@
 
     "event.title"           : "Veranstaltung",
 
+	"conference.waitMessage" : "Viel Spaß´auf ihrer heutigen Onlinekonferenz",
+
     "register.email"		: "Email",
     "register.register"		: "Registrieren",
+    "register.resend"		: "Email erneut senden",
+	"register.edit"			: "Email ändern",
 	"register.registerFacebook" : "Registrieren mit Facebook",
-	"register.logoutFacebook" : "Log Out"
+	"register.logoutFacebook" : "Log Out",
+	"register.registerConfirm" : "BESTÄTIGT",
+    "register.days"			: "Tag",
+	"register.hours"	    : "Stunden",
+	"register.minutes"	    : "Minuten",
+	"register.seconds"		: "Sekunden",
+	"register.waitMessage"  : "Sie müssen leider noch warten. Wir starten in",
+	
+    "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
+
+	"teaser.welcome"		: "Willkommen auf unsere Online-Event-Party",
+	
+	"countdown.waitMessage" : "Ihre Onlineveranstaltung findet bald statt. Bitte haben Sie etwas geduld"
+
 }			

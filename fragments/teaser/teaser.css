@@ -1,0 +1,7 @@
+﻿#teaserController .doc-container {
+    float: left;
+}
+
+.titlearea-bkg {
+	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
+}

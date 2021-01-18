@@ -20,8 +20,13 @@
                 eventId: options ? options.eventId : null,
                 dataRegister: {
                     Email: "",
-					Name: ""
+                    Name: ""
                 },
+                registerMessage: "",
+                showRegisterMail: true,
+                showResendEtiableMail: false,
+                editDisabled: false,
+                resendDisabled: false,
                 registerStatus: "Not logged in to Facebook",
                 loginDisabled: true
             }, commandList]);
@@ -65,13 +70,16 @@
                 });
             };
 
-            var fetchMail = function(response) {
+            var fetchMail = function (response) {
                 var vAccessToken = response.authResponse.accessToken;
                 FB.api('/me', 'GET', { "fields": "name, first_name, last_name, email", "access_token": vAccessToken },
                     function (response) {
-						var ctrl = document.getElementById("statustext");
+                        var ctrl = document.getElementById("statustext");
                         if (response.email) {
-							that.binding.dataRegister.Email = response.email;
+                            that.binding.dataRegister.Email = response.email;
+                            if (AppData._persistentStates.odata.emailRegister !== that.binding.dataRegister.Email) {
+                                AppData._persistentStates.odata.emailRegister = that.binding.dataRegister.Email;
+                            }
                             that.binding.dataRegister.Name = response.name;
                             if (ctrl) {
                                 ctrl.innerHTML = "Hello " + that.binding.dataRegister.Name + ", your mail address is " + that.binding.dataRegister.Email;
@@ -89,16 +97,16 @@
             }
             this.fetchMail = fetchMail;
 
-            var doLogin = function() {
+            var doLogin = function () {
                 FB.login(function (response) {
                     fetchMail(response);
                 }, {
-                    scope: 'email', return_scopes: true
-                });
+                        scope: 'email', return_scopes: true
+                    });
             }
             this.doLogin = doLogin;
 
-             var doLogout = function() {
+            var doLogout = function () {
                 FB.logout(function (response) {
                     var ctrl = document.getElementById("loginFBbutton");
                     ctrl.style.display = "";
@@ -110,7 +118,7 @@
                     if (ctrl) {
                         ctrl.innerHTML = "You are now logged out.";
                     }
-					that.binding.dataRegister.Email = "";
+                    that.binding.dataRegister.Email = "";
                     that.binding.dataRegister.Name = "";
                 });
             }
@@ -120,7 +128,7 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                // pUUID: window.device && window.device.uuid
+                    // pUUID: window.device && window.device.uuid
                     function create_UUID() {
                         var dt = new Date().getTime();
                         var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -136,7 +144,16 @@
                         AppData._persistentStates.savePersistentStates();
                     }
 
-                    return AppData.call("PRC_RegisterContact", { 
+                    if (!AppData._persistentStates.odata.statusRegister) {
+                        AppData._persistentStates.odata.statusRegister = 0;
+                        AppData._persistentStates.savePersistentStates();
+                    }
+
+                    if (!AppData._persistentStates.odata.eventIDregister) {
+                        AppData._persistentStates.odata.eventIDregister = that.binding.eventId;
+                    }
+
+                    /*return AppData.call("PRC_RegisterContact", { 
                         pVeranstaltungID: that.binding.eventId,
                         pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71',
                         pEMail: that.binding.dataRegister.Email,
@@ -150,7 +167,7 @@
                         Log.print(Log.l.trace, "PRC_RegisterContact success!");
                     }, function(error) {
                         Log.print(Log.l.error, "PRC_RegisterContact error! ");
-                    });
+                    });*/
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -161,21 +178,45 @@
                 var err;
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(that.binding);
+                var location = window.location.href;
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
                     pUserToken: AppData._persistentStates.odata.uuid,
                     pEMail: that.binding.dataRegister.Email,
-                    pAddressData: null
+                    pAddressData: null,
+                    pBaseURL: window.location.href
                 }, function (json) {
                     if (json && json.d && json.d.results) {
                         var result = json.d.results[0];
+                        if (result.UserToken && result.UserToken !== AppData._persistentStates.odata.uuid) {
+                            AppData._persistentStates.odata.uuid = result.UserToken;
+                        }
+                        if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.odata.eventIDregister) {
+                            AppData._persistentStates.odata.eventIDregister = result.VeranstaltungID;
+                        }
+                        if (result.ConfirmStatus && result.ConfirmStatus !== AppData._persistentStates.odata.statusRegister) {
+                            AppData._persistentStates.odata.statusRegister = result.ConfirmStatus;
+                        }
+                        if (result.ResultMessage) {
+                            that.binding.registerMessage = result.ResultMessage;
+                        }
+                        if (!AppData._persistentStates.odata.emailRegister &&
+                            AppData._persistentStates.odata.emailRegister !== that.binding.dataRegister.Email) {
+                            AppData._persistentStates.odata.emailRegister = that.binding.dataRegister.Email;
+                        }
+                        //AppData._persistentStates.savePersistentStates();
                     }
                     AppBar.busy = false;
-                    that.binding.dataRegister.Email = "";
+                    //that.binding.dataRegister.Email = "";
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");
                 }, function (error) {
                     Log.print(Log.l.error, "PRC_RegisterContact error! ");
+                }).then(function () {
+                    //that.binding.showRegister = false;
+                    that.binding.showRegisterMail = false;
+                    that.binding.showResendEtiableMail = true;
+                    //AppBar.scope.loadRegister();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -188,9 +229,36 @@
                     Log.call(Log.l.trace, "Register.Controller.");
                     that.saveData(function (response) {
                         // called asynchronously if ok
+
                     }, function (errorResponse) {
                         // called asynchronously on error
                     });
+                    Log.ret(Log.l.trace);
+                },
+                clickResend: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.binding.editDisabled = true;
+                    that.binding.resendDisabled = true;
+                    that.saveData(function (response) {
+                        // called asynchronously if ok
+
+                    }, function (errorResponse) {
+                        // called asynchronously on error
+                    });
+
+                    WinJS.Promise.timeout(5000).then(function () {
+                        that.binding.editDisabled = false;
+                        that.binding.resendDisabled = false;
+                    });
+
+                    Log.ret(Log.l.trace);
+                },
+                clickEdit: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    that.binding.showRegisterMail = true;
+                    that.binding.showResendEtiableMail = false;
+                    that.binding.editDisabled = true;
+                    that.binding.resendDisabled = true;
                     Log.ret(Log.l.trace);
                 },
                 clickFacebookLogin: function (event) {

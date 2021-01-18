@@ -1,0 +1,15 @@
+﻿#registerConfirmController .doc-container {
+    float: left;
+}
+
+#registerConfirm.mediaview {
+    width: 100%;
+    height: calc(100% - 8px);
+}
+
+.countdown-container {
+    width: 100%;
+}
+
+
+
