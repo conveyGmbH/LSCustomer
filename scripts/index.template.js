@@ -51,7 +51,7 @@
             timeZoneRemoteAdjustment: null,
             timeZoneRemoteDiffMs: 0,
             serverFailure: false
-        }
+        }, registerData: {}
     };
 
     // static array of menu groups for the split view pane

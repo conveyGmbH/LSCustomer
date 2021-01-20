@@ -24,10 +24,10 @@
                 },
                 registerMessage: "",
                 showRegisterMail: true,
-                showResendEtiableMail: false,
+                showResendEditableMail: false,
                 editDisabled: false,
                 resendDisabled: false,
-                registerStatus: "Not logged in to Facebook",
+                registerStatus: "", /*Not logged in to Facebook*/
                 loginDisabled: true
             }, commandList]);
 
@@ -65,7 +65,7 @@
                         if (ctrl) {
                             ctrl.innerHTML = "Not logged in to Facebook";
                         }
-                        that.binding.registerStatus = "Not logged in to Facebook";
+                        that.binding.registerStatus = ""; /*Not logged in to Facebook*/
                     }
                 });
             };
@@ -77,8 +77,8 @@
                         var ctrl = document.getElementById("statustext");
                         if (response.email) {
                             that.binding.dataRegister.Email = response.email;
-                            if (AppData._persistentStates.odata.emailRegister !== that.binding.dataRegister.Email) {
-                                AppData._persistentStates.odata.emailRegister = that.binding.dataRegister.Email;
+                            if (AppData._persistentStates.registerData.emailRegister !== that.binding.dataRegister.Email) {
+                                AppData._persistentStates.registerData.emailRegister = that.binding.dataRegister.Email;
                             }
                             that.binding.dataRegister.Name = response.name;
                             if (ctrl) {
@@ -139,18 +139,18 @@
                         return uuid;
                     }
 
-                    if (!AppData._persistentStates.odata.uuid) {
-                        AppData._persistentStates.odata.uuid = create_UUID();
+                    if (!AppData._persistentStates.registerData.uuid) {
+                        AppData._persistentStates.registerData.uuid = create_UUID();
                         AppData._persistentStates.savePersistentStates();
                     }
 
-                    if (!AppData._persistentStates.odata.statusRegister) {
-                        AppData._persistentStates.odata.statusRegister = 0;
+                    if (!AppData._persistentStates.registerData.statusRegister) {
+                        AppData._persistentStates.registerData.statusRegister = 0;
                         AppData._persistentStates.savePersistentStates();
                     }
 
-                    if (!AppData._persistentStates.odata.eventIDregister) {
-                        AppData._persistentStates.odata.eventIDregister = that.binding.eventId;
+                    if (!AppData._persistentStates.registerData.eventIDregister) {
+                        AppData._persistentStates.registerData.eventIDregister = that.binding.eventId;
                     }
 
                     /*return AppData.call("PRC_RegisterContact", { 
@@ -177,46 +177,84 @@
             var saveData = function (complete, error) {
                 var err;
                 Log.call(Log.l.trace, "Register.Controller.");
+                var dummy = "ff742dbe-51c7-464c-b59b-b2dfdc7fee46";
+                if (dummy) {
+                    AppData._persistentStates.registerData.uuid = dummy;
+                }
                 AppData.setErrorMsg(that.binding);
                 var location = window.location.href;
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
-                    pUserToken: AppData._persistentStates.odata.uuid,
+                    pUserToken: AppData._persistentStates.registerData.uuid,
                     pEMail: that.binding.dataRegister.Email,
                     pAddressData: null,
                     pBaseURL: window.location.href
                 }, function (json) {
                     if (json && json.d && json.d.results) {
                         var result = json.d.results[0];
-                        if (result.UserToken && result.UserToken !== AppData._persistentStates.odata.uuid) {
-                            AppData._persistentStates.odata.uuid = result.UserToken;
+                        if (result.UserToken && result.UserToken !== AppData._persistentStates.registerData.uuid) {
+                            AppData._persistentStates.registerData.uuid = result.UserToken;
                         }
-                        if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.odata.eventIDregister) {
-                            AppData._persistentStates.odata.eventIDregister = result.VeranstaltungID;
+                        if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.registerData.eventIDregister) {
+                            AppData._persistentStates.registerData.eventIDregister = result.VeranstaltungID;
                         }
-                        if (result.ConfirmStatus && result.ConfirmStatus !== AppData._persistentStates.odata.statusRegister) {
-                            AppData._persistentStates.odata.statusRegister = result.ConfirmStatus;
+                        if (result.ConfirmStatusID !== AppData._persistentStates.registerData.confirmStatusID) {
+                            AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;
                         }
                         if (result.ResultMessage) {
                             that.binding.registerMessage = result.ResultMessage;
                         }
-                        if (!AppData._persistentStates.odata.emailRegister &&
-                            AppData._persistentStates.odata.emailRegister !== that.binding.dataRegister.Email) {
-                            AppData._persistentStates.odata.emailRegister = that.binding.dataRegister.Email;
+                        if (!AppData._persistentStates.registerData.emailRegister &&
+                            AppData._persistentStates.registerData.emailRegister !== that.binding.dataRegister.Email) {
+                            AppData._persistentStates.registerData.emailRegister = that.binding.dataRegister.Email;
                         }
-                        //AppData._persistentStates.savePersistentStates();
+                        AppData._persistentStates.savePersistentStates();
                     }
                     AppBar.busy = false;
-                    //that.binding.dataRegister.Email = "";
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");
                 }, function (error) {
                     Log.print(Log.l.error, "PRC_RegisterContact error! ");
                 }).then(function () {
-                    //that.binding.showRegister = false;
+                    // rufe loaddata auf von event -> AppBar.scope.loaddata();
+                    //AppBar.scope.binding.showRegister = false;
+                    AppBar.scope.binding.showTeaser = false;
+                    if (AppData._persistentStates.registerData.confirmStatusID === null) {
+                        AppBar.scope.binding.showRegister = false;
+                        that.binding.showRegisterMail = false;
+                        that.binding.showResendEditableMail = false;
+                        AppBar.scope.binding.showCountdown = true;
+                        //AppBar.scope.loadCountdown();
+                        /*if (typeof AppBar.scope.loadCountdown === "function") {
+                            AppBar.scope.loadCountdown();
+                        }*/
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 0 ||
+                        AppData._persistentStates.registerData.confirmStatusID === 1) {
+                        AppBar.scope.binding.showRegister = true;
+                        that.binding.showRegisterMail = false; //false
+                        that.binding.showResendEditableMail = true;
+                        that.binding.registerMessage = getResourceText("register.sendEmailMessage");
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
+                        AppData._persistentStates.registerData.confirmStatusID === 11) {
+                        AppBar.scope.binding.showRegister = false;
                     that.binding.showRegisterMail = false;
-                    that.binding.showResendEtiableMail = true;
+                        that.binding.showResendEditableMail = false;
+                        AppBar.scope.binding.showCountdown = true;
+                        //AppBar.scope.loadCountdown();
+                        /*if (typeof AppBar.scope.loadCountdown === "function") {
+                            AppBar.scope.loadCountdown();
+                        }*/
+                    } else {
+                        AppBar.scope.binding.showCountdown = false;
+                        AppBar.scope.binding.showConference = true;
+                        if (typeof AppBar.scope.loadConference === "function") {
+                           AppBar.scope.loadConference();
+                        }
+                    }
                     //AppBar.scope.loadRegister();
+                    //if (typeof AppBar.scope.loadData === "function") {
+                    //    AppBar.scope.loaddata();
+                    //}
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -227,12 +265,16 @@
             this.eventHandlers = {
                 clickOk: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
+                    that.binding.editDisabled = false;
+                    that.binding.resendDisabled = false;
                     that.saveData(function (response) {
                         // called asynchronously if ok
 
                     }, function (errorResponse) {
                         // called asynchronously on error
                     });
+                    AppBar.modified = true;
+                    AppBar.triggerDisableHandlers();
                     Log.ret(Log.l.trace);
                 },
                 clickResend: function (event) {
@@ -241,22 +283,23 @@
                     that.binding.resendDisabled = true;
                     that.saveData(function (response) {
                         // called asynchronously if ok
-
+                        return WinJS.Promise.as();
                     }, function (errorResponse) {
                         // called asynchronously on error
                     });
-
-                    WinJS.Promise.timeout(5000).then(function () {
+                    AppBar.modified = true;
+                    that.binding.registerMessage = getResourceText("register.resendEmailMessage");
+                    WinJS.Promise.timeout(10000).then(function () {
                         that.binding.editDisabled = false;
                         that.binding.resendDisabled = false;
                     });
-
+                    AppBar.triggerDisableHandlers();
                     Log.ret(Log.l.trace);
                 },
                 clickEdit: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     that.binding.showRegisterMail = true;
-                    that.binding.showResendEtiableMail = false;
+                    that.binding.showResendEditableMail = false;
                     that.binding.editDisabled = true;
                     that.binding.resendDisabled = true;
                     Log.ret(Log.l.trace);

@@ -19,5 +19,16 @@
     "register.hours": "heures",
     "register.minutes": "minutes",
     "register.seconds": "secondes",
-    "register.waitMessage": "Malheureusement, vous devez attendre. Nous commençons dans"
+    
+    "register.waitMessage": "Malheureusement, vous devez attendre. Nous commençons dans",
+    "register.resendEmailMessage": "Votre e-mail a été de nouveau envoyé et devrait arriver sous peu. Veuillez vérifier votre boîte de réception ou votre spam.",
+    "register.sendEmailMessage": "Votre e-mail a été envoyé et devrait y arriver sous peu. Veuillez vérifier votre boîte de réception ou votre courrier indésirable. Si vous n'avez pas reçu d'e-mail dans les 10 prochaines minutes, vous pouvez saisir un nouvel e-mail ou un nouvel e-mail. envoyer",
+
+    "registerConfirm.waitMessage": "Merci pour votre inscription. Vous allez bientôt recevoir un e-mail de confirmation.",
+
+    "teaser.welcome": "Bienvenue à notre session vidéo de l'événement Convey Online",
+    "teaser.info1": "Inscrivez-vous et ne manquez pas notre événement en ligne!",
+    "teaser.info2": "Après votre inscription, vous recevrez un e-mail de confirmation avec les données d'accès correspondantes de notre part.",
+
+    "countdown.waitMessage": "Votre événement en ligne aura lieu bientôt. Veuillez patienter"
 }

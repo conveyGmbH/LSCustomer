@@ -385,10 +385,14 @@ var __meteor_runtime_config__;
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     return AppData.call("PRC_BBBConferenceLink", {
+                        //zum test da es für diesen token eine online Event vorhanden ist 
+                        //sonst AppData._persistentStates.registerData.uuid
                         pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71'
                     }, function(json) {
                         if (json && json.d && json.d.results) {
                             that.binding.dataConference = json.d.results[0];
+                            AppData._persistentStates.registerData.bbbURL = that.binding.dataConference.URL;
+                            AppBar.scope.binding.showRegister = false;
                         }
                         Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
                     }, function(error) {

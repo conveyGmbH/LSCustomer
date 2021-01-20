@@ -55,4 +55,7 @@
     color: white;
 }
 
-
+.centerarea.registerEmail {
+    width: 500px;
+    margin-left: calc(50% - 250px);
+}

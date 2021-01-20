@@ -17,13 +17,7 @@
             Log.call(Log.l.trace, "Teaser.Controller.", "eventId=" + (options && options.eventId));
 
             Fragments.Controller.apply(this, [fragmentElement, {
-                eventId: options ? options.eventId : null,
-                dataRegister: {
-                    Email: "",
-					Name: ""
-                },
-                registerStatus: "Not logged in to Facebook",
-                loginDisabled: true
+
             }, commandList]);
 
             var that = this;

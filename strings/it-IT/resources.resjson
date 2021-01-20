@@ -19,5 +19,15 @@
     "register.hours": "hours",
     "register.minutes": "minutes",
     "register.seconds": "seconds",
-    "register.waitMessage": "Purtroppo devi aspettare. Stiamo iniziando tra"
+    "register.waitMessage": "Purtroppo devi aspettare. Stiamo iniziando tra",
+    "register.resendEmailMessage": "La tua email è stata inviata di nuovo e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o spam.",
+    "register.sendEmailMessage": "La tua email è stata inviata e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o spam. Se non hai ricevuto un'email nei prossimi 10 minuti, puoi inserire una nuova email o una nuova Spedire",
+
+    "registerConfirm.waitMessage": "Grazie per la registrazione. Riceverai a breve un'e-mail di conferma.",
+
+    "teaser.welcome": "Benvenuto alla nostra sessione video di eventi online di trasmissione",
+    "teaser.info1": "Registrati e non perdere il nostro evento online!",
+    "teaser.info2": "Dopo la registrazione riceverai un'e-mail di conferma con i dati di accesso corrispondenti da parte nostra.",
+
+    "countdown.waitMessage": "Il tuo evento online si svolgerà presto. Sii paziente"
 }

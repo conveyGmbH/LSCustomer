@@ -42,7 +42,7 @@
                 if (newDataEvent.VeranstaltungVIEWID && Application.query && window.history) {
                     var state = {};
                     var title = "";
-                    Application.query.event = newDataEvent.VeranstaltungVIEWID;
+                    Application.query.eventID = newDataEvent.VeranstaltungVIEWID;
                     var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
                     window.history.pushState(state, title, location);
                 }
@@ -115,7 +115,6 @@
             }
             this.loadTeaser = loadTeaser;
 
-            /* countdownhost*/
             var loadCountdown = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
                 var ret = new WinJS.Promise.as().then(function () {
@@ -197,6 +196,50 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
+                    if (AppData._persistentStates.registerData.Email && Application.query.UserToken) {
+                        if (Application.query.UserToken !== AppData._persistentStates.registerData.uuid) {
+                            AppData._persistentStates.registerData.uuid = Application.query.UserToken;
+                        }
+                        return AppData.call("PRC_RegisterContact",
+                            {
+                                pVeranstaltungID: that.binding.eventId,
+                                pUserToken: AppData._persistentStates.registerData.uuid,
+                                pEMail: AppData._persistentStates.registerData.Email, //that.binding.dataRegister.Email
+                                pAddressData: null,
+                                pBaseURL: window.location.href
+                            },
+                            function (json) {
+                                if (json && json.d && json.d.results) {
+                                    var result = json.d.results[0];
+                                    if (result.UserToken &&
+                                        result.UserToken !== AppData._persistentStates.registerData.uuid) {
+                                        AppData._persistentStates.registerData.uuid = result.UserToken;
+                                    }
+                                    if (result.VeranstaltungID &&
+                                        result.VeranstaltungID !==
+                                        AppData._persistentStates.registerData.eventIDregister) {
+                                        AppData._persistentStates.registerData.eventIDregister = result.VeranstaltungID;
+                                    }
+                                    if (result.ConfirmStatusID !==
+                                        AppData._persistentStates.registerData.confirmStatusID) {
+                                        AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;
+                                    }
+                                    if (result.ResultMessage) {
+                                        that.binding.registerMessage = result.ResultMessage;
+                                    }
+                                    AppData._persistentStates.savePersistentStates();
+                                }
+                                AppBar.busy = false;
+                                that.binding.showRegister = false;
+                                Log.print(Log.l.trace, "PRC_RegisterContact success!");
+                            },
+                            function (error) {
+                                Log.print(Log.l.error, "PRC_RegisterContact error! ");
+                            });
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
                     AppBar.notifyModified = true;
                     return WinJS.Promise.as();
                 });
@@ -214,13 +257,15 @@
                 var registerFragmentControl = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("registerConfirm"));
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
-                    pUserToken: AppData._persistentStates.odata.uuid,
+                    pUserToken: AppData._persistentStates.registerData.uuid,
                     pEMail: "", //that.binding.dataRegister.Email
                     pAddressData: null
                 }, function (json) {
                     if (json && json.d && json.d.results) {
                         var result = json.d.results[0];
                     }
+                    // wenn in dem result die sessiontoken drinen ist dann rufe loadfragment auf
+
                     AppBar.busy = false;
                     //that.binding.dataRegister.Email = "";
                     that.binding.showRegister = false;
@@ -247,14 +292,17 @@
                 return that.loadCountdown();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
+                //in persistenstate eine Session enthalten ist dann lade Conference
+                if ((AppData._persistentStates.registerData.confirmStatusID === 10 || 
+                    AppData._persistentStates.registerData.confirmStatusID === 11) &&
+                    AppData._persistentStates.registerData.bbbsession) {
                 return that.loadConference();
+                } else
+                    return WinJS.Promise.as();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 return that.loadRegister();
-            })/*.then(function () {
-                Log.print(Log.l.trace, "Data loaded");
-                return that.loadRegisterConfirm();
-            })*/.then(function () {
+            }).then(function () {
                     Log.print(Log.l.trace, "Conference loaded");
                 });
             Log.ret(Log.l.trace);

@@ -40,7 +40,7 @@
                 Log.call(Log.l.trace, "Countdown.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    var countDownDate = new Date("Jan 15, 2021 12:00:00").getTime();
+                    var countDownDate = AppBar.scope.binding.dataEvent.dateBegin;
                     var timeleft = 0;
                     var countDown = setInterval(function () {
                         var now = new Date().getTime();
@@ -56,8 +56,22 @@
                             that.binding.countdown.hour = 0;
                             that.binding.countdown.minute = 0;
                             that.binding.countdown.second = 0;
+
+                            AppBar.scope.binding.showTeaser = false;
+                            AppBar.scope.binding.showCountdown = false;
+                            AppBar.scope.binding.showConference = true;
+                            //that.binding.showRegisterMail = false;
+                            //that.binding.showResendEditableMail = false;
+                            if (typeof AppBar.scope.loadData === "function") {
+                                AppBar.scope.loadData();
+                            }
                         }
                     }, 1000);
+                }).then(function () {
+                    // rufe loaddata auf von event -> AppBar.scope.loaddata();
+                    //that.binding.showRegister = false;
+
+                    //AppBar.scope.loadRegister();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -93,8 +107,6 @@
                     return that.binding.loginDisabled;
                 }*/
             };
-
-           // that.setDataRegister(getEmptyDefaultValue(Register.registerView.defaultValue));
 
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
