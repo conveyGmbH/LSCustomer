@@ -57,7 +57,7 @@
                             that.binding.countdown.minute = 0;
                             that.binding.countdown.second = 0;
 
-                            AppBar.scope.binding.showTeaser = false;
+                            //AppBar.scope.binding.showTeaser = false;
                             AppBar.scope.binding.showCountdown = false;
                             AppBar.scope.binding.showConference = true;
                             //that.binding.showRegisterMail = false;

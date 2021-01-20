@@ -253,8 +253,6 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(that.binding);
                 AppBar.busy = true;
-                //getfragmentController 
-                var registerFragmentControl = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("registerConfirm"));
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
                     pUserToken: AppData._persistentStates.registerData.uuid,
@@ -285,11 +283,21 @@
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
             }).then(function () {
-                Log.print(Log.l.trace, "Data loaded");
+                if (!AppData._persistentStates.registerData.confirmStatusID ||
+                    AppData._persistentStates.registerData.confirmStatusID === 0 ||
+                    AppData._persistentStates.registerData.confirmStatusID === 1) {
                 return that.loadTeaser();
+                } else {
+                    return WinJS.Promise.as();
+                }
             }).then(function () {
-                Log.print(Log.l.trace, "Data loaded");
-                return that.loadCountdown();
+                if (!AppData._persistentStates.registerData.confirmStatusID ||
+                    AppData._persistentStates.registerData.confirmStatusID === 0 ||
+                    AppData._persistentStates.registerData.confirmStatusID === 1) {
+                    return that.loadRegister();
+                } else {
+                    return WinJS.Promise.as();
+                }
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 //in persistenstate eine Session enthalten ist dann lade Conference
@@ -297,11 +305,9 @@
                     AppData._persistentStates.registerData.confirmStatusID === 11) &&
                     AppData._persistentStates.registerData.bbbsession) {
                 return that.loadConference();
-                } else
-                    return WinJS.Promise.as();
-            }).then(function () {
-                Log.print(Log.l.trace, "Data loaded");
-                return that.loadRegister();
+                } else {
+                    return that.loadCountdown();
+                }
             }).then(function () {
                     Log.print(Log.l.trace, "Conference loaded");
                 });
