@@ -38,6 +38,10 @@
                 that.binding.dataEvent = newDataEvent;
                 // convert Startdatum 
                 that.binding.dataEvent.dateBegin = getDateObject(newDataEvent.Startdatum);
+                if (AppData._persistentStates.registerData.dateBegin !== that.binding.dataEvent.dateBegin) {
+                    AppData._persistentStates.registerData.dateBegin = that.binding.dataEvent.dateBegin;
+                    Application.pageframe.savePersistentStates();
+                }
                 AppBar.modified = false;
                 if (newDataEvent.VeranstaltungVIEWID && Application.query && window.history) {
                     var state = {};
@@ -196,13 +200,22 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
-                    if (AppData._persistentStates.registerData.Email && Application.query.UserToken) {
+                    // Falls in query eine Email enthalten ist dann  verwende diese
+                    if (AppData._persistentStates.registerData.Email &&
+                        Application.query.UserToken) { 
                         if (Application.query.UserToken !== AppData._persistentStates.registerData.uuid) {
                             AppData._persistentStates.registerData.uuid = Application.query.UserToken;
+                            AppData._persistentStates.registerData.uuidFromLink = true;
+
                         }
+                        if (that.binding.eventID !== AppData._persistentStates.registerData.eventIDregister) {
+                            AppData._persistentStates.registerData.eventIDregister = that.binding.eventID;
+                        }
+                        Application.pageframe.savePersistentStates();
+                        Log.print(Log.l.trace, "calling PRC_RegisterContact...");
                         return AppData.call("PRC_RegisterContact",
                             {
-                                pVeranstaltungID: that.binding.eventId,
+                                pVeranstaltungID: AppData._persistentStates.registerData.eventIDregister,
                                 pUserToken: AppData._persistentStates.registerData.uuid,
                                 pEMail: AppData._persistentStates.registerData.Email, //that.binding.dataRegister.Email
                                 pAddressData: null,
@@ -227,7 +240,7 @@
                                     if (result.ResultMessage) {
                                         that.binding.registerMessage = result.ResultMessage;
                                     }
-                                    AppData._persistentStates.savePersistentStates();
+                                    Application.pageframe.savePersistentStates();
                                 }
                                 AppBar.busy = false;
                                 that.binding.showRegister = false;
@@ -239,6 +252,17 @@
                     } else {
                         return WinJS.Promise.as();
                     }
+                }).then(function () {
+                    //Lade Confi oder Countdown wenn über Link gegangen wurde mit query.Token und query.event
+                    if ((AppData._persistentStates.registerData.confirmStatusID === 10 ||
+                            AppData._persistentStates.registerData.confirmStatusID === 11) &&
+                        AppData._persistentStates.registerData.bbbsession) {
+                        return that.loadConference();
+                    } else {
+                        if (AppData._persistentStates.registerData.dateBegin)
+                            return that.loadCountdown();
+                    }
+                    return WinJS.Promise.as();
                 }).then(function () {
                     AppBar.notifyModified = true;
                     return WinJS.Promise.as();

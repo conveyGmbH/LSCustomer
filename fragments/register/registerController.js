@@ -141,12 +141,12 @@
 
                     if (!AppData._persistentStates.registerData.uuid) {
                         AppData._persistentStates.registerData.uuid = create_UUID();
-                        AppData._persistentStates.savePersistentStates();
+                        Application.pageframe.savePersistentStates();
                     }
 
                     if (!AppData._persistentStates.registerData.statusRegister) {
                         AppData._persistentStates.registerData.statusRegister = 0;
-                        AppData._persistentStates.savePersistentStates();
+                        Application.pageframe.savePersistentStates();
                     }
 
                     if (!AppData._persistentStates.registerData.eventIDregister) {
@@ -209,7 +209,7 @@
                             AppData._persistentStates.registerData.emailRegister !== that.binding.dataRegister.Email) {
                             AppData._persistentStates.registerData.emailRegister = that.binding.dataRegister.Email;
                         }
-                        AppData._persistentStates.savePersistentStates();
+                        Application.pageframe.savePersistentStates();
                     }
                     AppBar.busy = false;
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");

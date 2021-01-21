@@ -10,29 +10,29 @@
 
     "event.title"           : "Veranstaltung",
 
-	"conference.waitMessage" : "Viel Spaß´auf ihrer heutigen Onlinekonferenz",
+    "conference.waitMessage" : "Viel Spaß´auf ihrer heutigen Onlinekonferenz",
 
     "register.email"		: "Email",
     "register.register"		: "Registrieren",
     "register.resend"		: "Email erneut senden",
-	"register.edit"			: "Email ändern",
-	"register.registerFacebook" : "Registrieren mit Facebook",
-	"register.logoutFacebook" : "Log Out",
-	"register.registerConfirm" : "BESTÄTIGT",
+    "register.edit"			: "Email ändern",
+    "register.registerFacebook" : "Registrieren mit Facebook",
+    "register.logoutFacebook" : "Log Out",
+    "register.registerConfirm" : "BESTÄTIGT",
     "register.days"			: "Tag",
-	"register.hours"	    : "Stunden",
-	"register.minutes"	    : "Minuten",
-	"register.seconds"		: "Sekunden",
-	"register.waitMessage"  : "Sie müssen leider noch warten. Wir starten in",
-	"register.resendEmailMessage" : "Ihre Email wurde nochmal verschickt und müsste in kürze da sein. Bitte überprüfen Sie ihren Eingangsordner oder Spam.",
+    "register.hours"	    : "Stunden",
+    "register.minutes"	    : "Minuten",
+    "register.seconds"		: "Sekunden",
+    "register.waitMessage"  : "Sie müssen leider noch warten. Wir starten in",
+    "register.resendEmailMessage" : "Ihre Email wurde nochmal verschickt und müsste in kürze da sein. Bitte überprüfen Sie ihren Eingangsordner oder Spam.",
     "register.sendEmailMessage" : "Ihre Email wurde verschickt und müsste in kürze da sein. Bitte überprüfen Sie ihren Eingangsordner oder Spam. Falls Sie in den nächsten 10 Minuten noch keine Email erhalten haben, dann können Sie eine neue Email eingeben oder die Email neu senden",
 
     "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
 
-	"teaser.welcome"		: "Willkommen auf unsere Convey Online Event Video Session",
-	"teaser.info1"			: "Melde Dich an und verpasse nicht unseren Online Event!",
-	"teaser.info2"			: "Nach Deiner Anmeldung erhältst Du eine Bestätigungsmail mit den entsprechenden Zugangsdaten von uns. ",
+    "teaser.welcome"		: "Willkommen auf unsere Convey Online Event Video Session",
+    "teaser.info1"			: "Melde Dich an und verpasse nicht unseren Online Event!",
+    "teaser.info2"			: "Nach Deiner Anmeldung erhältst Du eine Bestätigungsmail mit den entsprechenden Zugangsdaten von uns. ",
 	
-	"countdown.waitMessage" : "Ihre Onlineveranstaltung findet bald statt. Bitte haben Sie etwas geduld"
+    "countdown.waitMessage" : "Ihre Onlineveranstaltung findet bald statt. Bitte haben Sie etwas geduld"
 
 }			
