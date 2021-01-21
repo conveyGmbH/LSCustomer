@@ -334,7 +334,8 @@
                     AppData._persistentStates.registerData.bbbsession) {
                 return that.loadConference();
                 } else {
-                    return that.loadCountdown();
+                    //return that.loadCountdown();
+                    return WinJS.Promise.as();
                 }
             }).then(function () {
                     Log.print(Log.l.trace, "Conference loaded");
