@@ -29,7 +29,8 @@
                     hour: "",
                     minute: "",
                     second: ""
-                }
+                },
+                countdownIsOver: false
             }, commandList]);
 
             var that = this;
@@ -56,7 +57,8 @@
                             that.binding.countdown.hour = 0;
                             that.binding.countdown.minute = 0;
                             that.binding.countdown.second = 0;
-                            AppBar.scope.binding.showCountdown = false;
+                            that.binding.countdownIsOver = true;
+                            AppBar.scope.binding.showCountdown = true;
                             AppBar.scope.binding.showConference = true;
                             //lade fragment mediathek
                         }

@@ -201,7 +201,7 @@
                     }
                 }).then(function () {
                     // Falls in query eine Email enthalten ist dann  verwende diese
-                    if (AppData._persistentStates.registerData.Email &&
+                    if (AppData._persistentStates.registerData.emailRegister &&
                         Application.query.UserToken) { 
                         if (Application.query.UserToken !== AppData._persistentStates.registerData.uuid) {
                             AppData._persistentStates.registerData.uuid = Application.query.UserToken;
@@ -217,7 +217,7 @@
                             {
                                 pVeranstaltungID: AppData._persistentStates.registerData.eventIDregister,
                                 pUserToken: AppData._persistentStates.registerData.uuid,
-                                pEMail: AppData._persistentStates.registerData.Email, //that.binding.dataRegister.Email
+                                pEMail: AppData._persistentStates.registerData.emailRegister, //that.binding.dataRegister.Email
                                 pAddressData: null,
                                 pBaseURL: window.location.href
                             },
@@ -259,7 +259,9 @@
                         AppData._persistentStates.registerData.bbbsession) {
                         return that.loadConference();
                     } else {
-                        if (AppData._persistentStates.registerData.dateBegin)
+                        //var now = new Date().getTime();
+                        //var timeleft = AppData._persistentStates.registerData.dateBegin - now;
+                        if (AppData._persistentStates.registerData.uuidFromLink)
                             return that.loadCountdown();
                     }
                     return WinJS.Promise.as();
@@ -307,17 +309,19 @@
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
             }).then(function () {
-                if (!AppData._persistentStates.registerData.confirmStatusID ||
+                if (!AppData._persistentStates.registerData.emailRegister &&
+                    (!AppData._persistentStates.registerData.confirmStatusID ||
                     AppData._persistentStates.registerData.confirmStatusID === 0 ||
-                    AppData._persistentStates.registerData.confirmStatusID === 1) {
+                    AppData._persistentStates.registerData.confirmStatusID === 1)) {
                 return that.loadTeaser();
                 } else {
                     return WinJS.Promise.as();
                 }
             }).then(function () {
-                if (!AppData._persistentStates.registerData.confirmStatusID ||
+                if (!AppData._persistentStates.registerData.emailRegister &&
+                    (!AppData._persistentStates.registerData.confirmStatusID ||
                     AppData._persistentStates.registerData.confirmStatusID === 0 ||
-                    AppData._persistentStates.registerData.confirmStatusID === 1) {
+                    AppData._persistentStates.registerData.confirmStatusID === 1)) {
                     return that.loadRegister();
                 } else {
                     return WinJS.Promise.as();

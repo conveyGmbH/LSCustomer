@@ -177,10 +177,6 @@
             var saveData = function (complete, error) {
                 var err;
                 Log.call(Log.l.trace, "Register.Controller.");
-                var dummy = "ff742dbe-51c7-464c-b59b-b2dfdc7fee46";
-                if (dummy) {
-                    AppData._persistentStates.registerData.uuid = dummy;
-                }
                 AppData.setErrorMsg(that.binding);
                 var location = window.location.href;
                 AppBar.busy = true;

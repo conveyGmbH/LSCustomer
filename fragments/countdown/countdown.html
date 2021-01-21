@@ -15,12 +15,16 @@
                     <div class="centerarea">
                         <div class="confirm-container">
                             <div class="line-separator register-email"></div>
-                            <div class="field_line field_line_full register-email">
+                            <div class="field_line field_line_full register-email" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplayNone">
                                 <span class="large_field"
                                       data-win-res="{textContent: 'countdown.waitMessage'}"></span>
                             </div>
+                            <div class="field_line field_line_full register-email" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplay">
+                                <span class="large_field"
+                                      data-win-res="{textContent: 'countdown.countDownOverMessage'}"></span>
+                            </div>
                         </div>
-                        <div class="countdown-container">
+                        <div class="countdown-container" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplayNone">
                             <div class="field_line field_line_full">
                                 <div class="large_field"
                                      data-win-res="{textContent: 'register.days'}"></div>

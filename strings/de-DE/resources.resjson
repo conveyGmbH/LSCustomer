@@ -33,6 +33,7 @@
     "teaser.info1"			: "Melde Dich an und verpasse nicht unseren Online Event!",
     "teaser.info2"			: "Nach Deiner Anmeldung erhältst Du eine Bestätigungsmail mit den entsprechenden Zugangsdaten von uns. ",
 	
-    "countdown.waitMessage" : "Ihre Onlineveranstaltung findet bald statt. Bitte haben Sie etwas geduld"
+	"countdown.waitMessage" : "Ihre Onlineveranstaltung findet bald statt. Bitte haben Sie etwas geduld",
+	"countdown.countDownOverMessage" : "Ihre Onlineveranstaltung findet bereits statt oder ist bereits zu Ende. Bitte schauen Sie in Ihrer Mediathek rein"
 
 }			
