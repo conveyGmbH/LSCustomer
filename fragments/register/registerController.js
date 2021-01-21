@@ -144,8 +144,8 @@
                         Application.pageframe.savePersistentStates();
                     }
 
-                    if (!AppData._persistentStates.registerData.statusRegister) {
-                        AppData._persistentStates.registerData.statusRegister = 0;
+                    if (!AppData._persistentStates.registerData.confirmStatusID) {
+                        AppData._persistentStates.registerData.confirmStatusID = 0; 
                         Application.pageframe.savePersistentStates();
                     }
 
