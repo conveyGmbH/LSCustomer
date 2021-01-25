@@ -182,7 +182,7 @@
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
-                    pUserToken: AppData._persistentStates.registerData.uuid,
+                    pUserToken: AppData._persistentStates.registerData.userToken,
                     pEMail: that.binding.dataRegister.Email,
                     pAddressData: null,
                     pBaseURL: ''

@@ -77,8 +77,8 @@
                         var ctrl = document.getElementById("statustext");
                         if (response.email) {
                             that.binding.dataRegister.Email = response.email;
-                            if (AppData._persistentStates.registerData.emailRegister !== that.binding.dataRegister.Email) {
-                                AppData._persistentStates.registerData.emailRegister = that.binding.dataRegister.Email;
+                            if (AppData._persistentStates.registerData.email !== that.binding.dataRegister.Email) {
+                                AppData._persistentStates.registerData.email = that.binding.dataRegister.Email;
                             }
                             that.binding.dataRegister.Name = response.name;
                             if (ctrl) {
@@ -139,8 +139,8 @@
                         return uuid;
                     }
 
-                    if (!AppData._persistentStates.registerData.uuid) {
-                        AppData._persistentStates.registerData.uuid = create_UUID();
+                    if (!AppData._persistentStates.registerData.userToken) {
+                        AppData._persistentStates.registerData.userToken = create_UUID();
                         Application.pageframe.savePersistentStates();
                     }
 
@@ -149,113 +149,14 @@
                         Application.pageframe.savePersistentStates();
                     }
 
-                    if (!AppData._persistentStates.registerData.eventIDregister) {
-                        AppData._persistentStates.registerData.eventIDregister = that.binding.eventId;
+                    if (!AppData._persistentStates.registerData.eventID) {
+                        AppData._persistentStates.registerData.eventID = that.binding.eventId;
                     }
-
-                    /*return AppData.call("PRC_RegisterContact", { 
-                        pVeranstaltungID: that.binding.eventId,
-                        pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71',
-                        pEMail: that.binding.dataRegister.Email,
-                        pAddressData: null
-                    }, function (json) {
-                        if (json && json.d && json.d.results) {
-                           // that.binding.dataRegister = json.d.results[0];
-                            var result = json.d.results[0];
-                        }
-                        //that.binding.dataRegister.Email = "";
-                        Log.print(Log.l.trace, "PRC_RegisterContact success!");
-                    }, function(error) {
-                        Log.print(Log.l.error, "PRC_RegisterContact error! ");
-                    });*/
                 });
                 Log.ret(Log.l.trace);
                 return ret;
             }
             this.loadData = loadData;
-
-            var saveData = function (complete, error) {
-                var err;
-                Log.call(Log.l.trace, "Register.Controller.");
-                AppData.setErrorMsg(that.binding);
-                var location = window.location.href;
-                AppBar.busy = true;
-                var ret = AppData.call("PRC_RegisterContact", {
-                    pVeranstaltungID: that.binding.eventId,
-                    pUserToken: AppData._persistentStates.registerData.uuid,
-                    pEMail: that.binding.dataRegister.Email,
-                    pAddressData: null,
-                    pBaseURL: window.location.href
-                }, function (json) {
-                    if (json && json.d && json.d.results) {
-                        var result = json.d.results[0];
-                        if (result.UserToken && result.UserToken !== AppData._persistentStates.registerData.uuid) {
-                            AppData._persistentStates.registerData.uuid = result.UserToken;
-                        }
-                        if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.registerData.eventIDregister) {
-                            AppData._persistentStates.registerData.eventIDregister = result.VeranstaltungID;
-                        }
-                        if (result.ConfirmStatusID !== AppData._persistentStates.registerData.confirmStatusID) {
-                            AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;
-                        }
-                        if (result.ResultMessage) {
-                            that.binding.registerMessage = result.ResultMessage;
-                        }
-                        if (!AppData._persistentStates.registerData.emailRegister &&
-                            AppData._persistentStates.registerData.emailRegister !== that.binding.dataRegister.Email) {
-                            AppData._persistentStates.registerData.emailRegister = that.binding.dataRegister.Email;
-                        }
-                        Application.pageframe.savePersistentStates();
-                    }
-                    AppBar.busy = false;
-                    Log.print(Log.l.trace, "PRC_RegisterContact success!");
-                }, function (error) {
-                    Log.print(Log.l.error, "PRC_RegisterContact error! ");
-                }).then(function () {
-                    // rufe loaddata auf von event -> AppBar.scope.loaddata();
-                    //AppBar.scope.binding.showRegister = false;
-                    AppBar.scope.binding.showTeaser = false;
-                    if (AppData._persistentStates.registerData.confirmStatusID === null) {
-                        AppBar.scope.binding.showRegister = false;
-                        that.binding.showRegisterMail = false;
-                        that.binding.showResendEditableMail = false;
-                        AppBar.scope.binding.showCountdown = true;
-                        //AppBar.scope.loadCountdown();
-                        /*if (typeof AppBar.scope.loadCountdown === "function") {
-                            AppBar.scope.loadCountdown();
-                        }*/
-                    } else if (AppData._persistentStates.registerData.confirmStatusID === 0 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 1) {
-                        AppBar.scope.binding.showRegister = true;
-                        that.binding.showRegisterMail = false; //false
-                        that.binding.showResendEditableMail = true;
-                        that.binding.registerMessage = getResourceText("register.sendEmailMessage");
-                    } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 11) {
-                        AppBar.scope.binding.showRegister = false;
-                    that.binding.showRegisterMail = false;
-                        that.binding.showResendEditableMail = false;
-                        AppBar.scope.binding.showCountdown = true;
-                        //AppBar.scope.loadCountdown();
-                        /*if (typeof AppBar.scope.loadCountdown === "function") {
-                            AppBar.scope.loadCountdown();
-                        }*/
-                    } else {
-                        AppBar.scope.binding.showCountdown = false;
-                        AppBar.scope.binding.showConference = true;
-                        if (typeof AppBar.scope.loadConference === "function") {
-                           AppBar.scope.loadConference();
-                        }
-                    }
-                    //AppBar.scope.loadRegister();
-                    //if (typeof AppBar.scope.loadData === "function") {
-                    //    AppBar.scope.loaddata();
-                    //}
-                });
-                Log.ret(Log.l.trace);
-                return ret;
-            }
-            this.saveData = saveData;
 
             // define handlers
             this.eventHandlers = {
@@ -263,12 +164,14 @@
                     Log.call(Log.l.trace, "Register.Controller.");
                     that.binding.editDisabled = false;
                     that.binding.resendDisabled = false;
-                    that.saveData(function (response) {
+                    if (typeof AppBar.scope.saveData === "function") {
+                        AppBar.scope.saveData(function (response) {
                         // called asynchronously if ok
 
                     }, function (errorResponse) {
                         // called asynchronously on error
                     });
+                    }                   
                     AppBar.modified = true;
                     AppBar.triggerDisableHandlers();
                     Log.ret(Log.l.trace);

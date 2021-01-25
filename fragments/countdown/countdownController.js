@@ -58,7 +58,7 @@
                             that.binding.countdown.minute = 0;
                             that.binding.countdown.second = 0;
                             that.binding.countdownIsOver = true;
-                            AppBar.scope.binding.showCountdown = true;
+                            AppBar.scope.binding.showCountdown = false;
                             AppBar.scope.binding.showConference = true;
                             //lade fragment mediathek
                         }
