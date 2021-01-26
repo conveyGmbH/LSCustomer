@@ -1,21 +1,59 @@
 /*
     margins/paddings for all screens
 */
-.events .list-header {
-    margin: 0 0 0 35px;
+.events .body-content {
+    margin: 15px 35px;
+    border-top: solid 0.2px #4e3ab0;
 }
 
-.events {
-    background-color: #ffffff;
-}
+
 .events .listview {
     width: 100%;
-    height: 100%;
+    height: auto;
+    background-color: #ffffff;
+    color: #000;
+}
+
+.events .custlogo {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+    min-height: 100px;
+    margin: 15px 0 0 35px;
+    padding 5px;
+    background-color: gainsboro;
+    text-align: center;
+}
+
+
+.events .caption-search, .events .caption-filter {
+    width: 30%;
+    border: solid 0.2px #4e3ab0;
+    display: inline-block;
+    position: relative;
+    height: 30px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.events label {
+    font-size: 16px;
+}
+
+.events .caption-field {
+    top: 5px;
+    left: 8px;
+    text-align: left;
+    width: 30%;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 0 5px;
 }
 
 .events .win-listview .win-gridlayout .win-container {
     margin: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    width: 30%;
 }
 
 .events .event-item {
@@ -30,8 +68,8 @@
     top: 0;
     width: 100%;
     height: 270px;
-    padding: 0px;
-    background-color: #fffff0;
+    padding: 0;
+    background-color: gainsboro;
 }
 
 .events .event-detail.box-bkg:hover {
@@ -72,28 +110,28 @@
 
 
 
-/*
-    margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 699px (in landscape add 140px for navigation bar)
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 699px (in landscape add 140px for navigation bar)*/
     @media (max-width:699px), (max-width:839px) and (orientation: landscape) {
 @media (max-width:899px) {
-    
+    .events .win-listview .win-gridlayout .win-container {
+        width: 100%;
+    }
+}
+
+
+/*margins/paddings for small screens and orientation vertical
+@media (max-height:699px) { 
 }
 */
 
-/*
-    margins/paddings for small screens and orientation vertical
-@media (max-height:699px) {
-   
-}
-*/
 
-
-/*
-    margins/paddings for small screens and orientation vertical
+/*margins/paddings for small screens and orientation vertical*/
 @media (max-width:499px) {
-    
+    .events .win-listview .win-gridlayout .win-container{
+        width: 100%;
+    }
 }
-*/
+
 
 
