@@ -7,6 +7,26 @@
     "use strict";
 
     WinJS.Namespace.define("Event", {
+        _textView: {
+            get: function () {
+                return AppData.getFormatView("LangMandantDokument", 20628);
+            }
+        },
+        textView: {
+            select: function (complete, error, eventId) {
+                Log.call(Log.l.trace, "eventView.");
+                var restriction = {
+                    VeranstaltungID: eventId,
+                    LanguageSpecID: AppData.getLanguageId()
+                };
+                var ret = Event._textView.select(complete, error, restriction, {
+                    ordered: true,
+                    orderAttribute: "Sortierung"
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+        },
         _eventView: {
             get: function () {
                 return AppData.getFormatView("Veranstaltung", 20620);

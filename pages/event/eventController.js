@@ -28,12 +28,14 @@
                 showRecordedContent: false,
                 //showRegisterConfirm: false,
                 eventId: AppData.getRecordId("Veranstaltung"),
-                dataEvent: {}
+                dataEvent: {},
+                dataText: {}
             }, commandList]);
 
             var that = this;
 
             var setDataEvent = function (newDataEvent) {
+                Log.call(Log.l.trace, "Event.Controller.");
                 var prevNotifyModified = AppBar.notifyModified;
                 AppBar.notifyModified = false;
                 that.binding.dataEvent = newDataEvent;
@@ -53,8 +55,38 @@
                 }
                 AppBar.notifyModified = prevNotifyModified;
                 AppBar.triggerDisableHandlers();
+                Log.ret(Log.l.trace);
             };
             this.setDataEvent = setDataEvent;
+
+            var setDataText = function(results) {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var newDataText = {};
+                for (var i = 0; i < results.length; i++) {
+                    var row = results[i];
+                    if (row.LabelTitle) {
+                        newDataText[row.LabelTitle] = row.Title ? row.Title : "";
+                    }
+                    if (row.LabelDescription) {
+                        newDataText[row.LabelDescription] = row.Description ? row.Description : "";
+                    }
+                    if (row.LabelMainTitle) {
+                        newDataText[row.LabelMainTitle] = row.MainTitle ? row.MainTitle : "";
+                    }
+                    if (row.LabelSubTitle) {
+                        newDataText[row.LabelSubTitle] = row.SubTitle ? row.SubTitle : "";
+                    }
+                    if (row.LabelSummary) {
+                        newDataText[row.LabelSummary] = row.Summary ? row.Summary : "";
+                    }
+                    if (row.LabelBody) {
+                        newDataText[row.LabelBody] = row.Body ? row.Body : "";
+                    }
+                }
+                that.binding.dataText = newDataText;
+                Log.ret(Log.l.trace);
+            }
+            this.setDataText = setDataText;
 
             // define handlers
             this.eventHandlers = {
@@ -178,6 +210,23 @@
                             if (json && json.d) {
                                 // now always edit!
                                 that.setDataEvent(json.d);
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select eventView...");
+                        return Event.textView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "labelView: success!");
+                            if (json && json.d) {
+                                // now always edit!
+                                that.setDataText(json.d.results);
                             }
                         }, function (errorResponse) {
                             AppData.setErrorMsg(that.binding, errorResponse);
