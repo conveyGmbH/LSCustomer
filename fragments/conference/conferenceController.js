@@ -393,6 +393,7 @@ var __meteor_runtime_config__;
                             that.binding.dataConference = json.d.results[0];
                             AppData._persistentStates.registerData.urlbbb = that.binding.dataConference.URL;
                             AppBar.scope.binding.showRegister = false;
+                            AppBar.scope.binding.showConference = true;
                         }
                         Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
                     }, function(error) {
