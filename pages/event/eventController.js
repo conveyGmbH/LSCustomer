@@ -273,13 +273,15 @@
                                         AppData._persistentStates.registerData.confirmStatusID) {
                                         AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;
                                     }
+                                    if (result.EMail && result.EMail !== AppData._persistentStates.registerData.email) {
+                                        AppData._persistentStates.registerData.email = result.EMail;
+                                    }
                                     if (result.ResultMessage) {
                                         that.binding.registerMessage = result.ResultMessage;
                                     }
                                     Application.pageframe.savePersistentStates();
                                 }
                                 AppBar.busy = false;
-                                that.binding.showRegister = false;
                                 Log.print(Log.l.trace, "PRC_RegisterContact success!");
                             },
                             function (error) {
@@ -317,18 +319,23 @@
                 AppData.setErrorMsg(that.binding);
                 var registerFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("register"));
                 var location = window.location.href;
+                var copyToken = null;
+                if (AppData._persistentStates.registerData.confirmStatusID === 21) {
+                    copyToken = AppData._persistentStates.registerData.userToken;
+                } 
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
                     pUserToken: AppData._persistentStates.registerData.userToken,
                     pEMail: registerFragment.controller.binding.dataRegister.Email,
                     pAddressData: null,
-                    pBaseURL: location
+                    pBaseURL: location,
+                    pCopyToken: copyToken
                 }, function (json) {
                     if (json && json.d && json.d.results) {
                         var result = json.d.results[0];
-                        if (result.UserToken && result.UserToken !== AppData._persistentStates.registerData.uuid) {
-                            AppData._persistentStates.registerData.uuid = result.UserToken;
+                        if (result.UserToken && result.UserToken !== AppData._persistentStates.registerData.userToken) {
+                            AppData._persistentStates.registerData.userToken = result.UserToken;
                         }
                         if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.registerData.eventID) {
                             AppData._persistentStates.registerData.eventID = result.VeranstaltungID;
@@ -394,27 +401,29 @@
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
                 var ret = new WinJS.Promise.as().then(function () {
-                if (!AppData._persistentStates.registerData.emailRegister &&
-                    (!AppData._persistentStates.registerData.confirmStatusID ||
-                    AppData._persistentStates.registerData.confirmStatusID === 0 ||
-                    AppData._persistentStates.registerData.confirmStatusID === 1)) {
+                    //!AppData._persistentStates.registerData.email &&
+                    if (!AppData._persistentStates.registerData.confirmStatusID ||
+                        AppData._persistentStates.registerData.confirmStatusID === 0 ||
+                        AppData._persistentStates.registerData.confirmStatusID === 1) {
                         that.loadTeaser();
                         that.loadRegister();
-                }
-                //in persistenstate eine Session enthalten ist dann lade Conference
-                if ((AppData._persistentStates.registerData.confirmStatusID === 10 || 
-                    AppData._persistentStates.registerData.confirmStatusID === 11) &&
+                    }
+                    //in persistenstate eine Session enthalten ist dann lade Conference
+                    if ((AppData._persistentStates.registerData.confirmStatusID === 10 ||
+                        AppData._persistentStates.registerData.confirmStatusID === 11) &&
                         AppData._persistentStates.registerData.urlbbb) {
                         that.binding.showTeaser = false;
                         that.binding.showRegister = false;
                         that.binding.showCountdown = false;
                         that.loadConference();
-                } else {
-                        that.binding.showCountdown = false;
+                    } else {
+                        that.binding.showCountdown = true;
                         that.loadCountdown();
-                        //that.binding.showTeaser = false;
-                        //that.binding.showRegister = false;
-                }
+                        that.binding.showTeaser = true;
+                        that.loadTeaser();
+                        that.binding.showRegister = true;
+                        that.loadRegister();
+                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -430,7 +439,7 @@
                 return that.updateFragment();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
-                });
+            });
             Log.ret(Log.l.trace);
         })
     });

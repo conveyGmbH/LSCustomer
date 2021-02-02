@@ -138,14 +138,23 @@
                         });
                         return uuid;
                     }
+                    if (AppData._persistentStates.registerData.email) {
+                        that.binding.registerData.email = AppData._persistentStates.registerData.email;
+                        //showRegisterMail: true,
+                        //showResendEditableMail: false,
+                        //    editDisabled: false,
+                        //    resendDisabled: false,
+                        that.binding.showRegisterMail = false;
+                        that.binding.showResendEditableMail = true;
 
+                    }
                     if (!AppData._persistentStates.registerData.userToken) {
                         AppData._persistentStates.registerData.userToken = create_UUID();
                         Application.pageframe.savePersistentStates();
                     }
 
                     if (!AppData._persistentStates.registerData.confirmStatusID) {
-                        AppData._persistentStates.registerData.confirmStatusID = 0; 
+                        AppData._persistentStates.registerData.confirmStatusID = 0;
                         Application.pageframe.savePersistentStates();
                     }
 
@@ -164,14 +173,15 @@
                     Log.call(Log.l.trace, "Register.Controller.");
                     that.binding.editDisabled = false;
                     that.binding.resendDisabled = false;
+                    that.binding.showResendEditableMail = true;
                     if (typeof AppBar.scope.saveData === "function") {
                         AppBar.scope.saveData(function (response) {
-                        // called asynchronously if ok
+                            // called asynchronously if ok
 
-                    }, function (errorResponse) {
-                        // called asynchronously on error
-                    });
-                    }                   
+                        }, function (errorResponse) {
+                            // called asynchronously on error
+                        });
+                    }
                     AppBar.modified = true;
                     AppBar.triggerDisableHandlers();
                     Log.ret(Log.l.trace);
@@ -180,12 +190,14 @@
                     Log.call(Log.l.trace, "Register.Controller.");
                     that.binding.editDisabled = true;
                     that.binding.resendDisabled = true;
-                    that.saveData(function (response) {
-                        // called asynchronously if ok
-                        return WinJS.Promise.as();
-                    }, function (errorResponse) {
-                        // called asynchronously on error
-                    });
+                    if (typeof AppBar.scope.saveData === "function") {
+                        AppBar.scope.saveData(function (response) {
+                            // called asynchronously if ok
+                            return WinJS.Promise.as();
+                        }, function (errorResponse) {
+                            // called asynchronously on error
+                        });
+                    }
                     AppBar.modified = true;
                     that.binding.registerMessage = getResourceText("register.resendEmailMessage");
                     WinJS.Promise.timeout(10000).then(function () {
