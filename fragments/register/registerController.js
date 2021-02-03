@@ -177,11 +177,16 @@
                     if (typeof AppBar.scope.saveData === "function") {
                         AppBar.scope.saveData(function (response) {
                             // called asynchronously if ok
-
+                            return WinJS.Promise.as();
                         }, function (errorResponse) {
                             // called asynchronously on error
+                        }).then(function () {
+                            if (typeof AppBar.scope.updateFragment === "function") {
+                                AppBar.scope.updateFragment();
+                            }
                         });
                     }
+
                     AppBar.modified = true;
                     AppBar.triggerDisableHandlers();
                     Log.ret(Log.l.trace);

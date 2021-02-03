@@ -294,15 +294,13 @@
                     //Lade Confi oder Countdown wenn über Link gegangen wurde mit query.Token und query.event
                     if ((AppData._persistentStates.registerData.confirmStatusID === 10 ||
                         AppData._persistentStates.registerData.confirmStatusID === 11)) {
+                        that.binding.showTeaser = false;
+                        that.binding.showRegister = false;
+                        that.binding.showCountdown = false;
                         return that.loadConference();
-                    } /*else {
-                        //var now = new Date().getTime();
-                        //var timeleft = AppData._persistentStates.registerData.dateBegin - now;
-                        // xLL PRC_bigbluebutton
-                        if (AppData._persistentStates.registerData.tokenFromLink) {
-                            return that.loadCountdown();
+                    } else {
+                        return that.updateFragment();
                     }
-                    }*/
                     return WinJS.Promise.as();
                 }).then(function () {
                     AppBar.notifyModified = true;
@@ -322,7 +320,7 @@
                 var copyToken = null;
                 if (AppData._persistentStates.registerData.confirmStatusID === 21) {
                     copyToken = AppData._persistentStates.registerData.userToken;
-                } 
+                }
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
@@ -356,22 +354,27 @@
                         Application.pageframe.savePersistentStates();
                     }
                     AppBar.busy = false;
+                    complete({});
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");
                 }, function (error) {
+                    error({});
                     Log.print(Log.l.error, "PRC_RegisterContact error! ");
-                }).then(function () {
-                    // rufe loaddata auf von event -> AppBar.scope.loaddata();
-                    //AppBar.scope.binding.showRegister = false;
-                    //AppBar.scope.binding.showTeaser = false;
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.saveData = saveData;
+
+            var updateFragment = function () {
+                Log.call(Log.l.trace, "Register.Controller.");
+                var registerFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("register"));
+                var ret = new WinJS.Promise.as().then(function () {
                     if (AppData._persistentStates.registerData.confirmStatusID === null) {
                         that.binding.showRegister = false;
                         registerFragment.controller.binding.showRegisterMail = false;
                         registerFragment.controller.binding.showResendEditableMail = false;
-                        that.binding.showCountdown = true;
-                        //AppBar.scope.loadCountdown();
-                        /*if (typeof AppBar.scope.loadCountdown === "function") {
-                            AppBar.scope.loadCountdown();
-                        }*/
+                        // zeige countdown wenn datum in zukunft ist
+                        that.binding.showCountdown = false;
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 0 ||
                         AppData._persistentStates.registerData.confirmStatusID === 1) {
                         that.binding.showRegister = true;
@@ -384,29 +387,9 @@
                         registerFragment.controller.binding.showRegisterMail = false;
                         registerFragment.controller.binding.showResendEditableMail = false;
                         that.binding.showCountdown = true;
-                        //AppBar.scope.loadCountdown();
-                        /*if (typeof AppBar.scope.loadCountdown === "function") {
-                            AppBar.scope.loadCountdown();
-                        }*/
                     } else {
                         that.binding.showCountdown = false;
                         that.binding.showConference = true;
-                    }
-                });
-                Log.ret(Log.l.trace);
-                return ret;
-            }
-            this.saveData = saveData;
-
-            var updateFragment = function () {
-                Log.call(Log.l.trace, "Register.Controller.");
-                var ret = new WinJS.Promise.as().then(function () {
-                    //!AppData._persistentStates.registerData.email &&
-                    if (!AppData._persistentStates.registerData.confirmStatusID ||
-                        AppData._persistentStates.registerData.confirmStatusID === 0 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 1) {
-                        that.loadTeaser();
-                        that.loadRegister();
                     }
                     //in persistenstate eine Session enthalten ist dann lade Conference
                     if ((AppData._persistentStates.registerData.confirmStatusID === 10 ||
@@ -416,14 +399,7 @@
                         that.binding.showRegister = false;
                         that.binding.showCountdown = false;
                         that.loadConference();
-                    } else {
-                        that.binding.showCountdown = true;
-                        that.loadCountdown();
-                        that.binding.showTeaser = true;
-                        that.loadTeaser();
-                        that.binding.showRegister = true;
-                        that.loadRegister();
-                    }
+                    } 
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -436,7 +412,11 @@
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Calling updateFragment");
-                return that.updateFragment();
+                //Lade fragmente
+                // lade alle fragmente! außer conference
+                that.loadTeaser();
+                that.loadRegister();
+                that.loadCountdown();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
             });
