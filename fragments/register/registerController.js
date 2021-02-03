@@ -161,6 +161,10 @@
                     if (!AppData._persistentStates.registerData.eventID) {
                         AppData._persistentStates.registerData.eventID = that.binding.eventId;
                     }
+
+                    if (AppBar.scope.binding.registerStatus) {
+                        that.binding.registerStatus = AppBar.scope.binding.registerStatus;
+                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -171,12 +175,15 @@
             this.eventHandlers = {
                 clickOk: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
+                    AppData._persistentStates.registerData.email = that.binding.dataRegister.Email;
+                    Application.pageframe.savePersistentStates();
                     that.binding.editDisabled = false;
                     that.binding.resendDisabled = false;
                     that.binding.showResendEditableMail = true;
                     if (typeof AppBar.scope.saveData === "function") {
                         AppBar.scope.saveData(function (response) {
                             // called asynchronously if ok
+                            that.binding.registerMessage = AppBar.scope.binding.registerMessage;
                             return WinJS.Promise.as();
                         }, function (errorResponse) {
                             // called asynchronously on error

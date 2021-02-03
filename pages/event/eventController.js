@@ -254,7 +254,7 @@
                             {
                                 pVeranstaltungID: AppData._persistentStates.registerData.eventID,
                                 pUserToken: AppData._persistentStates.registerData.userToken,
-                                pEMail: AppData._persistentStates.registerData.email, //that.binding.dataRegister.Email
+                                pEMail: null, //wenn über Link bestätigt, dann übergebe Email null 
                                 pAddressData: null,
                                 pBaseURL: window.location.href
                             },
@@ -326,7 +326,7 @@
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
                     pUserToken: AppData._persistentStates.registerData.userToken,
-                    pEMail: registerFragment.controller.binding.dataRegister.Email,
+                    pEMail: AppData._persistentStates.registerData.email, 
                     pAddressData: null,
                     pBaseURL: location,
                     pCopyToken: copyToken
