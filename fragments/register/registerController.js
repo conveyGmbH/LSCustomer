@@ -153,8 +153,8 @@
                         Application.pageframe.savePersistentStates();
                     }
 
-                    if (!AppData._persistentStates.registerData.confirmStatusID) {
-                        AppData._persistentStates.registerData.confirmStatusID = 0;
+                    if (typeof AppData._persistentStates.registerData.confirmStatusID === "undefined") {
+                        AppData._persistentStates.registerData.confirmStatusID = null;
                         Application.pageframe.savePersistentStates();
                     }
 

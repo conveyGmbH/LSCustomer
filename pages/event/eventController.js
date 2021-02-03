@@ -326,7 +326,7 @@
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
                     pUserToken: AppData._persistentStates.registerData.userToken,
-                    pEMail: AppData._persistentStates.registerData.email, 
+                    pEMail: AppData._persistentStates.registerData.email,
                     pAddressData: null,
                     pBaseURL: location,
                     pCopyToken: copyToken
@@ -346,12 +346,7 @@
                             AppData._persistentStates.registerData.email = result.email;
                         }
                         if (result.ResultMessage) {
-                            if (registerFragment && registerFragment.controller)
-                                registerFragment.controller.binding.registerStatus = result.ResultMessage;
-                        }
-                        if (!AppData._persistentStates.registerData.email &&
-                            AppData._persistentStates.registerData.email !== registerFragment.controller.binding.dataRegister.Email) {
-                            AppData._persistentStates.registerData.email = registerFragment.controller.binding.dataRegister.Email;
+                            that.binding.registerStatus = result.ResultMessage;
                         }
                         Application.pageframe.savePersistentStates();
                     }
@@ -367,20 +362,29 @@
             }
             this.saveData = saveData;
 
+            var getRegisterFragment = function() {
+                var registerFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("register"));
+                if (!registerFragment) {
+                    that.loadRegister();
+                } else {
+                    return registerFragment;
+                }
+            }
+            this.getRegisterFragment = getRegisterFragment;
+
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
-                var registerFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("register"));
+                var registerFragment = getRegisterFragment();
                 var ret = new WinJS.Promise.as().then(function () {
                     if (AppData._persistentStates.registerData.confirmStatusID === null) {
-                        that.binding.showRegister = false;
-                        registerFragment.controller.binding.showRegisterMail = false;
-                        registerFragment.controller.binding.showResendEditableMail = false;
+                        that.loadTeaser();
                         // zeige countdown wenn datum in zukunft ist
-                        that.binding.showCountdown = false;
+                        //that.binding.showCountdown = false;
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 0 ||
                         AppData._persistentStates.registerData.confirmStatusID === 1) {
+                        that.loadTeaser();
                         that.binding.showRegister = true;
-                        registerFragment.controller.binding.showRegisterMail = false; //false
+                        registerFragment.controller.binding.showRegisterMail = false;
                         registerFragment.controller.binding.showResendEditableMail = true;
                         registerFragment.controller.binding.registerMessage = getResourceText("register.sendEmailMessage");
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
@@ -388,7 +392,9 @@
                         that.binding.showRegister = false;
                         registerFragment.controller.binding.showRegisterMail = false;
                         registerFragment.controller.binding.showResendEditableMail = false;
-                        that.binding.showCountdown = true;
+                        // Fehlt Bedingung für wann countdown geladen wird
+                        //that.binding.showCountdown = true;
+                        //that.loadCountdown();
                     } else {
                         that.binding.showCountdown = false;
                         that.binding.showConference = true;
@@ -409,16 +415,11 @@
             this.updateFragment = updateFragment;
 
             // finally, load the data
-            that.processAll().then(function () {
+            that.processAll().then(function() {
+                that.loadRegister();
+            }).then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
-            }).then(function () {
-                Log.print(Log.l.trace, "Calling updateFragment");
-                //Lade fragmente
-                // lade alle fragmente! außer conference
-                that.loadTeaser();
-                that.loadRegister();
-                that.loadCountdown();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
             });
