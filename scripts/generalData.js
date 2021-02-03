@@ -25,7 +25,7 @@
                 Log.ret(Log.l.trace, "undefined");
                 return null;
             }
-            var ret = AppData._persistentStates.allRecIds[relationName];
+            var ret = typeof AppData._persistentStates.allRecIds[relationName] === "string" ? parseInt(AppData._persistentStates.allRecIds[relationName]) : AppData._persistentStates.allRecIds[relationName];
             Log.ret(Log.l.trace, ret);
             return ret;
         },
