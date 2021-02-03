@@ -199,6 +199,7 @@
 
             var loadData = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
+                var registerFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("register"));
                 AppData.setErrorMsg(that.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     if (that.binding.eventId) {
@@ -277,7 +278,8 @@
                                         AppData._persistentStates.registerData.email = result.EMail;
                                     }
                                     if (result.ResultMessage) {
-                                        that.binding.registerMessage = result.ResultMessage;
+                                        registerFragment.controller.binding.registerStatus = result.ResultMessage;
+
                                     }
                                     Application.pageframe.savePersistentStates();
                                 }
@@ -345,7 +347,7 @@
                             AppData._persistentStates.registerData.email = result.email;
                         }
                         if (result.ResultMessage) {
-                            registerFragment.controller.binding.registerMessage = result.ResultMessage;
+                            registerFragment.controller.binding.registerStatus = result.ResultMessage;
                         }
                         if (!AppData._persistentStates.registerData.email &&
                             AppData._persistentStates.registerData.email !== registerFragment.controller.binding.dataRegister.Email) {
