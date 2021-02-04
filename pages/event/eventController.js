@@ -271,7 +271,7 @@
                 AppData.setErrorMsg(that.binding);
                 var location = window.location.href;
                 var copyToken = null;
-                if (AppData._persistentStates.registerData.confirmStatusID === 21) {
+                if (AppData._persistentStates.registerData.resultCode === 21) {
                     copyToken = AppData._persistentStates.registerData.userToken;
                 }
                 AppBar.busy = true;
@@ -291,6 +291,9 @@
                         if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.registerData.eventID) {
                             AppData._persistentStates.registerData.eventID = result.VeranstaltungID;
                         }
+                        if (result.ResultCode !== AppData._persistentStates.registerData.resultCode) {
+                            AppData._persistentStates.registerData.resultCode = result.ResultCode;
+                        }
                         if (result.ConfirmStatusID !== AppData._persistentStates.registerData.confirmStatusID) {
                             AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;
                         }
@@ -299,6 +302,9 @@
                         }
                         if (result.ResultMessage) {
                             that.binding.registerStatus = result.ResultMessage;
+                            if (result.ResultCode === 21) {
+                                that.binding.registerStatus.registerStatus = getResourceText("");
+                            }
                         }
                         Application.pageframe.savePersistentStates();
                     }
@@ -318,7 +324,8 @@
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
                 var ret = that.getFragmentByName("register").then(function (registerFragment) {
-                    if (AppData._persistentStates.registerData.confirmStatusID === 0 ||
+                    if (AppData._persistentStates.registerData.resultCode === 21 ||
+                        AppData._persistentStates.registerData.confirmStatusID === 0 ||
                         AppData._persistentStates.registerData.confirmStatusID === 1) {
                         if (registerFragment &&
                             registerFragment.controller &&
@@ -345,6 +352,7 @@
                         that.binding.showTeaser = false;
                         // Fehlt Bedingung für wann countdown geladen wird
                         // AppData._persistentStates.registerData.urlbb
+                        //im prinzip könnte man sessionToken hernehmen
                         if (AppData._persistentStates.registerData.userToken) {
                             that.binding.showCountdown = false;
                             that.binding.showConference = true;

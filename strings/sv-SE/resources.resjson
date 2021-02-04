@@ -22,6 +22,7 @@
     "register.waitMessage"  : "Sie müssen leider noch warten. Wir starten in",
     "register.resendEmailMessage" : "Ihre Email wurde nochmal verschickt und müsste in kürze da sein. Bitte überprüfen Sie ihren Eingangsordner oder Spam.",
     "register.sendEmailMessage" : "Ihre Email wurde verschickt und müsste in kürze da sein. Bitte überprüfen Sie ihren Eingangsordner oder Spam. Falls Sie in den nächsten 10 Minuten noch keine Email erhalten haben, dann können Sie eine neue Email eingeben oder die Email neu senden",
+    "register.re_registerMessage" : "Sie wurden schon für eine andere Veranstaltung registriert, wenn Sie möchten melden Sie sich um", 
 
     "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
 
