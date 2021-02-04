@@ -138,65 +138,29 @@
                 }
             };
 
-            var loadTeaser = function () {
-                Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as().then(function () {
-                    var parentElement = pageElement.querySelector("#teaserhost");
-                    if (parentElement && that.binding.eventId) {
-                        return Application.loadFragmentById(parentElement, "teaser", { eventId: that.binding.eventId });
-                    } else {
-                        WinJS.Promise.as();
-                    }
-                });
-                Log.ret(Log.l.trace);
-                return ret;
-            }
-            this.loadTeaser = loadTeaser;
-
-            var loadCountdown = function () {
-                Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as().then(function () {
-                    var parentElement = pageElement.querySelector("#countdownhost");
-                    if (parentElement && that.binding.eventId) {
-                        return Application.loadFragmentById(parentElement, "countdown", { eventId: that.binding.eventId });
-                    } else {
-                        WinJS.Promise.as();
-                    }
-                });
-                Log.ret(Log.l.trace);
-                return ret;
-            }
-            this.loadCountdown = loadCountdown;
-
-            var loadConference = function () {
-                Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as().then(function () {
-                    var parentElement = pageElement.querySelector("#conferencehost");
-                    if (parentElement && that.binding.eventId) {
-                        return Application.loadFragmentById(parentElement, "conference", { eventId: that.binding.eventId });
+            var getFragmentByName = function(fragmentName) {
+                var fragmentController;
+                var ret = new WinJS.Promise.as().then(function() {
+                    fragmentController = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath(fragmentName));
+                    if (!fragmentController) {
+                        var parentElement = pageElement.querySelector("#"+fragmentName+"host");
+                        if (parentElement && that.binding.eventId) {
+                            return Application.loadFragmentById(parentElement, fragmentName, { eventId: that.binding.eventId });
+                        } else {
+                            return WinJS.Promise.as();
+                        }
                     } else {
                         return WinJS.Promise.as();
                     }
-                });
-                Log.ret(Log.l.trace);
-                return ret;
-            }
-            this.loadConference = loadConference;
-
-            var loadRegister = function () {
-                Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as().then(function () {
-                    var parentElement = pageElement.querySelector("#registerhost");
-                    if (parentElement && that.binding.eventId) {
-                        return Application.loadFragmentById(parentElement, "register", { eventId: that.binding.eventId });
-                    } else {
-                        return WinJS.Promise.as();
+                }).then(function () {
+                    if (!fragmentController) {
+                        fragmentController = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath(fragmentName));
                     }
+                    return fragmentController;
                 });
-                Log.ret(Log.l.trace);
                 return ret;
             }
-            this.loadRegister = loadRegister;
+            this.getFragmentByName = getFragmentByName;
 
             var loadData = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
@@ -292,17 +256,7 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
-                    //Lade Confi oder Countdown wenn über Link gegangen wurde mit query.Token und query.event
-                    if ((AppData._persistentStates.registerData.confirmStatusID === 10 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 11)) {
-                        that.binding.showTeaser = false;
-                        that.binding.showRegister = false;
-                        that.binding.showCountdown = false;
-                        return that.loadConference();
-                    } else {
-                        return that.updateFragment();
-                    }
-                    return WinJS.Promise.as();
+                    return that.updateFragment();
                 }).then(function () {
                     AppBar.notifyModified = true;
                     return WinJS.Promise.as();
@@ -362,51 +316,55 @@
             }
             this.saveData = saveData;
 
-            var getRegisterFragment = function() {
-                var registerFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("register"));
-                if (!registerFragment) {
-                    that.loadRegister();
-                } else {
-                    return registerFragment;
-                }
-            }
-            this.getRegisterFragment = getRegisterFragment;
-
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
-                var registerFragment = getRegisterFragment();
-                var ret = new WinJS.Promise.as().then(function () {
-                    if (AppData._persistentStates.registerData.confirmStatusID === null) {
-                        that.loadTeaser();
-                        // zeige countdown wenn datum in zukunft ist
-                        //that.binding.showCountdown = false;
-                    } else if (AppData._persistentStates.registerData.confirmStatusID === 0 ||
+                var ret = that.getFragmentByName("register").then(function (registerFragment) {
+                    if (AppData._persistentStates.registerData.confirmStatusID === 0 ||
                         AppData._persistentStates.registerData.confirmStatusID === 1) {
-                        that.loadTeaser();
-                        that.binding.showRegister = true;
-                        registerFragment.controller.binding.showRegisterMail = false;
-                        registerFragment.controller.binding.showResendEditableMail = true;
-                        registerFragment.controller.binding.registerMessage = getResourceText("register.sendEmailMessage");
+                        if (registerFragment &&
+                            registerFragment.controller &&
+                            registerFragment.controller.binding) {
+                            if (AppData._persistentStates.registerData.confirmStatusID === 1) {
+                                registerFragment.controller.binding.showRegisterMail = false;
+                                registerFragment.controller.binding.showResendEditableMail = true;
+                                registerFragment.controller.binding.registerMessage = getResourceText("register.sendEmailMessage");
+                            } else {
+                                registerFragment.controller.binding.showRegisterMail = true;
+                                registerFragment.controller.binding.showResendEditableMail = false;
+                            }
+                        }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
                         AppData._persistentStates.registerData.confirmStatusID === 11) {
-                        that.binding.showRegister = false;
-                        registerFragment.controller.binding.showRegisterMail = false;
-                        registerFragment.controller.binding.showResendEditableMail = false;
-                        // Fehlt Bedingung für wann countdown geladen wird
-                        //that.binding.showCountdown = true;
-                        //that.loadCountdown();
-                    } else {
-                        that.binding.showCountdown = false;
-                        that.binding.showConference = true;
-                    }
-                    //in persistenstate eine Session enthalten ist dann lade Conference
-                    if ((AppData._persistentStates.registerData.confirmStatusID === 10 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 11) &&
-                        AppData._persistentStates.registerData.urlbbb) {
+                        if (registerFragment &&
+                            registerFragment.controller &&
+                            registerFragment.controller.binding) {
+                            registerFragment.controller.binding.showRegisterMail = false;
+                            registerFragment.controller.binding.showResendEditableMail = false;
+                        }
+                        that.binding.showRegister = true;
                         that.binding.showTeaser = false;
-                        that.binding.showRegister = false;
+                        // Fehlt Bedingung für wann countdown geladen wird
+                        if (AppData._persistentStates.registerData.urlbb) {
+                            that.binding.showCountdown = false;
+                            that.binding.showConference = true;
+                            return that.getFragmentByName("conference");
+                        } else {
+                            that.binding.showCountdown = true;
+                            that.binding.showConference = false;
+                            return that.getFragmentByName("countdown");
+                        }
+                    } else {
+                        if (registerFragment &&
+                            registerFragment.controller &&
+                            registerFragment.controller.binding) {
+                            registerFragment.controller.binding.showRegisterMail = true;
+                            registerFragment.controller.binding.showResendEditableMail = false;
+                        }
+                        that.binding.showRegister = true;
+                        that.binding.showTeaser = true;
                         that.binding.showCountdown = false;
-                        that.loadConference();
+                        that.binding.showConference = false;
+                        return that.getFragmentByName("teaser");
                     }
                 });
                 Log.ret(Log.l.trace);
@@ -416,8 +374,6 @@
 
             // finally, load the data
             that.processAll().then(function() {
-                that.loadRegister();
-            }).then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
             }).then(function () {
