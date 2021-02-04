@@ -23,7 +23,7 @@
                     Name: ""
                 },
                 registerMessage: "",
-                showRegisterMail: true,
+                showRegisterMail: false,
                 showResendEditableMail: false,
                 editDisabled: false,
                 resendDisabled: false,
