@@ -22,6 +22,7 @@
     "register.waitMessage": "Purtroppo devi aspettare. Stiamo iniziando tra",
     "register.resendEmailMessage": "La tua email è stata inviata di nuovo e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o spam.",
     "register.sendEmailMessage": "La tua email è stata inviata e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o spam. Se non hai ricevuto un'email nei prossimi 10 minuti, puoi inserire una nuova email o una nuova Spedire",
+    "register.re_registerMessage": "Sei già stato registrato per un altro evento, se desideri accedere",
 
     "registerConfirm.waitMessage": "Grazie per la registrazione. Riceverai a breve un'e-mail di conferma.",
 

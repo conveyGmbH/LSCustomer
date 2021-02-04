@@ -22,6 +22,7 @@
     "register.waitMessage": "Unfortunately you have to wait. We're starting in",
     "register.resendEmailMessage": "Your email has been sent again and should be there shortly. Please check your inbox or spam.",
     "register.sendEmailMessage": "Your email has been sent and should be there shortly. Please check your inbox or spam. If you haven't received an email in the next 10 minutes, you can enter a new email or a new email send",
+	"register.re_registerMessage": "You have already been registered for another event, if you would like to log in",
 
     "registerConfirm.waitMessage": "Thank you for your registration. You will shortly receive a confirmation email.",
 
