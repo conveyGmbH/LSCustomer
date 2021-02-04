@@ -21,8 +21,8 @@
             }
 
             Application.Controller.apply(this, [pageElement, {
-                showTeaser: false,
-                showRegister: false,
+                showTeaser: true,
+                showRegister: true,
                 showCountdown: false,
                 showConference: false,
                 showRecordedContent: false,
