@@ -324,14 +324,14 @@
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
-                            if (AppData._persistentStates.registerData.confirmStatusID === 1) {
-                                registerFragment.controller.binding.showRegisterMail = false;
-                                registerFragment.controller.binding.showResendEditableMail = true;
-                                registerFragment.controller.binding.registerMessage = getResourceText("register.sendEmailMessage");
-                            } else {
+                            //if (AppData._persistentStates.registerData.confirmStatusID === 0) {
+                            registerFragment.controller.binding.showRegisterMail = false;
+                            registerFragment.controller.binding.showResendEditableMail = true;
+                            registerFragment.controller.binding.registerMessage = getResourceText("register.sendEmailMessage");
+                            /*} else {
                                 registerFragment.controller.binding.showRegisterMail = true;
                                 registerFragment.controller.binding.showResendEditableMail = false;
-                            }
+                            }*/
                         }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
                         AppData._persistentStates.registerData.confirmStatusID === 11) {
@@ -344,7 +344,8 @@
                         that.binding.showRegister = true;
                         that.binding.showTeaser = false;
                         // Fehlt Bedingung für wann countdown geladen wird
-                        if (AppData._persistentStates.registerData.urlbb) {
+                        // AppData._persistentStates.registerData.urlbb
+                        if (AppData._persistentStates.registerData.userToken) {
                             that.binding.showCountdown = false;
                             that.binding.showConference = true;
                             return that.getFragmentByName("conference");
