@@ -267,10 +267,8 @@
             this.loadData = loadData;
 
             var saveData = function (complete, error) {
-                var err;
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(that.binding);
-                var registerFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("register"));
                 var location = window.location.href;
                 var copyToken = null;
                 if (AppData._persistentStates.registerData.confirmStatusID === 21) {
@@ -307,7 +305,8 @@
                     AppBar.busy = false;
                     complete({});
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");
-                }, function (error) {
+                }, function (errorResponse) {
+                    AppData.setErrorMsg(that.binding, errorResponse);
                     error({});
                     Log.print(Log.l.error, "PRC_RegisterContact error! ");
                 });
@@ -333,6 +332,7 @@
                                 registerFragment.controller.binding.showResendEditableMail = false;
                             }*/
                         }
+                        return WinJS.Promise.as();
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
                         AppData._persistentStates.registerData.confirmStatusID === 11) {
                         if (registerFragment &&
