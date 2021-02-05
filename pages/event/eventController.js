@@ -300,11 +300,10 @@
                         if (result.Email && result.Email !== AppData._persistentStates.registerData.email) {
                             AppData._persistentStates.registerData.email = result.email;
                         }
-                        if (result.ResultMessage) {
+                        if (result.ResultCode === 21) {
+                            that.binding.registerStatus = getResourceText("register.re_registerMessage");
+                        } else if (result.ResultMessage) {
                             that.binding.registerStatus = result.ResultMessage;
-                            if (result.ResultCode === 21) {
-                                that.binding.registerStatus.registerStatus = getResourceText("register.re_registerMessage");
-                            }
                         }
                         Application.pageframe.savePersistentStates();
                     }
