@@ -139,7 +139,7 @@
                         return uuid;
                     }
                     if (AppData._persistentStates.registerData.email) {
-                        that.binding.registerData.email = AppData._persistentStates.registerData.email;
+                        that.binding.dataRegister.Email = AppData._persistentStates.registerData.email;
                         //showRegisterMail: true,
                         //showResendEditableMail: false,
                         //    editDisabled: false,
