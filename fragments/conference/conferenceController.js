@@ -217,10 +217,7 @@ var __meteor_runtime_config__;
 
             var getFragmentContentsXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
-                    var html5Client = req.responseText
-                        //.replaceAll(/href="\/html5client/g,'href="https://conference.germanywestcentral.cloudapp.azure.com/html5client')
-                        //.replaceAll(/src="\/html5client/g,'src="https://conference.germanywestcentral.cloudapp.azure.com/html5client')
-                        .replaceAll(/src="compatibility/g,'src="/www/lib/compatibility/scripts');
+                    var html5Client = req.responseText.replaceAll(/src="compatibility/g,'src="lib/compatibility/scripts');
                     return html5Client;
                 });
             }
@@ -416,35 +413,6 @@ var __meteor_runtime_config__;
                         };
                         options.url = url.replaceAll(/https:\/\/conference.germanywestcentral.cloudapp.azure.com\/html5client/g,'/html5client');
                         return renderImpl(options.url, conference, false);
-                        //return WinJS.UI.Fragments.render(meetingUrl, conference);
-                        /*return WinJS.xhr(options).then(function xhrSuccess(response) {
-                            Log.print(Log.l.trace, "GET url? success!");
-                            try {
-                                if (response) {
-                                    var getFragmentContents = WinJS.UI.Fragments._getFragmentContents;
-                                    WinJS.UI.Fragments._getFragmentContents = function(value) {
-                                        return WinJS.Promise.as().then(function() {
-                                            return value;
-                                        });
-                                    }
-                                    var html5Client = response.responseText
-                                        //.replaceAll(/href="\/html5client/g,'href="https://conference.germanywestcentral.cloudapp.azure.com/html5client')
-                                        //.replaceAll(/src="\/html5client/g,'src="https://conference.germanywestcentral.cloudapp.azure.com/html5client')
-                                        .replaceAll(/src="compatibility/g,'src="/www/lib/compatibility/scripts');
-                                    
-                                    WinJS.UI.Fragments.render(html5Client, conference).done(function() {
-                                        WinJS.UI.Fragments._getFragmentContents = getFragmentContents;
-                                    });
-                                }
-                            } catch (exception) {
-                                Log.print(Log.l.error, "resource parse error " + (exception && exception.message) + " success / " + " errors");
-                                var err = { status: 500, statusText: "data parse error " + (exception && exception.message) };
-                                AppData.setErrorMsg(AppBar.scope.binding, err);
-                            }
-                        },
-                        function(errorResponse) {
-                            AppData.setErrorMsg(AppBar.scope.binding, errorResponse);
-                        });*/
                     } else {
                         return WinJS.Promise.as();
                     }
