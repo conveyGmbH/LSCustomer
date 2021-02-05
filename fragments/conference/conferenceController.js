@@ -222,8 +222,11 @@ var __meteor_runtime_config__;
                         a.href = uri;
                         return a.href;
                     }
-                    var compatibilitySrc = 'src="' + abs("lib/compatibility/scripts");
-                    var html5Client = req.responseText.replaceAll(/src="compatibility/g, compatibilitySrc);
+                    var compatibilitySrc = '="' + abs("lib/compatibility/scripts");
+                    var html5ClientSrc = '="' + abs("/html5client");
+                    var html5Client = req.responseText
+                        .replaceAll(/="compatibility/g, compatibilitySrc)
+                        .replaceAll(/="\/html5client/g, html5ClientSrc);
                     return html5Client;
                 });
             }
