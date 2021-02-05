@@ -270,14 +270,17 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var location = window.location.href;
+                var userToken = AppData._persistentStates.registerData.userToken;
                 var copyToken = null;
+
                 if (AppData._persistentStates.registerData.resultCode === 21) {
                     copyToken = AppData._persistentStates.registerData.userToken;
+                    userToken = null;
                 }
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
-                    pUserToken: AppData._persistentStates.registerData.userToken,
+                    pUserToken: userToken,
                     pEMail: AppData._persistentStates.registerData.email,
                     pAddressData: null,
                     pBaseURL: location,
@@ -300,10 +303,11 @@
                         if (result.Email && result.Email !== AppData._persistentStates.registerData.email) {
                             AppData._persistentStates.registerData.email = result.email;
                         }
-                        if (result.ResultCode === 21) {
-                            that.binding.registerStatus = getResourceText("register.re_registerMessage");
-                        } else if (result.ResultMessage) {
+                        if (result.ResultMessage) {
                             that.binding.registerStatus = result.ResultMessage;
+                            if (result.ResultCode === 21) {
+                                that.binding.registerStatus = getResourceText("register.re_registerMessage");
+                            }
                         }
                         Application.pageframe.savePersistentStates();
                     }
