@@ -217,7 +217,13 @@ var __meteor_runtime_config__;
 
             var getFragmentContentsXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
-                    var html5Client = req.responseText.replaceAll(/src="compatibility/g,'src="/www/lib/compatibility/scripts');
+                    function abs(uri) {
+                        var a = document.createElement("a");
+                        a.href = uri;
+                        return a.href;
+                    }
+                    var compatibilitySrc = 'src="' + abs("lib/compatibility/scripts");
+                    var html5Client = req.responseText.replaceAll(/src="compatibility/g, compatibilitySrc);
                     return html5Client;
                 });
             }
