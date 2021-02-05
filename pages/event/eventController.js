@@ -303,7 +303,7 @@
                         if (result.ResultMessage) {
                             that.binding.registerStatus = result.ResultMessage;
                             if (result.ResultCode === 21) {
-                                that.binding.registerStatus.registerStatus = getResourceText("");
+                                that.binding.registerStatus.registerStatus = getResourceText("register.re_registerMessage");
                             }
                         }
                         Application.pageframe.savePersistentStates();
