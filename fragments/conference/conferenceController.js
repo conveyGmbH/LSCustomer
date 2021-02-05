@@ -217,7 +217,7 @@ var __meteor_runtime_config__;
 
             var getFragmentContentsXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
-                    var html5Client = req.responseText.replaceAll(/src="compatibility/g,'src="lib/compatibility/scripts');
+                    var html5Client = req.responseText.replaceAll(/src="compatibility/g,'src="/www/lib/compatibility/scripts');
                     return html5Client;
                 });
             }
