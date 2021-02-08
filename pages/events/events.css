@@ -25,15 +25,24 @@
     text-align: center;
 }
 
+.events .content-header {
+    height: 90px;
+}
 
-.events .caption-search, .events .caption-filter {
-    width: 30%;
-    border: solid 0.2px #4e3ab0;
+.events .caption-sort {
     display: inline-block;
     position: relative;
-    height: 30px;
+    text-align: right;
+    width: 50%;
+}
+
+.events .caption-search, .events .caption-filter {
+    width: 40%;
+    border: solid 0.2px #4e3ab0;
+    display: inline-block;
     margin: 5px;
     padding: 5px;
+    text-align: left;
 }
 
 .events label {
@@ -44,7 +53,7 @@
     top: 5px;
     left: 8px;
     text-align: left;
-    width: 30%;
+    width: 48%;
     display: inline-block;
     margin: 0 10px 0 0;
     padding: 0 5px;
@@ -107,16 +116,38 @@
     border-color: transparent;
 }
 
+.events .footer {
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    border-top: solid 0.2px #4e3ab0;
+
+}
+
+.events .footer-content {
+    margin: 20px 35px;
+
+}
+
 
 
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px (in landscape add 140px for navigation bar)*/
-    @media (max-width:699px), (max-width:839px) and (orientation: landscape) {
+@media (max-width:699px), (max-width:839px) and (orientation: landscape) {
+}
 @media (max-width:899px) {
     .events .win-listview .win-gridlayout .win-container {
         width: 100%;
     }
+
+    .events .caption-field { width: 35%; margin: 0 10px 0 5px;}
+    .events .caption-sort { width: 60%;}
 }
 
 
@@ -127,11 +158,16 @@
 
 
 /*margins/paddings for small screens and orientation vertical*/
-@media (max-width:499px) {
-    .events .win-listview .win-gridlayout .win-container{
-        width: 100%;
-    }
-}
+        @media (max-width:499px) {
+            .events .win-listview .win-gridlayout .win-container { width: 100%; }
 
+            .events .custlogo {width: 50%; min-height: 70px; margin: 15px 0 0 20px;}
+
+            .events .body-content { margin: 10px 20px; }
+            .events .content-header { height: 130px; margin-bottom: 5px;}
+            .events .caption-field { width: 100%; margin: 0; padding: 0;}
+            .events .caption-sort { width: 100%;}
+            .events .caption-filter, .events .caption-search { width: 100%; height: auto; margin: 5px 0; padding: 5px 0;}
+        }
 
 
