@@ -227,6 +227,16 @@ var __meteor_runtime_config__;
                     var html5Client = req.responseText
                         .replaceAll(/="compatibility/g, compatibilitySrc)
                         .replaceAll(/="\/html5client/g, html5ClientSrc);
+                    var pos = html5Client.indexOf("__meteor_runtime_config__");
+                    if (pos > 0) {
+                        pos = html5Client.indexOf("</script>", pos);
+                        if (pos > 0) {
+                            html5Client = html5Client.substr(0, pos) +
+                                ";__meteor_runtime_config__.ROOT_URL = \"" + abs("/") + "\""+
+                                html5Client.substr(pos);
+
+                        }
+                    }
                     return html5Client;
                 });
             }
@@ -238,7 +248,7 @@ var __meteor_runtime_config__;
                 htmlDoc.head.appendChild(base);
                 var anchor = htmlDoc.createElement("a");
                 htmlDoc.body.appendChild(anchor);
-                base.href = document.location.href; // Initialize base URL to primary document URL
+                //base.href = document.location.href; // Initialize base URL to primary document URL
                 anchor.setAttribute("href", href); // Resolve the relative path to an absolute path
                 base.href = anchor.href; // Update the base URL to be the resolved absolute path
                 // 'anchor' is no longer needed at this point and will be removed by the innerHTML call
