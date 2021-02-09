@@ -232,7 +232,8 @@ var __meteor_runtime_config__;
                         pos = html5Client.indexOf("</script>", pos);
                         if (pos > 0) {
                             html5Client = html5Client.substr(0, pos) +
-                                ";__meteor_runtime_config__.ROOT_URL = \"" + abs("/") + "\""+
+                                ";__meteor_runtime_config__.ROOT_URL = \"" + abs("/") + "\"" +
+                                ";__meteor_runtime_config__.ROOT_URL_PATH_PREFIX = \"" + abs("/html5client") + "\"" +
                                 html5Client.substr(pos);
 
                         }
@@ -430,7 +431,7 @@ var __meteor_runtime_config__;
                                 window.history.pushState(state, title, location);
                             }
                         };
-                        options.url = url.replaceAll(/https:\/\/conference.germanywestcentral.cloudapp.azure.com\/html5client/g,'/html5client');
+                        options.url = url.replaceAll(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
                         return renderImpl(options.url, conference, false);
                     } else {
                         return WinJS.Promise.as();
