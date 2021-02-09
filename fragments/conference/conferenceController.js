@@ -41,8 +41,25 @@ var __meteor_runtime_config__;
             var initialized = false;
             var cacheStore = {};
             var uniqueId = 1;
+            var a = document.createElement("a");
+            a.href = "/";
 
-            var addScript = function(scriptTag, fragmentHref, position, lastNonInlineScriptPromise, target) {
+            var getScriptFromSrcXhr = function (href) {
+                return WinJS.xhr({ url: href }).then(function (req) {
+                    a.href = "/";
+                    var newHostname = "(function(){return\"" + a.hostname + "\"})()";
+                    var newHref = "(function(){return\"" + a.href + "\"})()";
+                    var scriptText = req.responseText
+                        .replaceAll(/window\.document\.location\.hostname/g, newHostname)
+                        .replaceAll(/window\.location\.hostname/g, newHostname)
+                        .replaceAll(/window\.location\.href/g, newHref)
+                        ;
+                    return scriptText;
+                });
+            }
+            var getScriptFromSrc = getScriptFromSrcXhr;
+
+            var addScript = function(scriptTag, fragmentHref, position, lastNonInlineScriptPromise, target, isBody) {
                 // We synthesize a name for inline scripts because today we put the
                 // inline scripts in the same processing pipeline as src scripts. If
                 // we seperated inline scripts into their own logic, we could simplify
@@ -71,21 +88,27 @@ var __meteor_runtime_config__;
                     if (inline) {
                         var text = scriptTag.text;
                         promise = lastNonInlineScriptPromise.then(function() {
-                                n.text = text;
-                            })
-                            .then(null,
-                                function() {
-                                    // eat error
-                                });
-                    } else {
-                        promise = new WinJS.Promise(function(c) {
-                            n.onload = n.onerror = function() {
-                                c();
-                            };
-
-                            // Using scriptTag.src to maintain the original casing
-                            n.setAttribute("src", scriptTag.src);
+                            n.text = text;
+                        }).then(null, function() {
+                            // eat error
                         });
+                    } else {
+                        if (!isBody) {
+                            promise = new WinJS.Promise(function(c) {
+                                n.onload = n.onerror = function() {
+                                    c();
+                                };
+
+                                // Using scriptTag.src to maintain the original casing
+                                n.setAttribute("src", scriptTag.src);
+                            });
+                        } else {
+                            promise = getScriptFromSrcXhr(scriptTag.src).then(function(scriptText) {
+                                n.text = scriptText;
+                            }).then(null, function() {
+                                // eat error
+                            });
+                        }
                     }
                     if (target) {
                         target.appendChild(n);
@@ -218,7 +241,6 @@ var __meteor_runtime_config__;
             var getFragmentContentsXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
                     function abs(uri) {
-                        var a = document.createElement("a");
                         a.href = uri;
                         return a.href;
                     }
@@ -369,7 +391,7 @@ var __meteor_runtime_config__;
                                 var lastNonInlineScriptPromise = WinJS.Promise.as();
                                 forEach(state.localScripts,
                                     function(e, i) {
-                                        var result = addScript(e, href, state.headScripts.length + i, lastNonInlineScriptPromise, target);
+                                        var result = addScript(e, href, state.headScripts.length + i, lastNonInlineScriptPromise, target, true);
                                         if (result) {
                                             if (!result.inline) {
                                                 lastNonInlineScriptPromise = result.promise;
