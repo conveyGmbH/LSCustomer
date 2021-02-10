@@ -22,9 +22,9 @@
                     Email: "",
                     Name: ""
                 },
-                registerMessage: "",
                 showRegisterMail: false,
                 showResendEditableMail: false,
+                showReRegisterEventMail: false,
                 editDisabled: false,
                 resendDisabled: false,
                 registerStatus: "", /*Not logged in to Facebook*/
@@ -221,6 +221,7 @@
                 },
                 clickEdit: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
+                    AppBar.scope.binding.showTeaser = true;
                     that.binding.showRegisterMail = true;
                     that.binding.showResendEditableMail = false;
                     that.binding.editDisabled = true;

@@ -201,8 +201,8 @@
                     }
                 }).then(function () {
                     // Falls in query eine Email enthalten ist dann  verwende diese
-                    if (Application.query.UserToken && Application.query.eventID) {
-                        if (Application.query.UserToken !== AppData._persistentStates.registerData.userToken) {
+                    if (Application.query.eventID) {
+                        if (Application.query.UserToken && Application.query.UserToken !== AppData._persistentStates.registerData.userToken) {
                             AppData._persistentStates.registerData.userToken = Application.query.UserToken;
                             AppData._persistentStates.registerData.tokenFromLink = true;
                         }
@@ -242,7 +242,7 @@
                                         AppData._persistentStates.registerData.email = result.EMail;
                                     }
                                     if (result.ResultMessage) {
-                                        that.binding.registerStatus = result.ResultMessage;
+                                        AppData._persistentStates.registerData.resultMessage = result.ResultMessage;                                    
                                     }
                                     Application.pageframe.savePersistentStates();
                                 }
@@ -306,7 +306,7 @@
                         if (result.ResultMessage) {
                             that.binding.registerStatus = result.ResultMessage;
                             if (result.ResultCode === 21) {
-                                that.binding.registerStatus = getResourceText("register.re_registerMessage");
+                                AppData._persistentStates.registerData.resultCode = result.ResultCode;
                             }
                         }
                         Application.pageframe.savePersistentStates();
@@ -328,19 +328,21 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 var ret = that.getFragmentByName("register").then(function (registerFragment) {
                     if (AppData._persistentStates.registerData.resultCode === 21 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 0 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 1) {
+                        AppData._persistentStates.registerData.confirmStatusID === 1 ||
+                        AppData._persistentStates.registerData.confirmStatusID === 2) {
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
-                            //if (AppData._persistentStates.registerData.confirmStatusID === 0) {
                             registerFragment.controller.binding.showRegisterMail = false;
                             registerFragment.controller.binding.showResendEditableMail = true;
                             registerFragment.controller.binding.registerMessage = getResourceText("register.sendEmailMessage");
-                            /*} else {
-                                registerFragment.controller.binding.showRegisterMail = true;
-                                registerFragment.controller.binding.showResendEditableMail = false;
-                            }*/
+                            if (AppData._persistentStates.registerData.resultCode === 21) {
+                                registerFragment.controller.binding.showReRegisterEventMail = false;
+                                registerFragment.controller.binding.showRegisterMail = false;
+                                registerFragment.controller.binding.showResendEditableMail = true;
+                                registerFragment.controller.binding.registerMessage =
+                                getResourceText("register.re_registerMessage");
+                            } 
                         }
                         return WinJS.Promise.as();
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
@@ -352,18 +354,23 @@
                             registerFragment.controller.binding.showResendEditableMail = false;
                         }
                         that.binding.showRegister = true;
-                        that.binding.showTeaser = false;
+                        that.binding.showTeaser = true;
                         // Fehlt Bedingung für wann countdown geladen wird
                         // AppData._persistentStates.registerData.urlbb
-                        //im prinzip könnte man sessionToken hernehmen
-                        if (AppData._persistentStates.registerData.userToken) {
-                            that.binding.showCountdown = false;
-                            that.binding.showConference = true;
-                            return that.getFragmentByName("conference");
-                        } else {
+                        //im prinzip könnte man sessionToken hernehmen 
+
+                        //AppData._persistentStates.registerData.dateBegin > date heute 
+                        var countDownDate = AppData._persistentStates.registerData.dateBegin;
+                        var now = new Date().getTime();
+                        var timeleft = countDownDate - now;
+                        if (timeleft) {
                             that.binding.showCountdown = true;
                             that.binding.showConference = false;
                             return that.getFragmentByName("countdown");
+                        } else {
+                            that.binding.showCountdown = false;
+                            that.binding.showConference = true;
+                            return that.getFragmentByName("conference");
                         }
                     } else {
                         if (registerFragment &&
@@ -371,6 +378,7 @@
                             registerFragment.controller.binding) {
                             registerFragment.controller.binding.showRegisterMail = true;
                             registerFragment.controller.binding.showResendEditableMail = false;
+                            registerFragment.controller.binding.showReRegisterEventMail = false;
                         }
                         that.binding.showRegister = true;
                         that.binding.showTeaser = true;

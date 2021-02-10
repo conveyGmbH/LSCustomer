@@ -15,7 +15,7 @@
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea content-noscroll win-type-body">
                     <!--<div class="line-separator register-email"></div>-->
-                    <div class="field_line field_line_full register-email">
+                    <div class="field_line_full register-email">
                         <span class="large_field"
                               data-win-res="{textContent: 'register.commentEmail'}"></span>
                     </div>
@@ -30,7 +30,7 @@
                                        data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
                                        data-win-bind-onevent="oninput"/>
                             </div>
-                            <div class="field_line field_line_full">
+                            <div class="field_line_full register_button">
                                 <div class="button_line">
                                     <div class="button-element">
                                         <button id="loginButton"
@@ -64,7 +64,7 @@
                             </div>-->
                         </div>
                         <div class="resend-editable-mail-container" data-win-bind="style.display: showResendEditableMail Binding.Converter.toDisplay">
-                            <div class="field_line field_line_full register-email">
+                            <div class="field_line_full register-email">
                                 <span class="large_field"
                                       data-win-bind="textContent: registerMessage"></span>
                             </div>
@@ -77,7 +77,7 @@
                                        data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
                                        data-win-bind-onevent="oninput" disabled/>
                             </div>
-                            <div class="field_line field_line_full">
+                            <div class="field_line_full register_button">
                                 <div class="button_line">
                                     <div class="button-element">
                                         <button id="resendButton"
@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="field_line field_line_full">
+                            <div class="field_line_full register_button">
                                 <div class="button_line">
                                     <div class="button-element">
                                         <button id="editButton"
@@ -103,7 +103,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="field_line field_line_full">
+                        </div>
+                        <div class="reRegisterEvent-mail-container" data-win-bind="style.display: showReRegisterEventMail Binding.Converter.toDisplay">
+                            <div class="field_line_full register_button">
                                 <div class="button_line">
                                     <div class="button-element">
                                         <button id="re_registerEvent"
@@ -117,7 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="field_line field_line_full">
+                        <div class="field_line_full register_button">
                             <span data-win-bind="textContent: registerStatus"></span>
                             <!--<span id="statustext">Connecting to Facebook...</span>-->
                         </div>
