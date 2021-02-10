@@ -220,7 +220,8 @@
                                 pUserToken: AppData._persistentStates.registerData.userToken,
                                 pEMail: null, //wenn über Link bestätigt, dann übergebe Email null 
                                 pAddressData: null,
-                                pBaseURL: window.location.href
+                                pBaseURL: window.location.href,
+                                pCopyToken: null
                             },
                             function (json) {
                                 if (json && json.d && json.d.results) {
@@ -363,7 +364,7 @@
                         var countDownDate = AppData._persistentStates.registerData.dateBegin;
                         var now = new Date().getTime();
                         var timeleft = countDownDate - now;
-                        if (timeleft) {
+                        if (timeleft > 0) {
                             that.binding.showCountdown = true;
                             that.binding.showConference = false;
                             return that.getFragmentByName("countdown");
