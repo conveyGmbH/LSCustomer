@@ -59,15 +59,15 @@
                             that.binding.countdown.second = 0;
                             that.binding.countdownIsOver = true;
                             AppBar.scope.binding.showCountdown = false;
-                            AppBar.scope.binding.showConference = true;
+                            //AppBar.scope.binding.showConference = true;
                             //lade fragment mediathek
-                        }
+                            return WinJS.Promise.as();
+                        } 
                     }, 1000);
-                }).then(function () {
-                    // rufe loaddata auf von event -> AppBar.scope.loaddata();
-                    //that.binding.showRegister = false;
-
-                    //AppBar.scope.loadRegister();
+                }).then(function() {
+                    if (typeof AppBar.scope.loadData === "function") {
+                        AppBar.scope.loadData();
+                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
