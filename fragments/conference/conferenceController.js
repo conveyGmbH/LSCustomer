@@ -456,7 +456,15 @@ var __meteor_runtime_config__;
                         options.url = url.replaceAll(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
                         return renderImpl(options.url, conference, false);
                     } else {
-                        return WinJS.Promise.as();
+                        // wenn keine conference vorhanden dann zeige meldung -> Conference läuft noch nicht -> zurück button auf events
+                        // setze manuell auf ein ungültigen Status
+                        AppData._persistentStates.registerData.confirmStatusID = 403;
+                        Application.pageframe.savePersistentStates();
+                        if (typeof AppBar.scope.updateFragment === "function") {
+                            return AppBar.scope.updateFragment();
+                        } else {
+                            return WinJS.Promise.as();
+                        }
                     }
                 });
                 Log.ret(Log.l.trace);

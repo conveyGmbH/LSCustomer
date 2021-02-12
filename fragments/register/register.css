@@ -67,3 +67,7 @@
 .register_button {
     margin: 10px;
 }
+
+input[disabled] {
+    color: #DCDAD1;
+}

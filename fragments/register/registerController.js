@@ -212,9 +212,12 @@
                     }
                     AppBar.modified = true;
                     that.binding.registerMessage = getResourceText("register.resendEmailMessage");
-                    WinJS.Promise.timeout(10000).then(function () {
+                    WinJS.Promise.timeout(2000).then(function () {
                         that.binding.editDisabled = false;
                         that.binding.resendDisabled = false;
+                        if (typeof AppBar.scope.loadData === "function") {
+                            AppBar.scope.loadData();
+                        }
                     });
                     AppBar.triggerDisableHandlers();
                     Log.ret(Log.l.trace);

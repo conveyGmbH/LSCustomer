@@ -200,7 +200,6 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
-                    // Falls in query eine Email enthalten ist dann  verwende diese
                     if (Application.query.eventID) {
                         if (Application.query.UserToken && Application.query.UserToken !== AppData._persistentStates.registerData.userToken) {
                             AppData._persistentStates.registerData.userToken = Application.query.UserToken;
@@ -243,7 +242,7 @@
                                         AppData._persistentStates.registerData.email = result.EMail;
                                     }
                                     if (result.ResultMessage) {
-                                        AppData._persistentStates.registerData.resultMessage = result.ResultMessage;                                    
+                                        AppData._persistentStates.registerData.resultMessage = result.ResultMessage;
                                     }
                                     Application.pageframe.savePersistentStates();
                                 }
@@ -327,7 +326,13 @@
 
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
-                var ret = that.getFragmentByName("register").then(function (registerFragment) {
+                var ret = that.getFragmentByName("teaser").then(function (teaserFragment) {
+                    that.binding.showRegister = true;
+                    that.binding.showTeaser = true;
+                    that.binding.showCountdown = false;
+                    that.binding.showConference = false;
+                    return that.getFragmentByName("register");
+                }).then(function (registerFragment) {
                     if (AppData._persistentStates.registerData.resultCode === 21 ||
                         AppData._persistentStates.registerData.confirmStatusID === 1 ||
                         AppData._persistentStates.registerData.confirmStatusID === 2) {
@@ -336,14 +341,14 @@
                             registerFragment.controller.binding) {
                             registerFragment.controller.binding.showRegisterMail = false;
                             registerFragment.controller.binding.showResendEditableMail = true;
-                            registerFragment.controller.binding.registerMessage = getResourceText("register.sendEmailMessage");
+                            registerFragment.controller.binding.registerStatus = getResourceText("register.sendEmailMessage");
                             if (AppData._persistentStates.registerData.resultCode === 21) {
-                                registerFragment.controller.binding.showReRegisterEventMail = false;
+                                registerFragment.controller.binding.showReRegisterEventMail = true;
                                 registerFragment.controller.binding.showRegisterMail = false;
-                                registerFragment.controller.binding.showResendEditableMail = true;
-                                registerFragment.controller.binding.registerMessage =
-                                getResourceText("register.re_registerMessage");
-                            } 
+                                registerFragment.controller.binding.showResendEditableMail = false;
+                                registerFragment.controller.binding.registerStatus =
+                                    getResourceText("register.re_registerMessage");
+                            }
                         }
                         return WinJS.Promise.as();
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
@@ -373,6 +378,18 @@
                             that.binding.showConference = true;
                             return that.getFragmentByName("conference");
                         }
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
+                        if (registerFragment &&
+                            registerFragment.controller &&
+                            registerFragment.controller.binding) {
+                            that.binding.showTeaser = false;
+                            registerFragment.controller.binding.showReRegisterEventMail = false;
+                            registerFragment.controller.binding.showRegisterMail = false;
+                            registerFragment.controller.binding.showResendEditableMail = false;
+                            registerFragment.controller.binding.registerStatus =
+                                getResourceText("register.eventNotStartedYet");
+
+                        }
                     } else {
                         if (registerFragment &&
                             registerFragment.controller &&
@@ -381,11 +398,9 @@
                             registerFragment.controller.binding.showResendEditableMail = false;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
                         }
-                        that.binding.showRegister = true;
-                        that.binding.showTeaser = true;
-                        that.binding.showCountdown = false;
-                        that.binding.showConference = false;
-                        return that.getFragmentByName("teaser");
+
+                        return WinJS.Promise.as();
+                        //return that.getFragmentByName("teaser");
                     }
                 });
                 Log.ret(Log.l.trace);
