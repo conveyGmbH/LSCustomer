@@ -3,32 +3,38 @@
     "flyout.cancel"         : "Annulla",
 
     "label.home"            : "Start",
-    "label.events"          : "Series",
-    "label.event"           : "Event",
+    "label.events"          : "Serie",
+    "label.event"           : "Evento",
 
     "events.title"          : "Series",
 
-    "event.title"           : "Event",
+    "event.title"           : "Evento",
 
-    "register.email"		: "Email",	
+    "conference.waitMessage": "Divertiti con la tua conferenza online oggi",
+
+    "register.email"        : "Email",
     "register.register"     : "Registrati",
-    "register.registerFacebook" : "Registrati con Facebook",
-    "register.logoutFacebook" : "Log Out",
-    "register.registerConfirm": "CONFIRMED",
+    "register.resend"       : "Invia di nuovo email",
+    "register.edit"         : "Cambia email",
+	"register.registerFacebook": "Registrati con Facebook",
+	"register.logoutFacebook": "Esci",
+	"register.registerConfirm": "CONFIRMED",
     "register.days": "day",
-    "register.hours": "hours",
-    "register.minutes": "minutes",
-    "register.seconds": "seconds",
-    "register.waitMessage": "Purtroppo devi aspettare. Stiamo iniziando tra",
-    "register.resendEmailMessage": "La tua email è stata inviata di nuovo e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o spam.",
-    "register.sendEmailMessage": "La tua email è stata inviata e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o spam. Se non hai ricevuto un'email nei prossimi 10 minuti, puoi inserire una nuova email o una nuova Spedire",
-    "register.re_registerMessage": "Sei già stato registrato per un altro evento, se desideri accedere",
-
+	"register.hours": "hours",
+	"register.minutes": "minutes",
+	"register.seconds": "seconds",
+	"register.waitMessage": "Purtroppo devi aspettare. Stiamo iniziando tra",
+	"register.resendEmailMessage": "La tua email è stata inviata di nuovo e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o spam.",
+    "register.sendEmailMessage": "La tua email è stata inviata e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o lo spam. Se non hai ricevuto un'email nei prossimi 10 minuti, puoi inserire una nuova email o una nuova email da inviare ",
+	"register.re_registerEvent": "Nuova registrazione evento",
+	"register.re_registerMessage": "Sei già stato registrato per un altro evento, se desideri accedere",
+	"register.eventNotStartedYet": "Non c'è ancora nessuna conferenza per l'evento, sii paziente o torna all'elenco degli eventi e seleziona un altro evento.",
     "registerConfirm.waitMessage": "Grazie per la registrazione. Riceverai a breve un'e-mail di conferma.",
 
-    "teaser.welcome": "Benvenuto alla nostra sessione video di eventi online di trasmissione",
-    "teaser.info1": "Registrati e non perdere il nostro evento online!",
-    "teaser.info2": "Dopo la registrazione riceverai un'e-mail di conferma con i dati di accesso corrispondenti da parte nostra.",
+	"teaser.welcome": "Benvenuto alla nostra sessione video di eventi online di trasmissione",
+	"teaser.info1": "Registrati e non perdere il nostro evento online!",
+	"teaser.info2": "Dopo la registrazione riceverai un'e-mail di conferma da parte nostra con i dati di accesso corrispondenti.",
 
-    "countdown.waitMessage": "Il tuo evento online si svolgerà presto. Sii paziente"
+	"countdown.waitMessage": "Il tuo evento online sta per svolgersi. Sii paziente",
+	"countdown.countDownOverMessage": "Il tuo evento online è già in corso o è già terminato. Dai un'occhiata alla tua libreria multimediale"
 }

@@ -10,8 +10,12 @@
 
     "event.title"           : "Event",
 
+    "conference.waitMessage": "Have fun on your online conference today",
+
     "register.email"		: "Email",
     "register.register": "Register",
+    "register.resend": "Resend email",
+    "register.edit": "Change email",
     "register.registerFacebook" : "Register with Facebook",
     "register.logoutFacebook" : "Log Out",
     "register.registerConfirm": "CONFIRMED",
@@ -22,13 +26,15 @@
     "register.waitMessage": "Unfortunately you have to wait. We're starting in",
     "register.resendEmailMessage": "Your email has been sent again and should be there shortly. Please check your inbox or spam.",
     "register.sendEmailMessage": "Your email has been sent and should be there shortly. Please check your inbox or spam. If you haven't received an email in the next 10 minutes, you can enter a new email or a new email send",
+    "register.re_registerEvent" : "Event ummelden",
 	"register.re_registerMessage": "You have already been registered for another event, if you would like to log in",
+    "register.eventNotStartedYet": "There is no conference for the event yet, please be patient or go back to the event list and select another event.",   
+	"registerConfirm.waitMessage": "Thank you for your registration. You will shortly receive a confirmation email.",
 
-    "registerConfirm.waitMessage": "Thank you for your registration. You will shortly receive a confirmation email.",
+    "teaser.welcome"           : "Welcome to our Convey Online Event Video Session",
+    "teaser.info1"             : "Register and don't miss our online event!",
+    "teaser.info2"             : "After your registration you will receive a confirmation email with the corresponding access data from us.",
 
-    "teaser.welcome": "Welcome to our Convey Online Event Video Session",
-    "teaser.info1": "Register and don't miss our online event!",
-    "teaser.info2": "After your registration you will receive a confirmation email with the corresponding access data from us.",
-
-    "countdown.waitMessage": "Your online event will take place soon. Please be patient"
+    "countdown.waitMessage": "Your online event will take place soon. Please be patient",
+    "countdown.countDownOverMessage": "Your online event is already taking place or has already ended. Please take a look at your media library"
 }

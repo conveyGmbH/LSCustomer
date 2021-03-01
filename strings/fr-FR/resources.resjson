@@ -2,34 +2,39 @@
     "flyout.ok"             : "OK",
     "flyout.cancel"         : "Annuler",
 
-    "label.home"            : "Start",
-    "label.events"          : "Series",
-    "label.event"           : "Event",
+    "label.home"            : "Démarrer",
+    "label.events"          : "Série",
+    "label.event"           : "Événement",
 
-    "events.title"          : "Series",
+    "events.title"          : "Série",
 
-    "event.title"           : "Event",
+    "event.title"           : "Événement",
 
-    "register.email"		: "Email",
+    "conference.waitMessage": "Amusez-vous avec votre conférence en ligne aujourd'hui",
+
+    "register.email": "Email",
     "register.register": "S'inscrire",
-    "register.registerFacebook" : "Inscrivez-vous avec Facebook",
-    "register.logoutFacebook" : "Log Out",
+    "register.resend": "Renvoyer l'e-mail",
+    "register.edit": "Modifier l'adresse e-mail",
+    "register.registerFacebook": "S'inscrire sur Facebook",
+    "register.logoutFacebook": "Déconnexion",
     "register.registerConfirm": "CONFIRMÉ",
     "register.days": "day",
     "register.hours": "heures",
     "register.minutes": "minutes",
     "register.seconds": "secondes",
-    
     "register.waitMessage": "Malheureusement, vous devez attendre. Nous commençons dans",
-    "register.resendEmailMessage": "Votre e-mail a été de nouveau envoyé et devrait arriver sous peu. Veuillez vérifier votre boîte de réception ou votre spam.",
-    "register.sendEmailMessage": "Votre e-mail a été envoyé et devrait y arriver sous peu. Veuillez vérifier votre boîte de réception ou votre courrier indésirable. Si vous n'avez pas reçu d'e-mail dans les 10 prochaines minutes, vous pouvez saisir un nouvel e-mail ou un nouvel e-mail. envoyer",
+    "register.resendEmailMessage": "Votre e-mail a été de nouveau envoyé et devrait arriver sous peu. Veuillez vérifier votre boîte de réception ou votre courrier indésirable.",
+    "register.sendEmailMessage": "Votre e-mail a été envoyé et devrait y arriver sous peu. Veuillez vérifier votre boîte de réception ou votre courrier indésirable. Si vous n'avez pas reçu d'e-mail dans les 10 prochaines minutes, vous pouvez saisir un nouvel e-mail ou un nouvel envoi d'e-mail. ",
+    "register.re_registerEvent": "Réenregistrer l'événement",
     "register.re_registerMessage": "Vous êtes déjà inscrit à un autre événement, si vous souhaitez vous connecter",
-
+    "register.eventNotStartedYet": "Il n'y a pas encore de conférence pour l'événement, soyez patient ou revenez à la liste des événements et sélectionnez un autre événement.",
     "registerConfirm.waitMessage": "Merci pour votre inscription. Vous allez bientôt recevoir un e-mail de confirmation.",
 
     "teaser.welcome": "Bienvenue à notre session vidéo de l'événement Convey Online",
     "teaser.info1": "Inscrivez-vous et ne manquez pas notre événement en ligne!",
-    "teaser.info2": "Après votre inscription, vous recevrez un e-mail de confirmation avec les données d'accès correspondantes de notre part.",
+    "teaser.info2": "Après votre inscription, vous recevrez un e-mail de confirmation de notre part avec les données d'accès correspondantes.",
 
-    "countdown.waitMessage": "Votre événement en ligne aura lieu bientôt. Veuillez patienter"
+    "countdown.waitMessage": "Votre événement en ligne est sur le point d'avoir lieu. Veuillez patienter",
+    "countdown.countDownOverMessage": "Votre événement en ligne a déjà lieu ou est déjà terminé. Veuillez consulter votre médiathèque"
 }

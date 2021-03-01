@@ -1,33 +1,40 @@
 ﻿{
     "flyout.ok"             : "OK",
-    "flyout.cancel"         : "Anular",
+    "flyout.cancel"         : "Abbrechen",
 
     "label.home"            : "Start",
-    "label.events"          : "Series",
-    "label.event"           : "Event",
+    "label.events"          : "Serie",
+    "label.event"           : "Veranstaltung",
 
-    "events.title"          : "Series",
+    "events.title"          : "Serie",
 
-    "event.title"           : "Event",
+    "event.title"           : "Veranstaltung",
+
+	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 
     "register.email"		: "Email",
-    "register.register": "Register",
-    "register.registerFacebook" : "Registrieren mit Facebook",
-    "register.logoutFacebook" : "Log Out",
-    "register.registerConfirm": "CONFIRMED",
-    "register.days": "day",
-    "register.hours": "hours",
-    "register.minutes": "minutes",
-    "register.seconds": "seconds",
-    "register.waitMessage"  : "Sie müssen leider noch warten. Wir starten in",
-    "register.resendEmailMessage" : "Ihre Email wurde nochmal verschickt und müsste in kürze da sein. Bitte überprüfen Sie ihren Eingangsordner oder Spam.",
+    "register.register"		: "Registrieren",
+    "register.resend"		: "Email erneut senden",
+	"register.edit"			: "Email ändern",
+	"register.registerFacebook" : "Registrieren mit Facebook",
+	"register.logoutFacebook" : "Log Out",
+	"register.registerConfirm" : "BESTÄTIGT",
+    "register.days"			: "Tag",
+	"register.hours"	    : "Stunden",
+	"register.minutes"	    : "Minuten",
+	"register.seconds"		: "Sekunden",
+	"register.waitMessage"  : "Sie müssen leider noch warten. Wir starten in",
+	"register.resendEmailMessage" : "Ihre Email wurde nochmal verschickt und müsste in kürze da sein. Bitte überprüfen Sie ihren Eingangsordner oder Spam.",
     "register.sendEmailMessage" : "Ihre Email wurde verschickt und müsste in kürze da sein. Bitte überprüfen Sie ihren Eingangsordner oder Spam. Falls Sie in den nächsten 10 Minuten noch keine Email erhalten haben, dann können Sie eine neue Email eingeben oder die Email neu senden",
-
+	"register.re_registerEvent" : "Event ummelden",
+	"register.re_registerMessage" : "Sie wurden schon für eine andere Veranstaltung registriert, wenn Sie möchten melden Sie sich um", 
+	"register.eventNotStartedYet" : "Für die Veranstaltung gibt es noch keine Konferenz, bitte haben Sie etwas Geduld oder gehen zurück zur Eventliste und wählen eine andere Veranstaltung aus.",
     "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
 
-    "teaser.welcome"		: "Willkommen auf unsere Convey Online Event Video Session",
-    "teaser.info1"			: "Melde Dich an und verpasse nicht unseren Online Event!",
-    "teaser.info2"			: "Nach Deiner Anmeldung erhältst Du eine Bestätigungsmail mit den entsprechenden Zugangsdaten von uns. ",
+	"teaser.welcome"		: "Willkommen auf unsere Convey Online Event Video Session",
+	"teaser.info1"			: "Melde Dich an und verpasse nicht unseren Online Event!",
+	"teaser.info2"			: "Nach Deiner Anmeldung erhältst Du eine Bestätigungsmail mit den entsprechenden Zugangsdaten von uns. ",
 
-    "countdown.waitMessage" : "Ihre Onlineveranstaltung findet bald statt. Bitte haben Sie etwas geduld"
+	"countdown.waitMessage" : "Ihre Onlineveranstaltung findet bald statt. Bitte haben Sie etwas geduld",
+	"countdown.countDownOverMessage" : "Ihre Onlineveranstaltung findet bereits statt oder ist bereits zu Ende. Bitte schauen Sie in Ihrer Mediathek rein"
 }			
