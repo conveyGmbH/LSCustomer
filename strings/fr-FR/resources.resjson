@@ -29,6 +29,8 @@
     "register.re_registerEvent": "Réenregistrer l'événement",
     "register.re_registerMessage": "Vous êtes déjà inscrit à un autre événement, si vous souhaitez vous connecter",
     "register.eventNotStartedYet": "Il n'y a pas encore de conférence pour l'événement, soyez patient ou revenez à la liste des événements et sélectionnez un autre événement.",
+    "register.facebookRegister": "Connectez-vous avec Facebook",
+
     "registerConfirm.waitMessage": "Merci pour votre inscription. Vous allez bientôt recevoir un e-mail de confirmation.",
 
     "teaser.welcome": "Bienvenue à notre session vidéo de l'événement Convey Online",

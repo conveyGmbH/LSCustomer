@@ -29,6 +29,8 @@
 	"register.re_registerEvent" : "Event ummelden",
 	"register.re_registerMessage" : "Sie wurden schon für eine andere Veranstaltung registriert, wenn Sie möchten melden Sie sich um", 
 	"register.eventNotStartedYet" : "Für die Veranstaltung gibt es noch keine Konferenz, bitte haben Sie etwas Geduld oder gehen zurück zur Eventliste und wählen eine andere Veranstaltung aus.",
+	"register.facebookRegister"     : "Login mit Facebook",
+
     "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
 
 	"teaser.welcome"		: "Willkommen auf unsere Convey Online Event Video Session",

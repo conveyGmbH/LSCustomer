@@ -22,7 +22,7 @@
                     Email: "",
                     Name: ""
                 },
-                showRegisterMail: false,
+                showRegisterMail: true,
                 showResendEditableMail: false,
                 showReRegisterEventMail: false,
                 editDisabled: false,

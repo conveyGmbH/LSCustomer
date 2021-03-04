@@ -28,7 +28,9 @@
     "register.sendEmailMessage": "La tua email è stata inviata e dovrebbe essere lì a breve. Controlla la tua posta in arrivo o lo spam. Se non hai ricevuto un'email nei prossimi 10 minuti, puoi inserire una nuova email o una nuova email da inviare ",
 	"register.re_registerEvent": "Nuova registrazione evento",
 	"register.re_registerMessage": "Sei già stato registrato per un altro evento, se desideri accedere",
-	"register.eventNotStartedYet": "Non c'è ancora nessuna conferenza per l'evento, sii paziente o torna all'elenco degli eventi e seleziona un altro evento.",
+	"register.eventNotStartedYet": "Non c'è ancora nessuna conferenza per l'evento, sii paziente o torna all'elenco degli eventi e seleziona un altro evento.",	
+    "register.facebookRegister": "Accedi con Facebook",
+
     "registerConfirm.waitMessage": "Grazie per la registrazione. Riceverai a breve un'e-mail di conferma.",
 
 	"teaser.welcome": "Benvenuto alla nostra sessione video di eventi online di trasmissione",
