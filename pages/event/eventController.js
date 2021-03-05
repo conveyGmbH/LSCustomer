@@ -205,8 +205,8 @@
                             AppData._persistentStates.registerData.userToken = Application.query.UserToken;
                             AppData._persistentStates.registerData.tokenFromLink = true;
                         }
-                        if (that.binding.eventID !== AppData._persistentStates.registerData.eventID) {
-                            AppData._persistentStates.registerData.eventID = that.binding.eventID;
+                        if (that.binding.eventId !== AppData._persistentStates.registerData.eventID) {
+                            AppData._persistentStates.registerData.eventID = that.binding.eventId;
                         }
                         if (Application.query.eventID && Application.query.eventID !== AppData._persistentStates.registerData.eventID) {
                             AppData._persistentStates.registerData.eventID = Application.query.eventID;
