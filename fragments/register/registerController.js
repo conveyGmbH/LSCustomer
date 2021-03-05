@@ -200,6 +200,28 @@
                 },
                 clickResend: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
+                    that.binding.editDisabled = false;
+                    that.binding.resendDisabled = false;
+                    that.binding.showResendEditableMail = true;
+                    if (typeof AppBar.scope.reSendEmail === "function") {
+                        AppBar.scope.reSendEmail(function (response) {
+                            // called asynchronously if ok
+                            that.binding.registerMessage = AppBar.scope.binding.registerMessage;
+                            return WinJS.Promise.as();
+                        }, function (errorResponse) {
+                            // called asynchronously on error
+                        }).then(function () {
+                            if (typeof AppBar.scope.updateFragment === "function") {
+                                AppBar.scope.updateFragment();
+                            }
+                        });
+                    }
+                    AppBar.modified = true;
+                    AppBar.triggerDisableHandlers();
+                    Log.ret(Log.l.trace);
+                },
+                clickChangeEvent: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
                     that.binding.editDisabled = true;
                     that.binding.resendDisabled = true;
                     if (typeof AppBar.scope.saveData === "function") {

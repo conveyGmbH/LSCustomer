@@ -324,7 +324,7 @@
             }
             this.saveData = saveData;
 
-            var reSendEmail = function() {
+            var reSendEmail = function(complete, error) {
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var userToken = AppData._persistentStates.registerData.userToken;
@@ -335,20 +335,8 @@
                 }, function (json) {
                     if (json && json.d && json.d.results) {
                         var result = json.d.results[0];
-                        if (result.UserToken && result.UserToken !== AppData._persistentStates.registerData.userToken) {
-                            AppData._persistentStates.registerData.userToken = result.UserToken;
-                        }
-                        if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.registerData.eventID) {
-                            AppData._persistentStates.registerData.eventID = result.VeranstaltungID;
-                        }
                         if (result.ResultCode !== AppData._persistentStates.registerData.resultCode) {
                             AppData._persistentStates.registerData.resultCode = result.ResultCode;
-                        }
-                        if (result.ConfirmStatusID !== AppData._persistentStates.registerData.confirmStatusID) {
-                            AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;
-                        }
-                        if (result.Email && result.Email !== AppData._persistentStates.registerData.email) {
-                            AppData._persistentStates.registerData.email = result.email;
                         }
                         if (result.ResultMessage) {
                             that.binding.registerStatus = result.ResultMessage;
