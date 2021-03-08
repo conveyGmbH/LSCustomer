@@ -96,25 +96,25 @@
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
-                        var docContent = row.OvwContentDOCCNT3
-                            ? row.OvwContentDOCCNT3
+                        var docContent = row.DocContentDOCCNT1
+                            ? row.DocContentDOCCNT1
                             : row.DocContentDOCCNT1;
                         if (docContent) {
                             var sub = docContent.search("\r\n\r\n");
                             if (sub >= 0) {
                                 var data = docContent.substr(sub + 4);
                                 if (data && data !== "null") {
-                                    row.OvwContentDOCCNT3 = "data:image/jpeg;base64," + data;
+                                    row.DocContentDOCCNT1 = "data:image/jpeg;base64," + data;
                                 } else {
-                                    row.OvwContentDOCCNT3 = "";
+                                    row.DocContentDOCCNT1 = "";
                                 }
                             } else {
-                                row.OvwContentDOCCNT3 = "";
+                                row.DocContentDOCCNT1 = "";
                             }
                         } else {
-                            row.OvwContentDOCCNT3 = "";
+                            row.DocContentDOCCNT1 = "";
                         }
-                        newDataMedien[row.LabelTitle] = row.OvwContentDOCCNT3 ? row.OvwContentDOCCNT3 : "";
+                        newDataMedien[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
                     }
                 }
                 that.binding.dataMedien = newDataMedien;

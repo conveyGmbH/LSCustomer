@@ -17,8 +17,8 @@
             Log.call(Log.l.trace, "Teaser.Controller.", "eventId=" + (options && options.eventId));
 
             Fragments.Controller.apply(this, [fragmentElement, {
-                scopeEventBinding: AppBar.scope.binding.dataText,
-                scopeMedienBinding: AppBar.scope.binding.dataMedien
+                dataText: AppBar.scope.binding.dataText,
+                dataMedien: AppBar.scope.binding.dataMedien
             }, commandList]);
 
             var that = this;

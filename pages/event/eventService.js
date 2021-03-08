@@ -15,7 +15,7 @@
         //MandantDokumentVIEW_20633
         _medienView: {
             get: function () {
-                return AppData.getFormatView("MandantDokument", 20633);
+                return AppData.getFormatView("MandantDokument", 20635);
             }
         },
         textView: {

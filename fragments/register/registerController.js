@@ -29,8 +29,8 @@
                 resendDisabled: false,
                 registerStatus: "", /*Not logged in to Facebook*/
                 loginDisabled: true,
-                scopeEventBinding: AppBar.scope.binding.dataText,
-                scopeMedienBinding: AppBar.scope.binding.dataMedien
+                dataText: AppBar.scope.binding.dataText,
+                dataMedien: AppBar.scope.binding.dataMedien
             }, commandList]);
 
             var that = this;
