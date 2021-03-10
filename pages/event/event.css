@@ -1,3 +1,17 @@
 /*
     margins/paddings for all screens
 */
+.event .content {margin:0 2%; width: 100%;}
+.teaser-fragmenthost, .register-fragmenthost, .countdown-fragmenthost, .conference-fragmenthost {border: solid 1px #000;}
+.teaser-fragmenthost
+{
+    float: left;
+    display: inline-block;
+    position: relative;
+    width: 45%;
+    height: 300px;
+}
+
+.register-fragmenthost {display: inline-block; position: relative; width: 45%; height: 300px;}
+
+.caption-field {top: 0;}

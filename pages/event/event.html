@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<!--Event.html-->
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -14,15 +16,51 @@
                 <div class="contentarea win-type-body">
                     <div class="content-header">
                         <div class="content-header-line win-type-caption">
-                            <span class="caption-field" 
-                                  data-win-res="{textContent: 'event.title'}"></span>
+                            <span class="caption-field"
+                                  data-win-bind="textContent: dataText.ev_text_detail_name_h1"></span>
                         </div>
                     </div>
-                    <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
-                    <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
-                    <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
-                    <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
-                    <!--<div id="recordedContent" class="recordedContent-fragmenthost"></div> data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"-->
+                    <div class="date-field"> <span data-win-bind="textContent: dataText.ev_text_detail_time_h2"></span></div>
+                    <div class="content">
+                        <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
+                        <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
+                        <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
+                        <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
+                        <!--<div id="recordedContent" class="recordedContent-fragmenthost"></div> data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"-->
+
+                        <div class="ITbackground">
+                            <img class="ipadImg" data-win-bind="src: dataMedien.ev_doc" />
+                        </div>
+                        <div class="">
+                            <span data-win-bind="textContent: dataText.ev_text_calender_text"></span>
+                            <span data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+
+                        </div>
+                        <div class="register_button">
+                            <span data-win-bind="textContent: dataText.ev_text_button_registration_text"></span>
+                            <span data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>
+                        </div>
+
+
+                        <div class="fields-container"><span data-win-bind="textContent: dataText.ev_text_detail_summary"></span></div>
+                        <div class="">
+                            <span data-win-bind="textContent: dataText.ev_text_share_text"></span>
+                            <span data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
+
+                        </div>
+                        <div class=""><span data-win-bind="textContent: dataText.ev_text_agenda_body"></span></div>
+                        <div class="content-header">
+                            <span data-win-bind="textContent: dataText.ev_text_serial_name_h1"></span>
+                            <span data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
+                        </div>
+                        <div class="win-hub-section-content">
+                            <span data-win-bind="textContent: dataText.ev_text_para_h2"></span>
+                            <span data-win-bind="textContent: dataText.ev_text_para_body"></span>
+                        </div>
+                        <div class="win-textarea"><span data-win-bind="textContent: dataText.ev_text_free_body"></span></div>
+
+                        <div class=""><span data-win-bind="textContent: dataText.ev_text_privacy_body"></span></div>
+                    </div>
                 </div>
                 <div class="error-message"
                      data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>
