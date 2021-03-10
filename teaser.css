@@ -1,0 +1,38 @@
+﻿#teaserController .doc-container {
+    float: left;
+}
+
+.titlearea-bkg {
+	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
+}
+
+.teaser .ITbackground {
+    margin-top: 4px;
+    margin-left: 26px;
+    margin-right: 26px;
+    margin-bottom: 4px;
+    width: 100%;
+    /*width: calc(100% - 54px);*/
+    /*height: 730px; 645px*/
+    background-color: transparent;
+    /*color: white;
+    background-image: url("/www/images/ITBackground.jpg");*/
+}
+.teaser .ipadImg {
+    max-width: 100%;
+    width: 600px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+}
+/*#teaserController .centerarea .large_field {
+    margin-left: calc(50% - 200px)
+}*/
+
+.teaser .event-title {
+    width: calc(100% - 20px);
+    height: 40px;
+    font-size: 28px;
+}
