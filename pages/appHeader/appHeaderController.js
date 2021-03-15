@@ -32,11 +32,48 @@
             // First, we call WinJS.Binding.as to get the bindable proxy object
             this.binding = WinJS.Binding.as(this.pageData);
 
+            var resultConverter = function (item, index) {
+                var property = AppData.getPropertyFromInitoptionTypeID(item);
+                if (property && property !== "individualColors" && (!item.pageProperty) && item.LocalValue) {
+                    item.colorValue = "#" + item.LocalValue;
+                    AppData.applyColorSetting(property, item.colorValue);
+                }
+            }
+            this.resultConverter = resultConverter;
+
+            var loadData = function () {
+                var ret = new WinJS.Promise.as().then(function () {
+                    return AppHeader.CR_VERANSTOPTIONView.select(function (json) {
+                        // this callback will be called asynchronously
+                        // when the response is available
+                        Log.print(Log.l.trace, "CR_VERANSTOPTIONView: success!");
+                        // CR_VERANSTOPTION_ODataView returns object already parsed from json file in response
+                        if (json && json.d && json.d.results && json.d.results.length > 1) {
+                            var results = json.d.results;
+                            results.forEach(function (item, index) {
+                                that.resultConverter(item, index);
+                            });
+                            Application.pageframe.savePersistentStates();
+                        }
+                    }, function (errorResponse) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    }).then(function () {
+                        Colors.updateColors();
+                        return WinJS.Promise.as();
+                    });
+                });
+                return ret;
+            }
+            this.loadData = loadData();
+
             // Finally, wire up binding
             WinJS.Resources.processAll(that.element).then(function () {
                 return WinJS.Binding.processAll(that.element, that.binding);
             }).then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
+                return that.loadData();
             });
             Log.ret(Log.l.trace);
         }, {

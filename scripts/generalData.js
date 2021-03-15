@@ -330,6 +330,19 @@
             }
             Log.ret(Log.l.u1, property);
             return property;
+        },
+        applyColorSetting: function (colorProperty, color) {
+            Log.call(Log.l.u1, "AppData.", "colorProperty=" + colorProperty + " color=" + color);
+            Colors[colorProperty] = color;
+            switch (colorProperty) {
+            case "accentColor":
+            // fall through...
+            case "navigationColor":
+                AppBar.loadIcons();
+                NavigationBar.groups = Application.navigationBarGroups;
+                break;
+            }
+            Log.ret(Log.l.u1);
         }
     });
 
