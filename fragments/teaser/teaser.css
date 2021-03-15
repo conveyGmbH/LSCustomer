@@ -14,8 +14,6 @@
 .titlearea-bkg {
 	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
 }
-
-<<<<<<< Updated upstream
 .ITbackground {
     margin-top: 4px;
     margin-left: 26px;
@@ -27,10 +25,7 @@
     /*color: white;
     background-image: url("/www/images/ITBackground.jpg");*/
 }
-.ipadImg {
-=======
 .teaser .ipadImg {
->>>>>>> Stashed changes
     max-width: 100%;
     width: auto;
     height: auto;
