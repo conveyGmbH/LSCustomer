@@ -17,6 +17,15 @@
     WinJS.Namespace.define("AppHeader", {
         Controller: WinJS.Class.define(function Controller(pageElement) {
             Log.call(Log.l.trace, "AppHeader.Controller.");
+            // ensure login 
+            if (AppData &&
+                AppData._persistentStates &&
+                AppData._persistentStates.odata &&
+                (!AppData._persistentStates.odata.login ||
+                    !AppData._persistentStates.odata.password)) {
+                AppData._persistentStates.odata.login = AppData.customer;
+                AppData._persistentStates.odata.password = AppData.customerId;
+            }
             this.element = pageElement.querySelector("#appHeaderController.data-container");
             if (this.element) {
                 this.element.winControl = this;
