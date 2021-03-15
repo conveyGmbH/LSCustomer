@@ -14,6 +14,7 @@
                 <div class="contentarea win-type-body">
                     <div class="content-header">
                         <div class="content-header-line win-type-caption">
+<<<<<<< Updated upstream
                             <span class="caption-field" 
                                   data-win-res="{textContent: 'event.title'}"></span>
                         </div>
@@ -23,6 +24,64 @@
                     <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
                     <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
                     <!--<div id="recordedContent" class="recordedContent-fragmenthost"></div> data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"-->
+=======
+                            <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_serial_name_h1"></span>
+                            <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
+                        </div>
+                        <!--<div class="content-header-line date-field"></div>-->
+                        <div class="win-h1 content-header-line">
+                            <span class="content-header"
+                                  data-win-bind="textContent: dataText.ev_text_detail_name_h1">
+                            </span>
+                            
+                        </div>
+                        <div class="win-h3 content-header-line">
+                            <span data-win-bind="textContent: dataText.ev_text_detail_time_h2"></span>
+                        </div>
+                    </div>
+                    
+                    <section class="content win-hub-section-content">
+                        <section class="section-1 win-hub-section">
+                            <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
+                            <div class="win-h2 content-header">
+                                <span data-win-bind="textContent: dataText.ev_text_para_h2"></span>
+                                
+                            </div>
+                        <div class="div-separator"></div>
+                            <div class="win-h3 share-block">
+                            <span data-win-bind="textContent: dataText.ev_text_share_text"></span>
+                            <!--<span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>-->
+                        </div>
+                         <div class="div-separator"></div>
+                            <!--<div class="line-separator">
+                                <span data-win-bind="textContent: dataText.ev_text_calender_text"></span>
+                                <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+
+                            </div>-->
+                         <div class=""><p data-win-bind="textContent: dataText.ev_text_detail_summary"></p></div>
+                            
+                         <div class=""><p data-win-bind="textContent: dataText.ev_text_agenda_body"></p></div>
+                            
+                         <div class="">
+                               <p data-win-bind="textContent: dataText.ev_text_para_body"></p>
+                            </div>
+                         <div class=""><p data-win-bind="textContent: dataText.ev_text_free_body"></p></div>
+                         <div class="div-separator"></div>
+                         <div class=""><p data-win-bind="textContent: dataText.ev_text_privacy_body"></p></div>
+                        </section>
+                        
+                        <section class="section-2 win-hub-section">
+                            <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
+                            <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
+                           
+                        </section>
+                        <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
+                        
+                        <!--<div id="recordedContent" class="recordedContent-fragmenthost"></div> data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"-->
+                  
+                        
+                    </section>
+>>>>>>> Stashed changes
                 </div>
                 <div class="error-message"
                      data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>

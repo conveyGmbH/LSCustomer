@@ -1,5 +1,6 @@
 ﻿#registerController .doc-container {
     float: left;
+    margin-top: 20px;
 }
 
 #register.mediaview {
@@ -9,6 +10,35 @@
 .titlearea-bkg {
 	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
 }
+
+.centerarea.registerEmail {
+    width: 100%;
+    margin-left: 0;
+}
+
+.register .landscape_only { display: block; top: 0;}
+.register .input_field { float: left; width: 100%; margin-top: 8px;}
+
+.register .field_line { border: none;}
+.register .field_line_full { width: calc(100% - 38px);}
+
+.register #loginButton { width: 100%;}
+.register #resendButton { width: 100%;}
+.register #editButton { width: 100%;}
+
+.button {
+    width: 500px;
+}
+
+.register_button {
+    margin: 10px 18px;
+}
+
+input[disabled] {
+    color: #DCDAD1;
+}
+
+
 
 /*icon Facebook and Co.*/
 .fa {

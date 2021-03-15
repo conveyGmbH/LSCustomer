@@ -1,11 +1,21 @@
 ﻿#teaserController .doc-container {
     float: left;
+    margin-top: 20px;
 }
+
+.teaser .centerarea {
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.teaser-container { width: 100%; height: 300px;}
 
 .titlearea-bkg {
 	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
 }
 
+<<<<<<< Updated upstream
 .ITbackground {
     margin-top: 4px;
     margin-left: 26px;
@@ -18,12 +28,14 @@
     background-image: url("/www/images/ITBackground.jpg");*/
 }
 .ipadImg {
+=======
+.teaser .ipadImg {
+>>>>>>> Stashed changes
     max-width: 100%;
-    width: 600px;
+    width: auto;
     height: auto;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     background-color: transparent;
 }
 #teaserController .centerarea .large_field {
