@@ -107,6 +107,229 @@
                 AppData._customerId = newCustomerId;
                 Log.print(Log.l.trace, "set new lsCustomer=" + AppData._customerId);
             }
+        },
+        getPropertyFromInitoptionTypeID: function (item) {
+            Log.call(Log.l.u1, "AppData.");
+            var color;
+            var property = "";
+            switch (item.INITOptionTypeID) {
+                case 10:
+                    item.colorPickerId = "individualColors";
+                    property = item.colorPickerId;
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.individualColors = true;
+                    } else if (AppData._persistentStates.individualColors) {
+                        AppData._persistentStates.individualColors = false;
+                        WinJS.Promise.timeout(0).then(function () {
+                            AppData._persistentStates.colorSettings = copyByValue(AppData.persistentStatesDefaults.colorSettings);
+                            var colors = new Colors.ColorsClass(AppData._persistentStates.colorSettings);
+                            AppBar.loadIcons();
+                            NavigationBar.groups = Application.navigationBarGroups;
+                        });
+                    }
+                    break;
+                case 11:
+                    if (AppData._persistentStates.individualColors) {
+                        item.colorPickerId = "accentColor";
+                        property = "accentColor";
+                        if (!item.LocalValue && AppData.persistentStatesDefaults.colorSettings) {
+                            color = AppData.persistentStatesDefaults.colorSettings[property];
+                            item.LocalValue = color && color.replace("#", "");
+                        }
+                    }
+                    break;
+                case 12:
+                    if (AppData._persistentStates.individualColors) {
+                        item.colorPickerId = "backgroundColor";
+                        property = "backgroundColor";
+                        if (!item.LocalValue && AppData.persistentStatesDefaults.colorSettings) {
+                            color = AppData.persistentStatesDefaults.colorSettings[property];
+                            item.LocalValue = color && color.replace("#", "");
+                        }
+                    }
+                    break;
+                case 13:
+                    if (AppData._persistentStates.individualColors) {
+                        item.colorPickerId = "navigationColor";
+                        property = "navigationColor";
+                        if (!item.LocalValue && AppData.persistentStatesDefaults.colorSettings) {
+                            color = AppData.persistentStatesDefaults.colorSettings[property];
+                            item.LocalValue = color && color.replace("#", "");
+                        }
+                    }
+                    break;
+                case 46:
+                    if (AppData._persistentStates.individualColors) {
+                        item.colorPickerId = "dashboardColor";
+                        property = "dashboardColor";
+                        if (!item.LocalValue && AppData.persistentStatesDefaults.colorSettings) {
+                            color = AppData.persistentStatesDefaults.colorSettings[property];
+                            item.LocalValue = color && color.replace("#", "");
+                        }
+                    }
+                    break;
+                case 14:
+                    if (AppData._persistentStates.individualColors) {
+                        item.colorPickerId = "textColor";
+                        property = "textColor";
+                        if (!item.LocalValue && AppData.persistentStatesDefaults.colorSettings) {
+                            color = AppData.persistentStatesDefaults.colorSettings[property];
+                            item.LocalValue = color && color.replace("#", "");
+                        }
+                    }
+                    break;
+                case 15:
+                    if (AppData._persistentStates.individualColors) {
+                        item.colorPickerId = "labelColor";
+                        property = "labelColor";
+                        if (!item.LocalValue && AppData.persistentStatesDefaults.colorSettings) {
+                            color = AppData.persistentStatesDefaults.colorSettings[property];
+                            item.LocalValue = color && color.replace("#", "");
+                        }
+                    }
+                    break;
+                case 16:
+                    if (AppData._persistentStates.individualColors) {
+                        item.colorPickerId = "tileTextColor";
+                        property = "tileTextColor";
+                        if (!item.LocalValue && AppData.persistentStatesDefaults.colorSettings) {
+                            color = AppData.persistentStatesDefaults.colorSettings[property];
+                            item.LocalValue = color && color.replace("#", "");
+                        }
+                    }
+                    break;
+                case 17:
+                    if (AppData._persistentStates.individualColors) {
+                        item.colorPickerId = "tileBackgroundColor";
+                        property = "tileBackgroundColor";
+                        if (!item.LocalValue && AppData.persistentStatesDefaults.colorSettings) {
+                            color = AppData.persistentStatesDefaults.colorSettings[property];
+                            item.LocalValue = color && color.replace("#", "");
+                        }
+                    }
+                    break;
+                case 18:
+                    if (AppData._persistentStates.individualColors) {
+                        if (item.LocalValue === "1") {
+                            AppData._persistentStates.isDarkTheme = true;
+                        } else {
+                            AppData._persistentStates.isDarkTheme = false;
+                        }
+                        Colors.isDarkTheme = AppData._persistentStates.isDarkTheme;
+                    }
+                    break;
+                case 19:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.hideCameraQuestionnaire = true;
+                    } else {
+                        AppData._persistentStates.hideCameraQuestionnaire = false;
+                    }
+                    break;
+                case 20:
+                    item.pageProperty = "questionnaire";
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.hideQuestionnaire = true;
+                    } else {
+                        AppData._persistentStates.hideQuestionnaire = false;
+                    }
+                    break;
+                case 21:
+                    item.pageProperty = "sketch";
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.hideSketch = true;
+                    } else {
+                        AppData._persistentStates.hideSketch = false;
+                    }
+                    break;
+                case 23:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.hideBarcodeScan = true;
+                    } else {
+                        AppData._persistentStates.hideBarcodeScan = false;
+                    }
+                    break;
+                case 24:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.hideCameraScan = true;
+                    } else {
+                        AppData._persistentStates.hideCameraScan = false;
+                    }
+                    break;
+                case 30:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.productMailOn = true;
+                    } else {
+                        AppData._persistentStates.productMailOn = false;
+                    }
+                    break;
+                case 31:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.thankYouMailOn = true;
+                    } else {
+                        AppData._persistentStates.thankYouMailOn = false;
+                    }
+                    break;
+                case 34:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.privacyPolicySVGVisible = true;
+                    } else {
+                        AppData._persistentStates.privacyPolicySVGVisible = false;
+                    }
+                    break;
+                case 35:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.nachbearbeitetFlagAutoSetToNull = true;
+                    } else {
+                        AppData._persistentStates.nachbearbeitetFlagAutoSetToNull = false;
+                    }
+                    break;
+                case 38:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.showQRCode = true;
+                    } else {
+                        AppData._persistentStates.showQRCode = false;
+                    }
+                    break;
+                case 39:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.showNameInHeader = true;
+                    } else {
+                        AppData._persistentStates.showNameInHeader = false;
+                    }
+                    break;
+                case 44:
+                    // Enable bzw. disable wird hier behandelt, da umgekehrte Logik mit Anzeigewert
+                    if (parseInt(item.LocalValue) === 1 || parseInt(item.LocalValue) === 2) {
+                        AppData._persistentStates.showvisitorFlow = parseInt(item.LocalValue);
+                        /* NavigationBar.enablePage("visitorFlowDashboard");
+                         NavigationBar.enablePage("visitorFlowEntExt");
+                         NavigationBar.enablePage("employeeVisitorFlow");/*pagename muss wahrscheinlich nochmal geändert werden, jenachdem wie die seite heisst*/
+                    } else {
+                        AppData._persistentStates.showvisitorFlow = 0;
+                        /*NavigationBar.disablePage("visitorFlowDashboard");
+                        NavigationBar.disablePage("visitorFlowEntExt");
+                        NavigationBar.disablePage("employeeVisitorFlow");*/
+                    }
+                    break;
+                case 45:
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.visitorFlowPremium = true;
+                    } else {
+                        AppData._persistentStates.visitorFlowPremium = false;
+                    }
+                    break;
+                default:
+                // defaultvalues
+            }
+            if (item.pageProperty) {
+                if (item.LocalValue === "1") {
+                    NavigationBar.disablePage(item.pageProperty);
+                } else {
+                    NavigationBar.enablePage(item.pageProperty);
+                }
+            }
+            Log.ret(Log.l.u1, property);
+            return property;
         }
     });
 
