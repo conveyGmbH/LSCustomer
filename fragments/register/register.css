@@ -84,20 +84,3 @@ input[disabled] {
     background: #00aff0;
     color: white;
 }
-
-.centerarea.registerEmail {
-    width: 500px;
-    margin-left: calc(50% - 250px);
-}
-
-.button {
-    width: 500px;
-}
-
-.register_button {
-    margin: 10px;
-}
-
-input[disabled] {
-    color: #DCDAD1;
-}

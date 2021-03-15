@@ -1,174 +1,26 @@
 ﻿/*
     margins/paddings for all screens
 */
-.events .body-content {
-    margin: 15px 35px;
-    border-top: solid 0.2px #4e3ab0;
+body .event  { color: #000000;}
+.event .content-header { height: auto; margin: 10px 0; padding: 5px 0;}
+.event .content-header-line { margin-top: 10px;}
+.event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
+.event .content {margin:0 2%; display: flex;}
+.event .section-1 { width: calc(100% - 320px); display: block;}
+.event .section-2 { width: 320px; padding-left: 40px; position: relative; display: block;}
+.teaser-fragmenthost, .register-fragmenthost, .countdown-fragmenthost, .conference-fragmenthost {border: solid 1px #000;}
+.teaser-fragmenthost
+{
+    height: 300px;
+    margin-top: 20px;
 }
 
-
-.events .listview {
-    width: 100%;
+.register-fragmenthost {
     height: auto;
-    background-color: #ffffff;
-    color: #000;
+    margin-top: 20px;
 }
 
-.events .custlogo {
-    display: inline-block;
-    position: relative;
-    width: 20%;
-    min-height: 100px;
-    margin: 15px 0 0 35px;
-    padding 5px;
-    background-color: gainsboro;
-    text-align: center;
-}
+.caption-field {top: 0; float: left; text-align: left;}
+.caption-block { width: 20%; display: block;}
 
-.events .content-header {
-    height: 90px;
-}
-
-.events .caption-sort {
-    display: inline-block;
-    position: relative;
-    text-align: right;
-    width: 50%;
-}
-
-.events .caption-search, .events .caption-filter {
-    width: 40%;
-    border: solid 0.2px #4e3ab0;
-    display: inline-block;
-    margin: 5px;
-    padding: 5px;
-    text-align: left;
-}
-
-.events label {
-    font-size: 16px;
-}
-
-.events .caption-field {
-    top: 5px;
-    left: 8px;
-    text-align: left;
-    width: 48%;
-    display: inline-block;
-    margin: 0 10px 0 0;
-    padding: 0 5px;
-}
-
-.events .win-listview .win-gridlayout .win-container {
-    margin: 15px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-    /*width: 30%;*/
-}
-
-.events .event-item {
-    width: 480px;
-    height: 360px;
-}
-
-.events .event-image {
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 270px;
-    padding: 0;
-    background-color: gainsboro;
-}
-
-.events .event-detail.box-bkg:hover {
-    background-color: transparent;
-}
-
-.events .event-detail {
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    top: 270px;
-    width: 100%;
-    height: calc(100% - 120px);
-    padding-left: 10px;
-}
-
-.events .event-title {
-    width: calc(100% - 20px);
-    height: 40px;
-    font-weight: 200;
-    font-size: 26px;
-}
-
-.events .event-comment {
-    width: calc(100% - 32px);
-    min-height: 40px;
-    font-size: 12px;
-    line-height: 1.2;
-}
-
-
-
-.events .tile-button-color {
-    background-color: transparent;
-    border-color: transparent;
-}
-
-.events .footer {
-    background-color: #fff;
-    bottom: 0;
-    left: 0;
-    position: relative;
-    width: 100%;
-    height: 100px;
-    margin: 0;
-    padding: 0;
-    border-top: solid 0.2px #4e3ab0;
-
-}
-
-.events .footer-content {
-    margin: 20px 35px;
-
-}
-
-
-
-
-/*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 699px (in landscape add 140px for navigation bar)*/
-@media (max-width:699px), (max-width:839px) and (orientation: landscape) {
-}
-@media (max-width:899px) {
-    .events .win-listview .win-gridlayout .win-container {
-        width: 100%;
-    }
-
-    .events .caption-field { width: 35%; margin: 0 10px 0 5px;}
-    .events .caption-sort { width: 60%;}
-}
-
-
-/*margins/paddings for small screens and orientation vertical
-@media (max-height:699px) { 
-}
-*/
-
-
-/*margins/paddings for small screens and orientation vertical*/
-        @media (max-width:499px) {
-            .events .win-listview .win-gridlayout .win-container { width: 100%; }
-
-            .events .custlogo {width: 50%; min-height: 70px; margin: 15px 0 0 20px;}
-
-            .events .body-content { margin: 10px 20px; }
-            .events .content-header { height: 130px; margin-bottom: 5px;}
-            .events .caption-field { width: 100%; margin: 0; padding: 0;}
-            .events .caption-sort { width: 100%;}
-            .events .caption-filter, .events .caption-search { width: 100%; height: auto; margin: 5px 0; padding: 5px 0;}
-        }
-
-
-.caption-field {top: 0;}
+.share-block { color: #a4a4a4; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 5px;}
