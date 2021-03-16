@@ -1,13 +1,14 @@
 ﻿/*
     margins/paddings for all screens
+
 */
-body .event  { color: #000000;}
 .event .content-header { height: auto; margin: 10px 0; padding: 5px 0;}
 .event .content-header-line { margin-top: 10px;}
 .event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
-.event .content {margin:0 2%; display: flex;}
+.event .content {margin:0 2%; display: flex; flex-direction: row;}
 .event .section-1 { width: calc(100% - 320px); display: block;}
 .event .section-2 { width: 320px; padding-left: 40px; position: relative; display: block;}
+.event .body-content {margin: 0 2%; display: inline-block;}
 .teaser-fragmenthost, .register-fragmenthost, .countdown-fragmenthost, .conference-fragmenthost {border: solid 1px #000;}
 .teaser-fragmenthost
 {
@@ -20,7 +21,26 @@ body .event  { color: #000000;}
     margin-top: 20px;
 }
 
-.caption-field {top: 0; float: left; text-align: left;}
-.caption-block { width: 20%; display: block;}
+.event .caption-field {top: 0; float: left; text-align: left;}
+.event .caption-block { width: auto; display: block; padding-right: 10px; margin-right: 10px;}
 
-.share-block { color: #a4a4a4; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 5px;}
+.event .share-block { /*color: #a4a4a4; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;*/ padding: 5px;}
+
+
+
+@media (max-width:899px) {
+    .event .content {
+        flex-flow: row wrap;
+    }
+
+    .event .section-1 {
+        width: 100%;
+        height: auto;
+    }
+
+    .event .section-2 {
+        width: 100%;
+        height: auto;
+        padding: 0;
+    }
+}
