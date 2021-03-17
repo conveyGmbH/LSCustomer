@@ -202,8 +202,8 @@
                 },
                 clickResend: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    that.binding.editDisabled = false;
-                    that.binding.resendDisabled = false;
+                    that.binding.editDisabled = true;
+                    that.binding.resendDisabled = true;
                     that.binding.showResendEditableMail = true;
                     if (typeof AppBar.scope.reSendEmail === "function") {
                         AppBar.scope.reSendEmail(function (response) {
@@ -218,6 +218,11 @@
                             }
                         });
                     }
+                    WinJS.Promise.timeout(5000).then(function() {
+                        that.binding.editDisabled = false;
+                        that.binding.resendDisabled = false;
+                    });
+
                     AppBar.modified = true;
                     AppBar.triggerDisableHandlers();
                     Log.ret(Log.l.trace);
@@ -226,6 +231,7 @@
                     Log.call(Log.l.trace, "Register.Controller.");
                     that.binding.editDisabled = true;
                     that.binding.resendDisabled = true;
+                    that.binding.showReRegisterEventMail = false;
                     if (typeof AppBar.scope.saveData === "function") {
                         AppBar.scope.saveData(function (response) {
                             // called asynchronously if ok

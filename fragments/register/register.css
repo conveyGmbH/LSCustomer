@@ -25,6 +25,7 @@
 .register #loginButton { width: 100%;}
 .register #resendButton { width: 100%;}
 .register #editButton { width: 100%;}
+.register #re_registerEvent { width: 100%;}
 
 .button {
     width: 500px;
