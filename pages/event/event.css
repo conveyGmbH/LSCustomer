@@ -9,7 +9,8 @@
 .event .section-1 { width: calc(100% - 320px); display: block;}
 .event .section-2 { width: 320px; padding-left: 40px; position: relative; display: block;}
 .event .body-content {margin: 0 2%; display: inline-block;}
-.teaser-fragmenthost, .register-fragmenthost, .countdown-fragmenthost, .conference-fragmenthost {border: solid 1px #000;}
+.conference-fragmenthost { width: auto; height: auto;}
+.teaser-fragmenthost, .register-fragmenthost {border: solid 1px #000;}
 .teaser-fragmenthost
 {
     height: 300px;

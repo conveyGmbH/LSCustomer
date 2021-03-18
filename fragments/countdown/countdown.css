@@ -17,6 +17,7 @@
     float: left;
     text-align: center;
     width: 15%;
+    font-weight: 700;
 }
 .countdown .win-h5 { font-size: 10px; padding-right: 5px; float: left; text-align: center; width: 15%;}
 
