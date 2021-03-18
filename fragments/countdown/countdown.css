@@ -6,5 +6,12 @@
     width: 100%;
 }
 
+.countdown .field_line_full {
+    margin: 5px;
+    width: calc(100% - 38px);
+}
+
+.countdown .countdown-line, .countdown .countdown-line-small { width: 100%;}
+.countdown .win-h3, .countdown .win-h5 { padding-right: 5px; float: left; text-align: center; width: 15%;}
 
 
