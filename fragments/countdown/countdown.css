@@ -11,7 +11,13 @@
     width: calc(100% - 38px);
 }
 
-.countdown .countdown-line, .countdown .countdown-line-small { width: 100%;}
-.countdown .win-h3, .countdown .win-h5 { padding-right: 5px; float: left; text-align: center; width: 15%;}
+.countdown .countdown-line, .countdown .countdown-line-small { float: left; width: 100%;}
+.countdown .win-h3 {
+    padding-right: 5px;
+    float: left;
+    text-align: center;
+    width: 15%;
+}
+.countdown .win-h5 { font-size: 10px; padding-right: 5px; float: left; text-align: center; width: 15%;}
 
 
