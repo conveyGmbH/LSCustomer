@@ -75,7 +75,7 @@
                 });
                 return ret;
             }
-            this.loadData = loadData();
+            this.loadData = loadData;
 
             // Finally, wire up binding
             WinJS.Resources.processAll(that.element).then(function () {

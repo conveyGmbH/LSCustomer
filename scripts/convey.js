@@ -265,6 +265,8 @@
     }).then(function() {
         return include("lib/convey/scripts/winjs-es6promise.js");
     }).then(function() {
+        return include("lib/convey/scripts/inertia.js");
+    }).then(function() {
         return include("lib/convey/scripts/strings.js");
     }).then(function() {
         return include("lib/convey/scripts/sqlite.js");
