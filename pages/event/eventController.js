@@ -288,8 +288,8 @@
                                         AppData._persistentStates.registerData.confirmStatusID) {
                                         AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;
                                     }
-                                    if (result.EMail && result.EMail !== AppData._persistentStates.registerData.email) {
-                                        AppData._persistentStates.registerData.email = result.EMail;
+                                    if (result.EMail && result.EMail !== AppData._persistentStates.registerData.Email) {
+                                        AppData._persistentStates.registerData.Email = result.EMail;
                                     }
                                     if (result.ResultMessage) {
                                         AppData._persistentStates.registerData.resultMessage = result.ResultMessage;
@@ -327,12 +327,14 @@
                     copyToken = AppData._persistentStates.registerData.userToken;
                     userToken = null;
                 }
+
+                var addressData = JSON.stringify(AppData._persistentStates.registerData);
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {
                     pVeranstaltungID: that.binding.eventId,
                     pUserToken: userToken,
-                    pEMail: AppData._persistentStates.registerData.email,
-                    pAddressData: null,
+                    pEMail: AppData._persistentStates.registerData.Email,
+                    pAddressData: addressData, /**/
                     pBaseURL: location,
                     pCopyToken: copyToken
                 }, function (json) {
@@ -350,8 +352,8 @@
                         if (result.ConfirmStatusID !== AppData._persistentStates.registerData.confirmStatusID) {
                             AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;
                         }
-                        if (result.Email && result.Email !== AppData._persistentStates.registerData.email) {
-                            AppData._persistentStates.registerData.email = result.email;
+                        if (result.Email && result.Email !== AppData._persistentStates.registerData.Email) {
+                            AppData._persistentStates.registerData.Email = result.email;
                         }
                         if (result.ResultMessage) {
                             that.binding.registerStatus = result.ResultMessage;

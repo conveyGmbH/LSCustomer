@@ -13,6 +13,12 @@
     "conference.waitMessage": "Have fun on your online conference today",
 
     "register.email"		: "Email",
+    "register.firstName"    : "First name",
+    "register.name"         : "Surname",
+    "register.position"     : "Position",
+    "register.formOf"       : "Salutation",
+    "register.company"      : "company name",
+    "register.phone"        : "Telephone",
     "register.register": "Register",
     "register.resend": "Resend email",
     "register.edit": "Change email",

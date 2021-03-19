@@ -13,6 +13,12 @@
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 
     "register.email"		: "Email",
+    "register.firstName"     : "Vorname",
+    "register.name"          : "Nachname",
+    "register.position"      : "Position",
+    "register.formOf"        : "Anrede",
+    "register.company"       : "Firmenname",
+    "register.phone"         : "Telefon",
     "register.register"		: "Registrieren",
     "register.resend"		: "Email erneut senden",
 	"register.edit"			: "Email ändern",
