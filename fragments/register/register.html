@@ -22,6 +22,20 @@
                     <div class="centerarea registerEmail">
                         <div class="registermail-container" data-win-bind="style.display: showRegisterMail Binding.Converter.toDisplay">
                             <div class="field_line field_line_odd">
+                                <span class="label win-type-caption portrait_only_left" data-win-res="{textContent: 'register.formOf'}"></span>
+                                <div class="label landscape_only">
+                                    <span data-win-res="{textContent: 'register.formOf'}"></span>
+                                </div>
+                                <div class="input_group">
+                                    <select id="InitAnrede"
+                                            class="input_small_left win-dropdown"
+                                            data-win-control="WinJS.UI.Repeater"
+                                            data-win-bind="value: dataRegister.INITAnredeID Binding.Mode.twoway">
+                                        <option data-win-bind="value: INITAnredeID; textContent: TITLE"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field_line field_line_odd">
                                 <span class="label win-type-caption portrait_only"
                                       data-win-res="{textContent: 'register.email'}"></span>
                                 <span class="label landscape_only"

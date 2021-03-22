@@ -16,7 +16,7 @@
     "register.firstName"    : "First name",
     "register.name"         : "Cognome",
     "register.position"     : "Position",
-    "register.formOf"       : "Salutation",
+    "register.formOf"       : "Saluto",
     "register.company"      : "nome azienda",
     "register.phone"        : "Telephone",
     "register.register"     : "Registrati",

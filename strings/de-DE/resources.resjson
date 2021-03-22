@@ -19,7 +19,6 @@
     "register.formOf"        : "Anrede",
     "register.company"       : "Firmenname",
     "register.phone"         : "Telefon",
-
     "register.register"		: "Registrieren",
     "register.resend"		: "E-Mail erneut senden",
 	"register.edit"			: "E-Mail ändern",

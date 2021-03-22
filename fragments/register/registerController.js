@@ -19,6 +19,7 @@
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataRegister: {
+                    INITAnredeID: null, /* INITAnredeID: 0,*/
                     Email: "",
                     Name: "",
                     Vorname: "",
@@ -26,6 +27,7 @@
                     Firmenname: "",
                     TelefonMobil: ""
                 },
+                InitAnredeItem: { InitAnredeID: 0, TITLE: "" },
                 showRegisterMail: true,
                 showResendEditableMail: false,
                 showReRegisterEventMail: false,
@@ -39,6 +41,8 @@
 
             var that = this;
 
+            // select combo
+            var initAnrede = fragmentElement.querySelector("#InitAnrede");
             var register = fragmentElement.querySelector("#register");
 
             window.fbAsyncInit = function () {
@@ -134,6 +138,30 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
+                    if (!AppData.initAnredeView.getResults().length) {
+                        Log.print(Log.l.trace, "calling select initAnredeData...");
+                        //@nedra:25.09.2015: load the list of INITAnrede for Combobox
+                        return AppData.initAnredeView.select(function (json) {
+                            Log.print(Log.l.trace, "initAnredeView: success!");
+                            if (json && json.d && json.d.results) {
+                                // Now, we call WinJS.Binding.List to get the bindable list
+                                if (initAnrede && initAnrede.winControl) {
+                                    initAnrede.winControl.data = new WinJS.Binding.List(json.d.results);
+                                }
+                            }
+                        }, function (errorResponse) {
+                            // called asynchronously if an error occurs
+                            // or server returns response with an error status.
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        });
+                    } else {
+                        if (initAnrede && initAnrede.winControl &&
+                            (!initAnrede.winControl.data || !initAnrede.winControl.data.length)) {
+                            initAnrede.winControl.data = new WinJS.Binding.List(AppData.initAnredeView.getResults());
+                        }
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
                     // pUUID: window.device && window.device.uuid
                     function create_UUID() {
                         var dt = new Date().getTime();
@@ -154,6 +182,7 @@
                         that.binding.showResendEditableMail = true;
 
                     }
+                    that.binding.dataRegister.INITAnredeID = 0;
                     if (!AppData._persistentStates.registerData.userToken) {
                         AppData._persistentStates.registerData.userToken = create_UUID();
                         Application.pageframe.savePersistentStates();
@@ -171,6 +200,8 @@
                     if (AppBar.scope.binding.registerStatus) {
                         that.binding.registerStatus = AppBar.scope.binding.registerStatus;
                     }
+                }).then(function () {
+                    that.loadInitSelection();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -291,6 +322,48 @@
                     return that.binding.loginDisabled;
                 }
             };
+
+            var setInitAnredeItem = function (newInitAnredeItem) {
+                var prevNotifyModified = AppBar.notifyModified;
+                AppBar.notifyModified = false;
+                that.binding.InitAnredeItem = newInitAnredeItem;
+                that.binding.dataRegister.INITAnredeID = 0;
+                AppBar.modified = false;
+                AppBar.notifyModified = prevNotifyModified;
+            }
+            this.setInitAnredeItem = setInitAnredeItem;
+
+            var loadInitSelection = function () {
+                Log.call(Log.l.trace, "Contact.Controller.");
+                //if (typeof that.binding.dataContact.KontaktVIEWID !== "undefined") {
+                    var map, results, curIndex;
+                if (typeof that.binding.dataRegister.INITAnredeID !== "undefined") {
+                        Log.print(Log.l.trace, "calling select initAnredeData: Id=" + that.binding.dataRegister.INITAnredeID + "...");
+                        map = AppData.initAnredeView.getMap();
+                        results = AppData.initAnredeView.getResults();
+                        if (map && results) {
+                            curIndex = map[that.binding.dataRegister.INITAnredeID];
+                            if (typeof curIndex !== "undefined") {
+                                that.setInitAnredeItem(results[curIndex]);
+                            }
+                        }
+                    }
+                    /*if (typeof that.binding.dataContact.INITLandID !== "undefined") {
+                        Log.print(Log.l.trace, "calling select initLandData: Id=" + that.binding.dataRegister.INITLandID + "...");
+                        map = AppData.initLandView.getMap();
+                        results = AppData.initLandView.getResults();
+                        if (map && results) {
+                            curIndex = map[that.binding.dataContact.INITLandID];
+                            if (typeof curIndex !== "undefined") {
+                                that.setInitLandItem(results[curIndex]);
+                            }
+                        }
+                    }*/
+                //}
+                Log.ret(Log.l.trace);
+                return WinJS.Promise.as();
+            }
+            this.loadInitSelection = loadInitSelection;
 
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
