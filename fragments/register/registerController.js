@@ -20,7 +20,11 @@
                 eventId: options ? options.eventId : null,
                 dataRegister: {
                     Email: "",
-                    Name: ""
+                    Name: "",
+                    Vorname: "",
+                    Position: "",
+                    Firmenname: "",
+                    TelefonMobil: ""
                 },
                 showRegisterMail: true,
                 showResendEditableMail: false,
@@ -79,8 +83,8 @@
                         var ctrl = document.getElementById("statustext");
                         if (response.email) {
                             that.binding.dataRegister.Email = response.email;
-                            if (AppData._persistentStates.registerData.email !== that.binding.dataRegister.Email) {
-                                AppData._persistentStates.registerData.email = that.binding.dataRegister.Email;
+                            if (AppData._persistentStates.registerData.Email !== that.binding.dataRegister.Email) {
+                                AppData._persistentStates.registerData.Email = that.binding.dataRegister.Email;
                             }
                             that.binding.dataRegister.Name = response.name;
                             if (ctrl) {
@@ -140,8 +144,8 @@
                         });
                         return uuid;
                     }
-                    if (AppData._persistentStates.registerData.email) {
-                        that.binding.dataRegister.Email = AppData._persistentStates.registerData.email;
+                    if (AppData._persistentStates.registerData.Email) {
+                        that.binding.dataRegister = AppData._persistentStates.registerData;
                         //showRegisterMail: true,
                         //showResendEditableMail: false,
                         //    editDisabled: false,
@@ -177,7 +181,7 @@
             this.eventHandlers = {
                 clickOk: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    AppData._persistentStates.registerData.email = that.binding.dataRegister.Email;
+                    AppData._persistentStates.registerData = that.binding.dataRegister;
                     Application.pageframe.savePersistentStates();
                     that.binding.editDisabled = false;
                     that.binding.resendDisabled = false;

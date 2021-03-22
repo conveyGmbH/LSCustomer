@@ -29,6 +29,12 @@
     border-right-color: transparent;
     */
 }
+.masterhost-background {
+    background-color: transparent;
+}
+.contenthost-background {
+    background-color: transparent;
+}
 /*
 .win-selectionstylefilled.win-listview .win-selected {
     background-color: #e0e0e0;
@@ -87,7 +93,7 @@
     padding: 0;
     left: 48px;
     top: 48px;
-    width: 232px;
+    width: 280px;
     height: calc(100% - 48px);
     display: none;
     position: absolute;
@@ -105,31 +111,50 @@
     */
 }
 
-.pane-submenu-list .win-item.win-disabled {
+.pane-submenu-list .win-disabled .win-item {
     background-color: transparent;
     border-color: transparent;
-    opacity: 0.3;
+    opacity: 0.4;
 }
 
-.pane-submenu-list .win-itembox:hover {
+.pane-submenu-list .win-container:hover .win-itembox.win-disabled {
     background-color: transparent !important;
+}
+
+.win-splitviewcommand-button {
+    width: calc(100% - 40px);
 }
 
 .win-splitviewcommand-button-content {
     padding-left: 12px;
     padding-right: 12px;
+    width: calc(100% - 16px);
 }
 .win-splitviewcommand-label {
     color: WindowText;
     font-size: 20px;
     margin-top: 12px;
     margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-
+/*
+.win-disabled .win-splitviewcommand-label {
+    color: #808080 !important;
+}
+.win-disabled .win-splitviewcommand-icon svg > line {
+    stroke: #808080 !important;
+}
+.win-disabled .win-splitviewcommand-icon svg > path {
+    fill: #808080 !important;
+    stroke: #808080 !important;
+}
+*/
 .win-splitviewcommand.win-disabled {
     background-color: transparent;
     border-color: transparent;
-    opacity: 0.3;
+    opacity: 0.4;
 }
 html.win-hoverable .win-disabled .win-splitviewcommand-button:hover {
     background-color: transparent;
@@ -190,6 +215,7 @@ html.win-hoverable .win-disabled .win-splitviewcommand-button:hover.win-pressed 
 }
 .pane-submenu .win-splitviewcommand-button-content {
     padding-left: 56px;
+    width: calc(100% - 68px);
 }
 
 .pane-submenu .win-splitviewcommand-icon {
@@ -470,6 +496,9 @@ html.win-hoverable .win-disabled .win-splitviewcommand-button:hover.win-pressed 
     width: 100%;
 }
 
+.appHeader .win-button {
+    z-index: 9900;
+}
 .publish-button {
     background-color: #f2f2f2;
     /*color: #ed3330;*/
@@ -538,25 +567,22 @@ html.win-hoverable .win-disabled .win-splitviewcommand-button:hover.win-pressed 
     border-radius: 50%;
     padding: 0;
     overflow: hidden;
-    z-index: 9900;
 }
 
 .user-image {
-    display: inline-block;
+    display: block;
     position: relative;
     left: 0;
     top: 6px;
-    z-index: 9900;
 }
 
 .user-photo {
-    display: inline-block;
+    display: block;
     position: relative;
     left: 0px;
     top: -32px;
     width: auto;
     height: 40px;
-    z-index: 9900;
 }
 
 .onsite-offsite {

@@ -196,9 +196,14 @@ img .field_line {
     padding-bottom: 12px;
     padding-right: 0;
     height: 36px;
-    text-transform: uppercase;
     text-align: left;
     width: 100%;
+}
+.master-list-header-title {
+    text-transform: uppercase;
+}
+.master-list-header-line {
+    float: left;
 }
 
 .list-container {
@@ -218,6 +223,12 @@ img .field_line {
 }
 .accent-background-color {
     background-color: rgb(0, 120, 215);
+}
+.accent-color {
+    background-color: rgb(0, 120, 215);
+}
+.navigation-background-color {
+    background-color: #c66145;
 }
 
 .win-textbox:focus,
@@ -438,15 +449,15 @@ section[role=main] {
 }
 
 .centerarea {
-    width: 800px;
+    width: 500px;
     height: auto;
-    margin-left: calc(50% - 400px);
-    /*margin-top: calc(10% - 50px);
+    margin-left: calc(50% - 250px);
+    margin-top: calc(10% - 50px);
     border-style: solid;
     border-width: 1px;
     border-color: black;
     background-color: gray;
-    box-shadow: rgba(0, 0, 0, 0.133) 1.0px 1.6px 3.6px 0.6px, rgba(0, 0, 0, 0.11) 0.4px 0.6px 0.9px 0px;*/
+    box-shadow: rgba(0, 0, 0, 0.133) 1.0px 1.6px 3.6px 0.6px, rgba(0, 0, 0, 0.11) 0.4px 0.6px 0.9px 0px;
 }
 
 .error-message {
@@ -779,7 +790,9 @@ button.win-button {
     padding: 0;
     height: 70px;
     width: 100%;
+    /*
     background-color: #f3f3f3;
+    */
 }
 .list-footer {
     min-height: 40px;
@@ -807,24 +820,51 @@ button.win-button {
     display: none;
 }
 
-.list-field-small-relative  {
+.list-field-small-relative-10 {
     text-align: left;
-    width: calc(10% - 26px);
+    width: calc(10% - 44px);
     display: inline-block;
     position: relative;
     top: 0;
     min-height: 32px;
     padding-top: 8px;
+    overflow: hidden;
+    white-space: nowrap;
 }
-.list-field-small-fixed {
+.list-field-small-relative-20 {
     text-align: left;
-    width: 80px;
+    width: calc(20% - 88px);
+    display: inline-block;
+    position: relative;
+    top: 0;
+    min-height: 32px;
+    padding-top: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.list-field-small-fixed-right {
+    text-align: right;
+    width: 90px;
     display: inline-block;
     position: relative;
     top: 0;
     min-height: 32px;
     padding-top: 8px;
     padding-left: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.list-field-small-fixed {
+    text-align: left;
+    width: 88px;
+    display: inline-block;
+    position: relative;
+    top: 0;
+    min-height: 32px;
+    padding-top: 8px;
+    padding-left: 8px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .photo-container {
@@ -1499,28 +1539,28 @@ button.win-button {
     width: 100%;
 }
 
-    .overlaid-item-template img {
-        position: absolute;
-        width: 100%;
-        height: auto;
-        bottom: 0;
-        left: 0;
-    }
+.overlaid-item-template img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    left: 0;
+}
 
-    .overlaid-item-template .overlay {
-        position: absolute;
-        background-color: rgba(0,0,0,0.65);
-        height: 20px;
-        padding: 20px 15px;
-        overflow: hidden;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-    }
+.overlaid-item-template .overlay {
+    position: absolute;
+    background-color: rgba(0,0,0,0.65);
+    height: 20px;
+    padding: 20px 15px;
+    overflow: hidden;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
 
-        .overlaid-item-template .overlay .item-title {
-            color: rgba(255, 255, 255, 0.8);
-        }
+.overlaid-item-template .overlay .item-title {
+    color: rgba(255, 255, 255, 0.8);
+}
 
 .img-footer-container {
     width: 100%;
@@ -1545,4 +1585,66 @@ button.win-button {
 
 .darkthemeMandatory {
     background-color: #8b4513;
+}
+.bkgcolor-hoverable:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.bkgcolor-activatable.bkgcolor-hoverable:hover:active, .bkgcolor-activatable:active {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #000000;
+}
+.use-border-radius {
+    border-radius: 0;
+}
+
+.resize-helper-gripper {
+    display: block;
+    position: absolute;
+    user-select: none;
+    z-index: 20000;
+    background-color: #6e6e6e;
+    opacity: 0;
+    touch-action: none;
+}
+.resize-helper-vertical {
+    bottom: 0;
+    left: 0;
+    height: 6px;
+    cursor: s-resize;
+    width: 100%;
+}
+.resize-helper-horizontal {
+    top: 0;
+    right: 0;
+    width: 6px;
+    cursor: e-resize;
+    height: 100%;
+}
+
+.resize-helper-command-container {
+    display: block;
+    position: absolute !important;
+    right: 6px;
+    z-index: 20000 !important;
+}
+
+.resize-helper-command-container.win-commandingsurface .win-commandingsurface-actionarea {
+    background-color: transparent !important;
+}
+
+.resize-helper-command-container button.win-command {
+    border: none;
+    width: 32px;
+    min-width: 32px;
+}
+
+.resize-helper-command-container button.win-command:disabled {
+    display: none
+}
+
+.resize-helper-command-container .win-commandicon {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
