@@ -12,14 +12,6 @@
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 
-<<<<<<< HEAD
-    "register.email"		: "E-Mail",
-	"register.firstName"	: "Vorname",
-    "register.name"         : "Nachname",
-    "register.position"	    : "Position",
-    "register.company"	    : "Firmenname",
-    "register.phone"    	: "Mobil",
-=======
     "register.email"		: "Email",
     "register.firstName"     : "Vorname",
     "register.name"          : "Nachname",
@@ -27,7 +19,7 @@
     "register.formOf"        : "Anrede",
     "register.company"       : "Firmenname",
     "register.phone"         : "Telefon",
->>>>>>> 2f055edb6dd1c139397ad9884996a8b27e435b64
+
     "register.register"		: "Registrieren",
     "register.resend"		: "E-Mail erneut senden",
 	"register.edit"			: "E-Mail ändern",
