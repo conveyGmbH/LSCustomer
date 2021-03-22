@@ -14,12 +14,12 @@
 .centerarea.registerEmail {
     width: 100%;
     margin-left: 0;
+    background-color: #fffff0;
 }
-
-.register .landscape_only { display: block; top: 0;}
+.register .field_line { margin-top: 4px; border: none;}
+.register .label { color: #000000; dislay: block; top: 0;}
 .register .input_field { float: left; width: 100%; margin-top: 8px;}
 
-.register .field_line { border: none;}
 .register .field_line_full { width: calc(100% - 38px);}
 
 .register #loginButton { width: 100%;}

@@ -28,8 +28,59 @@
                                       data-win-res="{textContent: 'register.email'}"></span>
                                 <input class="input_field win-textbox" type="text"
                                        data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
-                                       data-win-bind-onevent="oninput"/>
+                                       data-win-bind-onevent="oninput" />
                             </div>
+
+                            <div class="field_line field_line_odd">
+                                <span class="label win-type-caption portrait_only"
+                                      data-win-res="{textContent: 'register.firstName'}"></span>
+                                <span class="label landscape_only"
+                                      data-win-res="{textContent: 'register.firstName'}"></span>
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-bind="value: dataRegister.Vorname Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput" />
+                            </div>
+
+                            <div class="field_line field_line_odd">
+                                <span class="label win-type-caption portrait_only"
+                                      data-win-res="{textContent: 'register.name'}"></span>
+                                <span class="label landscape_only"
+                                      data-win-res="{textContent: 'register.name'}"></span>
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-bind="value: dataRegister.Name Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput" />
+                            </div>
+
+                            <div class="field_line field_line_odd">
+                                <span class="label win-type-caption portrait_only"
+                                      data-win-res="{textContent: 'register.position'}"></span>
+                                <span class="label landscape_only"
+                                      data-win-res="{textContent: 'register.position'}"></span>
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-bind="value: dataRegister.Position Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput" />
+                            </div>
+
+                            <div class="field_line field_line_odd">
+                                <span class="label win-type-caption portrait_only"
+                                      data-win-res="{textContent: 'register.company'}"></span>
+                                <span class="label landscape_only"
+                                      data-win-res="{textContent: 'register.company'}"></span>
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-bind="value: dataRegister.Firmenname Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput" />
+                            </div>
+
+                            <div class="field_line field_line_odd">
+                                <span class="label win-type-caption portrait_only"
+                                      data-win-res="{textContent: 'register.phone'}"></span>
+                                <span class="label landscape_only"
+                                      data-win-res="{textContent: 'register.phone'}"></span>
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-bind="value: dataRegister.TelefonMobil Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput" />
+                            </div>
+
                             <div class="field_line">
                                 <div class="button_line">
                                     <div class="button-element">
@@ -44,30 +95,38 @@
                                 </div>
                             </div>
                             <!--<div class="field_line field_line_full">
-                                <div class="button_line">
-                                    <a class="fa fa-facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
-                                    <a class="fa fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
-                                </div>
-                            </div>
-                            <div class="field_line field_line_full">
-                                <div class="button_line">
-                                    <div class="button-element">
-                                        <button id="logoutbutton"
-                                                class="text-lightcolor titlearea-bkg win-button"
-                                                onclick="AppBar.handleEvent('click', 'clickFacebookLogout', event)"
-                                                style="display: none">
-                                            <span class="win-type-title"
-                                                  data-win-res="{textContent: 'register.logoutFacebook'}"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>-->
+        <div class="button_line">
+            <a class="fa fa-facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
+            <a class="fa fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
+        </div>
+    </div>
+    <div class="field_line field_line_full">
+        <div class="button_line">
+            <div class="button-element">
+                <button id="logoutbutton"
+                        class="text-lightcolor titlearea-bkg win-button"
+                        onclick="AppBar.handleEvent('click', 'clickFacebookLogout', event)"
+                        style="display: none">
+                    <span class="win-type-title"
+                          data-win-res="{textContent: 'register.logoutFacebook'}"></span>
+                </button>
+            </div>
+        </div>
+    </div>-->
                         </div>
                         <div class="resend-editable-mail-container" data-win-bind="style.display: showResendEditableMail Binding.Converter.toDisplay">
                             <div class="field_line register-email" data-win-bind="style.display: registerMessage Binding.Converter.toDisplay">
                                 <span class="large_field"
                                       data-win-bind="textContent: registerMessage"></span>
                             </div>
+                            <div class="field_line_full register_button">
+                                <span data-win-bind="textContent: registerStatus"></span>
+                                <!--<span id="statustext">Connecting to Facebook...</span>-->
+                            </div>
+                            
+                            
+                            
+
                             <div class="field_line field_line_odd register_input">
                                 <span class="label win-type-caption portrait_only"
                                       data-win-res="{textContent: 'register.email'}"></span>
@@ -77,6 +136,11 @@
                                        data-win-bind="value: dataRegister.Email Binding.Mode.twoway; disabled: showResendEditableMail"
                                        data-win-bind-onevent="oninput" disabled/>
                             </div>
+                            
+                            
+                            
+                            
+
                             <div class="field_line_full register_button">
                                 <div class="button_line">
                                     <div class="button-element">
@@ -122,6 +186,10 @@
                         <div class="field_line_full register_button">
                             <span data-win-bind="textContent: registerStatus"></span>
                             <!--<span id="statustext">Connecting to Facebook...</span>-->
+                        </div>
+                        <div class="win-h3 share-block">
+                            <span data-win-bind="textContent: dataText.ev_text_share_text"></span>
+                            <!--<span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>-->
                         </div>
                     </div>
                 </div>

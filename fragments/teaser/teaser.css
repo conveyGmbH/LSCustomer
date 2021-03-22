@@ -9,18 +9,17 @@
     margin: 0;
 }
 
-.teaser-container { width: 100%; height: 300px;}
+.teaser-container { width: 100%; height: auto;}
 
 .titlearea-bkg {
 	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
 }
 
 .teaser .ipadImg {
-    max-width: 100%;
-    width: auto;
+    width: 100%;
     height: auto;
     display: block;
-    margin: auto;
+    margin: 0;
     background-color: transparent;
 }
 /*#teaserController .centerarea .large_field {

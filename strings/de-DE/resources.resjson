@@ -12,10 +12,15 @@
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 
-    "register.email"		: "Email",
+    "register.email"		: "E-Mail",
+	"register.firstName"	: "Vorname",
+    "register.name"         : "Nachname",
+    "register.position"	    : "Position",
+    "register.company"	    : "Firmenname",
+    "register.phone"    	: "Mobil",
     "register.register"		: "Registrieren",
-    "register.resend"		: "Email erneut senden",
-	"register.edit"			: "Email ändern",
+    "register.resend"		: "E-Mail erneut senden",
+	"register.edit"			: "E-Mail ändern",
 	"register.registerFacebook" : "Registrieren mit Facebook",
 	"register.logoutFacebook" : "Log Out",
 	"register.registerConfirm" : "BESTÄTIGT",
