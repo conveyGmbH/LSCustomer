@@ -343,6 +343,31 @@
                 break;
             }
             Log.ret(Log.l.u1);
+        },
+        _initAnredeView: {
+            get: function () {
+                return AppData.getLgntInit("LGNTINITAnrede");
+            }
+        },
+        initAnredeView: {
+            select: function (complete, error, recordId) {
+                Log.call(Log.l.trace, "AppData.initAnredeView.");
+                var ret = AppData._initAnredeView.select(complete, error, recordId, { ordered: true, orderByValue: true });
+                Log.ret(Log.l.trace);
+                return ret;
+            },
+            getResults: function () {
+                Log.call(Log.l.trace, "AppData.initAnredeView.");
+                var ret = AppData._initAnredeView.results;
+                Log.ret(Log.l.trace);
+                return ret;
+            },
+            getMap: function () {
+                Log.call(Log.l.trace, "AppData.initAnredeView.");
+                var ret = AppData._initAnredeView.map;
+                Log.ret(Log.l.trace);
+                return ret;
+            }
         }
     });
 
