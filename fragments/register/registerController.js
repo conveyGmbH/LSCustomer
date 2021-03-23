@@ -19,15 +19,14 @@
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataRegister: {
-                    INITAnredeID: null, /* INITAnredeID: 0,*/
+                    AnredeID: null, /* INITAnredeID: 0,*/
                     Email: "",
                     Name: "",
                     Vorname: "",
                     Position: "",
-                    Firmenname: "",
-                    TelefonMobil: ""
+                    Firmenname: ""
                 },
-                InitAnredeItem: { InitAnredeID: 0, TITLE: "" },
+                InitAnredeItem: { AnredeID: 0, TITLE: "" },
                 showRegisterMail: true,
                 showResendEditableMail: false,
                 showReRegisterEventMail: false,
@@ -200,7 +199,7 @@
                         that.binding.showResendEditableMail = true;
 
                     }
-                    that.binding.dataRegister.INITAnredeID = 0;
+                    that.binding.dataRegister.AnredeID = 0;
                     if (!AppData._persistentStates.registerData.userToken) {
                         AppData._persistentStates.registerData.userToken = create_UUID();
                         Application.pageframe.savePersistentStates();
@@ -341,7 +340,7 @@
                     }
                     event.currentTarget.checked = true;
                 }
-                    that.binding.dataRegister.INITAnredeID = parseInt(event.currentTarget.textContent);
+                    that.binding.dataRegister.AnredeID = parseInt(event.currentTarget.textContent);
                 }
             };
 
@@ -356,7 +355,7 @@
                 var prevNotifyModified = AppBar.notifyModified;
                 AppBar.notifyModified = false;
                 that.binding.InitAnredeItem = newInitAnredeItem;
-                that.binding.dataRegister.INITAnredeID = 0;
+                that.binding.dataRegister.AnredeID = 0;
                 AppBar.modified = false;
                 AppBar.notifyModified = prevNotifyModified;
             }
@@ -366,12 +365,12 @@
                 Log.call(Log.l.trace, "Contact.Controller.");
                 //if (typeof that.binding.dataContact.KontaktVIEWID !== "undefined") {
                     var map, results, curIndex;
-                if (typeof that.binding.dataRegister.INITAnredeID !== "undefined") {
-                        Log.print(Log.l.trace, "calling select initAnredeData: Id=" + that.binding.dataRegister.INITAnredeID + "...");
+                if (typeof that.binding.dataRegister.AnredeID !== "undefined") {
+                    Log.print(Log.l.trace, "calling select initAnredeData: Id=" + that.binding.dataRegister.AnredeID + "...");
                         map = AppData.initAnredeView.getMap();
                         results = AppData.initAnredeView.getResults();
                         if (map && results) {
-                            curIndex = map[that.binding.dataRegister.INITAnredeID];
+                        curIndex = map[that.binding.dataRegister.AnredeID];
                             if (typeof curIndex !== "undefined") {
                                 that.setInitAnredeItem(results[curIndex]);
                             }
