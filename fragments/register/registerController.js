@@ -44,6 +44,8 @@
             // select combo
             var initAnrede = fragmentElement.querySelector("#InitAnrede");
             var register = fragmentElement.querySelector("#register");
+            // now do anything...
+            var listView = fragmentElement.querySelector("#anredeList.listview");
 
             window.fbAsyncInit = function () {
                 FB.init({
@@ -138,7 +140,7 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    if (!AppData.initAnredeView.getResults().length) {
+                    //if (!AppData.initAnredeView.getResults().length) {
                         Log.print(Log.l.trace, "calling select initAnredeData...");
                         //@nedra:25.09.2015: load the list of INITAnrede for Combobox
                         return AppData.initAnredeView.select(function (json) {
@@ -148,19 +150,34 @@
                                 if (initAnrede && initAnrede.winControl) {
                                     initAnrede.winControl.data = new WinJS.Binding.List(json.d.results);
                                 }
+                                //var results = json.d.results;
+                                // Now, we call WinJS.Binding.List to get the bindable list
+                                //that.anrede = new WinJS.Binding.List(results);
+                                var results = json.d.results.filter(function (item, index) {
+                                    return (item && (item.INITAnredeID !== 0 && item.INITAnredeID !== 3));
+                                });
+                                //that.files = results;
+                                if (listView.winControl) {
+                                    // add ListView dataSource
+                                    listView.winControl.itemDataSource = new WinJS.Binding.List(results).dataSource;
+                                }
                             }
                         }, function (errorResponse) {
                             // called asynchronously if an error occurs
                             // or server returns response with an error status.
                             AppData.setErrorMsg(that.binding, errorResponse);
                         });
-                    } else {
+                    /*} else {
                         if (initAnrede && initAnrede.winControl &&
                             (!initAnrede.winControl.data || !initAnrede.winControl.data.length)) {
                             initAnrede.winControl.data = new WinJS.Binding.List(AppData.initAnredeView.getResults());
                         }
-                        return WinJS.Promise.as();
+                        if (listView.winControl) {
+                            // add ListView dataSource
+                            listView.winControl.itemDataSource = new WinJS.Binding.List(AppData.initAnredeView.getResults()).dataSource;
                     }
+                        return WinJS.Promise.as();
+                    }*/
                 }).then(function () {
                     // pUUID: window.device && window.device.uuid
                     function create_UUID() {

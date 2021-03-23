@@ -21,7 +21,7 @@
                     </div>
                     <div class="centerarea registerEmail">
                         <div class="registermail-container" data-win-bind="style.display: showRegisterMail Binding.Converter.toDisplay">
-                            <div class="field_line field_line_odd">
+                            <!--<div class="field_line field_line_odd">
                                 <span class="label win-type-caption portrait_only_left" data-win-res="{textContent: 'register.formOf'}"></span>
                                 <div class="label landscape_only">
                                     <span data-win-res="{textContent: 'register.formOf'}"></span>
@@ -34,15 +34,22 @@
                                         <option data-win-bind="value: INITAnredeID; textContent: TITLE"></option>
                                     </select>
                                 </div>
+                            </div>-->
+                            <div class="anredeList-template"
+                                 data-win-control="WinJS.Binding.Template" style="display: none">
+                                <div class="list-anredecon-item">
+                                    <label class="list-anredecon-field">
+                                        <input type="checkbox" class="win-checkbox" value="1" /> <!--data-win-bind="checked: dataRegister.INITAnredeID"-->
+                                        <span data-win-bind="textContent: TITLE"></span>
+                                    </label>
                             </div>
-                            <div class="field_line field_line_odd">
-                                <span class="label win-type-caption portrait_only"
-                                      data-win-res="{textContent: 'register.email'}"></span>
-                                <span class="label landscape_only"
-                                      data-win-res="{textContent: 'register.email'}"></span>
-                                <input class="input_field win-textbox" type="text"
-                                       data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
-                                       data-win-bind-onevent="oninput" />
+                            </div>
+                            <div id="anredeList"
+                                 class="listview"
+                                 data-win-control="WinJS.UI.ListView"
+                                 data-win-options="{
+                                     itemTemplate: select('.anredeList-template')
+                                 }">
                             </div>
                             <div class="field_line field_line_odd">
                                 <span class="label win-type-caption portrait_only"
@@ -80,15 +87,6 @@
                                        data-win-bind="value: dataRegister.Firmenname Binding.Mode.twoway"
                                        data-win-bind-onevent="oninput" />
                             </div>
-                            <div class="field_line field_line_odd">
-                                <span class="label win-type-caption portrait_only"
-                                      data-win-res="{textContent: 'register.phone'}"></span>
-                                <span class="label landscape_only"
-                                      data-win-res="{textContent: 'register.phone'}"></span>
-                                <input class="input_field win-textbox" type="text"
-                                       data-win-bind="value: dataRegister.TelefonMobil Binding.Mode.twoway"
-                                       data-win-bind-onevent="oninput" />
-                            </div>
                             <!--<div class="field_line field_line_odd">
                                 <span class="label win-type-caption portrait_only"
                                       data-win-res="{textContent: 'register.email'}"></span>
@@ -96,8 +94,17 @@
                                       data-win-res="{textContent: 'register.email'}"></span>
                                 <input class="input_field win-textbox" type="text"
                                        data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
-                                       data-win-bind-onevent="oninput"/>
+                                       data-win-bind-onevent="oninput" />
                             </div>-->
+                            <div class="field_line field_line_odd">
+                                <span class="label win-type-caption portrait_only"
+                                      data-win-res="{textContent: 'register.email'}"></span>
+                                <span class="label landscape_only"
+                                      data-win-res="{textContent: 'register.email'}"></span>
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput"/>
+                            </div>
                             <div class="field_line">
                                 <div class="button_line">
                                     <div class="button-element">
