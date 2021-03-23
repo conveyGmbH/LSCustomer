@@ -339,8 +339,11 @@
                         fields[i].checked = false;
                     }
                     event.currentTarget.checked = true;
-                }
                     that.binding.dataRegister.AnredeID = parseInt(event.currentTarget.textContent);
+                    } else {
+                        that.binding.dataRegister.AnredeID = null;
+                    }
+
                 }
             };
 
