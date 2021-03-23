@@ -13,35 +13,51 @@
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea content-noscroll win-type-body">
                     <!--<div class="centerarea">-->
-                        <div class="confirm-container">
-                            <div class="line-separator register_button"></div>
-                            <div class="field_line_full" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplayNone">
-                                <span class="large_field" data-win-res="{textContent: 'countdown.waitMessage'}"></span>
-                            </div>
-                            <div class="field_line_full" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplay">
-                                <span class="large_field"
-                                      data-win-res="{textContent: 'countdown.countDownOverMessage'}"></span>
-                            </div>
+                    <div class="confirm-container">
+                        <div class="line-separator register_button"></div>
+
+                        <div class="field_line_full" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplayNone">
+                            <span class="large_field" data-win-res="{textContent: 'countdown.waitMessage'}"></span>
                         </div>
-                        <div class="countdown-container" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplayNone">
-                            <div class="field_line field_line_full">
-                                <div class="countdown-line">
+
+                        <div class="field_line_full" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplay">
+                            <span class="large_field"
+                                  data-win-res="{textContent: 'countdown.countDownOverMessage'}"></span>
+                        </div>
+                    </div>
+                    <div class="countdown-container" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplayNone">
+                        <div class="field_line field_line_full countdown-background">
+
+                            <div class="countdown-line">
+
+                                <div class="count-block">
                                     <span class="countdown win-h3" data-win-bind="textContent: countdown.day"></span>
-                                    
-                                    <span class="countdown win-h3" data-win-bind="textContent: countdown.hour"></span>
-                                    
-                                    <span class="countdown win-h3" data-win-bind="textContent: countdown.minute"></span>
-                                    
-                                    <span class="countdown win-h3" data-win-bind="textContent: countdown.second"></span>
+                                    <span class="countdown win-h5" data-win-res="{textContent: 'register.days'}"></span>
                                 </div>
-                                <div class="countdown-line-small">
-                                    <div class="countdown win-h5" data-win-res="{textContent: 'register.days'}"></div>
-                                    <div class="countdown win-h5" data-win-res="{textContent: 'register.hours'}"></div>
-                                    <div class="countdown win-h5" data-win-res="{textContent: 'register.minutes'}"></div>
-                                    <div class="countdown win-h5" data-win-res="{textContent: 'register.seconds'}"></div>
+
+                                <div class="count-block">
+                                    <span class="countdown win-h3" data-win-bind="textContent: countdown.hour"></span>
+                                    <span class="countdown win-h5" data-win-res="{textContent: 'register.hours'}"></span>
+                                </div>
+
+                                <div class="count-block">
+                                    <span class="countdown win-h3" data-win-bind="textContent: countdown.minute"></span>
+                                    <span class="countdown win-h5" data-win-res="{textContent: 'register.minutes'}"></span>
+                                </div>
+
+                                <div class="count-block">
+                                    <span class="countdown win-h3" data-win-bind="textContent: countdown.second"></span>
+                                    <span class="countdown win-h5" data-win-res="{textContent: 'register.seconds'}"></span>
                                 </div>
                             </div>
+                            
+
+
                         </div>
+
+
+                    </div>
+                    <!-- </div>-->
                 </div>
             </section>
         </div>
