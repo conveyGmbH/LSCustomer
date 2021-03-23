@@ -9,22 +9,35 @@
 
     .countdown .field_line_full {
         margin: 5px;
-        width: calc(100% - 38px);
         text-align: center;
 
     }
 
     .countdown .large_field { font-size: 24px;}
-    .countdown-background { background-color: #000000;}
+    .countdown-background { width: 100%; background-color: #000000;}
 
     .countdown .countdown-line { width: 100%; margin: 30px;}
    
-    .countdown .count-block { width: 20%; text-align: center; margin: 20px; padding: 5px; background-color: #ffffff; border: 5px solid #ffffff; border-radius: 20px;}
+    .countdown .count-block { display: inline-block; width: 20%; text-align: center; margin: 20px; padding: 5px; background-color: #ffffff; border: 5px solid #ffffff; border-radius: 20px;}
     .countdown .win-h3 {
         display: block;
         font-size: 10em;
         font-weight: 700;
         margin: 30px;
-        padding: 10px;
+        padding: 0;
     }
-    .countdown .win-h5 { display: block; font-size: 1em; padding: 10px; margin: 30px;}
+    .countdown .win-h5 { display: block; font-size: 2em; padding: 10px; margin: 10px;}
+
+
+@media (max-width:1024px) {
+
+    .countdown .count-block { width: 15%; margin: 10px;}
+    .countdown .win-h3 { font-size: 5em; margin: 10px;}
+    .countdown .win-h5 { font-size: 1em; padding: 0;}
+}
+
+@media (max-widtn:400px) {
+    .countdown .count-block { width: 10%; margin: 5px;}
+    .countdown .win-h3 { font-size: 2em; margin: 5px; padding: 0;}
+    .countdown .win-h5 { font-size: 9px; padding: 0; margin: 5px;}
+}
