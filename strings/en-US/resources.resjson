@@ -12,7 +12,7 @@
 
     "conference.waitMessage": "Have fun on your online conference today",
 
-    "register.email"		: "Email",
+    "register.email"		: "Email *",
     "register.firstName"    : "First name",
     "register.name"         : "Surname",
     "register.position"     : "Position",

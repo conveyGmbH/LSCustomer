@@ -41,6 +41,7 @@
 
             var that = this;
 
+            this.anrede = null;
             // select combo
             var initAnrede = fragmentElement.querySelector("#InitAnrede");
             var register = fragmentElement.querySelector("#register");
@@ -152,14 +153,14 @@
                                 }
                                 //var results = json.d.results;
                                 // Now, we call WinJS.Binding.List to get the bindable list
-                                //that.anrede = new WinJS.Binding.List(results);
                                 var results = json.d.results.filter(function (item, index) {
                                     return (item && (item.INITAnredeID !== 0 && item.INITAnredeID !== 3));
                                 });
+                            that.anrede = new WinJS.Binding.List(results);
                                 //that.files = results;
                                 if (listView.winControl) {
                                     // add ListView dataSource
-                                    listView.winControl.itemDataSource = new WinJS.Binding.List(results).dataSource;
+                                listView.winControl.itemDataSource = that.anrede.dataSource;
                                 }
                             }
                         }, function (errorResponse) {
@@ -330,6 +331,17 @@
                         // called asynchronously on error
                     });
                     Log.ret(Log.l.trace);
+                },
+                selectOnlyThis: function (event) {
+                    //loope über liste
+                    var fields = fragmentElement.querySelectorAll('input[type="checkbox"]');
+                    if (event.currentTarget.checked) {
+                    for (var i = 0; i < fields.length; i++) {
+                        fields[i].checked = false;
+                    }
+                    event.currentTarget.checked = true;
+                }
+                    that.binding.dataRegister.INITAnredeID = parseInt(event.currentTarget.textContent);
                 }
             };
 
