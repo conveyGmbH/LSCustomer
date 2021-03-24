@@ -6,7 +6,7 @@
     .event .content-header-line { margin-top: 10px;}
     .event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
     .event .content {
-        margin:0 2%;
+        margin:0 10%;
         display: grid;
         grid-template-columns: auto auto auto auto auto auto;
         grid-gap: 10px;
@@ -15,7 +15,7 @@
     .event .section-1 { grid-column: 1/span 4;}
     .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
     .event .section-3 { grid-area: 2/1/span 3/span 4;}
-    .event .body-content {margin: 0 2%;}
+    .event .body-content {margin: 0 10%;}
     .conference-fragmenthost { width: auto; height: auto; background-color: #000000;}
     .teaser-fragmenthost
     {
@@ -33,9 +33,17 @@
 
     .event .share-block { /*color: #a4a4a4; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;*/ padding: 5px;}
 
+@media (min-width:1441px) {
+    .event .content { margin: 0 20%;}
+    .event .body-content {
+        margin: 0 20%;
+    }
+}
 
+@media (max-width:899px) {
 
-    @media (max-width:899px) {
+        .event .content { margin: 0 2%; }
+        .event .body-content { margin: 0 2%;}
     
         .event .section-1 {
             grid-row: 1/span 1;

@@ -3,30 +3,26 @@
         float: left;
     }
 
-    .countdown-container {
-        width: 100%;
-    }
-
+    .countdown .confirm-container { margin: 0 2%;}
     .countdown .field_line_full {
         margin: 5px;
         text-align: center;
-        width: 97%;
+        width: 100%;
     }
 
-    .countdown .large_field { font-size: 24px;}
-    .countdown-background { width: 100%; background-color: #000000;}
-
-    .countdown .countdown-line { width: 100%; margin: 0 2%;}
+    .countdown .large_field .win-h4 { font-size: 30px; font-weight: 600; line-height: 2;}
+    
+    .countdown .countdown-line { margin: 0 20%; background-color: #000000; border: 1px solid #000000; border-radius: 20px;}
    
     .countdown .count-block { display: inline-block; width: 15%; text-align: center; margin: 10px; padding: 5px; background-color: #ffffff; border: 5px solid #ffffff; border-radius: 20px;}
     .countdown .win-h3 {
         display: block;
-        font-size: 8em;
+        font-size: 5em;
         font-weight: 700;
         margin: 10px;
         padding: 0;
     }
-    .countdown .win-h5 { display: block; font-size: 2em; padding: 10px; margin: 10px;}
+    .countdown .win-h5 { display: block; font-size: 1.2em; padding: 10px; margin: 10px;}
 
 
 @media (max-width:1024px) {
