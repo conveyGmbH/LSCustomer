@@ -17,7 +17,6 @@
     .event .section-3 { grid-area: 2/1/span 3/span 4;}
     .event .body-content {margin: 0 2%;}
     .conference-fragmenthost { width: auto; height: auto; background-color: #000000;}
-    .teaser-fragmenthost, .register-fragmenthost {border: solid 1px #000;}
     .teaser-fragmenthost
     {
         height: auto;

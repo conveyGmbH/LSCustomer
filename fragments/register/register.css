@@ -14,17 +14,27 @@
 .centerarea.registerEmail {
     width: 100%;
     margin-left: 0;
-    background-color: #fffff0;
+    margin-top: 0;
+    background-color: #d2d2d2;
 }
 .register .field_line { margin-top: 4px; border: none;}
-.register .label { color: #000000; dislay: block; top: 0;}
-.register .input_field { float: left; width: 100%; margin-top: 8px;}
+.register .label { color: #1f4061; dislay: block; top: 0;}
+.register .input_field { float: left; width: 100%; margin-top: 8px; background-color: #ffffff;}
 
 .register .field_line_full { width: calc(100% - 38px);}
 
-.register #loginButton { width: 100%;}
-.register #resendButton { width: 100%;}
-.register #editButton { width: 100%;}
+.register .win-container { margin-left: 0;}
+.register .win-container-odd { margin-left: 10px;}
+
+.register #loginButton { width: 100%; background-color: #1f4061;}
+.register #resendButton {
+    width: 50%;
+    display: inline-block;
+    float: left;
+    padding-right: 5px;
+}
+.register #editButton { width: 50%; display: inline-block;}
+.register.win-link > span { font-size: 16px;}
 .register #re_registerEvent { width: 100%;}
 
 .button {
