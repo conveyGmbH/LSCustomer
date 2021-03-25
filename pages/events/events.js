@@ -136,10 +136,10 @@
                                         listView.style.width = width + "px";
                                         that.prevWidth = width;
                                     }
-                                    if (listView.clientHeight !== height) {
+                                    /*if (listView.clientHeight !== height) {
                                         listView.style.height = height + "px";
                                         that.prevHeight = height;
-                                    }
+                                    }*/
                                 }
                             }
                         }

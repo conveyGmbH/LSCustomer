@@ -8,6 +8,12 @@
     <script type="text/javascript" src="register.js"></script>
     <!-- Load language specific scripts -->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="lib/fontawesome/css/all.css" />
+    <script defer src="lib/fontawesome/js/all.js"></script> <!--load all styles -->
+    <link href="lib/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="lib/fontawesome/css/brands.css" rel="stylesheet">
+    <link href="lib/fontawesome/css/solid.css" rel="stylesheet">
 </head>
 <body class="win-type-body">
     <div class="register fragment">
@@ -108,6 +114,37 @@
                                             <!--<span data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>-->
                                         </button>
                                     </div>
+                                </div>
+                            </div>
+                            <!-- Add font awesome icons -->
+
+                            <div class="field_line">
+                                <div class="button_line">
+                                    <div class="circle facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)">
+                                        <i class="fab fa-facebook-square"></i>
+                                    </div>
+                                    <div class="circle linkedin">
+                                        <i class="fab fa-linkedin"></i>
+                                    </div>
+                                    <div class="circle xing">
+                                        <i class="fab fa-xing-square"></i>
+                                    </div>
+                                    <div class="circle google">
+                                        <i class="fab fa-google"></i>
+                                    </div>
+                                    <!--<a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
+                                    <div class="fa">
+                                        <a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
+                                    </div>
+                                    <div class="fa">
+                                        <a class="fab fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
+                                    </div>
+                                    <div class="fa">
+                                        <a class="fab fa-google"></a>
+                                    </div>
+                                    <div class="fa">
+                                        <a class="fab fa-xing"></a>
+                                    </div>-->
                                 </div>
                             </div>
                             <!--<div class="field_line field_line_full">
