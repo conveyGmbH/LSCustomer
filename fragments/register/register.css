@@ -11,6 +11,7 @@
 	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
 }
 
+.register .registermail-container { background-color: #d2d2d2;}
 .centerarea.registerEmail {
     width: 100%;
     margin-left: 0;
@@ -23,7 +24,8 @@
 
 .register .field_line_full { width: calc(100% - 38px);}
 
-.register .win-container { margin-left: 0;}
+.win-listview .win-gridlayout .win-container { margin: 10px 5px 0 0; }
+    .register .win-container { margin-left: 0;}
 .register .win-container-odd { margin-left: 10px;}
 
 .register #loginButton { width: 100%; background-color: #1f4061;}
@@ -60,6 +62,7 @@ input[disabled] {
     text-decoration: none;
     margin: 5px 2px;
     font-size: 25px;
+line-height: normal;
 }
 
     /*icon Facebook and Co.
