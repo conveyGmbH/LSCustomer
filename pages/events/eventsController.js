@@ -18,6 +18,7 @@
             var listView = pageElement.querySelector("#events.listview");
 
             Application.RecordsetController.apply(this, [pageElement, {
+                dataText: {},
                 count: 0
             }, commandList, false, Events.eventView, null, listView]);
 
@@ -43,6 +44,57 @@
 
             var maxLeadingPages = 0;
             var maxTrailingPages = 0;
+
+            var setDataText = function (results) {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var newDataText = {};
+                for (var i = 0; i < results.length; i++) {
+                    var row = results[i];
+                    if (row.LabelTitle) {
+                        newDataText[row.LabelTitle] = row.Title ? row.Title : "";
+                    }
+                    if (row.LabelDescription) {
+                        newDataText[row.LabelDescription] = row.Description ? row.Description : "";
+                    }
+                    if (row.LabelMainTitle) {
+                        newDataText[row.LabelMainTitle] = row.MainTitle ? row.MainTitle : "";
+                    }
+                    if (row.LabelSubTitle) {
+                        newDataText[row.LabelSubTitle] = row.SubTitle ? row.SubTitle : "";
+                    }
+                    if (row.LabelSummary) {
+                        newDataText[row.LabelSummary] = row.Summary ? row.Summary : "";
+                    }
+                    if (row.LabelBody) {
+                        newDataText[row.LabelBody] = row.Body ? row.Body : "";
+                    }
+                }
+                that.binding.dataText = newDataText;
+                Log.ret(Log.l.trace);
+            }
+            this.setDataText = setDataText;
+
+            var loadText = function () {
+                Log.call(Log.l.trace, "Event.Controller.");
+                AppData.setErrorMsg(that.binding);
+                var ret = new WinJS.Promise.as().then(function () {
+                    //load of format relation record data
+                    Log.print(Log.l.trace, "calling select eventView...");
+                    return Events.textView.select(function (json) {
+                        AppData.setErrorMsg(that.binding);
+                        Log.print(Log.l.trace, "labelView: success!");
+                        if (json && json.d) {
+                            // now always edit!
+                            that.setDataText(json.d.results);
+                        }
+                    }, function (errorResponse) {
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    }, that.binding.eventId);
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadText = loadText;
 
             // define handlers
             this.eventHandlers = {
@@ -180,6 +232,8 @@
 
             // finally, load the data
             that.processAll().then(function() {
+                return that.loadText();
+            }).then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 that.loading = true;
                 return that.loadData();

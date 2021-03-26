@@ -11,6 +11,11 @@
             get: function () {
                 return AppData.getFormatView("Veranstaltung", 20619);
             }
+        },
+        _textView: {
+            get: function () {
+                return AppData.getFormatView("LangMandantDokument", 20628);
+            }
         }
     });
 
@@ -50,6 +55,22 @@
                         ret = record[Events._eventView.pkName];
                     }
                 }
+                return ret;
+            }
+        },
+        textView: {
+            select: function (complete, error, eventId) {
+                Log.call(Log.l.trace, "eventView.");
+                var restriction = {
+                    VeranstaltungID: null,
+                    DokVerwendungID: 1,
+                    LanguageSpecID: AppData.getLanguageId()
+                };
+                var ret = Events._textView.select(complete, error, restriction, {
+                    ordered: true,
+                    orderAttribute: "Sortierung"
+                });
+                Log.ret(Log.l.trace);
                 return ret;
             }
         }
