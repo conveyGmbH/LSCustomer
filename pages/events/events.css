@@ -1,7 +1,7 @@
 /*
     margins/paddings for all screens
 */
-
+.events .win-h1 { margin-left: 10px;}
 .events .caption-field { color: #07b9cb;}
 .events .event-title { color: #2a2f3d; font-weight: 500; text-transform: uppercase;}
 .events .event-comment { color: #2a2f3d;}
@@ -55,7 +55,7 @@
 }
 
 .events .caption-field {
-    top: 5px;
+    top: 20px;
     left: 8px;
     text-align: left;
     width: 48%;
