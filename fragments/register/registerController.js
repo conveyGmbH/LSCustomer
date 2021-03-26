@@ -47,41 +47,6 @@
             // now do anything...
             var listView = fragmentElement.querySelector("#anredeList.listview");
 
-            window.fbAsyncInit = function () {
-                FB.init({
-                    appId: '1889799884567520',
-                    autoLogAppEvents: true,
-                    xfbml: false, // Only needed for "Social Plugins"
-                    version: 'v9.0',
-                    status: true
-                });
-                FB.getLoginStatus(function (response) {
-                    if (response.status === "connected") {
-                        var ctrl = document.getElementById("statustext");
-                        if (ctrl) {
-                            ctrl.innerHTML = "Fetching data...";
-                        }
-                        that.binding.registerStatus = "Fetching data...";
-                        // Everything's alright, fetch user's mail address...
-                        that.fetchMail(response);
-                    } else if (response.status === "not_authorized") {
-                        // User logged in to Facebook but application is not (yet) authorized
-                        var ctrl = document.getElementById("statustext");
-                        if (ctrl) {
-                            ctrl.innerHTML = "App not authorized";
-                        }
-                        that.binding.registerStatus = "App not authorized";
-                    } else {
-                        // User is not logged in to Facebook
-                        var ctrl = document.getElementById("statustext");
-                        if (ctrl) {
-                            ctrl.innerHTML = "Not logged in to Facebook";
-                        }
-                        that.binding.registerStatus = ""; /*Not logged in to Facebook*/
-                    }
-                });
-            };
-
             var fetchMail = function (response) {
                 var vAccessToken = response.authResponse.accessToken;
                 FB.api('/me', 'GET', { "fields": "name, first_name, last_name, email", "access_token": vAccessToken },
@@ -399,6 +364,39 @@
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 return that.loadData();
+            }).then(function () {
+                FB.init({
+                    appId: '1889799884567520',
+                    autoLogAppEvents: true,
+                    xfbml: false, // Only needed for "Social Plugins"
+                    version: 'v9.0',
+                    status: true
+                });
+                FB.getLoginStatus(function (response) {
+                    if (response.status === "connected") {
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "Fetching data...";
+                        }
+                        that.binding.registerStatus = "Fetching data...";
+                        // Everything's alright, fetch user's mail address...
+                        that.fetchMail(response);
+                    } else if (response.status === "not_authorized") {
+                        // User logged in to Facebook but application is not (yet) authorized
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "App not authorized";
+                        }
+                        that.binding.registerStatus = "App not authorized";
+                    } else {
+                        // User is not logged in to Facebook
+                        var ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "Not logged in to Facebook";
+                        }
+                        that.binding.registerStatus = ""; /*Not logged in to Facebook*/
+                    }
+                });
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
             });
