@@ -18,11 +18,18 @@
     display: inline-block;
     position: relative;
     width: 20%;
+    height: auto;
     min-height: 100px;
     margin: 15px 0 0 35px;
     padding 5px;
     background-color: gainsboro;
     text-align: center;
+}
+
+.events .logo {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .events .content-header {
