@@ -102,9 +102,12 @@
 
 .events .event-title {
     width: calc(100% - 20px);
-    height: 40px;
+    height: auto;
     font-size: 26px;
 }
+
+.events .event-item { height: 380px;}
+.events .win-container { height: 380px;}
 
 .events .event-comment {
     width: calc(100% - 32px);
