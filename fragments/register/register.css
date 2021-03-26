@@ -1,4 +1,15 @@
-﻿#registerController .doc-container {
+﻿
+.register .label { color: #2a2f3d;}
+.register .checkbox { color: #2a2f3d;}
+
+.register #loginButton { background-color: #2a2f3d; border-radius: 30px;}
+    .register #loginButton > span {
+        font-weight: 400;
+    }
+
+
+
+#registerController .doc-container {
     float: left;
     margin-top: 20px;
 }
@@ -11,7 +22,9 @@
 	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
 }
 
-.register .registermail-container { background-color: #d2d2d2;}
+.register .registermail-container {
+    background-color: #d2d2d2;
+}
 .centerarea.registerEmail {
     width: 100%;
     margin-left: 0;
@@ -28,14 +41,19 @@
     .register .win-container { margin-left: 0;}
 .register .win-container-odd { margin-left: 10px;}
 
-.register #loginButton { width: 100%; background-color: #1f4061;}
+.register #loginButton { width: 100%;}
 .register #resendButton {
     width: 50%;
     display: inline-block;
     float: left;
     padding-right: 5px;
+    color: #07b9cb;
 }
-.register #editButton { width: 50%; display: inline-block;}
+.register #editButton {
+    width: 50%;
+    display: inline-block;
+    color: #07b9cb;
+}
 .register.win-link > span { font-size: 16px;}
 .register #re_registerEvent { width: 100%;}
 
