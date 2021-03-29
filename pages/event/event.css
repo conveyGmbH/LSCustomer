@@ -7,7 +7,7 @@
 .event .win-h3 { color: #2a2f3d;}
 .event .caption-field { color: #07b9cb;}
 .event p { color: #2a2f3d;}
-.event .content-header { height: auto; margin: 10px 0; padding: 5px 0;}
+.event .content-header { height: auto; width: auto; margin: 10px 0; padding: 5px 0;}
     .event .content-header-line { margin-top: 10px;}
     .event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
 .event .content {
