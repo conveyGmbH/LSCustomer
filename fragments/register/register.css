@@ -1,6 +1,6 @@
 ﻿
 .register .label { color: #2a2f3d;}
-.register .checkbox { color: #2a2f3d;}
+.register .checkbox { color: #2a2f3d; padding: 10px 0;}
 
 .register #loginButton { background-color: #2a2f3d; border-radius: 30px;}
     .register #loginButton > span {
@@ -41,7 +41,7 @@
     .register .win-container { margin-left: 0;}
 .register .win-container-odd { margin-left: 10px;}
 
-.register #loginButton { width: 100%;}
+.register #loginButton { width: 100%; margin: 20px 0;}
 .register #resendButton {
     width: 50%;
     display: inline-block;
