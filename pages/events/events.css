@@ -1,10 +1,28 @@
 /*
     margins/paddings for all screens
 */
-.events .win-h1 { margin-left: 10px;}
+@font-face{
+    font-family: "Barlow Semi Condensed", sans-serif;
+    src: url(../fonts/BarlowSemiCondensed-SemiBold.ttf);
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Barlow-Regular", sans-serif;
+    src: url(../fonts/Barlow-Regular.ttf);
+    font-style: normal;
+    font-weight: 400;
+}
+.events .win-h1 { margin-left: 10px; font-family: "Barlow Semi Condensed", sans-serif; text-transform: uppercase;}
 .events .caption-field { color: #07b9cb;}
-.events .event-title { color: #2a2f3d; font-weight: 500; text-transform: uppercase;}
+.events .event-title {
+    color: #2a2f3d;
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+}
 .events .event-comment { color: #2a2f3d;}
+.events .win-type-body { font-family: "Barlow-Regular", sans-serif;}
 
 .events .listview {
     width: 100%;

@@ -2,12 +2,41 @@
     margins/paddings for all screens
 
 */
-.event .win-h1 { color: #2a2f3d; font-weight: 500; text-transform: uppercase;}
-.event .win-h2 { color: #2a2f3d; font-weight: 400; text-transform: uppercase;}
-.event .win-h3 { color: #2a2f3d;}
-.event .caption-field { color: #07b9cb;}
-.event p { color: #2a2f3d;}
-.event .content-header { height: auto; width: auto; margin: 10px 0; padding: 5px 0;}
+@font-face {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    src: url(../fonts/BarlowSemiCondensed-SemiBold.ttf);
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Barlow-Regular", sans-serif;
+    src: url(../fonts/Barlow-Regular.ttf);
+    font-style: normal;
+    font-weight: 400;
+}
+.event .win-h1 {
+    color: #2a2f3d;
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+}
+.event .win-h2 {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    color: #2a2f3d;
+}
+.event .win-h3 {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    color: #2a2f3d;
+}
+.event .caption-field {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    color: #07b9cb;
+}
+.event p {
+    font-family: "Barlow-Regular", sans-serif;
+    color: #2a2f3d;
+}
+.event .content-header { height: auto; width: auto; margin: 25px 0; padding: 5px 0;}
     .event .content-header-line { margin-top: 10px;}
     .event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
 .event .content {
