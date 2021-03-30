@@ -61,14 +61,17 @@
                             AppBar.scope.binding.showCountdown = false;
                             //AppBar.scope.binding.showConference = true;
                             //lade fragment mediathek
-                            return WinJS.Promise.as();
+                            if (typeof AppBar.scope.loadData === "function") {
+                                return AppBar.scope.loadData();
+                            }
+                            //return WinJS.Promise.as();
                         } 
                     }, 1000);
-                }).then(function() {
+                })/*.then(function() {
                     if (typeof AppBar.scope.loadData === "function") {
                         AppBar.scope.loadData();
                     }
-                });
+                })*/;
                 Log.ret(Log.l.trace);
                 return ret;
             }
