@@ -4,14 +4,14 @@
 */
 @font-face {
     font-family: "Barlow Semi Condensed", sans-serif;
-    src: url(../fonts/BarlowSemiCondensed-SemiBold.ttf);
+    src: url(https://deimos.convey.de/LSCustomer/fonts/BarlowSemiCondensed-SemiBold.ttf);
     font-style: normal;
     font-weight: 600;
 }
 
 @font-face {
     font-family: "Barlow-Regular", sans-serif;
-    src: url(../fonts/Barlow-Regular.ttf);
+    src: url(https://deimos.convey.de/LSCustomer/fonts/Barlow-Regular.ttf);
     font-style: normal;
     font-weight: 400;
 }
