@@ -155,7 +155,7 @@
                         return uuid;
                     }
                     if (AppData._persistentStates.registerData.Email) {
-                        that.binding.dataRegister = AppData._persistentStates.registerData;
+                        that.binding.dataRegister = copyByValue(AppData._persistentStates.registerData);
                         //showRegisterMail: true,
                         //showResendEditableMail: false,
                         //    editDisabled: false,
@@ -194,7 +194,7 @@
             this.eventHandlers = {
                 clickOk: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    AppData._persistentStates.registerData = that.binding.dataRegister;
+                    AppData._persistentStates.registerData = copyByValue(that.binding.dataRegister); //backingdata
                     Application.pageframe.savePersistentStates();
                     that.binding.editDisabled = false;
                     that.binding.resendDisabled = false;
