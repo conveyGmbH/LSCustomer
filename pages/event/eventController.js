@@ -327,7 +327,6 @@
                     copyToken = AppData._persistentStates.registerData.userToken;
                     userToken = null;
                 }
-
                 var addressData = JSON.stringify(AppData._persistentStates.registerData);
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_RegisterContact", {

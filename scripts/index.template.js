@@ -57,7 +57,9 @@
             Name: "",
             Vorname: "",
             Position: "",
-            Firmenname: ""}
+            Firmenname: "",
+            UserTZ: moment.tz.guess()
+        }
     };
 
     // static array of menu groups for the split view pane
@@ -69,8 +71,8 @@
     // static array of pages for the navigation bar
     Application.navigationBarPages = [
         { id: "home", group: -1, disabled: false },
-        { id: "events", group: 2, disabled: false },
-        { id: "event", group: 2, disabled: false }
+        { id: "events", group: -2, disabled: false },
+        { id: "event", group: -2, disabled: false }
     ];
 
 
@@ -89,15 +91,6 @@
     Application.navigateByIdOverride = function (id, event) {
         if (id === "home") {
             id = "events";
-        }
-        // ensure login 
-        if (AppData && 
-            AppData._persistentStates && 
-            AppData._persistentStates.odata &&
-            (!AppData._persistentStates.odata.login ||
-                !AppData._persistentStates.odata.password)) {
-            AppData._persistentStates.odata.login = AppData.customer;
-            AppData._persistentStates.odata.password = AppData.customerId;
         }
         Log.call(Log.l.trace, "Application.", "id=" + id + " login=" + AppData._persistentStates.odata.login);
         Log.ret(Log.l.trace);

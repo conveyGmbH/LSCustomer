@@ -293,12 +293,15 @@
     }).then(function() {
         return include("scripts/generalData.js");
     }).then(function() {
+        return include("lib/moment/scripts/moment-with-locales.min.js");
+    }).then(function () {
+        return include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js");
+    }).then(function() {
         createRootElement("#ls-customer-host");
         return include("scripts/index.js");
     }).then(function() {
         checkForDeviceReady();
         Application.baseHref = newBaseHref;
     });
-
 
 })();

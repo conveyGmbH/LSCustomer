@@ -24,7 +24,8 @@
                     Name: "",
                     Vorname: "",
                     Position: "",
-                    Firmenname: ""
+                        Firmenname: "",
+                        UserTZ: AppData._persistentStates.registerData.UserTZ || moment.tz.guess()
                 },
                 InitAnredeItem: { AnredeID: 0, TITLE: "" },
                 showRegisterMail: true,
