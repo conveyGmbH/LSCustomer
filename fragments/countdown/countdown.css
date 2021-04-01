@@ -1,39 +1,67 @@
-﻿
+﻿@font-face {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    src: url(../../fonts/BarlowSemiCondensed-SemiBold.ttf);
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Barlow-Regular", sans-serif;
+    src: url(../../fonts/Barlow-Regular.ttf);
+    font-style: normal;
+    font-weight: 400;
+}
+
 #countdownController .doc-container {
         float: left;
     }
 
-    .countdown .confirm-container { margin: 0 2%;}
+    .countdown .confirm-container { margin: 0 10%;}
     .countdown .field_line_full {
         margin: 5px;
         text-align: center;
         width: 100%;
+        font-family: "Barlow-Regular", sans-serif;
     }
 
     .countdown .large_field .win-h4 { font-size: 30px; font-weight: 600; line-height: 2;}
-    
-    .countdown .countdown-line { margin: 0 20%; background-color: #000000; border: 1px solid #000000; border-radius: 20px;}
+
+.countdown .countdown-line {
+    margin: 0 20%;
+    background-color: #07b9cb;
+    border: 1px solid #07b9cb;
+    border-radius: 20px;
+}
    
     .countdown .count-block { display: inline-block; width: 15%; text-align: center; margin: 10px; padding: 5px; background-color: #ffffff; border: 5px solid #ffffff; border-radius: 20px;}
     .countdown .win-h3 {
         display: block;
-        font-size: 5em;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        color: #2a2f3d;
+        font-size: 2em;
         font-weight: 700;
         margin: 10px;
         padding: 0;
     }
-    .countdown .win-h5 { display: block; font-size: 1.2em; padding: 10px; margin: 10px;}
+.countdown .win-h5 {
+    display: block;
+    font-family: "Barlow Semi Condensed", sans-serif;
+    color: #2a2f3d;
+    font-size: 1em;
+    padding: 10px;
+    margin: 10px;
+}
 
 
 @media (max-width:1024px) {
 
     .countdown .count-block { width: 15%; margin: 10px;}
-    .countdown .win-h3 { font-size: 4em; margin: 10px;}
+    .countdown .win-h3 { font-size: 2em; margin: 10px;}
     .countdown .win-h5 { font-size: 1em; padding: 0;}
 }
 
 @media (max-width:400px) {
     .countdown .count-block { width: 10%; margin: 5px;}
-    .countdown .win-h3 { font-size: 1.2em; margin: 3px; padding: 0;}
+    .countdown .win-h3 { font-size: 1em; margin: 3px; padding: 0;}
     .countdown .win-h5 { font-size: 8px; padding: 0; margin: 0 0 0 -3px;}
 }

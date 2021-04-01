@@ -1,10 +1,30 @@
-﻿
-.register .label { color: #2a2f3d;}
-.register .checkbox { color: #2a2f3d; padding: 10px 0;}
+﻿@font-face {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    src: url(../../fonts/BarlowSemiCondensed-SemiBold.ttf);
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Barlow-Regular", sans-serif;
+    src: url(../../fonts/Barlow-Regular.ttf);
+    font-style: normal;
+    font-weight: 400;
+}
+.register .label {
+    font-family: "Barlow-Regular", sans-serif;
+    color: #2a2f3d;
+}
+.register .checkbox {
+    font-family: "Barlow-Regular", sans-serif;
+    color: #2a2f3d;
+    padding: 10px 0;
+}
 
 .register #loginButton { background-color: #2a2f3d; border-radius: 30px;}
     .register #loginButton > span {
         font-weight: 400;
+        font-family: "Barlow Semi Condensed", sans-serif;
     }
 
 
@@ -38,23 +58,19 @@
 .register .field_line_full { width: calc(100% - 38px);}
 
 .win-listview .win-gridlayout .win-container { margin: 10px 5px 0 0; }
-    .register .win-container { margin-left: 0;}
+.register .win-container {
+    margin-left: 0;
+    font-family: "Barlow-Regular", sans-serif;
+}
 .register .win-container-odd { margin-left: 10px;}
 
 .register #loginButton { width: 100%; margin: 20px 0;}
-.register #resendButton {
-    width: 50%;
+.register #resendButton, .register #editButton {
     display: inline-block;
-    float: left;
-    padding-right: 5px;
-    color: #07b9cb;
+    font-size: 12px;
+    text-align: left;
 }
-.register #editButton {
-    width: 50%;
-    display: inline-block;
-    color: #07b9cb;
-}
-.register.win-link > span { font-size: 16px;}
+
 .register #re_registerEvent { width: 100%;}
 
 .button {

@@ -103,6 +103,14 @@
                                        data-win-bind="value: dataRegister.Email Binding.Mode.twoway"
                                        data-win-bind-onevent="oninput" />
                             </div>
+                            
+                            <div class="field_line">
+                                <label class="list-privacy-field">
+                                    <input type="checkbox" class="win-checkbox" value="1" data-win-bind="textContent: INITAnredeID" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" /> <!--onclick  -->
+                                    <span class="checkbox" data-win-bind="textContent: dataText.ev_text_privacy_body"></span>
+                                </label>
+                            </div>
+
                             <div class="field_line">
                                 <div class="button_line">
                                     <div class="button-element">
@@ -147,15 +155,7 @@
             </div>-->
                                 </div>
                             </div>
-
-                            <div class="field_line">
-                                <label class="list-privacy-field">
-                                    <input type="checkbox" class="win-checkbox" value="1" data-win-bind="textContent: INITAnredeID" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" /> <!--onclick  -->
-                                    <span class="checkbox" data-win-bind="textContent: dataText.ev_text_privacy_body"></span>
-                                </label>
-                            </div>
-                            
-
+                           
                             <!--<div class="field_line field_line_full">
         <div class="button_line">
             <a class="fa fa-facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
@@ -199,26 +199,24 @@
                    data-win-bind-onevent="oninput" disabled/>
                                 </div>-->
                             <div class="field_line_full register_button">
-                                <div class="button_line">
+                                
                                     <div class="button-element">
                                         <div id="resendButton"
                                              class="win-link"
                                              onclick="AppBar.handleEvent('click', 'clickResend', event)"
                                              data-win-bind="disabled: resendDisabled">
-                                            <span class="win-type-title"
-                                                  data-win-res="{textContent: 'register.resend'}"></span>
+                                            <span data-win-res="{textContent: 'register.resend'}"></span>
                                         </div>
                                         <div id="editButton"
                                              class="win-link"
                                              onclick="AppBar.handleEvent('click', 'clickEdit', event)"
                                              data-win-bind="disabled: editDisabled">
-                                            <span class="win-type-title"
-                                                  data-win-res="{textContent: 'register.edit'}"></span>
+                                            <span data-win-res="{textContent: 'register.edit'}"></span>
                                         </div>
 
 
                                     </div>
-                                </div>
+                                
                             </div>
                             <div class="field_line_full register_button">
                                 <div class="button_line">
@@ -236,15 +234,14 @@
                                                 class="button text-lightcolor titlearea-bkg win-button"
                                                 onclick="AppBar.handleEvent('click', 'clickChangeEvent', event)"
                                                 data-win-bind="disabled: editDisabled">
-                                            <span class="win-type-title"
-                                                  data-win-res="{textContent: 'register.re_registerEvent'}"></span>
+                                            <span class="win-type-title" data-win-res="{textContent: 'register.re_registerEvent'}"></span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="win-h3 share-block">
+                        <div class="field_line share-block">
                             <span data-win-bind="textContent: dataText.ev_text_share_text"></span>
                             <!--<span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>-->
                         </div>
