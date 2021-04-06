@@ -153,3 +153,18 @@
     border-bottom-style: solid;
 }
 
+/********Start Fonts for LiveBridge*********/
+@font-face {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    src: url(../fonts/BarlowSemiCondensed-SemiBold.ttf);
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Barlow-Regular", sans-serif;
+    src: url(../fonts/Barlow-Regular.ttf);
+    font-style: normal;
+    font-weight: 400;
+}
+/******** Ende Fonts for LiveBridge*********/

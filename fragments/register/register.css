@@ -1,16 +1,5 @@
-﻿@font-face {
-    font-family: "Barlow Semi Condensed", sans-serif;
-    src: url(../../fonts/BarlowSemiCondensed-SemiBold.ttf);
-    font-style: normal;
-    font-weight: 600;
-}
+﻿.register .fragment{ font-family: "Barlow-Regular", sans-serif;}
 
-@font-face {
-    font-family: "Barlow-Regular", sans-serif;
-    src: url(../../fonts/Barlow-Regular.ttf);
-    font-style: normal;
-    font-weight: 400;
-}
 .register .label {
     font-family: "Barlow-Regular", sans-serif;
     color: #2a2f3d;

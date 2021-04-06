@@ -16,21 +16,22 @@
         float: left;
     }
 
-    .countdown .confirm-container { margin: 0 10%;}
+    .countdown .confirm-container { margin: 0;}
     .countdown .field_line_full {
         margin: 5px;
-        text-align: center;
         width: 100%;
         font-family: "Barlow-Regular", sans-serif;
     }
 
-    .countdown .large_field .win-h4 { font-size: 30px; font-weight: 600; line-height: 2;}
+    .countdown .large_field .win-h4 { font-family: "Barlow Semi Condensed", sans-serif; line-height: 2;}
 
 .countdown .countdown-line {
-    margin: 0 20%;
+    margin: 0;
     background-color: #07b9cb;
     border: 1px solid #07b9cb;
     border-radius: 20px;
+    width: 67%;
+    text-align: center;
 }
    
     .countdown .count-block { display: inline-block; width: 15%; text-align: center; margin: 10px; padding: 5px; background-color: #ffffff; border: 5px solid #ffffff; border-radius: 20px;}
@@ -58,6 +59,10 @@
     .countdown .count-block { width: 15%; margin: 10px;}
     .countdown .win-h3 { font-size: 2em; margin: 10px;}
     .countdown .win-h5 { font-size: 1em; padding: 0;}
+}
+
+@media (max-width:786px) {
+    .countdown .countdown-line { width: 100%;}
 }
 
 @media (max-width:400px) {
