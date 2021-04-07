@@ -10,10 +10,23 @@
     padding: 10px 0;
 }
 
-.register #loginButton { background-color: #2a2f3d; border-radius: 30px;}
+.register #loginButton {
+     background-color: #ffffff;
+    border-radius: 30px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #c2d63e;
+    cursor: pointer;
+}
     .register #loginButton > span {
         font-weight: 400;
         font-family: "Barlow Semi Condensed", sans-serif;
+        color: #c2d63e;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 20px;
+        letter-spacing: 1px;
     }
 
 
@@ -31,18 +44,18 @@
 	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
 }
 
-.register .registermail-container {
-    background-color: #d2d2d2;
-}
 .centerarea.registerEmail {
     width: 100%;
     margin-left: 0;
     margin-top: 0;
-    background-color: #d2d2d2;
+    background-color: #f3fbfc;
+    border: 1px solid #f3fbfc;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 }
 .register .field_line { margin-top: 4px; border: none;}
 /*.register .label { color: #1f4061; dislay: block; top: 0;}*/
-.register .input_field { float: left; width: 100%; margin-top: 8px; background-color: #ffffff;}
+.register .input_field { float: left; width: 100%; margin-top: 8px; background-color: #ffffff; border: 1px solid #d2d2d2; border-radius: 5px;}
 
 .register .field_line_full { width: calc(100% - 38px);}
 
@@ -76,16 +89,16 @@ input[disabled] {
 
 .circle {
     display: inline-block;
-    min-width: 30px;
-    padding: 15px;
+    min-width: 20px;
+    padding: 10px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     text-align: center;
     text-decoration: none;
     margin: 5px 2px;
-    font-size: 25px;
-line-height: normal;
+    font-size: 16px;
+    line-height: normal;
 }
 
     /*icon Facebook and Co.
@@ -139,6 +152,10 @@ line-height: normal;
     margin: 0
 }
 
+#anredeList .win-checkbox {
+    margin-right: 5px;
+}
+
 .list-anredecon-item {
     /*width: 180px;
     height: 48px;
@@ -149,7 +166,7 @@ line-height: normal;
     padding-left: 20px;
 
 */
-    background-color: #d2d2d2;
+    background-color: #f3fbfc;
     padding-left: 0px;
     padding-right: 0;
     padding-top: 2px;
