@@ -49,8 +49,15 @@
             var maxLeadingPages = 0;
             var maxTrailingPages = 0;
 
-            var setDataText = function (results) {
-                Log.call(Log.l.trace, "Event.Controller.");
+            var resultConverter = function(item, index) {
+                Log.call(Log.l.trace, "Events.Controller.");
+                item.dataText = getEmptyDefaultValue(Events.textView.defaultValue);
+                Log.ret(Log.l.trace);
+            }
+            this.resultConverter = resultConverter;
+
+            var setDataText = function (results, item) {
+                Log.call(Log.l.trace, "Events.Controller.");
                 var newDataText = {};
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
@@ -73,32 +80,76 @@
                         newDataText[row.LabelBody] = row.Body ? row.Body : "";
                     }
                 }
-                that.binding.dataText = newDataText;
+                if (item) {
+                    item.dataText = newDataText;
+                } else {
+                    that.binding.dataText = newDataText;
+                }
                 Log.ret(Log.l.trace);
             }
             this.setDataText = setDataText;
 
             var loadText = function () {
-                Log.call(Log.l.trace, "Event.Controller.");
+                Log.call(Log.l.trace, "Events.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     //load of format relation record data
-                    Log.print(Log.l.trace, "calling select eventView...");
+                    Log.print(Log.l.trace, "calling select textView...");
                     return Events.textView.select(function (json) {
                         AppData.setErrorMsg(that.binding);
-                        Log.print(Log.l.trace, "labelView: success!");
+                        Log.print(Log.l.trace, "textView: success!");
                         if (json && json.d) {
                             // now always edit!
                             that.setDataText(json.d.results);
                         }
                     }, function (errorResponse) {
                         AppData.setErrorMsg(that.binding, errorResponse);
-                    }, that.binding.eventId);
+                    });
                 });
                 Log.ret(Log.l.trace);
                 return ret;
             }
             this.loadText = loadText;
+
+            var loadEventText = function (eventIds) {
+                Log.call(Log.l.trace, "Event.Controller.");
+                AppData.setErrorMsg(that.binding);
+                var ret = new WinJS.Promise.as().then(function () {
+                    //load of format relation record data
+                    Log.print(Log.l.trace, "calling select textView...");
+                    return Events.textView.select(function (json) {
+                        AppData.setErrorMsg(that.binding);
+                        Log.print(Log.l.trace, "textView: success!");
+                        if (json && json.d && json.d.results) {
+                            var results = [];
+                            var eventId = 0;
+                            for (var i = 0; i < json.d.results.length; i++) {
+                                var row = json.d.results[i];
+                                if (row && row.VeranstaltungID) {
+                                    if (eventId !== row.VeranstaltungID) {
+                                        if (results.length > 0) {
+                                            var curScope = that.scopeFromRecordId(eventId);
+                                            if (curScope && curScope.item && curScope.item.dataText) {
+                                                that.setDataText(results, curScope.item);
+                                                curScope.item.dataText.done = true;
+                                                that.records.setAt(curScope.index, curScope.item);
+                                            }
+                                            results = [];
+                                        }
+                                        eventId = row.VeranstaltungID;
+                                    }
+                                    results.push(row);
+                                }
+                            }
+                        }
+                    }, function (errorResponse) {
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    }, eventIds);
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadEventText = loadEventText;
 
             // define handlers
             this.eventHandlers = {
@@ -139,14 +190,27 @@
                         }
                         // Double the size of the buffers on both sides
                         if (!maxLeadingPages) {
-                            maxLeadingPages = listView.winControl.maxLeadingPages * 4;
+                            maxLeadingPages = listView.winControl.maxLeadingPages * 2;
                             listView.winControl.maxLeadingPages = maxLeadingPages;
                         }
                         if (!maxTrailingPages) {
-                            maxTrailingPages = listView.winControl.maxTrailingPages * 4;
+                            maxTrailingPages = listView.winControl.maxTrailingPages * 2;
                             listView.winControl.maxTrailingPages = maxTrailingPages;
                         }
                         if (listView.winControl.loadingState === "itemsLoading") {
+                            var indexOfFirstVisible = listView.winControl.indexOfFirstVisible;
+                            var indexOfLastVisible = listView.winControl.indexOfLastVisible;
+                            var eventIds = [];
+                            if (that.records) for (var i = indexOfFirstVisible; i <= indexOfLastVisible; i++) {
+                                var record = that.records.getAt(i);
+                                if (record && typeof record === "object" &&
+                                    record.dataText && !record.dataText.done) {
+                                    eventIds.push(record.VeranstaltungVIEWID);
+                                }
+                            }
+                            if (eventIds.length > 0) {
+                                that.loadEventText(eventIds);
+                            }
                         } else if (listView.winControl.loadingState === "complete") {
                             if (that.loading) {
                                 progress = listView.querySelector(".list-footer .progress");

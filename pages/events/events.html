@@ -18,14 +18,14 @@
                                 <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg" />
                             </div>
                             <div class="content-header">
-                                <div class="content-header-line">
-                                    <h1 class="win-h1" data-win-bind="textContent: dataText.ser_text_name_h1"></h1>
+                                <div class="content-header-line win-type-header">
+                                    <h1 data-win-bind="textContent: dataText.ser_text_name_h1"></h1>
                                 </div>
-                                <div class="content-header-line">
-                                    <h2 class="win-h2" data-win-bind="textContent: dataText.ser_text_subtitle_h2"></h2>
+                                <div class="content-header-line win-type-subtitle">
+                                    <h2 data-win-bind="textContent: dataText.ser_text_subtitle_h2"></h2>
                                 </div>
-                                <div class="content-header-line">
-                                    <span class="win-type-body" data-win-bind="textContent: dataText.ser_text_free_body"></span>
+                                <div class="content-header-line win-type-body">
+                                    <span data-win-bind="textContent: dataText.ser_text_free_body"></span>
                                 </div>
 
                             </div>
@@ -39,11 +39,14 @@
                                 <img class="vaimg" src="https://deimos.convey.de/LSCustomer/images/Download.jpg"/>
                             </div>
                             <div class="event-detail box-bkg">
-                                <div class="event-title">
-                                    <span data-win-bind="textContent: Name"></span>
+                                <div class="event-title win-type-title">
+                                    <span data-win-bind="textContent: dataText.ev_text_detail_name_h1"></span>
                                 </div>
-                                <div class="event-comment">
-                                    <span data-win-bind="textContent: Startdatum Binding.Converter.toLocaleDateString"></span>
+                                <div class="event-subtitle win-type-subtitle">
+                                    <span data-win-bind="textContent: dataText.ev_text_detail_time_h2"></span>
+                                </div>
+                                <div class="event-comment win-type-body">
+                                    <span data-win-bind="textContent: dataText.ev_text_detail_summary"></span>
                                 </div>
                             </div>
                         </div>

@@ -29,6 +29,10 @@
         eventView: {
             select: function (complete, error, restriction) {
                 Log.call(Log.l.trace, "Events.eventView.");
+                if (!restriction) {
+                    restriction = {};
+                }
+                restriction.MandantSerieID = Events._eventSeriesId;
                 var ret = Events._eventView.select(complete, error, restriction, {
                     ordered: true,
                     orderAttribute: "Startdatum"
@@ -73,12 +77,27 @@
                     LanguageSpecID: AppData.getLanguageId(),
                     NameLanguageID: 1033
                 };
-                var ret = Events._textView.select(complete, error, restriction, {
+                if (eventId) {
+                    restriction.VeranstaltungID = eventId;
+                    restriction.DokVerwendungID = 3;
+                    // don't use serie-specific VA-Text for the time being:
+                    restriction.MandantSerieID = null;
+                }
+                var viewOptions = {
                     ordered: true,
                     orderAttribute: "Sortierung"
-                });
+                };
+                if (eventId && eventId.length) {
+                    viewOptions.orderAttribute = "VeranstaltungID";
+                }
+                var ret = Events._textView.select(complete, error, restriction, viewOptions);
                 Log.ret(Log.l.trace);
                 return ret;
+            },
+            defaultValue: {
+                ev_text_detail_name_h1: "",
+                ev_text_detail_time_h2: "",
+                ev_text_detail_summary: ""
             }
         },
         medienView: {

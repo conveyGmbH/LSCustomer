@@ -7,7 +7,6 @@
 
 .events .content-header {
     color: #07b9cb;
-    padding: 10px;
     height: auto;
     display: inline;
 }
@@ -17,17 +16,27 @@
     height: auto;
 }
 
-.events .win-h1 {
+.events .content-header-line > h1 {
     font-family: "Barlow Semi Condensed", sans-serif;
     text-transform: uppercase;
     display: inline-block;
+    font-size: 46px;
+    font-weight: 200;
+    line-height: 1.216;
+    letter-spacing: 0px;
+    width: calc(100% - 52px);
 }
-.events .win-h2 {
+.events .content-header-line > h2 {
     font-family: "Barlow Semi Condensed", sans-serif;
     display: inline-block;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.167;
+    width: calc(100% - 52px);
 }
-.events .win-type-body {
+.events .content-header-line > span {
     display: inline-block;
+    width: calc(100% - 52px);
 }
 
 .events .vaimg { width: 100%; height: 270px;}
@@ -129,23 +138,23 @@
     padding-left: 10px;
 }
 
-.events .event-title {
-    width: calc(100% - 20px);
-    height: auto;
-    font-size: 26px;
-}
-
 .events .event-item { height: 380px;}
 .events .win-container { height: 380px;}
 
-.events .event-comment {
-    width: calc(100% - 32px);
-    min-height: 40px;
-    font-size: 12px;
-    line-height: 1.2;
+.events .event-item .event-title {
+    width: calc(100% - 20px);
+    height: auto;
 }
 
+.events .event-item .event-subtitle {
+    width: calc(100% - 20px);
+    height: auto;
+}
 
+.events .event-item .event-comment {
+    width: calc(100% - 32px);
+    min-height: 40px;
+}
 
 .events .tile-button-color {
     background-color: transparent;
@@ -172,41 +181,75 @@
 
 
 
-
 /*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 699px (in landscape add 140px for navigation bar)*/
-@media (max-width:699px), (max-width:839px) and (orientation: landscape) {
-}
-@media (max-width:899px) {
-    .events .win-listview .win-gridlayout .win-container {
-        width: 100%;
+    contentarea is less than 899px 
+    @media (max-width:899px) {
     }
-    .events .vaimg {
-        width: 100%;
-        height: auto;
-    }
-    .events .caption-field { width: 35%; margin: 0 10px 0 5px;}
-    .events .caption-sort { width: 60%;}
-}
 
-
-/*margins/paddings for small screens and orientation vertical
-@media (max-height:699px) { 
-}
+    use: .view-size-medium
 */
 
+.view-size-medium .events .win-listview .win-gridlayout .win-container {
+    width: 100%;
+}
+.view-size-medium .events .vaimg {
+    width: 100%;
+    height: auto;
+}
+.view-size-medium .events .caption-field {
+    width: 35%;
+    margin: 0 10px 0 5px;
+}
+.view-size-medium .events .caption-sort {
+    width: 60%;
+}
 
-/*margins/paddings for small screens and orientation vertical*/
+.events .content-header-line > h1,
+.events .content-header-line > h2,
+.events .content-header-line > body {
+    width: calc(100% - 36px);
+}
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 699px 
+
+    use: .view-size-medium-small
+*/
+/*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
-            .events .win-listview .win-gridlayout .win-container { width: 100%; }
-
-            .events .custlogo {width: 50%; min-height: 70px; margin: 15px 0 0 20px;}
-
-            .events .body-content { margin: 10px 20px; }
-            .events .content-header { height: 130px; margin-bottom: 5px;}
-            .events .caption-field { width: 100%; margin: 0; padding: 0;}
-            .events .caption-sort { width: 100%;}
-            .events .caption-filter, .events .caption-search { width: 100%; height: auto; margin: 5px 0; padding: 5px 0;}
         }
+    use: .view-size-small
+*/
+.view-size-small .events .win-listview .win-gridlayout .win-container {
+    width: 100%;
+}
+
+.view-size-small .events .custlogo {
+    width: 50%;
+    min-height: 70px;
+    margin: 15px 0 0 20px;
+}
+
+.view-size-small .events .body-content {
+    margin: 10px 20px;
+}
+.view-size-small .events .content-header {
+    height: 130px;
+    margin-bottom: 5px;
+}
+.view-size-small .events .caption-field {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.view-size-small .events .caption-sort {
+    width: 100%;
+}
+.view-size-small .events .caption-filter, .events .caption-search {
+    width: 100%;
+    height: auto;
+    margin: 5px 0;
+    padding: 5px 0;
+}
 
 
