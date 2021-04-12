@@ -14,6 +14,10 @@
         Controller: WinJS.Class.derive(Application.RecordsetController, function Controller(pageElement, commandList) {
             Log.call(Log.l.trace, "Events.Controller.");
 
+            if (Application.query && Application.query.eventSeriesId) {
+                Events._eventSeriesId = Application.query.eventSeriesId;
+            }
+
             // ListView control
             var listView = pageElement.querySelector("#events.listview");
 

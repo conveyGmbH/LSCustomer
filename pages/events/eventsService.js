@@ -9,14 +9,20 @@
     WinJS.Namespace.define("Events", {
         _eventView: {
             get: function () {
-                return AppData.getFormatView("Veranstaltung", 20619);
+                return AppData.getFormatView("Veranstaltung", 20647);
             }
         },
         _textView: {
             get: function () {
                 return AppData.getFormatView("LangMandantDokument", 20628);
             }
-        }
+        },
+        _medienView: {
+            get: function () {
+                return AppData.getFormatView("MandantDokument", 20635);
+            }
+        },
+        _eventSeriesId: -1
     });
 
     WinJS.Namespace.define("Events", {
@@ -25,7 +31,7 @@
                 Log.call(Log.l.trace, "Events.eventView.");
                 var ret = Events._eventView.select(complete, error, restriction, {
                     ordered: true,
-                    orderAttribute: "Sortierung"
+                    orderAttribute: "Startdatum"
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -62,13 +68,29 @@
             select: function (complete, error, eventId) {
                 Log.call(Log.l.trace, "eventView.");
                 var restriction = {
-                    VeranstaltungID: null,
-                    DokVerwendungID: 1,
-                    LanguageSpecID: AppData.getLanguageId()
+                    MandantSerieID: Events._eventSeriesId,
+                    DokVerwendungID: 2,
+                    LanguageSpecID: AppData.getLanguageId(),
+                    NameLanguageID: 1033
                 };
                 var ret = Events._textView.select(complete, error, restriction, {
                     ordered: true,
                     orderAttribute: "Sortierung"
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+        },
+        medienView: {
+            select: function (complete, error, eventId) {
+                Log.call(Log.l.trace, "eventView.");
+                var restriction = {
+                    VeranstaltungID: eventId
+                    //LanguageSpecID: AppData.getLanguageId()
+                };
+                var ret = Events._medienView.select(complete, error, restriction, {
+                    ordered: true
+                    //orderAttribute: "Sortierung"
                 });
                 Log.ret(Log.l.trace);
                 return ret;
