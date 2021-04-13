@@ -9,7 +9,9 @@
     WinJS.Namespace.define("Events", {
         _eventView: {
             get: function () {
-                return AppData.getFormatView("Veranstaltung", 20647);
+                var ret = AppData.getFormatView("Veranstaltung", 20647);
+                ret.maxPageSize = 20;
+                return ret;
             }
         },
         _textView: {
@@ -17,7 +19,7 @@
                 return AppData.getFormatView("LangMandantDokument", 20628);
             }
         },
-        _medienView: {
+        _docView: {
             get: function () {
                 return AppData.getFormatView("MandantDokument", 20635);
             }
@@ -95,24 +97,41 @@
                 return ret;
             },
             defaultValue: {
+                done: false,
                 ev_text_detail_name_h1: "",
                 ev_text_detail_time_h2: "",
                 ev_text_detail_summary: ""
             }
         },
-        medienView: {
+        docView: {
             select: function (complete, error, eventId) {
                 Log.call(Log.l.trace, "eventView.");
                 var restriction = {
-                    VeranstaltungID: eventId
-                    //LanguageSpecID: AppData.getLanguageId()
+                    MandantSerieID: Events._eventSeriesId,
+                    DokVerwendungID: 2,
+                    AddIndex: "NULL"
                 };
-                var ret = Events._medienView.select(complete, error, restriction, {
-                    ordered: true
-                    //orderAttribute: "Sortierung"
-                });
+                if (eventId) {
+                    restriction.VeranstaltungID = eventId;
+                    restriction.DokVerwendungID = 3;
+                    // don't use serie-specific VA-Text for the time being:
+                    restriction.MandantSerieID = null;
+                    //restriction.AddIndex = 1;
+                }
+                var viewOptions = {
+                    ordered: true,
+                    orderAttribute: "AddIndex"
+                };
+                if (eventId && eventId.length) {
+                    viewOptions.orderAttribute = "VeranstaltungID";
+                }
+                var ret = Events._docView.select(complete, error, restriction, viewOptions);
                 Log.ret(Log.l.trace);
                 return ret;
+            },
+            defaultValue: {
+                done: false,
+                ev_doc: ""
             }
         }
     });

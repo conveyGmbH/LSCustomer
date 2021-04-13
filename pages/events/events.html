@@ -17,6 +17,9 @@
                             <div class="events custlogo">
                                 <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg" />
                             </div>
+                            <div class="series-image-container">
+                                <img data-win-bind="src: dataDoc.ser_doc" />
+                            </div>
                             <div class="content-header">
                                 <div class="content-header-line win-type-header">
                                     <h1 data-win-bind="textContent: dataText.ser_text_name_h1"></h1>
@@ -34,9 +37,8 @@
                     <div class="event-list-template"
                          data-win-control="WinJS.Binding.Template" style="display: none">
                         <div class="event-item">
-                            <div class="event-image"
-                                 data-win-bind="src: dataMedien.ov_doc">
-                                <img class="vaimg" src="https://deimos.convey.de/LSCustomer/images/Download.jpg"/>
+                            <div class="event-image-container">
+                                <img data-win-bind="src: dataDoc.ev_doc" />
                             </div>
                             <div class="event-detail box-bkg">
                                 <div class="event-title win-type-title">
