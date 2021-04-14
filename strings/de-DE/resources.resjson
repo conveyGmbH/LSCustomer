@@ -5,6 +5,7 @@
     "label.home"            : "Start",
     "label.events"          : "Serie",
     "label.event"           : "Veranstaltung",
+	"label.overview"	    : "Überblick",
 
     "events.title"          : "Serie",
 

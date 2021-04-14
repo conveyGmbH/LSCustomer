@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="overview.css" rel="stylesheet" />
+    <script type="text/javascript" src="overviewService.js"></script>
+    <script type="text/javascript" src="overviewController.js"></script>
+    <script type="text/javascript" src="overview.js"></script>
+</head>
+<body class="win-type-body" style="background-color: #ffffff;">
+    <div class="overview fragment">
+        <div id="eventController" class="data-container">
+            <div aria-label="Main content" role="main" class="animationElement">
+                <div class="contentarea win-type-body">
+                    <div class="event custlogo">
+                        <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg" />
+                    </div>
+                    <!--<div class="list-header">
+                        <div class="content-header">
+                            <div class="content-header-line win-type-caption">
+                                <span class="win-h1" data-win-bind="textContent: dataText.ov_text_h1"></span>
+                            </div>
+                            <div class="content-header-line win-type-caption">
+                                <span class="caption-field" data-win-bind=""></span>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="overview-list-template"
+                         data-win-control="WinJS.Binding.Template" style="display: none">
+                        <div class="event-item">
+                            <div class="event-image"
+                                 data-win-bind="src: dataMedien.ov_doc"></div>
+                            <div class="event-detail box-bkg">
+                                <div class="event-title">
+                                    <span data-win-bind="textContent: Name"></span>
+                                </div>
+                                <div class="event-comment">
+                                    <span data-win-bind="textContent: Startdatum Binding.Converter.toLocaleDateString"></span>
+                                </div>
+                                <div class="event-comment">
+                                    <span data-win-bind="textContent: Untertitel"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="overview"
+                         class="listview win-selectionstylefilled"
+                         data-win-control="WinJS.UI.ListView"
+                         data-win-options="{
+                                itemTemplate: select('.overview-list-template'),
+                                selectionMode: 'none',
+                                tapBehavior: 'invokeOnly'
+                            }">
+
+                    </div>
+                </div>
+                <div class="error-message"
+                     data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
