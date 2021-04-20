@@ -13,39 +13,72 @@
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea win-type-body">
                     <div class="headerFooterPlaceholder">
-                        <div class="hub-header">
+                        <div class="list-header">
+                            <div class="custlogo">
+                                <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg" />
+                            </div>
+                            <div class="hero-image-container">
+                                <img data-win-bind="src: dataDoc.ov_doc" />
+                            </div>
                             <div class="content-header">
-                                <div class="content-header-line win-type-caption">
-                                    <span class="caption-field" data-win-res="{textContent: 'home.title'}"></span>
+                                <div class="content-header-line win-type-title">
+                                    <h1 data-win-bind="textContent: dataText.ov_text_h1"></h1>
+                                </div>
+                                <div class="content-header-line win-type-body">
+                                    <span data-win-bind="textContent: dataText.ov_text_free_body"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="home-hub-header-template"
+                    <div class="home-group-header-template"
+                         data-win-control="WinJS.Binding.Template" style="display: none">
+                        <div class="group-header">
+                            <div class="group-image-container">
+                                <img data-win-bind="src: dataGroupDoc.ser_doc" />
+                            </div>
+                            <div class="content-header">
+                                <div class="content-header-line win-type-subtitle">
+                                    <h1 data-win-bind="textContent: dataGroupText.ser_text_name_h1"></h1>
+                                </div>
+                                <div class="content-header-line win-type-body bold">
+                                    <h2 data-win-bind="textContent: dataGroupText.ser_text_subtitle_h2"></h2>
+                                </div>
+                                <div class="content-header-line win-type-body">
+                                    <span data-win-bind="textContent: dataGroupText.ser_text_free_body"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-list-template"
                          data-win-control="WinJS.Binding.Template" style="display: none">
                         <div class="event-item">
-                            <div class="event-image" 
-                                 data-win-bind="name: imageName"></div>
+                            <div class="event-image-container">
+                                <img data-win-bind="src: dataDoc.ev_doc" />
+                            </div>
                             <div class="event-detail box-bkg">
-                                <div class="event-title">
-                                    <span data-win-bind="textContent: Name"></span>
+                                <div class="event-title win-type-body">
+                                    <span data-win-bind="textContent: dataText.ev_text_detail_name_h1"></span>
                                 </div>
-                                <div class="event-comment">
-                                    <span data-win-bind="textContent: Startdatum Binding.Converter.toLocaleDateString"></span>
+                                <div class="event-subtitle win-type-caption bold">
+                                    <span data-win-bind="textContent: dataText.ev_text_detail_time_h2"></span>
                                 </div>
-                                <div class="event-comment">
-                                    <span data-win-bind="textContent: Untertitel"></span>
+                                <div class="event-comment win-type-caption">
+                                    <span data-win-bind="textContent: dataText.ev_text_detail_summary"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="home" 
-                         class="hubview"
-                         data-win-control="WinJS.UI.Hub"
+                    <div id="events"
+                         class="listview win-selectionstylefilled"
+                         data-win-control="WinJS.UI.ListView"
                          data-win-options="{
-                                headerTemplate: select('.home-hub-header-template'),
-                                orientation: WinJS.UI.Orientation.vertical
+                                header: select('.list-header'),
+                                itemTemplate: select('.event-list-template'),
+                                groupHeaderTemplate: select('.home-group-header-template'),
+                                selectionMode: 'none',
+                                tapBehavior: 'invokeOnly'
                             }">
+
                     </div>
                 </div>
                 <div class="error-message"

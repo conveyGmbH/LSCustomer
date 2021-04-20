@@ -13,6 +13,41 @@
 
     var pageName = Application.getPagePath("home");
 
+    WinJS.Namespace.define("Application.HomeListLayout", {
+        HomeLayout: WinJS.Class.derive(WinJS.UI.GridLayout, function (options) {
+                WinJS.UI.GridLayout.apply(this, [options]);
+                this._site = null;
+                this._surface = null;
+            },
+            {
+                // This sets up any state and CSS layout on the surface of the custom layout
+                initialize: function (site) {
+                    if (this.__proto__ &&
+                        typeof this.__proto__.initialize === "function") {
+                        this.__proto__.initialize(site);
+                    }
+                    this._site = site;
+                    this._surface = this._site.surface;
+
+                    // Add a CSS class to control the surface level layout
+                    WinJS.Utilities.addClass(this._surface, "homelistLayout");
+
+                    return WinJS.UI.Orientation.vertical;
+                },
+
+                // Reset the layout to its initial state
+                uninitialize: function () {
+                    WinJS.Utilities.removeClass(this._surface, "homelistLayout");
+                    this._site = null;
+                    this._surface = null;
+                    if (this.__proto__ &&
+                        typeof this.__proto__.uninitialize === "function") {
+                        this.__proto__.uninitialize();
+                    }
+                }
+            })
+    });
+
     WinJS.UI.Pages.define(pageName, {
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
@@ -95,16 +130,16 @@
                             var width = contentArea.clientWidth;
                             var height = contentArea.clientHeight;
                             if (width !== that.prevWidth || height !== that.prevHeight) {
-                                var listView = element.querySelector("#homeEvents.listview");
+                                var listView = element.querySelector("#home.listview");
                                 if (listView && listView.style) {
                                     if (listView.clientWidth !== width) {
                                         listView.style.width = width + "px";
                                         that.prevWidth = width;
                                     }
-                                    if (listView.clientHeight !== height) {
+                                    /*if (listView.clientHeight !== height) {
                                         listView.style.height = height + "px";
                                         that.prevHeight = height;
-                                    }
+                                    }*/
                                 }
                             }
                         }

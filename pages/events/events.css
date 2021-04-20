@@ -5,13 +5,17 @@
      font-family: "Barlow-Regular";
 }
 
+.events .bold {
+    font-weight: 600;
+}
+
 .events .content-header {
     color: #07b9cb;
     height: auto;
     display: inline;
 }
 
-.events .series-image-container {
+.events .hero-image-container {
     display: block;
     position: absolute;
     left: 0;
@@ -21,7 +25,8 @@
     overflow: hidden;
     z-index: -1;
 }
-.events .series-image-container > img {
+
+.events .hero-image-container > img {
     width: 100%;
     height: auto;
 }
@@ -35,18 +40,11 @@
     font-family: "Barlow Semi Condensed", sans-serif;
     text-transform: uppercase;
     display: inline-block;
-    font-size: 46px;
-    font-weight: 200;
-    line-height: 1.216;
-    letter-spacing: 0px;
     width: calc(100% - 52px);
 }
 .events .content-header-line > h2 {
     font-family: "Barlow Semi Condensed", sans-serif;
     display: inline-block;
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 1.167;
     width: calc(100% - 52px);
 }
 .events .content-header-line > span {
@@ -124,8 +122,13 @@
 
 .events .event-item {
     width: 480px;
-    height: 360px;
+    height: 380px;
 }
+
+.events .win-container {
+    height: 380px;
+}
+
 
 .events .event-image-container {
     display: inline-block;
@@ -157,9 +160,6 @@
     height: calc(100% - 120px);
     padding-left: 10px;
 }
-
-.events .event-item { height: 380px;}
-.events .win-container { height: 380px;}
 
 .events .event-item .event-title {
     width: calc(100% - 20px);
@@ -199,11 +199,11 @@
 
 }
 
-.view-size-biggest .events .series-image-container {
+.view-size-biggest .events .hero-image-container {
     height: 500px;
 }
 
-.view-size-bigger .events .series-image-container {
+.view-size-bigger .events .hero-image-container {
     height: 600px;
 }
 
@@ -215,11 +215,11 @@
     use: .view-size-medium
 */
 
-.view-size-medium .events .series-image-container {
+.view-size-medium .events .hero-image-container {
     height: 700px;
 }
 
-.view-size-medium .events .series-image-container > img {
+.view-size-medium .events .hero-image-container > img {
     height: 100%;
     width: auto;
 }
@@ -247,7 +247,7 @@
     use: .view-size-medium-small
 */
 
-.view-size-medium-small .events .series-image-container {
+.view-size-medium-small .events .hero-image-container {
     height: 900px;
 }
 
@@ -257,7 +257,7 @@
     use: .view-size-small
 */
 
-.view-size-small .events .series-image-container {
+.view-size-small .events .hero-image-container {
     height: 1100px;
 }
 
