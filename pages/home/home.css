@@ -22,7 +22,7 @@
     width: 100%;
     height: 400px;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
     z-index: -2;
 }
 
@@ -32,35 +32,51 @@
 }
 
 .home .win-groupheadercontainer {
+    /*
     z-index: -1;
+    */
 }
+.home .group-header:hover {
+    text-decoration: underline;
+}
+.home .win-itemscontainer {
+    z-index: 1;
+}
+
 
 .home .group-header {
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 50%;
+    z-index: -1;
+    display: inline;
 }
 
 .home .group-image-container {
     display: block;
     position: absolute;
-    left: 0;
+    left: 18px;
     width: 100%;
-    height: 200px;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
     z-index: -2;
 }
 
 .home .group-image-container > img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 440px;
 }
 
 .home .content-header {
+    color: lemonchiffon ;
+    height: auto;
+    display: inline-block;
+}
+
+.home .group-header .content-header {
     color: #07b9cb;
     height: auto;
-    display: inline;
+    display: inline-block;
 }
 
 .home .content-header-line {
@@ -154,12 +170,14 @@
 .home .win-listview .win-gridlayout .win-container {
     margin: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    z-index: 2;
     /*width: 30%;*/
 }
 
 .home .event-item {
     width: 240px;
     height: 200px;
+    background-color: #ffffff;
 }
 
 .home .win-container {
@@ -237,17 +255,10 @@
     height: 500px;
 }
 
-.view-size-biggest .home .group-image-container {
-    height: 250px;
-}
-
 .view-size-bigger .home .hero-image-container {
     height: 600px;
 }
 
-.view-size-bigger .home .group-image-container {
-    height: 300px;
-}
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
@@ -261,15 +272,6 @@
 }
 
 .view-size-medium .home .hero-image-container > img {
-    height: 100%;
-    width: auto;
-}
-
-.view-size-medium .home .group-image-container {
-    height: 350px;
-}
-
-.view-size-medium .home .group-image-container > img {
     height: 100%;
     width: auto;
 }
@@ -299,10 +301,6 @@
     height: 900px;
 }
 
-.view-size-medium-small .home .group-image-container {
-    height: 450px;
-}
-
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
         }
@@ -311,10 +309,6 @@
 
 .view-size-small .home .hero-image-container {
     height: 1100px;
-}
-
-.view-size-small .home .group-image-container {
-    height: 550px;
 }
 
 .view-size-small .events .hero-image-container > img {

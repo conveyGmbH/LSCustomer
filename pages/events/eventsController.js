@@ -16,6 +16,8 @@
 
             if (Application.query && Application.query.eventSeriesId) {
                 Events._eventSeriesId = Application.query.eventSeriesId;
+            } else {
+                Events._eventSeriesId = AppData.getRecordId("MandantSerie");
             }
 
             // ListView control
@@ -292,6 +294,11 @@
                     if (WinJS.Navigation.canGoBack === true) {
                         WinJS.Navigation.back(1).done( /* Your success and error handlers */);
                     }
+                    Log.ret(Log.l.trace);
+                },
+                clickHome: function(event) {
+                    Log.call(Log.l.trace, "Events.Controller.");
+                    Application.navigateById("home", event);
                     Log.ret(Log.l.trace);
                 },
                 onItemInvoked: function (eventInfo) {

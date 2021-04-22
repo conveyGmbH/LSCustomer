@@ -602,6 +602,23 @@
                     }
                     Log.ret(Log.l.trace);
                 },
+                onGroupHeaderInvoked: function(eventInfo) {
+                    Log.call(Log.l.trace, "Home.Controller.");
+                    if (eventInfo && eventInfo.detail && 
+                        that.recordsGrouped && that.recordsGrouped.groups) {
+                        Log.print(Log.l.trace, "groupHeaderIndex=" + eventInfo.detail.groupHeaderIndex);
+                        var item = that.recordsGrouped.groups.getItem(eventInfo.detail.groupHeaderIndex);
+                        if (item && item.data && item.data.MandantSerieID) {
+                            if (Application.query) {
+                                Application.query.eventSeriesId = item.data.MandantSerieID;
+                            } else {
+                                AppData.setRecordId("MandantSerie", item.data.MandantSerieID);
+                            }
+                            Application.navigateById("events", eventInfo);
+                        }
+                    }
+                    Log.ret(Log.l.trace);
+                },
                 onLoadingStateChanged: function (eventInfo) {
                     Log.call(Log.l.trace, "Home.Controller.");
                     if (listView && listView.winControl) {
@@ -746,6 +763,7 @@
                 this.addRemovableEventListener(listView, "footervisibilitychanged", this.eventHandlers.onFooterVisibilityChanged.bind(this));
                 this.addRemovableEventListener(listView, "headervisibilitychanged", this.eventHandlers.onHeaderVisibilityChanged.bind(this));
                 this.addRemovableEventListener(listView, "iteminvoked", this.eventHandlers.onItemInvoked.bind(this));
+                this.addRemovableEventListener(listView, "groupheaderinvoked", this.eventHandlers.onGroupHeaderInvoked.bind(this));
             }
 
             // create grouped binding list in advance
