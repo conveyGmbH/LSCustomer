@@ -13,20 +13,10 @@
 
 .countdown .countdown-line {
     margin: 0;
-    background-color: #f3fbfc;
-    border: 1px solid #f3fbfc;
-    width: 67%;
+    width: 100%;
     text-align: center;
-}
-
-.countdown .count-block {
-    display: inline-block;
-    width: 12%;
-    text-align: center;
-    margin: 10px 5px;
-    padding: 5px;
     background-color: #ffffff;
-    border: 5px solid #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -35,11 +25,20 @@
     -webkit-transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
     -moz-transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 }
+
+.countdown .count-block {
+    display: inline-block;
+    width: 13%;
+    margin: 5px;
+    padding: 5px;
+    background-color: #ffffff;
+    
+}
     .countdown .win-h3 {
         display: block;
         font-family: "Barlow Semi Condensed", sans-serif;
         color: #2a2f3d;
-        font-size: 2em;
+        font-size: 1.5em;
         font-weight: 700;
         margin: 5px;
         padding: 0;
@@ -48,15 +47,15 @@
     display: block;
     font-family: "Barlow Semi Condensed", sans-serif;
     color: #2a2f3d;
-    font-size: 1em;
-    padding: 10px;
+    font-size: 12px;
+    padding: 2px;
     margin: 0;
 }
 
 
 /*for max-width 1024px*/
 
-    .view-size-bigger .countdown .count-block { width: 15%; margin: 10px;}
+    .view-size-bigger .countdown .count-block { width: 15%; margin: 5px;}
     .view-size-bigger .countdown .win-h3 { font-size: 2em; margin: 10px;}
     .view-size-bigger .countdown .win-h5 { font-size: 0.75em; padding: 0;}
 

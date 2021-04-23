@@ -15,7 +15,8 @@
 
                     <div class="content-header body-content">
                         <div class="event custlogo">
-                            <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg" />
+                            <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg"
+                                 onclick="AppBar.handleEvent('click', 'clickHome', event)"/>
                         </div>
 
                         <div class="win-h1 content-header">
@@ -27,18 +28,31 @@
                         <div class="win-h3 content-header">
                             <span data-win-bind="textContent: dataText.ev_text_detail_time_h2"></span>
                         </div>
-                        
+
+                        <div class="button_line">
+                            <div class="button-element">
+                                <button id="calenderButton" class="text-lightcolor win-button">
+                                    <!--onclick="AppBar.handleEvent('click', 'clickOk', event)">-->
+            
+                                    <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
+                                    <span data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
                     
-                        <div id="countdownhost" class="body-content countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
-
+                        
                         <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
                   
                     <div class="content win-hub-section-content">
                         <div class="section-1 win-hub-section">
                             <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
+                            <div class="content-header field_line share-block">
+                                <span class="win-h5" data-win-bind="textContent: dataText.ev_text_share_text"></span>
+                                <!--<span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>-->
+                            </div>
                             <div class="win-h5 content-header win-type-caption">
-                                <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_serial_name_h1"></span>
                                 <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
                             </div>
                             <div class="win-h2 content-header">
@@ -54,6 +68,7 @@
                         </div>
 
                         <div class="section-2 win-hub-section">
+                            <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
                             <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
 
 
@@ -63,11 +78,7 @@
                         <div class="section-3">
 
                             <div class="div-separator"></div>
-                            <!--<div class="line-separator">
-        <span data-win-bind="textContent: dataText.ev_text_calender_text"></span>
-        <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
-
-    </div>-->
+                            
                             <div class="">
                                 <p data-win-bind="textContent: dataText.ev_text_detail_summary"></p>
                             </div>

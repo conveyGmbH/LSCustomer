@@ -16,6 +16,8 @@
 
             if (Application.query && Application.query.eventSeriesId) {
                 Events._eventSeriesId = Application.query.eventSeriesId;
+            } else {
+                Events._eventSeriesId = AppData.getRecordId("MandantSerie");
             }
 
             // ListView control
@@ -59,7 +61,9 @@
             var resultConverter = function(item, index) {
                 Log.call(Log.l.trace, "Events.Controller.");
                 item.dataText = getEmptyDefaultValue(Events.textView.defaultValue);
+                item.dataText.done = false;
                 item.dataDoc = getEmptyDefaultValue(Events.docView.defaultValue);
+                item.dataDoc.done = false;
                 Log.ret(Log.l.trace);
             }
             this.resultConverter = resultConverter;
@@ -107,14 +111,18 @@
                         var labelWidth = labelTitle + "_width";
                         var labelHeight = labelTitle + "_height";
                         var docFormatInfo = AppData.getDocFormatInfo(row.DocFormat);
-                        var imgSrcDataType = "data:" + docFormatInfo + ";base64,";
-                        var docContent = row.DocContentDOCCNT1;
-                        if (docContent) {
-                            var sub = docContent.search("\r\n\r\n");
-                            if (sub >= 0) {
-                                var data = docContent.substr(sub + 4);
-                                if (data && data !== "null") {
-                                    newDataDoc[labelTitle] = imgSrcDataType + data;
+                        if (docFormatInfo) {
+                            var imgSrcDataType = "data:" + docFormatInfo.mimeType + ";base64,";
+                            var docContent = row.DocContentDOCCNT1;
+                            if (docContent) {
+                                var sub = docContent.search("\r\n\r\n");
+                                if (sub >= 0) {
+                                    var data = docContent.substr(sub + 4);
+                                    if (data && data !== "null") {
+                                        newDataDoc[labelTitle] = imgSrcDataType + data;
+                                    } else {
+                                        newDataDoc[labelTitle] = "";
+                                    }
                                 } else {
                                     newDataDoc[labelTitle] = "";
                                 }
@@ -286,6 +294,11 @@
                     if (WinJS.Navigation.canGoBack === true) {
                         WinJS.Navigation.back(1).done( /* Your success and error handlers */);
                     }
+                    Log.ret(Log.l.trace);
+                },
+                clickHome: function(event) {
+                    Log.call(Log.l.trace, "Events.Controller.");
+                    Application.navigateById("home", event);
                     Log.ret(Log.l.trace);
                 },
                 onItemInvoked: function (eventInfo) {

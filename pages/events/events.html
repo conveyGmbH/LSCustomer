@@ -14,14 +14,15 @@
                 <div class="contentarea win-type-body">
                     <div class="headerFooterPlaceholder">
                         <div class="list-header">
-                            <div class="events custlogo">
-                                <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg" />
+                            <div class="custlogo">
+                                <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg"
+                                     onclick="AppBar.handleEvent('click', 'clickHome', event)"/>
                             </div>
-                            <div class="series-image-container">
+                            <div class="hero-image-container">
                                 <img data-win-bind="src: dataDoc.ser_doc" />
                             </div>
                             <div class="content-header">
-                                <div class="content-header-line win-type-header">
+                                <div class="content-header-line win-type-title">
                                     <h1 data-win-bind="textContent: dataText.ser_text_name_h1"></h1>
                                 </div>
                                 <div class="content-header-line win-type-subtitle">
@@ -30,7 +31,6 @@
                                 <div class="content-header-line win-type-body">
                                     <span data-win-bind="textContent: dataText.ser_text_free_body"></span>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -41,10 +41,10 @@
                                 <img data-win-bind="src: dataDoc.ev_doc" />
                             </div>
                             <div class="event-detail box-bkg">
-                                <div class="event-title win-type-title">
+                                <div class="event-title win-type-subtitle">
                                     <span data-win-bind="textContent: dataText.ev_text_detail_name_h1"></span>
                                 </div>
-                                <div class="event-subtitle win-type-subtitle">
+                                <div class="event-subtitle win-type-body bold">
                                     <span data-win-bind="textContent: dataText.ev_text_detail_time_h2"></span>
                                 </div>
                                 <div class="event-comment win-type-body">
@@ -58,9 +58,7 @@
                          data-win-control="WinJS.UI.ListView"
                          data-win-options="{
                                 header: select('.list-header'),
-                                itemTemplate: select('.event-list-template'),
-                                selectionMode: 'none',
-                                tapBehavior: 'invokeOnly'
+                                itemTemplate: select('.event-list-template')
                             }">
 
                     </div>

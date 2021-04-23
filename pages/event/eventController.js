@@ -131,6 +131,11 @@
                     }
                     Log.ret(Log.l.trace);
                 },
+                clickHome: function(event) {
+                    Log.call(Log.l.trace, "Events.Controller.");
+                    Application.navigateById("home", event);
+                    Log.ret(Log.l.trace);
+                },
                 clickOk: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     that.saveData(function (response) {

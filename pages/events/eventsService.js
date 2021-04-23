@@ -97,7 +97,6 @@
                 return ret;
             },
             defaultValue: {
-                done: false,
                 ev_text_detail_name_h1: "",
                 ev_text_detail_time_h2: "",
                 ev_text_detail_summary: ""
@@ -130,7 +129,6 @@
                 return ret;
             },
             defaultValue: {
-                done: false,
                 ev_doc: ""
             }
         }

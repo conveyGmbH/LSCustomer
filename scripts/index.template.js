@@ -89,9 +89,6 @@
 
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
-        if (id === "home") {
-            id = "events";
-        }
         Log.call(Log.l.trace, "Application.", "id=" + id + " login=" + AppData._persistentStates.odata.login);
         Log.ret(Log.l.trace);
         return id;

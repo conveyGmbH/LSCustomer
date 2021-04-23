@@ -1,35 +1,204 @@
 /*
     margins/paddings for all screens
 */
-.home .hubview {
-    width: 100%;
-    height: 100%;
+.home {
+    font-family: "Barlow-Regular";
 }
 
-.hub-header {
+.home .bold {
+    font-weight: 600;
+}
+
+.home .list-header {
     margin: 0;
     padding: 0;
     width: 100%;
 }
 
+.home .hero-image-container {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    padding: 0;
+    overflow: visible;
+    z-index: -2;
+}
+
+.home .hero-image-container > img {
+    width: 100%;
+    height: auto;
+}
+
+.home .win-groupheadercontainer {
+    /*
+    z-index: -1;
+    */
+}
+.home .group-header:hover {
+    text-decoration: underline;
+}
+.home .win-itemscontainer {
+    z-index: 1;
+}
+
+
+.home .group-header {
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    z-index: -1;
+    display: inline;
+}
+
+.home .group-image-container {
+    display: block;
+    position: absolute;
+    left: 18px;
+    width: 100%;
+    padding: 0;
+    overflow: visible;
+    z-index: -2;
+}
+
+.home .group-image-container > img {
+    width: auto;
+    height: 440px;
+}
+
+.home .content-header {
+    color: lemonchiffon ;
+    height: auto;
+    display: inline-block;
+}
+
+.home .group-header .content-header {
+    color: #07b9cb;
+    height: auto;
+    display: inline-block;
+}
+
+.home .content-header-line {
+    display: inline;
+    height: auto;
+}
+
+.home .content-header-line > h1 {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+    display: inline-block;
+    width: calc(100% - 52px);
+}
+
+.home .content-header-line > h2 {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    display: inline-block;
+    width: calc(100% - 52px);
+}
+
+.home .content-header-line > span {
+    display: inline-block;
+    width: calc(100% - 52px);
+}
+
+.home .event-title {
+    color: #2a2f3d;
+    font-family: "Barlow Semi Condensed", sans-serif;
+    text-transform: uppercase;
+}
+
+.home .event-comment {
+    color: #2a2f3d;
+}
+
+.home .listview {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    color: #000;
+}
+
+.home .custlogo {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+    height: auto;
+    min-height: 100px;
+    margin: 15px 0 0 35px;
+    padding: 5px;
+    text-align: center;
+}
+
+.home .logo {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+.home .caption-sort {
+    display: inline-block;
+    position: relative;
+    text-align: right;
+    width: 50%;
+}
+
+.home .caption-search, .home .caption-filter {
+    width: 40%;
+    border: solid 0.2px #4e3ab0;
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    text-align: left;
+}
+
+.home label {
+    font-size: 16px;
+}
+
+.home .caption-field {
+    top: 20px;
+    left: 8px;
+    text-align: left;
+    width: 48%;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 0 5px;
+}
+
 .home .win-listview .win-gridlayout .win-container {
     margin: 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    /*width: 30%;*/
 }
 
 .home .event-item {
     width: 240px;
-    height: 480px;
+    height: 200px;
+    background-color: #ffffff;
 }
 
-.home .event-image {
+.home .win-container {
+    height: 200px;
+}
+
+.home .event-image-container {
     display: inline-block;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
-    height: 120px;
-    padding: 20px;
+    height: 135px;
+    padding: 0;
+    background-color: gainsboro;
+    overflow: hidden;
+}
+
+.home .event-image-container > img {
+    width: 100%;
+    height: auto;
 }
 
 .home .event-detail.box-bkg:hover {
@@ -40,59 +209,147 @@
     display: inline-block;
     position: absolute;
     left: 0;
-    top: 120px;
+    top: 135px;
     width: 100%;
     height: calc(100% - 120px);
     padding-left: 10px;
 }
 
-.home .event-title {
+.home .event-item .event-title {
     width: calc(100% - 20px);
-    height: 40px;
-    font-weight: 200;
-    font-size: 26px;
+    height: auto;
 }
 
-.home .event-comment {
+.home .event-item .event-subtitle {
+    width: calc(100% - 20px);
+    height: auto;
+}
+
+.home .event-item .event-comment {
     width: calc(100% - 32px);
     min-height: 40px;
-    font-size: 12px;
-    line-height: 1.2;
 }
-
-
 
 .home .tile-button-color {
     background-color: transparent;
     border-color: transparent;
 }
 
-
-
-
-/*
-    margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 699px (in landscape add 140px for navigation bar)
-    @media (max-width:699px), (max-width:839px) and (orientation: landscape) {
-@media (max-width:899px) {
-    
+.home .footer {
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    border-top: solid 0.2px #4e3ab0;
 }
+
+.home .footer-content {
+    margin: 20px 35px;
+}
+
+.view-size-biggest .home .hero-image-container {
+    height: 500px;
+}
+
+.view-size-bigger .home .hero-image-container {
+    height: 600px;
+}
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 899px 
+    @media (max-width:899px) {
+    }
+
+    use: .view-size-medium
 */
 
-
-/*
-    margins/paddings for small screens and orientation vertical
-@media (max-height:699px) {
-   
+.view-size-medium .home .hero-image-container {
+    height: 700px;
 }
+
+.view-size-medium .home .hero-image-container > img {
+    height: 100%;
+    width: auto;
+}
+
+.view-size-medium .home .caption-field {
+    width: 35%;
+    margin: 0 10px 0 5px;
+}
+
+.view-size-medium .home .caption-sort {
+    width: 60%;
+}
+
+.home .content-header-line > h1,
+.home .content-header-line > h2,
+.home .content-header-line > body {
+    width: calc(100% - 36px);
+}
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 699px 
+
+    use: .view-size-medium-small
 */
 
-
-/*
-    margins/paddings for small screens and orientation vertical
-@media (max-width:499px) {
-    
+.view-size-medium-small .home .hero-image-container {
+    height: 900px;
 }
+
+/*margins/paddings for small screens and orientation vertical
+        @media (max-width:499px) {
+        }
+    use: .view-size-small
 */
+
+.view-size-small .home .hero-image-container {
+    height: 1100px;
+}
+
+.view-size-small .events .hero-image-container > img {
+    height: 100%;
+    width: auto;
+}
+
+.view-size-small .home .win-listview .win-gridlayout .win-container {
+    width: 100%;
+}
+
+.view-size-small .home .custlogo {
+    width: 50%;
+    min-height: 70px;
+    margin: 15px 0 0 20px;
+}
+
+.view-size-small .home .body-content {
+    margin: 10px 20px;
+}
+
+.view-size-small .home .content-header {
+    height: 130px;
+    margin-bottom: 5px;
+}
+
+.view-size-small .home .caption-field {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.view-size-small .home .caption-sort {
+    width: 100%;
+}
+
+.view-size-small .home .caption-filter, .home .caption-search {
+    width: 100%;
+    height: auto;
+    margin: 5px 0;
+    padding: 5px 0;
+}
 
 
