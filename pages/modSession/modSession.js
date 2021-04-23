@@ -92,8 +92,7 @@
                     if (that.controller) {
                         var contentarea = element.querySelector(".contentarea");
                         var conferencehost = element.querySelector("#conferencehost");
-                        var logo = element.querySelector(".logo");
-                        console.log(logo.style.height);
+                        var logo = element.querySelector("#customerLogo");
                         if (contentarea) {
                             var width = contentarea.clientWidth;
                             var height = contentarea.clientHeight;
