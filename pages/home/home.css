@@ -16,7 +16,7 @@
 }
 
 .home .hero-image-container {
-    display: block;
+    display: none;
     position: absolute;
     left: 0;
     width: 100%;
@@ -68,7 +68,7 @@
 }
 
 .home .content-header {
-    color: lemonchiffon ;
+    color: #2a2f3d ;
     height: auto;
     display: inline-block;
 }
@@ -77,6 +77,7 @@
     color: #07b9cb;
     height: auto;
     display: inline-block;
+    cursor: pointer;
 }
 
 .home .content-header-line {
@@ -171,14 +172,15 @@
     margin: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
     z-index: 2;
+    height: 220px;
     /*width: 30%;*/
 }
 
-.home .event-item {
-    width: 240px;
-    height: 200px;
-    background-color: #ffffff;
-}
+    .home .event-item {
+        width: 240px;
+        height: 220px;
+        background-color: #ffffff;
+    }
 
 .home .win-container {
     height: 200px;
@@ -211,7 +213,7 @@
     left: 0;
     top: 135px;
     width: 100%;
-    height: calc(100% - 120px);
+    height: calc(100% - 135px);
     padding-left: 10px;
 }
 
