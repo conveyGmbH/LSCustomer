@@ -467,6 +467,7 @@ var __meteor_runtime_config__;
                         if (json && json.d && json.d.results) {
                             that.binding.dataConference = json.d.results[0];
                             var modSessionLink = that.binding.dataConference.URL;
+                            AppBar.scope.binding.modSessionLink = that.binding.dataConference.URL;
                             AppBar.scope.binding.showConference = true;
                         }
                         Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");

@@ -81,10 +81,36 @@
         },
 
         updateLayout: function (element, viewState, lastViewState) {
-            Log.call(Log.l.u1, pageName + ".");
+            var ret = null;
+            var that = this;
             /// <param name="element" domElement="true" />
+            Log.call(Log.l.u1, pageName + ".");
             // TODO: Respond to changes in viewState.
+            if (element && !that.inResize) {
+                that.inResize = 1;
+                ret = WinJS.Promise.timeout(0).then(function () {
+                    if (that.controller) {
+                        var contentarea = element.querySelector(".contentarea");
+                        var conferencehost = element.querySelector("#conferencehost");
+                        var logo = element.querySelector(".logo");
+                        console.log(logo.style.height);
+                        if (contentarea) {
+                            var width = contentarea.clientWidth;
+                            var height = contentarea.clientHeight;
+                            if (width !== that.prevWidth) {
+                                that.prevWidth = width;
+                            }
+                            if (height !== that.prevHeight) {
+                                that.prevHeight = height;
+                                conferencehost.style.height = height - 271 + "px";  /*225*/
+                            }
+                        }
+                    }
+                    that.inResize = 0;
+                });
+            }
             Log.ret(Log.l.u1);
+            return ret || WinJS.Promise.as();
         }
     });
 })();
