@@ -1,0 +1,9 @@
+.event .custlogo {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+    height: auto;
+    margin: 15px 0;
+    padding: 5px;
+    text-align: center;
+}

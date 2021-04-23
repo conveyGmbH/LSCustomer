@@ -420,14 +420,23 @@ var __meteor_runtime_config__;
                     type: "GET",
                     url: ""
                 };
+                var page = null;
+                if (Application.query.page) {
+                    page = Application.query.page;
+                }
                 Log.call(Log.l.trace, "Conference.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    return AppData.call("PRC_BBBConferenceLink", {
+                    if (page === "event") {
+                        return AppData.call("PRC_BBBConferenceLink",
+                            {
                         //zum test da es für diesen token eine online Event vorhanden ist 
                         //sonst AppData._persistentStates.registerData.userToken
-                        pUserToken: AppData._persistentStates.registerData.userToken //'0b24e593-127e-46f6-b034-c2cc178d8c71'  
-                    }, function(json) {
+                                pUserToken:
+                                    AppData._persistentStates.registerData
+                                        .userToken //'0b24e593-127e-46f6-b034-c2cc178d8c71'  
+                            },
+                            function(json) {
                         if (json && json.d && json.d.results) {
                             that.binding.dataConference = json.d.results[0];
                             AppData._persistentStates.registerData.urlbbb = that.binding.dataConference.URL;
@@ -435,9 +444,39 @@ var __meteor_runtime_config__;
                             AppBar.scope.binding.showConference = true;
                         }
                         Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
-                    }, function(error) {
+                            },
+                            function(error) {
                         Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
                     });
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
+                    var modToken = null;
+                    if (Application.query.UserToken) {
+                        modToken = Application.query.UserToken;
+                    }
+                    if (page === "modSession") {
+                        return AppData.call("PRC_BBBModeratorLink",
+                            {
+                        pVeranstaltungID: 0,
+                        pAlias: null,
+                        pUserToken: modToken //aus startlink 
+                            },
+                            function(json) {
+                        if (json && json.d && json.d.results) {
+                            that.binding.dataConference = json.d.results[0];
+                            var modSessionLink = that.binding.dataConference.URL;
+                            AppBar.scope.binding.showConference = true;
+                        }
+                        Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
+                            },
+                            function(error) {
+                        Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
+                    });
+                    } else {
+                        return WinJS.Promise.as();
+                    }
                 }).then(function () {
                     var url = that.binding.dataConference && that.binding.dataConference.URL;
                     if (url) {

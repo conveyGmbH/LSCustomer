@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="modSession.css" rel="stylesheet" />
+    <script type="text/javascript" src="modSessionService.js"></script>
+    <script type="text/javascript" src="modSessionController.js"></script>
+    <script type="text/javascript" src="modSession.js"></script>
+</head>
+<body class="win-type-body" style="background-color: #ffffff;">
+    <div class="modSession fragment">
+        <div id="modSessionController" class="data-container">
+            <div aria-label="Main content" role="main" class="animationElement">
+                <div class="contentarea win-type-body">
+                    <div class="content-header body-content">
+                        <div class="modSession custlogo">
+                            <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg"
+                                 onclick="AppBar.handleEvent('click', 'clickHome', event)" />
+                        </div>
+                    </div>
+                    <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
+                </div>
+                <div class="error-message"
+                     data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
