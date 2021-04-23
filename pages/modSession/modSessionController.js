@@ -197,7 +197,7 @@
                     modToken = Application.query.UserToken;
                 }
                 AppData.setErrorMsg(that.binding);
-                var ret = new WinJS.Promise.as()/*.then(function () {
+                var ret = new WinJS.Promise.as().then(function () {
                     return AppData.call("PRC_BBBModeratorLink", {
                         pVeranstaltungID: 0,
                         pAlias: null,
@@ -206,15 +206,18 @@
                         if (json && json.d && json.d.results) {
                             that.binding.dataConference = json.d.results[0];
                             var modSessionLink = that.binding.dataConference.URL;
+                            if (modSessionLink) {
+                                window.open(modSessionLink);
+                            }
                             AppBar.scope.binding.showConference = true;
                         }
                         Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
                     }, function (error) {
                         Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
                     });
-                })*/.then(function () {
+                })/*.then(function () {
                     return that.updateFragment();
-                }).then(function () {
+                })*/.then(function () {
                     AppBar.notifyModified = true;
                     return WinJS.Promise.as();
                 });
