@@ -6,6 +6,13 @@
     <script type="text/javascript" src="eventService.js"></script>
     <script type="text/javascript" src="eventController.js"></script>
     <script type="text/javascript" src="event.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="lib/fontawesome/css/all.css" />
+    <script defer src="lib/fontawesome/js/all.js"></script> <!--load all styles -->
+    <link href="lib/fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="lib/fontawesome/css/brands.css" rel="stylesheet">
+    <link href="lib/fontawesome/css/solid.css" rel="stylesheet">
 </head>
 <body class="win-type-body" style="background-color: #ffffff;">
     <div class="event fragment">
@@ -51,7 +58,38 @@
                             <div class="content-header field_line share-block">
                                 <span class="win-h5" data-win-bind="textContent: dataText.ev_text_share_text"></span>
                                 <!--<span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>-->
-                            </div>
+                                <!-- Add font awesome icons -->
+
+                                
+                                    <div class="button_line">
+                                        <div class="circle facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)">
+                                            <i class="fab fa-facebook-square"></i>
+                                        </div>
+                                        <div class="circle linkedin">
+                                            <i class="fab fa-linkedin"></i>
+                                        </div>
+                                        <div class="circle xing">
+                                            <i class="fab fa-xing-square"></i>
+                                        </div>
+                                        <div class="circle google">
+                                            <i class="fab fa-google"></i>
+                                        </div>
+                                        <!--<a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
+    <div class="fa">
+        <a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
+    </div>
+    <div class="fa">
+        <a class="fab fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
+    </div>
+    <div class="fa">
+        <a class="fab fa-google"></a>
+    </div>
+    <div class="fa">
+        <a class="fab fa-xing"></a>
+    </div>-->
+                                        <!--</div>-->
+                                    </div>
+                        
                             <div class="win-h5 content-header win-type-caption">
                                 <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
                             </div>
@@ -66,7 +104,7 @@
                                         </div>-->
 
                         </div>
-
+</div>
                         <div class="section-2 win-hub-section">
                             <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
                             <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
