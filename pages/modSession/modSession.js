@@ -59,7 +59,7 @@
 
             var commandList = [];
 
-            this.controller = new Event.Controller(element, commandList);
+            this.controller = new ModSession.Controller(element, commandList);
             if (this.controller.eventHandlers) {
                 // general event listener for hardware back button, too!
                 this.controller.addRemovableEventListener(document, "backbutton", this.controller.eventHandlers.clickBack.bind(this.controller));
