@@ -64,6 +64,13 @@
         height: auto;
         margin-top: 20px;
     }
+.countdown-fragmenthost {
+    position: fixed;
+    float: right;
+    right: 0;
+    width: 30%;
+    margin-right: 5%;
+}
 
 .event .button_line { text-align: left;}
 .event #calenderButton {
@@ -98,6 +105,14 @@
     contentarea is less than 899px*/
         .view-size-medium .event .content { margin: 0 2%; }
         .view-size-medium .event .body-content { margin: 0 2%;}
+.view-size-medium .countdown-fragmenthost {
+    position: fixed;
+    float: right;
+    right: 0;
+    width: 40%;
+    margin-right: 10px;
+    top: 35%;
+}
     
 .view-size-medium .event .section-1 {
             grid-row: 1/span 1;
@@ -113,6 +128,14 @@
             grid-row: 3/span 1;
             grid-column: 1/span 6;
         }
+
+.view-size-small .countdown-fragmenthost {
+    position: fixed;
+    right: 0;
+    top: 60%;
+    width: 70%;
+    margin-right: 5px;
+}
 
 p {
     white-space: pre-wrap

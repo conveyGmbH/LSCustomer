@@ -7,6 +7,7 @@
         margin: 5px;
         width: 100%;
         font-family: "Barlow-Regular", sans-serif;
+        text-align: center;
     }
 
     .countdown .large_field .win-h4 { font-family: "Barlow Semi Condensed", sans-serif; line-height: 2;}
