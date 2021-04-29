@@ -227,6 +227,15 @@
 .view-size-medium .events .win-listview .win-gridlayout .win-container {
     width: 100%;
 }
+
+.view-size-medium .events .content-header-line > h1 {
+    font-size: 1.2em;
+}
+
+.view-size-medium .events .content-header-line > h2 {
+    font-size: 1em;
+}
+
 .view-size-medium .events .caption-field {
     width: 35%;
     margin: 0 10px 0 5px;
@@ -278,11 +287,20 @@
     height: 130px;
     margin-bottom: 5px;
 }
-.view-size-small .events .caption-field {
-    width: 100%;
-    margin: 0;
-    padding: 0;
+
+.view-size-small .events .content-header-line > h1 {
+    font-size: 22px;
 }
+
+.view-size-small .events .content-header-line > h2 {
+    font-size: 16px;
+}
+
+    .view-size-small .events .caption-field {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
 .view-size-small .events .caption-sort {
     width: 100%;
 }

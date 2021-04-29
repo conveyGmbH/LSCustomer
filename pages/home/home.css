@@ -278,6 +278,14 @@
     width: auto;
 }
 
+.view-size-medium .home .content-header-line > h1 {
+    font-size: 1.2em;
+}
+
+.view-size-medium .home .content-header-line > h2 {
+    font-size: 1em;
+}
+
 .view-size-medium .home .caption-field {
     width: 35%;
     margin: 0 10px 0 5px;
@@ -309,6 +317,9 @@
     use: .view-size-small
 */
 
+.view-size-small .home .content-header {
+    margin: 0 2%;
+}
 .view-size-small .home .hero-image-container {
     height: 1100px;
 }
@@ -328,9 +339,17 @@
     margin: 15px 0 0 20px;
 }
 
-.view-size-small .home .body-content {
-    margin: 10px 20px;
+.view-size-small .home .content-header-line > h1 {
+    font-size: 22px;
 }
+
+    .view-size-small .home .content-header-line > h2 {
+        font-size: 16px;
+    }
+
+    .view-size-small .home .body-content {
+        margin: 10px 20px;
+    }
 
 .view-size-small .home .content-header {
     height: 130px;

@@ -103,8 +103,11 @@
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px*/
-        .view-size-medium .event .content { margin: 0 2%; }
-        .view-size-medium .event .body-content { margin: 0 2%;}
+.view-size-medium .event .content { margin: 0 2%; grid-gap: 0;}
+.view-size-medium .event .body-content { margin: 0 2%;}
+.view-size-medium .event .win-h1 { font-size: 1.5em;}
+.view-size-medium .event .win-h2 { font-size: 1.2em;}
+.view-size-medium .event .win-h3, .view-size-medium .event .win-h5 { font-size: 1em;}
 .view-size-medium .countdown-fragmenthost {
     position: fixed;
     float: right;
@@ -128,6 +131,18 @@
             grid-row: 3/span 1;
             grid-column: 1/span 6;
         }
+
+
+/*margins/paddings for small size screens or orientation vertical
+    @media (max-width:499px)*/
+
+.view-size-small .event .win-h1 {
+    font-size: 1.2em;
+}
+
+.view-size-small .event .win-h2 {
+    font-size: 1em;
+}
 
 .view-size-small .countdown-fragmenthost {
     position: fixed;
