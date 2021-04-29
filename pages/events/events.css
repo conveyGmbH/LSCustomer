@@ -16,11 +16,11 @@
 }
 
 .events .hero-image-container {
-    display: block;
-    position: absolute;
+    display: none;
+    position: relative;
     left: 0;
     width: 100%;
-    height: 400px;
+    height: auto;
     padding: 0;
     overflow: hidden;
     z-index: -1;
@@ -199,6 +199,7 @@
 
 }
 
+/*
 .view-size-biggest .events .hero-image-container {
     height: 500px;
 }
@@ -206,6 +207,7 @@
 .view-size-bigger .events .hero-image-container {
     height: 600px;
 }
+*/
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
@@ -215,10 +217,11 @@
     use: .view-size-medium
 */
 
-.view-size-medium .events .hero-image-container {
+/*
+ .view-size-medium .events .hero-image-container {
     height: 700px;
 }
-
+*/
 .view-size-medium .events .hero-image-container > img {
     height: 100%;
     width: auto;
@@ -256,20 +259,22 @@
     use: .view-size-medium-small
 */
 
+/*
 .view-size-medium-small .events .hero-image-container {
     height: 900px;
 }
+*/
 
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
         }
     use: .view-size-small
 */
-
+/*
 .view-size-small .events .hero-image-container {
     height: 1100px;
 }
-
+*/
 .view-size-small .events .win-listview .win-gridlayout .win-container {
     width: 100%;
 }

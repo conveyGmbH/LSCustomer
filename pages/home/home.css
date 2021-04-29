@@ -17,10 +17,10 @@
 
 .home .hero-image-container {
     display: none;
-    position: absolute;
+    position: relative;
     left: 0;
     width: 100%;
-    height: 400px;
+    height: auto;
     padding: 0;
     overflow: visible;
     z-index: -2;
@@ -253,13 +253,13 @@
     margin: 20px 35px;
 }
 
-.view-size-biggest .home .hero-image-container {
+/*.view-size-biggest .home .hero-image-container {
     height: 500px;
 }
 
 .view-size-bigger .home .hero-image-container {
     height: 600px;
-}
+}*/
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
@@ -269,10 +269,10 @@
     use: .view-size-medium
 */
 
-.view-size-medium .home .hero-image-container {
+/*.view-size-medium .home .hero-image-container {
     height: 700px;
 }
-
+*/
 .view-size-medium .home .hero-image-container > img {
     height: 100%;
     width: auto;
@@ -307,10 +307,10 @@
     use: .view-size-medium-small
 */
 
-.view-size-medium-small .home .hero-image-container {
+/*.view-size-medium-small .home .hero-image-container {
     height: 900px;
 }
-
+*/
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
         }
@@ -320,10 +320,10 @@
 .view-size-small .home .content-header {
     margin: 0 2%;
 }
-.view-size-small .home .hero-image-container {
+/*.view-size-small .home .hero-image-container {
     height: 1100px;
 }
-
+*/
 .view-size-small .events .hero-image-container > img {
     height: 100%;
     width: auto;
