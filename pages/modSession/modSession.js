@@ -92,7 +92,7 @@
                     if (that.controller) {
                         var contentarea = element.querySelector(".contentarea");
                         var conferencehost = element.querySelector("#conferencehost");
-                        var logo = element.querySelector("#customerLogo");
+                        var logo = element.querySelector(".modSession");
                         if (contentarea) {
                             var width = contentarea.clientWidth;
                             var height = contentarea.clientHeight;
@@ -101,7 +101,7 @@
                             }
                             if (height !== that.prevHeight) {
                                 that.prevHeight = height;
-                                conferencehost.style.height = height - 271 + "px";  /*225*/
+                                conferencehost.style.height = height - 146 + "px";  /*225*/
                             }
                         }
                     }
