@@ -10,15 +10,17 @@
     padding: 10px 0;
 }
 
-.register #loginButton {
-     background-color: #ffffff;
+.register #loginButton, .register #re_registerEvent {
+    background-color: #ffffff;
     border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
     border-style: solid;
     border-width: 2px;
     border-color: #c2d63e;
     cursor: pointer;
 }
-    .register #loginButton > span {
+    .register #loginButton > span, .register #re_registerEvent > span {
         font-weight: 400;
         font-family: "Barlow Semi Condensed", sans-serif;
         color: #c2d63e;
