@@ -179,11 +179,11 @@
                         <div class="resend-editable-mail-container" data-win-bind="style.display: showResendEditableMail Binding.Converter.toDisplay">
                             <div class="field_line register-email" data-win-bind="style.display: registerMessage Binding.Converter.toDisplay">
                                 <span class="large_field"
-                                      data-win-bind="textContent: registerMessage"></span>
+                                      data-win-bind="textContent: dataText.on_text_reg_confirm"></span><!--registerMessage-->
                             </div>
 
                             <div class="field_line_full register_button">
-                                <span data-win-bind="textContent: registerStatus"></span>
+                                <span data-win-bind="textContent: dataText.on_text_reg_noconfirm"></span><!--registerStatus-->
                                 <!--<span id="statustext">Connecting to Facebook...</span>-->
                             </div>
 
@@ -205,13 +205,13 @@
                                              class="win-link"
                                              onclick="AppBar.handleEvent('click', 'clickResend', event)"
                                              data-win-bind="disabled: resendDisabled">
-                                            <span data-win-res="{textContent: 'register.resend'}"></span>
+                                            <span data-win-bind="textContent: dataText.on_text_button_resend_text'"></span>
                                         </div>
                                         <div id="editButton"
                                              class="win-link"
                                              onclick="AppBar.handleEvent('click', 'clickEdit', event)"
                                              data-win-bind="disabled: editDisabled">
-                                            <span data-win-res="{textContent: 'register.edit'}"></span>
+                                            <span data-win-bind="textContent: dataText.on_text_button_edit_text'"></span>
                                         </div>
 
 

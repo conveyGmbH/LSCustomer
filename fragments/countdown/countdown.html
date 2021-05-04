@@ -17,7 +17,7 @@
                         <div class="line-separator register_button"></div>
 
                         <div class="field_line_full" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplayNone">
-                            <span class="large_field" data-win-res="{textContent: 'countdown.waitMessage'}"></span>
+                            <span class="large_field" data-win-bind="textContent: dataText.on_text_wait_body"></span>
                         </div>
 
                         <div class="field_line_full" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplay">
