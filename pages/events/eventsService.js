@@ -37,7 +37,7 @@
                 restriction.MandantSerieID = Events._eventSeriesId;
                 var ret = Events._eventView.select(complete, error, restriction, {
                     ordered: true,
-                    orderAttribute: "Startdatum"
+                    orderAttribute: "Sortierung" 
                 });
                 Log.ret(Log.l.trace);
                 return ret;
