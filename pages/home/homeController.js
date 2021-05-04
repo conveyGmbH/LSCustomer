@@ -768,7 +768,11 @@
 
             // create grouped binding list in advance
             var groupIndex = function (item) {
-                return (item && item.SerieSortierung) || 0;
+                var index = 0;
+                if (item && typeof item.SerieSortierung === "string") {
+                    index = parseInt("1" + item.SerieSortierung);
+                }
+                return index;
             };
 
             var groupKey = function (item) {
