@@ -17,10 +17,10 @@
 }
 
 .home .hero-image-container {
-    display: none;
+    /*display: none;*/
     position: relative;
     left: 0;
-    width: 100%;
+    width: 25%;
     height: auto;
     padding: 0;
     overflow: visible;
@@ -54,7 +54,7 @@
 }
 
 .home .group-image-container {
-    display: none;
+    /*display: none;*/
     position: absolute;
     left: 18px;
     width: 100%;
