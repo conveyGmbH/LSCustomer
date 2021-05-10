@@ -52,7 +52,7 @@
         ready: function (element, options) {
             Log.call(Log.l.trace, pageName + ".");
             // TODO: Initialize the page here.
-            var contentarea = element.querySelector(".contentarea");
+            /*var contentarea = element.querySelector(".contentarea");
             if (contentarea && contentarea.style) {
                 if (Colors.isDarkTheme) {
                     var bkg = Colors.hex2rgb(Colors.tileBackgroundColor);
@@ -64,7 +64,7 @@
                 } else {
                     contentarea.style.backgroundColor = Colors.tileBackgroundColor;
                 }
-            }
+            }*/
             // insert body-content
             var contentHeader = element.querySelector(".content-header");
             if (contentHeader && contentHeader.parentElement) {
