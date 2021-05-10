@@ -81,9 +81,9 @@
                 };
                 if (eventId) {
                     restriction.VeranstaltungID = eventId;
-                    restriction.DokVerwendungID = 3;
                     // don't use serie-specific VA-Text for the time being:
-                    restriction.MandantSerieID = null;
+                } else {
+                    restriction.VeranstaltungID = "NULL";
                 }
                 var viewOptions = {
                     ordered: true,
@@ -112,10 +112,8 @@
                 };
                 if (eventId) {
                     restriction.VeranstaltungID = eventId;
-                    restriction.DokVerwendungID = 3;
-                    // don't use serie-specific VA-Text for the time being:
-                    restriction.MandantSerieID = null;
-                    //restriction.AddIndex = 1;
+                } else {
+                    restriction.VeranstaltungID = "NULL";
                 }
                 var viewOptions = {
                     ordered: true,

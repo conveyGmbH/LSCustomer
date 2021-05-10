@@ -84,15 +84,14 @@
                 }
                 if (eventId) {
                     restriction.VeranstaltungID = eventId;
-                    restriction.DokVerwendungID = 3;
-                    // don't use start-specific VA-Text for the time being:
-                    restriction.MandantStartID = null;
-                }
-                if (seriesId) {
-                    restriction.MandantSerieID = seriesId;
-                    restriction.DokVerwendungID = 2;
-                    // don't use start-specific VA-Text for the time being:
-                    restriction.MandantStartID = null;
+                } else {
+                    restriction.VeranstaltungID = "NULL";
+                    if (seriesId) {
+                        restriction.MandantSerieID = seriesId;
+                        restriction.DokVerwendungID = 2;
+                        // don't use start-specific VA-Text for the time being:
+                        restriction.MandantStartID = null;
+                    }
                 }
                 var viewOptions = {
                     ordered: true,
@@ -126,17 +125,14 @@
                 };
                 if (eventId) {
                     restriction.VeranstaltungID = eventId;
-                    restriction.DokVerwendungID = 3;
-                    // don't use start-specific VA-Text for the time being:
-                    restriction.MandantStartID = null;
-                    //restriction.AddIndex = 1;
-                }
-                if (seriesId) {
-                    restriction.MandantSerieID = seriesId;
-                    restriction.DokVerwendungID = 2;
-                    // don't use start-specific VA-Text for the time being:
-                    restriction.MandantStartID = null;
-                    //restriction.AddIndex = 1;
+                } else {
+                    restriction.VeranstaltungID = "NULL";
+                    if (seriesId) {
+                        restriction.MandantSerieID = seriesId;
+                        restriction.DokVerwendungID = 2;
+                        // don't use start-specific VA-Text for the time being:
+                        restriction.MandantStartID = null;
+                    }
                 }
                 var viewOptions = {
                     ordered: true,
