@@ -128,9 +128,9 @@
     letter-spacing: 1px;
 }
 
-.win-tooltip .win-tooltip-phantom span  { display: none; position: relative;}
-.win-tooltip .win-tooltip-phantom span:hover + .win-tooltip .win-tooltip-phantom span {
-        display: block;
+.win-tooltip .win-tooltip-phantom span  { visibility: hidden; position: relative;}
+.win-tooltip .win-tooltip-phantom span:hover {
+    visibility: visible; display: block;
     }
 
 .event .caption-field {top: 0; float: left; text-align: left; height: auto;}
