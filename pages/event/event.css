@@ -128,8 +128,8 @@
     letter-spacing: 1px;
 }
 
-.win-tooltip .win-tooltip-phantom { visibility: hidden; position: relative;}
-.win-tooltip .win-tooltip-phantom:hover + .win-tooltip .win-tooltip-phantom {
+.event .win-tooltip { visibility: hidden; position: relative;}
+.win-tooltip:hover + .win-tooltip {
     visibility: visible; display: block;
 }
 
