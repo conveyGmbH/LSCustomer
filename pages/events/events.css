@@ -17,7 +17,7 @@
 }
 
 .events .hero-image-container {
-    /*display: none;*/
+    display: none;
     position: relative;
     left: 0;
     width: 100%;
