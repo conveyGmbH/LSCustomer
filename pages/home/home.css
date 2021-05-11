@@ -3,24 +3,24 @@
 */
 .home {
     font-family: "Barlow-Regular";
-    margin: 0 10%;
+    margin: 0 5%;
 }
 
 .home .bold {
     font-weight: 600;
 }
 
-.home .list-header {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
+    .home .list-header {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
 
 .home .hero-image-container {
     display: block;
     position: relative;
     left: 0;
-    width: 25%;
+    width: 100%;
     height: auto;
     padding: 0;
     overflow: visible;
@@ -254,13 +254,21 @@
     margin: 20px 35px;
 }
 
-/*.view-size-biggest .home .hero-image-container {
+.view-size-biggest .home {
+    margin: 0 10%;
+}
+
+.view-size-biggest .home .hero-image-container {
     height: 500px;
+}
+
+.view-size-bigger .home {
+    margin: 0 10%;
 }
 
 .view-size-bigger .home .hero-image-container {
     height: 600px;
-}*/
+}
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
@@ -270,10 +278,10 @@
     use: .view-size-medium
 */
 
-/*.view-size-medium .home .hero-image-container {
+.view-size-medium .home .hero-image-container {
     height: 700px;
 }
-*/
+
 .view-size-medium .home .hero-image-container > img {
     height: 100%;
     width: auto;

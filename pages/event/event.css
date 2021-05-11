@@ -118,7 +118,7 @@
     border-color: #c2d63e;
     cursor: pointer;
 }
-.event #calenderButton > span {
+.event #calenderButton .win-type-title {
     font-weight: 400;
     font-family: "Barlow Semi Condensed", sans-serif;
     color: #c2d63e;
@@ -128,10 +128,10 @@
     letter-spacing: 1px;
 }
 
-.win-tooltip .win-tooltip-phantom span  { visibility: hidden; position: relative;}
-.win-tooltip .win-tooltip-phantom span:hover {
+.event .win-tooltip { visibility: hidden; position: relative;}
+.win-tooltip:hover + .win-tooltip {
     visibility: visible; display: block;
-    }
+}
 
 .event .caption-field {top: 0; float: left; text-align: left; height: auto;}
 .event .caption-block { width: auto; display: block; padding-right: 10px; margin-right: 10px;}
