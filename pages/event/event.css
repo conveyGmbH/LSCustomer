@@ -56,7 +56,7 @@
     .event .body-content {margin: 0 10%;}
 
     .event .speakerblock { width: 100%; display: inline-block; background-color: #ffffff /*#f3fbfc*/;}
-    .event .speaker-line { display: block; width: auto; margin: 5px;}
+    .event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
     .event .speaker-image-container {
         display: block;
         position: relative;
@@ -75,7 +75,7 @@
         -moz-border-radius: 50%;
         margin: 0 20%;
     }
-    .event .speaker-text { margin: 5px; display: block; position: relative; padding: 5px;}
+    .event .speaker-text { display: inline; position: relative; }
     .event .speaker-text > span { display: block; margin: 5px; padding: 5px;}
     .event .speaker-name .win-h3 {
         font-family: "Barlow Semi Condensed", sans-serif;
