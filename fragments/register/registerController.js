@@ -28,6 +28,7 @@
                         UserTZ: AppData._persistentStates.registerData.UserTZ || moment.tz.guess()
                 },
                 InitAnredeItem: { AnredeID: 0, TITLE: "" },
+                registerMessage: "",
                 showRegisterMail: true,
                 showResendEditableMail: false,
                 showReRegisterEventMail: false,
@@ -36,7 +37,8 @@
                 registerStatus: "", /*Not logged in to Facebook*/
                 loginDisabled: true,
                 dataText: AppBar.scope.binding.dataText,
-                dataMedien: AppBar.scope.binding.dataMedien
+                dataDoc: AppBar.scope.binding.dataDoc,
+                dataDocText: AppBar.scope.binding.dataDocText
             }, commandList]);
 
             var that = this;
@@ -44,7 +46,7 @@
             this.anrede = null;
             // select combo
             var initAnrede = fragmentElement.querySelector("#InitAnrede");
-            var register = fragmentElement.querySelector("#register");
+            //var register = fragmentElement.querySelector("#register");
             // now do anything...
             var listView = fragmentElement.querySelector("#anredeList.listview");
 

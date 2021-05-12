@@ -31,8 +31,8 @@
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
-                dataMedien: {},
-                dataMedienText: {}
+                dataDoc: {},
+                dataDocText: {}
             }, commandList]);
 
             var that = this;
@@ -91,9 +91,9 @@
             }
             this.setDataText = setDataText;
 
-            var setDataMedien = function(results) {
+            var setDataDoc = function(results) {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var newDataMedien = {};
+                var newDataDoc = {};
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
@@ -115,42 +115,42 @@
                         } else {
                             row.DocContentDOCCNT1 = "";
                         }
-                        newDataMedien[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
+                        newDataDoc[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
                     }
                 }
-                that.binding.dataMedien = newDataMedien;
+                that.binding.dataDoc = newDataDoc;
                 Log.ret(Log.l.trace);
             }
-            this.setDataMedien = setDataMedien;
+            this.setDataDoc = setDataDoc;
 
-            var setDataMedienText = function (results) {
+            var setDataDocText = function (results) {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var newDataMedienText = {};
+                var newDataDocText = {};
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
-                        newDataMedienText[row.LabelTitle] = row.Title ? row.Title : "";
+                        newDataDocText[row.LabelTitle] = row.Title ? row.Title : "";
                     }
                     if (row.LabelDescription) {
-                        newDataMedienText[row.LabelDescription] = row.Description ? row.Description : "";
+                        newDataDocText[row.LabelDescription] = row.Description ? row.Description : "";
                     }
                     if (row.LabelMainTitle) {
-                        newDataMedienText[row.LabelMainTitle] = row.MainTitle ? row.MainTitle : "";
+                        newDataDocText[row.LabelMainTitle] = row.MainTitle ? row.MainTitle : "";
                     }
                     if (row.LabelSubTitle) {
-                        newDataMedienText[row.LabelSubTitle] = row.SubTitle ? row.SubTitle : "";
+                        newDataDocText[row.LabelSubTitle] = row.SubTitle ? row.SubTitle : "";
                     }
                     if (row.LabelSummary) {
-                        newDataMedienText[row.LabelSummary] = row.Summary ? row.Summary : "";
+                        newDataDocText[row.LabelSummary] = row.Summary ? row.Summary : "";
                     }
                     if (row.LabelBody) {
-                        newDataMedienText[row.LabelBody] = row.Body ? row.Body : "";
+                        newDataDocText[row.LabelBody] = row.Body ? row.Body : "";
                     }
                 }
-                that.binding.dataMedienText = newDataMedienText;
+                that.binding.dataDocText = newDataDocText;
                 Log.ret(Log.l.trace);
             }
-            this.setDataMedienText = setDataMedienText;
+            this.setDataDocText = setDataDocText;
 
             // define handlers
             this.eventHandlers = {
@@ -276,7 +276,7 @@
                             Log.print(Log.l.trace, "labelView: success!");
                             if (json && json.d) {
                                 // now always edit!
-                                that.setDataMedien(json.d.results);
+                                that.setDataDoc(json.d.results);
                             }
                         }, function (errorResponse) {
                             AppData.setErrorMsg(that.binding, errorResponse);
@@ -293,7 +293,7 @@
                             Log.print(Log.l.trace, "labelView: success!");
                             if (json && json.d) {
                                 // now always edit!
-                                that.setDataMedienText(json.d.results);
+                                that.setDataDocText(json.d.results);
                             }
                         }, function (errorResponse) {
                             AppData.setErrorMsg(that.binding, errorResponse);

@@ -29,6 +29,9 @@
                 dataDoc: {
                     ov_doc: ""
                 },
+                dataDocText: {
+
+                },
                 count: 0
             }, commandList, false, Home.eventView, null, listView]);
 
@@ -205,6 +208,35 @@
             }
             this.setDataDoc = setDataDoc;
 
+            var setDataDocText = function (results) {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var newDataDocText = {};
+                for (var i = 0; i < results.length; i++) {
+                    var row = results[i];
+                    if (row.LabelTitle) {
+                        newDataDocText[row.LabelTitle] = row.Title ? row.Title : "";
+                    }
+                    if (row.LabelDescription) {
+                        newDataDocText[row.LabelDescription] = row.Description ? row.Description : "";
+                    }
+                    if (row.LabelMainTitle) {
+                        newDataDocText[row.LabelMainTitle] = row.MainTitle ? row.MainTitle : "";
+                    }
+                    if (row.LabelSubTitle) {
+                        newDataDocText[row.LabelSubTitle] = row.SubTitle ? row.SubTitle : "";
+                    }
+                    if (row.LabelSummary) {
+                        newDataDocText[row.LabelSummary] = row.Summary ? row.Summary : "";
+                    }
+                    if (row.LabelBody) {
+                        newDataDocText[row.LabelBody] = row.Body ? row.Body : "";
+                    }
+                }
+                that.binding.dataDocText = newDataDocText;
+                Log.ret(Log.l.trace);
+            }
+            this.setDataDocText = setDataDocText;
+
             var loadText = function () {
                 Log.call(Log.l.trace, "Home.Controller.");
                 AppData.setErrorMsg(that.binding);
@@ -226,6 +258,28 @@
                 return ret;
             }
             this.loadText = loadText;
+
+            var loadTextDoc = function () {
+                Log.call(Log.l.trace, "Events.Controller.");
+                AppData.setErrorMsg(that.binding);
+                var ret = new WinJS.Promise.as().then(function () {
+                    //load of format relation record data
+                    Log.print(Log.l.trace, "calling select textView...");
+                    return Home.textDocView.select(function (json) {
+                        AppData.setErrorMsg(that.binding);
+                        Log.print(Log.l.trace, "textView: success!");
+                        if (json && json.d) {
+                            // now always edit!
+                            that.setDataDocText(json.d.results);
+                        }
+                    }, function (errorResponse) {
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    });
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadTextDoc = loadTextDoc;
 
             var loadEventText = function (eventIds) {
                 var i, j, dataText;
@@ -807,6 +861,7 @@
                 that.loading = true;
                 that.loadText();
                 that.loadDoc();
+                that.loadTextDoc();
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");

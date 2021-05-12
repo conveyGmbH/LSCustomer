@@ -81,9 +81,9 @@
             }
             this.setDataText = setDataText;
 
-            var setDataMedien = function(results) {
+            var setDataDoc = function(results) {
                 Log.call(Log.l.trace, "ModSession.Controller.");
-                var newDataMedien = {};
+                var newDataDoc = {};
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
@@ -105,13 +105,13 @@
                         } else {
                             row.DocContentDOCCNT1 = "";
                         }
-                        newDataMedien[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
+                        newDataDoc[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
                     }
                 }
-                that.binding.dataMedien = newDataMedien;
+                that.binding.dataDoc = newDataDoc;
                 Log.ret(Log.l.trace);
             }
-            this.setDataMedien = setDataMedien;
+            this.setDataDoc = setDataDoc;
 
             // define handlers
             this.eventHandlers = {
