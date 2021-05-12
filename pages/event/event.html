@@ -143,11 +143,11 @@
                             
                             <div class="section-4 speakerblock">
                                 <div class="win-h5 content-header win-type-caption">
-                                    <span class="caption-field caption-block" data-win-bind=""></span>
+                                <span class="caption-field caption-block" data-win-bind="">Speaker</span>
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod1_name Binding.Converter.toDisplay">
                                     <div class="speaker-image-container">
-                                        <img data-win-bind="src: dataMedien.ev_doc_mod1; title: dataText.ev_doc_mod1_title; alt: dataText.ev_doc_mod1_alt" />
+                                    <img data-win-bind="src: dataMedien.ev_doc_mod1; alt: dataMedienText.ev_doc_mod1_alt; title: dataMedienText.ev_doc_mod1_title" />
                                     </div>
                                     <div class="speaker-text">
                                         <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod1_name"></span>
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod2_name Binding.Converter.toDisplay">
                                     <div class="speaker-image-container">
-                                        <img data-win-bind="src: dataMedien.ev_doc_mod2; title: dataText.ev_doc_mod2_title; alt: dataText.ev_doc_mod2_alt" />
+                                    <img data-win-bind="src: dataMedien.ev_doc_mod2; alt: dataMedienText.ev_doc_mod2_alt; title: dataMedienText.ev_doc_mod2_title" />
                                     </div>
                                     <div class="speaker-text">
                                         <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod2_name"></span>
@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod3_name Binding.Converter.toDisplay">
                                     <div class="speaker-image-container">
-                                        <img data-win-bind="src: dataMedien.ev_doc_mod3; title: dataText.ev_doc_mod3_title; alt: dataText.ev_doc_mod3_alt" />
+                                    <img data-win-bind="src: dataMedien.ev_doc_mod3; alt: dataMedienText.ev_doc_mod3_alt; title: dataMedienText.ev_doc_mod3_title" />
                                     </div>
                                     <div class="speaker-text">
                                         <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod3_name"></span>
@@ -180,9 +180,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                 </div>
                 <div class="error-message"
                      data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>

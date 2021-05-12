@@ -31,7 +31,8 @@
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
-                dataMedien: {}
+                dataMedien: {},
+                dataMedienText: {}
             }, commandList]);
 
             var that = this;
@@ -121,6 +122,35 @@
                 Log.ret(Log.l.trace);
             }
             this.setDataMedien = setDataMedien;
+
+            var setDataMedienText = function (results) {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var newDataMedienText = {};
+                for (var i = 0; i < results.length; i++) {
+                    var row = results[i];
+                    if (row.LabelTitle) {
+                        newDataMedienText[row.LabelTitle] = row.Title ? row.Title : "";
+                    }
+                    if (row.LabelDescription) {
+                        newDataMedienText[row.LabelDescription] = row.Description ? row.Description : "";
+                    }
+                    if (row.LabelMainTitle) {
+                        newDataMedienText[row.LabelMainTitle] = row.MainTitle ? row.MainTitle : "";
+                    }
+                    if (row.LabelSubTitle) {
+                        newDataMedienText[row.LabelSubTitle] = row.SubTitle ? row.SubTitle : "";
+                    }
+                    if (row.LabelSummary) {
+                        newDataMedienText[row.LabelSummary] = row.Summary ? row.Summary : "";
+                    }
+                    if (row.LabelBody) {
+                        newDataMedienText[row.LabelBody] = row.Body ? row.Body : "";
+                    }
+                }
+                that.binding.dataMedienText = newDataMedienText;
+                Log.ret(Log.l.trace);
+            }
+            this.setDataMedienText = setDataMedienText;
 
             // define handlers
             this.eventHandlers = {
@@ -247,6 +277,23 @@
                             if (json && json.d) {
                                 // now always edit!
                                 that.setDataMedien(json.d.results);
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select eventView...");
+                        return Event.medienTextView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "labelView: success!");
+                            if (json && json.d) {
+                                // now always edit!
+                                that.setDataMedienText(json.d.results);
                             }
                         }, function (errorResponse) {
                             AppData.setErrorMsg(that.binding, errorResponse);

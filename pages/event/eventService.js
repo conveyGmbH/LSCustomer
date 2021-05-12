@@ -18,6 +18,14 @@
                 return AppData.getFormatView("MandantDokument", 20635);
             }
         },
+        /**
+         * LangMandantDokument_20634
+         */
+        _medienTextView: {
+            get: function () {
+                return AppData.getFormatView("LangMandantDokument", 20634);
+            }
+        },
         textView: {
             select: function (complete, error, eventId) {
                 Log.call(Log.l.trace, "eventView.");
@@ -41,6 +49,22 @@
                     //LanguageSpecID: AppData.getLanguageId()
                 };
                 var ret = Event._medienView.select(complete, error, restriction, {
+                    ordered: true
+                    //orderAttribute: "Sortierung"
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+        },
+        medienTextView: {
+            select: function (complete, error, eventId) {
+                Log.call(Log.l.trace, "eventView.");
+                var restriction = {
+                    VeranstaltungID: eventId,
+                    DokVerwendungID: 3,
+                    LanguageSpecID: AppData.getLanguageId()
+                };
+                var ret = Event._medienTextView.select(complete, error, restriction, {
                     ordered: true
                     //orderAttribute: "Sortierung"
                 });
