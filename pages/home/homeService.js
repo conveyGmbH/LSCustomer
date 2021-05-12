@@ -84,6 +84,9 @@
                 }
                 if (eventId) {
                     restriction.VeranstaltungID = eventId;
+                    if (seriesId) {
+                        restriction.MandantSerieID = seriesId;
+                    }
                 } else {
                     restriction.VeranstaltungID = "NULL";
                     if (seriesId) {
@@ -125,6 +128,9 @@
                 };
                 if (eventId) {
                     restriction.VeranstaltungID = eventId;
+                    if (seriesId) {
+                        restriction.MandantSerieID = seriesId;
+                    }
                 } else {
                     restriction.VeranstaltungID = "NULL";
                     if (seriesId) {
