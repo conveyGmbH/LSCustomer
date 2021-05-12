@@ -175,9 +175,9 @@
 
             var setDataDoc = function (results, item, isGroup) {
                 Log.call(Log.l.trace, "Home.Controller.");
-                var newDataDoc = isGroup ? 
-                    getEmptyDefaultValue(Home.docView.defaultGroupValue) :
-                    getEmptyDefaultValue(Home.docView.defaultValue);
+                var newDataDoc = isGroup ?
+                    item ? copyByValue(item.dataGroupDoc) : getEmptyDefaultValue(Home.docView.defaultGroupValue) :
+                    item ? copyByValue(item.dataDoc) : getEmptyDefaultValue(Home.docView.defaultValue);
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle && row.DocFormat && row.DocContentDOCCNT1) {
@@ -484,7 +484,7 @@
             this.loadDoc = loadDoc;
 
             var loadEventDocs = function (eventIds, seriesId) {
-                var i, j;
+                var i, j, dataDoc;
                 var eventId = 0;
                 var curScopes = null, curScope = null;
                 Log.call(Log.l.trace, "Event.Controller.");
@@ -520,12 +520,18 @@
                                     if (eventId !== row.VeranstaltungID) {
                                         if (results.length > 0) {
                                             curScopes = that.allScopesFromRecordId(eventId, seriesId);
-                                            for (j = 0; j < curScopes.length; j++) {
+                                            for (j = 0, dataDoc = null; j < curScopes.length; j++) {
                                                 curScope = curScopes[j];
                                                 if (curScope && curScope.item && curScope.item.dataDoc) {
-                                                    that.setDataDoc(results, curScope.item);
-                                                    curScope.item.dataDoc.done = true;
-                                                    that.records.setAt(curScope.index, curScope.item);
+                                                    if (!dataDoc) {
+                                                        that.setDataDoc(results, curScope.item);
+                                                        curScope.item.dataDoc.done = true;
+                                                        that.records.setAt(curScope.index, curScope.item);
+                                                        dataDoc = curScope.item.dataDoc;
+                                                    } else {
+                                                        curScope.item.dataDoc = dataDoc;
+                                                        that.records.setAt(curScope.index, curScope.item);
+                                                    }
                                                 }
                                             }
                                             results = [];
@@ -537,12 +543,18 @@
                             }
                             if (results.length > 0) {
                                 curScopes = that.allScopesFromRecordId(eventId, seriesId);
-                                for (j = 0; j < curScopes.length; j++) {
+                                for (j = 0, dataDoc = null; j < curScopes.length; j++) {
                                     curScope = curScopes[j];
                                     if (curScope && curScope.item && curScope.item.dataDoc) {
-                                        that.setDataDoc(results, curScope.item);
-                                        curScope.item.dataDoc.done = true;
-                                        that.records.setAt(curScope.index, curScope.item);
+                                        if (!dataDoc) {
+                                            that.setDataDoc(results, curScope.item);
+                                            curScope.item.dataDoc.done = true;
+                                            that.records.setAt(curScope.index, curScope.item);
+                                            dataDoc = curScope.item.dataDoc;
+                                        } else {
+                                            curScope.item.dataDoc = dataDoc;
+                                            that.records.setAt(curScope.index, curScope.item);
+                                        }
                                     }
                                 }
                             }
