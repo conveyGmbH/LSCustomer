@@ -113,9 +113,11 @@
                 return ret;
             },
             defaultValue: {
-                ev_text_detail_name_h1: "",
-                ev_text_detail_time_h2: "",
-                ev_text_detail_summary: ""
+                ov_text_h1: "",
+                ov_text_free_body: "",
+                ov_text_event_name_h2: "",
+                ov_text_event_time_h3: "",
+                ov_text_event_summary: ""
             },
             defaultGroupValue: {
                 ser_text_name_h1: "",
@@ -157,14 +159,15 @@
                 return ret;
             },
             defaultValue: {
-                ev_doc: ""
+                ov_doc: "",
+                ov_doc_event: ""
             },
             defaultGroupValue: {
                 ser_doc: ""
             }
         },
         textDocView: {
-            select: function (complete, error, eventId) {
+            select: function (complete, error, eventId, seriesId) {
                 Log.call(Log.l.trace, "eventView.");
                 var restriction = {
                     MandantSerieID: Home._eventStartId,
@@ -174,9 +177,17 @@
                 };
                 if (eventId) {
                     restriction.VeranstaltungID = eventId;
-                    // don't use serie-specific VA-Text for the time being:
+                    if (seriesId) {
+                        restriction.MandantSerieID = seriesId;
+                    }
                 } else {
                     restriction.VeranstaltungID = "NULL";
+                    if (seriesId) {
+                        restriction.MandantSerieID = seriesId;
+                        restriction.DokVerwendungID = 2;
+                        // don't use start-specific VA-Text for the time being:
+                        restriction.MandantStartID = null;
+                    }
                 }
                 var viewOptions = {
                     ordered: true,
@@ -190,9 +201,17 @@
                 return ret;
             },
             defaultValue: {
-                ev_text_detail_name_h1: "",
-                ev_text_detail_time_h2: "",
-                ev_text_detail_summary: ""
+                ov_doc_alt: "",
+                ov_doc_title: "",
+                ov_doc_descr: "",
+                ov_doc_event_alt: "",
+                ov_doc_event_title: "",
+                ov_doc_event_descr: ""
+            },
+            defaultGroupValue: {
+                ser_doc_alt: "",
+                ser_doc_title: "",
+                ser_doc_descr: ""
             }
         }
     });

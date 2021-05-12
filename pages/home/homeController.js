@@ -29,6 +29,11 @@
                 dataDoc: {
                     ov_doc: ""
                 },
+                dataDocText: {
+                    ov_doc_alt: "",
+                    ov_doc_title: "",
+                    ov_doc_descr: ""
+                },
                 count: 0
             }, commandList, false, Home.eventView, null, listView]);
 
@@ -115,6 +120,10 @@
                 item.dataDoc.done = false;
                 item.dataGroupDoc = getEmptyDefaultValue(Home.docView.defaultGroupValue);
                 item.dataGroupDoc.done = false;
+                item.dataDocText = getEmptyDefaultValue(Home.textDocView.defaultValue);
+                item.dataDocText.done = false;
+                item.dataGroupDocText = getEmptyDefaultValue(Home.textDocView.defaultGroupValue);
+                item.dataGroupDocText.done = false;
                 Log.ret(Log.l.trace);
             }
             this.resultConverter = resultConverter;
@@ -122,8 +131,8 @@
             var setDataText = function (results, item, isGroup) {
                 Log.call(Log.l.trace, "Home.Controller.");
                 var newDataText = isGroup ?
-                    item ? copyByValue(item.dataGroupText) : getEmptyDefaultValue(Home.docView.defaultGroupValue) :
-                    item ? copyByValue(item.dataText) : getEmptyDefaultValue(Home.docView.defaultValue);
+                    item ? copyByValue(item.dataGroupText) : getEmptyDefaultValue(Home.textView.defaultGroupValue) :
+                    item ? copyByValue(item.dataText) : getEmptyDefaultValue(Home.textView.defaultValue);
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
@@ -214,6 +223,52 @@
             }
             this.setDataDoc = setDataDoc;
 
+            var setDataDocText = function (results, item, isGroup) {
+                Log.call(Log.l.trace, "Home.Controller.");
+                var newDataText = isGroup ?
+                    item ? copyByValue(item.dataGroupDocText) : getEmptyDefaultValue(Home.textDocView.defaultGroupValue) :
+                    item ? copyByValue(item.dataDocText) : getEmptyDefaultValue(Home.textDocView.defaultValue);
+                for (var i = 0; i < results.length; i++) {
+                    var row = results[i];
+                    if (row.LabelTitle) {
+                        newDataText[row.LabelTitle] = row.Title ? row.Title : 
+                            newDataText[row.LabelTitle] ? newDataText[row.LabelTitle] : "";
+                    }
+                    if (row.LabelDescription) {
+                        newDataText[row.LabelDescription] = row.Description ? row.Description : 
+                            newDataText[row.LabelDescription] ? newDataText[row.LabelDescription] : "" ;
+                    }
+                    if (row.LabelMainTitle) {
+                        newDataText[row.LabelMainTitle] = row.MainTitle ? row.MainTitle : 
+                            newDataText[row.LabelMainTitle] ? newDataText[row.LabelMainTitle] : "";
+                    }
+                    if (row.LabelSubTitle) {
+                        newDataText[row.LabelSubTitle] = row.SubTitle ? row.SubTitle : 
+                            newDataText[row.LabelSubTitle] ? newDataText[row.LabelSubTitle] : "";
+                    }
+                    if (row.LabelSummary) {
+                        newDataText[row.LabelSummary] = row.Summary ? row.Summary : 
+                            newDataText[row.LabelSummary] ? newDataText[row.LabelSummary] : "";
+                    }
+                    if (row.LabelBody) {
+                        newDataText[row.LabelBody] = row.Body ? row.Body : 
+                            newDataText[row.LabelBody] ? newDataText[row.LabelBody] : "";
+                    }
+                }
+                if (item) {
+                    if (isGroup) {
+                        item.dataGroupDocText = newDataText;
+                    } else {
+                        item.dataDocText = newDataText;
+                    }
+                } else {
+                    that.binding.dataDocText = newDataText;
+                }
+                Log.ret(Log.l.trace);
+            }
+            this.setDataDocText = setDataDocText;
+
+
             var loadText = function () {
                 Log.call(Log.l.trace, "Home.Controller.");
                 AppData.setErrorMsg(that.binding);
@@ -297,18 +352,18 @@
                             if (results.length > 0) {
                                 curScopes = that.allScopesFromRecordId(eventId, seriesId);
                                 for (j = 0, dataText = null; j < curScopes.length; j++) {
-                                                curScope = curScopes[j];
-                                                if (curScope && curScope.item && curScope.item.dataText) {
-                                                    if (!dataText) {
-                                                        that.setDataText(results, curScope.item);
-                                                        curScope.item.dataText.done = true;
-                                                        that.records.setAt(curScope.index, curScope.item);
-                                                        dataText = curScope.item;
-                                                    } else {
-                                                        curScope.item.dataText = dataText;
-                                                        that.records.setAt(curScope.index, curScope.item);
-                                                    }
-                                                }
+                                    curScope = curScopes[j];
+                                    if (curScope && curScope.item && curScope.item.dataText) {
+                                        if (!dataText) {
+                                            that.setDataText(results, curScope.item);
+                                            curScope.item.dataText.done = true;
+                                            that.records.setAt(curScope.index, curScope.item);
+                                            dataText = curScope.item;
+                                        } else {
+                                            curScope.item.dataText = dataText;
+                                            that.records.setAt(curScope.index, curScope.item);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -586,6 +641,198 @@
             }
             this.loadSeriesDocs = loadSeriesDocs;
 
+            var loadDocText = function () {
+                Log.call(Log.l.trace, "Events.Controller.");
+                AppData.setErrorMsg(that.binding);
+                var ret = new WinJS.Promise.as().then(function () {
+                    //load of format relation record data
+                    Log.print(Log.l.trace, "calling select textView...");
+                    return Home.textDocView.select(function (json) {
+                        AppData.setErrorMsg(that.binding);
+                        Log.print(Log.l.trace, "textView: success!");
+                        if (json && json.d) {
+                            // now always edit!
+                            that.setDataDocText(json.d.results);
+                        }
+                    }, function (errorResponse) {
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    });
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadDocText = loadDocText;
+
+            var loadEventDocText = function (eventIds, seriesId) {
+                var i, j, dataDocText;
+                var eventId = 0;
+                var curScopes, curScope = null;
+                Log.call(Log.l.trace, "Event.Controller.");
+                if (!eventIds || !eventIds.length) {
+                    Log.ret(Log.l.trace, "extra ignored");
+                    return WinJS.Promise.as();
+                }
+                AppData.setErrorMsg(that.binding);
+                var ret = new WinJS.Promise.as().then(function () {
+                    for (i = 0; i < eventIds.length; i++) {
+                        eventId = eventIds[i];
+                        curScopes = that.allScopesFromRecordId(eventId, seriesId);
+                        for (j = 0; j < curScopes.length; j++) {
+                            curScope = curScopes[j];
+                            if (curScope && curScope.item && curScope.item.dataDocText) {
+                                curScope.item.dataDocText.done = true;
+                                that.records.setAt(curScope.index, curScope.item);
+                            }
+                        }
+                    }
+                    //load of format relation record data
+                    Log.print(Log.l.trace, "calling select textView...");
+                    return Home.textDocView.select(function (json) {
+                        AppData.setErrorMsg(that.binding);
+                        Log.print(Log.l.trace, "textView: success!");
+                        if (json && json.d && json.d.results) {
+                            var results = [];
+                            eventId = 0;
+                            curScope = null;
+                            for (i = 0; i < json.d.results.length; i++) {
+                                var row = json.d.results[i];
+                                if (row && row.VeranstaltungID) {
+                                    if (eventId !== row.VeranstaltungID) {
+                                        if (results.length > 0) {
+                                            curScopes = that.allScopesFromRecordId(eventId, seriesId);
+                                            for (j = 0, dataDocText = null; j < curScopes.length; j++) {
+                                                curScope = curScopes[j];
+                                                if (curScope && curScope.item && curScope.item.dataDocText) {
+                                                    if (!dataDocText) {
+                                                        that.setDataDocText(results, curScope.item);
+                                                        curScope.item.dataDocText.done = true;
+                                                        that.records.setAt(curScope.index, curScope.item);
+                                                        dataDocText = curScope.item;
+                                                    } else {
+                                                        curScope.item.dataDocText = dataDocText;
+                                                        that.records.setAt(curScope.index, curScope.item);
+                                                    }
+                                                }
+                                            }
+                                            results = [];
+                                        }
+                                        eventId = row.VeranstaltungID;
+                                    }
+                                    results.push(row);
+                                }
+                            }
+                            if (results.length > 0) {
+                                curScopes = that.allScopesFromRecordId(eventId, seriesId);
+                                for (j = 0, dataDocText = null; j < curScopes.length; j++) {
+                                    curScope = curScopes[j];
+                                    if (curScope && curScope.item && curScope.item.dataDocText) {
+                                        if (!dataDocText) {
+                                            that.setDataDocText(results, curScope.item);
+                                            curScope.item.dataDocText.done = true;
+                                            that.records.setAt(curScope.index, curScope.item);
+                                            dataDocText = curScope.item;
+                                        } else {
+                                            curScope.item.dataDocText = dataDocText;
+                                            that.records.setAt(curScope.index, curScope.item);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }, function (errorResponse) {
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    }, eventIds, seriesId);
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadEventDocText = loadEventDocText;
+
+            var loadSeriesDocText = function (seriesIds) {
+                var i, j, dataGroupDocText;
+                var seriesId = 0;
+                var curScopes, curScope = null;
+                Log.call(Log.l.trace, "Event.Controller.");
+                if (!seriesIds || !seriesIds.length) {
+                    Log.ret(Log.l.trace, "extra ignored");
+                    return WinJS.Promise.as();
+                }
+                AppData.setErrorMsg(that.binding);
+                var ret = new WinJS.Promise.as().then(function () {
+                    for (i = 0; i < seriesIds.length; i++) {
+                        seriesId = seriesIds[i];
+                        curScopes = that.allScopesFromSeriesId(seriesId);
+                        for (j = 0; j < curScopes.length; j++) {
+                            curScope = curScopes[j];
+                            if (curScope && curScope.item && curScope.item.dataGroupDocText) {
+                                curScope.item.dataGroupDocText.done = true;
+                                that.records.setAt(curScope.index, curScope.item);
+                            }
+                        }
+                    }
+                    //load of format relation record data
+                    Log.print(Log.l.trace, "calling select textView...");
+                    return Home.textDocView.select(function (json) {
+                        AppData.setErrorMsg(that.binding);
+                        Log.print(Log.l.trace, "textView: success!");
+                        if (json && json.d && json.d.results) {
+                            var results = [];
+                            seriesId = 0;
+                            curScope = null;
+                            for (i = 0; i < json.d.results.length; i++) {
+                                var row = json.d.results[i];
+                                if (row && row.MandantSerieID) {
+                                    if (seriesId !== row.MandantSerieID) {
+                                        if (results.length > 0) {
+                                            curScopes = that.allScopesFromSeriesId(seriesId);
+                                            for (j = 0, dataGroupDocText = null; j < curScopes.length; j++) {
+                                                curScope = curScopes[j];
+                                                if (curScope && curScope.item && curScope.item.dataGroupDocText) {
+                                                    if (!dataGroupDocText) {
+                                                        that.setDataDocText(results, curScope.item, true);
+                                                        curScope.item.dataGroupDocText.done = true;
+                                                        that.records.setAt(curScope.index, curScope.item);
+                                                        dataGroupDocText = curScope.item.dataGroupDocText;
+                                                    } else {
+                                                        curScope.item.dataGroupDocText = dataGroupDocText;
+                                                        that.records.setAt(curScope.index, curScope.item);
+                                                    }
+                                                }
+                                            }
+                                            results = [];
+                                        }
+                                        seriesId = row.MandantSerieID;
+                                    }
+                                    results.push(row);
+                                }
+                            }
+                            if (results.length > 0) {
+                                curScopes = that.allScopesFromSeriesId(seriesId);
+                                for (j = 0, dataGroupDocText = null; j < curScopes.length; j++) {
+                                    curScope = curScopes[j];
+                                    if (curScope && curScope.item && curScope.item.dataGroupDocText) {
+                                        if (!dataGroupDocText) {
+                                            that.setDataDocText(results, curScope.item, true);
+                                            curScope.item.dataGroupDocText.done = true;
+                                            that.records.setAt(curScope.index, curScope.item);
+                                            dataGroupDocText = curScope.item.dataGroupDocText;
+                                        } else {
+                                            curScope.item.dataGroupDocText = dataGroupDocText;
+                                            that.records.setAt(curScope.index, curScope.item);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }, function (errorResponse) {
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    }, null, seriesIds);
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.loadSeriesDocText = loadSeriesDocText;
+
             // define handlers
             this.eventHandlers = {
                 clickBack: function (event) {
@@ -650,14 +897,17 @@
                             listView.winControl.maxTrailingPages = maxTrailingPages;
                         }
                         if (listView.winControl.loadingState === "itemsLoaded") {
+                            var preloadCount = 5;
                             var indexOfFirstVisible = listView.winControl.indexOfFirstVisible;
                             var indexOfLastVisible = listView.winControl.indexOfLastVisible;
                             var eventIdsText = [];
-                            var eventIdsDocs = [];
+                            var eventIdsDoc = [];
+                            var eventIdsDocText = [];
                             var seriesIdsText = [];
-                            var seriesIdsDocs = [];
-                            var seriesId = null;
-                            if (that.records) for (var i = indexOfFirstVisible; i <= indexOfLastVisible; i++) {
+                            var seriesIdsDoc = [];
+                            var seriesIdsDocText = [];
+                            var seriesId = 0;
+                            if (that.records) for (var i = indexOfFirstVisible; Math.min(i < indexOfLastVisible+preloadCount,that.records.length); i++) {
                                 var record = that.records.getAt(i);
                                 if (record && typeof record === "object") {
                                     if (seriesId !== record.MandantSerieID) {
@@ -665,11 +915,15 @@
                                             if (eventIdsText.length > 0) {
                                                 that.loadEventText(eventIdsText, seriesId);
                                             }
-                                            if (eventIdsDocs.length > 0) {
-                                                that.loadEventDocs(eventIdsDocs, seriesId);
+                                            if (eventIdsDoc.length > 0) {
+                                                that.loadEventDocs(eventIdsDoc, seriesId);
+                                            }
+                                            if (eventIdsDocText.length > 0) {
+                                                that.loadEventDocText(eventIdsDocText, seriesId);
                                             }
                                             eventIdsText = [];
-                                            eventIdsDocs = [];
+                                            eventIdsDoc = [];
+                                            eventIdsDocText = [];
                                         }
                                         seriesId = record.MandantSerieID;
                                     }
@@ -677,29 +931,42 @@
                                         eventIdsText.push(record.VeranstaltungVIEWID);
                                     }
                                     if (record.dataDoc && !record.dataDoc.done) {
-                                        eventIdsDocs.push(record.VeranstaltungVIEWID);
+                                        eventIdsDoc.push(record.VeranstaltungVIEWID);
+                                    }
+                                    if (record.dataDocText && !record.dataDocText.done) {
+                                        eventIdsDocText.push(record.VeranstaltungVIEWID);
                                     }
                                     if (record.dataGroupText && !record.dataGroupText.done &&
-                                        seriesIdsText.indexOf(record.MandantSerieID) < 0) {
-                                        seriesIdsText.push(record.MandantSerieID);
+                                        seriesIdsText.indexOf(seriesId) < 0) {
+                                        seriesIdsText.push(seriesId);
                                     }
                                     if (record.dataGroupDoc && !record.dataGroupDoc.done &&
-                                        seriesIdsDocs.indexOf(record.MandantSerieID) < 0) {
-                                        seriesIdsDocs.push(record.MandantSerieID);
+                                        seriesIdsDoc.indexOf(seriesId) < 0) {
+                                        seriesIdsDoc.push(seriesId);
+                                    }
+                                    if (record.dataGroupDocText && !record.dataGroupDocText.done &&
+                                        seriesIdsDocText.indexOf(seriesId) < 0) {
+                                        seriesIdsDocText.push(seriesId);
                                     }
                                 }
                             }
                             if (eventIdsText.length > 0) {
                                 that.loadEventText(eventIdsText, seriesId);
                             }
-                            if (eventIdsDocs.length > 0) {
-                                that.loadEventDocs(eventIdsDocs, seriesId);
+                            if (eventIdsDoc.length > 0) {
+                                that.loadEventDocs(eventIdsDoc, seriesId);
+                            }
+                            if (eventIdsDocText.length > 0) {
+                                that.loadEventDocText(eventIdsDocText, seriesId);
                             }
                             if (seriesIdsText.length > 0) {
                                 that.loadSeriesText(seriesIdsText);
                             }
-                            if (seriesIdsDocs.length > 0) {
-                                that.loadSeriesDocs(seriesIdsDocs);
+                            if (seriesIdsDoc.length > 0) {
+                                that.loadSeriesDocs(seriesIdsDoc);
+                            }
+                            if (seriesIdsDocText.length > 0) {
+                                that.loadSeriesDocText(seriesIdsDocText);
                             }
                         } else if (listView.winControl.loadingState === "complete") {
                             if (that.loading) {
@@ -830,6 +1097,7 @@
                 that.loading = true;
                 that.loadText();
                 that.loadDoc();
+                that.loadDocText();
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
