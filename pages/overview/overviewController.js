@@ -23,7 +23,7 @@
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
-                dataMedien: {},
+                dataDoc: {},
                 count: 0
             }, commandList, false, Overview.eventView, null, listView]);
 
@@ -36,7 +36,7 @@
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
-                dataMedien: {}
+                dataDoc: {}
             }, commandList]);*/
 
             var that = this;
@@ -116,9 +116,9 @@
             }
             this.setDataText = setDataText;
 
-            var setDataMedien = function (results) {
+            var setDataDoc = function (results) {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var newDataMedien = {};
+                var newDataDoc = {};
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
@@ -140,13 +140,13 @@
                         } else {
                             row.DocContentDOCCNT1 = "";
                         }
-                        newDataMedien[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
+                        newDataDoc[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
                     }
                 }
-                that.binding.dataMedien = newDataMedien;
+                that.binding.dataDoc = newDataDoc;
                 Log.ret(Log.l.trace);
             }
-            this.setDataMedien = setDataMedien;
+            this.setDataDoc = setDataDoc;
 
             // define handlers
             this.eventHandlers = {
@@ -326,7 +326,7 @@
                             Log.print(Log.l.trace, "labelView: success!");
                             if (json && json.d) {
                                 // now always edit!
-                                that.setDataMedien(json.d.results);
+                                that.setDataDoc(json.d.results);
                             }
                         }, function (errorResponse) {
                             AppData.setErrorMsg(that.binding, errorResponse);

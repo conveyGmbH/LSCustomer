@@ -24,6 +24,11 @@
                 return AppData.getFormatView("MandantDokument", 20635);
             }
         },
+        _textDocView: {
+            get: function () {
+                return AppData.getFormatView("LangMandantDokument", 20634);
+            }
+        },
         _eventStartId: null
     });
 
@@ -156,6 +161,38 @@
             },
             defaultGroupValue: {
                 ser_doc: ""
+            }
+        },
+        textDocView: {
+            select: function (complete, error, eventId) {
+                Log.call(Log.l.trace, "eventView.");
+                var restriction = {
+                    MandantSerieID: Home._eventStartId,
+                    DokVerwendungID: 1,
+                    LanguageSpecID: AppData.getLanguageId(),
+                    NameLanguageID: 1033
+                };
+                if (eventId) {
+                    restriction.VeranstaltungID = eventId;
+                    // don't use serie-specific VA-Text for the time being:
+                } else {
+                    restriction.VeranstaltungID = "NULL";
+                }
+                var viewOptions = {
+                    ordered: true,
+                    orderAttribute: "Sortierung"
+                };
+                if (eventId && eventId.length) {
+                    viewOptions.orderAttribute = "VeranstaltungID";
+                }
+                var ret = Home._textDocView.select(complete, error, restriction, viewOptions);
+                Log.ret(Log.l.trace);
+                return ret;
+            },
+            defaultValue: {
+                ev_text_detail_name_h1: "",
+                ev_text_detail_time_h2: "",
+                ev_text_detail_summary: ""
             }
         }
     });

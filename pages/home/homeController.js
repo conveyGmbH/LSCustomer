@@ -671,7 +671,7 @@
                                             eventIdsText = [];
                                             eventIdsDocs = [];
                                         }
-                                        seriesId = record.MandantSerieID
+                                        seriesId = record.MandantSerieID;
                                     }
                                     if (record.dataText && !record.dataText.done) {
                                         eventIdsText.push(record.VeranstaltungVIEWID);
