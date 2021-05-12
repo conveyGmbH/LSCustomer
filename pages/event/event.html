@@ -13,6 +13,7 @@
     <link href="lib/fontawesome/css/fontawesome.css" rel="stylesheet">
     <link href="lib/fontawesome/css/brands.css" rel="stylesheet">
     <link href="lib/fontawesome/css/solid.css" rel="stylesheet">
+    <title data-win-bind="textContent: dataText.ev_text_detail_title"></title>
 </head>
 <body class="win-type-body" style="background-color: #ffffff;">
     <div class="event fragment">
@@ -42,7 +43,7 @@
                                     <!--onclick="AppBar.handleEvent('click', 'clickOk', event)">-->
 
                                     <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
-                                    <span class="win-tooltip win-tooltip-phantom" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+                                    <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
                                 </button>
                                 
                             </div>
@@ -58,7 +59,7 @@
                                 <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
                                 <div class="content-header field_line share-block">
                                     <span class="win-h5" data-win-bind="textContent: dataText.ev_text_share_text"></span>
-                                    <!--<span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>-->
+                                    <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
                                     <!-- Add font awesome icons -->
 
 
@@ -146,7 +147,7 @@
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod1_name Binding.Converter.toDisplay">
                                     <div class="speaker-image-container">
-                                        <img data-win-bind="src: dataMedien.ev_doc_mod1" />
+                                        <img data-win-bind="src: dataMedien.ev_doc_mod1; title: dataText.ev_doc_mod1_title; alt: dataText.ev_doc_mod1_alt" />
                                     </div>
                                     <div class="speaker-text">
                                         <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod1_name"></span>
@@ -157,7 +158,7 @@
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod2_name Binding.Converter.toDisplay">
                                     <div class="speaker-image-container">
-                                        <img data-win-bind="src: dataMedien.ev_doc_mod2" />
+                                        <img data-win-bind="src: dataMedien.ev_doc_mod2; title: dataText.ev_doc_mod2_title; alt: dataText.ev_doc_mod2_alt" />
                                     </div>
                                     <div class="speaker-text">
                                         <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod2_name"></span>
@@ -168,7 +169,7 @@
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod3_name Binding.Converter.toDisplay">
                                     <div class="speaker-image-container">
-                                        <img data-win-bind="src: dataMedien.ev_doc_mod3" />
+                                        <img data-win-bind="src: dataMedien.ev_doc_mod3; title: dataText.ev_doc_mod3_title; alt: dataText.ev_doc_mod3_alt" />
                                     </div>
                                     <div class="speaker-text">
                                         <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod3_name"></span>

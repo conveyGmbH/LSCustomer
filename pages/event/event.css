@@ -52,10 +52,10 @@
     .event .section-1 { grid-column: 1/span 4;}
     .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
     .event .section-3 { grid-area: 2/1/span 3/span 4;}
-    .event .section-4 { grid-area: 5/1/span 2/span 4;}
+    .event .section-4 { grid-area: 5/1/span 3/span 4;}
     .event .body-content {margin: 0 10%;}
 
-    .event .speakerblock { width: 100%; display: inline-block; background-color: #ffffff /*#f3fbfc*/;}
+    .event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px; background-color: #ffffff /*#f3fbfc*/;}
     .event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
     .event .speaker-image-container {
         display: block;
@@ -128,9 +128,44 @@
     letter-spacing: 1px;
 }
 
-.event .win-tooltip { visibility: hidden; position: relative;}
-.win-tooltip:hover + .win-tooltip {
-    visibility: visible; display: block;
+.event #calenderButton .win-tooltip {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    left: 15%;
+    top: 40%;
+    color: #fff;
+    background: #2a2f3d;
+    border-color: #2a2f3d;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    }
+.event #calenderButton:hover .win-tooltip {
+    visibility: visible; opacity: 1;
+}
+
+.event .share-block .win-tooltip {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    left: 10%;
+    top: 75%;
+    color: #fff;
+    background: #2a2f3d;
+    border-color: #2a2f3d;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+}
+.event .share-block:hover .win-tooltip {
+    visibility: visible; opacity: 1;
 }
 
 .event .caption-field {top: 0; float: left; text-align: left; height: auto;}
