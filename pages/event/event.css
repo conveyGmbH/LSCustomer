@@ -2,7 +2,18 @@
     margins/paddings for all screens
 
 */
-.event { background-color: #f3fbfc;}
+
+.event {
+    background-color: #f3fbfc;
+}
+.event .color_container2{ background-color: #ffffff; position: absolute; z-index: -2; height: 160%; width: 100%;}
+    .event .color_container4 {
+        background-color: #ffffff;
+        position: absolute;
+        z-index: -2;
+        height: 50px;
+        width: 100%;
+    }
 .event .win-h1 {
     text-transform: uppercase;
 }
@@ -27,7 +38,6 @@
     .event .content-header-line { margin-top: 10px;}
     .event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
 .event .content {
-    margin: 0 10%;
     display: grid;
     grid-template-columns:20% 15% 15% 15% 15% 20%;
     grid-gap: 10px;
@@ -55,7 +65,7 @@
     .event .section-4 { grid-area: 5/1/span 3/span 4;}
     .event .body-content {margin: 0 10%;}
 
-    .event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px; background-color: #ffffff /*#f3fbfc*/;}
+    .event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px;}
     .event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
     .event .speaker-image-container {
         display: block;
@@ -173,14 +183,14 @@
 
     
 /*margin/padding for large size screens or orientation landscape more than 1440px*/
-    .view-size-biggest .event .content { margin: 0 20%;}
+
     .view-size-biggest .event .body-content {
         margin: 0 20%;
     }
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px*/
-.view-size-medium .event .content { margin: 0 2%; grid-gap: 0;}
+.view-size-medium .event .content { grid-gap: 0;}
 .view-size-medium .event .body-content { margin: 0 2%;}
 .view-size-medium .event .win-h1 { font-size: 1.5em;}
 .view-size-medium .event .win-h2 { font-size: 1.2em;}
@@ -193,7 +203,8 @@
     margin-right: 10px;
     top: 15%;
 }
-    
+
+.view-size-medium .event .color_container2 { height: 300%;}
 .view-size-medium .event .section-1 {
             grid-row: 1/span 1;
             grid-column: 1/span 6;
@@ -233,7 +244,9 @@
     width: 70%;
     margin-right: 5px;
 }
-
+.view-size-small .event .color_container2 {
+    height: 270%;
+}
 p {
     white-space: pre-wrap
 }
