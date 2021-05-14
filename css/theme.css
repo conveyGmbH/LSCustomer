@@ -155,14 +155,14 @@
 
 /********Start Fonts for LiveBridge*********/
 @font-face {
-    font-family: "Barlow Semi Condensed", sans-serif;
+    font-family: "Barlow";
     src: url(../fonts/BarlowSemiCondensed-SemiBold.ttf);
     font-style: normal;
     font-weight: 600;
 }
 
 @font-face {
-    font-family: "Barlow-Regular", sans-serif;
+    font-family: "Barlow";
     src: url(../fonts/Barlow-Regular.ttf);
     font-style: normal;
     font-weight: 400;

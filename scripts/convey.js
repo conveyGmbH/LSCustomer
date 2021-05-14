@@ -246,7 +246,7 @@
     function checkForDeviceReady() {
         window.setTimeout(function () {
             if (!document.body || typeof WinJS !== "object" || !Application.pageframe) {
-                checkForDeviceReady(rootId);
+                checkForDeviceReady();
             } else {
                 if (document.dispatchEvent) {
                     document.dispatchEvent(event);
