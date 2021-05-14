@@ -3,13 +3,16 @@
 */
 .events {
     font-family: "Barlow-Regular";
-    /*
-    margin: 0 10%;
-    */
 }
 
 .events .bold {
     font-weight: 600;
+}
+
+.events .list-header {
+    width: auto;
+    margin: 0 10%;
+    padding: 0;
 }
 
 .events .content-header {
@@ -117,6 +120,10 @@
     display: inline-block;
     margin: 0 10px 0 0;
     padding: 0 5px;
+}
+
+.events .win-itemscontainer {
+    margin: 0 0 0 10%;
 }
 
 .events .win-listview .win-gridlayout .win-container {
@@ -227,6 +234,8 @@
     height: 700px;
 }
 */
+.view-size-medium .events .list-header { margin: 0 2%;}
+.view-size-medium .events .win-itemscontainer { margin: 0 0 0 2%;}
 .view-size-medium .events .hero-image-container > img {
     height: 100%;
     width: auto;
