@@ -3,7 +3,9 @@
 */
 .home {
     font-family: "Barlow-Regular";
+    /*
     margin: 0 5%;
+    */
 }
 
 .home .bold {
@@ -257,7 +259,9 @@
 }
 
 .view-size-biggest .home {
+    /*
     margin: 0 10%;
+    */
 }
 
 .view-size-biggest .home .hero-image-container {
@@ -265,7 +269,9 @@
 }
 
 .view-size-bigger .home {
+    /*
     margin: 0 10%;
+    */
 }
 
 .view-size-bigger .home .hero-image-container {
