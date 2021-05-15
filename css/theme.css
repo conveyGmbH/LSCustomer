@@ -155,15 +155,26 @@
 
 /********Start Fonts for LiveBridge*********/
 @font-face {
+    font-family: "Symbols";
+    src: url(../lib/WinJS/fonts/Symbols.woff2) format("woff2"), 
+         url(../lib/WinJS/fonts/Symbols.woff) format("woff"), 
+         url(../lib/WinJS/fonts/Symbols.ttf) format("truetype");
+}
+
+@font-face {
     font-family: "Barlow";
-    src: url(../fonts/BarlowSemiCondensed-SemiBold.ttf);
+    src: url(../fonts/BarlowSemiCondensed-SemiBold.woff2) format("woff2"), 
+         url(../fonts/BarlowSemiCondensed-SemiBold.woff) format("woff"), 
+         url(../fonts/BarlowSemiCondensed-SemiBold.ttf) format("truetype");
     font-style: normal;
     font-weight: 600;
 }
 
 @font-face {
     font-family: "Barlow";
-    src: url(../fonts/Barlow-Regular.ttf);
+    src: url(../fonts/Barlow-Regular.woff2) format("woff2"), 
+         url(../fonts/Barlow-Regular.woff) format("woff"), 
+         url(../fonts/Barlow-Regular.ttf) format("truetype");
     font-style: normal;
     font-weight: 400;
 }
