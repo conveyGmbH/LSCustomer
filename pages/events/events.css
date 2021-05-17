@@ -1,8 +1,11 @@
 /*
     margins/paddings for all screens
 */
-.events {
-    font-family: "Barlow-Regular";
+.events .win-type-title,
+.events .win-type-subtitle,
+.events .win-type-body,
+.events .win-type-caption {
+    font-family: "Barlow";
 }
 
 .events .bold {
@@ -43,13 +46,11 @@
 }
 
 .events .content-header-line > h1 {
-    font-family: "Barlow Semi Condensed", sans-serif;
     text-transform: uppercase;
     display: inline-block;
     width: calc(100% - 52px);
 }
 .events .content-header-line > h2 {
-    font-family: "Barlow Semi Condensed", sans-serif;
     display: inline-block;
     width: calc(100% - 52px);
 }
@@ -60,7 +61,6 @@
 
 .events .event-title {
     color: #2a2f3d;
-    font-family: "Barlow Semi Condensed", sans-serif;
     font-weight: 600;
     line-height: 1.167;
     padding: 5px 0 0 0;

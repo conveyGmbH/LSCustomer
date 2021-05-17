@@ -2,6 +2,21 @@
     margins/paddings for all screens
 
 */
+.event .win-type-title,
+.event .win-type-subtitle,
+.event .win-type-body,
+.event .win-h1,
+.event .win-h2,
+.event .win-h3,
+.event .win-h5,
+.event .win-tooltip,
+.event .win-type-caption,
+.event .caption-field,
+.event .content-header{
+    font-family: "Barlow";
+}
+
+.event .bold { font-weight: 600;}
 
 .event {
     background-color: #f3fbfc;
@@ -19,15 +34,12 @@
 }
 
 .event .caption-field {
-    font-family: "Barlow Semi Condensed", sans-serif;
     color: #07b9cb;
 }
 .event p {
-    font-family: "Barlow-Regular", sans-serif;
     color: #2a2f3d;
 }
 .event .content-header {
-    font-family: "Barlow Semi Condensed", sans-serif;
     color: #2a2f3d;
     height: auto;
     width: auto;
@@ -35,8 +47,8 @@
     padding: 5px 0;
     
 }
-    .event .content-header-line { margin-top: 10px;}
-    .event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
+.event .content-header-line { margin-top: 10px;}
+.event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
 .event .content {
     display: grid;
     grid-template-columns:20% 15% 15% 15% 15% 20%;
@@ -88,13 +100,11 @@
     .event .speaker-text { display: inline; position: relative; }
     .event .speaker-text > span { display: block; margin: 5px; padding: 5px;}
     .event .speaker-name .win-h3 {
-        font-family: "Barlow Semi Condensed", sans-serif;
         color: #2a2f3d;
         font-size: 18px;
         
     }
 .event .speaker-title .win-type-caption {
-    font-family: "Barlow-Regular", sans-serif;
     color: #2a2f3d;
     font-size: 16px;
     font-weight: 600;
@@ -130,7 +140,6 @@
 }
 .event #calenderButton .win-type-title {
     font-weight: 400;
-    font-family: "Barlow Semi Condensed", sans-serif;
     color: #c2d63e;
     font-size: 16px;
     font-weight: 700;
@@ -184,7 +193,7 @@
     
 /*margin/padding for large size screens or orientation landscape more than 1440px*/
 
-    .view-size-biggest .event .body-content {
+.view-size-biggest .event .body-content {
         margin: 0 20%;
     }
 

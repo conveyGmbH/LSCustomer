@@ -1,16 +1,23 @@
-﻿#countdownController .doc-container {
+﻿.countdown .win-type-body,
+.countdown .field_line_full,
+.countdown .win-h3,
+.countdown .win-h4,
+.countdown .win-h5 {
+    font-family: "Barlow";
+}
+
+#countdownController .doc-container {
         float: left;
     }
 
-    .countdown .confirm-container { margin: 0;}
-    .countdown .field_line_full {
+.countdown .confirm-container { margin: 0;}
+.countdown .field_line_full {
         margin: 5px;
         width: 100%;
-        font-family: "Barlow-Regular", sans-serif;
         text-align: center;
     }
 
-    .countdown .large_field .win-h4 { font-family: "Barlow Semi Condensed", sans-serif; line-height: 2;}
+.countdown .large_field .win-h4 { line-height: 2;}
 
 .countdown .countdown-line {
     margin: 0;
@@ -92,7 +99,6 @@
 }
     .countdown .win-h3 {
         display: block;
-        font-family: "Barlow Semi Condensed", sans-serif;
         color: #2a2f3d;
         font-size: 1.5em;
         font-weight: 700;
@@ -101,7 +107,6 @@
     }
 .countdown .win-h5 {
     display: block;
-    font-family: "Barlow Semi Condensed", sans-serif;
     color: #2a2f3d;
     font-size: 12px;
     padding: 2px;
@@ -110,10 +115,10 @@
 
 
 /*for max-width 1024px*/
-        .view-size-bigger .countdown .count-block { width: 15%; margin: 5px;}
-    .view-size-bigger .countdown .win-h3 { font-size: 2em; margin: 10px;}
-    .view-size-bigger .countdown .win-h5 { font-size: 0.75em; padding: 0;}
-    .view-size-bigger .countdown .count { padding-top: 25px;}
+.view-size-bigger .countdown .count-block { width: 15%; margin: 5px;}
+.view-size-bigger .countdown .win-h3 { font-size: 2em; margin: 10px;}
+.view-size-bigger .countdown .win-h5 { font-size: 0.75em; padding: 0;}
+.view-size-bigger .countdown .count { padding-top: 25px;}
 
 
 /*for max-width 786px*/

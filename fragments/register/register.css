@@ -1,11 +1,20 @@
-﻿.register .fragment{ font-family: "Barlow-Regular", sans-serif;}
+﻿.register .win-type-body,
+.register .win-type-title,
+.register .win-link,
+.register .win-container,
+.register .win-textbox,
+.register .field_line,
+.register .field_line_odd,
+.register .field_line_full,
+.register .label,
+.register .checkbox {
+    font-family: "Barlow";
+}
 
 .register .label {
-    font-family: "Barlow-Regular", sans-serif;
     color: #2a2f3d;
 }
 .register .checkbox {
-    font-family: "Barlow-Regular", sans-serif;
     color: #2a2f3d;
     padding: 10px 0;
 }
@@ -22,7 +31,6 @@
 }
     .register #loginButton > span, .register #re_registerEvent > span {
         font-weight: 400;
-        font-family: "Barlow Semi Condensed", sans-serif;
         color: #c2d63e;
         font-size: 16px;
         font-weight: 700;
@@ -30,8 +38,6 @@
         line-height: 20px;
         letter-spacing: 1px;
     }
-
-
 
 #registerController .doc-container {
     float: left;
@@ -66,7 +72,6 @@
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 }
 .register .field_line { margin-top: 4px; border: none;}
-/*.register .label { color: #1f4061; dislay: block; top: 0;}*/
 .register .input_field { float: left; width: 100%; margin-top: 8px; background-color: #ffffff; border: 1px solid #d2d2d2; border-radius: 5px;}
 
 .register .field_line_full { width: calc(100% - 38px);}
@@ -74,7 +79,6 @@
 .win-listview .win-gridlayout .win-container { margin: 10px 5px 0 0; }
 .register .win-container {
     margin-left: 0;
-    font-family: "Barlow-Regular", sans-serif;
 }
 .register .win-container-odd { margin-left: 10px;}
 
@@ -178,7 +182,7 @@ input[disabled] {
     padding-left: 20px;
 
 */
-    background-color: #f3fbfc;
+    background-color: transparent;
     padding-left: 0;
     padding-right: 0;
     padding-top: 2px;
