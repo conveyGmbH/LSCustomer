@@ -14,12 +14,14 @@
 
 .home .win-listview .win-vertical .win-gridlayout.win-headerpositiontop.win-surface {
     -ms-grid-rows: auto !important;
+    margin-left: calc(50% - 530px);
+    width: 1030px;
 }
 
 .home .win-listview .win-vertical .win-footercontainer, 
 .home .win-listview .win-vertical .win-headercontainer {
-    margin-left: 20px;
-    width: calc(100% - 50px);
+    margin-left: calc(50% - 530px);
+    width: 1030px;
     padding: 15px;
 }
 
@@ -45,7 +47,7 @@
 }
 
 .home .win-listview .win-groupheader {
-    width: calc(100% - 50px);
+    width: 1030px;
     padding: 15px;
 }
 
@@ -138,52 +140,17 @@
 }
 
 
-.home .caption-sort {
-    display: inline-block;
-    position: relative;
-    text-align: right;
-    width: 50%;
-}
-
-.home .caption-search, .home .caption-filter {
-    width: 40%;
-    border: solid 0.2px #4e3ab0;
-    display: inline-block;
-    margin: 5px;
-    padding: 5px;
-    text-align: left;
-}
-
-.home label {
-    font-size: 16px;
-}
-
-.home .caption-field {
-    top: 20px;
-    left: 8px;
-    text-align: left;
-    width: 48%;
-    display: inline-block;
-    margin: 0 10px 0 0;
-    padding: 0 5px;
-}
-
 .home .win-listview .win-gridlayout .win-container {
     margin: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
     z-index: 2;
     height: 220px;
-    /*width: 30%;*/
 }
 
-    .home .event-item {
-        width: 240px;
-        height: 220px;
-        background-color: #ffffff;
-    }
-
-.home .win-container {
-    height: 200px;
+.home .event-item {
+    width: 240px;
+    height: 220px;
+    background-color: #ffffff;
 }
 
 .home .event-image-container {
@@ -232,37 +199,30 @@
     min-height: 40px;
 }
 
-.home .tile-button-color {
-    background-color: transparent;
-    border-color: transparent;
-}
 
-.home .footer {
-    background-color: #fff;
-    bottom: 0;
-    left: 0;
-    position: relative;
-    width: 100%;
-    height: 100px;
-    margin: 0;
-    padding: 0;
-    border-top: solid 0.2px #4e3ab0;
+.view-size-bigger .home .win-listview .win-vertical .win-footercontainer,
+.view-size-bigger .home .win-listview .win-vertical .win-headercontainer {
+    margin-left: 20px;
+    width: calc(100% - 70px);
+    padding: 15px;
 }
-
-.home .footer-content {
-    margin: 20px 35px;
+.view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-headerpositiontop.win-surface {
+    margin-left: 20px;
+}
+.view-size-bigger .home .win-listview .win-groupheader {
+    width: calc(100% - 70px);
+    padding: 15px;
+}
+.view-size-bigger .home .win-listview .win-gridlayout .win-container {
+    margin: 15px;
 }
 /*
-.view-size-biggest .home .hero-image-container {
-    height: 500px;
-}
 
 .view-size-bigger .home .hero-image-container {
     height: 600px;
 }
 
 */
-
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
@@ -288,9 +248,6 @@
     height: 700px;
 }
 */
-
-
-
 .view-size-medium .home .hero-image-container > img {
     height: 100%;
     width: auto;
@@ -302,21 +259,6 @@
 
 .view-size-medium .home .content-header-line > h2 {
     font-size: 1em;
-}
-
-.view-size-medium .home .caption-field {
-    width: 35%;
-    margin: 0 10px 0 5px;
-}
-
-.view-size-medium .home .caption-sort {
-    width: 60%;
-}
-
-.home .content-header-line > h1,
-.home .content-header-line > h2,
-.home .content-header-line > body {
-    width: calc(100% - 36px);
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -341,15 +283,34 @@
 /*.view-size-small .home .hero-image-container {
     height: 1100px;
 }
-*/
 .view-size-small .events .hero-image-container > img {
     height: 100%;
     width: auto;
 }
 
-.view-size-small .home .win-listview .win-gridlayout .win-container {
+.view-size-small .home .win-listview .win-vertical .win-gridlayout.win-headerpositiontop.win-surface {
+    margin-left: 0;
     width: 100%;
 }
+.view-size-small .home .win-listview .win-groupheader {
+    width: 100%;
+    padding: 0;
+}
+
+.view-size-small .home .win-listview .win-vertical .win-footercontainer,
+.view-size-small .home .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.view-size-small .home .win-listview .win-gridlayout .win-container {
+    width: 100%;
+    margin: 15px 0;
+}
+.view-size-small .home .event-item {
+}
+*/
 
 .view-size-small .home .custlogo {
     width: 50%;
@@ -361,34 +322,7 @@
     font-size: 22px;
 }
 
-    .view-size-small .home .content-header-line > h2 {
-        font-size: 16px;
-    }
-
-    .view-size-small .home .body-content {
-        margin: 10px 20px;
-    }
-
-.view-size-small .home .content-header {
-    height: 130px;
-    margin-bottom: 5px;
+.view-size-small .home .content-header-line > h2 {
+    font-size: 16px;
 }
-
-.view-size-small .home .caption-field {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.view-size-small .home .caption-sort {
-    width: 100%;
-}
-
-.view-size-small .home .caption-filter, .home .caption-search {
-    width: 100%;
-    height: auto;
-    margin: 5px 0;
-    padding: 5px 0;
-}
-
 
