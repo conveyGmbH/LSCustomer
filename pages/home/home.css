@@ -12,6 +12,8 @@
     font-weight: 600;
 }
 
+/* width of content should be limited to 1100px (view-size-bigger), so add margin on wide screens */
+
 .home .win-listview .win-vertical .win-gridlayout.win-headerpositiontop.win-surface {
     -ms-grid-rows: auto !important;
     margin-left: calc(50% - 530px);
@@ -199,6 +201,13 @@
     min-height: 40px;
 }
 
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1099px 
+    @media (max-width:1099px) {
+    }
+
+    use: .view-size-bigger
+*/
 
 .view-size-bigger .home .win-listview .win-vertical .win-footercontainer,
 .view-size-bigger .home .win-listview .win-vertical .win-headercontainer {
@@ -216,37 +225,13 @@
 .view-size-bigger .home .win-listview .win-gridlayout .win-container {
     margin: 15px;
 }
-/*
 
-.view-size-bigger .home .hero-image-container {
-    height: 600px;
-}
-
-*/
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
     }
 
     use: .view-size-medium
-.view-size-medium .home .list-header {
-    margin: 0 2%;
-}
-
-.view-size-medium .home .group-header .content-header {
-    margin: 0 2%;
-}
-
-.view-size-medium .home .win-itemscontainer {
-    margin: 0 2%;
-}
-
-.view-size-medium .home .group-image-container {
-    margin: 0 2%;
-}
-.view-size-medium .home .hero-image-container {
-    height: 700px;
-}
 */
 .view-size-medium .home .hero-image-container > img {
     height: 100%;
@@ -267,17 +252,11 @@
     use: .view-size-medium-small
 */
 
-/*.view-size-medium-small .home .hero-image-container {
-    height: 900px;
-}
-*/
+
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
         }
     use: .view-size-small
-.view-size-small .home .content-header {
-    margin: 0 2%;
-}
 */
 
 /*.view-size-small .home .hero-image-container {
