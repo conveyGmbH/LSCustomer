@@ -478,7 +478,7 @@
                                     winGroupHeaderContainer[i].style.width = listView.clientWidth.toString() + "px";
                                     var winGroupHeader = winGroupHeaderContainer[i].querySelector(".group-header");
                                     if (winGroupHeader) {
-                                        var heightGroupHeader = winGroupHeader.clientHeight + 20;
+                                        var heightGroupHeader = winGroupHeader.clientHeight + 40;
                                         winGroupHeaderContainer[i].style.height = heightGroupHeader.toString() + "px";
                                     }
                                 }
