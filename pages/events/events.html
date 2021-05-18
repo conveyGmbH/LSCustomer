@@ -22,13 +22,13 @@
                                 <img data-win-bind="src: dataDoc.ser_doc; alt: dataDocText.ser_doc_alt; title: dataDocText.ser_doc_title; longdesc: dataDocText.ser_doc_descr" />
                             </div>
                             <div class="content-header">
-                                <div class="content-header-line win-type-title">
+                                <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ser_text_name_h1 Binding.Converter.toDisplay">
                                     <h1 data-win-bind="textContent: dataText.ser_text_name_h1"></h1>
                                 </div>
-                                <div class="content-header-line win-type-subtitle">
+                                <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ser_text_subtitle_h2 Binding.Converter.toDisplay">
                                     <h2 data-win-bind="textContent: dataText.ser_text_subtitle_h2"></h2>
                                 </div>
-                                <div class="content-header-line win-type-body">
+                                <div class="content-header-line win-type-body" data-win-bind="style.display: dataText.ser_text_free_body Binding.Converter.toDisplay">
                                     <span data-win-bind="textContent: dataText.ser_text_free_body"></span>
                                 </div>
                             </div>

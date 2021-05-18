@@ -297,6 +297,12 @@
     }).then(function () {
         return include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js");
     }).then(function() {
+        return include("lib/ics/ics.js");
+    }).then(function () {
+        return include("lib/FileSaver/scripts/FileSaver.js");
+    }).then(function () {
+        return include("lib/blob/Blob.js");
+    }).then(function () {
         createRootElement("#ls-customer-host");
         return include("scripts/index.js");
     }).then(function() {

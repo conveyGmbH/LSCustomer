@@ -192,6 +192,17 @@
                         // called asynchronously on error
                     });
                     Log.ret(Log.l.trace);
+                },
+                clickCreateIcs: function (event) {
+                    Log.call(Log.l.trace, "Event.Controller.");
+                    var cal = ics();
+                    cal.addEvent("Das ist ein deutsches Event", that.binding.dataEvent.LiveTyp, 'LEER', '17.05.2021', '17.05.2021');
+                    console.log(that.binding.dataEvent);
+                    var calendar_ics = cal.calendar();
+                    window.open("data:text/calendar;charset=utf8," + escape(calendar_ics));
+                    //cal.download();
+                    /*cal.addEvent('Demo Event', 'This is thirty minute event', 'Nome, AK', '8/7/2013 5:30 pm', '8/7/2013 6:00 pm');*/
+                    Log.ret(Log.l.trace);
                 }
             };
 

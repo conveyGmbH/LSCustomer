@@ -45,7 +45,7 @@
                                  data-win-control="WinJS.Binding.Template" style="display: none">
                                 <div class="list-anredecon-item">
                                     <label class="list-anredecon-field">
-                                        <input type="checkbox" class="win-checkbox" value="1" data-win-bind="textContent: INITAnredeID" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" /> <!--onclick  -->
+                                        <input type="checkbox" class="anrede win-checkbox" value="1" data-win-bind="textContent: INITAnredeID" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" /> <!--onclick  -->
                                         <span class="checkbox" data-win-bind="textContent: TITLE"></span>
                                     </label>
                                 </div>
@@ -106,7 +106,7 @@
                             
                             <div class="field_line">
                                 <label class="list-privacy-field">
-                                    <input type="checkbox" class="win-checkbox" value="1" data-win-bind="textContent: INITAnredeID" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" /> <!--onclick  -->
+                                    <input type="checkbox" class="win-checkbox" value="1" data-win-bind="checked: privacyPolicyFlag" /> <!--onclick  -->
                                     <span class="checkbox" data-win-bind="textContent: dataText.ev_text_privacy_body"></span>
                                 </label>
                             </div>

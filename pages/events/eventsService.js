@@ -102,9 +102,9 @@
                 return ret;
             },
             defaultValue: {
-                ev_text_detail_name_h1: "",
-                ev_text_detail_time_h2: "",
-                ev_text_detail_summary: ""
+                ser_text_event_time_h3: "",
+                ser_text_event_name_h2: "",
+                ser_text_event_summary: ""
             }
         },
         docView: {
@@ -132,7 +132,7 @@
                 return ret;
             },
             defaultValue: {
-                ev_doc: ""
+                ser_doc_event: ""
             }
         },
         textDocView: {
@@ -144,12 +144,13 @@
                     LanguageSpecID: AppData.getLanguageId(),
                     NameLanguageID: 1033
                 };
-                if (eventId) {
+                /*if (eventId) {
                     restriction.VeranstaltungID = eventId;
                     // don't use serie-specific VA-Text for the time being:
                 } else {
                     restriction.VeranstaltungID = "NULL";
-                }
+                }*/
+                restriction.VeranstaltungID = "NOT NULL";
                 var viewOptions = {
                     ordered: true,
                     orderAttribute: "Sortierung"
@@ -162,9 +163,9 @@
                 return ret;
             },
             defaultValue: {
-                ev_text_detail_name_h1: "",
-                ev_text_detail_time_h2: "",
-                ev_text_detail_summary: ""
+                ser_doc_event_alt: "",
+                ser_doc_event_title: "",
+                ser_doc_event_descr: ""
             }
         }
     });

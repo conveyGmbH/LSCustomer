@@ -25,6 +25,7 @@
                     Vorname: "",
                     Position: "",
                         Firmenname: "",
+                    privacyPolicyFlag: false,
                         UserTZ: AppData._persistentStates.registerData.UserTZ || moment.tz.guess()
                 },
                 InitAnredeItem: { AnredeID: 0, TITLE: "" },
@@ -301,7 +302,7 @@
                 },
                 selectOnlyThis: function (event) {
                     //loope über liste
-                    var fields = fragmentElement.querySelectorAll('input[type="checkbox"]');
+                    var fields = fragmentElement.querySelectorAll(".anrede");
                     if (event.currentTarget.checked) {
                     for (var i = 0; i < fields.length; i++) {
                         fields[i].checked = false;
