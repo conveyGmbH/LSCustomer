@@ -386,7 +386,7 @@
                     return WinJS.Promise.as();
                 }
                 AppData.setErrorMsg(that.binding);
-                var ret = new WinJS.Promise.as().then(function () {
+                var ret = new WinJS.Promise.as().then(function() {
                     for (i = 0; i < seriesIds.length; i++) {
                         seriesId = seriesIds[i];
                         curScopes = that.allScopesFromSeriesId(seriesId);
@@ -400,7 +400,7 @@
                     }
                     //load of format relation record data
                     Log.print(Log.l.trace, "calling select textView...");
-                    return Home.textView.select(function (json) {
+                    return Home.textView.select(function(json) {
                         AppData.setErrorMsg(that.binding);
                         Log.print(Log.l.trace, "textView: success!");
                         if (json && json.d && json.d.results) {
@@ -452,14 +452,55 @@
                                 }
                             }
                         }
-                    }, function (errorResponse) {
+                    },
+                    function(errorResponse) {
                         AppData.setErrorMsg(that.binding, errorResponse);
-                    }, null, seriesIds);
+                    },
+                    null,
+                    seriesIds);
+                }).then(function() {
+                    return WinJS.Promise.timeout(0);
+                }).then(function() {
+                    return that.adjustGroupHeaderSize();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
             }
             this.loadSeriesText = loadSeriesText;
+
+            var adjustGroupHeaderSize = function() {
+                Log.call(Log.l.trace, "Home.Controller.");
+                var winGroupHeaderContainer, i;
+                var ret = new WinJS.Promise.as().then(function() {
+                    if (listView) {
+                        winGroupHeaderContainer = listView.querySelectorAll(".win-groupheadercontainer");
+                        if (winGroupHeaderContainer) {
+                            for (i = 0; i < winGroupHeaderContainer.length; i++) {
+                                if (winGroupHeaderContainer[i] && winGroupHeaderContainer[i].style) {
+                                    winGroupHeaderContainer[i].style.width = listView.clientWidth.toString() + "px";
+                                }
+                            }
+                        }
+                    }
+                    return WinJS.Promise.timeout(0);
+                }).then(function() {
+                    winGroupHeaderContainer = listView.querySelectorAll(".win-groupheadercontainer");
+                    if (winGroupHeaderContainer) {
+                        for (i = 0; i < winGroupHeaderContainer.length; i++) {
+                            if (winGroupHeaderContainer[i]) {
+                                var winGroupHeader = winGroupHeaderContainer[i].querySelector(".group-header");
+                                if (winGroupHeader) {
+                                    var heightGroupHeader = winGroupHeader.clientHeight + 20;
+                                    winGroupHeaderContainer[i].style.height = heightGroupHeader.toString() + "px";
+                                }
+                            }
+                        }
+                    }
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            that.adjustGroupHeaderSize = adjustGroupHeaderSize;
 
             var loadDoc = function () {
                 Log.call(Log.l.trace, "Home.Controller.");
@@ -981,6 +1022,7 @@
                                 that.loadSeriesDocText(seriesIdsDocText);
                             }
                         } else if (listView.winControl.loadingState === "complete") {
+                            that.adjustGroupHeaderSize();
                             if (that.loading) {
                                 progress = listView.querySelector(".list-footer .progress");
                                 counter = listView.querySelector(".list-footer .counter");

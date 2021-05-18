@@ -130,16 +130,28 @@
                             var width = contentArea.clientWidth;
                             var height = contentArea.clientHeight;
                             if (width !== that.prevWidth || height !== that.prevHeight) {
-                                var listView = element.querySelector("#home.listview");
+                                var winGroupHeaderContainer, i;
+                                var listView = element.querySelector("#events.listview");
                                 if (listView && listView.style) {
-                                    if (listView.clientWidth !== width) {
+                                    var doAdjustHeight = false;
+                                    if (listView.prevWidth !== width) {
+                                        doAdjustHeight = true;
                                         listView.style.width = width + "px";
+                                        winGroupHeaderContainer = listView.querySelectorAll(".win-groupheadercontainer");
+                                        if (winGroupHeaderContainer) {
+                                            for (i = 0; i < winGroupHeaderContainer.length; i++) {
+                                                if (winGroupHeaderContainer[i] && winGroupHeaderContainer[i].style) {
+                                                    winGroupHeaderContainer[i].style.width = width.toString() + "px";
+                                                }
+                                            }
+                                        }
                                         that.prevWidth = width;
                                     }
-                                    /*if (listView.clientHeight !== height) {
+                                    if (listView.prevHeight !== height) {
+                                        doAdjustHeight = true;
                                         listView.style.height = height + "px";
                                         that.prevHeight = height;
-                                    }*/
+                                    }
                                 }
                             }
                         }

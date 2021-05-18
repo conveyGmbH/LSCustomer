@@ -13,9 +13,11 @@
 }
 
 .home .list-header {
+    /*
     margin: 0 10%;
+    */
     padding: 0;
-    width: auto;
+    height: auto;
 }
 
 .home .hero-image-container {
@@ -44,27 +46,26 @@
 }
 .home .win-itemscontainer {
     z-index: 1;
+    /*
     margin: 0 10%;
+    */
 }
 
+.home .win-groupheader {
+    width: 100%;
+}
 
 .home .group-header {
     margin: 0;
     padding: 0;
-    width: 50%;
-    z-index: -1;
-    display: inline;
+    width: 100%;
 }
 
 .home .group-image-container {
-    display: block;
-    position: absolute;
     left: 18px;
     width: auto;
-    margin: 0 10%;
     padding: 0;
     overflow: visible;
-    z-index: -2;
 }
 
 .home .group-image-container > img {
@@ -75,37 +76,30 @@
 .home .content-header {
     color: #2a2f3d;
     height: auto;
-    display: inline-block;
+    width: 100%;
 }
 
 .home .group-header .content-header {
     color: #07b9cb;
-    width: auto;
+    width: 100%;
     height: auto;
-    margin: 0 10%;
-    display: inline-block;
     cursor: pointer;
 }
 
 .home .content-header-line {
-    display: inline;
     height: auto;
+    width: 100%;
 }
 
 .home .content-header-line > h1 {
     text-transform: uppercase;
-    display: inline-block;
-    width: calc(100% - 52px);
 }
 
 .home .content-header-line > h2 {
-    display: inline-block;
-    width: calc(100% - 52px);
 }
 
 .home .content-header-line > span {
-    display: inline-block;
-    width: calc(100% - 52px);
+
 }
 
 .home .event-title {
@@ -258,7 +252,7 @@
 .home .footer-content {
     margin: 20px 35px;
 }
-
+/*
 .view-size-biggest .home .hero-image-container {
     height: 500px;
 }
@@ -267,14 +261,14 @@
     height: 600px;
 }
 
+*/
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
     }
 
     use: .view-size-medium
-*/
-
 .view-size-medium .home .list-header {
     margin: 0 2%;
 }
@@ -290,10 +284,12 @@
 .view-size-medium .home .group-image-container {
     margin: 0 2%;
 }
-
 .view-size-medium .home .hero-image-container {
     height: 700px;
 }
+*/
+
+
 
 .view-size-medium .home .hero-image-container > img {
     height: 100%;
@@ -337,11 +333,11 @@
         @media (max-width:499px) {
         }
     use: .view-size-small
-*/
-
 .view-size-small .home .content-header {
     margin: 0 2%;
 }
+*/
+
 /*.view-size-small .home .hero-image-container {
     height: 1100px;
 }
