@@ -12,6 +12,10 @@
     font-weight: 600;
 }
 
+.home .win-listview .win-vertical .win-gridlayout.win-headerpositiontop.win-surface {
+    -ms-grid-rows: auto !important;
+}
+
 .home .list-header {
     /*
     margin: 0 10%;
