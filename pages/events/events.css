@@ -225,18 +225,18 @@
 
 .view-size-medium .events .win-listview .win-vertical .win-footercontainer,
 .view-size-medium .events .win-listview .win-vertical .win-headercontainer {
-    margin-left: 10px;
+    margin-left: 5px;
     width: calc(100% - 30px);
-    padding: 5px;
+    padding: 10px;
 }
 
 .view-size-medium .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 10px;
-    width: calc(100% - 10px) !important;
+    margin-left: 5px;
+    width: calc(100% - 5px) !important;
 }
 
 .view-size-medium .events .win-listview .win-gridlayout .win-container {
-    margin: 5px;
+    margin: 10px;
 }
 
 
@@ -245,7 +245,7 @@
 }
 
 .view-size-medium .events .event-item {
-    width: 325px;
+    width: 315px;
 }
 
 .view-size-medium .events .hero-image-container > img {
@@ -272,7 +272,7 @@
 }
 
 .view-size-medium-small .events .event-item {
-    width: 235px;
+    width: 215px;
 }
 
 
@@ -282,11 +282,29 @@
     use: .view-size-small
 */
 
-.view-size-small .events .win-listview .win-vertical .win-itemscontainer {
-    width: 460px !important;
+.view-size-small .events .win-listview .win-vertical .win-footercontainer,
+.view-size-small .events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0;
+    width: calc(100% - 10px);
+    padding: 10px;
 }
+
+.view-size-small .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 0;
+    width: 100% !important;
+}
+
+.view-size-small .events .win-listview .win-vertical .win-itemscontainer {
+    width: 325px !important;
+}
+
+.view-size-small .events .win-listview .win-gridlayout .win-container {
+    margin: 30px 10px;
+    box-shadow: none;
+}
+
 .view-size-small .events .event-item {
-    width: 325px;
+    width: 500px;
 }
 
 
