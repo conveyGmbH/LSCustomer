@@ -43,7 +43,7 @@
     color: #2a2f3d;
     height: auto;
     width: auto;
-    margin: 25px 0;
+    margin: 25px 0 0 0;
     padding: 5px 0;
     
 }
@@ -63,6 +63,7 @@
     margin: 15px 0;
     padding: 5px;
     text-align: center;
+    background-color: #fff;
 }
 
 .event .logo {
@@ -83,7 +84,7 @@
         display: block;
         position: relative;
         float: left;
-        width: 35%;
+        width: 20%;
         height: auto;
         margin: 5px;
         padding: 5px;
@@ -95,10 +96,10 @@
         border-radius: 50%;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
-        margin: 0 20%;
+        margin: 0 auto;
     }
-    .event .speaker-text { display: inline; position: relative; }
-    .event .speaker-text > span { display: block; margin: 5px; padding: 5px;}
+    .event .speaker-text { display: block; position: relative; width: 75%; float: right; }
+    .event .speaker-text > span { display: block; margin: 0; padding: 5px;}
     .event .speaker-name .win-h3 {
         color: #2a2f3d;
         font-size: 18px;
@@ -147,12 +148,15 @@
     letter-spacing: 1px;
 }
 
-.event #calenderButton .win-tooltip {
+.event .button-element .win-tooltip {
     visibility: hidden;
-    position: absolute;
+    position: relative;
+    display: inline-block;
     opacity: 0;
-    left: 15%;
-    top: 45%;
+    width: 200px;
+    text-align: center;
+    top: 0;
+    left: 0;
     color: #fff;
     background: #2a2f3d;
     border-color: #2a2f3d;
@@ -163,16 +167,19 @@
     -webkit-transition: opacity 0.3s;
     -moz-transition: opacity 0.3s;
     }
-.event #calenderButton:hover .win-tooltip {
+.event .button-element:hover .win-tooltip {
     visibility: visible; opacity: 1;
 }
 
 .event .share-block .win-tooltip {
     visibility: hidden;
-    position: absolute;
+    position: relative;
+    display: inline-block;
     opacity: 0;
-    left: 12%;
-    top: 120%;
+    width: 200px;
+    text-align: center;
+    left: 24%;
+    top: 100%;
     color: #fff;
     background: #2a2f3d;
     border-color: #2a2f3d;
@@ -197,6 +204,16 @@
         margin: 0 20%;
     }
 
+.view-size-biggest .event .share-block .win-tooltip {
+    left: 18%;
+    top: 70%;
+}
+
+.view-size-bigger .event .share-block .win-tooltip {
+    left: 24%;
+    top: 100%;
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px*/
 .view-size-medium .event .content { grid-gap: 0;}
@@ -211,6 +228,11 @@
     width: 40%;
     margin-right: 10px;
     top: 15%;
+}
+
+.view-size-medium .event .share-block .win-tooltip {
+    left: 25%;
+    top: 150%;
 }
 
 .view-size-medium .event .color_container2 { height: 300%;}
@@ -255,6 +277,29 @@
 }
 .view-size-small .event .color_container2 {
     height: 270%;
+}
+
+.view-size-small .event .share-block .win-tooltip {
+    left: 50%;
+    top: 105%;
+}
+
+.view-size-small .event .speaker-image-container {
+    float: left;
+    width: 100%;
+}
+
+.view-size-small .event .speaker-image-container > img {
+    margin: 0;
+}
+
+.view-size-small .event .speaker-text {
+    width: 100%;
+}
+
+.view-size-small .event .speaker-text > span {
+    float: left;
+    width: auto;
 }
 p {
     white-space: pre-wrap

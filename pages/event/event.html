@@ -41,26 +41,24 @@
                             <div class="button-element">
                                 <button id="calenderButton" class="text-lightcolor win-button" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
                                     <!--onclick="AppBar.handleEvent('click', 'clickOk', event)">-->
-
                                     <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
-                                    <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
                                 </button>
+                                    <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
                                 
                             </div>
                         </div>
 
                     </div>
-                    
-                        
-                        <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
+                    <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
                  <div class="color_container2"></div> 
                     <div class="body-content content win-hub-section-content">
                         <div class="section-1 win-hub-section">
                             <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
-                            <div class="content-header field_line share-block">
-                                <span class="win-h5" data-win-bind="textContent: dataText.ev_text_share_text"></span>
-                                <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
-                                <!-- Add font awesome icons -->
+                            <div class="content-header field_line">
+                                <div class="share-block">
+                                    <span class="win-h5" data-win-bind="textContent: dataText.ev_text_share_text"></span>
+                                    <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
+                                    <!-- Add font awesome icons -->
 
 
                                     <div class="button_line">
@@ -77,55 +75,52 @@
                                             <i class="fab fa-google"></i>
                                         </div>
                                         <!--<a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
-                <div class="fa">
-                    <a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
-                </div>
-                <div class="fa">
-                    <a class="fab fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
-                </div>
-                <div class="fa">
-                    <a class="fab fa-google"></a>
-                </div>
-                <div class="fa">
-                    <a class="fab fa-xing"></a>
-                </div>-->
+        <div class="fa">
+            <a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
+        </div>
+        <div class="fa">
+            <a class="fab fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
+        </div>
+        <div class="fa">
+            <a class="fab fa-google"></a>
+        </div>
+        <div class="fa">
+            <a class="fab fa-xing"></a>
+        </div>-->
                                         <!--</div>-->
                                     </div>
-
-                                <div class="win-h5 content-header win-type-caption" data-win-bind="style.display: dataText.ev_text_other_name_h1 Binding.Converter.toDisplay">
-                                        <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
-                                    </div>
-                                <div class="win-h2 content-header" data-win-bind="style.display: dataText.ev_text_para_h2 Binding.Converter.toDisplay">
-                                        <span data-win-bind="textContent: dataText.ev_text_para_h2"></span>
-
-                                    </div>
-                                    <div class="div-separator"></div>
-                                    
                                 </div>
+                                <div class="win-h5 content-header win-type-caption" data-win-bind="style.display: dataText.ev_text_other_name_h1 Binding.Converter.toDisplay">
+                                    <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
+                                </div>
+                            </div>
                             </div>
                             <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
                             <div class="section-2 win-hub-section">
                                 <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
                             </div>
 
-                            <div class="section-3">
-                                <div class="div-separator"></div>
-                            <div class="" data-win-bind="style.display: dataText.ev_text_detail_summary Binding.Converter.toDisplay">
-                                    <p data-win-bind="textContent: dataText.ev_text_detail_summary"></p>
-                                </div>
-                            <div class="" data-win-bind="style.display: dataText.ev_text_agenda_body Binding.Converter.toDisplay">
-                                    <p data-win-bind="textContent: dataText.ev_text_agenda_body"></p>
-                                </div>
-                            <div class="" data-win-bind="style.display: dataText.ev_text_para_body Binding.Converter.toDisplay">
-                                    <p data-win-bind="textContent: dataText.ev_text_para_body"></p>
-                                </div>
-                            <div class="" data-win-bind="style.display: dataText.ev_text_free_body Binding.Converter.toDisplay">
-                                    <p data-win-bind="textContent: dataText.ev_text_free_body"></p>
-                                </div>
-                                <div class="div-separator"></div>
-                               
-                                <div id="recordedContent" class="recordedContent-fragmenthost" data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"></div> 
+                        <div class="section-3">
+                            <div class="win-h2 content-header" data-win-bind="style.display: dataText.ev_text_para_h2 Binding.Converter.toDisplay">
+                                <span data-win-bind="textContent: dataText.ev_text_para_h2"></span>
                             </div>
+                            <div class="div-separator"></div>
+                            <div class="" data-win-bind="style.display: dataText.ev_text_detail_summary Binding.Converter.toDisplay">
+                                <p data-win-bind="textContent: dataText.ev_text_detail_summary"></p>
+                            </div>
+                            <div class="" data-win-bind="style.display: dataText.ev_text_agenda_body Binding.Converter.toDisplay">
+                                <p data-win-bind="textContent: dataText.ev_text_agenda_body"></p>
+                            </div>
+                            <div class="" data-win-bind="style.display: dataText.ev_text_para_body Binding.Converter.toDisplay">
+                                <p data-win-bind="textContent: dataText.ev_text_para_body"></p>
+                            </div>
+                            <div class="" data-win-bind="style.display: dataText.ev_text_free_body Binding.Converter.toDisplay">
+                                <p data-win-bind="textContent: dataText.ev_text_free_body"></p>
+                            </div>
+                            <div class="div-separator"></div>
+
+                            <div id="recordedContent" class="recordedContent-fragmenthost" data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"></div>
+                        </div>
                             
                             <div class="section-4 speakerblock">
                                 <div class="win-h5 content-header win-type-caption">
