@@ -16,14 +16,14 @@
 
 .home .win-listview .win-vertical .win-gridlayout.win-surface {
     -ms-grid-rows: auto !important;
-    margin-left: calc(50% - 530px);
-    width: 1030px !important;
+    margin-left: calc(50% - 630px);
+    width: 1230px !important;
 }
 
 .home .win-listview .win-vertical .win-footercontainer,
 .home .win-listview .win-vertical .win-headercontainer {
-    margin-left: calc(50% - 530px);
-    width: 1030px;
+    margin-left: calc(50% - 630px);
+    width: 1230px;
     padding: 15px;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .home .win-listview .win-vertical .win-itemsblock {
-    width: 1030px !important;
+    width: 1230px !important;
     height: auto !important;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .home .win-listview .win-groupheader {
-    width: 1030px;
+    width: 1230px;
     padding: 15px;
 }
 
@@ -221,6 +221,39 @@
 }
 
 /*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1299px 
+    @media (max-width:1299px) {
+    }
+
+    use: .view-size-biggest
+*/
+
+.view-size-biggest .home .win-listview .win-vertical .win-footercontainer,
+.view-size-biggest .home .win-listview .win-vertical .win-headercontainer {
+    margin-left: 20px;
+    width: calc(100% - 70px);
+    padding: 15px;
+}
+
+.view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 20px;
+    width: calc(100% - 40px) !important;
+}
+
+.view-size-biggest .home .win-listview .win-groupheader {
+    width: calc(100% - 70px);
+    padding: 15px;
+}
+
+.view-size-biggest .home .win-listview .win-vertical .win-itemsblock {
+    width: 100% !important;
+}
+
+.view-size-biggest .home .win-listview .win-gridlayout .win-container {
+    margin: 15px;
+}
+
+/*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1099px 
     @media (max-width:1099px) {
     }
@@ -228,28 +261,6 @@
     use: .view-size-bigger
 */
 
-.view-size-bigger .home .win-listview .win-vertical .win-footercontainer,
-.view-size-bigger .home .win-listview .win-vertical .win-headercontainer {
-    margin-left: 20px;
-    width: calc(100% - 70px);
-    padding: 15px;
-}
-.view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 20px;
-    width: calc(100% - 40px) !important;
-}
-.view-size-bigger .home .win-listview .win-groupheader {
-    width: calc(100% - 70px);
-    padding: 15px;
-}
-
-.view-size-bigger .home .win-listview .win-vertical .win-itemsblock {
-    width: 100% !important;
-}
-
-.view-size-bigger .home .win-listview .win-gridlayout .win-container {
-    margin: 15px;
-}
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 

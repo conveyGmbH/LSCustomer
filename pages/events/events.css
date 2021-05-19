@@ -16,19 +16,19 @@
 
 .events .win-listview .win-vertical .win-gridlayout.win-surface {
     -ms-grid-rows: auto !important;
-    margin-left: calc(50% - 530px);
-    width: 1060px !important;
+    margin-left: calc(50% - 630px);
+    width: 1260px !important;
 }
 
 .events .win-listview .win-vertical .win-footercontainer,
 .events .win-listview .win-vertical .win-headercontainer {
-    margin-left: calc(50% - 530px);
-    width: 1030px;
+    margin-left: calc(50% - 630px);
+    width: 1230px;
     padding: 15px;
 }
 
 .events .win-listview .win-vertical .win-itemscontainer {
-    width: 1060px !important;
+    width: 1260px !important;
     height: auto !important;
 }
 
@@ -113,7 +113,7 @@
 }
 
 .events .event-item {
-    width: 500px;
+    width: 285px;
     height: 380px;
 }
 
@@ -171,6 +171,34 @@
 }
 
 /*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1299px 
+    @media (max-width:1299px) {
+    }
+
+    use: .view-size-biggest
+*/
+
+.view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
+.view-size-biggest .events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 20px;
+    width: calc(100% - 70px);
+    padding: 15px;
+}
+
+.view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 20px;
+    width: calc(100% - 20px) !important;
+}
+
+.view-size-biggest .events .win-listview .win-vertical .win-itemscontainer {
+    width: 1100px !important;
+}
+
+.view-size-biggest .events .event-item {
+    width: 325px;
+}
+
+/*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1099px 
     @media (max-width:1099px) {
     }
@@ -178,26 +206,14 @@
     use: .view-size-bigger
 */
 
-.view-size-bigger .events .win-listview .win-vertical .win-footercontainer,
-.view-size-bigger .events .win-listview .win-vertical .win-headercontainer {
-    margin-left: 20px;
-    width: calc(100% - 70px);
-    padding: 15px;
-}
-
-.view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 20px;
-    width: calc(100% - 20px) !important;
-}
-
 .view-size-bigger .events .win-listview .win-vertical .win-itemscontainer {
     width: 900px !important;
 }
 
 .view-size-bigger .events .event-item {
-    width: 420px;
+    width: 260px;
+    background-color: transparent;
 }
-
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
@@ -207,12 +223,29 @@
     use: .view-size-medium
 */
 
+.view-size-medium .events .win-listview .win-vertical .win-footercontainer,
+.view-size-medium .events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 10px;
+    width: calc(100% - 30px);
+    padding: 5px;
+}
+
+.view-size-medium .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 10px;
+    width: calc(100% - 10px) !important;
+}
+
+.view-size-medium .events .win-listview .win-gridlayout .win-container {
+    margin: 5px;
+}
+
+
 .view-size-medium .events .win-listview .win-vertical .win-itemscontainer {
     width: 700px !important;
 }
 
 .view-size-medium .events .event-item {
-    width: 320px;
+    width: 325px;
 }
 
 .view-size-medium .events .hero-image-container > img {
@@ -239,7 +272,7 @@
 }
 
 .view-size-medium-small .events .event-item {
-    width: 220px;
+    width: 235px;
 }
 
 
@@ -253,7 +286,7 @@
     width: 460px !important;
 }
 .view-size-small .events .event-item {
-    width: 380px;
+    width: 325px;
 }
 
 
