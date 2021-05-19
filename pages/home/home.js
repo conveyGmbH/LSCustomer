@@ -67,6 +67,8 @@
                     contentarea.style.backgroundColor = Colors.tileBackgroundColor;
                 }
             }*/
+            Colors.changeCSS(".home .win-listview .win-gridlayout .win-container", "border-radius", AppData._persistentStates.inputBorderRadius + "px");
+
             // insert body-content
             var contentHeader = element.querySelector(".content-header");
             if (contentHeader && contentHeader.parentElement) {

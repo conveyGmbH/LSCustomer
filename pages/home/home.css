@@ -12,12 +12,17 @@
     font-weight: 600;
 }
 
+.home .listview {
+    width: 100%;
+    height: 100%;
+}
+
 /* width of content should be limited to 1100px (view-size-bigger), so add margin on wide screens */
 
 .home .win-listview .win-vertical .win-gridlayout.win-surface {
     -ms-grid-rows: auto !important;
     margin-left: calc(50% - 630px);
-    width: 1230px !important;
+    width: 1260px !important;
 }
 
 .home .win-listview .win-vertical .win-footercontainer,
@@ -32,11 +37,12 @@
 }
 
 .home .win-listview .win-vertical .win-itemscontainer {
+    width: 1260px !important;
     height: auto !important;
 }
 
 .home .win-listview .win-vertical .win-itemsblock {
-    width: 1230px !important;
+    width: 100% !important;
     height: auto !important;
 }
 
@@ -130,13 +136,6 @@
     color: #2a2f3d;
 }
 
-.home .listview {
-    width: 100%;
-    height: 100%;
-    background-color: #ffffff;
-    color: #000;
-}
-
 .home .custlogo {
     display: inline-block;
     position: relative;
@@ -157,13 +156,14 @@
     margin: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
     z-index: 2;
-    height: 350px;
+    height: 380px;
     width: auto;
+    border-radius: 0;
 }
 
 .home .event-item {
-    width: 240px;
-    height: 350px;
+    width: 285px;
+    height: 380px;
 }
 
 .home .event-image-container {
@@ -172,7 +172,7 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 115px;
+    height: 180px;
     padding: 0;
     background-color: gainsboro;
     overflow: hidden;
@@ -192,9 +192,9 @@
     display: inline-block;
     position: absolute;
     left: 0;
-    top: 115px;
+    top: 180px;
     width: 100%;
-    height: calc(100% - 115px);
+    height: calc(100% - 180px);
     padding-left: 10px;
 }
 
@@ -214,10 +214,10 @@
 }
 
 .home .event-item .event-comment {
-    width: calc(100% - 20px);
+    width: calc(100% - 32px);
     min-height: 40px;
-    font-size: 14px;
     color: #2a2f3d;
+    padding-bottom: 15px;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -245,12 +245,12 @@
     padding: 15px;
 }
 
-.view-size-biggest .home .win-listview .win-vertical .win-itemsblock {
-    width: 100% !important;
+.view-size-biggest .home .win-listview .win-vertical .win-itemscontainer {
+    width: 1100px !important;
 }
 
-.view-size-biggest .home .win-listview .win-gridlayout .win-container {
-    margin: 15px;
+.view-size-biggest .home .event-item {
+    width: 325px;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -261,6 +261,13 @@
     use: .view-size-bigger
 */
 
+.view-size-bigger .home .win-listview .win-vertical .win-itemscontainer {
+    width: 900px !important;
+}
+
+.view-size-bigger .home .event-item {
+    width: 260px;
+}
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
@@ -270,13 +277,39 @@
     use: .view-size-medium
 */
 
-.view-size-medium .home .hero-image-container > img {
-    height: 100%;
-    width: auto;
+.view-size-medium .home .win-listview .win-vertical .win-footercontainer,
+.view-size-medium .home .win-listview .win-vertical .win-headercontainer {
+    margin-left: 5px;
+    width: calc(100% - 30px);
+    padding: 10px;
+}
+
+.view-size-medium .home .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 5px;
+    width: calc(100% - 5px) !important;
 }
 
 .view-size-medium .home .win-listview .win-groupheader {
-    width: calc(100% - 70px);
+    width: calc(100% - 30px);
+}
+
+.view-size-medium .home .win-listview .win-vertical .win-itemscontainer {
+    width: 700px !important;
+}
+
+
+.view-size-medium .home .win-listview .win-gridlayout .win-container {
+    margin: 10px;
+}
+
+
+.view-size-medium .home .event-item {
+    width: 315px;
+}
+
+.view-size-medium .home .hero-image-container > img {
+    height: 100%;
+    width: auto;
 }
 
 .view-size-medium .home .content-header-line > h1 {
@@ -293,6 +326,13 @@
     use: .view-size-medium-small
 */
 
+.view-size-medium-small .home .win-listview .win-vertical .win-itemscontainer {
+    width: 500px !important;
+}
+
+.view-size-medium-small .home .event-item {
+    width: 215px;
+}
 
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
@@ -300,39 +340,35 @@
     use: .view-size-small
 */
 
-/*
-.view-size-small .home .hero-image-container > img {
-    height: 100%;
-    width: auto;
+.view-size-small .home .win-listview .win-vertical .win-footercontainer,
+.view-size-small .home .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0;
+    width: calc(100% - 10px);
+    padding: 10px;
 }
 
 .view-size-small .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 0;
-    width: 100%;
-}
-.view-size-small .home .win-listview .win-groupheader {
-    width: 100%;
-    padding: 0;
+    width: 100% !important;
 }
 
-.view-size-small .home .win-listview .win-vertical .win-footercontainer,
-.view-size-small .home .win-listview .win-vertical .win-headercontainer {
-    margin-left: 0;
-    width: 100%;
-    padding: 0;
+.view-size-small .home .win-listview .win-groupheader {
+    width: calc(100% - 10px);
+}
+
+.view-size-small .home .win-listview .win-vertical .win-itemscontainer {
+    width: 325px !important;
 }
 
 .view-size-small .home .win-listview .win-gridlayout .win-container {
-    width: 100%;
-    margin: 15px 0;
+    margin: 30px 10px;
 }
-.view-size-small .home .event-item {
-}
-*/
 
-.view-size-small .home .win-listview .win-groupheader {
-    width: calc(100% - 40px);
+
+.view-size-small .home .event-item {
+    width: 500px;
 }
+
 
 .view-size-small .home .custlogo {
     width: 50%;
@@ -347,4 +383,3 @@
 .view-size-small .home .content-header-line > h2 {
     font-size: 16px;
 }
-

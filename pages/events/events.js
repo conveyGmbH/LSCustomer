@@ -54,6 +54,7 @@
         ready: function (element, options) {
             Log.call(Log.l.trace, pageName + ".");
             // TODO: Initialize the page here.
+            Colors.changeCSS(".events .win-listview .win-gridlayout .win-container", "border-radius", AppData._persistentStates.inputBorderRadius + "px");
             /*var contentarea = element.querySelector(".contentarea");
             if (contentarea && contentarea.style) {
                 if (Colors.isDarkTheme) {
