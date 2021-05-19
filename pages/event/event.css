@@ -31,6 +31,7 @@
     }
 .event .win-h1 {
     text-transform: uppercase;
+    font-weight: 600;
 }
 
 .event .caption-field {
@@ -111,7 +112,7 @@
     font-weight: 600;
 }
 
-    .conference-fragmenthost { width: auto; height: auto; margin: 0 0 0 10%; background-color: #000000;}
+    .conference-fragmenthost { width: auto; height: auto; margin: 0; background-color: #000000;}
     .teaser-fragmenthost
     {
         height: auto;
