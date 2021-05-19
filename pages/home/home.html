@@ -34,8 +34,8 @@
                          data-win-control="WinJS.Binding.Template" style="display: none">
                         <div class="group-header">
                             <!--<div class="group-image-container">
-        <img data-win-bind="src: dataGroupDoc.ser_doc; alt: dataGroupDocText.ser_doc_alt; title: dataGroupDocText.ser_doc_title; longdesc: dataGroupDocText.ser_doc_descr" />
-    </div>-->
+                                <img data-win-bind="src: dataGroupDoc.ser_doc; alt: dataGroupDocText.ser_doc_alt; title: dataGroupDocText.ser_doc_title; longdesc: dataGroupDocText.ser_doc_descr" />
+                            </div>-->
                             <div class="content-header">
                                 <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataGroupText.ser_text_name_h1 Binding.Converter.toDisplay">
                                     <h1 data-win-bind="textContent: dataGroupText.ser_text_name_h1"></h1>
@@ -55,7 +55,7 @@
                             <div class="event-image-container">
                                 <img data-win-bind="src: dataDoc.ov_doc_event; alt: dataDocText.ov_doc_event_alt; title: dataDocText.ov_doc_event_title; longdesc: dataDocText.ov_doc_event_descr" />
                             </div>
-                            <div class="event-detail box-bkg">
+                            <div class="event-detail">
                                 <div class="event-title win-type-body bold">
                                     <span data-win-bind="textContent: dataText.ov_text_event_name_h2"></span>
                                 </div>
@@ -68,6 +68,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div id="events"
                          class="listview win-selectionstylefilled"
                          data-win-control="WinJS.UI.ListView"
@@ -78,6 +79,7 @@
                             }">
 
                     </div>
+                    
                 </div>
                 <div class="error-message"
                      data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>
