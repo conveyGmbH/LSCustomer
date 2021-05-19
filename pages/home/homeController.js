@@ -949,7 +949,7 @@
                             var seriesIdsDoc = [];
                             var seriesIdsDocText = [];
                             var seriesId = 0;
-                            if (that.records) for (var i = indexOfFirstVisible; Math.min(i < indexOfLastVisible+preloadCount,that.records.length); i++) {
+                            if (that.records) for (var i = indexOfFirstVisible; i < Math.min(indexOfLastVisible+preloadCount,that.records.length); i++) {
                                 var record = that.records.getAt(i);
                                 if (record && typeof record === "object") {
                                     if (seriesId !== record.MandantSerieID) {

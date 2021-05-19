@@ -391,11 +391,12 @@
                             listView.winControl.maxTrailingPages = maxTrailingPages;
                         }
                         if (listView.winControl.loadingState === "itemsLoaded") {
+                            var preloadCount = 5;
                             var indexOfFirstVisible = listView.winControl.indexOfFirstVisible;
                             var indexOfLastVisible = listView.winControl.indexOfLastVisible;
                             var eventIdsText = [];
                             var eventIdsDocs = [];
-                            if (that.records) for (var i = indexOfFirstVisible; i <= indexOfLastVisible; i++) {
+                            if (that.records) for (var i = indexOfFirstVisible; i < Math.min(indexOfLastVisible+preloadCount,that.records.length); i++) {
                                 var record = that.records.getAt(i);
                                 if (record && typeof record === "object") {
                                     if (record.dataText && !record.dataText.done) {
