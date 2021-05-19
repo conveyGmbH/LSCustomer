@@ -130,16 +130,11 @@
                             var width = contentArea.clientWidth;
                             var height = contentArea.clientHeight;
                             if (width !== that.prevWidth || height !== that.prevHeight) {
-                                var listView = element.querySelector("#events.listview");
-                                if (listView && listView.style) {
-                                    if (listView.clientWidth !== width) {
-                                        listView.style.width = width + "px";
-                                        that.prevWidth = width;
-                                    }
-                                    /*if (listView.clientHeight !== height) {
-                                        listView.style.height = height + "px";
-                                        that.prevHeight = height;
-                                    }*/
+                                if (that.prevWidth !== width) {
+                                    that.prevWidth = width;
+                                }
+                                if (that.prevHeight !== height) {
+                                    that.prevHeight = height;
                                 }
                             }
                         }

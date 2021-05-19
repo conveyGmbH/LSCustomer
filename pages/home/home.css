@@ -14,14 +14,10 @@
 
 /* width of content should be limited to 1100px (view-size-bigger), so add margin on wide screens */
 
-.home .win-listview .win-vertical .win-gridlayout.win-headerpositiontop.win-surface {
+.home .win-listview .win-vertical .win-gridlayout.win-surface {
     -ms-grid-rows: auto !important;
     margin-left: calc(50% - 530px);
-    width: 1030px;
-}
-
-.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
-    margin-top: 40px;
+    width: 1030px !important;
 }
 
 .home .win-listview .win-vertical .win-footercontainer,
@@ -29,6 +25,19 @@
     margin-left: calc(50% - 530px);
     width: 1030px;
     padding: 15px;
+}
+
+.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
+    margin-top: 40px;
+}
+
+.home .win-listview .win-vertical .win-itemscontainer {
+    height: auto !important;
+}
+
+.home .win-listview .win-vertical .win-itemsblock {
+    width: 1030px !important;
+    height: auto !important;
 }
 
 .home .list-header {
@@ -175,6 +184,11 @@
     height: auto;
 }
 
+.home .event-detail.box-bkg:hover {
+    background-color: transparent;
+}
+
+
 .home .event-detail {
     display: inline-block;
     position: absolute;
@@ -221,13 +235,19 @@
     width: calc(100% - 70px);
     padding: 15px;
 }
-.view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-headerpositiontop.win-surface {
+.view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 20px;
+    width: calc(100% - 40px) !important;
 }
 .view-size-bigger .home .win-listview .win-groupheader {
     width: calc(100% - 70px);
     padding: 15px;
 }
+
+.view-size-bigger .home .win-listview .win-vertical .win-itemsblock {
+    width: 100% !important;
+}
+
 .view-size-bigger .home .win-listview .win-gridlayout .win-container {
     margin: 15px;
 }
@@ -270,15 +290,13 @@
     use: .view-size-small
 */
 
-/*.view-size-small .home .hero-image-container {
-    height: 1100px;
-}
-.view-size-small .events .hero-image-container > img {
+/*
+.view-size-small .home .hero-image-container > img {
     height: 100%;
     width: auto;
 }
 
-.view-size-small .home .win-listview .win-vertical .win-gridlayout.win-headerpositiontop.win-surface {
+.view-size-small .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 0;
     width: 100%;
 }
@@ -319,16 +337,4 @@
 .view-size-small .home .content-header-line > h2 {
     font-size: 16px;
 }
-
-.view-size-small .home .caption-sort {
-    width: 100%;
-}
-
-.view-size-small .home .caption-filter, .home .caption-search {
-    width: 100%;
-    height: auto;
-    margin: 5px 0;
-    padding: 5px 0;
-}
-
 

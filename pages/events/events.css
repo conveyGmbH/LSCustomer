@@ -12,16 +12,33 @@
     font-weight: 600;
 }
 
-.events .list-header {
-    width: auto;
-    margin: 0 10%;
-    padding: 0;
+/* width of content should be limited to 1100px (view-size-bigger), so add margin on wide screens */
+
+.events .win-listview .win-vertical .win-gridlayout.win-surface {
+    -ms-grid-rows: auto !important;
+    margin-left: calc(50% - 530px);
+    width: 1030px !important;
 }
 
-.events .content-header {
-    color: #2a2f3d;
-    height: auto;
-    display: inline;
+.events .win-listview .win-vertical .win-footercontainer,
+.events .win-listview .win-vertical .win-headercontainer {
+    margin-left: calc(50% - 530px);
+    width: 1030px;
+    padding: 15px;
+}
+
+.events .win-listview .win-vertical .win-itemscontainer {
+    height: auto !important;
+}
+
+.events .win-listview .win-vertical .win-itemsblock {
+    width: 1030px !important;
+    height: auto !important;
+}
+
+.events .list-header {
+    padding: 0;
+    width: auto;
 }
 
 .events .hero-image-container {
@@ -32,7 +49,7 @@
     height: auto;
     padding: 0;
     overflow: hidden;
-    z-index: -1;
+    max-height: 600px;
 }
 
 .events .hero-image-container > img {
@@ -40,23 +57,26 @@
     height: auto;
 }
 
-.events .content-header-line {
-    display: inline;
+.events .content-header {
+    color: #2a2f3d;
     height: auto;
+    width: 100%;
+}
+
+.events .content-header-line {
+    height: auto;
+    width: 100%;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
 }
 
 .events .content-header-line > h1 {
     text-transform: uppercase;
-    display: inline-block;
-    width: calc(100% - 52px);
 }
 .events .content-header-line > h2 {
-    display: inline-block;
-    width: calc(100% - 52px);
 }
 .events .content-header-line > span {
-    display: inline-block;
-    width: calc(100% - 52px);
 }
 
 .events .listview {
@@ -84,55 +104,18 @@
 }
 
 
-.events .caption-sort {
-    display: inline-block;
-    position: relative;
-    text-align: right;
-    width: 50%;
-}
-
-.events .caption-search, .events .caption-filter {
-    width: 40%;
-    border: solid 0.2px #4e3ab0;
-    display: inline-block;
-    margin: 5px;
-    padding: 5px;
-    text-align: left;
-}
-
-.events label {
-    font-size: 16px;
-}
-
-.events .caption-field {
-    top: 20px;
-    left: 8px;
-    text-align: left;
-    width: 48%;
-    display: inline-block;
-    margin: 0 10px 0 0;
-    padding: 0 5px;
-}
-
-.events .win-itemscontainer {
-    margin: 0 0 0 10%;
-}
-
 .events .win-listview .win-gridlayout .win-container {
     margin: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
-    /*width: 30%;*/
+    z-index: 2;
+    height: 380px;
+    width: auto;
 }
 
 .events .event-item {
     width: 480px;
     height: 380px;
 }
-
-.events .win-container {
-    height: 380px;
-}
-
 
 .events .event-image-container {
     display: inline-block;
@@ -187,38 +170,34 @@
     padding-bottom: 15px;
 }
 
-.events .tile-button-color {
-    background-color: transparent;
-    border-color: transparent;
-}
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1099px 
+    @media (max-width:1099px) {
+    }
 
-.events .footer {
-    background-color: #fff;
-    bottom: 0;
-    left: 0;
-    position: relative;
-    width: 100%;
-    height: 100px;
-    margin: 0;
-    padding: 0;
-    border-top: solid 0.2px #4e3ab0;
-
-}
-
-.events .footer-content {
-    margin: 20px 35px;
-
-}
-
-/*
-.view-size-biggest .events .hero-image-container {
-    height: 500px;
-}
-
-.view-size-bigger .events .hero-image-container {
-    height: 600px;
-}
+    use: .view-size-bigger
 */
+
+.view-size-bigger .events .win-listview .win-vertical .win-footercontainer,
+.view-size-bigger .events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 20px;
+    width: calc(100% - 70px);
+    padding: 15px;
+}
+
+.view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 20px;
+    width: calc(100% - 40px) !important;
+}
+
+.view-size-bigger .events .win-listview .win-vertical .win-itemsblock {
+    width: 100% !important;
+}
+
+.view-size-bigger .events .win-listview .win-gridlayout .win-container {
+    margin: 15px;
+}
+
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
@@ -233,15 +212,9 @@
     height: 700px;
 }
 */
-.view-size-medium .events .list-header { margin: 0 2%;}
-.view-size-medium .events .win-itemscontainer { margin: 0 0 0 2%;}
 .view-size-medium .events .hero-image-container > img {
     height: 100%;
     width: auto;
-}
-
-.view-size-medium .events .win-listview .win-gridlayout .win-container {
-    width: 100%;
 }
 
 .view-size-medium .events .content-header-line > h1 {
@@ -250,20 +223,6 @@
 
 .view-size-medium .events .content-header-line > h2 {
     font-size: 1em;
-}
-
-.view-size-medium .events .caption-field {
-    width: 35%;
-    margin: 0 10px 0 5px;
-}
-.view-size-medium .events .caption-sort {
-    width: 60%;
-}
-
-.events .content-header-line > h1,
-.events .content-header-line > h2,
-.events .content-header-line > body {
-    width: calc(100% - 36px);
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -283,27 +242,37 @@
         }
     use: .view-size-small
 */
+
 /*
-.view-size-small .events .hero-image-container {
-    height: 1100px;
+.view-size-small .events .hero-image-container > img {
+    height: 100%;
+    width: auto;
 }
-*/
-.view-size-small .events .win-listview .win-gridlayout .win-container {
+
+.view-size-small .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 0;
     width: 100%;
 }
+
+.view-size-small .events .win-listview .win-vertical .win-footercontainer,
+.view-size-small .events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.view-size-small .home .win-listview .win-gridlayout .win-container {
+    width: 100%;
+    margin: 15px 0;
+}
+.view-size-small .home .event-item {
+}
+*/
 
 .view-size-small .events .custlogo {
     width: 50%;
     min-height: 70px;
     margin: 15px 0 0 20px;
-}
-
-.view-size-small .events .body-content {
-    margin: 10px 20px;
-}
-.view-size-small .events .content-header {
-    height: 130px;
-    margin-bottom: 5px;
 }
 
 .view-size-small .events .content-header-line > h1 {
@@ -313,20 +282,3 @@
 .view-size-small .events .content-header-line > h2 {
     font-size: 16px;
 }
-
-    .view-size-small .events .caption-field {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-.view-size-small .events .caption-sort {
-    width: 100%;
-}
-.view-size-small .events .caption-filter, .events .caption-search {
-    width: 100%;
-    height: auto;
-    margin: 5px 0;
-    padding: 5px 0;
-}
-
-
