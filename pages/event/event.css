@@ -92,16 +92,17 @@
     }
     .event .speaker-image-container > img {
         display: block;
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
         margin: 0 auto;
+        object-fit: cover;
     }
     .event .speaker-text { display: block; position: relative; width: 75%; float: right; }
-    .event .speaker-text > span { display: block; margin: 0; padding: 5px;}
-    .event .speaker-name .win-h3 {
+    .event .speaker-text > span { display: block; margin: 0 0 0 15px; padding: 5px; font-size: 16px;}
+    .event .speaker-text .win-h3 > span {
         color: #2a2f3d;
         font-size: 18px;
         
@@ -301,6 +302,7 @@
 .view-size-small .event .speaker-text > span {
     float: left;
     width: auto;
+    margin: 0;
 }
 p {
     white-space: pre-wrap
