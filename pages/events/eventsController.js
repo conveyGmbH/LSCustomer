@@ -391,28 +391,6 @@
                             listView.winControl.maxTrailingPages = maxTrailingPages;
                         }
                         if (listView.winControl.loadingState === "itemsLoaded") {
-                            var preloadCount = 5;
-                            var indexOfFirstVisible = listView.winControl.indexOfFirstVisible;
-                            var indexOfLastVisible = listView.winControl.indexOfLastVisible;
-                            var eventIdsText = [];
-                            var eventIdsDocs = [];
-                            if (that.records) for (var i = indexOfFirstVisible; i < Math.min(indexOfLastVisible+preloadCount,that.records.length); i++) {
-                                var record = that.records.getAt(i);
-                                if (record && typeof record === "object") {
-                                    if (record.dataText && !record.dataText.done) {
-                                        eventIdsText.push(record.VeranstaltungVIEWID);
-                                    }
-                                    if (record.dataDoc && !record.dataDoc.done) {
-                                        eventIdsDocs.push(record.VeranstaltungVIEWID);
-                                    }
-                                }
-                            }
-                            if (eventIdsText.length > 0) {
-                                that.loadEventText(eventIdsText);
-                            }
-                            if (eventIdsDocs.length > 0) {
-                                that.loadEventDocs(eventIdsDocs);
-                            }
                         } else if (listView.winControl.loadingState === "complete") {
                             if (that.loading) {
                                 progress = listView.querySelector(".list-footer .progress");
@@ -498,6 +476,32 @@
                 this.addRemovableEventListener(listView, "footervisibilitychanged", this.eventHandlers.onFooterVisibilityChanged.bind(this));
                 this.addRemovableEventListener(listView, "headervisibilitychanged", this.eventHandlers.onHeaderVisibilityChanged.bind(this));
                 this.addRemovableEventListener(listView, "iteminvoked", this.eventHandlers.onItemInvoked.bind(this));
+            }
+
+            Events.afterSelectEventViewHook = function(json) {
+                Log.call(Log.l.trace, "Events.Controller.");
+                if (that.records) {
+                    var eventIdsText = [];
+                    var eventIdsDocs = [];
+                    for (var i = 0; i < that.records.length; i++) {
+                        var record = that.records.getAt(i);
+                        if (record && typeof record === "object") {
+                            if (record.dataText && !record.dataText.done) {
+                                eventIdsText.push(record.VeranstaltungVIEWID);
+                            }
+                            if (record.dataDoc && !record.dataDoc.done) {
+                                eventIdsDocs.push(record.VeranstaltungVIEWID);
+                            }
+                        }
+                    }
+                    if (eventIdsText.length > 0) {
+                        that.loadEventText(eventIdsText);
+                    }
+                    if (eventIdsDocs.length > 0) {
+                        that.loadEventDocs(eventIdsDocs);
+                    }
+                }
+                Log.ret(Log.l.trace);
             }
 
             // finally, load the data

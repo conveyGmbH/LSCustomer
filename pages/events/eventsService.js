@@ -29,7 +29,16 @@
                 return AppData.getFormatView("LangMandantDokument", 20634);
             }
         },
-        _eventSeriesId: -1
+        _eventSeriesId: -1,
+        _afterSelectEventViewHook: null,
+        afterSelectEventViewHook: {
+            get: function() {
+                return Events._afterSelectEventViewHook;
+            },
+            set: function(f) {
+                Events._afterSelectEventViewHook = f;
+            }
+        }
     });
 
     WinJS.Namespace.define("Events", {
@@ -40,7 +49,14 @@
                     restriction = {};
                 }
                 restriction.MandantSerieID = Events._eventSeriesId;
-                var ret = Events._eventView.select(complete, error, restriction, {
+                var ret = Events._eventView.select(function(json) {
+                    if (typeof complete === "function") {
+                        complete(json);
+                    }
+                    if (typeof Events.afterSelectEventViewHook === "function") {
+                        Events.afterSelectEventViewHook(json);
+                    }
+                }, error, restriction, {
                     ordered: true,
                     orderAttribute: "Sortierung" 
                 });
@@ -55,7 +71,14 @@
             },
             selectNext: function (complete, error, response, nextUrl) {
                 Log.call(Log.l.trace, "Events.eventView.");
-                var ret = Events._eventView.selectNext(complete, error, response, nextUrl);
+                var ret = Events._eventView.selectNext(function(json) {
+                    if (typeof complete === "function") {
+                        complete(json);
+                    }
+                    if (typeof Events.afterSelectEventViewHook === "function") {
+                        Events.afterSelectEventViewHook(json);
+                    }
+                }, error, response, nextUrl);
                 // this will return a promise to controller
                 Log.ret(Log.l.trace);
                 return ret;

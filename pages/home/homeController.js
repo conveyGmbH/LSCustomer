@@ -939,77 +939,6 @@
                             listView.winControl.maxTrailingPages = maxTrailingPages;
                         }
                         if (listView.winControl.loadingState === "itemsLoaded") {
-                            var preloadCount = 5;
-                            var indexOfFirstVisible = listView.winControl.indexOfFirstVisible;
-                            var indexOfLastVisible = listView.winControl.indexOfLastVisible;
-                            var eventIdsText = [];
-                            var eventIdsDoc = [];
-                            var eventIdsDocText = [];
-                            var seriesIdsText = [];
-                            var seriesIdsDoc = [];
-                            var seriesIdsDocText = [];
-                            var seriesId = 0;
-                            if (that.records) for (var i = indexOfFirstVisible; i < Math.min(indexOfLastVisible+preloadCount,that.records.length); i++) {
-                                var record = that.records.getAt(i);
-                                if (record && typeof record === "object") {
-                                    if (seriesId !== record.MandantSerieID) {
-                                        if (seriesId) {
-                                            if (eventIdsText.length > 0) {
-                                                that.loadEventText(eventIdsText, seriesId);
-                                            }
-                                            if (eventIdsDoc.length > 0) {
-                                                that.loadEventDocs(eventIdsDoc, seriesId);
-                                            }
-                                            if (eventIdsDocText.length > 0) {
-                                                that.loadEventDocText(eventIdsDocText, seriesId);
-                                            }
-                                            eventIdsText = [];
-                                            eventIdsDoc = [];
-                                            eventIdsDocText = [];
-                                        }
-                                        seriesId = record.MandantSerieID;
-                                    }
-                                    if (record.dataText && !record.dataText.done) {
-                                        eventIdsText.push(record.VeranstaltungVIEWID);
-                                    }
-                                    if (record.dataDoc && !record.dataDoc.done) {
-                                        eventIdsDoc.push(record.VeranstaltungVIEWID);
-                                    }
-                                    if (record.dataDocText && !record.dataDocText.done) {
-                                        eventIdsDocText.push(record.VeranstaltungVIEWID);
-                                    }
-                                    if (record.dataGroupText && !record.dataGroupText.done &&
-                                        seriesIdsText.indexOf(seriesId) < 0) {
-                                        seriesIdsText.push(seriesId);
-                                    }
-                                    if (record.dataGroupDoc && !record.dataGroupDoc.done &&
-                                        seriesIdsDoc.indexOf(seriesId) < 0) {
-                                        seriesIdsDoc.push(seriesId);
-                                    }
-                                    if (record.dataGroupDocText && !record.dataGroupDocText.done &&
-                                        seriesIdsDocText.indexOf(seriesId) < 0) {
-                                        seriesIdsDocText.push(seriesId);
-                                    }
-                                }
-                            }
-                            if (eventIdsText.length > 0) {
-                                that.loadEventText(eventIdsText, seriesId);
-                            }
-                            if (eventIdsDoc.length > 0) {
-                                that.loadEventDocs(eventIdsDoc, seriesId);
-                            }
-                            if (eventIdsDocText.length > 0) {
-                                that.loadEventDocText(eventIdsDocText, seriesId);
-                            }
-                            if (seriesIdsText.length > 0) {
-                                that.loadSeriesText(seriesIdsText);
-                            }
-                            if (seriesIdsDoc.length > 0) {
-                                that.loadSeriesDocs(seriesIdsDoc);
-                            }
-                            if (seriesIdsDocText.length > 0) {
-                                that.loadSeriesDocText(seriesIdsDocText);
-                            }
                         } else if (listView.winControl.loadingState === "complete") {
                             that.adjustGroupHeaderSize();
                             if (that.loading) {
@@ -1132,6 +1061,81 @@
             if (listView && listView.winControl) {
                 listView.winControl.itemDataSource = that.recordsGrouped.dataSource;
                 listView.winControl.groupDataSource = that.recordsGrouped.groups.dataSource;
+            }
+
+            Home.afterSelectEventViewHook = function(json) {
+                Log.call(Log.l.trace, "Home.Controller.");
+                if (that.records) {
+                    var eventIdsText = [];
+                    var eventIdsDoc = [];
+                    var eventIdsDocText = [];
+                    var seriesIdsText = [];
+                    var seriesIdsDoc = [];
+                    var seriesIdsDocText = [];
+                    var seriesId = 0;
+                    for (var i = 0; i < that.records.length; i++) {
+                        var record = that.records.getAt(i);
+                        if (record && typeof record === "object") {
+                            if (seriesId !== record.MandantSerieID) {
+                                if (seriesId) {
+                                    if (eventIdsText.length > 0) {
+                                        that.loadEventText(eventIdsText, seriesId);
+                                    }
+                                    if (eventIdsDoc.length > 0) {
+                                        that.loadEventDocs(eventIdsDoc, seriesId);
+                                    }
+                                    if (eventIdsDocText.length > 0) {
+                                        that.loadEventDocText(eventIdsDocText, seriesId);
+                                    }
+                                    eventIdsText = [];
+                                    eventIdsDoc = [];
+                                    eventIdsDocText = [];
+                                }
+                                seriesId = record.MandantSerieID;
+                            }
+                            if (record.dataText && !record.dataText.done) {
+                                eventIdsText.push(record.VeranstaltungVIEWID);
+                            }
+                            if (record.dataDoc && !record.dataDoc.done) {
+                                eventIdsDoc.push(record.VeranstaltungVIEWID);
+                            }
+                            if (record.dataDocText && !record.dataDocText.done) {
+                                eventIdsDocText.push(record.VeranstaltungVIEWID);
+                            }
+                            if (record.dataGroupText && !record.dataGroupText.done &&
+                                seriesIdsText.indexOf(seriesId) < 0) {
+                                seriesIdsText.push(seriesId);
+                            }
+                            if (record.dataGroupDoc && !record.dataGroupDoc.done &&
+                                seriesIdsDoc.indexOf(seriesId) < 0) {
+                                seriesIdsDoc.push(seriesId);
+                            }
+                            if (record.dataGroupDocText && !record.dataGroupDocText.done &&
+                                seriesIdsDocText.indexOf(seriesId) < 0) {
+                                seriesIdsDocText.push(seriesId);
+                            }
+                        }
+                    }
+                    if (eventIdsText.length > 0) {
+                        that.loadEventText(eventIdsText, seriesId);
+                    }
+                    if (eventIdsDoc.length > 0) {
+                        that.loadEventDocs(eventIdsDoc, seriesId);
+                    }
+                    if (eventIdsDocText.length > 0) {
+                        that.loadEventDocText(eventIdsDocText, seriesId);
+                    }
+                    if (seriesIdsText.length > 0) {
+                        that.loadSeriesText(seriesIdsText);
+                    }
+                    if (seriesIdsDoc.length > 0) {
+                        that.loadSeriesDocs(seriesIdsDoc);
+                    }
+                    if (seriesIdsDocText.length > 0) {
+                        that.loadSeriesDocText(seriesIdsDocText);
+                    }
+                }
+                Log.ret(Log.l.trace);
             }
 
             // finally, load the data
