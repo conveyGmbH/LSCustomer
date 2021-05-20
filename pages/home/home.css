@@ -56,15 +56,15 @@
     position: relative;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 600px;
     padding: 0;
     overflow: hidden;
-    max-height: 600px;
 }
 
 .home .hero-image-container > img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .home .win-listview .win-groupheader {
@@ -83,14 +83,16 @@
 
 .home .group-image-container {
     left: 18px;
-    width: auto;
+    width: 100%;
+    height: 440px;
     padding: 0;
     overflow: visible;
 }
 
 .home .group-image-container > img {
-    width: auto;
-    height: 440px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .home .content-header {
@@ -308,11 +310,12 @@
 .view-size-medium .home .event-item {
     width: 315px;
 }
-
+/*
 .view-size-medium .home .hero-image-container > img {
     height: 100%;
     width: auto;
 }
+*/
 
 .view-size-medium .home .content-header-line > h1 {
     font-size: 1.2em;

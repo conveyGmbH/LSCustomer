@@ -60,7 +60,8 @@
 
 .events .hero-image-container > img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .events .content-header {
@@ -246,11 +247,12 @@
 .view-size-medium .events .event-item {
     width: 315px;
 }
-
+/*
 .view-size-medium .events .hero-image-container > img {
     height: 100%;
     width: auto;
 }
+*/
 
 .view-size-medium .events .content-header-line > h1 {
     font-size: 1.2em;
