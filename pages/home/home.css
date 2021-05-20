@@ -115,7 +115,7 @@
 }
 
 .home .content-header-line > h1 {
-    text-transform: uppercase;
+    
 }
 
 .home .content-header-line > h2 {
@@ -216,6 +216,7 @@
 .home .event-item .event-comment {
     width: calc(100% - 32px);
     min-height: 40px;
+    font-size: 14px;
     color: #2a2f3d;
     padding-bottom: 15px;
 }

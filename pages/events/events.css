@@ -78,7 +78,7 @@
 }
 
 .events .content-header-line > h1 {
-    text-transform: uppercase;
+    
 }
 .events .content-header-line > h2 {
 }
@@ -212,6 +212,7 @@
 .view-size-bigger .events .event-item {
     width: 260px;
 }
+*/
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 

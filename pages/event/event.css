@@ -18,19 +18,22 @@
 
 .event .bold { font-weight: 600;}
 
-.event {
+.event .color_container2 {
     background-color: #f3fbfc;
+    position: absolute;
+    z-index: -2;
+    height: 60%;
+    width: 100%;
+    top: 0;
 }
-.event .color_container2{ background-color: #ffffff; position: absolute; z-index: -2; height: 160%; width: 100%;}
-    .event .color_container4 {
-        background-color: #ffffff;
-        position: absolute;
-        z-index: -2;
-        height: 50px;
-        width: 100%;
-    }
-.event .win-h1 {
-    text-transform: uppercase;
+.event .color_container4 {
+    background-color: #ffffff;
+    position: absolute;
+    z-index: -2;
+    height: 50px;
+    width: 100%;
+}
+.event .win-h1, event .win-h3 {
     font-weight: 600;
 }
 
@@ -64,7 +67,6 @@
     margin: 15px 0;
     padding: 5px;
     text-align: center;
-    background-color: #fff;
 }
 
 .event .logo {
