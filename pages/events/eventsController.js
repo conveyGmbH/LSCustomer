@@ -262,6 +262,8 @@
                     }, function (errorResponse) {
                         AppData.setErrorMsg(that.binding, errorResponse);
                     }, eventIds);
+                }).then(function() {
+                    return that.adjustContainerSize();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -275,12 +277,13 @@
                     if (listView) {
                         var winSurface = listView.querySelector(".win-surface");
                         if (winSurface) {
+                            var clientWidth = winSurface.clientWidth - 20;
                             var winGroupHeaderContainers = listView.querySelectorAll(".win-groupheadercontainer");
                             if (winGroupHeaderContainers) {
                                 for (i = 0; i < winGroupHeaderContainers.length; i++) {
                                     var winGroupHeaderContainer = winGroupHeaderContainers[i];
                                     if (winGroupHeaderContainer && winGroupHeaderContainer.style) {
-                                        winGroupHeaderContainer.style.width = winSurface.clientWidth.toString() + "px";
+                                        winGroupHeaderContainer.style.width = clientWidth.toString() + "px";
                                         var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
                                         if (winGroupHeader) {
                                             var heightGroupHeader = winGroupHeader.clientHeight + 40;
@@ -294,7 +297,7 @@
                                 for (i = 0; i < winItemsContainers.length; i++) {
                                     var winItemsContainer = winItemsContainers[i];
                                     if (winItemsContainer && winItemsContainer.style) {
-                                        winItemsContainer.style.width = winSurface.clientWidth.toString() + "px";
+                                        winItemsContainer.style.width = clientWidth.toString() + "px";
                                     }
                                 }
                             }
@@ -314,7 +317,7 @@
                                 if (WinJS.Utilities.hasClass(pageElement, "view-size-medium-small")) {
                                     tilesPerRow = 1;
                                 }
-                                var tileWidth = winSurface.clientWidth / tilesPerRow - 2*margin - 1;
+                                var tileWidth = clientWidth / tilesPerRow - 2*margin;
                                 for (i = 0; i < eventItems.length; i++) {
                                     var eventItem = eventItems[i];
                                     if (eventItem && eventItem.style) {

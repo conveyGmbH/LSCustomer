@@ -22,7 +22,7 @@
 .home .win-listview .win-vertical .win-gridlayout.win-surface {
     -ms-grid-rows: auto !important;
     margin-left: calc(50% - 630px);
-    width: 1260px !important;
+    width: 1280px !important;
 }
 
 .home .win-listview .win-vertical .win-footercontainer,
@@ -67,7 +67,7 @@
 }
 
 .home .win-listview .win-groupheader {
-    width: 1230px;
+    width: calc(100% - 30px);
     padding: 15px;
 }
 
@@ -240,12 +240,7 @@
 
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 20px;
-    width: calc(100% - 40px) !important;
-}
-
-.view-size-biggest .home .win-listview .win-groupheader {
-    width: calc(100% - 70px);
-    padding: 15px;
+    width: calc(100% - 20px) !important;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -273,11 +268,11 @@
 
 .view-size-medium .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 5px;
-    width: calc(100% - 10px) !important;
+    width: calc(100% + 10px) !important;
 }
 
 .view-size-medium .home .win-listview .win-groupheader {
-    width: calc(100% - 30px);
+    padding: 10px;
 }
 
 .view-size-medium .home .win-listview .win-gridlayout .win-container {
@@ -307,17 +302,12 @@
 .view-size-small .home .win-listview .win-vertical .win-footercontainer,
 .view-size-small .home .win-listview .win-vertical .win-headercontainer {
     margin-left: 0;
-    width: calc(100% - 10px);
-    padding: 10px;
+    width: calc(100% - 20px);
 }
 
 .view-size-small .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 0;
-    width: 100% !important;
-}
-
-.view-size-small .home .win-listview .win-groupheader {
-    width: calc(100% - 10px);
+    width: calc(100% + 20px) !important;
 }
 
 .view-size-small .home .win-listview .win-gridlayout .win-container {
