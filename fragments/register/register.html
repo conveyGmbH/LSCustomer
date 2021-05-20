@@ -177,16 +177,19 @@
     </div>-->
                         </div>
                         <div class="resend-editable-mail-container" data-win-bind="style.display: showResendEditableMail Binding.Converter.toDisplay">
-                            <div class="field_line register-email" data-win-bind="style.display: registerMessage Binding.Converter.toDisplay">
+                            <div class="field_line register-email">
                                 <span class="large_field"
                                       data-win-bind="textContent: dataText.on_text_reg_confirm"></span><!--registerMessage-->
                             </div>
 
-                            <div class="field_line_full register_button">
+                            <!--<div class="field_line_full register_button">
                                 <span data-win-bind="textContent: dataText.on_text_reg_noconfirm"></span><!--registerStatus-->
-                                <!--<span id="statustext">Connecting to Facebook...</span>-->
+                                <!--<span id="statustext">Connecting to Facebook...</span>
+                            </div>-->
+                            <div class="field_line register-email">
+                                <span class="large_field"
+                                      data-win-bind="textContent: dataText.on_text_wait_body"></span><!--registerMessage-->
                             </div>
-
 
 
                             <!--<div class="field_line field_line_odd register_input">
