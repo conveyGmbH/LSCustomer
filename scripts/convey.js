@@ -245,7 +245,8 @@
     }
     function checkForDeviceReady() {
         window.setTimeout(function () {
-            if (!document.body || typeof WinJS !== "object" || !Application.pageframe) {
+            if (!document.body || typeof Application !== "object" || !Application.pageframe ||
+                !document.querySelector("#contenthost")) {
                 checkForDeviceReady();
             } else {
                 if (document.dispatchEvent) {
