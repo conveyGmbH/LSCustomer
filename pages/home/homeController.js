@@ -459,14 +459,14 @@
                     null,
                     seriesIds);
                 }).then(function() {
-                    return that.adjustGroupHeaderSize();
+                    return that.adjustContainerSize();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
             }
             this.loadSeriesText = loadSeriesText;
 
-            var adjustGroupHeaderSize = function() {
+            var adjustContainerSize = function() {
                 Log.call(Log.l.trace, "Home.Controller.");
                 var i;
                 var ret = new WinJS.Promise.as().then(function() {
@@ -512,9 +512,6 @@
                                 if (WinJS.Utilities.hasClass(pageElement, "view-size-medium-small")) {
                                     tilesPerRow = 1;
                                 }
-                                if (WinJS.Utilities.hasClass(pageElement, "view-size-small")) {
-                                    tilesPerRow = 1;
-                                }
                                 var tileWidth = winSurface.clientWidth / tilesPerRow - 2*margin - 1;
                                 for (i = 0; i < eventItems.length; i++) {
                                     var eventItem = eventItems[i];
@@ -529,7 +526,7 @@
                 Log.ret(Log.l.trace);
                 return ret;
             }
-            that.adjustGroupHeaderSize = adjustGroupHeaderSize;
+            that.adjustContainerSize = adjustContainerSize;
 
             var loadDoc = function () {
                 Log.call(Log.l.trace, "Home.Controller.");
@@ -979,8 +976,8 @@
                             listView.winControl.maxTrailingPages = maxTrailingPages;
                         }
                         if (listView.winControl.loadingState === "itemsLoaded") {
+                            that.adjustContainerSize();
                         } else if (listView.winControl.loadingState === "complete") {
-                            that.adjustGroupHeaderSize();
                             if (that.loading) {
                                 progress = listView.querySelector(".list-footer .progress");
                                 counter = listView.querySelector(".list-footer .counter");

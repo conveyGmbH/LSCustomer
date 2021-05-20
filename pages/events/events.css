@@ -33,7 +33,6 @@
 }
 
 .events .win-listview .win-vertical .win-itemscontainer {
-    width: 1260px !important;
     height: auto !important;
 }
 
@@ -167,6 +166,7 @@
 .events .event-item .event-comment {
     width: calc(100% - 32px);
     min-height: 40px;
+    font-size: 14px;
     color: #2a2f3d;
     padding-bottom: 15px;
 }
@@ -188,15 +188,7 @@
 
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 20px;
-    width: calc(100% - 20px) !important;
-}
-
-.view-size-biggest .events .win-listview .win-vertical .win-itemscontainer {
-    width: 1100px !important;
-}
-
-.view-size-biggest .events .event-item {
-    width: 325px;
+    width: calc(100% - 40px) !important;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -207,14 +199,6 @@
     use: .view-size-bigger
 */
 
-.view-size-bigger .events .win-listview .win-vertical .win-itemscontainer {
-    width: 900px !important;
-}
-
-.view-size-bigger .events .event-item {
-    width: 260px;
-}
-*/
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
@@ -236,17 +220,10 @@
     width: calc(100% - 5px) !important;
 }
 
-.view-size-medium .events .win-listview .win-vertical .win-itemscontainer {
-    width: 700px !important;
-}
-
 .view-size-medium .events .win-listview .win-gridlayout .win-container {
     margin: 10px;
 }
 
-.view-size-medium .events .event-item {
-    width: 315px;
-}
 /*
 .view-size-medium .events .hero-image-container > img {
     height: 100%;
@@ -268,15 +245,6 @@
     use: .view-size-medium-small
 */
 
-.view-size-medium-small .events .win-listview .win-vertical .win-itemscontainer {
-    width: 500px !important;
-}
-
-.view-size-medium-small .events .event-item {
-    width: 215px;
-}
-
-
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
         }
@@ -295,18 +263,9 @@
     width: 100% !important;
 }
 
-.view-size-small .events .win-listview .win-vertical .win-itemscontainer {
-    width: 325px !important;
-}
-
 .view-size-small .events .win-listview .win-gridlayout .win-container {
     margin: 30px 10px;
 }
-
-.view-size-small .events .event-item {
-    width: 500px;
-}
-
 
 .view-size-small .events .custlogo {
     width: 50%;
