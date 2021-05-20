@@ -37,7 +37,6 @@
 }
 
 .home .win-listview .win-vertical .win-itemscontainer {
-    width: 1260px !important;
     height: auto !important;
 }
 
@@ -249,14 +248,6 @@
     padding: 15px;
 }
 
-.view-size-biggest .home .win-listview .win-vertical .win-itemscontainer {
-    width: 1100px !important;
-}
-
-.view-size-biggest .home .event-item {
-    width: 325px;
-}
-
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1099px 
     @media (max-width:1099px) {
@@ -264,14 +255,6 @@
 
     use: .view-size-bigger
 */
-
-.view-size-bigger .home .win-listview .win-vertical .win-itemscontainer {
-    width: 900px !important;
-}
-
-.view-size-bigger .home .event-item {
-    width: 260px;
-}
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
@@ -290,32 +273,16 @@
 
 .view-size-medium .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 5px;
-    width: calc(100% - 5px) !important;
+    width: calc(100% - 10px) !important;
 }
 
 .view-size-medium .home .win-listview .win-groupheader {
     width: calc(100% - 30px);
 }
 
-.view-size-medium .home .win-listview .win-vertical .win-itemscontainer {
-    width: 700px !important;
-}
-
-
 .view-size-medium .home .win-listview .win-gridlayout .win-container {
     margin: 10px;
 }
-
-
-.view-size-medium .home .event-item {
-    width: 315px;
-}
-/*
-.view-size-medium .home .hero-image-container > img {
-    height: 100%;
-    width: auto;
-}
-*/
 
 .view-size-medium .home .content-header-line > h1 {
     font-size: 1.2em;
@@ -330,14 +297,6 @@
 
     use: .view-size-medium-small
 */
-
-.view-size-medium-small .home .win-listview .win-vertical .win-itemscontainer {
-    width: 500px !important;
-}
-
-.view-size-medium-small .home .event-item {
-    width: 215px;
-}
 
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
@@ -361,19 +320,9 @@
     width: calc(100% - 10px);
 }
 
-.view-size-small .home .win-listview .win-vertical .win-itemscontainer {
-    width: 325px !important;
-}
-
 .view-size-small .home .win-listview .win-gridlayout .win-container {
     margin: 30px 10px;
 }
-
-
-.view-size-small .home .event-item {
-    width: 500px;
-}
-
 
 .view-size-small .home .custlogo {
     width: 50%;

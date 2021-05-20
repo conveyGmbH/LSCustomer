@@ -468,18 +468,58 @@
 
             var adjustGroupHeaderSize = function() {
                 Log.call(Log.l.trace, "Home.Controller.");
-                var winGroupHeaderContainer, i;
+                var i;
                 var ret = new WinJS.Promise.as().then(function() {
                     if (listView) {
-                        winGroupHeaderContainer = listView.querySelectorAll(".win-groupheadercontainer");
-                        if (winGroupHeaderContainer) {
-                            for (i = 0; i < winGroupHeaderContainer.length; i++) {
-                                if (winGroupHeaderContainer[i] && winGroupHeaderContainer[i].style) {
-                                    winGroupHeaderContainer[i].style.width = listView.clientWidth.toString() + "px";
-                                    var winGroupHeader = winGroupHeaderContainer[i].querySelector(".group-header");
-                                    if (winGroupHeader) {
-                                        var heightGroupHeader = winGroupHeader.clientHeight + 40;
-                                        winGroupHeaderContainer[i].style.height = heightGroupHeader.toString() + "px";
+                        var winSurface = listView.querySelector(".win-surface");
+                        if (winSurface) {
+                            var winGroupHeaderContainers = listView.querySelectorAll(".win-groupheadercontainer");
+                            if (winGroupHeaderContainers) {
+                                for (i = 0; i < winGroupHeaderContainers.length; i++) {
+                                    var winGroupHeaderContainer = winGroupHeaderContainers[i];
+                                    if (winGroupHeaderContainer && winGroupHeaderContainer.style) {
+                                        winGroupHeaderContainer.style.width = winSurface.clientWidth.toString() + "px";
+                                        var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
+                                        if (winGroupHeader) {
+                                            var heightGroupHeader = winGroupHeader.clientHeight + 40;
+                                            winGroupHeaderContainer.style.height = heightGroupHeader.toString() + "px";
+                                        }
+                                    }
+                                }
+                            }
+                            var winItemsContainers = listView.querySelectorAll(".win-itemscontainer");
+                            if (winItemsContainers) {
+                                for (i = 0; i < winItemsContainers.length; i++) {
+                                    var winItemsContainer = winItemsContainers[i];
+                                    if (winItemsContainer && winItemsContainer.style) {
+                                        winItemsContainer.style.width = winSurface.clientWidth.toString() + "px";
+                                    }
+                                }
+                            }
+                            var eventItems = listView.querySelectorAll(".event-item");
+                            if (eventItems) {
+                                var tilesPerRow = 4;
+                                var margin = 15;
+                                if (WinJS.Utilities.hasClass(pageElement, "view-size-biggest")) {
+                                    tilesPerRow = 3;
+                                }
+                                if (WinJS.Utilities.hasClass(pageElement, "view-size-bigger")) {
+                                    tilesPerRow = 2;
+                                }
+                                if (WinJS.Utilities.hasClass(pageElement, "view-size-medium")) {
+                                    margin = 10;
+                                }
+                                if (WinJS.Utilities.hasClass(pageElement, "view-size-medium-small")) {
+                                    tilesPerRow = 1;
+                                }
+                                if (WinJS.Utilities.hasClass(pageElement, "view-size-small")) {
+                                    tilesPerRow = 1;
+                                }
+                                var tileWidth = winSurface.clientWidth / tilesPerRow - 2*margin - 1;
+                                for (i = 0; i < eventItems.length; i++) {
+                                    var eventItem = eventItems[i];
+                                    if (eventItem && eventItem.style) {
+                                        eventItem.style.width = tileWidth.toString() + "px";
                                     }
                                 }
                             }
