@@ -20,10 +20,10 @@
                             <span class="large_field" data-win-bind="textContent: dataText.on_text_wait_body"></span>
                         </div>
 
-                        <div class="field_line_full" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplay">
+                        <!--<div class="field_line_full" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplay">
                             <span class="large_field"
                                   data-win-res="{textContent: 'countdown.countDownOverMessage'}"></span>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="countdown-container" data-win-bind="style.display: countdownIsOver Binding.Converter.toDisplayNone">
                         
@@ -49,7 +49,9 @@
                                 <span class="countdown win-h5" data-win-res="{textContent: 'register.seconds'}"></span>
                             </div>
                         </div>
-                            
+                        <div class="field_line_full">
+                            <span class="large_field" data-win-bind="textContent: dataText.on_text_wait_body"></span><!--registerMessage-->
+                        </div>
                      
 
 
