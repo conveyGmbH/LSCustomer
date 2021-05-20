@@ -303,16 +303,16 @@
                 selectOnlyThis: function (event) {
                     //loope über liste
                     var fields = fragmentElement.querySelectorAll(".anrede");
-                    if (event.currentTarget.checked) {
+                    var element = event.currentTarget || event.target;
+                    if (element.checked) {
                     for (var i = 0; i < fields.length; i++) {
                         fields[i].checked = false;
                     }
-                    event.currentTarget.checked = true;
+                        element.checked = true;
                     that.binding.dataRegister.AnredeID = parseInt(event.currentTarget.textContent);
                     } else {
-                        that.binding.dataRegister.AnredeID = null;
+                        that.binding.dataRegister.AnredeID = 0;
                     }
-
                 }
             };
 

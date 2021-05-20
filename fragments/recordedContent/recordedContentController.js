@@ -29,7 +29,10 @@
                     hour: "",
                     minute: "",
                     second: ""
-                }
+                },
+                dataText: AppBar.scope.binding.dataText,
+                dataDoc: AppBar.scope.binding.dataDoc,
+                dataDocText: AppBar.scope.binding.dataDocText
             }, commandList]);
 
             var that = this;

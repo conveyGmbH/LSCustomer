@@ -106,7 +106,7 @@
                             
                             <div class="field_line">
                                 <label class="list-privacy-field">
-                                    <input type="checkbox" class="win-checkbox" value="1" data-win-bind="checked: privacyPolicyFlag" /> <!--onclick  -->
+                                    <input type="checkbox" class="win-checkbox" value="1" data-win-bind="checked: dataRegister.privacyPolicyFlag Binding.Mode.twoway" /> <!--onclick  -->
                                     <span class="checkbox" data-win-bind="textContent: dataText.ev_text_privacy_body"></span>
                                 </label>
                             </div>
@@ -125,7 +125,6 @@
                                 </div>
                             </div>
                             <!-- Add font awesome icons -->
-
                             <!--<div class="field_line">
                                 <div class="button_line">
                                     <div class="circle facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)">
@@ -155,7 +154,6 @@
             </div>-->
                                 <!--</div>
                             </div>-->
-                           
                             <!--<div class="field_line field_line_full">
         <div class="button_line">
             <a class="fa fa-facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
