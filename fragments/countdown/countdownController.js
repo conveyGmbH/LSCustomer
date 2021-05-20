@@ -30,7 +30,10 @@
                     minute: "",
                     second: ""
                 },
-                countdownIsOver: false
+                countdownIsOver: false,
+                dataText: AppBar.scope.binding.dataText,
+                dataDoc: AppBar.scope.binding.dataDoc,
+                dataDocText: AppBar.scope.binding.dataDocText
             }, commandList]);
 
             var that = this;

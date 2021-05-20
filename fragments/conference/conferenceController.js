@@ -20,7 +20,10 @@ var __meteor_runtime_config__;
                 eventId: options ? options.eventId : null,
                 dataConference: {
                     media: ""
-                }
+                },
+                dataText: AppBar.scope.binding.dataText,
+                dataDoc: AppBar.scope.binding.dataDoc,
+                dataDocText: AppBar.scope.binding.dataDocText
             }, commandList]);
 
             this.meetingDoc = null;
