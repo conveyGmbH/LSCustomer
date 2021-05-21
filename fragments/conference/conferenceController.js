@@ -53,9 +53,9 @@ var __meteor_runtime_config__;
                     var newHostname = "(function(){return\"" + a.hostname + "\"})()";
                     var newHref = "(function(){return\"" + a.href + "\"})()";
                     var scriptText = req.responseText
-                        .replaceAll(/window\.document\.location\.hostname/g, newHostname)
-                        .replaceAll(/window\.location\.hostname/g, newHostname)
-                        .replaceAll(/window\.location\.href/g, newHref)
+                        .replace(/window\.document\.location\.hostname/g, newHostname)
+                        .replace(/window\.location\.hostname/g, newHostname)
+                        .replace(/window\.location\.href/g, newHref)
                         ;
                     return scriptText;
                 });
@@ -250,8 +250,8 @@ var __meteor_runtime_config__;
                     var compatibilitySrc = '="' + abs("lib/compatibility/scripts");
                     var html5ClientSrc = '="' + abs("/html5client");
                     var html5Client = req.responseText
-                        .replaceAll(/="compatibility/g, compatibilitySrc)
-                        .replaceAll(/="\/html5client/g, html5ClientSrc);
+                        .replace(/="compatibility/g, compatibilitySrc)
+                        .replace(/="\/html5client/g, html5ClientSrc);
                     var pos = html5Client.indexOf("__meteor_runtime_config__");
                     if (pos > 0) {
                         pos = html5Client.indexOf("</script>", pos);
@@ -496,7 +496,7 @@ var __meteor_runtime_config__;
                                 window.history.pushState(state, title, location);
                             }
                         };
-                        options.url = url.replaceAll(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
+                        options.url = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
                         return renderImpl(options.url, conference, false);
                     } else {
                         // wenn keine conference vorhanden dann zeige meldung -> Conference läuft noch nicht -> zurück button auf events
