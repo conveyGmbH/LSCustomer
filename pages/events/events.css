@@ -17,19 +17,19 @@
     height: 100%;
 }
 
-/* width of content should be limited to 1100px (view-size-bigger), so add margin on wide screens */
-
-.events .win-listview .win-vertical .win-gridlayout.win-surface {
-    -ms-grid-rows: auto !important;
-    margin-left: calc(50% - 630px);
-    width: 1280px !important;
-}
+/* width of content should be limited to 1300px (view-size-biggest), so add margin on wide screens */
 
 .events .win-listview .win-vertical .win-footercontainer,
 .events .win-listview .win-vertical .win-headercontainer {
-    margin-left: calc(50% - 630px);
-    width: 1230px;
+    margin-left: calc(50% - 620px);
+    width: 1210px;
     padding: 15px;
+}
+
+.events .win-listview .win-vertical .win-gridlayout.win-surface {
+    -ms-grid-rows: auto !important;
+    margin-left: calc(50% - 620px);
+    width: 1260px !important;
 }
 
 .events .win-listview .win-vertical .win-itemscontainer {
