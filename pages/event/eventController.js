@@ -372,7 +372,9 @@
                     return that.updateFragment();
                 }).then(function () {
                     AppBar.notifyModified = true;
-                    return WinJS.Promise.as();
+                    return WinJS.Promise.timeout(1000);
+                }).then(function () {
+                    Application.navigator._resized();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
