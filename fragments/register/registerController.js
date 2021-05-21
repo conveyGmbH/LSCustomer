@@ -53,55 +53,60 @@
 
             var fetchMail = function (response) {
                 var vAccessToken = response.authResponse.accessToken;
-                FB.api('/me', 'GET', { "fields": "name, first_name, last_name, email", "access_token": vAccessToken },
-                    function (response) {
-                        var ctrl = document.getElementById("statustext");
-                        if (response.email) {
-                            that.binding.dataRegister.Email = response.email;
-                            if (AppData._persistentStates.registerData.Email !== that.binding.dataRegister.Email) {
-                                AppData._persistentStates.registerData.Email = that.binding.dataRegister.Email;
+                if (typeof FB === "object") {
+                    FB.api('/me', 'GET', { "fields": "name, first_name, last_name, email", "access_token": vAccessToken },
+                        function (response) {
+                            var ctrl = document.getElementById("statustext");
+                            if (response.email) {
+                                that.binding.dataRegister.Email = response.email;
+                                if (AppData._persistentStates.registerData.Email !== that.binding.dataRegister.Email) {
+                                    AppData._persistentStates.registerData.Email = that.binding.dataRegister.Email;
+                                }
+                                that.binding.dataRegister.Name = response.name;
+                                if (ctrl) {
+                                    ctrl.innerHTML = "Hello " + that.binding.dataRegister.Name + ", your mail address is " + that.binding.dataRegister.Email;
+                                }
+                                ctrl = document.getElementById("loginFBbutton");
+                                ctrl.style.display = "none";
+                                ctrl = document.getElementById("logoutbutton");
+                                ctrl.style.display = "";
+                            } else {
+                                ctrl.innerHTML = "Hello " + response.name + ", your mail address is not accessible, please log in once more";
                             }
-                            that.binding.dataRegister.Name = response.name;
-                            if (ctrl) {
-                                ctrl.innerHTML = "Hello " + that.binding.dataRegister.Name + ", your mail address is " + that.binding.dataRegister.Email;
-                            }
-                            ctrl = document.getElementById("loginFBbutton");
-                            ctrl.style.display = "none";
-
-                            ctrl = document.getElementById("logoutbutton");
-                            ctrl.style.display = "";
-                        } else {
-                            ctrl.innerHTML = "Hello " + response.name + ", your mail address is not accessible, please log in once more";
                         }
-                    }
-                );
+                    );
+                }
             }
             this.fetchMail = fetchMail;
 
             var doLogin = function () {
-                FB.login(function (response) {
-                    fetchMail(response);
-                }, {
+                if (typeof FB === "object") {
+                    FB.login(function (response) {
+                        fetchMail(response);
+                    }, {
                         scope: 'email', return_scopes: true
                     });
+                }
             }
             this.doLogin = doLogin;
 
             var doLogout = function () {
-                FB.logout(function (response) {
-                    var ctrl = document.getElementById("loginFBbutton");
-                    ctrl.style.display = "";
+                if (typeof FB === "object") {
+                    FB.logout(function (response) {
+                        var ctrl = document.getElementById("loginFBbutton");
+                        ctrl.style.display = "";
 
-                    ctrl = document.getElementById("logoutbutton");
-                    ctrl.style.display = "none";
+                        ctrl = document.getElementById("logoutbutton");
+                        ctrl.style.display = "none";
 
-                    ctrl = document.getElementById("statustext");
-                    if (ctrl) {
-                        ctrl.innerHTML = "You are now logged out.";
-                    }
-                    that.binding.dataRegister.Email = "";
-                    that.binding.dataRegister.Name = "";
-                });
+                        ctrl = document.getElementById("statustext");
+                        if (ctrl) {
+                            ctrl.innerHTML = "You are now logged out.";
+                        }
+                        that.binding.dataRegister.Email = "";
+                        that.binding.dataRegister.Name = "";
+                    });
+                }
             }
             this.doLogout = doLogout;
 
@@ -369,38 +374,40 @@
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 return that.loadData();
             }).then(function () {
-                FB.init({
-                    appId: '1889799884567520',
-                    autoLogAppEvents: true,
-                    xfbml: false, // Only needed for "Social Plugins"
-                    version: 'v9.0',
-                    status: true
-                });
-                FB.getLoginStatus(function (response) {
-                    if (response.status === "connected") {
-                        var ctrl = document.getElementById("statustext");
-                        if (ctrl) {
-                            ctrl.innerHTML = "Fetching data...";
+                if (typeof FB === "object") {
+                    FB.init({
+                        appId: '1889799884567520',
+                        autoLogAppEvents: true,
+                        xfbml: false, // Only needed for "Social Plugins"
+                        version: 'v9.0',
+                        status: true
+                    });
+                    FB.getLoginStatus(function (response) {
+                        if (response.status === "connected") {
+                            var ctrl = document.getElementById("statustext");
+                            if (ctrl) {
+                                ctrl.innerHTML = "Fetching data...";
+                            }
+                            that.binding.registerStatus = "Fetching data...";
+                            // Everything's alright, fetch user's mail address...
+                            that.fetchMail(response);
+                        } else if (response.status === "not_authorized") {
+                            // User logged in to Facebook but application is not (yet) authorized
+                            var ctrl = document.getElementById("statustext");
+                            if (ctrl) {
+                                ctrl.innerHTML = "App not authorized";
+                            }
+                            that.binding.registerStatus = "App not authorized";
+                        } else {
+                            // User is not logged in to Facebook
+                            var ctrl = document.getElementById("statustext");
+                            if (ctrl) {
+                                ctrl.innerHTML = "Not logged in to Facebook";
+                            }
+                            that.binding.registerStatus = ""; /*Not logged in to Facebook*/
                         }
-                        that.binding.registerStatus = "Fetching data...";
-                        // Everything's alright, fetch user's mail address...
-                        that.fetchMail(response);
-                    } else if (response.status === "not_authorized") {
-                        // User logged in to Facebook but application is not (yet) authorized
-                        var ctrl = document.getElementById("statustext");
-                        if (ctrl) {
-                            ctrl.innerHTML = "App not authorized";
-                        }
-                        that.binding.registerStatus = "App not authorized";
-                    } else {
-                        // User is not logged in to Facebook
-                        var ctrl = document.getElementById("statustext");
-                        if (ctrl) {
-                            ctrl.innerHTML = "Not logged in to Facebook";
-                        }
-                        that.binding.registerStatus = ""; /*Not logged in to Facebook*/
-                    }
-                });
+                    });
+                }
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
             });
