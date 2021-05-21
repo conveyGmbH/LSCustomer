@@ -542,6 +542,12 @@
                                 getResourceText("register.eventNotStartedYet");
 
                         }
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
+                        that.binding.showRegister = false;
+                        that.binding.showTeaser = false;
+                        that.binding.showCountdown = false;
+                        that.binding.showConference = false;
+                        return that.getFragmentByName("recordedContent");
                     } else {
                         if (registerFragment &&
                             registerFragment.controller &&
