@@ -28,6 +28,7 @@
                 showRecordedContent: false,
                 registerStatus: "",
                 //showRegisterConfirm: false,
+                recordedLink: null,
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
@@ -354,6 +355,9 @@
                                     if (result.EMail && result.EMail !== AppData._persistentStates.registerData.Email) {
                                         AppData._persistentStates.registerData.Email = result.EMail;
                                     }
+                                    if (result.ConferenceLink && result.ConfirmStatusID === 20) {
+                                        that.binding.recordedLink = result.ConferenceLink;
+                                    }
                                     if (result.ResultMessage) {
                                         AppData._persistentStates.registerData.resultMessage = result.ResultMessage;
                                     }
@@ -547,6 +551,7 @@
                         that.binding.showTeaser = false;
                         that.binding.showCountdown = false;
                         that.binding.showConference = false;
+                        that.binding.showRecordedContent = true;
                         return that.getFragmentByName("recordedContent");
                     } else {
                         if (registerFragment &&

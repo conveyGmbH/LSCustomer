@@ -447,7 +447,7 @@ var __meteor_runtime_config__;
                                 window.history.pushState(state, title, location);
                             }
                         };
-                        options.url = url.replaceAll(/https?:\/\/[\.a-zA-Z]+\/html5client/g, '/html5client');
+                        options.url = url.replaceAll(/https?:\/\/[\.a-zA-Z]+\/playback/g, '/playback');
                         return renderImpl(options.url, recordedContent, false);
                     } else {
                         // wenn keine recordedContent vorhanden dann zeige meldung -> recordedContent läuft noch nicht -> zurück button auf events
