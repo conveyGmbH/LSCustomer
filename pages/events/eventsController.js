@@ -327,6 +327,9 @@
                             }
                         }
                     }
+                    return WinJS.Promise.timeout(1000);
+                }).then(function () {
+                    Application.navigator._resized();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
