@@ -190,7 +190,7 @@ var __meteor_runtime_config__;
                 //     trailing out-of-line script.
                 //
                 var lastNonInlineScriptPromise = WinJS.Promise.as();
-                state.headScripts = h.getElementsByTagName('script');
+                state.headScripts = cd.getElementsByTagName('script');
                 forEach(state.headScripts, function (e, i) {
                     var result = addScript(e, href, i, lastNonInlineScriptPromise);
                     if (result) {
@@ -220,7 +220,7 @@ var __meteor_runtime_config__;
                 var localScripts = b.getElementsByTagName("script");
                 while (localScripts.length > 0) {
                     var s = localScripts[0];
-                    state.localScripts.push(s);
+                    //state.localScripts.push(s);
                     s.parentNode.removeChild(s);
                 }
 
@@ -253,27 +253,22 @@ var __meteor_runtime_config__;
 
             var getFragmentContentsXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
+                    var targetPath = req.responseURL.split('?')[0];
+                    targetPath = targetPath.substr(0, targetPath.lastIndexOf('/') + 1);
                     function abs(uri) {
-                        a.href = uri;
-                        return a.href;
-                    }
-                    var compatibilitySrc = '="' + abs("lib/compatibility/scripts");
-                    var html5ClientSrc = '="' + abs("/html5client");
-                    var html5Client = req.responseText
-                        .replace(/="compatibility/g, compatibilitySrc)
-                        .replace(/="\/html5client/g, html5ClientSrc);
-                    var pos = html5Client.indexOf("__meteor_runtime_config__");
-                    if (pos > 0) {
-                        pos = html5Client.indexOf("</script>", pos);
-                        if (pos > 0) {
-                            html5Client = html5Client.substr(0, pos) +
-                                ";__meteor_runtime_config__.ROOT_URL = \"" + abs("/") + "\"" +
-                                ";__meteor_runtime_config__.ROOT_URL_PATH_PREFIX = \"" + abs("/html5client") + "\"" +
-                                html5Client.substr(pos);
-
+                        if (uri.substr(0, 1) !== '/') {
+                            return targetPath + uri;
+                        } else {
+                            return uri;
                         }
                     }
-                    return html5Client;
+
+                    var hrefSrc = 'href="' + targetPath;
+                    var srcSrc = 'src="' + targetPath;
+                    var playback = req.responseText
+                        .replace(/href="/g, hrefSrc)
+                        .replace(/src="/g, srcSrc);
+                    return playback;
                 });
             }
             var getFragmentContents = getFragmentContentsXhr;
