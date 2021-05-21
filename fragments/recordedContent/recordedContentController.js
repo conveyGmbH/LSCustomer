@@ -6,7 +6,7 @@
 /// <reference path="~/www/lib/convey/scripts/fragmentController.js" />
 /// <reference path="~/www/scripts/generalData.js" />
 /// <reference path="~/www/fragments/recordedContent/recordedContentService.js" />
-
+var __meteor_runtime_config__;
 (function () {
     "use strict";
 
@@ -29,6 +29,9 @@
                     hour: "",
                     minute: "",
                     second: ""
+                },
+                dataConference: {
+                    media: ""
                 },
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
@@ -426,33 +429,11 @@
             var loadData = function () {
                 Log.call(Log.l.trace, "RecordedContent.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
-                var ret = new WinJS.Promise.as()/*.then(function () {
-                    if (that.binding.eventId) {
-                        return AppData.call("PRC_RegisterContact",
-                            {
-                                pVeranstaltungID: that.binding.eventId,
-                                pUserToken: '0b24e593-127e-46f6-b034-c2cc178d8c71',
-                                pEMail: that.binding.dataRegister.Email,
-                                pAddressData: null,
-                                pBaseURL: AppData.getBaseURL(AppData.appSettings.odata.onlinePort)
-                            },
-                            function (json) {
-                                if (json && json.d && json.d.results) {
-                                    // that.binding.dataRegister = json.d.results[0];
-                                    var result = json.d.results[0];
+                var ret = new WinJS.Promise.as().then(function () {
+                    var url;
+                    if (AppBar.scope.binding.recordedLink) {
+                        url = AppBar.scope.binding.recordedLink;
                                 }
-                                //that.binding.dataRegister.Email = "";
-                                Log.print(Log.l.trace, "PRC_RegisterContact success!");
-                            },
-                            function (error) {
-                                Log.print(Log.l.error, "PRC_RegisterContact error! ");
-                            });
-                    } else {
-                        return WinJS.Promise.as();
-                    }
-
-                })*/.then(function () {
-                    var url = that.binding.dataConference && that.binding.dataConference.URL;
                     if (url) {
                         var query = url.split("?")[1];
                         if (window.history && query && Application.query) {
