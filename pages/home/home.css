@@ -116,7 +116,6 @@
 }
 
 .home .content-header-line > h1 {
-    
 }
 
 .home .content-header-line > h2 {
@@ -327,3 +326,16 @@
 .view-size-small .home .content-header-line > h2 {
     font-size: 16px;
 }
+
+.view-size-small .home .caption-sort {
+    width: 100%;
+}
+
+.view-size-small .home .caption-filter, .home .caption-search {
+    width: 100%;
+    height: auto;
+    margin: 5px 0;
+    padding: 5px 0;
+}
+
+

@@ -75,57 +75,58 @@
     height: auto;
 }
 
-    .event .section-1 { grid-column: 1/span 4;}
-    .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
-    .event .section-3 { grid-area: 2/1/span 3/span 4;}
-    .event .section-4 { grid-area: 5/1/span 3/span 4;}
-    .event .body-content {margin: 0 10%;}
+.event .section-1 { grid-column: 1/span 4;}
+.event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
+.event .section-3 { grid-area: 2/1/span 3/span 4;}
+.event .section-4 { grid-area: 5/1/span 3/span 4;}
+.event .body-content {margin: 0 10%;}
 
-    .event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px;}
-    .event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
-    .event .speaker-image-container {
-        display: block;
-        position: relative;
-        float: left;
-        width: 20%;
-        height: auto;
-        margin: 5px;
-        padding: 5px;
-    }
-    .event .speaker-image-container > img {
-        display: block;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        margin: 0 auto;
-        object-fit: cover;
-    }
-    .event .speaker-text { display: block; position: relative; width: 75%; float: right; }
-    .event .speaker-text > span { display: block; margin: 0 0 0 15px; padding: 5px; font-size: 16px;}
-    .event .speaker-text .win-h3 > span {
-        color: #2a2f3d;
-        font-size: 18px;
-        
-    }
+.event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px;}
+.event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
+.event .speaker-image-container {
+    display: block;
+    position: relative;
+    float: left;
+    width: 20%;
+    height: auto;
+    margin: 5px;
+    padding: 5px;
+}
+.event .speaker-image-container > img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    margin: 0 auto;
+    object-fit: cover;
+}
+.event .speaker-text { display: block; position: relative; width: 75%; float: right; }
+.event .speaker-text > span { display: block; margin: 0 0 0 15px; padding: 5px; font-size: 16px;}
+.event .speaker-text .win-h3 > span {
+    color: #2a2f3d;
+    font-size: 18px;
+}
+.event .speaker-name .win-h3 {
+    font-weight: 600;
+}
 .event .speaker-title .win-type-caption {
     color: #2a2f3d;
     font-size: 16px;
     font-weight: 600;
 }
 
-    .conference-fragmenthost { width: auto; height: auto; margin: 0; background-color: #000000;}
-    .teaser-fragmenthost
-    {
-        height: auto;
-        margin-top: 20px;
-    }
+.conference-fragmenthost { width: auto; height: auto; margin: 0; background-color: #000000;}
+.teaser-fragmenthost {
+    height: auto;
+    margin-top: 20px;
+}
 
-    .register-fragmenthost {
-        height: auto;
-        margin-top: 20px;
-    }
+.register-fragmenthost {
+    height: auto;
+    margin-top: 20px;
+}
 .countdown-fragmenthost {
     position: fixed;
     float: right;
