@@ -45,8 +45,8 @@
                 that.binding.dataEvent = newDataEvent;
                 // convert Startdatum 
                 that.binding.dataEvent.dateBegin = getDateObject(newDataEvent.Startdatum);
-                that.binding.dataEvent.dateStartDatum = getDateObject(newDataEvent.Startdatum);
-                that.binding.dataEvent.dateEndDatum = getDateObject(newDataEvent.Startdatum);
+                that.binding.dataEvent.dateStartDatum = getDateObject(newDataEvent.LiveStartDatum);
+                that.binding.dataEvent.dateEndDatum = getDateObject(newDataEvent.LiveEndDatum);
                 if (AppData._persistentStates.registerData.dateBegin !== that.binding.dataEvent.dateBegin) {
                     AppData._persistentStates.registerData.dateBegin = that.binding.dataEvent.dateBegin;
                     Application.pageframe.savePersistentStates();
