@@ -262,6 +262,20 @@
     include("lib/WinJS/scripts/base.min.js").then(function() {
         return include("lib/WinJS/scripts/ui.js");
     }).then(function() {
+        return include("lib/jquery/scripts/jquery.min.js");
+    }).then(function() {
+        return include("lib/jquery/scripts/jquery-ui.min.js");
+    }).then(function() {
+        return include("lib/moment/scripts/moment-with-locales.min.js");
+    }).then(function () {
+        return include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js");
+    }).then(function() {
+        return include("lib/ics/ics.js");
+    }).then(function () {
+        return include("lib/FileSaver/scripts/FileSaver.js");
+    }).then(function () {
+        return include("lib/blob/Blob.js");
+    }).then(function() {
         return include("lib/convey/scripts/logging.js");
     }).then(function() {
         return include("lib/convey/scripts/winjs-es6promise.js");
@@ -293,24 +307,6 @@
         return include("lib/convey/scripts/fragmentController.js");
     }).then(function() {
         return include("scripts/generalData.js");
-    }).then(function() {
-        return include("lib/moment/scripts/moment-with-locales.min.js");
-    }).then(function () {
-        return include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js");
-    }).then(function() {
-        return include("lib/ics/ics.js");
-    }).then(function () {
-        return include("lib/FileSaver/scripts/FileSaver.js");
-    }).then(function () {
-        return include("lib/blob/Blob.js");
-    }).then(function () {
-        return include("lib/fontawesome/js/all.js");
-    }).then(function () {
-        return include("lib/fontawesome/css/fontawesome.css");
-    }).then(function () {
-        return include("lib/fontawesome/css/brands.css");
-    }).then(function () {
-        return include("lib/fontawesome/css/brands.css");
     }).then(function () {
         createRootElement("#ls-customer-host");
         return include("scripts/index.js");

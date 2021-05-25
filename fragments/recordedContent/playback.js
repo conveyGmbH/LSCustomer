@@ -511,12 +511,12 @@ function forceMediaEvents() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+window.playbackLoaded = function() {
   logger.info("==DOM content loaded");
   loadMetadata();
   checkMedias();
   document.dispatchEvent(new CustomEvent('content-ready', {'detail': 'dom'}));
-}, false);
+}
 
 function loadPlayback() {
   logger.info("==Loading playback");

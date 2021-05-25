@@ -12,6 +12,49 @@ var __meteor_runtime_config__;
 
     var nav = WinJS.Navigation;
 
+    var include = function(file, fnc) {
+        var n, s, l, e = {
+                         setNext: function(next) {
+                             return n = next;
+                         },
+                         load: function() {
+                             if (s && l) {
+                                 s.removeEventListener("load", l);
+                                 l = null;
+                             }
+                             if (n && typeof n.next === "function") {
+                                 window.setTimeout(function() {
+                                     n.next();
+                                 }, 0);
+                             }
+                         },
+                         next: function() {
+                             if (typeof fnc === "function") {
+                                 var r = fnc();
+                                 if (n && typeof n.next === "function") {
+                                     r.setNext(n);
+                                     n = null;
+                                 }
+                             } 
+                         },
+                         then: function(f) {
+                             n = include(null, f);
+                             return n;
+                         }
+                     }
+        if (typeof file === "string") {
+            window.setTimeout(function() {
+                s = document.createElement("SCRIPT");
+                s.type = "text/javascript";
+                s.src = newBaseHref + file;
+                l = e.load;
+                s.addEventListener("load", l);
+                document.head.appendChild(s);
+            }, 0);
+        }
+        return e;
+    };
+
     WinJS.Namespace.define("RecordedContent", {
         Controller: WinJS.Class.derive(Fragments.Controller, function Controller(fragmentElement, options, commandList) {
             Log.call(Log.l.trace, "RecordedContent.Controller.", "eventId=" + (options && options.eventId));
@@ -253,21 +296,10 @@ var __meteor_runtime_config__;
 
             var getFragmentContentsXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
-                    var targetPath = req.responseURL.split('?')[0];
-                    targetPath = targetPath.substr(0, targetPath.lastIndexOf('/') + 1);
-                    function abs(uri) {
-                        if (uri.substr(0, 1) !== '/') {
-                            return targetPath + uri;
-                        } else {
-                            return uri;
-                        }
-                    }
-
-                    var hrefSrc = 'href="' + targetPath;
-                    var srcSrc = 'src="' + targetPath;
+                    var emptyStr = '';
                     var playback = req.responseText
-                        .replace(/href="/g, hrefSrc)
-                        .replace(/src="/g, srcSrc);
+                        .replace(/<link.+>/g, emptyStr)
+                        .replace(/<script.+<\/script>/g, emptyStr);
                     return playback;
                 });
             }
@@ -326,7 +358,9 @@ var __meteor_runtime_config__;
                         cacheStore[fragmentId] = state;
                     }
                     var result = state.promise = createEntry(state, href);
-                    state.promise.then(function () { delete state.promise; });
+                    state.promise.then(function() {
+                         delete state.promise;
+                    });
                     return result;
                 }
             }
@@ -454,40 +488,13 @@ var __meteor_runtime_config__;
                         } else {
                             return WinJS.Promise.as();
                         }
-                        }
+                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
             }
             this.loadData = loadData;
 
-            /*var saveData = function (complete, error) {
-                var err;
-                Log.call(Log.l.trace, "RegisterConfirm.Controller.");
-                AppData.setErrorMsg(that.binding);
-                AppBar.busy = true;
-                var ret = AppData.call("PRC_RegisterContact", {
-                    pVeranstaltungID: that.binding.eventId,
-                    pUserToken: AppData._persistentStates.registerData.userToken,
-                    pEMail: that.binding.dataRegister.Email,
-                    pAddressData: null,
-                    pBaseURL: ''
-                }, function (json) {
-                    if (json && json.d && json.d.results) {
-                        var result = json.d.results[0];
-                    }
-                    AppBar.busy = false;
-                    //that.binding.dataRegister.Email = "";
-                    Register.controller.binding.dataRegister.Email = "";
-                    Log.print(Log.l.trace, "PRC_RegisterContact success!");
-                }, function (error) {
-                    Log.print(Log.l.error, "PRC_RegisterContact error! ");
-                });
-                Log.ret(Log.l.trace);
-                return ret;
-            }
-            this.saveData = saveData;
-            */
             // define handlers
            /* this.eventHandlers = {
                 clickOk: function (event) {
@@ -508,13 +515,13 @@ var __meteor_runtime_config__;
                 }*/
             };
 
-           // that.setDataRegister(getEmptyDefaultValue(Register.registerView.defaultValue));
-
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
+                $(document).foundation();
+                window.playbackLoaded();
             });
             Log.ret(Log.l.trace);
         })
