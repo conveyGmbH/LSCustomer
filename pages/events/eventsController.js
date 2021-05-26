@@ -147,7 +147,7 @@
             this.setDataDoc = setDataDoc;
 
             var setDataDocText = function (results) {
-                Log.call(Log.l.trace, "Event.Controller.");
+                Log.call(Log.l.trace, "Events.Controller.");
                 var newDataDocText = {};
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
@@ -220,7 +220,7 @@
             this.loadTextDoc = loadTextDoc;
 
             var loadEventText = function (eventIds) {
-                Log.call(Log.l.trace, "Event.Controller.");
+                Log.call(Log.l.trace, "Events.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     //load of format relation record data
@@ -271,7 +271,7 @@
             this.loadEventText = loadEventText;
 
             var adjustContainerSize = function() {
-                Log.call(Log.l.trace, "Home.Controller.");
+                Log.call(Log.l.trace, "Events.Controller.");
                 var i;
                 var ret = new WinJS.Promise.as().then(function() {
                     if (listView) {
@@ -359,7 +359,7 @@
             this.loadDoc = loadDoc;
 
             var loadEventDocs = function (eventIds) {
-                Log.call(Log.l.trace, "Event.Controller.");
+                Log.call(Log.l.trace, "Events.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     //load of format relation record data

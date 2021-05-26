@@ -19,7 +19,9 @@
             Fragments.Controller.apply(this, [fragmentElement, {
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
-                dataDocText: AppBar.scope.binding.dataDocText
+                dataDocText: AppBar.scope.binding.dataDocText,
+                showEvDoc: false,
+                showOnDoc: false
             }, commandList]);
 
             var that = this;

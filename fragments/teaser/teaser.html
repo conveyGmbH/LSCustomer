@@ -21,7 +21,8 @@
                         <!--</div>-->
                         <div class="teaser-container">
                             <div class="ITbackground">
-                                <img class="ipadImg" data-win-bind="src: dataDoc.ev_doc; title: dataDocText.ev_doc_title; alt: dataDocText.ev_doc_alt; longdesc: dataDocText.ev_doc_descr" />
+                                <img class="ipadImg" data-win-bind="src: dataDoc.ev_doc; title: dataDocText.ev_doc_title; alt: dataDocText.ev_doc_alt; longdesc: dataDocText.ev_doc_descr; style.display: showEvDoc Binding.Converter.toDisplay" />
+                                <img class="ipadImg" data-win-bind="src: dataDoc.on_doc; title: dataDocText.on_doc_title; alt: dataDocText.on_doc_alt; longdesc: dataDocText.on_doc_descr; style.display: showOnDoc Binding.Converter.toDisplay" />
                                 <!-- <div>
                 <div class="action-label" data-win-bind="textContent: dataText.teaser.info1"></div>
                 <div class="action-label" data-win-bind="textContent: dataText.teaser.info2"></div>
