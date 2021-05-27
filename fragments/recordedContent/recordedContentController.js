@@ -525,7 +525,9 @@ var __meteor_runtime_config__;
                 if (typeof $(document).foundation === "function") {
                     $(document).foundation();
                 }
-                window.playbackLoaded();
+                if (BBBPlayback && typeof BBBPlayback.playbackLoaded === "function") {
+                    BBBPlayback.playbackLoaded();
+                }
             });
             Log.ret(Log.l.trace);
         })

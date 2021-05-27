@@ -61,8 +61,9 @@
                                 docContainer.style.height = height.toString() + "px";
                                 doResizeContent = true;
                             }
-                            if (doResizeContent && typeof window.resizeContent === "function") {
-                                window.resizeContent();
+                            if (doResizeContent && BBBWriting &&
+                                typeof BBBWriting.resizeContent === "function") {
+                                BBBWriting.resizeContent();
                             }
                         }
                     }
