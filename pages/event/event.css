@@ -24,7 +24,7 @@
     color: #2a2f3d;
 }
 
-.event .win-headercontainer,
+.event .hero-header,
 .event .content-container {
     margin-left: calc(50% - 620px);
     width: 1210px;
@@ -306,7 +306,7 @@
 
     use: .view-size-biggest
 */
-.view-size-biggest .event .win-headercontainer,
+.view-size-biggest .event .hero-header,
 .view-size-biggest .event .content-container {
     margin-left: 20px;
     width: calc(100% - 70px);
@@ -328,7 +328,7 @@
 
     use: .view-size-medium
 */
-.view-size-medium .event .win-headercontainer,
+.view-size-medium .event .hero-header,
 .view-size-medium .event .content-container {
     margin-left: 5px;
     width: calc(100% - 30px);
@@ -390,7 +390,7 @@
         }
     use: .view-size-small
 */
-.view-size-small .event .win-headercontainer,
+.view-size-small .event .hero-header,
 .view-size-small .event .content-container {
     margin-left: 0;
     width: calc(100% - 20px);
