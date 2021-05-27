@@ -32,7 +32,7 @@
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
-                dataDoc: {},
+                dataDoc: getEmptyDefaultValue(Event.medienView.defaultValue),
                 dataDocText: {}
             }, commandList]);
 
@@ -96,17 +96,14 @@
 
             var setDataDoc = function(results) {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var newDataDoc = {};
+                var newDataDoc = getEmptyDefaultValue(Event.medienView.defaultValue);
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
-                        var docContent = row.DocContentDOCCNT1
-                            ? row.DocContentDOCCNT1
-                            : row.DocContentDOCCNT1;
-                        if (docContent) {
-                            var sub = docContent.search("\r\n\r\n");
+                        if (row.DocContentDOCCNT1) {
+                            var sub = row.DocContentDOCCNT1.search("\r\n\r\n");
                             if (sub >= 0) {
-                                var data = docContent.substr(sub + 4);
+                                var data = row.DocContentDOCCNT1.substr(sub + 4);
                                 if (data && data !== "null") {
                                     row.DocContentDOCCNT1 = "data:image/jpeg;base64," + data;
                                 } else {

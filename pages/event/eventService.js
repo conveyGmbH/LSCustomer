@@ -55,6 +55,11 @@
                 });
                 Log.ret(Log.l.trace);
                 return ret;
+            },
+            defaultValue: {
+                ev_doc_mod1: "",
+                ev_doc_mod2: "",
+                ev_doc_mod3: ""
             }
         },
         medienTextView: {
