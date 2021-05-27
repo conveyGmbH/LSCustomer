@@ -21,8 +21,9 @@
             }
 
             Application.Controller.apply(this, [pageElement, {
-                showTeaser: true,
-                showRegister: true,
+                showShare: false,
+                showTeaser: false,
+                showRegister: false,
                 showCountdown: false,
                 showConference: false,
                 showRecordedContent: false,
@@ -480,8 +481,8 @@
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
                 var ret = that.getFragmentByName("teaser").then(function (teaserFragment) {
-                    that.binding.showRegister = true;
-                    that.binding.showTeaser = true;
+                    that.binding.showRegister = false;
+                    that.binding.showTeaser = false;
                     that.binding.showCountdown = false;
                     that.binding.showConference = false;
                     if (teaserFragment &&
@@ -501,6 +502,8 @@
                     if (AppData._persistentStates.registerData.resultCode === 21 ||
                         AppData._persistentStates.registerData.confirmStatusID === 1 ||
                         AppData._persistentStates.registerData.confirmStatusID === 2) {
+                        that.binding.showRegister = true;
+                        that.binding.showTeaser = true;
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
@@ -525,7 +528,6 @@
                             registerFragment.controller.binding.showResendEditableMail = false;
                         }
                         that.binding.showRegister = false;
-                        that.binding.showTeaser = true;
                         // Fehlt Bedingung für wann countdown geladen wird
                         // AppData._persistentStates.registerData.urlbb
                         //im prinzip könnte man sessionToken hernehmen 
@@ -537,6 +539,7 @@
                         if (timeleft > 0) {
                             that.binding.showCountdown = true;
                             that.binding.showConference = false;
+                            that.binding.showTeaser = true;
                             return that.getFragmentByName("countdown");
                         } else {
                             that.binding.showCountdown = false;
@@ -564,6 +567,8 @@
                         that.binding.showRecordedContent = true;
                         return that.getFragmentByName("recordedContent");
                     } else {
+                        that.binding.showRegister = true;
+                        that.binding.showTeaser = true;
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
@@ -571,7 +576,6 @@
                             registerFragment.controller.binding.showResendEditableMail = false;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
                         }
-
                         return WinJS.Promise.as();
                         //return that.getFragmentByName("teaser");
                     }
@@ -587,6 +591,7 @@
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
+                that.binding.showShare = true;
             });
             Log.ret(Log.l.trace);
         })

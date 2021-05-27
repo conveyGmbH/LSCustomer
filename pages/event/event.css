@@ -215,7 +215,6 @@
     margin-right: 5%;
 }
 
-.event .button_line { text-align: left;}
 .event #calenderButton {
     background-color: #ffffff;
     border-radius: 30px;
@@ -263,8 +262,8 @@
 }
 
 .event .share-block {
-    position: relative;
-    display: inline-block;
+    text-align: left;
+    width: 100%;
 }
 
 .event .share-block .win-tooltip {
@@ -290,8 +289,14 @@
     visibility: visible; opacity: 1;
 }
 
-.event .caption-field {top: 0; float: left; text-align: left; height: auto;}
-.event .caption-block { width: auto; display: block; padding-right: 10px; margin-right: 10px;}
+.event .caption-field {
+    width: 100%; 
+    text-align: left;
+    top: 20px;
+}
+.event .caption-block {
+     width: auto; display: block; padding-right: 10px; margin-right: 10px;
+}
 
 
 /*margins/paddings for medium size screens or orientation landscape
