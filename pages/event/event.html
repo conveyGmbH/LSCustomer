@@ -18,148 +18,137 @@
         <div id="eventController" class="data-container">
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea win-type-body">
-
-                    <div class="content-header body-content">
-                        <div class="event custlogo">
+                    <div class="win-headercontainer">
+                        <div class="custlogo">
                             <img class="logo" src="https://deimos.convey.de/LSCustomer/images/logo_landscape_on_white.svg"
                                  onclick="AppBar.handleEvent('click', 'clickHome', event)"/>
                         </div>
-
-                        <div class="win-h1 content-header" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
-                            <span class="content-header"
-                                  data-win-bind="textContent: dataText.ev_text_detail_name_h1">
-                            </span>
-
-                        </div>
-                        <div class="win-h3 content-header" data-win-bind="style.display: dataText.ev_text_detail_time_h2 Binding.Converter.toDisplay">
-                            <span data-win-bind="textContent: dataText.ev_text_detail_time_h2"></span>
-                        </div>
-
-                        <div class="button_line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
-                            <div class="button-element">
-                                <button id="calenderButton" class="text-lightcolor win-button" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
-                                    <!--onclick="AppBar.handleEvent('click', 'clickOk', event)">-->
-                                    
-                                    <div class="calender-tip">
-                                        <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
-                                        <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
-                                    </div>
-                                </button>
-                                
-                                    
+                        <div class="content-header">
+                            <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
+                                <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>
+                            </div>
+                            <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ev_text_detail_time_h2 Binding.Converter.toDisplay">
+                                <h2 class="win-h2" data-win-bind="textContent: dataText.ev_text_detail_time_h2"></h2>
+                            </div>
+                            <div class="content-header-line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
+                                <div class="button-element">
+                                    <button id="calenderButton" class="text-lightcolor win-button" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
+                                        <!--onclick="AppBar.handleEvent('click', 'clickOk', event)">-->
+                                        <div class="calender-tip">
+                                            <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
+                                            <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
+                        <div id="recordedContenthost" class="recordedContent-fragmenthost" data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"></div>
                     </div>
                     <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
-                    <div id="recordedContenthost" class="recordedContent-fragmenthost" data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"></div>
-                    <div class="color_container2"></div> 
-                    <div class="body-content content win-hub-section-content">
-                        <div class="section-1 win-hub-section">
-                            <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
-                            <div class="content-header field_line">
-                                
+                    <div class="color_container2"></div>
+                    <div class="content-container">
+                        <div class="content-grid">
+                            <div class="section-1">
+                                <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
+                                <div class="content-header field_line">
                                     <span class="win-h5" data-win-bind="textContent: dataText.ev_text_share_text"></span>
-                                    
                                     <!-- Add font awesome icons -->
-                                <div class="button_line">
-
-                                    <div class="share-block">
-                                        <div class="circle facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)">
-                                            <i class="fab fa-facebook-square"></i>
+                                    <div class="button_line">
+                                        <div class="share-block">
+                                            <div class="circle facebook" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)">
+                                                <i class="fab fa-facebook-square"></i>
+                                            </div>
+                                            <div class="circle linkedin">
+                                                <i class="fab fa-linkedin"></i>
+                                            </div>
+                                            <div class="circle xing">
+                                                <i class="fab fa-xing-square"></i>
+                                            </div>
+                                            <div class="circle google">
+                                                <i class="fab fa-google"></i>
+                                            </div>
+                                            <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
                                         </div>
-                                        <div class="circle linkedin">
-                                            <i class="fab fa-linkedin"></i>
-                                        </div>
-                                        <div class="circle xing">
-                                            <i class="fab fa-xing-square"></i>
-                                        </div>
-                                        <div class="circle google">
-                                            <i class="fab fa-google"></i>
-                                        </div>
-                                        <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
-                                    </div>
                                         <!--<a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
-                                        <div class="fa">
-                                            <a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
-                                        </div>
-                                        <div class="fa">
-                                            <a class="fab fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
-                                        </div>
-                                        <div class="fa">
-                                            <a class="fab fa-google"></a>
-                                        </div>
-                                        <div class="fa">
-                                            <a class="fab fa-xing"></a>
-                                        </div>
-                                        -->
+                <div class="fa">
+                    <a class="fab fa-facebook-f" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)"></a>
+                </div>
+                <div class="fa">
+                    <a class="fab fa-linkedin" onclick="AppBar.handleEvent('click', 'clickLinkinLogin', event)"></a>
+                </div>
+                <div class="fa">
+                    <a class="fab fa-google"></a>
+                </div>
+                <div class="fa">
+                    <a class="fab fa-xing"></a>
+                </div>
+                -->
                                     </div>
-                                
-                                <div class="win-h5 content-header win-type-caption" data-win-bind="style.display: dataText.ev_text_other_name_h1 Binding.Converter.toDisplay">
-                                    <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
+                                    <div class="win-h5 content-header win-type-caption" data-win-bind="style.display: dataText.ev_text_other_name_h1 Binding.Converter.toDisplay">
+                                        <span class="caption-field caption-block" data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
-                            <div class="section-2 win-hub-section">
+                            <div class="section-2">
                                 <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
                             </div>
-
-                        <div class="section-3">
-                            <div class="win-h2 content-header" data-win-bind="style.display: dataText.ev_text_para_h2 Binding.Converter.toDisplay">
-                                <span data-win-bind="textContent: dataText.ev_text_para_h2"></span>
-                            </div>
-                            <div class="div-separator"></div>
-                            <div class="" data-win-bind="style.display: dataText.ev_text_detail_summary Binding.Converter.toDisplay">
-                                <p data-win-bind="textContent: dataText.ev_text_detail_summary"></p>
-                            </div>
-                            <div class="" data-win-bind="style.display: dataText.ev_text_agenda_body Binding.Converter.toDisplay">
-                                <p data-win-bind="textContent: dataText.ev_text_agenda_body"></p>
-                            </div>
-                            <div class="" data-win-bind="style.display: dataText.ev_text_para_body Binding.Converter.toDisplay">
-                                <p data-win-bind="textContent: dataText.ev_text_para_body"></p>
-                            </div>
-                            <div class="" data-win-bind="style.display: dataText.ev_text_free_body Binding.Converter.toDisplay">
-                                <p data-win-bind="textContent: dataText.ev_text_free_body"></p>
-                            </div>
-                            <div class="div-separator"></div>
-                        </div>
-                        <div class="section-4 speakerblock">
-                            <div class="win-h5 content-header win-type-caption">
-                            <span class="caption-field caption-block" data-win-bind="">Speaker</span>
-                            </div>
-                            <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod1_name Binding.Converter.toDisplay">
-                                <div class="speaker-image-container">
-                                    <img data-win-bind="src: dataDoc.ev_doc_mod1; alt: dataDocText.ev_doc_mod1_alt; title: dataDocText.ev_doc_mod1_title; longdesc: dataDocText.ev_doc_mod1_descr" />
+                            <div class="section-3">
+                                <div class="win-h2 content-header" data-win-bind="style.display: dataText.ev_text_para_h2 Binding.Converter.toDisplay">
+                                    <span data-win-bind="textContent: dataText.ev_text_para_h2"></span>
                                 </div>
-                                <div class="speaker-text">
-                                    <span class="speaker-vorname win-h3"></span>
-                                    <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod1_name"></span>
-                                    <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_expertise"></span>
-                                    <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_homepage"></span>
-                                    <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_cv"></span>
+                                <div class="div-separator"></div>
+                                <div class="" data-win-bind="style.display: dataText.ev_text_detail_summary Binding.Converter.toDisplay">
+                                    <p data-win-bind="textContent: dataText.ev_text_detail_summary"></p>
                                 </div>
+                                <div class="" data-win-bind="style.display: dataText.ev_text_agenda_body Binding.Converter.toDisplay">
+                                    <p data-win-bind="textContent: dataText.ev_text_agenda_body"></p>
+                                </div>
+                                <div class="" data-win-bind="style.display: dataText.ev_text_para_body Binding.Converter.toDisplay">
+                                    <p data-win-bind="textContent: dataText.ev_text_para_body"></p>
+                                </div>
+                                <div class="" data-win-bind="style.display: dataText.ev_text_free_body Binding.Converter.toDisplay">
+                                    <p data-win-bind="textContent: dataText.ev_text_free_body"></p>
+                                </div>
+                                <div class="div-separator"></div>
                             </div>
-                            <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod2_name Binding.Converter.toDisplay">
-                                <div class="speaker-image-container">
-                                    <img data-win-bind="src: dataDoc.ev_doc_mod2; alt: dataDocText.ev_doc_mod2_alt; title: dataDocText.ev_doc_mod2_title; longdesc: dataDocText.ev_doc_mod2_descr" />
+                            <div class="section-4 speakerblock">
+                                <div class="win-h5 content-header win-type-caption">
+                                    <span class="caption-field caption-block" data-win-bind="">Speaker</span>
                                 </div>
-                                <div class="speaker-text">
-                                    <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod2_name"></span>
-                                    <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod2_expertise"></span>
-                                    <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod2_homepage"></span>
-                                    <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod2_cv"></span>
+                                <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod1_name Binding.Converter.toDisplay">
+                                    <div class="speaker-image-container">
+                                        <img data-win-bind="src: dataDoc.ev_doc_mod1; alt: dataDocText.ev_doc_mod1_alt; title: dataDocText.ev_doc_mod1_title; longdesc: dataDocText.ev_doc_mod1_descr" />
+                                    </div>
+                                    <div class="speaker-text">
+                                        <span class="speaker-vorname win-h3"></span>
+                                        <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod1_name"></span>
+                                        <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_expertise"></span>
+                                        <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_homepage"></span>
+                                        <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_cv"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod3_name Binding.Converter.toDisplay">
-                                <div class="speaker-image-container">
-                                    <img data-win-bind="src: dataDoc.ev_doc_mod3; alt: dataDocText.ev_doc_mod3_alt; title: dataDocText.ev_doc_mod3_title; longdesc: dataDocText.ev_doc_mod3_descr" />
+                                <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod2_name Binding.Converter.toDisplay">
+                                    <div class="speaker-image-container">
+                                        <img data-win-bind="src: dataDoc.ev_doc_mod2; alt: dataDocText.ev_doc_mod2_alt; title: dataDocText.ev_doc_mod2_title; longdesc: dataDocText.ev_doc_mod2_descr" />
+                                    </div>
+                                    <div class="speaker-text">
+                                        <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod2_name"></span>
+                                        <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod2_expertise"></span>
+                                        <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod2_homepage"></span>
+                                        <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod2_cv"></span>
+                                    </div>
                                 </div>
-                                <div class="speaker-text">
-                                    <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod3_name"></span>
-                                    <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_expertise"></span>
-                                    <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_homepage"></span>
-                                    <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_cv"></span>
+                                <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod3_name Binding.Converter.toDisplay">
+                                    <div class="speaker-image-container">
+                                        <img data-win-bind="src: dataDoc.ev_doc_mod3; alt: dataDocText.ev_doc_mod3_alt; title: dataDocText.ev_doc_mod3_title; longdesc: dataDocText.ev_doc_mod3_descr" />
+                                    </div>
+                                    <div class="speaker-text">
+                                        <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod3_name"></span>
+                                        <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_expertise"></span>
+                                        <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_homepage"></span>
+                                        <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_cv"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -16,11 +16,84 @@
     font-family: "Barlow";
 }
 
+.event .bold {
+    font-weight: 600;
+}
+
 .event .win-type-body {
     color: #2a2f3d;
 }
 
-.event .bold { font-weight: 600;}
+.event .win-headercontainer,
+.event .content-container {
+    margin-left: calc(50% - 620px);
+    width: 1210px;
+    padding: 15px;
+}
+.event .content-grid {
+    display: grid;
+    grid-template-columns: 20% 15% 15% 15% 15% 20%;
+    grid-gap: 0;
+}
+
+.events .hero-image-container {
+    display: block;
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    overflow: hidden;
+    max-height: 600px;
+}
+
+.event .hero-image-container > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event .content-header {
+    color: #2a2f3d;
+    height: auto;
+    width: 100%;
+}
+
+.event .content-header-line {
+    height: auto;
+    width: 100%;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+}
+
+.event .content-header-line > win-h1 {
+}
+
+.event .content-header-line > win-h2 {
+}
+
+.event .content-header-line > span {
+}
+
+.event .custlogo {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+    height: auto;
+    margin: 15px 0 0 0;
+    padding: 5px;
+    text-align: center;
+}
+
+.event .logo {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+
 
 .event .color_container2 {
     background-color: #f3fbfc;
@@ -55,12 +128,11 @@
     padding: 5px 0;
     
 }
-.event .content-header-line { margin-top: 10px;}
-.event .date-field { text-align: left; width: auto; display: inline-block; left: 0; top: 0;}
-.event .content {
-    display: grid;
-    grid-template-columns:20% 15% 15% 15% 15% 20%;
-    grid-gap: 10px;
+.event .content-header-line {
+     margin-top: 10px;
+}
+.event .date-field {
+     text-align: left; width: auto; display: inline-block; left: 0; top: 0;
 }
 
 .event .custlogo {
@@ -83,7 +155,6 @@
 .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
 .event .section-3 { grid-area: 2/1/span 3/span 4;}
 .event .section-4 { grid-area: 5/1/span 3/span 5;}
-.event .body-content {margin: 0 10%;}
 
 .event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px;}
 .event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
@@ -222,20 +293,56 @@
 .event .caption-field {top: 0; float: left; text-align: left; height: auto;}
 .event .caption-block { width: auto; display: block; padding-right: 10px; margin-right: 10px;}
 
-    
-/*margin/padding for large size screens or orientation landscape more than 1440px*/
-
-.view-size-biggest .event .body-content {
-        margin: 0 20%;
-    }
 
 /*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 899px*/
-.view-size-medium .event .content { grid-gap: 0;}
-.view-size-medium .event .body-content { margin: 0 2%;}
-.view-size-medium .event .win-h1 { font-size: 1.5em;}
-.view-size-medium .event .win-h2 { font-size: 1.2em;}
-.view-size-medium .event .win-h3, .view-size-medium .event .win-h5 { font-size: 1em;}
+    contentarea is less than 1299px 
+    @media (max-width:1299px) {
+    }
+
+    use: .view-size-biggest
+*/
+.view-size-biggest .event .win-headercontainer,
+.view-size-biggest .event .content-container {
+    margin-left: 20px;
+    width: calc(100% - 70px);
+    padding: 15px;
+}
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1099px 
+    @media (max-width:1099px) {
+    }
+
+    use: .view-size-bigger
+*/
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 899px 
+    @media (max-width:899px) {
+    }
+
+    use: .view-size-medium
+*/
+.view-size-medium .event .win-headercontainer,
+.view-size-medium .event .content-container {
+    margin-left: 5px;
+    width: calc(100% - 30px);
+    padding: 10px;
+}
+
+.view-size-medium .event .content-header-line > h1 {
+    font-size: 1.2em;
+}
+
+.view-size-medium .event .content-header-line > h2 {
+    font-size: 1em;
+}
+
+.view-size-medium .event .win-h3, 
+.view-size-medium .event .win-h5 {
+    font-size: 1em;
+}
+
 .view-size-medium .countdown-fragmenthost {
     position: fixed;
     float: right;
@@ -267,15 +374,29 @@
 }
 
 
-/*margins/paddings for small size screens or orientation vertical
-    @media (max-width:499px)*/
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 699px 
 
-.view-size-small .event .win-h1 {
-    font-size: 1.2em;
+    use: .view-size-medium-small
+*/
+
+/*margins/paddings for small screens and orientation vertical
+        @media (max-width:499px) {
+        }
+    use: .view-size-small
+*/
+.view-size-small .event .win-headercontainer,
+.view-size-small .event .content-container {
+    margin-left: 0;
+    width: calc(100% - 20px);
 }
 
-.view-size-small .event .win-h2 {
-    font-size: 1em;
+.view-size-small .event .content-header-line > h1 {
+    font-size: 22px;
+}
+
+.view-size-small .event .content-header-line > h2 {
+    font-size: 16px;
 }
 
 .view-size-small .countdown-fragmenthost {
