@@ -165,12 +165,12 @@
                     Log.ret(Log.l.trace);
                 },
                 clickHome: function(event) {
-                    Log.call(Log.l.trace, "Events.Controller.");
+                    Log.call(Log.l.trace, "Event.Controller.");
                     Application.navigateById("home", event);
                     Log.ret(Log.l.trace);
                 },
                 clickOk: function (event) {
-                    Log.call(Log.l.trace, "Register.Controller.");
+                    Log.call(Log.l.trace, "Event.Controller.");
                     that.saveData(function (response) {
                         // called asynchronously if ok
                     }, function (errorResponse) {
@@ -179,7 +179,7 @@
                     Log.ret(Log.l.trace);
                 },
                 clickFacebookLogin: function (event) {
-                    Log.call(Log.l.trace, "Register.Controller.");
+                    Log.call(Log.l.trace, "Event.Controller.");
                     that.doLogin(function (response) {
                         // called asynchronously if ok
                     }, function (errorResponse) {
@@ -188,7 +188,7 @@
                     Log.ret(Log.l.trace);
                 },
                 clickFacebookLogout: function (event) {
-                    Log.call(Log.l.trace, "Register.Controller.");
+                    Log.call(Log.l.trace, "Event.Controller.");
                     that.doLogout(function (response) {
                         // called asynchronously if ok
                     }, function (errorResponse) {
@@ -266,7 +266,7 @@
                 }).then(function () {
                     if (that.binding.eventId) {
                         //load of format relation record data
-                        Log.print(Log.l.trace, "calling select eventView...");
+                        Log.print(Log.l.trace, "calling select textView...");
                         return Event.textView.select(function (json) {
                             AppData.setErrorMsg(that.binding);
                             Log.print(Log.l.trace, "labelView: success!");
@@ -283,7 +283,7 @@
                 }).then(function () {
                     if (that.binding.eventId) {
                         //load of format relation record data
-                        Log.print(Log.l.trace, "calling select eventView...");
+                        Log.print(Log.l.trace, "calling select medienView...");
                         return Event.medienView.select(function (json) {
                             AppData.setErrorMsg(that.binding);
                             Log.print(Log.l.trace, "labelView: success!");
@@ -300,7 +300,7 @@
                 }).then(function () {
                     if (that.binding.eventId) {
                         //load of format relation record data
-                        Log.print(Log.l.trace, "calling select eventView...");
+                        Log.print(Log.l.trace, "calling select medienTextView...");
                         return Event.medienTextView.select(function (json) {
                             AppData.setErrorMsg(that.binding);
                             Log.print(Log.l.trace, "labelView: success!");
@@ -387,7 +387,7 @@
             this.loadData = loadData;
 
             var saveData = function (complete, error) {
-                Log.call(Log.l.trace, "Register.Controller.");
+                Log.call(Log.l.trace, "Event.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var location = window.location.href;
                 var userToken = AppData._persistentStates.registerData.userToken;
@@ -446,7 +446,7 @@
             this.saveData = saveData;
 
             var reSendEmail = function(complete, error) {
-                Log.call(Log.l.trace, "Register.Controller.");
+                Log.call(Log.l.trace, "Event.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var userToken = AppData._persistentStates.registerData.userToken;
                 AppBar.busy = true;
@@ -481,12 +481,24 @@
             this.reSendEmail = reSendEmail;
 
             var updateFragment = function () {
-                Log.call(Log.l.trace, "Register.Controller.");
+                Log.call(Log.l.trace, "Event.Controller.");
                 var ret = that.getFragmentByName("teaser").then(function (teaserFragment) {
                     that.binding.showRegister = true;
                     that.binding.showTeaser = true;
                     that.binding.showCountdown = false;
                     that.binding.showConference = false;
+                    if (teaserFragment &&
+                        teaserFragment.controller &&
+                        teaserFragment.controller.binding) {
+                        if (AppData._persistentStates.registerData.resultCode === 21 ||
+                            AppData._persistentStates.registerData.confirmStatusID > 0) {
+                            teaserFragment.controller.binding.showEvDoc = false;
+                            teaserFragment.controller.binding.showOnDoc = true;
+                        } else {
+                            teaserFragment.controller.binding.showEvDoc = true;
+                            teaserFragment.controller.binding.showOnDoc = false;
+                        }
+                    }
                     return that.getFragmentByName("register");
                 }).then(function (registerFragment) {
                     if (AppData._persistentStates.registerData.resultCode === 21 ||

@@ -62,8 +62,9 @@
                 Log.call(Log.l.trace, "eventView.");
                 var restriction = {
                     VeranstaltungID: eventId,
-                    DokVerwendungID: 3,
-                    LanguageSpecID: AppData.getLanguageId()
+                    /*DokVerwendungID: 3,*/
+                    LanguageSpecID: AppData.getLanguageId(),
+                    NameLanguageID: 1033
                 };
                 var ret = Event._medienTextView.select(complete, error, restriction, {
                     ordered: true
