@@ -308,14 +308,6 @@
     }).then(function() {
         return include("scripts/generalData.js");
     }).then(function () {
-        return include("lib/fontawesome/js/all.js");
-    }).then(function () {
-        return include("lib/fontawesome/css/fontawesome.css");
-    }).then(function () {
-        return include("lib/fontawesome/css/brands.css");
-    }).then(function () {
-        return include("lib/fontawesome/css/brands.css");
-    }).then(function () {
         createRootElement("#ls-customer-host");
         return include("scripts/index.js");
     }).then(function() {
