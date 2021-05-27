@@ -39,7 +39,7 @@ meta.foundation-mq-xxlarge {
 
 meta.foundation-data-attribute-namespace {
   font-family: false; }
-
+/*
 html, body {
   height: 100%; }
 
@@ -75,6 +75,7 @@ img {
 
 img {
   -ms-interpolation-mode: bicubic; }
+*/
 
 #map_canvas img,
 #map_canvas embed,
@@ -109,6 +110,7 @@ img {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+/*
 img {
   display: inline-block;
   vertical-align: middle; }
@@ -119,6 +121,7 @@ textarea {
 
 select {
   width: 100%; }
+*/
 
 .row {
   margin: 0 auto;
@@ -1144,7 +1147,7 @@ select {
     position: relative;
     right: 91.66667%;
     left: auto; } }
-button, .button {
+/*button,*/ .button {
   -webkit-appearance: none;
   -moz-appearance: none;
   border-radius: 0;
@@ -1165,10 +1168,11 @@ button, .button {
   border-color: #007095;
   color: #FFFFFF;
   transition: background-color 300ms ease-out; }
-  button:hover, button:focus, .button:hover, .button:focus {
+  /*button:hover, button:focus,*/ .button:hover, .button:focus {
     background-color: #007095; }
-  button:hover, button:focus, .button:hover, .button:focus {
+  /*button:hover, button:focus,*/ .button:hover, .button:focus {
     color: #FFFFFF; }
+
   button.secondary, .button.secondary {
     background-color: #e7e7e7;
     border-color: #b9b9b9;
@@ -1320,7 +1324,7 @@ button::-moz-focus-inner {
   padding: 0; }
 
 @media only screen and (min-width: 40.0625em) {
-  button, .button {
+  /*button,*/ .button {
     display: inline-block; } }
 /* Standard Forms */
 form {
@@ -1444,6 +1448,7 @@ span.postfix, label.postfix {
   border-color: #cccccc; }
 
 /* We use this to get basic styling on all basic form elements */
+/*
 input:not([type]), input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1481,7 +1486,7 @@ input:not([type]), input[type="text"], input[type="password"], input[type="date"
     cursor: default; }
   input:not([type]).radius, input[type="text"].radius, input[type="password"].radius, input[type="date"].radius, input[type="datetime"].radius, input[type="datetime-local"].radius, input[type="month"].radius, input[type="week"].radius, input[type="email"].radius, input[type="number"].radius, input[type="search"].radius, input[type="tel"].radius, input[type="time"].radius, input[type="url"].radius, input[type="color"].radius, textarea.radius {
     border-radius: 3px; }
-
+*/
 form .row .prefix-radius.row.collapse input,
 form .row .prefix-radius.row.collapse textarea,
 form .row .prefix-radius.row.collapse select,
@@ -1571,7 +1576,7 @@ textarea {
   color: #666666; }
 
 /* Add height value for select elements to match text input height */
-select {
+/*select {
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
   background-color: #FAFAFA;
@@ -1601,8 +1606,9 @@ select {
     cursor: default; }
   select[multiple] {
     height: auto; }
-
+    */
 /* Adjust margin for form elements below */
+/*
 input[type="file"],
 input[type="checkbox"],
 input[type="radio"],
@@ -1616,10 +1622,10 @@ input[type="radio"] + label {
   margin-right: 1rem;
   margin-bottom: 0;
   vertical-align: baseline; }
-
+*/
 /* Normalize file input width */
-input[type="file"] {
-  width: 100%; }
+/*input[type="file"] {
+  width: 100%; }*/
 
 /* HTML5 Number spinners settings */
 /* We add basic fieldset styling */
@@ -3695,7 +3701,7 @@ ul.pagination {
   .xxlarge-text-justify {
     text-align: justify !important; } }
 /* Typography resets */
-div,
+/*div,
 dl,
 dt,
 dd,
@@ -3716,9 +3722,9 @@ th,
 td {
   margin: 0;
   padding: 0; }
-
+*/
 /* Default Link Styles */
-a {
+/*a {
   color: #008CBA;
   line-height: inherit;
   text-decoration: none; }
@@ -3726,15 +3732,15 @@ a {
     color: #0078a0; }
   a img {
     border: none; }
-
+  */
 /* Default paragraph styles */
-p {
+/*p {
   font-family: inherit;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.6;
   margin-bottom: 1.25rem;
-  text-rendering: optimizeLegibility; }
+  text-rendering: optimizeLegibility; }*/
   p.lead {
     font-size: 1.21875rem;
     line-height: 1.6; }
@@ -3744,7 +3750,7 @@ p {
     line-height: 1.35; }
 
 /* Default header styles */
-h1, h2, h3, h4, h5, h6 {
+/*h1, h2, h3, h4, h5, h6 {
   color: #222222;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-style: normal;
@@ -3774,7 +3780,7 @@ h5 {
   font-size: 1.125rem; }
 
 h6 {
-  font-size: 1rem; }
+  font-size: 1rem; }*/
 
 .subheader {
   line-height: 1.4;
@@ -3925,7 +3931,7 @@ blockquote p {
   padding: 0 0.0625rem; }
 
 @media only screen and (min-width: 40.0625em) {
-  h1, h2, h3, h4, h5, h6 {
+  /*h1, h2, h3, h4, h5, h6 {
     line-height: 1.4; }
 
   h1 {
@@ -3944,7 +3950,7 @@ blockquote p {
     font-size: 1.125rem; }
 
   h6 {
-    font-size: 1rem; } }
+    font-size: 1rem; } }*/
 /*
  * Print styles.
  *
@@ -5653,7 +5659,7 @@ ul.off-canvas-list {
     .f-dropdown.mega.open {
       left: 0 !important; }
 
-table {
+/*table {
   background: #FFFFFF;
   border: solid 1px #DDDDDD;
   margin-bottom: 1.25rem;
@@ -5694,7 +5700,7 @@ table {
   table tbody tr td,
   table tr td {
     display: table-cell;
-    line-height: 1.125rem; }
+    line-height: 1.125rem; }*/
 
 .range-slider {
   border: 1px solid #DDDDDD;
