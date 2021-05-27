@@ -120,8 +120,13 @@
     font-size: 16px;
     font-weight: 600;
 }
-
-.conference-fragmenthost { width: auto; height: auto; margin: 0; background-color: #000000;}
+.recordedContent-fragmenthost,
+.conference-fragmenthost {
+    width: auto;
+    height: auto;
+    margin: 0;
+    background-color: #e6e6e6;
+}
 .teaser-fragmenthost {
     height: auto;
     margin-top: 20px;

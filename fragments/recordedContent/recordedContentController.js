@@ -159,7 +159,7 @@ var __meteor_runtime_config__;
                                 n.setAttribute("src", scriptTag.src);
                             });
                         } else {
-                            promise = getScriptFromSrcXhr(scriptTag.src).then(function (scriptText) {
+                            promise = getScriptFromSrc(scriptTag.src).then(function (scriptText) {
                                 n.text = scriptText;
                             }).then(null, function () {
                                 // eat error
@@ -296,10 +296,12 @@ var __meteor_runtime_config__;
 
             var getFragmentContentsXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
+                    var progressStr = '<progress class="win-progress-ring"></progress>';
                     var emptyStr = '';
                     var playback = req.responseText
                         .replace(/<link.+>/g, emptyStr)
-                        .replace(/<script.+<\/script>/g, emptyStr);
+                        .replace(/<script.+<\/script>/g, emptyStr)
+                        .replace(/<img id="load-img.+>/g, progressStr);
                     return playback;
                 });
             }
@@ -520,7 +522,9 @@ var __meteor_runtime_config__;
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
-                $(document).foundation();
+                if (typeof $(document).foundation === "function") {
+                    $(document).foundation();
+                }
                 window.playbackLoaded();
             });
             Log.ret(Log.l.trace);

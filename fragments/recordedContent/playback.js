@@ -515,7 +515,7 @@ window.playbackLoaded = function() {
   logger.info("==DOM content loaded");
   loadMetadata();
   checkMedias();
-  document.dispatchEvent(new CustomEvent('content-ready', {'detail': 'dom'}));
+  document.dispatchEvent(new CustomEvent('content-ready', { detail: 'dom' }));
 }
 
 function loadPlayback() {
@@ -628,7 +628,10 @@ function loadLogo(logo) {
   let logoURL = typeof logo !== 'undefined' ? logo : defaultLogo;
   logger.info("==Loaded logo from", logoURL);
   $("#slide").css('background-image', 'url(' + logoURL + ')');
-  document.getElementById("load-img").src = logoURL;
+  var loadImg = document.getElementById("load-img");
+  if (loadImg) {
+    loadImg.src = logoURL;
+  }
 }
 
 function loadCopyright(copyright) {
