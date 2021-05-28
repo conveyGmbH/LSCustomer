@@ -62,6 +62,7 @@ p {
 /* Swappable components have different settings depending on where they are */
 #main-section #presentation-area {
   height: 100%;
+  min-height: 250px;
   margin-bottom: 5px;
 }
 #main-section #video-area, #main-section #audio-area {
