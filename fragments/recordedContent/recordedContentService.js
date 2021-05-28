@@ -6,6 +6,10 @@
 (function () {
     "use strict";
 
+    window.paceOptions = {
+        eventLag: false
+    };
+    
     WinJS.Namespace.define("RecordedContent", {
     });
 })();
