@@ -344,6 +344,42 @@
             }
             Log.ret(Log.l.u1);
         },
+        setSeoText: function (confirmStatus, dataText) {
+            Log.call(Log.l.u1, "AppData.");
+            var title = document.getElementsByTagName('title');
+            var metas = document.getElementsByTagName('meta');
+
+            // if confirmStatus === 'nach veranstaltung'
+            if (confirmStatus && confirmStatus > 20) {
+                for (var i = 0; i < title.length; i++) {
+                    title[i].text = dataText.off_text_detail_title; //gesetzt ist text
+                }
+                for (var i = 0; i < metas.length; i++) {
+                    if (metas[i].getAttribute('name')) {
+                        var name = metas[i].getAttribute('name');
+                        if (name === "description") {
+                            //dataDocText.ev_text_detail_desc
+                            metas[i].content = dataText.off_text_detail_descr;
+                        }
+                    }
+                }
+            } else {
+                for (var i = 0; i < title.length; i++) {
+                    title[i].text = dataText.ev_text_detail_title; //gesetzt ist text
+                }
+                for (var i = 0; i < metas.length; i++) {
+                    if (metas[i].getAttribute('name')) {
+                        var name = metas[i].getAttribute('name');
+                        if (name === "description") {
+                            //dataDocText.ev_text_detail_desc
+                            metas[i].content = dataText.ev_text_detail_descr;
+                        }
+                    }
+                }
+            }
+
+            Log.ret(Log.l.u1);
+        },
         _initAnredeView: {
             get: function () {
                 return AppData.getLgntInit("LGNTINITAnrede");

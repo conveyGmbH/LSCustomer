@@ -609,6 +609,8 @@
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
             }).then(function () {
+                AppData.setSeoText(AppData._persistentStates.registerData.confirmStatusID, that.binding.dataText);
+            }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 that.binding.showShare = true;
             });
