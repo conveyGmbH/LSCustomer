@@ -19,3 +19,7 @@
     display: none;
 }
 
+#recordedContent #side-section {
+    position: absolute;
+    right: 0;
+}

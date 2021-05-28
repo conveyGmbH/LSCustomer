@@ -464,20 +464,8 @@ var __meteor_runtime_config__;
                     var url;
                     if (AppBar.scope.binding.recordedLink) {
                         url = AppBar.scope.binding.recordedLink;
-                                }
+                    }
                     if (url) {
-                        var query = url.split("?")[1];
-                        if (window.history && query && Application.query) {
-                            var state = {};
-                            var title = "";
-                            var key = query.split("=")[0];
-                            var value = query.split("=")[1];
-                            if (key && value) {
-                                Application.query[key] = value;
-                                var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
-                                window.history.pushState(state, title, location);
-                            }
-                        };
                         options.url = url.replace(/https?:\/\/[\.a-zA-Z]+\/playback/g, '/playback');
                         return renderImpl(options.url, recordedContent, false);
                     } else {
@@ -500,7 +488,7 @@ var __meteor_runtime_config__;
             // define handlers
            /* this.eventHandlers = {
                 clickOk: function (event) {
-                    Log.call(Log.l.trace, "RegisterConfirm.Controller.");
+                    Log.call(Log.l.trace, "RecordedContent.Controller.");
                     that.saveData(function (response) {
                         // called asynchronously if ok
                     }, function (errorResponse) {
