@@ -12,49 +12,6 @@ var __meteor_runtime_config__;
 
     var nav = WinJS.Navigation;
 
-    var include = function(file, fnc) {
-        var n, s, l, e = {
-                         setNext: function(next) {
-                             return n = next;
-                         },
-                         load: function() {
-                             if (s && l) {
-                                 s.removeEventListener("load", l);
-                                 l = null;
-                             }
-                             if (n && typeof n.next === "function") {
-                                 window.setTimeout(function() {
-                                     n.next();
-                                 }, 0);
-                             }
-                         },
-                         next: function() {
-                             if (typeof fnc === "function") {
-                                 var r = fnc();
-                                 if (n && typeof n.next === "function") {
-                                     r.setNext(n);
-                                     n = null;
-                                 }
-                             } 
-                         },
-                         then: function(f) {
-                             n = include(null, f);
-                             return n;
-                         }
-                     }
-        if (typeof file === "string") {
-            window.setTimeout(function() {
-                s = document.createElement("SCRIPT");
-                s.type = "text/javascript";
-                s.src = newBaseHref + file;
-                l = e.load;
-                s.addEventListener("load", l);
-                document.head.appendChild(s);
-            }, 0);
-        }
-        return e;
-    };
-
     WinJS.Namespace.define("RecordedContent", {
         Controller: WinJS.Class.derive(Fragments.Controller, function Controller(fragmentElement, options, commandList) {
             Log.call(Log.l.trace, "RecordedContent.Controller.", "eventId=" + (options && options.eventId));
@@ -82,6 +39,17 @@ var __meteor_runtime_config__;
             }, commandList]);
 
             var that = this;
+
+            that.dispose = function() {
+                Log.call(Log.l.trace, "RecordedContent.Controller.");
+                if (BBBPlayback && typeof BBBPlayback.exit === "function") {
+                    BBBPlayback.exit();
+                }
+                if (BBBWriting && typeof BBBWriting.exit === "function") {
+                    BBBWriting.exit();
+                }
+                Log.ret(Log.l.trace);
+            }
 
             var recordedContent = fragmentElement.querySelector("#recordedContent");
 
@@ -512,6 +480,12 @@ var __meteor_runtime_config__;
                 Log.print(Log.l.trace, "Data loaded");
                 if (typeof $(document).foundation === "function") {
                     $(document).foundation();
+                }
+                if (BBBWriting && typeof BBBWriting.init === "function") {
+                    BBBWriting.init();
+                }
+                if (BBBPlayback && typeof BBBPlayback.init === "function") {
+                    BBBPlayback.init();
                 }
                 if (BBBPlayback && typeof BBBPlayback.playbackLoaded === "function") {
                     BBBPlayback.playbackLoaded();
