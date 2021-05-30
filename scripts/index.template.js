@@ -50,7 +50,8 @@
             timeZoneAdjustment: 0,
             timeZoneRemoteAdjustment: null,
             timeZoneRemoteDiffMs: 0,
-            serverFailure: false
+            serverFailure: false,
+            corsQuirks: true
         }, registerData: {
             AnredeID: null, /* INITAnredeID: 0,*/
             Email: "",
