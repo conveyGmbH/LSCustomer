@@ -30,6 +30,17 @@ var __meteor_runtime_config__;
 
             var that = this;
 
+            XMLHttpRequest.prototype._oriOpen = XMLHttpRequest.prototype.open;
+            XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+                Log.call(Log.l.info, "XMLHttpRequest.", "method=" + method + " url=" + url);
+                if (url.indexOf("conference") >= 0) {
+                    var target = url;
+                }
+                var ret = this._oriOpen(method, url, async, user, password);
+                Log.ret(Log.l.info);
+                return ret;
+            }
+
             var conference = fragmentElement.querySelector("#conference");
 
             var forEach = function (arrayLikeValue, action) {
@@ -50,17 +61,27 @@ var __meteor_runtime_config__;
             var getScriptFromSrcXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
                     a.href = "/";
+                    var location = copyByValue(window.location);
+                    location.href = a.href;
+                    location.hostname = a.hostname;
+                    location.host = a.host;
+                    location.port = a.port;
+                    location.protocol = a.protocol;
+                    var jsonLocation = JSON.stringify(location);
+                    var tGetsLocation = "=JSON.parse('"+jsonLocation+"')";
                     var newHostname = "(function(){return\"" + a.hostname + "\"})()";
+                    var newHost = "(function(){return\"" + a.host + "\"})()";
                     var newHref = "(function(){return\"" + a.href + "\"})()";
                     var scriptText = req.responseText
                         .replace(/window\.document\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.href/g, newHref)
+                        //.replace(/=t\.location/g, tGetsLocation)
+                        //.replace(/e\.location\.href/g, newHref)
                         ;
                     return scriptText;
                 });
             }
-            var getScriptFromSrc = getScriptFromSrcXhr;
 
             var addScript = function(scriptTag, fragmentHref, position, lastNonInlineScriptPromise, target, isBody) {
                 // We synthesize a name for inline scripts because today we put the
