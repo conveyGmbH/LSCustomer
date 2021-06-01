@@ -39,7 +39,7 @@ var __meteor_runtime_config__;
                 var ret = this._oriOpen(method, url, async, user, password);
                 Log.ret(Log.l.info);
                 return ret;
-            }
+            };
 
             var conference = fragmentElement.querySelector("#conference");
 
@@ -61,23 +61,19 @@ var __meteor_runtime_config__;
             var getScriptFromSrcXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
                     a.href = "/";
-                    var location = copyByValue(window.location);
-                    location.href = a.href;
-                    location.hostname = a.hostname;
-                    location.host = a.host;
-                    location.port = a.port;
-                    location.protocol = a.protocol;
-                    var jsonLocation = JSON.stringify(location);
-                    var tGetsLocation = "=JSON.parse('"+jsonLocation+"')";
+                    var reBase = "function rebase(url){if(!url||typeof url!=\"string\"||url.indexOf(\""+a.hostname+"\")>=0)return url;let p=url.indexOf(\"://\"),q=(p>=0)?url.substr(p+3).substr(url.substr(p+3).indexOf(\"/\")):url;return q};";
                     var newHostname = "(function(){return\"" + a.hostname + "\"})()";
-                    var newHost = "(function(){return\"" + a.host + "\"})()";
                     var newHref = "(function(){return\"" + a.href + "\"})()";
+                    var eGetImageUri = "let t=(function(){"+reBase+"let et=rebase(e.imageUri);console.info(\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,r=e.svgHeight;";
+                    var aGetImageUri = "s,u=(function(){"+reBase+"let au=rebase(a.imageUri);console.info(\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
+                    var uGetImageUri = "k,{imageUri:(function(){"+reBase+"let uu=rebase(u);console.info(\"uu=\"+JSON.stringify(uu));return uu})(),";
                     var scriptText = req.responseText
                         .replace(/window\.document\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.href/g, newHref)
-                        //.replace(/=t\.location/g, tGetsLocation)
-                        //.replace(/e\.location\.href/g, newHref)
+                        .replace(/let\{imageUri:t,svgWidth:n,svgHeight:r\}=e;/g, eGetImageUri)
+                        .replace(/s,\{imageUri:u,content:m\}=a;/g, aGetImageUri)
+                        .replace(/k,\{imageUri:u,/g, uGetImageUri)
                         ;
                     return scriptText;
                 });
