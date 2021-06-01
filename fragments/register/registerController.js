@@ -323,7 +323,11 @@
 
             this.disableHandlers = {
                 clickOk: function () {
-                    that.binding.loginDisabled = AppBar.busy || that.binding.dataRegister.Email.length === 0;
+                    that.binding.loginDisabled = AppBar.busy || (that.binding.dataRegister.Email.length === 0 || !that.binding.dataRegister.privacyPolicyFlag);
+                    var loginButton = fragmentElement.querySelector("#loginButton");
+                    if (loginButton) {
+                        loginButton.disabled = that.binding.loginDisabled;
+                    }
                     return that.binding.loginDisabled;
                 }
             };
