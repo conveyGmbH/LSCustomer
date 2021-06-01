@@ -64,9 +64,9 @@ var __meteor_runtime_config__;
                     var reBase = "function rebase(url){if(!url||typeof url!=\"string\"||url.indexOf(\""+a.hostname+"\")>=0)return url;let p=url.indexOf(\"://\"),q=(p>=0)?url.substr(p+3).substr(url.substr(p+3).indexOf(\"/\")):url;return q};";
                     var newHostname = "(function(){return\"" + a.hostname + "\"})()";
                     var newHref = "(function(){return\"" + a.href + "\"})()";
-                    var eGetImageUri = "let t=(function(){"+reBase+"let et=rebase(e.imageUri);console.info(\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,r=e.svgHeight;";
-                    var aGetImageUri = "s,u=(function(){"+reBase+"let au=rebase(a.imageUri);console.info(\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
-                    var uGetImageUri = "k,{imageUri:(function(){"+reBase+"let uu=rebase(u);console.info(\"uu=\"+JSON.stringify(uu));return uu})(),";
+                    var eGetImageUri = "let t=(function(){"+reBase+"let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,r=e.svgHeight;";
+                    var aGetImageUri = "s,u=(function(){"+reBase+"let au=rebase(a.imageUri);Log.print(Log.l.info,\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
+                    var uGetImageUri = "k,{imageUri:(function(){"+reBase+"let uu=rebase(u);Log.print(Log.l.info,\"uu=\"+JSON.stringify(uu));return uu})(),";
                     var scriptText = req.responseText
                         .replace(/window\.document\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.hostname/g, newHostname)
