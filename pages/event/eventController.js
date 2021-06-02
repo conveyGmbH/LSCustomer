@@ -187,14 +187,6 @@
                     });
                     Log.ret(Log.l.trace);
                 },
-                clickFacebookShare: function (event) {
-                    Log.call(Log.l.trace, "Register.Controller.");
-                    window.open(
-                        'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href),
-                        'facebook-share-dialog',
-                        'width=626,height=436');
-                    Log.ret(Log.l.trace);
-                },
                 clickFacebookLogout: function (event) {
                     Log.call(Log.l.trace, "Event.Controller.");
                     that.doLogout(function (response) {

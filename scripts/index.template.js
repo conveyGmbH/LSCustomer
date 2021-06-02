@@ -54,7 +54,7 @@
             corsQuirks: true
         }, registerData: {
             AnredeID: null, /* INITAnredeID: 0,*/
-            Email: "",
+            Email: null,
             Name: "",
             Vorname: "",
             Position: "",
