@@ -19,6 +19,9 @@
         ready: function (element, options) {
             Log.call(Log.l.trace, pageName + ".");
             // TODO: Initialize the page here.
+            this.inResize = 0;
+            this.prevWidth = 0;
+            this.prevHeight = 0;
             /*var contentarea = element.querySelector(".contentarea");
             if (contentarea && contentarea.style) {
                 if (Colors.isDarkTheme) {
@@ -68,6 +71,32 @@
             Log.ret(Log.l.trace);
         },
 
+        canUnload: function (complete, error) {
+            var that = this;
+            Log.call(Log.l.trace, pageName + ".");
+            var ret = WinJS.Promise.as().then(function (response) {
+                // reset query string and other event-specific settings!
+                if (Application.query && window.history) {
+                    var state = {};
+                    var title = "";
+                    if (Application.query.eventID) {
+                        delete Application.query.eventID;
+                    }
+                    if (Application.query.sessionToken) {
+                        delete Application.query.sessionToken;
+                    }
+                    if (Application.query.meetingId) {
+                        delete Application.query.meetingId;
+                    }
+                    var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
+                    window.history.pushState(state, title, location);
+                }
+                complete(response);
+            });
+            Log.ret(Log.l.trace);
+            return ret;
+        },
+
         unload: function () {
             Log.call(Log.l.trace, pageName + ".");
             // TODO: Respond to navigations away from this page.
@@ -81,10 +110,54 @@
         },
 
         updateLayout: function (element, viewState, lastViewState) {
+            var ret = null;
+            var that = this;
             Log.call(Log.l.u1, pageName + ".");
             /// <param name="element" domElement="true" />
             // TODO: Respond to changes in viewState.
+            if (element && !that.inResize) {
+                that.inResize = 1;
+                ret = WinJS.Promise.timeout(0).then(function() {
+                    if (that.controller) {
+                        var contentArea = element.querySelector(".contentarea");
+                        if (contentArea) {
+                            var width = contentArea.clientWidth;
+                            var height = contentArea.clientHeight;
+                            if (width > 0 && width !== that.prevWidth || height > 0 && height !== that.prevHeight) {
+                                function adjustContentHeight(content) {
+                                    if (content && content.style) {
+                                        var offsetTop = Math.max(content.offsetTop - contentArea.scrollTop,0);
+                                        if (content.clientHeight !== height - offsetTop) {
+                                            var contentHeight = Math.max(height - offsetTop,400);
+                                            content.style.height = contentHeight.toString() + "px";
+                                            var fragmentElement = content.firstElementChild;
+                                            if (fragmentElement) {
+                                                var fragmentControl = fragmentElement.winControl;
+                                                if (fragmentControl) {
+                                                    fragmentControl.updateLayout.call(fragmentControl, fragmentElement);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                var contents = contentArea.querySelectorAll(".recordedContent-fragmenthost, .conference-fragmenthost");
+                                if (contents) for (var i = 0; i < contents.length; i++) {
+                                    adjustContentHeight(contents[i]);
+                                }
+                                if (width > 0 && that.prevWidth !== width) {
+                                    that.prevWidth = width;
+                                }
+                                if (height > 0 && that.prevHeight !== height) {
+                                    that.prevHeight = height;
+                                }
+                            }
+                        }
+                    }
+                    that.inResize = 0;
+                });
+            }
             Log.ret(Log.l.u1);
+            return ret;
         }
     });
 })();

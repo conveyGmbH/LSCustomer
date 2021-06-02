@@ -436,8 +436,6 @@ var __meteor_runtime_config__;
                 });
             }
 
-
-
             var loadData = function () {
                 var options = {
                     type: "GET",

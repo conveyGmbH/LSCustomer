@@ -37,6 +37,7 @@
                 dataDocText: {}
             }, commandList]);
 
+
             var that = this;
 
             var setDataEvent = function (newDataEvent) {
@@ -203,6 +204,16 @@
                     cal.download(that.binding.dataEvent.Name);
                     /*cal.addEvent('Demo Event', 'This is thirty minute event', 'Nome, AK', '8/7/2013 5:30 pm', '8/7/2013 6:00 pm');*/
                     Log.ret(Log.l.trace);
+                },
+                onScroll: function (event) {
+                    Log.call(Log.l.trace, "Event.Controller.");
+                    var pageControl = pageElement.winControl;
+                    if (pageControl) {
+                        pageControl.prevWidth = 0;
+                        pageControl.prevHeight = 0;
+                        pageControl.updateLayout.call(pageControl, pageElement);
+                    }
+                    Log.ret(Log.l.trace);
                 }
             };
 
@@ -330,7 +341,7 @@
                             {
                                 pVeranstaltungID: AppData._persistentStates.registerData.eventID,
                                 pUserToken: AppData._persistentStates.registerData.userToken,
-                                pEMail: null, //wenn über Link bestätigt, dann übergebe Email null 
+                                pEMail: AppData._persistentStates.registerData.Email, //wenn über Link bestätigt, dann übergebe Email null 
                                 pAddressData: null,
                                 pBaseURL: window.location.href,
                                 pCopyToken: null
@@ -603,6 +614,12 @@
                 return ret;
             }
             this.updateFragment = updateFragment;
+
+            var contentArea = pageElement.querySelector(".contentarea");
+            if (contentArea) {
+                this.addRemovableEventListener(contentArea, "scroll", this.eventHandlers.onScroll.bind(this));
+            }
+
 
             // finally, load the data
             that.processAll().then(function() {

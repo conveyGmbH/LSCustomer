@@ -50,12 +50,6 @@
                         if (fragment) {
                             var width = fragment.clientWidth;
                             var height = fragment.clientHeight;
-                            if (AppBar.scope && AppBar.scope.element) {
-                                var pageElement = AppBar.scope.element.querySelector(".contentarea");
-                                if (pageElement) {
-                                    height = pageElement.clientHeight - 100;
-                                }
-                            }
                             var doResizeContent = false;
                             if (width > 0 && width !== that.prevWidth) {
                                 that.prevWidth = width;
