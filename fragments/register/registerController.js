@@ -301,8 +301,24 @@
                     Log.call(Log.l.trace, "Register.Controller.");
                     window.open(
                         'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href),
-                        'facebook-share-dialog',
-                        'width=626,height=436');
+                        'facebook-share-dialog');
+                    Log.ret(Log.l.trace);
+                },
+                clickLinkedInShare: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' +
+                        encodeURIComponent(window.location.href));
+                    Log.ret(Log.l.trace);
+                },
+                clickXingShare: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    window.open('https://www.xing.com/spi/shares/new?url=' +
+                        encodeURIComponent(window.location.href));
+                    Log.ret(Log.l.trace);
+                },
+                clickGooglePlusShare: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    window.open('https://plus.google.com/share?url={' + encodeURIComponent(window.location.href) + '}');
                     Log.ret(Log.l.trace);
                 },
                 clickFacebookLogout: function (event) {
