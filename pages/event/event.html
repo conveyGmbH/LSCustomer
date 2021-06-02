@@ -56,7 +56,7 @@
                                         <span data-win-bind="textContent: dataText.ev_text_share_text"></span>
                                     </div>
                                     <div class="share-block" data-win-bind="style.visibility: showShare Binding.Converter.toVisibility">
-                                        <div class="circle facebook" data-win-bind="this['data-href']: link WinJS.Binding.setAttribute" onclick="AppBar.handleEvent('click', 'clickFacebookLogin', event)">
+                                        <div class="circle facebook" onclick="AppBar.handleEvent('click', 'clickFacebookShare', event)">
                                             <i class="fab fa-facebook-square"></i>
                                         </div>
                                         <div class="circle linkedin">
