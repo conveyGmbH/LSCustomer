@@ -4,7 +4,7 @@
 }
 
 #conference.mediaview {
-    width: 100%;
+    width: calc(100% - 24px);
     height: calc(100% - 8px);
 }
 
@@ -23,4 +23,38 @@
 
 .left--18SBXP, .right--Z4dKWq {
     z-index: 1;
+}
+
+/*.ghost--Z136aiN.default--Z19H5du:hover, .buttonWrapper--x8uow:hover .ghost--Z136aiN.default--Z19H5du*/
+.ghost--Z136aiN {
+    background-color: var(--btn-primary-bg) !important;
+    box-shadow: 0 2px 5px 0 black !important;
+    opacity: 0.8;
+}
+
+.ghost--Z136aiN.default--Z19H5du:hover, .ghost--Z136aiN.default--Z19H5du:active {
+    background-color: var(--btn-primary-bg) !important;
+    opacity: 1;
+}
+
+.video-list-left {
+    display: block !important;
+    position: absolute !important;
+    left: 10px;
+    width: 192px !important;
+}
+.video-list-right {
+    display: block !important;
+    position: absolute !important;
+    right: 30px;
+    width: 192px !important;
+}
+
+.media--Z1xJW08 {
+    max-height: calc(100% - 100px);
+    margin: 10px 0 !important;
+}
+
+.actionsbar--Z1ant6U {
+    height: 64px !important;
 }

@@ -26,7 +26,10 @@ var __meteor_runtime_config__;
                 dataDocText: AppBar.scope.binding.dataDocText
             }, commandList]);
 
+            var conference = fragmentElement.querySelector("#conference");
+
             this.showUserListPromise = null;
+            this.placeVideoList = null;
             this.meetingDoc = null;
 
             var that = this;
@@ -37,6 +40,11 @@ var __meteor_runtime_config__;
                     that.showUserListPromise.cancel();
                 }
                 that.showUserListPromise = null;
+                if (that.placeVideoList) {
+                    that.placeVideoList.cancel();
+                }
+                that.placeVideoList = null;
+                conference = null;
                 Log.ret(Log.l.trace);
             }
 
@@ -50,8 +58,6 @@ var __meteor_runtime_config__;
                 Log.ret(Log.l.info);
                 return ret;
             };
-
-            var conference = fragmentElement.querySelector("#conference");
 
             var forEach = function (arrayLikeValue, action) {
                 for (var i = 0, l = arrayLikeValue.length; i < l; i++) {
@@ -449,6 +455,9 @@ var __meteor_runtime_config__;
             var showUserList = function(bShow) {
                 var ret = null;
                 Log.call(Log.l.trace, "Conference.Controller.");
+                if (that.showUserListPromise) {
+                    that.showUserListPromise.cancel();
+                }
                 var btnShowUserList = fragmentElement.querySelector(".btn--Z25OApd");
                 if (btnShowUserList) {
                     var userList = fragmentElement.querySelector(".userList--11btR3");
@@ -466,9 +475,6 @@ var __meteor_runtime_config__;
                 }
                 if (ret === null) {
                     Log.print(Log.l.trace, "not yet created - try later again!");
-                    if (that.showUserListPromise) {
-                        that.showUserListPromise.cancel();
-                    }
                     that.showUserListPromise = WinJS.Promise.timeout(250).then(function() {
                         that.showUserList(bShow);
                     });
@@ -476,7 +482,136 @@ var __meteor_runtime_config__;
                 Log.ret(Log.l.trace);
                 return ret;
             }
-            that.showUserList = showUserList;
+            this.showUserList = showUserList;
+
+            var videoListDefaults = {
+                aspect: 4.0/3.0,
+                width: 192,
+                height: 144,
+                left: "left",
+                right: "right",
+                default: "default",
+                direction: null,
+                videoListWidth: 0,
+                videoListHeight: 0
+            };
+            var placeVideoList = function(direction) {
+                var ret = null;
+                Log.call(Log.l.trace, "Conference.Controller.", "direction");
+                if (that.placeVideoListPromise) {
+                    that.placeVideoListPromise.cancel();
+                }
+                var videoList = fragmentElement.querySelector(".videoList--1OC49P");
+                if (videoList && videoList.style &&
+                    videoList.parentElement &&
+                    videoList.parentElement.parentElement && videoList.parentElement.parentElement.style) {
+                    var overlayElement = videoList.parentElement.parentElement;
+                    ret = videoListDefaults.direction;
+                    var numVideos, videoWidth, videoHeight;
+                    if (videoList.clientWidth / videoList.clientHeight > videoListDefaults.aspect * 1.5) {
+                        videoWidth = videoList.clientHeight * videoListDefaults.aspect;
+                        videoHeight = videoWidth / videoListDefaults.aspect;
+                        numVideos = Math.round(videoList.clientWidth / videoWidth);
+                    } else {
+                        videoHeight = videoList.clientWidth / videoListDefaults.aspect;
+                        videoWidth = videoHeight * videoListDefaults.aspect;
+                        numVideos = Math.round(videoList.clientHeight / videoHeight);
+                    }
+                    var setDefaultPlacement = function() {
+                        videoList.style.height = "";
+                        videoList.parentElement.style.height = "";
+                        videoList.style.gridTemplateRows = "";
+                        videoList.style.gridTemplateCols = "";
+                        if (WinJS.Utilities.hasClass(overlayElement, "video-list-left")) {
+                            WinJS.Utilities.removeClass(overlayElement, "video-list-left");
+                        }
+                        if (WinJS.Utilities.hasClass(overlayElement, "video-list-right")) {
+                            WinJS.Utilities.removeClass(overlayElement, "video-list-right");
+                        }
+                        if (!WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
+                            WinJS.Utilities.addClass(overlayElement, "overlay--nP1TK");
+                        }
+                        if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
+                            WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
+                        }
+                        if (numVideos > 1 && !WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
+                            WinJS.Utilities.addClass(overlayElement, "fullWidth--Z1RRil3");
+                        }
+                    }
+                    if (direction === videoListDefaults.default ||
+                        WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-bigger")) {
+                        setDefaultPlacement();
+                    } else {
+                        if (videoListDefaults.videoListWidth !== videoList.clientWidth ||
+                            videoListDefaults.videoListHeight !== videoList.clientHeight) {
+                            var rows = numVideos;
+                            var cols = 1;
+                            videoListDefaults.videoListWidth = Math.round(cols * videoListDefaults.width + (cols - 1) * 2);
+                            videoListDefaults.videoListHeight = Math.round(rows * videoListDefaults.height + (rows - 1) * 2);
+                            videoListDefaults.cols = cols;
+                            videoListDefaults.rows = rows;
+                            WinJS.Promise.timeout(500).then(function() {
+                                if (conference) {
+                                    var curWidth = conference.clientWidth;
+                                    conference.style.width = (curWidth - 10).toString() + "px";
+                                }
+                                return WinJS.Promise.timeout(50);
+                            }).then(function () {
+                                if (conference) {
+                                    conference.style.width = "";
+                                }
+                            });
+                        }
+                        videoList.style.height = videoListDefaults.videoListHeight.toString() + "px";
+                        videoList.parentElement.style.height = videoListDefaults.videoListHeight.toString() + "px";
+                        videoList.style.gridTemplateRows = "repeat(" + videoListDefaults.rows.toString() + ",1fr)";
+                        videoList.style.gridTemplateCols = "repeat(" + videoListDefaults.cols.toString() + ",1fr)";
+                        if (videoListDefaults.rows > 1) {
+                            if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
+                                WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
+                            }
+                            if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
+                                WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
+                            }
+                            if (WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
+                                WinJS.Utilities.removeClass(overlayElement, "overlay--nP1TK");
+                            }
+                            if (WinJS.Utilities.hasClass(overlayElement, "floatingOverlay--ZU51zt")) {
+                                WinJS.Utilities.removeClass(overlayElement, "floatingOverlay--ZU51zt");
+                            }
+                            if (direction === videoListDefaults.right) {
+                                if (WinJS.Utilities.hasClass(overlayElement, "video-list-left")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "video-list-left");
+                                }
+                                if (!WinJS.Utilities.hasClass(overlayElement, "video-list-right")) {
+                                    WinJS.Utilities.addClass(overlayElement, "video-list-right");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(overlayElement, "video-list-right")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "video-list-right");
+                                }
+                                if (!WinJS.Utilities.hasClass(overlayElement, "video-list-left")) {
+                                    WinJS.Utilities.addClass(overlayElement, "video-list-left");
+                                }
+                            }
+                        } else {
+                            setDefaultPlacement();
+                        }
+                    }
+                    videoListDefaults.direction = direction;
+                    that.placeVideoListPromise = WinJS.Promise.timeout(1000).then(function() {
+                        that.placeVideoList(direction);
+                    });
+                } else {
+                    Log.print(Log.l.trace, "not yet created - try later again!");
+                    that.placeVideoListPromise = WinJS.Promise.timeout(500).then(function() {
+                        that.placeVideoList(direction);
+                    });
+                }
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            this.placeVideoList = placeVideoList;
 
             var loadData = function () {
                 var options = {
@@ -581,6 +716,7 @@ var __meteor_runtime_config__;
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 that.showUserList(false);
+                that.placeVideoList(videoListDefaults.right);
             });
             Log.ret(Log.l.trace);
         })
