@@ -34,7 +34,8 @@
                 dataEvent: {},
                 dataText: {},
                 dataDoc: getEmptyDefaultValue(Event.medienView.defaultValue),
-                dataDocText: {}
+                dataDocText: {},
+                link: window.location.href
             }, commandList]);
 
             var that = this;
