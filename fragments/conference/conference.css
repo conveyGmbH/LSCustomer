@@ -12,3 +12,15 @@
 .dropZoneBottom--ZYMK7J {
     max-height: 40px;
 }
+
+.navbar--Z2lHYbG {
+    position: absolute !important;
+    width: calc(100% - 16px);
+}
+.center--2pV1iJ {
+    visibility: hidden;
+}
+
+.left--18SBXP, .right--Z4dKWq {
+    z-index: 1;
+}
