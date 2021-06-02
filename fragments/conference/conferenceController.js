@@ -26,9 +26,19 @@ var __meteor_runtime_config__;
                 dataDocText: AppBar.scope.binding.dataDocText
             }, commandList]);
 
+            this.showUserListPromise = null;
             this.meetingDoc = null;
 
             var that = this;
+
+            that.dispose = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (that.showUserListPromise) {
+                    that.showUserListPromise.cancel();
+                }
+                that.showUserListPromise = null;
+                Log.ret(Log.l.trace);
+            }
 
             XMLHttpRequest.prototype._oriOpen = XMLHttpRequest.prototype.open;
             XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
@@ -436,6 +446,38 @@ var __meteor_runtime_config__;
                 });
             }
 
+            var showUserList = function(bShow) {
+                var ret = null;
+                Log.call(Log.l.trace, "Conference.Controller.");
+                var btnShowUserList = fragmentElement.querySelector(".btn--Z25OApd");
+                if (btnShowUserList) {
+                    var userList = fragmentElement.querySelector(".userList--11btR3");
+                    if (userList) {
+                        ret = true;
+                        if (!bShow) {
+                            btnShowUserList.click();
+                        }
+                    } else {
+                        ret = false;
+                        if (bShow) {
+                            btnShowUserList.click();
+                        }
+                    }
+                }
+                if (ret === null) {
+                    Log.print(Log.l.trace, "not yet created - try later again!");
+                    if (that.showUserListPromise) {
+                        that.showUserListPromise.cancel();
+                    }
+                    that.showUserListPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.showUserList(bShow);
+                    });
+                }
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            that.showUserList = showUserList;
+
             var loadData = function () {
                 var options = {
                     type: "GET",
@@ -538,6 +580,7 @@ var __meteor_runtime_config__;
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
+                that.showUserList(false);
             });
             Log.ret(Log.l.trace);
         })
