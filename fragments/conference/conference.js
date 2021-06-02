@@ -50,14 +50,16 @@
                         if (fragment) {
                             var width = fragment.clientWidth;
                             var height = fragment.clientHeight;
-
+                            var doResizeContent = false;
                             if (width > 0 && width !== that.prevWidth) {
                                 that.prevWidth = width;
                                 docContainer.style.width = width.toString() + "px";
+                                doResizeContent = true;
                             }
                             if (height > 0 && height !== that.prevHeight) {
                                 that.prevHeight = height;
                                 docContainer.style.height = height.toString() + "px";
+                                doResizeContent = true;
                             }
                         }
                     }
