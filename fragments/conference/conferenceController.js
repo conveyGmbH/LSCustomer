@@ -93,14 +93,12 @@ var __meteor_runtime_config__;
             var getScriptFromSrcXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
                     a.href = "/";
-                    var getProtocol = "function getProtocol(url){if(url&&typeof url===\"string\"&&url.indexOf(\"://\")>=0)return url.substr(0,url.indexOf(\"://\"));return \"https\"};";
                     var reBase = "function rebase(url){if(!url||typeof url!=\"string\"||url.indexOf(\""+a.hostname+"\")>=0)return url;let p=url.indexOf(\"://\"),q=(p>=0)?url.substr(p+3).substr(url.substr(p+3).indexOf(\"/\")):url;return q};";
                     var newHostname = "(function(){return\"" + a.hostname + "\"})()";
                     var newHref = "(function(){return\"" + a.href + "\"})()";
                     var eGetImageUri = "let t=(function(){"+reBase+"let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,r=e.svgHeight;";
                     var aGetImageUri = "s,u=(function(){"+reBase+"let au=rebase(a.imageUri);Log.print(Log.l.info,\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
                     var uGetImageUri = "k,{imageUri:(function(){"+reBase+"let uu=rebase(u);Log.print(Log.l.info,\"uu=\"+JSON.stringify(uu));return uu})(),";
-                    var newGetNextUrl = "getNextUrl(e._url)}).then(function(t){"+getProtocol+""+reBase+"t=getProtocol(t)+\"://"+a.host+"\"+rebase(t);";
                     var scriptText = req.responseText
                         .replace(/window\.document\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.hostname/g, newHostname)
@@ -108,7 +106,6 @@ var __meteor_runtime_config__;
                         .replace(/let\{imageUri:t,svgWidth:n,svgHeight:r\}=e;/g, eGetImageUri)
                         .replace(/s,\{imageUri:u,content:m\}=a;/g, aGetImageUri)
                         .replace(/k,\{imageUri:u,/g, uGetImageUri)
-                        .replace(/getNextUrl\(e\._url\)\}\)\.then\(function\(t\)\{/g, newGetNextUrl)
                         ;
                     return scriptText;
                 });
@@ -301,9 +298,14 @@ var __meteor_runtime_config__;
                     }
                     var compatibilitySrc = '="' + abs("lib/compatibility/scripts");
                     var html5ClientSrc = '="' + abs("/html5client");
+                    var wssBbWebRtcSfuSrc = "wss%3A%2F%2F" + a.host + "%2Fbbb-webrtc-sfu";
+                    var httpsPadSrc = "https%3A%2F%2F" + a.host + "%2Fpad";
                     var html5Client = req.responseText
                         .replace(/="compatibility/g, compatibilitySrc)
-                        .replace(/="\/html5client/g, html5ClientSrc);
+                        .replace(/="\/html5client/g, html5ClientSrc)
+                        .replace(/wss%3A%2F%2F[.a-z]+%2Fbbb-webrtc-sfu/g, wssBbWebRtcSfuSrc)
+                        .replace(/https%3A%2F%2F[.a-z]+%2Fpad/g, httpsPadSrc)
+                        ;
                     var pos = html5Client.indexOf("__meteor_runtime_config__");
                     if (pos > 0) {
                         pos = html5Client.indexOf("</script>", pos);
