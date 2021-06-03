@@ -61,6 +61,9 @@
                                 docContainer.style.height = height.toString() + "px";
                                 doResizeContent = true;
                             }
+                            if (doResizeContent && that.controller) {
+                                that.controller.placeVideoList();
+                            }
                         }
                     }
                     that.inResize = 0;

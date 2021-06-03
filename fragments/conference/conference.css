@@ -37,17 +37,25 @@
     opacity: 1;
 }
 
-.video-list-left {
+.video-overlay-left {
     display: block !important;
     position: absolute !important;
     left: 10px;
     width: 192px !important;
+    height: calc(100% - 100px) !important;
 }
-.video-list-right {
+.video-overlay-right {
     display: block !important;
     position: absolute !important;
     right: 30px;
     width: 192px !important;
+    height: calc(100% - 100px) !important;
+}
+.video-list-vertical {
+    grid-template-columns:100% !important;
+    grid-template-rows: repeat(auto-fill, 144px) !important;
+    width: 192px !important;
+    height: 100% !important;
 }
 
 .media--Z1xJW08 {
