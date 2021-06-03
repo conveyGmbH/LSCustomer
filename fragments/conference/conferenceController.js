@@ -484,6 +484,7 @@ var __meteor_runtime_config__;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (that.showUserListPromise) {
                     that.showUserListPromise.cancel();
+                    that.showUserListPromise = null;
                 }
                 var btnShowUserList = fragmentElement.querySelector(".btn--Z25OApd");
                 if (btnShowUserList) {
@@ -567,6 +568,7 @@ var __meteor_runtime_config__;
                 }
                 if (that.placeVideoListPromise) {
                     that.placeVideoListPromise.cancel();
+                    that.placeVideoListPromise = null;
                 }
                 var videoList = fragmentElement.querySelector(".videoList--1OC49P");
                 if (videoList && videoList.style &&
@@ -664,6 +666,10 @@ var __meteor_runtime_config__;
                     videoListDefaults.hideInactive = hideInactive;
                 }
                 Log.call(Log.l.trace, "Conference.Controller.", "hideInactive="+hideInactive);
+                if (that.checkForInactiveVideoPromise) {
+                    that.checkForInactiveVideoPromise.cancel();
+                    that.checkForInactiveVideoPromise = null;
+                }
                 var videoList = fragmentElement.querySelector(".videoList--1OC49P");
                 if (videoList) {
                     var i = 0;
@@ -719,9 +725,11 @@ var __meteor_runtime_config__;
                     }
                     videoListDefaults.activeVideoCount = numVideos;
                 }
-                that.checkForInactiveVideoPromise = WinJS.Promise.timeout(500).then(function() {
-                    that.checkForInactiveVideo();
-                });
+                if (hideInactive) {
+                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(500).then(function() {
+                        that.checkForInactiveVideo();
+                    });
+                }
                 Log.ret(Log.l.trace);
             }
             that.checkForInactiveVideo = checkForInactiveVideo;
