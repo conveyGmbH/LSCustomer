@@ -10,6 +10,7 @@
     "events.title"          : "Serie",
 
     "event.title"           : "Veranstaltung",
+    "event.moderators"      : "Moderatoren",
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 

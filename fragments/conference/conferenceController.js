@@ -50,6 +50,7 @@ var __meteor_runtime_config__;
             this.showUserListPromise = null;
             this.placeVideoListPromise = null;
             this.checkForInactiveVideoPromise = null;
+            this.filterModeratorsPromise = null;
             this.meetingDoc = null;
 
             var that = this;
@@ -67,6 +68,10 @@ var __meteor_runtime_config__;
                 if (that.checkForInactiveVideoPromise) {
                     that.checkForInactiveVideoPromise.cancel();
                     that.checkForInactiveVideoPromise = null;
+                }
+                if (that.filterModeratorsPromise) {
+                    that.filterModeratorsPromise.cancel();
+                    that.filterModeratorsPromise = null;
                 }
                 conference = null;
                 videoListDefaults = {};
@@ -479,9 +484,43 @@ var __meteor_runtime_config__;
                 });
             }
 
-            var showUserList = function(bShow) {
-                var ret = null;
+            var filterModerators = function() {
                 Log.call(Log.l.trace, "Conference.Controller.");
+                if (that.filterModeratorsPromise) {
+                    that.filterModeratorsPromise.cancel();
+                    that.filterModeratorsPromise = null;
+                }
+                var userList = fragmentElement.querySelector(".userList--11btR3");
+                if (userList) {
+                    var participantsList = userList.querySelectorAll(".participantsList--1MvMwF");
+                    if (participantsList) {
+                        var moderatorCount = 0;
+                        for (var i = 0; i < participantsList.length; i++) {
+                            if (participantsList[i] && !participantsList[i].querySelector(".moderator--24bqCT")) {
+                                participantsList[i].style.display = "none";
+                            } else {
+                                moderatorCount++;
+                            }
+                        }
+                        var userListColumn = userList.querySelector(".userListColumn--6vKQL");
+                        if (userListColumn) {
+                            var h2 = userListColumn.querySelector("h2");
+                            if (h2) {
+                                h2.textContent = getResourceText("event.moderators") + " (" + moderatorCount + ")";
+                            }
+                        }
+                    }
+                }
+                that.filterModeratorsPromise = WinJS.Promise.timeout(500).then(function() {
+                    that.filterModerators();
+                });
+                Log.ret(Log.l.trace);
+            }
+            that.filterModerators = filterModerators;
+
+            var showUserList = function(bShow, bOnlyModerators) {
+                var ret = null;
+                Log.call(Log.l.trace, "Conference.Controller.", "bShow="+bShow+" bOnlyModerators="+bOnlyModerators);
                 if (that.showUserListPromise) {
                     that.showUserListPromise.cancel();
                     that.showUserListPromise = null;
@@ -500,11 +539,19 @@ var __meteor_runtime_config__;
                             btnShowUserList.click();
                         }
                     }
+                    if (bOnlyModerators) {
+                        that.filterModerators();
+                    } else {
+                        if (that.filterModeratorsPromise) {
+                            that.filterModeratorsPromise.cancel();
+                            that.filterModeratorsPromise = null;
+                        }
+                    }
                 }
                 if (ret === null) {
                     Log.print(Log.l.trace, "not yet created - try later again!");
                     that.showUserListPromise = WinJS.Promise.timeout(250).then(function() {
-                        that.showUserList(bShow);
+                        that.showUserList(bShow, bOnlyModerators);
                     });
                 }
                 Log.ret(Log.l.trace);
@@ -836,7 +883,7 @@ var __meteor_runtime_config__;
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
-                that.showUserList(false);
+                that.showUserList(false,true);
                 that.placeVideoList(videoListDefaults.right);
                 that.checkForInactiveVideo(true);
             });
