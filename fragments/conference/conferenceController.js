@@ -28,7 +28,11 @@ var __meteor_runtime_config__;
                 videoListHeight: 0,
                 closeDesc: null,
                 restoreDesc: null,
-                isDescClosed: false
+                isDescClosed: false,
+                hideInactive: false,
+                contentActivity: [],
+                inactivityDelay: 7000,
+                activeVideoCount: 0
             };
 
             Fragments.Controller.apply(this, [fragmentElement, {
@@ -44,7 +48,8 @@ var __meteor_runtime_config__;
             var conference = fragmentElement.querySelector("#conference");
 
             this.showUserListPromise = null;
-            this.placeVideoList = null;
+            this.placeVideoListPromise = null;
+            this.checkForInactiveVideoPromise = null;
             this.meetingDoc = null;
 
             var that = this;
@@ -53,12 +58,16 @@ var __meteor_runtime_config__;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (that.showUserListPromise) {
                     that.showUserListPromise.cancel();
+                    that.showUserListPromise = null;
                 }
-                that.showUserListPromise = null;
-                if (that.placeVideoList) {
-                    that.placeVideoList.cancel();
+                if (that.placeVideoListPromise) {
+                    that.placeVideoListPromise.cancel();
+                    that.placeVideoListPromise = null;
                 }
-                that.placeVideoList = null;
+                if (that.checkForInactiveVideoPromise) {
+                    that.checkForInactiveVideoPromise.cancel();
+                    that.checkForInactiveVideoPromise = null;
+                }
                 conference = null;
                 videoListDefaults = {};
                 Log.ret(Log.l.trace);
@@ -565,15 +574,9 @@ var __meteor_runtime_config__;
                     videoList.parentElement.parentElement && videoList.parentElement.parentElement.style) {
                     var overlayElement = videoList.parentElement.parentElement;
                     ret = videoListDefaults.direction;
-                    var numVideos, videoWidth, videoHeight;
-                    if (videoList.clientWidth / videoList.clientHeight > videoListDefaults.aspect * 1.5) {
-                        videoWidth = videoList.clientHeight * videoListDefaults.aspect;
-                        videoHeight = videoWidth / videoListDefaults.aspect;
-                        numVideos = Math.round(videoList.clientWidth / videoWidth);
-                    } else {
-                        videoHeight = videoList.clientWidth / videoListDefaults.aspect;
-                        videoWidth = videoHeight * videoListDefaults.aspect;
-                        numVideos = Math.round(videoList.clientHeight / videoHeight);
+                    var numVideos = videoList.childElementCount;
+                    if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
+                        WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
                     }
                     if (direction === videoListDefaults.default ||
                         WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-bigger") ||
@@ -590,18 +593,24 @@ var __meteor_runtime_config__;
                         if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
                             WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
                         }
-                        if (numVideos > 1 && !WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                            WinJS.Utilities.addClass(overlayElement, "fullWidth--Z1RRil3");
+                        if (numVideos > 1) {
+                            if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                                WinJS.Utilities.addClass(overlayElement, "video-overlay-fullwidth");
+                            }
+                        } else {
+                            if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                                WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
+                            }
                         }
                         if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                             WinJS.Utilities.removeClass(videoList, "video-list-vertical");
                         }
                     } else {
+                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
+                        }
                         if (!WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                             WinJS.Utilities.addClass(videoList, "video-list-vertical");
-                        }
-                        if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                            WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
                         }
                         if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
                             WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
@@ -634,8 +643,9 @@ var __meteor_runtime_config__;
                             }
                             closeDescButton.onclick = that.clickCloseDesc;
                         }
-                        videoListDefaults.direction = direction;
                     }
+                    videoListDefaults.activeVideoCount = numVideos;
+                    videoListDefaults.direction = direction;
                 } else {
                     Log.print(Log.l.trace, "not yet created - try later again!");
                     that.placeVideoListPromise = WinJS.Promise.timeout(250).then(function() {
@@ -646,6 +656,75 @@ var __meteor_runtime_config__;
                 return ret;
             }
             this.placeVideoList = placeVideoList;
+
+            var checkForInactiveVideo = function(hideInactive) {
+                if (typeof hideInactive === "undefined") {
+                    hideInactive = videoListDefaults.hideInactive;
+                } else {
+                    videoListDefaults.hideInactive = hideInactive;
+                }
+                Log.call(Log.l.trace, "Conference.Controller.", "hideInactive="+hideInactive);
+                var videoList = fragmentElement.querySelector(".videoList--1OC49P");
+                if (videoList) {
+                    var i = 0;
+                    var sizeVisible = 0;
+                    var isVertical = WinJS.Utilities.hasClass(videoList, "video-list-vertical");
+                    var numVideos = 0;
+                    var now = Date.now();
+                    var videoListItem = videoList.firstElementChild;
+                    while (videoListItem) {
+                        var content = videoListItem.firstElementChild;
+                        if (content) {
+                            var muted = null;
+                            if (WinJS.Utilities.hasClass(content, "talking--26lGzY")) {
+                                videoListDefaults.contentActivity[i] = now;
+                            } else {
+                                muted = content.querySelector(".muted--quAxq");
+                            }
+                            if (hideInactive &&
+                                (muted || !videoListDefaults.contentActivity[i] ||
+                                 now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay)) {
+                                videoListItem.style.display = "none";
+                            } else {
+                                videoListItem.style.display = "flex";
+                                numVideos++;
+                            }
+                            i++;
+                        }
+                        videoListItem = videoListItem.nextElementSibling;
+                    }
+                    var overlayElement = videoList.parentElement.parentElement;
+                    if (!isVertical && !numVideos) {
+                        if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-top")) {
+                            WinJS.Utilities.addClass(overlayElement, "video-overlay-top");
+                        }
+                        if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
+                            WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
+                        }
+                        if (WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
+                            WinJS.Utilities.removeClass(overlayElement, "overlay--nP1TK");
+                        }
+                    } else {
+                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-top")) {
+                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-top");
+                        }
+                        if (!isVertical) {
+                            if (!WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
+                                WinJS.Utilities.addClass(overlayElement, "overlay--nP1TK");
+                            }
+                            if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
+                                WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
+                            }
+                        }
+                    }
+                    videoListDefaults.activeVideoCount = numVideos;
+                }
+                that.checkForInactiveVideoPromise = WinJS.Promise.timeout(500).then(function() {
+                    that.checkForInactiveVideo();
+                });
+                Log.ret(Log.l.trace);
+            }
+            that.checkForInactiveVideo = checkForInactiveVideo;
 
             var loadData = function () {
                 var options = {
@@ -751,6 +830,7 @@ var __meteor_runtime_config__;
                 Log.print(Log.l.trace, "Data loaded");
                 that.showUserList(false);
                 that.placeVideoList(videoListDefaults.right);
+                that.checkForInactiveVideo(true);
             });
             Log.ret(Log.l.trace);
         })
