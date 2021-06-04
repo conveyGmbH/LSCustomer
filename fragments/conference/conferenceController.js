@@ -44,6 +44,7 @@ var __meteor_runtime_config__;
 
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
+                dataEvent: options ? options.dataEvent : {},
                 dataConference: {
                     media: ""
                 },
@@ -879,10 +880,6 @@ var __meteor_runtime_config__;
             that.checkForInactiveVideo = checkForInactiveVideo;
 
             var loadData = function () {
-                var options = {
-                    type: "GET",
-                    url: ""
-                };
                 var page = null;
                 if (Application.query.page) {
                     page = Application.query.page;
@@ -956,8 +953,8 @@ var __meteor_runtime_config__;
                                 window.history.pushState(state, title, location);
                             }
                         };
-                        options.url = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
-                        return renderImpl(options.url, conference, false);
+                        var path = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
+                        return renderImpl(path, conference, false);
                     } else {
                         // wenn keine conference vorhanden dann zeige meldung -> Conference läuft noch nicht -> zurück button auf events
                         // setze manuell auf ein ungültigen Status
@@ -980,9 +977,11 @@ var __meteor_runtime_config__;
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
-                that.showUserList(false,true);
+                that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
                 that.placeVideoList(videoListDefaults.right);
-                that.checkForInactiveVideo(true);
+                if (!!that.binding.dataEvent.HideSilentVideos) {
+                    that.checkForInactiveVideo(true);
+                }
             });
             Log.ret(Log.l.trace);
         })
