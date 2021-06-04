@@ -34,6 +34,13 @@ var __meteor_runtime_config__;
                 inactivityDelay: 7000,
                 activeVideoCount: 0
             };
+            var userListDefaults = {
+                show: true,
+                onlyModerators: false,
+                userListObserver: null,
+                toggleBtnObserver: null,
+                toggleUserList: null
+            };
 
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
@@ -51,6 +58,7 @@ var __meteor_runtime_config__;
             this.placeVideoListPromise = null;
             this.checkForInactiveVideoPromise = null;
             this.filterModeratorsPromise = null;
+            this.observeToggleUserListBtnPromise = null;
             this.meetingDoc = null;
 
             var that = this;
@@ -73,8 +81,13 @@ var __meteor_runtime_config__;
                     that.filterModeratorsPromise.cancel();
                     that.filterModeratorsPromise = null;
                 }
+                if (that.observeToggleUserListBtnPromise) {
+                    that.observeToggleUserListBtnPromise.cancel();
+                    that.observeToggleUserListBtnPromise = null;
+                }
                 conference = null;
                 videoListDefaults = {};
+                userListDefaults = {};
                 Log.ret(Log.l.trace);
             }
 
@@ -484,7 +497,7 @@ var __meteor_runtime_config__;
                 });
             }
 
-            var filterModerators = function() {
+            var filterModerators = function(addedNodes) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (that.filterModeratorsPromise) {
                     that.filterModeratorsPromise.cancel();
@@ -492,54 +505,138 @@ var __meteor_runtime_config__;
                 }
                 var userList = fragmentElement.querySelector(".userList--11btR3");
                 if (userList) {
-                    var participantsList = userList.querySelectorAll(".participantsList--1MvMwF");
-                    if (participantsList) {
-                        var moderatorCount = 0;
-                        for (var i = 0; i < participantsList.length; i++) {
-                            if (participantsList[i] && !participantsList[i].querySelector(".moderator--24bqCT")) {
-                                participantsList[i].style.display = "none";
-                            } else {
-                                moderatorCount++;
+                    var moderatorCount = 0;
+                    var userListColumn = userList.querySelector(".userListColumn--6vKQL");
+                    if (userListColumn) {
+                        var participantsList = userListColumn.querySelectorAll(".participantsList--1MvMwF");
+                        if (participantsList) {
+                            for (var i = participantsList.length - 1; i >= 0; i--) {
+                                var participantsListEntry = participantsList[i];
+                                if (participantsListEntry && !participantsListEntry.querySelector(".moderator--24bqCT")) {
+                                    try {
+                                        participantsListEntry.parentNode.removeChild(participantsListEntry);
+                                    } catch (ex) {
+                                        Log.print(Log.l.trace, "participantsList[" + i + "] is not a child entry of userList");
+                                    }
+                                } else {
+                                    moderatorCount++;
+                                }
                             }
                         }
-                        var userListColumn = userList.querySelector(".userListColumn--6vKQL");
-                        if (userListColumn) {
-                            var h2 = userListColumn.querySelector("h2");
-                            if (h2) {
-                                h2.textContent = getResourceText("event.moderators") + " (" + moderatorCount + ")";
+                        var h2 = userListColumn.querySelector("h2");
+                        if (h2) {
+                            h2.textContent = getResourceText("event.moderators") + " (" + moderatorCount + ")";
+                        }
+                        var participantsListParent = userListColumn.querySelector(".list--Z2pj65C");
+                        if (participantsListParent && participantsListParent.firstElementChild) {
+                            userListDefaults.userListObserver = new MutationObserver(function(mutationList, observer) {
+                                WinJS.Promise.timeout(0).then(function() {
+                                    mutationList.forEach(function(mutation) {
+                                        if (mutation.type === "childList") {
+                                            that.filterModerators(mutation.addedNodes);
+                                        }
+                                    });
+                                });
+                            });
+                            if (userListDefaults.userListObserver) {
+                                userListDefaults.userListObserver.observe(participantsListParent.firstElementChild, {
+                                    childList: true
+                                });
                             }
                         }
                     }
+                } else {
+                    that.filterModeratorsPromise = WinJS.Promise.timeout(500).then(function() {
+                        that.filterModerators();
+                    });
                 }
-                that.filterModeratorsPromise = WinJS.Promise.timeout(500).then(function() {
-                    that.filterModerators();
-                });
                 Log.ret(Log.l.trace);
             }
             that.filterModerators = filterModerators;
 
-            var showUserList = function(bShow, bOnlyModerators) {
+            var clickToggleUserList = function(event) {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (userListDefaults.userListObserver) {
+                    userListDefaults.userListObserver.disconnect();
+                }
+                var userList = fragmentElement.querySelector(".userList--11btR3");
+                if (typeof userListDefaults.toggleUserList === "function") {
+                    userListDefaults.toggleUserList(event);
+                }
+                if (userListDefaults.onlyModerators && !userList) {
+                    that.filterModeratorsPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.filterModerators();
+                    });
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.clickToggleUserList = clickToggleUserList;
+
+            var observeToggleUserListBtn = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (that.observeToggleUserListBtnPromise) {
+                    that.observeToggleUserListBtnPromise.cancel();
+                    that.observeToggleUserListBtnPromise = null;
+                }
+                var btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
+                if (btnToggleUserList) {
+                    if (!userListDefaults.toggleBtnObserver) {
+                        userListDefaults.toggleBtnObserver = new MutationObserver(function(mutationList, observer) {
+                            userListDefaults.toggleBtnObserver.disconnect();
+                            WinJS.Promise.timeout(250).then(function() {
+                                that.observeToggleUserListBtn();
+                            });
+                        });
+                    }
+                    if (userListDefaults.toggleBtnObserver) {
+                        userListDefaults.toggleBtnObserver.observe(btnToggleUserList.parentNode, {
+                            childList: true
+                        });
+                    }
+                    userListDefaults.toggleUserList = btnToggleUserList.onclick;
+                    btnToggleUserList.onclick = that.clickToggleUserList;
+                } else {
+                    that.observeToggleUserListBtnPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.observeToggleUserListBtn();
+                    });
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.observeToggleUserListBtn = observeToggleUserListBtn;
+
+            var showUserList = function(show, onlyModerators) {
                 var ret = null;
-                Log.call(Log.l.trace, "Conference.Controller.", "bShow="+bShow+" bOnlyModerators="+bOnlyModerators);
+                Log.call(Log.l.trace, "Conference.Controller.", "show="+show+" onlyModerators="+onlyModerators);
+                if (typeof show === "undefined") {
+                    show = userListDefaults.show;
+                } else {
+                    userListDefaults.show = show;
+                }
+                if (typeof onlyModerators === "undefined") {
+                    onlyModerators = userListDefaults.onlyModerators;
+                } else {
+                    userListDefaults.onlyModerators = onlyModerators;
+                }
                 if (that.showUserListPromise) {
                     that.showUserListPromise.cancel();
                     that.showUserListPromise = null;
                 }
-                var btnShowUserList = fragmentElement.querySelector(".btn--Z25OApd");
-                if (btnShowUserList) {
+                var btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
+                if (btnToggleUserList) {
+                    that.observeToggleUserListBtn();
                     var userList = fragmentElement.querySelector(".userList--11btR3");
                     if (userList) {
                         ret = true;
-                        if (!bShow) {
-                            btnShowUserList.click();
+                        if (!show) {
+                            btnToggleUserList.click();
                         }
                     } else {
                         ret = false;
-                        if (bShow) {
-                            btnShowUserList.click();
+                        if (show) {
+                            btnToggleUserList.click();
                         }
                     }
-                    if (bOnlyModerators) {
+                    if (onlyModerators) {
                         that.filterModerators();
                     } else {
                         if (that.filterModeratorsPromise) {
@@ -551,7 +648,7 @@ var __meteor_runtime_config__;
                 if (ret === null) {
                     Log.print(Log.l.trace, "not yet created - try later again!");
                     that.showUserListPromise = WinJS.Promise.timeout(250).then(function() {
-                        that.showUserList(bShow, bOnlyModerators);
+                        that.showUserList(show, onlyModerators);
                     });
                 }
                 Log.ret(Log.l.trace);
