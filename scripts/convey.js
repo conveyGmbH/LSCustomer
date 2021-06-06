@@ -5,17 +5,6 @@
 
     function loadAppIntoRootElement() {
 
-        var event; // The custom event that will be created
-
-        if (document.createEvent) {
-            event = document.createEvent("HTMLEvents");
-            event.initEvent("deviceready", true, true);
-        } else {
-            event = document.createEventObject();
-            event.eventType = "deviceready";
-        }
-        event.eventName = "deviceready";
-
         var newBaseHref = null;
         var scripts = document.getElementsByTagName("script");
         for (var i = 0; i < scripts.length; i++) {
@@ -257,6 +246,17 @@
                     !document.querySelector("#contenthost")) {
                     checkForDeviceReady();
                 } else {
+                    var event; // The custom event that will be created
+
+                    if (document.createEvent) {
+                        event = document.createEvent("HTMLEvents");
+                        event.initEvent("deviceready", true, true);
+                    } else {
+                        event = document.createEventObject();
+                        event.eventType = "deviceready";
+                    }
+                    event.eventName = "deviceready";
+
                     if (document.dispatchEvent) {
                         document.dispatchEvent(event);
                     } else {
@@ -328,7 +328,7 @@
     function waitForCallerPageCompletion() {
         if (document.body.childElementCount !== prevChildCount) {
             prevChildCount = document.body.childElementCount;
-            window.setTimeout(function() { waitForCallerPageCompletion(); }, 250);
+            window.setTimeout(function() { waitForCallerPageCompletion(); }, 20);
             return false;
         } else {
             loadAppIntoRootElement();
