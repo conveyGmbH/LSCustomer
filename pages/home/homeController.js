@@ -521,22 +521,19 @@
                                     }
                                 }
                             }
-                            if (winSurface.clientHeight > listView.clientHeight) {
-                                var listHeader = pageElement.querySelector(".list-header");
-                                if (listHeader) {
-                                    var firstElementChild = listHeader.firstElementChild;
-                                    while (firstElementChild) {
-                                        var styles = getComputedStyle(firstElementChild);
-                                        if (styles && styles.getPropertyValue("position") === "fixed") {
-                                            if (firstElementChild.offsetLeft + firstElementChild.clientWidth >
-                                                listView.offsetLeft + listView.clientWidth - 20) {
-                                                var fixedWidth = listView.offsetLeft + listView.clientWidth - 20 - firstElementChild.offsetLeft;
-                                                firstElementChild.style.width = fixedWidth.toString() + "px";
-                                            }
-                                            break;
-                                        }
-                                        firstElementChild = firstElementChild.firstElementChild;
+                            var viewPort = listView.querySelector(".win-viewport");
+                            if (viewPort) {
+                                var firstElementChild = headerContainer.firstElementChild;
+                                while (firstElementChild) {
+                                    var styles = getComputedStyle(firstElementChild);
+                                    if (styles && styles.getPropertyValue("position") === "fixed") {
+                                        var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
+                                        firstElementChild.style.maxWidth = "calc(100% -"+ (firstElementChild.offsetLeft+scrollBarWidth).toString() +"px)";
+                                        break;
                                     }
+                                    firstElementChild = firstElementChild.firstElementChild;
+                                }
+                                if (winSurface.clientHeight > listView.clientHeight) {
                                 }
                             }
                         }
