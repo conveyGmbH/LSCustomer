@@ -87,8 +87,9 @@
             this.prevWidth = 0;
             this.prevHeight = 0;
 
-            var commandList = [];
+            Colors.loadSVGImageElements(element, "action-image", 40, Colors.textColor);
 
+            var commandList = [];
             this.controller = new Event.Controller(element, commandList);
             if (this.controller.eventHandlers) {
                 // general event listener for hardware back button, too!

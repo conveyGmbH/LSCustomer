@@ -19,10 +19,10 @@
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea win-type-body">
                     <div class="hero-header">
-                        <div class="custlogo">
-                            <img class="win-commandicon" src="../../images/home.svg"
-                                 onclick="AppBar.handleEvent('click', 'clickHome', event)"/>
-                        </div>
+                        <button class="win-button">
+                            <div class="action-image" id="home" 
+                                 onclick="AppBar.handleEvent('click', 'clickHome', event)"></div>
+                        </button>
                         <div class="content-header">
                             <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
                                 <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>

@@ -184,10 +184,21 @@
     --max-content-width: 1410px;
     --max-content-width-surface: 1460px !important;
     /*
-    --max-content-margin-left: calc(50% - 620px);
-    --max-content-width: 1210px;
-    --max-content-width-surface: 1260px;
+    --e-global-color-primary: #2A2F3D;
+    --e-global-color-secondary: #07B9CB;
+    --e-global-color-text: #2A2F3D;
+    --e-global-color-accent: #C2D63E;
+    --e-global-color-d4faeed: #F3FBFC;
     */
+}
+.contentarea {
+    background-color: var(--e-global-color-d4faeed, #F3FBFC);
+}
+.win-type-body {
+    color: var(--e-global-color-text, #2A2F3D);
+}
+.caption-field {
+    color: var(--e-global-color-secondary, #07B9CB);
 }
 
 /******** Ende Fonts for LiveBridge*********/

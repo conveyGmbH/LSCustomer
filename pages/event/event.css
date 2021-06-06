@@ -20,10 +20,6 @@
     font-weight: 600;
 }
 
-.event .win-type-body {
-    color: #2a2f3d;
-}
-
 .event .hero-header,
 .event .content-container {
     margin-left: var(--max-content-margin-left);
@@ -54,7 +50,6 @@
 }
 
 .event .content-header {
-    color: #2a2f3d;
     height: auto;
     width: 100%;
 }
@@ -97,7 +92,6 @@
 
 
 .event .color_container2 {
-    background-color: #f3fbfc;
     position: absolute;
     z-index: -2;
     height: 60%;
@@ -115,14 +109,7 @@
     font-weight: 600;
 }
 
-.event .caption-field {
-    color: #07b9cb;
-}
-.event p {
-    color: #2a2f3d;
-}
 .event .content-header {
-    color: #2a2f3d;
     height: auto;
     width: auto;
     margin: 15px 0 0 0;
@@ -181,14 +168,12 @@
 .event .speaker-text { display: block; position: relative; width: 75%; float: right; }
 .event .speaker-text > span { display: block; margin: 0 0 0 15px; padding: 5px; font-size: 16px;}
 .event .speaker-text .win-h3 > span {
-    color: #2a2f3d;
     font-size: 18px;
 }
 .event .speaker-name {
     font-weight: 600;
 }
 .event .speaker-title .win-type-caption {
-    color: #2a2f3d;
     font-size: 16px;
     font-weight: 600;
 }
@@ -197,7 +182,7 @@
     width: auto;
     height: auto;
     margin: 0;
-    background-color: #e6e6e6;
+    background-color: rgba(128,128,128,0.1);
 }
 .teaser-fragmenthost {
     height: auto;
@@ -221,12 +206,12 @@
     border-radius: 30px;
     border-style: solid;
     border-width: 2px;
-    border-color: #c2d63e;
+    border-color: var(--e-global-color-accent, #c2d63e);
     cursor: pointer;
 }
 .event #calenderButton .win-type-title {
     font-weight: 400;
-    color: #c2d63e;
+    color: var(--e-global-color-accent, #c2d63e);
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
@@ -247,8 +232,8 @@
     right: -50px;
     top: -50px;
     color: #fff;
-    background: #2a2f3d;
-    border-color: #2a2f3d;
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
     border-radius: 15px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -276,8 +261,8 @@
     left: 0;
     top: 100%;
     color: #fff;
-    background: #2a2f3d;
-    border-color: #2a2f3d;
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
     border-radius: 15px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;

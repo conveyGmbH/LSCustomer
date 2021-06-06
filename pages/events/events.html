@@ -14,10 +14,10 @@
                 <div class="contentarea win-type-body">
                     <div class="headerFooterPlaceholder">
                         <div class="list-header">
-                            <div class="custlogo">
-                                <img class="win-commandicon" src="../../images/home.svg"
-                                     onclick="AppBar.handleEvent('click', 'clickHome', event)"/>
-                            </div>
+                            <button class="win-button">
+                                <div class="action-image" id="home" 
+                                     onclick="AppBar.handleEvent('click', 'clickHome', event)"></div>
+                            </button>
                             <div class="hero-image-container" data-win-bind="style.display: dataDoc.ser_doc Binding.Converter.toDisplay">
                                 <img data-win-bind="src: dataDoc.ser_doc; alt: dataDocText.ser_doc_alt; title: dataDocText.ser_doc_title; longdesc: dataDocText.ser_doc_descr" />
                             </div>

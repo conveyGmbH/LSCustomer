@@ -121,7 +121,6 @@
             this.prevHeight = 0;
 
             var commandList = [];
-
             this.controller = new Home.Controller(element, commandList);
             if (this.controller.eventHandlers) {
                 // general event listener for hardware back button, too!
