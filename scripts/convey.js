@@ -4,10 +4,6 @@
     var rootElementId = "ls-customer-host";
 
     function loadAppIntoRootElement() {
-        if (!document.querySelector("#"+rootElementId)) {
-            //cancel processing if no root element present!
-            return;
-        }
 
         var event; // The custom event that will be created
 
@@ -328,11 +324,30 @@
         });
     }
 
+    var prevChildCount = 0;
+    function waitForCallerPageCompletion() {
+        if (document.body.childElementCount !== prevChildCount) {
+            window.setTimeout(function() { waitForCallerPageCompletion(); }, 250);
+            return false;
+        } else {
+            loadAppIntoRootElement();
+            return true;
+        }
+    }
+
+    function checkForRootElement() {
+        if (!document.querySelector("#"+rootElementId)) {
+            //cancel processing if no root element present!
+            return;
+        }
+        waitForCallerPageCompletion();
+    }
+
     var prevOnLoadHandler = window.onload;
     window.onload = function(event) {
         if (typeof prevOnLoadHandler === "function") {
             prevOnLoadHandler(event);
         }
-        loadAppIntoRootElement();
+        checkForRootElement();
     }
 })();
