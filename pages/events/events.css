@@ -105,12 +105,11 @@
 }
 
 .events button.win-button,
-.event button.win-button:focus {
+.events button.win-button:focus {
     border-radius: 40px 40px 40px 40px;
     outline-style: none;
 }
-
-.event button#homeButton {
+.events button#homeButton {
     padding: 2px;
 }
 
