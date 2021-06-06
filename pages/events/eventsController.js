@@ -325,6 +325,24 @@
                                     }
                                 }
                             }
+                            if (winSurface.clientHeight > listView.clientHeight) {
+                                var listHeader = pageElement.querySelector("list-header");
+                                if (listHeader) {
+                                    var firstElementChild = listHeader.firstElementChild;
+                                    while (firstElementChild) {
+                                        var styles = getComputedStyle(firstElementChild);
+                                        if (styles && styles.getPropertyValue("position") === "fixed") {
+                                            if (firstElementChild.offsetLeft + firstElementChild.clientWidth >
+                                                listView.offsetLeft + listView.clientWidth - 20) {
+                                                var fixedWidth = listView.offsetLeft + listView.clientWidth - 20 - firstElementChild.offsetLeft;
+                                                firstElementChild.style.width = fixedWidth.toString() + "px";
+                                            }
+                                            break;
+                                        }
+                                        firstElementChild = firstElementChild.firstElementChild;
+                                    }
+                                }
+                            }
                         }
                     }
                     return WinJS.Promise.timeout(1000);
