@@ -107,6 +107,10 @@
         function createRootElement() {
             var customerElement = document.querySelector("#"+rootElementId);
             if (customerElement && customerElement.parentElement) {
+                var customerRootElement = customerElement;
+                while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
+                    customerRootElement = customerRootElement.parentElement;
+                }
                 var data = getDataset(customerElement);
                 if (data) {
                     AppData.customer = data.customer;
@@ -141,7 +145,7 @@
                 barHorizontalTextGray.appendChild(barHorizontalInnerTextGray);
                 barHorizontalItem.appendChild(barHorizontalTextGray);
                 barHorizontalTemplate.appendChild(barHorizontalItem);
-                customerElement.parentElement.insertBefore(barHorizontalTemplate, customerElement.nextElementSibling);
+                document.body.insertBefore(barHorizontalTemplate, customerRootElement.nextElementSibling);
 
                 var barVerticalTemplate = document.createElement("DIV");
                 barVerticalTemplate.setAttribute("class", "navigationbar-vertical-template");
@@ -166,13 +170,13 @@
                 barVerticalTextGray.appendChild(barVerticalInnerTextGray);
                 barVerticalItem.appendChild(barVerticalTextGray);
                 barVerticalTemplate.appendChild(barVerticalItem);
-                customerElement.parentElement.insertBefore(barVerticalTemplate, barHorizontalTemplate.nextElementSibling);
+                document.body.insertBefore(barVerticalTemplate, barHorizontalTemplate.nextElementSibling);
 
                 // App Header 
                 var appHeader = document.createElement("DIV");
                 appHeader.id = "headerhost";
                 appHeader.setAttribute("class", "headerhost-container");
-                customerElement.parentElement.insertBefore(appHeader, barVerticalTemplate.nextElementSibling);
+                document.body.insertBefore(appHeader, barVerticalTemplate.nextElementSibling);
 
                 var splitView = document.createElement("DIV");
                 splitView.id = "root-split-view";
@@ -216,7 +220,7 @@
                 splitViewContent.appendChild(contenthost);
 
                 splitView.appendChild(splitViewContent);
-                customerElement.parentElement.insertBefore(splitView, appHeader.nextElementSibling);
+                document.body.insertBefore(splitView, appHeader.nextElementSibling);
 
                 // AppBar for Page Commands
                 var appbar = document.createElement("DIV");
