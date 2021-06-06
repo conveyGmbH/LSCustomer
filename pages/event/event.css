@@ -260,6 +260,7 @@
 .event .share-block {
     text-align: left;
     width: 100%;
+    box-sizing: content-box;
 }
 
 .event .share-block .win-tooltip {
