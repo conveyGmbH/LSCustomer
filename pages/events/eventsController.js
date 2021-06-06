@@ -325,6 +325,16 @@
                                     }
                                 }
                             }
+                        }
+                    }
+                    return WinJS.Promise.timeout(1000);
+                }).then(function () {
+                    Application.navigator._resized();
+                    return WinJS.Promise.timeout(50);
+                }).then(function () {
+                    if (listView) {
+                        var winSurface = listView.querySelector(".win-surface");
+                        if (winSurface) {
                             var listHeader = listView.querySelector(".list-header");
                             var viewPort = listView.querySelector(".win-viewport");
                             if (viewPort && listHeader) {
@@ -344,9 +354,6 @@
                             }
                         }
                     }
-                    return WinJS.Promise.timeout(1000);
-                }).then(function () {
-                    Application.navigator._resized();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
