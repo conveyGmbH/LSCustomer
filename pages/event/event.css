@@ -144,8 +144,12 @@
     border-radius: 40px 40px 40px 40px;
     outline-style: none;
 }
-
-.event .section-1 { grid-column: 1/span 4;}
+.event button#homeButton {
+    padding: 2px;
+}
+.event .section-1 {
+    grid-column: 1/span 4;
+}
 .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
 .event .section-3 { grid-area: 2/1/span 3/span 4;}
 .event .section-4 { grid-area: 5/1/span 3/span 5;}
@@ -207,20 +211,15 @@
     margin-right: 5%;
 }
 
-.event button#calenderButton {
-    border-radius: 30px;
-}
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
     background-color: Window;
-    border-style: solid;
-    border-width: 2px;
     border-color: var(--e-global-color-accent, #c2d63e);
 }
 
 .event button#calenderButton .win-type-title {
     font-weight: 400;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 20px;
     letter-spacing: 1px;
 }
