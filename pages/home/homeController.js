@@ -530,7 +530,7 @@
                                     if (styles && styles.getPropertyValue("position") === "fixed") {
                                         if (firstElementChild.style) {
                                             var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
-                                            var maxWidth = "calc(100% -" + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
+                                            var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
                                             firstElementChild.style.maxWidth = maxWidth;
                                         }
                                         break;
