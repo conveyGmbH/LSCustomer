@@ -325,9 +325,10 @@
                                     }
                                 }
                             }
+                            var listHeader = listView.querySelector(".list-header");
                             var viewPort = listView.querySelector(".win-viewport");
-                            if (viewPort) {
-                                var firstElementChild = headerContainer.firstElementChild;
+                            if (viewPort && listHeader) {
+                                var firstElementChild = listHeader.firstElementChild;
                                 while (firstElementChild) {
                                     var styles = getComputedStyle(firstElementChild);
                                     if (styles && styles.getPropertyValue("position") === "fixed") {
