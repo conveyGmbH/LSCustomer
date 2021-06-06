@@ -178,4 +178,16 @@
     font-style: normal;
     font-weight: 400;
 }
+
+:root {
+    --max-content-margin-left: calc(50% - 720px);
+    --max-content-width: 1410px;
+    --max-content-width-surface: 1460px !important;
+    /*
+    --max-content-margin-left: calc(50% - 620px);
+    --max-content-width: 1210px;
+    --max-content-width-surface: 1260px;
+    */
+}
+
 /******** Ende Fonts for LiveBridge*********/

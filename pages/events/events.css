@@ -21,15 +21,15 @@
 
 .events .win-listview .win-vertical .win-footercontainer,
 .events .win-listview .win-vertical .win-headercontainer {
-    margin-left: calc(50% - 620px);
-    width: 1210px;
+    margin-left: var(--max-content-margin-left);
+    width: var(--max-content-width);
     padding: 15px;
 }
 
 .events .win-listview .win-vertical .win-gridlayout.win-surface {
     -ms-grid-rows: auto !important;
-    margin-left: calc(50% - 620px);
-    width: 1260px !important;
+    margin-left: var(--max-content-margin-left);
+    width: var(--max-content-width-surface) !important;
 }
 
 .events .win-listview .win-vertical .win-itemscontainer {
@@ -184,7 +184,6 @@
 .view-size-biggest .events .win-listview .win-vertical .win-headercontainer {
     margin-left: 20px;
     width: calc(100% - 70px);
-    padding: 15px;
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
