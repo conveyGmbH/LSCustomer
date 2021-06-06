@@ -621,6 +621,20 @@
                 this.addRemovableEventListener(contentArea, "scroll", this.eventHandlers.onScroll.bind(this));
             }
 
+            var heroHeader = pageElement.querySelector(".hero-header");
+            if (heroHeader) {
+                var firstElementChild = heroHeader.firstElementChild;
+                while (firstElementChild) {
+                    var styles = getComputedStyle(firstElementChild);
+                    if (styles && styles.getPropertyValue("position") === "fixed") {
+                        if (firstElementChild.style) {
+                            firstElementChild.style.maxWidth = "";
+                        }
+                        break;
+                    }
+                    firstElementChild = firstElementChild.firstElementChild;
+                }
+            }
 
             // finally, load the data
             that.processAll().then(function() {
