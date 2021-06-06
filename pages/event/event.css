@@ -207,21 +207,25 @@
     margin-right: 5%;
 }
 
-.event #calenderButton {
-    background-color: #ffffff;
+.event button#calenderButton {
     border-radius: 30px;
+}
+.event button#calenderButton:not(:hover):not(:active):not(:focus) {
+    background-color: Window;
     border-style: solid;
     border-width: 2px;
     border-color: var(--e-global-color-accent, #c2d63e);
-    cursor: pointer;
 }
-.event #calenderButton .win-type-title {
+
+.event button#calenderButton .win-type-title {
     font-weight: 400;
-    color: var(--e-global-color-accent, #c2d63e);
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
     letter-spacing: 1px;
+}
+.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
+    color: var(--e-global-color-accent, #c2d63e);
 }
 
 .event .calender-tip {
