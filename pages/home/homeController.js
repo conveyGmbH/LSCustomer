@@ -528,13 +528,14 @@
                                 while (firstElementChild) {
                                     var styles = getComputedStyle(firstElementChild);
                                     if (styles && styles.getPropertyValue("position") === "fixed") {
-                                        var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
-                                        firstElementChild.style.maxWidth = "calc(100% -"+ (firstElementChild.offsetLeft+scrollBarWidth).toString() +"px)";
+                                        if (firstElementChild.style) {
+                                            var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
+                                            var maxWidth = "calc(100% -" + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
+                                            firstElementChild.style.maxWidth = maxWidth;
+                                        }
                                         break;
                                     }
                                     firstElementChild = firstElementChild.firstElementChild;
-                                }
-                                if (winSurface.clientHeight > listView.clientHeight) {
                                 }
                             }
                         }
