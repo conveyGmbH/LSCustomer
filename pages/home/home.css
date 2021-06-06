@@ -50,6 +50,10 @@
     height: auto;
 }
 
+.home .list-footer {
+    margin-top: 65px;
+}
+
 .home .hero-image-container {
     display: block;
     position: relative;
