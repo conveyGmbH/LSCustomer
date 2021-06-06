@@ -327,6 +327,7 @@
     var prevChildCount = 0;
     function waitForCallerPageCompletion() {
         if (document.body.childElementCount !== prevChildCount) {
+            prevChildCount = document.body.childElementCount;
             window.setTimeout(function() { waitForCallerPageCompletion(); }, 250);
             return false;
         } else {
