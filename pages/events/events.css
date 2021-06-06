@@ -105,7 +105,7 @@
 }
 
 .events button.win-button,
-.event button.win-button:active {
+.event button.win-button:focus {
     border-radius: 40px 40px 40px 40px;
 }
 
