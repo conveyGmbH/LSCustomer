@@ -326,7 +326,7 @@
                                 }
                             }
                             if (winSurface.clientHeight > listView.clientHeight) {
-                                var listHeader = pageElement.querySelector("list-header");
+                                var listHeader = pageElement.querySelector(".list-header");
                                 if (listHeader) {
                                     var firstElementChild = listHeader.firstElementChild;
                                     while (firstElementChild) {
