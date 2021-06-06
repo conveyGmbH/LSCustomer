@@ -132,6 +132,7 @@
                     }
                     curBodyChild = nextBodyChild;
                 }
+                bodyContentTop.appendChild(customerRootElement);
                 document.body.insertBefore(bodyContentTop, customerRootElement);
                 document.body.insertBefore(bodyContentBottom, customerRootElement.nextElementSibling);
 
