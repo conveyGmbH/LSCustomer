@@ -3,7 +3,7 @@
 
     var rootElementId = "ls-customer-host";
 
-    function loadAppIntoRootElement() {
+    function loadApplication() {
 
         var newBaseHref = null;
         var scripts = document.getElementsByTagName("script");
@@ -324,24 +324,12 @@
         });
     }
 
-    var prevChildCount = 0;
-    function waitForCallerPageCompletion() {
-        if (document.body.childElementCount !== prevChildCount) {
-            prevChildCount = document.body.childElementCount;
-            window.setTimeout(function() { waitForCallerPageCompletion(); }, 20);
-            return false;
-        } else {
-            loadAppIntoRootElement();
-            return true;
-        }
-    }
-
     function checkForRootElement() {
         if (!document.querySelector("#"+rootElementId)) {
             //cancel processing if no root element present!
             return;
         }
-        waitForCallerPageCompletion();
+        loadApplication();
     }
 
     var prevOnLoadHandler = window.onload;
