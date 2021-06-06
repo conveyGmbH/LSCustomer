@@ -104,6 +104,10 @@
     height: auto;
 }
 
+.events button.win-button {
+    border-radius: 40px 40px 40px 40px;
+}
+
 .events .win-listview .win-gridlayout .win-container {
     margin: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
