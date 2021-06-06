@@ -104,7 +104,8 @@
     height: auto;
 }
 
-.events button.win-button {
+.events button.win-button,
+.event button.win-button:active {
     border-radius: 40px 40px 40px 40px;
 }
 
