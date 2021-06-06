@@ -68,6 +68,7 @@
                 }
             }*/
             Colors.changeCSS(".home .win-listview .win-gridlayout .win-container", "border-radius", AppData._persistentStates.inputBorderRadius + "px");
+            Colors.changeCSS(".home .win-listview .win-groupheadercontainer", AppData._persistentStates.inputBorderRadius + "px");
 
             // insert body-content
             var sibling,nextSibling;

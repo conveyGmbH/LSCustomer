@@ -33,7 +33,7 @@
 }
 
 .home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 .home .win-listview .win-vertical .win-itemscontainer {
@@ -74,6 +74,15 @@
     object-fit: cover;
 }
 
+.home .win-listview .win-groupheadercontainer {
+    padding: 10px 0;
+}
+
+.home .win-listview .win-groupheadercontainer:hover {
+    background-color: rgba(128,128,128,0.1);
+}
+
+
 .home .win-listview .win-groupheader {
     width: calc(100% - 30px);
     padding: 15px;
@@ -111,10 +120,6 @@
     width: 100%;
     height: auto;
     cursor: pointer;
-}
-
-.home .group-header:hover {
-    background-color: rgba(128,128,128,0.1);
 }
 
 .home .content-header-line {
