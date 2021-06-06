@@ -109,10 +109,10 @@
                 // save customer page content
                 var bodyContentTop = document.createElement("DIV");
                 bodyContentTop.setAttribute("class", "saved-body-content-top");
-                bodyContentTop.setAttribute("style", "display: none");
+                //bodyContentTop.setAttribute("style", "display: none");
                 var bodyContentBottom = document.createElement("DIV");
                 bodyContentBottom.setAttribute("class", "saved-body-content-bottom");
-                bodyContentBottom.setAttribute("style", "display: none");
+                //bodyContentBottom.setAttribute("style", "display: none");
                 var nextBodyChild;
                 var curBodyChild = document.body.firstElementChild;
                 while (curBodyChild && curBodyChild !== customerRootElement) {
@@ -132,9 +132,9 @@
                     }
                     curBodyChild = nextBodyChild;
                 }
-                bodyContentTop.appendChild(customerRootElement);
                 document.body.insertBefore(bodyContentTop, customerRootElement);
                 document.body.insertBefore(bodyContentBottom, customerRootElement.nextElementSibling);
+                bodyContentTop.appendChild(customerRootElement);
 
                 // Page-Navigationbar Templates
                 var barHorizontalTemplate = document.createElement("DIV");
