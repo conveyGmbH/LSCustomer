@@ -76,12 +76,22 @@
 
 .home .win-listview .win-groupheadercontainer {
     padding: 10px 0;
+    box-shadow: none;
+    transform: translate3d(0,0,0);
+    transition-property: box-shadow,transform;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(.16,1,.29,.99);
 }
 
-.home .win-listview .win-groupheadercontainer:hover {
+.home .win-listview .win-groupheadercontainer:hover,
+.home .win-listview .win-groupheadercontainer:focus {
     background-color: rgba(128,128,128,0.1);
+    transform: translate3d(0,-2px,0);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition-property: box-shadow,transform;
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(.16,1,.29,.99);
 }
-
 
 .home .win-listview .win-groupheader {
     width: calc(100% - 30px);
@@ -171,7 +181,18 @@
     z-index: 2;
     height: 380px;
     width: auto;
-    border-radius: 0;
+    transform: translate3d(0,0,0);
+    transition-property: box-shadow,transform;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(.16,1,.29,.99);
+}
+.home .win-listview .win-gridlayout .win-container:hover,
+.home .win-listview .win-gridlayout .win-container:focus {
+    transform: translate3d(0,-2px,0);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition-property: box-shadow,transform;
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(.16,1,.29,.99);
 }
 
 .home .event-item {
