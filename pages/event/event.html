@@ -20,7 +20,7 @@
                 <div class="contentarea win-type-body">
                     <div class="hero-header">
                         <div class="custlogo">
-                            <img class="logo" src="../../images/logo_landscape_on_white.svg"
+                            <img class="win-commandicon" src="../../images/home.svg"
                                  onclick="AppBar.handleEvent('click', 'clickHome', event)"/>
                         </div>
                         <div class="content-header">
@@ -45,7 +45,6 @@
                         <div id="recordedContenthost" class="recordedContent-fragmenthost" data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"></div>
                     </div>
                     <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
-                    <div class="color_container2"></div>
                     <div class="content-container">
                         <div class="content-grid">
                             <div class="section-1">
@@ -106,19 +105,19 @@
                                     </div>
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod1_name Binding.Converter.toDisplay">
-                                <div class="speaker-image-container" data-win-bind="style.display: dataEvent.SpeakerImage Binding.Converter.toDisplay">
+                                    <div class="speaker-image-container" data-win-bind="style.display: dataEvent.SpeakerImage Binding.Converter.toDisplay">
                                         <img data-win-bind="src: dataDoc.ev_doc_mod1; alt: dataDocText.ev_doc_mod1_alt; title: dataDocText.ev_doc_mod1_title; longdesc: dataDocText.ev_doc_mod1_descr" />
                                     </div>
                                     <div class="speaker-text">
-                                    <span class="speaker-vorname win-h3" data-win-bind="style.display: dataEvent.SpeakerFN Binding.Converter.toDisplay"></span>
-                                    <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod1_name; style.display: dataEvent.SpeakerName Binding.Converter.toDisplay"></span>
+                                        <span class="speaker-vorname win-h3" data-win-bind="style.display: dataEvent.SpeakerFN Binding.Converter.toDisplay"></span>
+                                        <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod1_name; style.display: dataEvent.SpeakerName Binding.Converter.toDisplay"></span>
                                         <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_expertise; style.display: dataEvent.SpeakerTitle Binding.Converter.toDisplay"></span>
-                                    <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_homepage; style.display: dataText.ev_text_mod1_homepage Binding.Converter.toDisplay"></span>
-                                    <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_cv; style.display: dataEvent.SpeakerCV Binding.Converter.toDisplay"></span>
+                                        <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_homepage; style.display: dataText.ev_text_mod1_homepage Binding.Converter.toDisplay"></span>
+                                        <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod1_cv; style.display: dataEvent.SpeakerCV Binding.Converter.toDisplay"></span>
                                     </div>
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod2_name Binding.Converter.toDisplay">
-                                <div class="speaker-image-container" data-win-bind="style.display: dataEvent.SpeakerImage Binding.Converter.toDisplay">
+                                    <div class="speaker-image-container" data-win-bind="style.display: dataEvent.SpeakerImage Binding.Converter.toDisplay">
                                         <img data-win-bind="src: dataDoc.ev_doc_mod2; alt: dataDocText.ev_doc_mod2_alt; title: dataDocText.ev_doc_mod2_title; longdesc: dataDocText.ev_doc_mod2_descr" />
                                     </div>
                                     <div class="speaker-text">
@@ -130,21 +129,23 @@
                                     </div>
                                 </div>
                                 <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod3_name Binding.Converter.toDisplay">
-                                <div class="speaker-image-container" data-win-bind="style.display: dataEvent.SpeakerImage Binding.Converter.toDisplay">
+                                    <div class="speaker-image-container" data-win-bind="style.display: dataEvent.SpeakerImage Binding.Converter.toDisplay">
                                         <img data-win-bind="src: dataDoc.ev_doc_mod3; alt: dataDocText.ev_doc_mod3_alt; title: dataDocText.ev_doc_mod3_title; longdesc: dataDocText.ev_doc_mod3_descr" />
                                     </div>
-                                <div class="speaker-text">
-                                    <span class="speaker-vorname win-h3" data-win-bind="style.display: dataEvent.SpeakerFN Binding.Converter.toDisplay"></span>
-                                    <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod3_name; style.display: dataEvent.SpeakerName Binding.Converter.toDisplay"></span>
+                                    <div class="speaker-text">
+                                        <span class="speaker-vorname win-h3" data-win-bind="style.display: dataEvent.SpeakerFN Binding.Converter.toDisplay"></span>
+                                        <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod3_name; style.display: dataEvent.SpeakerName Binding.Converter.toDisplay"></span>
                                         <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_expertise; style.display: dataEvent.SpeakerTitle Binding.Converter.toDisplay"></span>
-                                    <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_homepage; style.display: dataText.ev_text_mod3_homepage Binding.Converter.toDisplay"></span>
-                                    <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_cv; style.display: dataEvent.SpeakerCV Binding.Converter.toDisplay"></span>
+                                        <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_homepage; style.display: dataText.ev_text_mod3_homepage Binding.Converter.toDisplay"></span>
+                                        <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod3_cv; style.display: dataEvent.SpeakerCV Binding.Converter.toDisplay"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="color_container4"></div>
+                    <div class="hero-footer">
+
+                    </div>
                 </div>
                 <div class="error-message"
                      data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>

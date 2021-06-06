@@ -106,6 +106,35 @@
                     Log.print(Log.l.info, "customer=" + AppData.customer + "customerId=" + AppData.customerId + " language=" + Application.language);
                 }
 
+                // save customer page content
+                var bodyContentTop = document.createElement("DIV");
+                bodyContentTop.setAttribute("class", "saved-body-content-top");
+                bodyContentTop.setAttribute("style", "display: none");
+                var bodyContentBottom = document.createElement("DIV");
+                bodyContentBottom.setAttribute("class", "saved-body-content-bottom");
+                bodyContentBottom.setAttribute("style", "display: none");
+                var nextBodyChild;
+                var curBodyChild = document.body.firstElementChild;
+                while (curBodyChild && curBodyChild !== customerRootElement) {
+                    nextBodyChild = curBodyChild.nextElementSibling;
+                    if (curBodyChild.tagName && curBodyChild.tagName.toLowerCase() !== "script") {
+                        document.body.removeChild(curBodyChild);
+                        bodyContentTop.appendChild(curBodyChild);
+                    }
+                    curBodyChild = nextBodyChild;
+                }
+                curBodyChild = customerRootElement.nextElementSibling;
+                while (curBodyChild && curBodyChild !== customerRootElement) {
+                    nextBodyChild = curBodyChild.nextElementSibling;
+                    if (curBodyChild.tagName && curBodyChild.tagName.toLowerCase() !== "script") {
+                        document.body.removeChild(curBodyChild);
+                        bodyContentBottom.appendChild(curBodyChild);
+                    }
+                    curBodyChild = nextBodyChild;
+                }
+                document.body.insertBefore(bodyContentTop, customerRootElement);
+                document.body.insertBefore(bodyContentBottom, customerRootElement.nextElementSibling);
+
                 // Page-Navigationbar Templates
                 var barHorizontalTemplate = document.createElement("DIV");
                 barHorizontalTemplate.setAttribute("class", "navigationbar-horizontal-template");

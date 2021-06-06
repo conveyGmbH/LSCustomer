@@ -14,9 +14,6 @@
                 <div class="contentarea win-type-body">
                     <div class="headerFooterPlaceholder">
                         <div class="list-header">
-                            <div class="custlogo">
-                                <img class="logo" src="../../images/logo_landscape_on_white.svg" />
-                            </div>
                             <div class="hero-image-container" data-win-bind="style.display: dataDoc.ov_doc Binding.Converter.toDisplay">
                                 <img data-win-bind="src: dataDoc.ov_doc; alt: dataDocText.ov_doc_alt; title: dataDocText.ov_doc_title; longdesc: dataDocText.ov_doc_descr" />
                             </div>
@@ -28,6 +25,8 @@
                                     <span data-win-bind="textContent: dataText.ov_text_free_body"></span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="list-footer">
                         </div>
                     </div>
                     <div class="home-group-header-template"
@@ -73,6 +72,7 @@
                          data-win-control="WinJS.UI.ListView"
                          data-win-options="{
                                 header: select('.list-header'),
+                                footer: select('.list-footer'),
                                 itemTemplate: select('.event-list-template'),
                                 groupHeaderTemplate: select('.home-group-header-template')
                             }">

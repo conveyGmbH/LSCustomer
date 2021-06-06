@@ -70,24 +70,50 @@
             Colors.changeCSS(".home .win-listview .win-gridlayout .win-container", "border-radius", AppData._persistentStates.inputBorderRadius + "px");
 
             // insert body-content
-            var contentHeader = element.querySelector(".content-header");
-            if (contentHeader && contentHeader.parentElement) {
-                var bodyContent = Application.navigator.pageElement &&
-                    Application.navigator.pageElement.querySelector(".body-content");
-                if (bodyContent) {
-                    bodyContent.parentElement.removeChild(bodyContent);
+            var sibling,nextSibling;
+            var listHeader = element.querySelector(".list-header");
+            if (listHeader) {
+                var bodyContentTop = Application.navigator.pageElement &&
+                    Application.navigator.pageElement.querySelector(".body-content-top");
+                if (bodyContentTop) {
+                    bodyContentTop.parentElement.removeChild(bodyContentTop);
                 } else {
-                    bodyContent = document.createElement("DIV");
-                    bodyContent.setAttribute("class", "body-content");
-                    var sibling = document.body.firstElementChild;
-                    while (sibling && sibling.id !== "ls-customer-host") {
-                        var nextSibling = sibling.nextElementSibling;
-                        document.body.removeChild(sibling);
-                        bodyContent.appendChild(sibling);
-                        sibling = nextSibling;
+                    bodyContentTop = document.createElement("DIV");
+                    bodyContentTop.setAttribute("class", "body-content-top");
+                    var savedBodyContentTop = document.querySelector(".saved-body-content-top");
+                    if (savedBodyContentTop) {
+                        sibling = savedBodyContentTop.firstElementChild;
+                        while (sibling) {
+                            nextSibling = sibling.nextElementSibling;
+                            savedBodyContentTop.removeChild(sibling);
+                            bodyContentTop.appendChild(sibling);
+                            sibling = nextSibling;
+                        }
                     }
                 }
-                contentHeader.parentElement.insertBefore(bodyContent, contentHeader);
+                listHeader.insertBefore(bodyContentTop, listHeader.firstElementChild);
+            }
+            var listFooter = element.querySelector(".list-footer");
+            if (listFooter) {
+                var bodyContentBottom = Application.navigator.pageElement &&
+                    Application.navigator.pageElement.querySelector(".body-content-bottom");
+                if (bodyContentBottom) {
+                    bodyContentBottom.parentElement.removeChild(bodyContentBottom);
+                } else {
+                    bodyContentBottom = document.createElement("DIV");
+                    bodyContentBottom.setAttribute("class", "body-content-bottom");
+                    var savedBodyContentBottom = document.querySelector(".saved-body-content-bottom");
+                    if (savedBodyContentBottom) {
+                        sibling = savedBodyContentBottom.firstElementChild;
+                        while (sibling) {
+                            nextSibling = sibling.nextElementSibling;
+                            savedBodyContentBottom.removeChild(sibling);
+                            bodyContentBottom.appendChild(sibling);
+                            sibling = nextSibling;
+                        }
+                    }
+                }
+                listFooter.appendChild(bodyContentBottom);
             }
 
             this.inResize = 0;

@@ -15,7 +15,7 @@
                     <div class="headerFooterPlaceholder">
                         <div class="list-header">
                             <div class="custlogo">
-                                <img class="logo" src="../../images/logo_landscape_on_white.svg"
+                                <img class="win-commandicon" src="../../images/home.svg"
                                      onclick="AppBar.handleEvent('click', 'clickHome', event)"/>
                             </div>
                             <div class="hero-image-container" data-win-bind="style.display: dataDoc.ser_doc Binding.Converter.toDisplay">
@@ -32,6 +32,8 @@
                                     <span data-win-bind="textContent: dataText.ser_text_free_body"></span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="list-footer">
                         </div>
                     </div>
                     <div class="event-list-template"
@@ -58,6 +60,7 @@
                          data-win-control="WinJS.UI.ListView"
                          data-win-options="{
                                 header: select('.list-header'),
+                                footer: select('.list-footer'),
                                 itemTemplate: select('.event-list-template')
                             }">
 
