@@ -107,6 +107,7 @@
 .events button.win-button,
 .event button.win-button:focus {
     border-radius: 40px 40px 40px 40px;
+    outline-style: none;
 }
 
 .events .win-listview .win-gridlayout .win-container {
