@@ -136,6 +136,7 @@
     position: absolute;
     opacity: 0;
     min-width: 200px;
+    width: fit-content;
     text-align: center;
     right: -50px;
     top: 20px;
