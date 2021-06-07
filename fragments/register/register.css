@@ -148,6 +148,15 @@ input[disabled] {
     color: white;
 }
 
+.twitter {
+    background: #00acee;
+    color: white;
+}
+
+.mail {
+    background: #8EE5EE;
+    color: white;
+}
 #anredeList .win-headercontainer {
     height: 0;
 }

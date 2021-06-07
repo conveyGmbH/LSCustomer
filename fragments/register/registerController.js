@@ -300,25 +300,35 @@
                 clickFacebookShare: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     window.open(
-                        'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href),
+                        'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(that.eventLinkToShare()),
                         'facebook-share-dialog');
                     Log.ret(Log.l.trace);
                 },
                 clickLinkedInShare: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     window.open('https://www.linkedin.com/sharing/share-offsite/?url=' +
-                        encodeURIComponent(window.location.href));
+                        encodeURIComponent(that.eventLinkToShare()));
                     Log.ret(Log.l.trace);
                 },
                 clickXingShare: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     window.open('https://www.xing.com/spi/shares/new?url=' +
-                        encodeURIComponent(window.location.href));
+                        encodeURIComponent(that.eventLinkToShare()));
                     Log.ret(Log.l.trace);
-                },
+                }/*,
                 clickGooglePlusShare: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    window.open('https://plus.google.com/share?url={' + encodeURIComponent(window.location.href) + '}');
+                    window.open('https://plus.google.com/share?url={' + encodeURIComponent(that.shareEventLink) + '}');
+                    Log.ret(Log.l.trace);
+                }*/,
+                clickTwitterShare: function(event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    window.open('https://twitter.com/share?url=' + encodeURIComponent(that.eventLinkToShare()));
+                    Log.ret(Log.l.trace);
+                },
+                clickEmailShare: function(event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    window.open('mailto:?subject=' + that.binding.dataText.ev_text_detail_name_h1 + '&body=' + encodeURIComponent(that.eventLinkToShare()));
                     Log.ret(Log.l.trace);
                 },
                 clickFacebookLogout: function (event) {
@@ -362,6 +372,13 @@
                 }
             };
 
+            var eventLinkToShare = function() {
+                return window.location.href.split("?")[0] + "?" + createQueryStringFromParameters({
+                    eventID: Application.query.eventID
+                });
+            }
+            this.eventLinkToShare = eventLinkToShare;
+
             var setInitAnredeItem = function (newInitAnredeItem) {
                 var prevNotifyModified = AppBar.notifyModified;
                 AppBar.notifyModified = false;
@@ -373,7 +390,7 @@
             this.setInitAnredeItem = setInitAnredeItem;
 
             var loadInitSelection = function () {
-                Log.call(Log.l.trace, "Contact.Controller.");
+                Log.call(Log.l.trace, "Register.Controller.");
                 //if (typeof that.binding.dataContact.KontaktVIEWID !== "undefined") {
                     var map, results, curIndex;
                 if (typeof that.binding.dataRegister.AnredeID !== "undefined") {
