@@ -103,6 +103,9 @@
                     if (data.language) {
                         Application.language = data.language;
                     }
+                    if (data.theme) {
+                        Application.theme = data.theme;
+                    }
                     Log.print(Log.l.info, "customer=" + AppData.customer + "customerId=" + AppData.customerId + " language=" + Application.language);
                 }
 
