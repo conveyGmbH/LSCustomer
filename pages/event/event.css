@@ -180,7 +180,7 @@
     visibility: hidden;
     position: absolute;
     opacity: 0;
-    width: 200px;
+    min-width: 200px;
     text-align: center;
     right: -50px;
     top: 20px;
