@@ -6,6 +6,8 @@
     "label.events"          : "Série",
     "label.event"           : "Événement",
 
+	"tooltip.home"          : "Retour à la page d'aperçu",
+
     "events.title"          : "Série",
 
     "event.title"           : "Événement",

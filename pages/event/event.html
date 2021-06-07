@@ -19,9 +19,13 @@
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea win-type-body">
                     <div class="hero-header">
-                        <button id="homeButton" class="win-button">
-                            <div class="action-image" id="home" 
-                                 onclick="AppBar.handleEvent('click', 'clickHome', event)"></div>
+                        <button id="homeButton" class="win-button" 
+                                onclick="AppBar.handleEvent('click', 'clickHome', event)">
+                            <div class="button-tip">
+                                <div class="action-image" id="home"></div>
+                                <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
+                                <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
+                            </div>
                         </button>
                         <div class="content-header">
                             <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
@@ -33,7 +37,7 @@
                             <div class="content-header-line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
                                 <div class="button-element">
                                     <button id="calenderButton" class="win-button" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
-                                        <div class="calender-tip">
+                                        <div class="button-tip">
                                             <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
                                             <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
                                         </div>

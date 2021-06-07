@@ -120,7 +120,7 @@
             this.prevWidth = 0;
             this.prevHeight = 0;
 
-            Colors.loadSVGImageElements(element, "action-image", 40, Colors.textColor);
+            Colors.loadSVGImageElements(element, "action-image", 16, "#ffffff", null, null, {home:{strokeWidth: 400}});
 
 
             var commandList = [];

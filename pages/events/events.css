@@ -110,7 +110,50 @@
     outline-style: none;
 }
 .events button#homeButton {
-    padding: 2px;
+    padding: 12px 24px;
+    color: #ffffff;
+}
+
+.events button .win-type-title {
+    font-weight: 400;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+.events .button-tip {
+    position: relative;
+    display: inline-block;
+}
+
+.events .button-tip .action-image {
+    margin-top: 2px;
+}
+
+.events .button-tip .win-tooltip {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    width: 200px;
+    text-align: center;
+    right: -50px;
+    top: 20px;
+    color: #fff;
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    z-index: 99;
+}
+
+.events .button-tip:hover .win-tooltip {
+    visibility: visible;
+    opacity: 1;
 }
 
 
