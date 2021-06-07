@@ -482,7 +482,7 @@
                                         winGroupHeaderContainer.style.width = clientWidth.toString() + "px";
                                         var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
                                         if (winGroupHeader) {
-                                            var heightGroupHeader = winGroupHeader.clientHeight + 40;
+                                            var heightGroupHeader = winGroupHeader.clientHeight + 60;
                                             winGroupHeaderContainer.style.height = heightGroupHeader.toString() + "px";
                                         }
                                     }
