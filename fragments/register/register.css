@@ -11,11 +11,7 @@
     font-family: "Barlow";
 }
 
-.register .label {
-    color: #2a2f3d;
-}
 .register .checkbox {
-    color: #2a2f3d;
     padding: 10px 0;
 }
 
@@ -26,18 +22,18 @@
     -moz-border-radius: 30px;
     border-style: solid;
     border-width: 2px;
-    border-color: #c2d63e;
+    border-color: var(--e-global-color-accent, #c2d63e);
     /*cursor: pointer;*/
 }
-    .register #loginButton > span, .register #re_registerEvent > span {
-        font-weight: 400;
-        color: #c2d63e;
-        font-size: 16px;
-        font-weight: 700;
-        text-transform: uppercase;
-        line-height: 20px;
-        letter-spacing: 1px;
-    }
+.register #loginButton > span, .register #re_registerEvent > span {
+    font-weight: 400;
+    color: var(--e-global-color-accent, #c2d63e);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
 
 #registerController .doc-container {
     float: left;
