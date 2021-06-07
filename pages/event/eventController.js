@@ -359,6 +359,9 @@
                                         AppData._persistentStates.registerData.eventID) {
                                         AppData._persistentStates.registerData.eventID = result.VeranstaltungID;
                                     }
+                                    /*if (result.ResultCode !== AppData._persistentStates.registerData.resultCode) {
+                                        AppData._persistentStates.registerData.resultCode = result.ResultCode;
+                                    }*/
                                     if (result.ConfirmStatusID !==
                                         AppData._persistentStates.registerData.confirmStatusID) {
                                         AppData._persistentStates.registerData.confirmStatusID = result.ConfirmStatusID;

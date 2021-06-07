@@ -78,7 +78,7 @@
 .register .win-container-odd { margin-left: 10px;}
 
 .register #loginButton { width: 100%; margin: 20px 0;}
-.register #resendButton, .register #editButton {
+.register #resendButton, .register #editButton, .register #reRegisterButton {
     display: inline-block;
     font-size: 12px;
     text-align: left;
