@@ -145,12 +145,11 @@
     outline-style: none;
 }
 .event button#homeButton {
-    padding: 12px 24px;
+    padding: 14px 26px;
     color: #ffffff;
 }
 
 .event button .win-type-title {
-    font-weight: 400;
     font-size: 16px;
     font-weight: 600;
     line-height: 20px;
@@ -172,7 +171,9 @@
 }
 
 .event .button-tip .action-image {
-    margin-top: 2px;
+    display: inline-block !important;
+    position: relative;
+    top: 1px;
 }
 
 .event .button-tip .win-tooltip {
