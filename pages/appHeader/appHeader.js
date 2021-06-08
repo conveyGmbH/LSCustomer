@@ -22,7 +22,7 @@
 
             // insert body-content
             var sibling,nextSibling;
-            var appHeader = element.firstElementChild || element;
+            var appHeader = element.firstElementChild.firstElementChild || element.firstElementChild || element;
             var savedBodyContentTop = document.querySelector(".saved-body-content-top");
             if (savedBodyContentTop) {
                 sibling = savedBodyContentTop.firstElementChild;
@@ -41,6 +41,9 @@
                     if (hasFixedChild) {
                         savedBodyContentTop.removeChild(sibling);
                         appHeader.appendChild(sibling);
+                        if (appHeader.parentNode && appHeader.parentNode.style) {
+                            appHeader.parentNode.style.position = "absolute";
+                        }
                     }
                     sibling = nextSibling;
                 }
