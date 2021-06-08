@@ -52,8 +52,20 @@
                         sibling = savedBodyContentTop.firstElementChild;
                         while (sibling) {
                             nextSibling = sibling.nextElementSibling;
-                            savedBodyContentTop.removeChild(sibling);
-                            bodyContentTop.appendChild(sibling);
+                            var hasFixedChild;
+                            var firstElementChild = sibling.firstElementChild;
+                            while (firstElementChild) {
+                                var styles = getComputedStyle(firstElementChild);
+                                if (styles && styles.getPropertyValue("position") === "fixed") {
+                                    hasFixedChild = true;
+                                    break;
+                                }
+                                firstElementChild = firstElementChild.firstElementChild;
+                            }
+                            if (!hasFixedChild) {
+                                savedBodyContentTop.removeChild(sibling);
+                                bodyContentTop.appendChild(sibling);
+                            }
                             sibling = nextSibling;
                         }
                     }
@@ -172,11 +184,18 @@
                                 if (contents) for (var i = 0; i < contents.length; i++) {
                                     adjustContentHeight(contents[i]);
                                 }
+                                var doAdjustContainerSize = false;
                                 if (width > 0 && that.prevWidth !== width) {
                                     that.prevWidth = width;
+                                    doAdjustContainerSize = true;
                                 }
                                 if (height > 0 && that.prevHeight !== height) {
                                     that.prevHeight = height;
+                                    doAdjustContainerSize = true;
+                                }
+                                if (doAdjustContainerSize &&
+                                    typeof that.controller.adjustContainerSize === "function") {
+                                    that.controller.adjustContainerSize();
                                 }
                             }
                         }

@@ -85,8 +85,20 @@
                         sibling = savedBodyContentTop.firstElementChild;
                         while (sibling) {
                             nextSibling = sibling.nextElementSibling;
-                            savedBodyContentTop.removeChild(sibling);
-                            bodyContentTop.appendChild(sibling);
+                            var hasFixedChild;
+                            var firstElementChild = sibling.firstElementChild;
+                            while (firstElementChild) {
+                                var styles = getComputedStyle(firstElementChild);
+                                if (styles && styles.getPropertyValue("position") === "fixed") {
+                                    hasFixedChild = true;
+                                    break;
+                                }
+                                firstElementChild = firstElementChild.firstElementChild;
+                            }
+                            if (!hasFixedChild) {
+                                savedBodyContentTop.removeChild(sibling);
+                                bodyContentTop.appendChild(sibling);
+                            }
                             sibling = nextSibling;
                         }
                     }

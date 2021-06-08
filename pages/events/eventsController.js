@@ -335,10 +335,10 @@
                     if (listView) {
                         var winSurface = listView.querySelector(".win-surface");
                         if (winSurface) {
-                            var listHeader = listView.querySelector(".list-header");
+                            var savedBodyContentTop = document.querySelector(".saved-body-content-top");
                             var viewPort = listView.querySelector(".win-viewport");
-                            if (viewPort && listHeader) {
-                                var firstElementChild = listHeader.firstElementChild;
+                            if (viewPort && savedBodyContentTop) {
+                                var firstElementChild = savedBodyContentTop.firstElementChild;
                                 while (firstElementChild) {
                                     var styles = getComputedStyle(firstElementChild);
                                     if (styles && styles.getPropertyValue("position") === "fixed") {

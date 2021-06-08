@@ -412,6 +412,9 @@
                     return WinJS.Promise.timeout(1000);
                 }).then(function () {
                     Application.navigator._resized();
+                    return WinJS.Promise.timeout(50);
+                }).then(function () {
+                    return that.adjustContainerSize();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -593,6 +596,7 @@
                                 getResourceText("register.eventNotStartedYet");
 
                         }
+                        return WinJS.Promise.as();
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
                         that.binding.showRegister = false;
                         that.binding.showTeaser = false;
@@ -624,20 +628,30 @@
                 this.addRemovableEventListener(contentArea, "scroll", this.eventHandlers.onScroll.bind(this));
             }
 
-            var heroHeader = pageElement.querySelector(".hero-header");
-            if (heroHeader) {
-                var firstElementChild = heroHeader.firstElementChild;
-                while (firstElementChild) {
-                    var styles = getComputedStyle(firstElementChild);
-                    if (styles && styles.getPropertyValue("position") === "fixed") {
-                        if (firstElementChild.style) {
-                            firstElementChild.style.maxWidth = "";
+            var adjustContainerSize = function() {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var ret = new WinJS.Promise.as().then(function() {
+                    var savedBodyContentTop = document.querySelector(".saved-body-content-top");
+                    if (contentArea && savedBodyContentTop) {
+                        var firstElementChild = savedBodyContentTop.firstElementChild;
+                        while (firstElementChild) {
+                            var styles = getComputedStyle(firstElementChild);
+                            if (styles && styles.getPropertyValue("position") === "fixed") {
+                                if (firstElementChild.style) {
+                                    var scrollBarWidth = contentArea.offsetWidth - contentArea.clientWidth;
+                                    var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
+                                    firstElementChild.style.maxWidth = maxWidth;
+                                }
+                                break;
+                            }
+                            firstElementChild = firstElementChild.firstElementChild;
                         }
-                        break;
                     }
-                    firstElementChild = firstElementChild.firstElementChild;
-                }
+                });
+                Log.ret(Log.l.trace);
+                return ret;
             }
+            that.adjustContainerSize = adjustContainerSize;
 
             // finally, load the data
             that.processAll().then(function() {
