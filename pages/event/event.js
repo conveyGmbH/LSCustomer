@@ -167,6 +167,10 @@
                                 function adjustContentHeight(content) {
                                     if (content && content.style) {
                                         var offsetTop = Math.max(content.offsetTop - contentArea.scrollTop,0);
+                                        var headerHost = document.querySelector("#headerhost");
+                                        if (headerHost && headerHost.firstElementChild) {
+                                            offsetTop += headerHost.firstElementChild.clientHeight;
+                                        }
                                         if (content.clientHeight !== height - offsetTop) {
                                             var contentHeight = Math.max(height - offsetTop,400);
                                             content.style.height = contentHeight.toString() + "px";
