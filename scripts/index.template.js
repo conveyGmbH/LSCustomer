@@ -62,7 +62,8 @@
             Vorname: "",
             Position: "",
             Firmenname: "",
-            UserTZ: moment.tz.guess()
+            UserTZ: moment.tz.guess(),
+            privacyPolicyFlag: false
         }
     };
 
