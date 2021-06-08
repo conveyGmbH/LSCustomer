@@ -462,6 +462,15 @@ var __meteor_runtime_config__;
                         if (BBBPlayback && typeof BBBPlayback.playbackLoaded === "function") {
                             BBBPlayback.playbackLoaded();
                         }
+                        var slide = fragmentElement.querySelector("#slide");
+                        if (slide) {
+                            that.addRemovableEventListener(slide, "click", function() {
+                                var playButton = fragmentElement.querySelector(".acorn-play-button");
+                                if (playButton) {
+                                    playButton.click();
+                                }
+                            });
+                        }
                     }
                 });
                 Log.ret(Log.l.trace);
