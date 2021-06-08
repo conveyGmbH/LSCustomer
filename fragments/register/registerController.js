@@ -264,6 +264,10 @@
                             return WinJS.Promise.as();
                         }, function (errorResponse) {
                             // called asynchronously on error
+                        }).then(function () {
+                            if (typeof AppBar.scope.updateFragment === "function") {
+                                AppBar.scope.updateFragment();
+                            }
                         });
                     }
                     AppBar.modified = true;
