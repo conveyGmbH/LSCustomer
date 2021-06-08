@@ -633,10 +633,10 @@
                 var ret = new WinJS.Promise.as().then(function() {
                     var headerHost = document.querySelector("#headerhost");
                     if (contentArea && headerHost) {
-                        if (contentArea.style) {
-                            contentArea.style.marginTop = headerHost.clientHeight.toString() + "px";
-                        }
                         var firstElementChild = headerHost.firstElementChild;
+                        if (contentArea.style && firstElementChild) {
+                            contentArea.style.marginTop = firstElementChild.clientHeight.toString() + "px";
+                        }
                         while (firstElementChild) {
                             var styles = getComputedStyle(firstElementChild);
                             if (styles && styles.getPropertyValue("position") === "fixed") {

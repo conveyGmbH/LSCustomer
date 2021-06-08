@@ -473,8 +473,8 @@
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
                         var winHeaderContainer = listView.querySelector(".win-headercontainer");
-                        if (headerHost && winHeaderContainer && winHeaderContainer.style) {
-                            winHeaderContainer.style.marginTop = headerHost.clientHeight.toString() + "px";
+                        if (headerHost && headerHost.firstElementChild && winHeaderContainer && winHeaderContainer.style) {
+                            winHeaderContainer.style.marginTop = headerHost.firstElementChild.clientHeight.toString() + "px";
                         }
                         var winSurface = listView.querySelector(".win-surface");
                         if (winSurface) {
