@@ -28,7 +28,7 @@
                 sibling = savedBodyContentTop.firstElementChild;
                 while (sibling) {
                     nextSibling = sibling.nextElementSibling;
-                    var hasFixedChild;
+                    var hasFixedChild = false;
                     var firstElementChild = sibling.firstElementChild;
                     while (firstElementChild) {
                         var styles = getComputedStyle(firstElementChild);
