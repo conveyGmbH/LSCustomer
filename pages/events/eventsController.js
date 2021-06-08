@@ -275,6 +275,11 @@
                 var i;
                 var ret = new WinJS.Promise.as().then(function() {
                     if (listView) {
+                        var headerHost = document.querySelector("#headerhost");
+                        var winHeaderContainer = listView.querySelector(".win-headercontainer");
+                        if (headerHost && winHeaderContainer && winHeaderContainer.style) {
+                            winHeaderContainer.style.marginTop = headerHost.clientHeight.toString() + "px";
+                        }
                         var winSurface = listView.querySelector(".win-surface");
                         if (winSurface) {
                             var clientWidth = winSurface.clientWidth - 20;
@@ -333,24 +338,21 @@
                     return WinJS.Promise.timeout(50);
                 }).then(function () {
                     if (listView) {
-                        var winSurface = listView.querySelector(".win-surface");
-                        if (winSurface) {
-                            var headerHost = document.querySelector("#headerhost");
-                            var viewPort = listView.querySelector(".win-viewport");
-                            if (viewPort && headerHost) {
-                                var firstElementChild = headerHost.firstElementChild;
-                                while (firstElementChild) {
-                                    var styles = getComputedStyle(firstElementChild);
-                                    if (styles && styles.getPropertyValue("position") === "fixed") {
-                                        if (firstElementChild.style) {
-                                            var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
-                                            var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
-                                            firstElementChild.style.maxWidth = maxWidth;
-                                        }
-                                        break;
+                        var headerHost = document.querySelector("#headerhost");
+                        var viewPort = listView.querySelector(".win-viewport");
+                        if (viewPort && headerHost) {
+                            var firstElementChild = headerHost.firstElementChild;
+                            while (firstElementChild) {
+                                var styles = getComputedStyle(firstElementChild);
+                                if (styles && styles.getPropertyValue("position") === "fixed") {
+                                    if (firstElementChild.style) {
+                                        var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
+                                        var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
+                                        firstElementChild.style.maxWidth = maxWidth;
                                     }
-                                    firstElementChild = firstElementChild.firstElementChild;
+                                    break;
                                 }
+                                firstElementChild = firstElementChild.firstElementChild;
                             }
                         }
                     }
