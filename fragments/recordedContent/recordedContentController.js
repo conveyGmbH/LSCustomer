@@ -426,11 +426,12 @@ var __meteor_runtime_config__;
             }
 
             var loadData = function () {
+                var url;
                 Log.call(Log.l.trace, "RecordedContent.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    var url;
-                    if (AppBar.scope.binding.recordedLink) {
+                    Application.query = getQueryStringParameters();
+                    if (Application.query && Application.query.meetingId && AppBar.scope.binding.recordedLink) {
                         url = AppBar.scope.binding.recordedLink;
                     }
                     if (url) {
@@ -447,49 +448,32 @@ var __meteor_runtime_config__;
                             return WinJS.Promise.as();
                         }
                     }
+                }).then(function () {
+                    if (url) {
+                        if (typeof $(document).foundation === "function") {
+                            $(document).foundation();
+                        }
+                        if (BBBWriting && typeof BBBWriting.init === "function") {
+                            BBBWriting.init();
+                        }
+                        if (BBBPlayback && typeof BBBPlayback.init === "function") {
+                            BBBPlayback.init();
+                        }
+                        if (BBBPlayback && typeof BBBPlayback.playbackLoaded === "function") {
+                            BBBPlayback.playbackLoaded();
+                        }
+                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
             }
             this.loadData = loadData;
 
-            // define handlers
-           /* this.eventHandlers = {
-                clickOk: function (event) {
-                    Log.call(Log.l.trace, "RecordedContent.Controller.");
-                    that.saveData(function (response) {
-                        // called asynchronously if ok
-                    }, function (errorResponse) {
-                        // called asynchronously on error
-                    });
-                    Log.ret(Log.l.trace);
-                }
-            };*/
-
-            this.disableHandlers = {
-                /*clickOk: function () {
-                    that.binding.loginDisabled = AppBar.busy || that.binding.dataRegister.Email.length === 0;
-                    return that.binding.loginDisabled;
-                }*/
-            };
-
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
-                if (typeof $(document).foundation === "function") {
-                    $(document).foundation();
-                }
-                if (BBBWriting && typeof BBBWriting.init === "function") {
-                    BBBWriting.init();
-                }
-                if (BBBPlayback && typeof BBBPlayback.init === "function") {
-                    BBBPlayback.init();
-                }
-                if (BBBPlayback && typeof BBBPlayback.playbackLoaded === "function") {
-                    BBBPlayback.playbackLoaded();
-                }
             });
             Log.ret(Log.l.trace);
         })
