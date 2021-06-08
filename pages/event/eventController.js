@@ -635,7 +635,7 @@
                     if (contentArea && headerHost) {
                         var firstElementChild = headerHost.firstElementChild;
                         if (contentArea.style && firstElementChild) {
-                            contentArea.style.marginTop = firstElementChild.clientHeight.toString() + "px";
+                            contentArea.style.paddingTop = firstElementChild.clientHeight.toString() + "px";
                         }
                         while (firstElementChild) {
                             var styles = getComputedStyle(firstElementChild);
