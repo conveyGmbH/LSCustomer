@@ -11,6 +11,9 @@
 (function () {
     "use strict";
 
+    Application.rootElementId = "ls-customer-host";
+    Colors.corsAwareCssRuleAccess = true;
+
     // default settings
     AppData.persistentStatesDefaults = {
         colorSettings: {
@@ -73,7 +76,8 @@
     Application.navigationBarPages = [
         { id: "home", group: -1, disabled: false },
         { id: "events", group: -2, disabled: false },
-        { id: "event", group: -2, disabled: false }
+        { id: "event", group: -2, disabled: false },
+        { id: "modSession", group: -3, disabled: false }
     ];
 
 
@@ -91,6 +95,15 @@
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
         Log.call(Log.l.trace, "Application.", "id=" + id + " login=" + AppData._persistentStates.odata.login);
+        // ensure login 
+        if (AppData && 
+            AppData._persistentStates && 
+            AppData._persistentStates.odata &&
+            (!AppData._persistentStates.odata.login ||
+                !AppData._persistentStates.odata.password)) {
+            AppData._persistentStates.odata.login = AppData.customer;
+            AppData._persistentStates.odata.password = AppData.customerId;
+        }
         Log.ret(Log.l.trace);
         return id;
     };
