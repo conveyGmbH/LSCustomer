@@ -33,6 +33,7 @@
                     while (firstElementChild) {
                         var styles = getComputedStyle(firstElementChild);
                         if (styles && styles.getPropertyValue("position") === "fixed") {
+                            WinJS.Utilities.addClass(firstElementChild, "sticky-header-pinned-fixed");
                             hasFixedChild = true;
                             break;
                         }

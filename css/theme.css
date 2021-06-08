@@ -200,5 +200,7 @@
 .caption-field {
     color: var(--e-global-color-secondary, #07B9CB);
 }
-
+.sticky-scrolled .sticky-header-pinned-fixed {
+    background-color: Window;
+}
 /******** Ende Fonts for LiveBridge*********/

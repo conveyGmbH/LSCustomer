@@ -551,6 +551,24 @@
                         }
                     }
                     Log.ret(Log.l.trace);
+                },
+                onScroll: function (event) {
+                    Log.call(Log.l.trace, "Events.Controller.");
+                    if (listView && listView.winControl) {
+                        var headerHost = document.querySelector("#headerhost");
+                        if (headerHost && headerHost.firstElementChild) {
+                            if (listView.winControl.scrollPosition > 0) {
+                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                    WinJS.Utilities.addClass(headerHost.firstElementChild, "sticky-scrolled");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                    WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
+                                }
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.trace);
                 }
             };
 
@@ -571,6 +589,10 @@
                 this.addRemovableEventListener(listView, "footervisibilitychanged", this.eventHandlers.onFooterVisibilityChanged.bind(this));
                 this.addRemovableEventListener(listView, "headervisibilitychanged", this.eventHandlers.onHeaderVisibilityChanged.bind(this));
                 this.addRemovableEventListener(listView, "iteminvoked", this.eventHandlers.onItemInvoked.bind(this));
+                var viewPort = listView.querySelector(".win-viewport");
+                if (viewPort) {
+                    this.addRemovableEventListener(viewPort, "scroll", this.eventHandlers.onScroll.bind(this));
+                }
             }
 
             Events.afterSelectEventViewHook = function(json) {

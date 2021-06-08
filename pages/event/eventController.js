@@ -38,6 +38,7 @@
                 link: window.location.href
             }, commandList]);
 
+            var contentArea = pageElement.querySelector(".contentarea");
 
             var that = this;
 
@@ -213,6 +214,20 @@
                         pageControl.prevWidth = 0;
                         pageControl.prevHeight = 0;
                         pageControl.updateLayout.call(pageControl, pageElement);
+                    }
+                    if (contentArea) {
+                        var headerHost = document.querySelector("#headerhost");
+                        if (headerHost && headerHost.firstElementChild) {
+                            if (contentArea.scrollTop > 0) {
+                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                    WinJS.Utilities.addClass(headerHost.firstElementChild, "sticky-scrolled");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                    WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
+                                }
+                            }
+                        }
                     }
                     Log.ret(Log.l.trace);
                 }
@@ -623,7 +638,6 @@
             }
             this.updateFragment = updateFragment;
 
-            var contentArea = pageElement.querySelector(".contentarea");
             if (contentArea) {
                 this.addRemovableEventListener(contentArea, "scroll", this.eventHandlers.onScroll.bind(this));
             }
