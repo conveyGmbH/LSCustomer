@@ -462,13 +462,16 @@
                     AppBar.busy = false;
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");
                     that.resultConverter(json);
-                    if (result.ResultCode !== AppData._persistentStates.registerData.resultCode) {
-                        AppData._persistentStates.registerData.resultCode = result.ResultCode;
-                    }
-                    if (result.ResultMessage) {
-                        that.binding.registerStatus = result.ResultMessage;
-                        if (result.ResultCode === 21) {
+                    if (json && json.d && json.d.results) {
+                        var result = json.d.results[0];
+                        if (result.ResultCode !== AppData._persistentStates.registerData.resultCode) {
                             AppData._persistentStates.registerData.resultCode = result.ResultCode;
+                        }
+                        if (result.ResultMessage) {
+                            that.binding.registerStatus = result.ResultMessage;
+                            if (result.ResultCode === 21) {
+                                AppData._persistentStates.registerData.resultCode = result.ResultCode;
+                            }
                         }
                     }
                     complete({});
