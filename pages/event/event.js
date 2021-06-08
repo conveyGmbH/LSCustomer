@@ -107,8 +107,8 @@
                 if (Application.query && window.history) {
                     var state = {};
                     var title = "";
-                    if (Application.query.eventID) {
-                        delete Application.query.eventID;
+                    if (Application.query.eventId) {
+                        delete Application.query.eventId;
                     }
                     if (Application.query.sessionToken) {
                         delete Application.query.sessionToken;

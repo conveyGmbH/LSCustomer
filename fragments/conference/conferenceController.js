@@ -881,8 +881,8 @@ var __meteor_runtime_config__;
 
             var loadData = function () {
                 var page = null;
-                if (Application.query.page) {
-                    page = Application.query.page;
+                if (Application.query.pageId) {
+                    page = Application.query.pageId;
                 }
                 Log.call(Log.l.trace, "Conference.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);

@@ -16,8 +16,8 @@
         Controller: WinJS.Class.derive(Application.Controller, function Controller(pageElement, commandList) {
             Log.call(Log.l.trace, "ModSession.Controller.");
 
-            if (Application.query && Application.query.eventID) {
-                AppData.setRecordId("Veranstaltung", Application.query.eventID);
+            if (Application.query && Application.query.eventId) {
+                AppData.setRecordId("Veranstaltung", Application.query.eventId);
             }
 
             Application.Controller.apply(this, [pageElement, {
@@ -42,7 +42,7 @@
                 if (newDataEvent.VeranstaltungVIEWID && Application.query && window.history) {
                     var state = {};
                     var title = "";
-                    Application.query.eventID = newDataEvent.VeranstaltungVIEWID;
+                    Application.query.eventId = newDataEvent.VeranstaltungVIEWID;
                     var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
                     window.history.pushState(state, title, location);
                 }

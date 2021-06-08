@@ -16,8 +16,8 @@
         Controller: WinJS.Class.derive(Application.Controller, function Controller(pageElement, commandList) {
             Log.call(Log.l.trace, "Event.Controller.");
 
-            if (Application.query && Application.query.eventID) {
-                AppData.setRecordId("Veranstaltung", Application.query.eventID);
+            if (Application.query && Application.query.eventId) {
+                AppData.setRecordId("Veranstaltung", Application.query.eventId);
             }
 
             Application.Controller.apply(this, [pageElement, {
@@ -58,7 +58,7 @@
                 if (newDataEvent.VeranstaltungVIEWID && Application.query && window.history) {
                     var state = {};
                     var title = "";
-                    Application.query.eventID = newDataEvent.VeranstaltungVIEWID;
+                    Application.query.eventId = newDataEvent.VeranstaltungVIEWID;
                     var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
                     window.history.pushState(state, title, location);
                 }
@@ -325,22 +325,22 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
-                    if (Application.query.eventID) {
+                    if (Application.query.eventId) {
                         if (Application.query.UserToken && Application.query.UserToken !== AppData._persistentStates.registerData.userToken) {
                             AppData._persistentStates.registerData.userToken = Application.query.UserToken;
                             AppData._persistentStates.registerData.tokenFromLink = true;
                         }
-                        if (that.binding.eventId !== AppData._persistentStates.registerData.eventID) {
-                            AppData._persistentStates.registerData.eventID = that.binding.eventId;
+                        if (that.binding.eventId !== AppData._persistentStates.registerData.eventId) {
+                            AppData._persistentStates.registerData.eventId = that.binding.eventId;
                         }
-                        if (Application.query.eventID && Application.query.eventID !== AppData._persistentStates.registerData.eventID) {
-                            AppData._persistentStates.registerData.eventID = Application.query.eventID;
+                        if (Application.query.eventId && Application.query.eventId !== AppData._persistentStates.registerData.eventId) {
+                            AppData._persistentStates.registerData.eventId = Application.query.eventId;
                         }
                         Application.pageframe.savePersistentStates();
                         Log.print(Log.l.trace, "calling PRC_RegisterContact...");
                         return AppData.call("PRC_RegisterContact",
                             {
-                                pVeranstaltungID: AppData._persistentStates.registerData.eventID,
+                                pVeranstaltungID: AppData._persistentStates.registerData.eventId,
                                 pUserToken: AppData._persistentStates.registerData.userToken,
                                 pEMail: AppData._persistentStates.registerData.Email, //wenn über Link bestätigt, dann übergebe Email null 
                                 pAddressData: null,
@@ -356,8 +356,8 @@
                                     }
                                     if (result.VeranstaltungID &&
                                         result.VeranstaltungID !==
-                                        AppData._persistentStates.registerData.eventID) {
-                                        AppData._persistentStates.registerData.eventID = result.VeranstaltungID;
+                                        AppData._persistentStates.registerData.eventId) {
+                                        AppData._persistentStates.registerData.eventId = result.VeranstaltungID;
                                     }
                                     /*if (result.ResultCode !== AppData._persistentStates.registerData.resultCode) {
                                         AppData._persistentStates.registerData.resultCode = result.ResultCode;
@@ -444,8 +444,8 @@
                         if (result.UserToken && result.UserToken !== AppData._persistentStates.registerData.userToken) {
                             AppData._persistentStates.registerData.userToken = result.UserToken;
                         }
-                        if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.registerData.eventID) {
-                            AppData._persistentStates.registerData.eventID = result.VeranstaltungID;
+                        if (result.VeranstaltungID && result.VeranstaltungID !== AppData._persistentStates.registerData.eventId) {
+                            AppData._persistentStates.registerData.eventId = result.VeranstaltungID;
                         }
                         if (result.ResultCode !== AppData._persistentStates.registerData.resultCode) {
                             AppData._persistentStates.registerData.resultCode = result.ResultCode;

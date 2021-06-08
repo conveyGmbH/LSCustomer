@@ -452,7 +452,7 @@
                         var item = that.records.getAt(eventInfo.detail.itemIndex);
                         if (item && item.VeranstaltungVIEWID) {
                             if (Application.query) {
-                                Application.query.eventID = item.VeranstaltungVIEWID;
+                                Application.query.eventId = item.VeranstaltungVIEWID;
                             } else {
                                 AppData.setRecordId("Veranstaltung", item.VeranstaltungVIEWID);
                             }

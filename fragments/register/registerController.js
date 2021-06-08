@@ -184,8 +184,8 @@
                         Application.pageframe.savePersistentStates();
                     }
 
-                    if (!AppData._persistentStates.registerData.eventID) {
-                        AppData._persistentStates.registerData.eventID = that.binding.eventId;
+                    if (!AppData._persistentStates.registerData.eventId) {
+                        AppData._persistentStates.registerData.eventId = that.binding.eventId;
                     }
 
                     if (AppBar.scope.binding.registerStatus) {
@@ -374,7 +374,7 @@
 
             var eventLinkToShare = function() {
                 return window.location.href.split("?")[0] + "?" + createQueryStringFromParameters({
-                    eventID: Application.query.eventID
+                    eventId: Application.query.eventId
                 });
             }
             this.eventLinkToShare = eventLinkToShare;
