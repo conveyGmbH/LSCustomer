@@ -21,7 +21,7 @@
     "register.name"         : "Surname",
     "register.position"     : "Position",
     "register.formOf"       : "Salutation",
-    "register.company"      : "company name",
+    "register.company"      : "Company name",
     "register.phone"        : "Telephone",
     "register.register": "Register",
     "register.resend": "Resend email",

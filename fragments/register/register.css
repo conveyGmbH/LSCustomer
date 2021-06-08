@@ -11,6 +11,10 @@
     font-family: "Barlow";
 }
 
+.register .label {
+    width: 130px;
+}
+
 .register .checkbox {
     padding: 10px 0;
 }
