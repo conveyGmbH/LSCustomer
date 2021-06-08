@@ -19,19 +19,34 @@
         ready: function (element, options) {
             Log.call(Log.l.trace, pageName + ".");
             // TODO: Initialize the page here.
-            this.inResize = 0;
-            this.controller = new AppHeader.Controller(element);
 
-            var userImage = element.querySelector(".user-image");
-            if (userImage) {
-                Colors.loadSVGImage({
-                    fileName: userImage.id,
-                    element: userImage,
-                    size: 28,
-                    color: "#f0f0f0",
-                    strokeWidth: AppData._persistentStates.iconStrokeWidth
-                });
+            // insert body-content
+            var sibling,nextSibling;
+            var appHeader = element.firstElementChild || element;
+            var savedBodyContentTop = document.querySelector(".saved-body-content-top");
+            if (savedBodyContentTop) {
+                sibling = savedBodyContentTop.firstElementChild;
+                while (sibling) {
+                    nextSibling = sibling.nextElementSibling;
+                    var hasFixedChild;
+                    var firstElementChild = sibling.firstElementChild;
+                    while (firstElementChild) {
+                        var styles = getComputedStyle(firstElementChild);
+                        if (styles && styles.getPropertyValue("position") === "fixed") {
+                            hasFixedChild = true;
+                            break;
+                        }
+                        firstElementChild = firstElementChild.firstElementChild;
+                    }
+                    if (hasFixedChild) {
+                        savedBodyContentTop.removeChild(sibling);
+                        appHeader.appendChild(sibling);
+                    }
+                    sibling = nextSibling;
+                }
             }
+
+            this.controller = new AppHeader.Controller(element);
             Log.ret(Log.l.trace);
         },
 
@@ -42,46 +57,8 @@
         },
 
         updateLayout: function (element, viewState, lastViewState) {
-            var ret = null;
-            var that = this;
-            Log.call(Log.l.u1, pageName + ".");
             /// <param name="element" domElement="true" />
             // TODO: Respond to changes in viewState.
-            if (element && !that.inResize) {
-                that.inResize = 1;
-                ret = WinJS.Promise.timeout(0).then(function () {
-                    var strStyleWidth;
-                    var strStyleFloat;
-                    if (document.body.clientWidth <= 899) {
-                        strStyleWidth = "100%";
-                        strStyleFloat = "left";
-                    } else {
-                        var widthLogo = 280;
-                        var widthMaster = 0;
-                        var widthAdd = 12;
-                        if (Application.navigator.masterElement && Application.navigator._nextMaster) {
-                            widthMaster = Application.navigator.masterElement.clientWidth;
-                        }
-                        if (widthMaster + widthAdd> widthLogo) {
-                            widthLogo = widthMaster + widthAdd;
-                        }
-                        if (NavigationBar.orientation === "vertical" &&
-                            NavigationBar.navVertWidth + widthAdd > widthLogo) {
-                            widthLogo = NavigationBar.navVertWidth + widthAdd;
-                        }
-                        strStyleWidth = "calc(100% - " + widthLogo.toString() + "px)";
-                        strStyleFloat = "right";
-                    }
-                    var eventField = document.querySelector(".event-field");
-                    if (eventField && eventField.style) {
-                        eventField.style.width = strStyleWidth;
-                        eventField.style.float = strStyleFloat;
-                    }
-                    that.inResize = 0;
-                });
-            }
-            Log.ret(Log.l.u1);
-            return ret;
         }
     });
 })();
