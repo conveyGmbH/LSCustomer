@@ -637,9 +637,9 @@
                 var ret = new WinJS.Promise.as().then(function() {
                     var headerHost = document.querySelector("#headerhost");
                     if (contentArea && headerHost) {
-                        var firstElementChild = headerHost.firstElementChild;
-                        if (contentArea.style && firstElementChild) {
-                            contentArea.style.paddingTop = firstElementChild.clientHeight.toString() + "px";
+                        var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
+                        if (contentArea.style && stickyHeader) {
+                            contentArea.style.paddingTop = stickyHeader.clientHeight.toString() + "px";
                         }
                         while (firstElementChild) {
                             var styles = getComputedStyle(firstElementChild);

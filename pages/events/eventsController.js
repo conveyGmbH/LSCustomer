@@ -276,9 +276,12 @@
                 var ret = new WinJS.Promise.as().then(function() {
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
-                        var winHeaderContainer = listView.querySelector(".win-headercontainer");
-                        if (headerHost && headerHost.firstElementChild && winHeaderContainer && winHeaderContainer.style) {
-                            winHeaderContainer.style.marginTop = headerHost.firstElementChild.clientHeight.toString() + "px";
+                        if (headerHost) {
+                            var winHeaderContainer = listView.querySelector(".win-headercontainer");
+                            var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
+                            if (stickyHeader && winHeaderContainer && winHeaderContainer.style) {
+                                winHeaderContainer.style.marginTop = stickyHeader.clientHeight.toString() + "px";
+                            }
                         }
                         var winSurface = listView.querySelector(".win-surface");
                         if (winSurface) {
