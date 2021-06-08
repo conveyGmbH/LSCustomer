@@ -631,9 +631,9 @@
             var adjustContainerSize = function() {
                 Log.call(Log.l.trace, "Event.Controller.");
                 var ret = new WinJS.Promise.as().then(function() {
-                    var savedBodyContentTop = document.querySelector(".saved-body-content-top");
-                    if (contentArea && savedBodyContentTop) {
-                        var firstElementChild = savedBodyContentTop.firstElementChild;
+                    var headerHost = document.querySelector("#headerhost");
+                    if (contentArea && headerHost) {
+                        var firstElementChild = headerHost.firstElementChild;
                         while (firstElementChild) {
                             var styles = getComputedStyle(firstElementChild);
                             if (styles && styles.getPropertyValue("position") === "fixed") {
