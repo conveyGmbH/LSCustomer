@@ -54,6 +54,15 @@
     display: none;
 }
 
+#conference.mediaview .speaking--Z2tUpzD > button {
+    height: 22px !important;
+    padding: 1px 10px !important;
+}
+
+#conference.mediaview .speaking--Z2tUpzD button > i {
+    margin-top: 2px !important;
+}
+
 .video-overlay-fullwidth {
     width: calc(100% - 100px) !important;
     min-width: calc(100% - 100px) !important;
