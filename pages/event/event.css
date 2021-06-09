@@ -268,7 +268,7 @@
     margin-top: 20px;
 }
 .countdown-fragmenthost {
-    position: fixed;
+    position: absolute;
     float: right;
     right: 0;
     width: 30%;
