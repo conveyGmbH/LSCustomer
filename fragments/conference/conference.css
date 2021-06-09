@@ -8,33 +8,50 @@
     height: calc(100% - 8px);
 }
 
-.dropZoneTop--A7khq, 
-.dropZoneBottom--ZYMK7J {
+#conference.mediaview .dropZoneTop--A7khq,
+#conference.mediaview .dropZoneBottom--ZYMK7J {
     max-height: 40px;
 }
 
-.navbar--Z2lHYbG {
+#conference.mediaview .navbar--Z2lHYbG {
     position: absolute !important;
     width: calc(100% - 16px);
 }
-.center--2pV1iJ {
+#conference.mediaview .center--2pV1iJ {
     visibility: hidden;
 }
 
-.left--18SBXP, .right--Z4dKWq {
+#conference.mediaview .left--18SBXP, .right--Z4dKWq {
     z-index: 1;
 }
 
-/*.ghost--Z136aiN.default--Z19H5du:hover, .buttonWrapper--x8uow:hover .ghost--Z136aiN.default--Z19H5du*/
-.ghost--Z136aiN {
+/*#conference.mediaview .ghost--Z136aiN.default--Z19H5du:hover, #conference.mediaview .buttonWrapper--x8uow:hover .ghost--Z136aiN.default--Z19H5du*/
+#conference.mediaview .ghost--Z136aiN {
     background-color: var(--btn-primary-bg) !important;
     box-shadow: 0 2px 5px 0 black !important;
     opacity: 0.8;
 }
 
-.ghost--Z136aiN.default--Z19H5du:hover, .ghost--Z136aiN.default--Z19H5du:active {
+#conference.mediaview .ghost--Z136aiN.default--Z19H5du:hover, .ghost--Z136aiN.default--Z19H5du:active {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
+}
+
+#conference.mediaview .media--Z1xJW08 {
+    max-height: calc(100% - 100px);
+    margin: 10px 0 !important;
+}
+
+#conference.mediaview .actionsbar--Z1ant6U {
+    height: 64px !important;
+}
+
+/* hide logoff menu-item in options menu */
+#conference.mediaview .scrollable--4fyj li.separator--Z1vmd5H {
+    display: none;
+}
+#conference.mediaview .scrollable--4fyj li[aria-labelledby="dropdown-item-label-14"].item--yl1AH {
+    display: none;
 }
 
 .video-overlay-fullwidth {
@@ -42,6 +59,7 @@
     min-width: calc(100% - 100px) !important;
     max-width: calc(100% - 100px);
 }
+
 .video-overlay-left {
     display: block !important;
     position: absolute !important;
@@ -49,6 +67,7 @@
     width: 192px !important;
     height: calc(100% - 100px) !important;
 }
+
 .video-overlay-right {
     display: block !important;
     position: absolute !important;
@@ -56,6 +75,7 @@
     width: 192px !important;
     height: calc(100% - 100px) !important;
 }
+
 .video-overlay-top {
     display: block !important;
     position: absolute !important;
@@ -63,19 +83,10 @@
     width: calc(100% - 100px);
     height: 144px !important;
 }
+
 .video-list-vertical {
-    grid-template-columns:100% !important;
+    grid-template-columns: 100% !important;
     grid-template-rows: repeat(auto-fill, 144px) !important;
     width: 192px !important;
     height: 100% !important;
 }
-
-.media--Z1xJW08 {
-    max-height: calc(100% - 100px);
-    margin: 10px 0 !important;
-}
-
-.actionsbar--Z1ant6U {
-    height: 64px !important;
-}
-
