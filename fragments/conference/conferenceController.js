@@ -32,7 +32,9 @@ var __meteor_runtime_config__;
                 hideInactive: false,
                 contentActivity: [],
                 inactivityDelay: 7000,
-                activeVideoCount: 0
+                activeVideoCount: 0,
+                mediaContainerObserver: null,
+                videoListObserver: null
             };
             var userListDefaults = {
                 show: true,
@@ -704,87 +706,130 @@ var __meteor_runtime_config__;
                     that.placeVideoListPromise.cancel();
                     that.placeVideoListPromise = null;
                 }
-                var videoList = fragmentElement.querySelector(".videoList--1OC49P");
-                if (videoList && videoList.style &&
-                    videoList.parentElement &&
-                    videoList.parentElement.parentElement && videoList.parentElement.parentElement.style) {
-                    var overlayElement = videoList.parentElement.parentElement;
-                    ret = videoListDefaults.direction;
-                    var numVideos = videoList.childElementCount;
-                    if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                        WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
+                var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                if (mediaContainer) {
+                    if (!videoListDefaults.mediaContainerObserver) {
+                        videoListDefaults.mediaContainerObserver = new MutationObserver(function(mutationList, observer) {
+                            Log.print(Log.l.trace, "mediaContainer childList changed!");
+                            WinJS.Promise.timeout(50).then(function() {
+                                that.placeVideoList();
+                            });
+                        });
+                        videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
+                            childList: true
+                        });
                     }
-                    if (direction === videoListDefaults.default ||
-                        WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-bigger") ||
-                        videoListDefaults.isDescClosed) {
-                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
-                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
-                        }
-                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
-                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
-                        }
-                        if (!WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
-                            WinJS.Utilities.addClass(overlayElement, "overlay--nP1TK");
-                        }
-                        if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
-                            WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
-                        }
-                        if (numVideos > 1) {
-                            if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                                WinJS.Utilities.addClass(overlayElement, "video-overlay-fullwidth");
+                    var overlayElement = mediaContainer.querySelector(".overlay--nP1TK");
+                    if (overlayElement) {
+                        var videoList = overlayElement.querySelector(".videoList--1OC49P");
+                        if (videoList && videoList.style && overlayElement.style) {
+                            if (!videoListDefaults.videoListObserver) {
+                                videoListDefaults.videoListObserver = new MutationObserver(function(mutationList, observer) {
+                                    Log.print(Log.l.trace, "videoList childList changed!");
+                                    WinJS.Promise.timeout(50).then(function() {
+                                        that.placeVideoList();
+                                    });
+                                });
+                                videoListDefaults.videoListObserver.observe(videoList, {
+                                    childList: true
+                                });
                             }
+                            ret = videoListDefaults.direction;
+                            var numVideos = videoList.childElementCount;
+                            if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
+                                WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
+                            }
+                            if (direction === videoListDefaults.default ||
+                                WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-bigger") ||
+                                videoListDefaults.isDescClosed) {
+                                if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
+                                }
+                                if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
+                                }
+                                if (!WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
+                                    WinJS.Utilities.addClass(overlayElement, "overlay--nP1TK");
+                                }
+                                if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
+                                    WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
+                                }
+                                if (numVideos > 1) {
+                                    if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                                        WinJS.Utilities.addClass(overlayElement, "video-overlay-fullwidth");
+                                    }
+                                } else {
+                                    if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                                        WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
+                                    }
+                                }
+                                if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
+                                    WinJS.Utilities.removeClass(videoList, "video-list-vertical");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
+                                }
+                                if (!WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
+                                    WinJS.Utilities.addClass(videoList, "video-list-vertical");
+                                }
+                                if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
+                                }
+                                if (WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "overlay--nP1TK");
+                                }
+                                if (WinJS.Utilities.hasClass(overlayElement, "floatingOverlay--ZU51zt")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "floatingOverlay--ZU51zt");
+                                }
+                                if (direction === videoListDefaults.right) {
+                                    if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
+                                        WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
+                                    }
+                                    if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
+                                        WinJS.Utilities.addClass(overlayElement, "video-overlay-right");
+                                    }
+                                } else {
+                                    if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
+                                        WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
+                                    }
+                                    if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
+                                        WinJS.Utilities.addClass(overlayElement, "video-overlay-left");
+                                    }
+                                }
+                                var closeDescButton = fragmentElement.querySelector('button[aria-describedby="closeDesc"]');
+                                if (closeDescButton) {
+                                    if (!videoListDefaults.closeDesc) {
+                                        videoListDefaults.closeDesc = closeDescButton.onclick;
+                                    }
+                                    closeDescButton.onclick = that.clickCloseDesc;
+                                }
+                            }
+                            videoListDefaults.activeVideoCount = numVideos;
+                            videoListDefaults.direction = direction;
                         } else {
-                            if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                                WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
+                            if (videoListDefaults.videoListObserver) {
+                                videoListDefaults.videoListObserver.disconnect();
+                                videoListDefaults.videoListObserver = null;
                             }
-                        }
-                        if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
-                            WinJS.Utilities.removeClass(videoList, "video-list-vertical");
+                            Log.print(Log.l.trace, "videoList not yet created - try later again!");
+                            that.placeVideoListPromise = WinJS.Promise.timeout(50).then(function() {
+                                that.placeVideoList(direction);
+                            });
                         }
                     } else {
-                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
-                        }
-                        if (!WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
-                            WinJS.Utilities.addClass(videoList, "video-list-vertical");
-                        }
-                        if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
-                            WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
-                        }
-                        if (WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
-                            WinJS.Utilities.removeClass(overlayElement, "overlay--nP1TK");
-                        }
-                        if (WinJS.Utilities.hasClass(overlayElement, "floatingOverlay--ZU51zt")) {
-                            WinJS.Utilities.removeClass(overlayElement, "floatingOverlay--ZU51zt");
-                        }
-                        if (direction === videoListDefaults.right) {
-                            if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
-                                WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
-                            }
-                            if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
-                                WinJS.Utilities.addClass(overlayElement, "video-overlay-right");
-                            }
-                        } else {
-                            if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
-                                WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
-                            }
-                            if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
-                                WinJS.Utilities.addClass(overlayElement, "video-overlay-left");
-                            }
-                        }
-                        var closeDescButton = fragmentElement.querySelector('button[aria-describedby="closeDesc"]');
-                        if (closeDescButton) {
-                            if (!videoListDefaults.closeDesc) {
-                                videoListDefaults.closeDesc = closeDescButton.onclick;
-                            }
-                            closeDescButton.onclick = that.clickCloseDesc;
+                        if (videoListDefaults.videoListObserver) {
+                            videoListDefaults.videoListObserver.disconnect();
+                            videoListDefaults.videoListObserver = null;
                         }
                     }
-                    videoListDefaults.activeVideoCount = numVideos;
-                    videoListDefaults.direction = direction;
                 } else {
-                    Log.print(Log.l.trace, "not yet created - try later again!");
-                    that.placeVideoListPromise = WinJS.Promise.timeout(250).then(function() {
+                    if (videoListDefaults.mediaContainerObserver) {
+                        videoListDefaults.mediaContainerObserver.disconnect();
+                        videoListDefaults.mediaContainerObserver = null;
+                    }
+                    Log.print(Log.l.trace, "mediaContainer not yet created - try later again!");
+                    that.placeVideoListPromise = WinJS.Promise.timeout(50).then(function() {
                         that.placeVideoList(direction);
                     });
                 }
