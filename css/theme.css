@@ -203,4 +203,18 @@
 .sticky-scrolled .sticky-header-pinned-fixed {
     background-color: Window;
 }
+
+.win-button {
+    cursor: pointer;
+}
+
+.text-lightcolor.win-button {
+    background-color: Window;
+}
+
+.text-lightcolor.win-button:disabled {
+    background-color: #dcdcE4;
+    cursor: default;
+}
+
 /******** Ende Fonts for LiveBridge*********/
