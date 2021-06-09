@@ -38,6 +38,7 @@
 }
 
 #conference.mediaview .media--Z1xJW08 {
+    max-width: calc(100% - 80px);
     max-height: calc(100% - 100px);
     margin: 10px 0 !important;
 }
@@ -62,6 +63,39 @@
 #conference.mediaview .speaking--Z2tUpzD button > i {
     margin-top: 2px !important;
 }
+
+#conference.mediaview .overlay--Arkp5 {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#conference.mediaview .pollingContainer--1xRnAH {
+    border: 1px solid var(--color-gray-lighter, #a7b3bd);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    transform: translate3d(0,0,0);
+    transition-property: box-shadow,transform;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(.16,1,.29,.99);
+    right: 30px;
+    bottom: 90px;
+}
+#conference.mediaview .pollingContainer--1xRnAH:hover,
+#conference.mediaview .pollingContainer--1xRnAH:focus {
+    transform: translate3d(0,-2px,0);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    transition-property: box-shadow,transform;
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(.16,1,.29,.99);
+}
+#conference.mediaview .pollingContainer--1xRnAH button {
+    background-color: var(--btn-primary-bg) !important;
+    opacity: 0.8;
+}
+#conference.mediaview .pollingContainer--1xRnAH button:hover {
+    background-color: var(--btn-primary-bg) !important;
+    opacity: 1;
+}
+
 
 .video-overlay-fullwidth {
     width: calc(100% - 100px) !important;
