@@ -274,7 +274,7 @@ body {
 	background: #289ad6;
 	font-weight: bold;
 	font-size: 12px;
-	position: absolute;
+	position: fixed;
 	bottom: 5px;
 	left: 0;
   right: 0;
