@@ -21,6 +21,7 @@
             }
 
             Application.Controller.apply(this, [pageElement, {
+                showICS: false,
                 showShare: false,
                 showTeaser: false,
                 showRegister: false,
@@ -641,6 +642,7 @@
                         if (contentArea.style && stickyHeader) {
                             contentArea.style.paddingTop = stickyHeader.clientHeight.toString() + "px";
                         }
+                        var firstElementChild = headerHost.firstElementChild;
                         while (firstElementChild) {
                             var styles = getComputedStyle(firstElementChild);
                             if (styles && styles.getPropertyValue("position") === "fixed") {
@@ -669,6 +671,15 @@
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 that.binding.showShare = true;
+            }).then(function () {
+                var dateEnd = that.binding.dataEvent.dateEndDatum;
+                var now = new Date().getTime();
+                var remainderTime = dateEnd - now;
+                if (remainderTime > 0) {
+                    that.binding.showICS = true;
+                } else {
+                    that.binding.showICS = false;
+                }
             });
             Log.ret(Log.l.trace);
         })

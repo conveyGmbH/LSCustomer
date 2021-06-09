@@ -40,6 +40,7 @@
 	"register.re_registerMessage" : "Sie wurden schon für eine andere Veranstaltung registriert, wenn Sie möchten melden Sie sich um", 
 	"register.eventNotStartedYet" : "Für die Veranstaltung gibt es noch keine Konferenz, bitte haben Sie etwas Geduld oder gehen zurück zur Eventliste und wählen eine andere Veranstaltung aus.",
 	"register.facebookRegister"     : "Login mit Facebook",
+	"register.mandatoryText"  : "* Diese Felder müssen ausgefüllt werden",
 
     "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
 

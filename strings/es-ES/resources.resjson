@@ -39,6 +39,7 @@
 	"register.re_registerMessage" : "Sie wurden schon für eine andere Veranstaltung registriert, wenn Sie möchten melden Sie sich um", 
 	"register.eventNotStartedYet" : "Für die Veranstaltung gibt es noch keine Konferenz, bitte haben Sie etwas Geduld oder gehen zurück zur Eventliste und wählen eine andere Veranstaltung aus.",
     "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
+    "register.mandatoryText"  : "* Diese Felder müssen ausgefüllt werden",
 
 	"teaser.welcome"		: "Willkommen auf unsere Convey Online Event Video Session",
 	"teaser.info1"			: "Melde Dich an und verpasse nicht unseren Online Event!",

@@ -36,7 +36,7 @@
                             </div>
                             <div class="content-header-line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
                                 <div class="button-element">
-                                    <button id="calenderButton" class="win-button" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
+                                    <button id="calenderButton" class="win-button" data-win-bind="style.display: showICS Binding.Converter.toDisplay" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
                                         <div class="button-tip">
                                             <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
                                             <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>

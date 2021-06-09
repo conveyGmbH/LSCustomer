@@ -39,6 +39,7 @@
 	"register.re_registerMessage": "Sei già stato registrato per un altro evento, se desideri accedere",
 	"register.eventNotStartedYet": "Non c'è ancora nessuna conferenza per l'evento, sii paziente o torna all'elenco degli eventi e seleziona un altro evento.",	
     "register.facebookRegister": "Accedi con Facebook",
+    "register.mandatoryText"  : "* Questi campi devono essere compilati",
 
     "registerConfirm.waitMessage": "Grazie per la registrazione. Riceverai a breve un'e-mail di conferma.",
 
