@@ -1077,7 +1077,7 @@
                     Log.ret(Log.l.trace);
                 },
                 onScroll: function (event) {
-                    Log.call(Log.l.trace, "Home.Controller.");
+                    Log.call(Log.l.u1, "Home.Controller.");
                     if (listView && listView.winControl) {
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost && headerHost.firstElementChild) {
@@ -1092,7 +1092,7 @@
                             }
                         }
                     }
-                    Log.ret(Log.l.trace);
+                    Log.ret(Log.l.u1);
                 }
 
             };

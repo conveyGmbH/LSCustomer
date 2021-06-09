@@ -92,17 +92,6 @@ var __meteor_runtime_config__;
                 Log.ret(Log.l.trace);
             }
 
-            XMLHttpRequest.prototype._oriOpen = XMLHttpRequest.prototype.open;
-            XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
-                Log.call(Log.l.info, "XMLHttpRequest.", "method=" + method + " url=" + url);
-                if (url.indexOf("conference") >= 0) {
-                    var target = url;
-                }
-                var ret = this._oriOpen(method, url, async, user, password);
-                Log.ret(Log.l.info);
-                return ret;
-            };
-
             var forEach = function (arrayLikeValue, action) {
                 for (var i = 0, l = arrayLikeValue.length; i < l; i++) {
                     action(arrayLikeValue[i], i);

@@ -1,4 +1,5 @@
 ﻿// controller for page: home
+// controller for page: home
 /// <reference path="~/www/lib/convey/scripts/logging.js" />
 /// <reference path="~/www/lib/convey/scripts/appSettings.js" />
 /// <reference path="~/www/lib/convey/scripts/dataService.js" />
@@ -556,7 +557,7 @@
                     Log.ret(Log.l.trace);
                 },
                 onScroll: function (event) {
-                    Log.call(Log.l.trace, "Events.Controller.");
+                    Log.call(Log.l.u1, "Events.Controller.");
                     if (listView && listView.winControl) {
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost && headerHost.firstElementChild) {
@@ -571,7 +572,7 @@
                             }
                         }
                     }
-                    Log.ret(Log.l.trace);
+                    Log.ret(Log.l.u1);
                 }
             };
 

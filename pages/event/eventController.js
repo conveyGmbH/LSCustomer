@@ -209,7 +209,7 @@
                     Log.ret(Log.l.trace);
                 },
                 onScroll: function (event) {
-                    Log.call(Log.l.trace, "Event.Controller.");
+                    Log.call(Log.l.u1, "Event.Controller.");
                     var pageControl = pageElement.winControl;
                     if (pageControl) {
                         pageControl.prevWidth = 0;
@@ -230,7 +230,7 @@
                             }
                         }
                     }
-                    Log.ret(Log.l.trace);
+                    Log.ret(Log.l.u1);
                 }
             };
 
