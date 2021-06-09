@@ -369,7 +369,7 @@
                         }
                     }, function (errorResponse) {
                         AppData.setErrorMsg(that.binding, errorResponse);
-                    }, eventIds, seriesId);
+                    }, eventIds);
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -661,7 +661,7 @@
                         }
                     }, function (errorResponse) {
                         AppData.setErrorMsg(that.binding, errorResponse);
-                    }, eventIds, seriesId);
+                    }, eventIds);
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -853,7 +853,7 @@
                         }
                     }, function (errorResponse) {
                         AppData.setErrorMsg(that.binding, errorResponse);
-                    }, eventIds, seriesId);
+                    }, eventIds);
                 });
                 Log.ret(Log.l.trace);
                 return ret;
