@@ -132,7 +132,7 @@ p {
    generic place in the page, making it look like the controls are not
    only for audio and video, but for all playback. */
 #audio-area .acorn-controls, #video-area .acorn-controls {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
