@@ -141,13 +141,19 @@
 }
 
 .home .content-header-line > h1 {
+    font-size: 46px;
+    font-weight: 600;
+    line-height: 62px;
 }
 
 .home .content-header-line > h2 {
+    font-size: 25px;
+    line-height: 28px;
 }
 
 .home .content-header-line > span {
-
+    font-size: 18px;
+    line-height: 28px;
 }
 
 .home .event-title {
@@ -214,7 +220,7 @@
 
 .home .event-image-container > img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
 }
 
@@ -239,6 +245,7 @@
 .home .event-item .event-title {
     width: calc(100% - 20px);
     height: auto;
+    font-size: 20px;
     font-weight: 600;
     line-height: 1.167;
     padding: 15px 0 5px 0;
@@ -248,12 +255,13 @@
     width: calc(100% - 20px);
     height: auto;
     padding: 0 0 15px 0;
+    font-size: 16px;
 }
 
 .home .event-item .event-comment {
     width: calc(100% - 32px);
     min-height: 40px;
-    font-size: 14px;
+    font-size: 16px;
     padding-bottom: 15px;
 }
 
@@ -314,25 +322,33 @@
 }
 
 .view-size-medium .home .content-header-line > h1 {
-    font-size: 1.2em;
+    font-size: 26px;
+    line-height: 32px;
 }
 
 .view-size-medium .home .content-header-line > h2 {
-    font-size: 1em;
+    font-size: 22px;
+    line-height: 26px;
 }
 
+.view-size-medium .home .content-header-line > span {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.view-size-medium .home .event-item .event-comment {
+    font-size: 14px;
+}
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
 
     use: .view-size-medium-small
 */
-
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
         }
     use: .view-size-small
 */
-
 .view-size-small .home .win-listview .win-vertical .win-footercontainer,
 .view-size-small .home .win-listview .win-vertical .win-headercontainer {
     margin-left: 0;

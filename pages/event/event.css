@@ -62,13 +62,21 @@
     padding: 0;
 }
 
-.event .content-header-line > win-h1 {
+.event .win-h1 {
+    font-size: 46px;
+    font-weight: 600;
+    line-height: 62px;
 }
 
-.event .content-header-line > win-h2 {
+.event .win-h2 {
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 28px;
 }
 
-.event .content-header-line > span {
+.event .win-type-body{
+    font-size: 18px;
+    line-height: 28px;
 }
 
 .event .custlogo {
@@ -342,12 +350,19 @@
     padding: 10px;
 }
 
-.view-size-medium .event .content-header-line > h1 {
-    font-size: 1.2em;
+.view-size-medium .event .win-h1 {
+    font-size: 26px;
+    line-height: 32px;
 }
 
-.view-size-medium .event .content-header-line > h2 {
-    font-size: 1em;
+.view-size-medium .event .win-h2 {
+    font-size: 22px;
+    line-height: 26px;
+}
+
+.view-size-medium .event .win-type-body {
+    font-size: 16px;
+    line-height: 24px;
 }
 
 .view-size-medium .event .win-h3, 
@@ -413,10 +428,19 @@
 
 .view-size-small .countdown-fragmenthost {
     position: fixed;
-    right: 0;
-    top: 25%;
+    left: 0;
+    top: 19%;
     width: 70%;
-    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.view-size-small .teaser-fragmenthost {
+    position: relative;
+    top: 30%;
+}
+
+.view-size-small .event .content-header {
+    position: relative;
 }
 .view-size-small .event .color_container2 {
     height: 270%;
