@@ -44,7 +44,7 @@
 .acorn-player.bigbluebutton button {
   position: relative;
   width: 35px;
-  margin: 0 6px;
+  margin: 6px;
   padding: 0px;
   border: none;
   background-color: transparent;
@@ -87,7 +87,7 @@
   float: left;
   width: 70%;
   height: 12px;
-  margin: 5px 10px 5px 10px;
+  margin: 10px;
   background: #8E9DAF;
 }
 .acorn-player.bigbluebutton .acorn-seek-slider .ui-slider-handle {
@@ -133,13 +133,13 @@
 /* Volume Box */
 .acorn-player.bigbluebutton .acorn-volume-box {
   position: absolute;
-  float: left;
-  bottom: 6px;
+  float: none;
+  bottom: 0;
   right: 0;
   overflow: visible;
   color: #fff;
   transition: all 0.1s ease-in-out 0s;
-  margin: 0 6px;
+  margin: 10px 6px;
   width: 35px;/* 5%; */
 }
 .acorn-player.bigbluebutton .acorn-volume-box:hover {
