@@ -67,7 +67,8 @@
 #conference.mediaview .scrollable--4fyj li.separator--Z1vmd5H {
     display: none;
 }
-#conference.mediaview .scrollable--4fyj li[aria-labelledby="dropdown-item-label-14"].item--yl1AH {
+#conference.mediaview .scrollable--4fyj li[aria-labelledby="dropdown-item-label-14"].item--yl1AH,
+#conference.mediaview .scrollable--4fyj li[aria-labelledby="dropdown-item-label-15"].item--yl1AH {
     display: none;
 }
 
