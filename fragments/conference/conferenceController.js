@@ -655,7 +655,7 @@ var __meteor_runtime_config__;
                     videoListDefaults.restoreDesc(event);
                 }
                 WinJS.Promise.timeout(50).then(function() {
-                    that.placeVideoList(videoListDefaults.direction);
+                    that.placeVideoList();
                     return WinJS.Promise.timeout(250);
                 }).then(function () {
                     var closeDescButton = fragmentElement.querySelector('button[aria-describedby="closeDesc"]');
@@ -677,7 +677,7 @@ var __meteor_runtime_config__;
                     videoListDefaults.closeDesc(event);
                 }
                 WinJS.Promise.timeout(50).then(function() {
-                    that.placeVideoList(videoListDefaults.default);
+                    that.placeVideoList();
                     return WinJS.Promise.timeout(250);
                 }).then(function () {
                     var restoreDescButton = fragmentElement.querySelector("button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF");
@@ -692,11 +692,9 @@ var __meteor_runtime_config__;
             }
             that.clickCloseDesc = clickCloseDesc;
 
-            var placeVideoList = function(direction) {
+            var placeVideoList = function() {
                 var ret = null;
-                if (typeof direction === "undefined") {
-                    direction = videoListDefaults.direction;
-                }
+                var direction = videoListDefaults.direction;
                 Log.call(Log.l.trace, "Conference.Controller.", "direction="+direction);
                 if (!direction) {
                     Log.ret(Log.l.trace, "extra ignored");
@@ -719,7 +717,7 @@ var __meteor_runtime_config__;
                             childList: true
                         });
                     }
-                    var overlayElement = mediaContainer.querySelector(".overlay--nP1TK");
+                    var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .video-overlay-left, .video-overlay-right");
                     if (overlayElement) {
                         var videoList = overlayElement.querySelector(".videoList--1OC49P");
                         if (videoList && videoList.style && overlayElement.style) {
@@ -739,9 +737,17 @@ var __meteor_runtime_config__;
                             if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
                                 WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
                             }
-                            if (direction === videoListDefaults.default ||
-                                WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-bigger") ||
+                            var content = mediaContainer.querySelector(".content--Z2gO9GE");
+                            if (!content ||
+                                direction === videoListDefaults.default ||
+                                WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
                                 videoListDefaults.isDescClosed) {
+                                if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
+                                }
                                 if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
                                     WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
                                 }
@@ -753,6 +759,9 @@ var __meteor_runtime_config__;
                                 }
                                 if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
                                     WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
+                                }
+                                if (!WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
+                                    WinJS.Utilities.addClass(overlayElement, "autoWidth--24e2xI");
                                 }
                                 if (numVideos > 1) {
                                     if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
@@ -773,6 +782,9 @@ var __meteor_runtime_config__;
                                 if (!WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                                     WinJS.Utilities.addClass(videoList, "video-list-vertical");
                                 }
+                                if (WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
+                                    WinJS.Utilities.removeClass(overlayElement, "autoWidth--24e2xI");
+                                }
                                 if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
                                     WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
                                 }
@@ -783,6 +795,9 @@ var __meteor_runtime_config__;
                                     WinJS.Utilities.removeClass(overlayElement, "floatingOverlay--ZU51zt");
                                 }
                                 if (direction === videoListDefaults.right) {
+                                    if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                        WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-right");
+                                    }
                                     if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
                                         WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
                                     }
@@ -790,6 +805,9 @@ var __meteor_runtime_config__;
                                         WinJS.Utilities.addClass(overlayElement, "video-overlay-right");
                                     }
                                 } else {
+                                    if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
+                                        WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-left");
+                                    }
                                     if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
                                         WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
                                     }
@@ -806,7 +824,6 @@ var __meteor_runtime_config__;
                                 }
                             }
                             videoListDefaults.activeVideoCount = numVideos;
-                            videoListDefaults.direction = direction;
                         } else {
                             if (videoListDefaults.videoListObserver) {
                                 videoListDefaults.videoListObserver.disconnect();
@@ -814,13 +831,19 @@ var __meteor_runtime_config__;
                             }
                             Log.print(Log.l.trace, "videoList not yet created - try later again!");
                             that.placeVideoListPromise = WinJS.Promise.timeout(50).then(function() {
-                                that.placeVideoList(direction);
+                                that.placeVideoList();
                             });
                         }
                     } else {
                         if (videoListDefaults.videoListObserver) {
                             videoListDefaults.videoListObserver.disconnect();
                             videoListDefaults.videoListObserver = null;
+                        }
+                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
+                        }
+                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
                         }
                     }
                 } else {
@@ -830,7 +853,7 @@ var __meteor_runtime_config__;
                     }
                     Log.print(Log.l.trace, "mediaContainer not yet created - try later again!");
                     that.placeVideoListPromise = WinJS.Promise.timeout(50).then(function() {
-                        that.placeVideoList(direction);
+                        that.placeVideoList();
                     });
                 }
                 Log.ret(Log.l.trace);
@@ -1012,7 +1035,8 @@ var __meteor_runtime_config__;
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
-                that.placeVideoList(videoListDefaults.right);
+                videoListDefaults.direction = videoListDefaults.right;
+                that.placeVideoList();
                 if (!!that.binding.dataEvent.HideSilentVideos) {
                     that.checkForInactiveVideo(true);
                 }
