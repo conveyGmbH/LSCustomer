@@ -128,5 +128,5 @@
 
     .view-size-small .countdown .count-block { width: 10%; margin: 5px;}
     .view-size-small .countdown .win-h3 { font-size: 1em; margin: 3px; padding: 0;}
-    .view-size-small .countdown .win-h5 { font-size: 8px; padding: 0; margin: 0 0 0 -3px;}
+    .view-size-small .countdown .win-h5 { font-size: x-small; padding: 0; margin: 0 0 0 -3px;}
     .view-size-small .countdown .count { padding-top: 8px;}

@@ -427,11 +427,11 @@
 }
 
 .view-size-small .countdown-fragmenthost {
-    position: fixed;
+    position: absolute;
     left: 0;
-    top: 21%;
-    width: 70%;
-    margin-left: 5px;
+    top: 15em;
+    width: 90%;
+    margin-left: 10px;
 }
 
 .view-size-small .teaser-fragmenthost {
@@ -439,9 +439,11 @@
     top: 30%;
 }
 
-.view-size-small .event .content-header {
+.view-size-small .event .section-1 > .content-header {
     position: relative;
+    margin-top: 42%;
 }
+
 .view-size-small .event .color_container2 {
     height: 270%;
 }
