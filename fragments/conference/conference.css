@@ -49,7 +49,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .portal--27FHYi .default--Z19H5du {
     color: var(--btn-default-color) !important;
     background-color: var(--btn-default-bg) !important;
-    border: var(--border-size-large) solid transparent !important;
 }
 #conference.mediaview .primary--1IbqAO:hover,
 #conference.mediaview .buttonWrapper--x8uow:hover .primary--1IbqAO,
