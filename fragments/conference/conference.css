@@ -122,7 +122,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .toolbarListButton--1pCqT3:hover, #conference.mediaview .toolbarListButton--1pCqT3:focus {
     background-color: #bbb !important;
 }
-
+#conference.mediaview .selectedListButton--Zre3AC {
+    background-color: var(--toolbar-list-color) !important;
+}
 
 /* protect h1 */
 #conference.mediaview h1 {
