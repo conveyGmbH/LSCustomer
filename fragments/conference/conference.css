@@ -59,21 +59,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview .primary--1IbqAO:hover,
-#conference.mediaview .buttonWrapper--x8uow:hover .primary--1IbqAO,
-.portal--27FHYi .primary--1IbqAO:hover,
-.portal--27FHYi .buttonWrapper--x8uow:hover .primary--1IbqAO {
+#conference.mediaview .buttonWrapper--x8uow:hover .primary--1IbqAO {
     color: var(--btn-primary-color) !important;
 }
 #conference.mediaview .default--Z19H5du:hover,
-#conference.mediaview .buttonWrapper--x8uow:hover .default--Z19H5du,
-.portal--27FHYi .default--Z19H5du:hover,
-.portal--27FHYi .buttonWrapper--x8uow:hover .default--Z19H5du {
+#conference.mediaview .buttonWrapper--x8uow:hover .default--Z19H5du {
     color: var(--btn-default-color) !important;
 }
 #conference.mediaview .audioBtn--1H6rCK:hover span:first-child,
-#conference.mediaview .audioBtn--1H6rCK:focus span:first-child,
-.portal--27FHYi .audioBtn--1H6rCK:hover span:first-child,
-.portal--27FHYi .audioBtn--1H6rCK:focus span:first-child {
+#conference.mediaview .audioBtn--1H6rCK:focus span:first-child {
     border: 5px solid var(--color-primary) !important;
     background-color: #f1f8ff !important;
 }
