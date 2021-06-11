@@ -106,12 +106,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--toolbar-button-bg) !important;
     border-color: var(--toolbar-button-border-color) !important;
 }
-#conference.mediaview .toolbarListButton--1pCqT3:hover, .toolbarListButton--1pCqT3:focus {
+#conference.mediaview .toolbarListButton--1pCqT3:hover, #conference.mediaview .toolbarListButton--1pCqT3:focus {
     background-color: #bbb !important;
 }
-#conference.mediaview .default--Z19H5du:hover, .buttonWrapper--x8uow:hover .default--Z19H5du {
-    color: var(--btn-default-color) !important;
-}
+
 
 /* protect h1 */
 #conference.mediaview h1 {
