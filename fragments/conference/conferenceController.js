@@ -692,12 +692,12 @@ var __meteor_runtime_config__;
             }
             that.clickCloseDesc = clickCloseDesc;
 
-            var onWheelPresentationHandler = function(event) {
+            var onWheelSvg = function(event) {
                 if (event) {
-                    event.stopPropagation();
+                    event.preventDefault();
                 }
             }
-            that.onWheelPresentationHandler = null;
+            that.onWheelSvg = null;
 
             var placeVideoList = function() {
                 var ret = null;
@@ -711,11 +711,11 @@ var __meteor_runtime_config__;
                     that.placeVideoListPromise.cancel();
                     that.placeVideoListPromise = null;
                 }
-                var presentationContainer = fragmentElement.querySelector(".presentationContainer--1wqUYG");
-                if (presentationContainer) {
-                    if (!that.onWheelPresentationHandler) {
-                        that.onWheelPresentationHandler = onWheelPresentationHandler;
-                        that.addRemovableEventListener(presentationContainer, "wheel", that.onWheelPresentationHandler.bind(that));
+                var svgContainer = fragmentElement.querySelector(".svgContainer--Z1z3wO0");
+                if (svgContainer && svgContainer.firstElementChild) {
+                    if (!that.onWheelSvg) {
+                        that.onWheelSvg = onWheelSvg;
+                        that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
                     }
                 }
                 var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
