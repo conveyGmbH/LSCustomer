@@ -1,18 +1,246 @@
+.modSession .win-type-title,
+.modSession .win-type-subtitle,
+.modSession .win-type-body,
+.modSession .win-h1,
+.modSession .win-h2,
+.modSession .win-h3,
+.modSession .win-h5,
+.modSession .win-tooltip,
+.modSession .win-type-caption,
+.modSession .caption-field,
+.modSession .content-header{
+    font-family: "Barlow";
+}
+
+.modSession .bold {
+    font-weight: 600;
+}
+
+.modSession .hero-header,
+.modSession .content-container {
+    margin-left: var(--max-content-margin-left);
+    width: var(--max-content-width);
+    padding: 15px;
+}
+
+.modSessions .hero-image-container {
+    display: block;
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    overflow: hidden;
+    max-height: 600px;
+}
+
+.modSession .hero-image-container > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modSession .content-header {
+    height: auto;
+    width: 100%;
+}
+
+.modSession .content-header-line {
+    height: auto;
+    width: 100%;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+}
+
+.modSession .win-h1 {
+    font-size: 46px;
+    font-weight: 600;
+    line-height: 62px;
+}
+
+.modSession .win-h2 {
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+.modSession .win-type-body {
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.modSession .content-header {
+    height: auto;
+    width: auto;
+    margin: 15px 0 0 0;
+    padding: 5px 0;
+    
+}
+.modSession .content-header-line {
+    margin-top: 10px;
+}
+.modSession .date-field {
+    text-align: left; width: auto; display: inline-block; left: 0; top: 0;
+}
+
 .modSession .custlogo {
     display: inline-block;
     position: relative;
+    width: 20%;
+    height: auto;
     margin: 15px 0;
     padding: 5px;
+    text-align: center;
 }
 
-#customerLogo {
-    height: 100px;
+.modSession .logo {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
-.conference-fragmenthost {
-    width: 100%; 
-    /*height: 350px; */
-    min-height: 600px;
-    margin-top: 0%; 
-    background-color: #000000;
+.modSession button.win-button,
+.modSession button.win-button:focus {
+    border-radius: 40px 40px 40px 40px;
+    outline-style: none;
 }
+.modSession button#homeButton {
+    padding: 14px 26px;
+    color: #ffffff;
+}
+
+.modSession button .win-type-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+.modSession .button-tip {
+    position: relative;
+    display: inline-block;
+}
+
+.modSession .button-tip .action-image {
+    display: inline-block !important;
+    position: relative;
+    top: 1px;
+}
+
+.modSession .button-tip .win-tooltip {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    min-width: 200px;
+    width: fit-content;
+    text-align: center;
+    right: -50px;
+    top: 20px;
+    color: #fff;
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    z-index: 99;
+}
+
+.modSession .button-tip:hover .win-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modSession .conference-fragmenthost {
+    width: auto;
+    height: auto;
+    margin: 0;
+    background-color: rgba(128,128,128,0.1);
+}
+
+.modSession .hero-footer {
+    min-height: 150px;
+}
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1299px 
+    @media (max-width:1299px) {
+    }
+
+    use: .view-size-biggest
+*/
+.view-size-biggest .modSession .hero-header,
+.view-size-biggest .modSession .content-container {
+    margin-left: 20px;
+    width: calc(100% - 70px);
+    padding: 15px;
+}
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1099px 
+    @media (max-width:1099px) {
+    }
+
+    use: .view-size-bigger
+*/
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 899px 
+    @media (max-width:899px) {
+    }
+
+    use: .view-size-medium
+*/
+.view-size-medium .modSession .hero-header,
+.view-size-medium .modSession .content-container {
+    margin-left: 5px;
+    width: calc(100% - 30px);
+    padding: 10px;
+}
+
+.view-size-medium .modSession .win-h1 {
+    font-size: 26px;
+    line-height: 32px;
+}
+
+.view-size-medium .modSession .win-h2 {
+    font-size: 22px;
+    line-height: 26px;
+}
+
+.view-size-medium .modSession .win-type-body {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.view-size-medium .modSession .win-h3,
+.view-size-medium .modSession .win-h5 {
+    font-size: 1em;
+}
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 699px 
+
+    use: .view-size-medium-small
+*/
+
+/*margins/paddings for small screens and orientation vertical
+        @media (max-width:499px) {
+        }
+    use: .view-size-small
+*/
+.view-size-small .modSession .hero-header,
+.view-size-small .modSession .content-container {
+    margin-left: 0;
+    width: calc(100% - 20px);
+}
+
+.view-size-small .modSession .content-header-line > h1 {
+    font-size: 22px;
+}
+
+.view-size-small .modSession .content-header-line > h2 {
+    font-size: 16px;
+}
+
+

@@ -79,24 +79,6 @@
     line-height: 28px;
 }
 
-.event .custlogo {
-    display: inline-block;
-    position: relative;
-    width: 20%;
-    height: auto;
-    margin: 15px 0 0 0;
-    padding: 5px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.event .logo {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-
 
 
 .event .color_container2 {
@@ -251,23 +233,23 @@
     font-size: 16px;
     font-weight: 600;
 }
-.recordedContent-fragmenthost,
-.conference-fragmenthost {
+.event .recordedContent-fragmenthost,
+.event .conference-fragmenthost {
     width: auto;
     height: auto;
     margin: 0;
     background-color: rgba(128,128,128,0.1);
 }
-.teaser-fragmenthost {
+.event .teaser-fragmenthost {
     height: auto;
     margin-top: 20px;
 }
 
-.register-fragmenthost {
+.event .register-fragmenthost {
     height: auto;
     margin-top: 20px;
 }
-.countdown-fragmenthost {
+.event .countdown-fragmenthost {
     position: absolute;
     float: right;
     right: 0;
@@ -311,6 +293,16 @@
 }
 .event .caption-block {
      width: auto; display: block; padding-right: 10px; margin-right: 10px;
+}
+
+.event p {
+    white-space: pre-wrap
+}
+
+.event .logOff-container {
+    float: right;
+    height: auto;
+    width: 10%;
 }
 
 
@@ -370,7 +362,7 @@
     font-size: 1em;
 }
 
-.view-size-medium .countdown-fragmenthost {
+.view-size-medium .event .countdown-fragmenthost {
     position: fixed;
     float: right;
     right: 0;
@@ -426,7 +418,7 @@
     font-size: 16px;
 }
 
-.view-size-small .countdown-fragmenthost {
+.view-size-small .event .countdown-fragmenthost {
     position: absolute;
     left: 0;
     top: 22em;
@@ -434,7 +426,7 @@
     margin-left: 10px;
 }
 
-.view-size-small .teaser-fragmenthost {
+.view-size-small .event .teaser-fragmenthost {
     position: relative;
     top: 30%;
 }
@@ -465,13 +457,4 @@
     float: left;
     width: auto;
     margin: 0;
-}
-p {
-    white-space: pre-wrap
-}
-
-.event .logOff-container {
-    float: right;
-    height: auto;
-    width: 10%;
 }
