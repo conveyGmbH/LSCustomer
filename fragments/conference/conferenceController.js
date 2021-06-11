@@ -692,6 +692,12 @@ var __meteor_runtime_config__;
             }
             that.clickCloseDesc = clickCloseDesc;
 
+            var onScrollPresentationHandler = function(event) {
+                if (event) {
+                    event.stopPropagation();
+                }
+            }
+
             var placeVideoList = function() {
                 var ret = null;
                 var direction = videoListDefaults.direction;
@@ -703,6 +709,13 @@ var __meteor_runtime_config__;
                 if (that.placeVideoListPromise) {
                     that.placeVideoListPromise.cancel();
                     that.placeVideoListPromise = null;
+                }
+                var presentationContainer = fragmentElement.querySelector(".presentationContainer--1wqUYG");
+                if (presentationContainer) {
+                    if (!that.onScrollPresentationHandler) {
+                        that.onScrollPresentationHandler = onScrollPresentationHandler;
+                        that.addRemovableEventListener(presentationContainer, "scroll", that.onScrollPresentationHandler.bind(that));
+                    }
                 }
                 var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                 if (mediaContainer) {
@@ -898,25 +911,12 @@ var __meteor_runtime_config__;
             }
             this.placeVideoList = placeVideoList;
 
-            var onScrollPresentationHandler = function(event) {
-                if (event) {
-                    event.stopPropagation();
-                }
-            }
-
             var checkForInactiveVideo = function() {
                 var hideInactive = videoListDefaults.hideInactive;
                 Log.call(Log.l.trace, "Conference.Controller.", "hideInactive="+hideInactive);
                 if (that.checkForInactiveVideoPromise) {
                     that.checkForInactiveVideoPromise.cancel();
                     that.checkForInactiveVideoPromise = null;
-                }
-                var presentationContainer = fragmentElement.querySelector(".presentationContainer--1wqUYG");
-                if (presentationContainer) {
-                    if (!that.onScrollPresentationHandler) {
-                        that.onScrollPresentationHandler = onScrollPresentationHandler;
-                        that.addRemovableEventListener(presentationContainer, "scroll", that.onScrollPresentationHandler.bind(that));
-                    }
                 }
                 var videoList = fragmentElement.querySelector(".videoList--1OC49P");
                 if (videoList) {
