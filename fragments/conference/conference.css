@@ -94,8 +94,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding: initial !important;
 }
 
-#conference.mediaview .default--Z19H5du:focus,
-#conference.mediaview .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
+
+
+#conference.mediaview :not(.presentationContainer--1wqUYG) :not(.screenshareContainer--1GSmqo) .default--Z19H5du:focus,
+#conference.mediaview :not(.presentationContainer--1wqUYG) :not(.screenshareContainer--1GSmqo) .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
     color: var(--btn-default-color) !important;
     background-color: var(--btn-default-bg) !important;
     background-clip: padding-box;
@@ -262,6 +264,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     top: 0 !important;
     bottom: inherit !important;
 }
+
 /* hide logoff menu-item in options menu */
 #conference.mediaview .scrollable--4fyj li.separator--Z1vmd5H {
     display: none;
