@@ -95,8 +95,9 @@
             this.prevWidth = 0;
             this.prevHeight = 0;
 
-            var commandList = [];
+            Colors.loadSVGImageElements(element, "action-image", 16, "#ffffff", null, null, {home:{strokeWidth: 400}});
 
+            var commandList = [];
             this.controller = new ModSession.Controller(element, commandList);
             if (this.controller.eventHandlers) {
                 // general event listener for hardware back button, too!
@@ -104,6 +105,35 @@
             }
             document.body.style.overflowY = "visible";
             Log.ret(Log.l.trace);
+        },
+
+        canUnload: function (complete, error) {
+            var that = this;
+            Log.call(Log.l.trace, pageName + ".");
+            var ret = WinJS.Promise.as().then(function (response) {
+                // reset query string and other event-specific settings!
+                if (Application.query && window.history) {
+                    var state = {};
+                    var title = "";
+                    if (Application.query.eventId) {
+                        delete Application.query.eventId;
+                    }
+                    if (Application.query.sessionToken) {
+                        delete Application.query.sessionToken;
+                    }
+                    if (Application.query.meetingId) {
+                        delete Application.query.meetingId;
+                    }
+                    if (Application.query.UserToken) {
+                        delete Application.query.UserToken;
+                    }
+                    var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
+                    window.history.pushState(state, title, location);
+                }
+                complete(response);
+            });
+            Log.ret(Log.l.trace);
+            return ret;
         },
 
         unload: function () {
