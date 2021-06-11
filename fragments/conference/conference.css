@@ -120,6 +120,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--user-list-text) !important;
 }
 
+/* protect speaking bar */
+#conference.mediaview .bottom--2oxmox {
+    display: block;
+    position: absolute;
+    width: calc(100% - 120px);
+    left: 60px;
+    z-index: 1000;
+}
+
 
 #conference.mediaview .media--Z1xJW08 {
     max-width: calc(100% - 36px);
