@@ -92,7 +92,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--btn-primary-color) !important;
 }
 
-
+/* protect h1 */
+#conference.mediaview .presentationTitle--1LT79g {
+    font-weight: 200 !important;
+    color: var(--color-white) !important;
+    font-size: var(--font-size-base) !important;
+}
 /* protect h2 */
 #conference.mediaview h2 {
     color: inherit !important;
@@ -105,6 +110,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding: 0 var(--sm-padding-x) !important;
     margin: 0 0 var(--lg-padding-x)/2 0 !important;
     color: var(--color-gray) !important;
+}
+#conference.mediaview .userList--Z2q1D0p {
+    color: var(--user-list-text) !important;
 }
 
 
