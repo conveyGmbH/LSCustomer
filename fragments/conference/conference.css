@@ -9,7 +9,7 @@
 }
 
 /* protect button */
-#conference.mediaview button {
+#conference.mediaview button, .portal--27FHYi button {
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
     border-radius: 2px !important;
