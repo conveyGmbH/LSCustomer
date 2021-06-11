@@ -188,8 +188,14 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 /* speaking labels on top area */
 #conference.mediaview .speaking--Z2tUpzD > button {
-    height: 22px !important;
-    padding: 1px 10px !important;
+    /*
+        height: 22px !important;
+        padding: 1px 10px !important;
+    */
+    height: var(--talker-height) !important;
+    border-radius: var(--talker-border-radius) var(--talker-border-radius) !important;
+    font-size: var(--font-size-base) !important;
+    padding: var(--talker-padding-xsm) var(--talker-padding-lg) var(--talker-padding-xsm) var(--talker-padding-lg) !important;
 }
 
 #conference.mediaview .speaking--Z2tUpzD button > i {
