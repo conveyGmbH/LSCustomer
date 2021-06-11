@@ -169,6 +169,14 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--user-list-text) !important;
 }
 
+#conference.mediaview .wrapper--Z20hQYP > div:not(.content--2jo8b8) {
+    border-top: 1px solid var(--color-gray-lightest);
+    border-bottom: 1px solid var(--color-gray-lightest);
+}
+#conference.mediaview .userlistPad--o5KDX {
+    border-right: 1px solid var(--color-gray-lightest);
+}
+
 /* protect speaking bar */
 #conference.mediaview .bottom--2oxmox {
     display: block;
@@ -221,7 +229,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 50px;
     width: calc(100% - 100px);
     position: absolute;
+    border: 1px solid var(--color-gray-lightest);
+    background-color: var(--color-off-white);
 }
+
 #conference.mediaview .video-overlay-is-left .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .video-overlay-is-left .screenshareContainer--1GSmqo:not(:fullscreen) {
     left: 200px;
@@ -235,7 +246,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX) {
     border: 1px solid var(--color-gray-lightest);
 }
-
+#conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .button--Z2dosza {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
 
 /* hide logoff menu-item in options menu */
 #conference.mediaview .scrollable--4fyj li.separator--Z1vmd5H {
