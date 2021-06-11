@@ -14,7 +14,8 @@
     padding: var(--btn-sm-padding) !important;
     border-radius: 2px !important;
 }
-#conference.mediaview .buttonWrapper--x8uow {
+#conference.mediaview .buttonWrapper--x8uow,
+.portal--27FHYi .buttonWrapper--x8uow {
     background: none !important;
     padding: 0 !important;
 }
