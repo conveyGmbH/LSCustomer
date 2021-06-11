@@ -160,6 +160,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     font-size: inherit !important;
     line-height: inherit !important;
 }
+
+#conferenceController .win-type-body {
+    font-size: var(--font-size-base);
+    line-height: 1.33;
+}
+
 #conference.mediaview .smallTitle--2wz4kP {
     font-size: 0.85rem !important;
     text-transform: uppercase !important;
