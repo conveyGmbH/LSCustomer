@@ -169,7 +169,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--user-list-text) !important;
 }
 
-#conference.mediaview .wrapper--Z20hQYP > div:not(.content--2jo8b8) {
+#conference.mediaview .wrapper--Z20hQYP > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) {
     border-top: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
 }
