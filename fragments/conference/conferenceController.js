@@ -717,7 +717,7 @@ var __meteor_runtime_config__;
                             childList: true
                         });
                     }
-                    var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .video-overlay-left, .video-overlay-right");
+                    var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .video-overlay-left, .video-overlay-right, video-overlay-top");
                     if (overlayElement) {
                         var videoList = overlayElement.querySelector(".videoList--1OC49P");
                         if (videoList && videoList.style && overlayElement.style) {
