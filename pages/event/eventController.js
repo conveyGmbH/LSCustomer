@@ -41,6 +41,7 @@
                 registerEmail: null
             }, commandList]);
 
+            var onScrollResizePromise = null;
             var contentArea = pageElement.querySelector(".contentarea");
 
             var that = this;
@@ -232,6 +233,14 @@
                             }
                         }
                     }
+                    if (onScrollResizePromise) {
+                        onScrollResizePromise.cancel();
+                    }
+                    onScrollResizePromise = WinJS.Promise.timeout(20).then(function() {
+                        var resizeEvent = document.createEvent('uievent');
+                        resizeEvent.initEvent('resize', true, true);
+                        window.dispatchEvent(resizeEvent);
+                    });
                     Log.ret(Log.l.u1);
                 },
                 clickLogOffEvent: function (event) {
