@@ -236,6 +236,7 @@
                 },
                 clickLogOffEvent: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
+                    var logOffButton = pageElement.querySelector("#logOffButton");
                     var confirmTitle = getResourceText("event.labelLogOff");
                     confirm(confirmTitle, function (result) {
                         if (result) {
@@ -262,7 +263,7 @@
                         } else {
                             Log.print(Log.l.trace, "clickDelete: user choice CANCEL");
                         }
-                    });
+                    }, logOffButton);
                     Log.ret(Log.l.trace);
                 }
             };
