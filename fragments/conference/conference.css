@@ -248,12 +248,20 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX) {
     border: 1px solid var(--color-gray-lightest);
 }
+/* hide button: hide-presentation  */
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .button--Z2dosza {
+    /*
     background-color: rgba(0, 0, 0, 0.3) !important;
     border-radius: 0 !important;
     box-shadow: none !important;
+    */
+    display: none;
 }
-
+/* set fulldcreen buttonto the top */
+#conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .wrapper--Z17x8k2.dark--Z1Y80Wt.bottom--Z1oNR9L {
+    top: 0 !important;
+    bottom: inherit !important;
+}
 /* hide logoff menu-item in options menu */
 #conference.mediaview .scrollable--4fyj li.separator--Z1vmd5H {
     display: none;
