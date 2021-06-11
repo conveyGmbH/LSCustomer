@@ -76,8 +76,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .audioBtn--1H6rCK:focus span:first-child,
 .portal--27FHYi .audioBtn--1H6rCK:hover span:first-child,
 .portal--27FHYi .audioBtn--1H6rCK:focus span:first-child {
-    border: 5px solid var(--color-primary);
-    background-color: #f1f8ff;
+    border: 5px solid var(--color-primary) !important;
+    background-color: #f1f8ff !important;
 }
 
 /* buttons in top nav area */
