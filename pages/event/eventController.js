@@ -28,6 +28,7 @@
                 showCountdown: false,
                 showConference: false,
                 showRecordedContent: false,
+                showLogOffEventMail: false,
                 registerStatus: "",
                 //showRegisterConfirm: false,
                 recordedLink: null,
@@ -36,7 +37,8 @@
                 dataText: {},
                 dataDoc: getEmptyDefaultValue(Event.medienView.defaultValue),
                 dataDocText: {},
-                link: window.location.href
+                link: window.location.href,
+                registerEmail: null
             }, commandList]);
 
             var contentArea = pageElement.querySelector(".contentarea");
@@ -231,6 +233,37 @@
                         }
                     }
                     Log.ret(Log.l.u1);
+                },
+                clickLogOffEvent: function (event) {
+                    Log.call(Log.l.trace, "Register.Controller.");
+                    var confirmTitle = getResourceText("event.labelLogOff");
+                    confirm(confirmTitle, function (result) {
+                        if (result) {
+                            AppBar.busy = true;
+                            Log.print(Log.l.trace, "clickLogOff: user choice OK");
+                            if (AppData._persistentStates.registerData) {
+                                AppData._persistentStates.registerData.AnredeID = null;
+                                AppData._persistentStates.registerData.Email = null;
+                                AppData._persistentStates.registerData.Firmenname = null;
+                                AppData._persistentStates.registerData.Name = null;
+                                AppData._persistentStates.registerData.Vorname = null;
+                                AppData._persistentStates.registerData.Position = null;
+                                AppData._persistentStates.registerData.privacyPolicyFlag = false;
+                                AppData._persistentStates.registerData.confirmStatusID = 0;
+                                AppData._persistentStates.registerData.userToken = null;
+                                AppData._persistentStates.registerData.resultMessage = "";
+                                AppData._persistentStates.registerData.UserTZ = "";
+                                AppData._persistentStates.registerData.eventId = null;
+                                AppData._persistentStates.registerData.dateBegin = null;
+                                Application.pageframe.savePersistentStates();
+                            }
+                            Application.navigateById("home");
+                            that.binding.showLogOffEventMail = false;
+                        } else {
+                            Log.print(Log.l.trace, "clickDelete: user choice CANCEL");
+                        }
+                    });
+                    Log.ret(Log.l.trace);
                 }
             };
 
@@ -286,6 +319,7 @@
                     }
                     if (result.EMail && result.EMail !== AppData._persistentStates.registerData.Email) {
                         AppData._persistentStates.registerData.Email = result.EMail;
+                        that.binding.registerEmail = result.EMail;
                     }
                     if (result.ConfirmStatusID === 20) {
                         that.binding.recordedLink = result.ConferenceLink;
@@ -571,6 +605,7 @@
                             registerFragment.controller.binding.showResendEditableMail = false;
                         }
                         that.binding.showRegister = false;
+                        that.binding.showLogOffEventMail = true;
                         // Fehlt Bedingung für wann countdown geladen wird
                         // AppData._persistentStates.registerData.urlbb
                         //im prinzip könnte man sessionToken hernehmen 
@@ -595,6 +630,7 @@
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
                             that.binding.showTeaser = true;
+                            that.binding.showLogOffEventMail = true;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
                             registerFragment.controller.binding.showRegisterMail = false;
                             registerFragment.controller.binding.showResendEditableMail = false;
@@ -609,10 +645,22 @@
                         that.binding.showCountdown = false;
                         that.binding.showConference = false;
                         that.binding.showRecordedContent = true;
+                        that.binding.showLogOffEventMail = true;
                         return that.getFragmentByName("recordedContent");
-                    } else {
+                    } /*else if (AppData._persistentStates.registerData.confirmStatusID === 30) {
+                         that.getFragmentByName("teaser").then(function (teaserFragment) {
+                             teaserFragment.controller.binding.showEvDoc = false;
+                             teaserFragment.controller.binding.showOnDoc = false;
+                             teaserFragment.controller.binding.showOffDoc = true;
+                         });
+                          that.binding.showRegister = false;
+                          that.binding.showCountdown = false;
+                          that.binding.showConference = true;
+                          that.binding.showTeaser = false;
+                    }*/ else {
                         that.binding.showRegister = true;
                         that.binding.showTeaser = true;
+                        that.binding.showLogOffEventMail = false;
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
@@ -671,7 +719,7 @@
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 that.binding.showShare = true;
-            }).then(function () {
+            })/*.then(function () {
                 var dateEnd = that.binding.dataEvent.dateEndDatum;
                 var now = new Date().getTime();
                 var remainderTime = dateEnd - now;
@@ -680,7 +728,22 @@
                 } else {
                     that.binding.showICS = false;
                 }
-            });
+                var countDown = setInterval(function () {
+                    var now = new Date().getTime();
+                    var timeleft = dateEnd - now;
+                    if (timeleft < 0) {
+                        clearInterval(countDown);
+                        //AppBar.scope.binding.showConference = true;
+                        //lade fragment mediathek
+                        /*if (typeof AppBar.scope.loadData === "function") {
+                            return AppBar.scope.loadData();
+                        }
+                        AppData._persistentStates.registerData.confirmStatusID = 30;
+                        return that.updateFragment();
+                        //return WinJS.Promise.as();
+                    }
+                }, 1000);
+            })*/;
             Log.ret(Log.l.trace);
         })
     });

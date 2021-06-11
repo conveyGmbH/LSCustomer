@@ -346,6 +346,7 @@
                 },
                 selectOnlyThis: function (event) {
                     //loope über liste
+                    Log.call(Log.l.trace, "Register.Controller.");
                     var fields = fragmentElement.querySelectorAll(".anrede");
                     var element = event.currentTarget || event.target;
                     if (element.checked) {
@@ -357,6 +358,7 @@
                     } else {
                         that.binding.dataRegister.AnredeID = 0;
                     }
+                    Log.ret(Log.l.trace);
                 }
             };
 

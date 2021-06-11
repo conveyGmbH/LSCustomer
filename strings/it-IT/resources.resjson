@@ -12,6 +12,7 @@
 
     "event.title"           : "Evento",
     "event.moderators"      : "Moderatori",
+    "event.labelLogOff"     : "Vuoi disconnetterti?",
 
     "conference.waitMessage": "Divertiti con la tua conferenza online oggi",
 
@@ -25,6 +26,7 @@
     "register.register"     : "Registrati",
     "register.resend"       : "Invia di nuovo email",
     "register.edit"         : "Cambia email",
+    "register.logOffEvent"  : "Disconnettersi",
 	"register.registerFacebook": "Registrati con Facebook",
 	"register.logoutFacebook": "Esci",
 	"register.registerConfirm": "CONFIRMED",

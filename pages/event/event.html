@@ -27,6 +27,22 @@
                                 <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
                             </div>
                         </button>
+                        <div class="logOff-container">
+                            <!--<div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
+                                <span class="large_field"
+                                      data-win-bind="textContent: email; style.fontWeight: email Binding.Converter.toBold"></span><!--registerMessage
+                            </div>-->
+                            <div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
+                                <div id="logOffButton"
+                                     class="win-link"
+                                     data-win-bind="title: registerEmail"
+                                     onclick="AppBar.handleEvent('click', 'clickLogOffEvent', event)">
+                                    <span data-win-res="{textContent: 'register.logOffEvent'}"></span>
+                                </div>
+                                <!--<span class="large_field"
+                                      data-win-bind="textContent: registerEmail"></span>-->
+                            </div>
+                        </div>
                         <div class="content-header">
                             <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
                                 <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>

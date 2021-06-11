@@ -986,6 +986,7 @@ var __meteor_runtime_config__;
                 if (Application.query.pageId) {
                     page = Application.query.pageId;
                 }
+                AppBar.scope.binding.registerEmail = AppData._persistentStates.registerData.Email;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {

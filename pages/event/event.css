@@ -469,3 +469,9 @@
 p {
     white-space: pre-wrap
 }
+
+.event .logOff-container {
+    float: right;
+    height: auto;
+    width: 10%;
+}
