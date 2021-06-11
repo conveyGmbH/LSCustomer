@@ -25,6 +25,9 @@
                 modSessionLink: null
             }, commandList]);
 
+            var onScrollResizePromise = null;
+            var contentArea = pageElement.querySelector(".contentarea");
+
             var that = this;
 
             var setDataEvent = function (newDataEvent) {
@@ -160,6 +163,38 @@
                         window.open(that.binding.modSessionLink);
                     }
                     Log.ret(Log.l.trace);
+                },
+                onScroll: function (event) {
+                    Log.call(Log.l.u1, "Event.Controller.");
+                    var pageControl = pageElement.winControl;
+                    if (pageControl) {
+                        pageControl.prevWidth = 0;
+                        pageControl.prevHeight = 0;
+                        pageControl.updateLayout.call(pageControl, pageElement);
+                    }
+                    if (contentArea) {
+                        var headerHost = document.querySelector("#headerhost");
+                        if (headerHost && headerHost.firstElementChild) {
+                            if (contentArea.scrollTop > 0) {
+                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                    WinJS.Utilities.addClass(headerHost.firstElementChild, "sticky-scrolled");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                    WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
+                                }
+                            }
+                        }
+                    }
+                    if (onScrollResizePromise) {
+                        onScrollResizePromise.cancel();
+                    }
+                    onScrollResizePromise = WinJS.Promise.timeout(20).then(function() {
+                        var resizeEvent = document.createEvent('uievent');
+                        resizeEvent.initEvent('resize', true, true);
+                        window.dispatchEvent(resizeEvent);
+                    });
+                    Log.ret(Log.l.u1);
                 }
             };
 
@@ -205,8 +240,8 @@
                     modToken = Application.query.UserToken;
                 }
                 AppData.setErrorMsg(that.binding);
-                var ret = new WinJS.Promise.as()/*.then(function () {
-                    return AppData.call("PRC_BBBModeratorLink", {
+                var ret = new WinJS.Promise.as().then(function () {
+                    return WinJS.Promise.as();/*AppData.call("PRC_BBBModeratorLink", {
                         pVeranstaltungID: 0,
                         pAlias: null,
                         pUserToken: modToken //aus startlink 
@@ -222,12 +257,17 @@
                         Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
                     }, function (error) {
                         Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
-                    });
-                })*/.then(function () {
+                    });*/
+                }).then(function () {
                     return that.updateFragment();
                 }).then(function () {
                     AppBar.notifyModified = true;
-                    return WinJS.Promise.as();
+                    return WinJS.Promise.timeout(1000);
+                }).then(function () {
+                    Application.navigator._resized();
+                    return WinJS.Promise.timeout(50);
+                }).then(function () {
+                    return that.adjustContainerSize();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -242,6 +282,39 @@
                 return ret;
             }
             this.saveData = saveData;
+
+            if (contentArea) {
+                this.addRemovableEventListener(contentArea, "scroll", this.eventHandlers.onScroll.bind(this));
+            }
+
+            var adjustContainerSize = function() {
+                Log.call(Log.l.trace, "Event.Controller.");
+                var ret = new WinJS.Promise.as().then(function() {
+                    var headerHost = document.querySelector("#headerhost");
+                    if (contentArea && headerHost) {
+                        var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
+                        if (contentArea.style && stickyHeader) {
+                            contentArea.style.paddingTop = stickyHeader.clientHeight.toString() + "px";
+                        }
+                        var firstElementChild = headerHost.firstElementChild;
+                        while (firstElementChild) {
+                            var styles = getComputedStyle(firstElementChild);
+                            if (styles && styles.getPropertyValue("position") === "fixed") {
+                                if (firstElementChild.style) {
+                                    var scrollBarWidth = contentArea.offsetWidth - contentArea.clientWidth;
+                                    var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
+                                    firstElementChild.style.maxWidth = maxWidth;
+                                }
+                                break;
+                            }
+                            firstElementChild = firstElementChild.firstElementChild;
+                        }
+                    }
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            that.adjustContainerSize = adjustContainerSize;
 
             var updateFragment = function () {
                 Log.call(Log.l.trace, "ModSession.Controller.");

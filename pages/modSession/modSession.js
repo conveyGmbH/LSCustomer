@@ -33,24 +33,62 @@
                 }
             }*/
             // insert body-content
-            var contentHeader = element.querySelector(".content-header");
-            if (contentHeader && contentHeader.parentElement) {
-                var bodyContent = Application.navigator.pageElement &&
-                    Application.navigator.pageElement.querySelector(".body-content");
-                if (bodyContent) {
-                    bodyContent.parentElement.removeChild(bodyContent);
+            var sibling,nextSibling;
+            var listHeader = element.querySelector(".hero-header");
+            if (listHeader) {
+                var bodyContentTop = Application.navigator.pageElement &&
+                    Application.navigator.pageElement.querySelector(".body-content-top");
+                if (bodyContentTop) {
+                    bodyContentTop.parentElement.removeChild(bodyContentTop);
                 } else {
-                    bodyContent = document.createElement("DIV");
-                    bodyContent.setAttribute("class", "body-content");
-                    var sibling = document.body.firstElementChild;
-                    while (sibling && sibling.id !== "ls-customer-host") {
-                        var nextSibling = sibling.nextElementSibling;
-                        document.body.removeChild(sibling);
-                        bodyContent.appendChild(sibling);
-                        sibling = nextSibling;
+                    bodyContentTop = document.createElement("DIV");
+                    bodyContentTop.setAttribute("class", "body-content-top");
+                    var savedBodyContentTop = document.querySelector(".saved-body-content-top");
+                    if (savedBodyContentTop) {
+                        sibling = savedBodyContentTop.firstElementChild;
+                        while (sibling) {
+                            nextSibling = sibling.nextElementSibling;
+                            var hasFixedChild;
+                            var firstElementChild = sibling.firstElementChild;
+                            while (firstElementChild) {
+                                var styles = getComputedStyle(firstElementChild);
+                                if (styles && styles.getPropertyValue("position") === "fixed") {
+                                    hasFixedChild = true;
+                                    break;
+                                }
+                                firstElementChild = firstElementChild.firstElementChild;
+                            }
+                            if (!hasFixedChild) {
+                                savedBodyContentTop.removeChild(sibling);
+                                bodyContentTop.appendChild(sibling);
+                            }
+                            sibling = nextSibling;
+                        }
                     }
                 }
-                contentHeader.parentElement.insertBefore(bodyContent, contentHeader);
+                listHeader.insertBefore(bodyContentTop, listHeader.firstElementChild);
+            }
+            var listFooter = element.querySelector(".hero-footer");
+            if (listFooter) {
+                var bodyContentBottom = Application.navigator.pageElement &&
+                    Application.navigator.pageElement.querySelector(".body-content-bottom");
+                if (bodyContentBottom) {
+                    bodyContentBottom.parentElement.removeChild(bodyContentBottom);
+                } else {
+                    bodyContentBottom = document.createElement("DIV");
+                    bodyContentBottom.setAttribute("class", "body-content-bottom");
+                    var savedBodyContentBottom = document.querySelector(".saved-body-content-bottom");
+                    if (savedBodyContentBottom) {
+                        sibling = savedBodyContentBottom.firstElementChild;
+                        while (sibling) {
+                            nextSibling = sibling.nextElementSibling;
+                            savedBodyContentBottom.removeChild(sibling);
+                            bodyContentBottom.appendChild(sibling);
+                            sibling = nextSibling;
+                        }
+                    }
+                }
+                listFooter.appendChild(bodyContentBottom);
             }
 
             this.inResize = 0;
@@ -88,20 +126,54 @@
             // TODO: Respond to changes in viewState.
             if (element && !that.inResize) {
                 that.inResize = 1;
-                ret = WinJS.Promise.timeout(0).then(function () {
+                ret = WinJS.Promise.timeout(0).then(function() {
                     if (that.controller) {
-                        var contentarea = element.querySelector(".contentarea");
-                        var conferencehost = element.querySelector("#conferencehost");
-                        var logo = element.querySelector(".modSession");
-                        if (contentarea) {
-                            var width = contentarea.clientWidth;
-                            var height = contentarea.clientHeight;
-                            if (width !== that.prevWidth) {
-                                that.prevWidth = width;
-                            }
-                            if (height !== that.prevHeight) {
-                                that.prevHeight = height;
-                                conferencehost.style.height = height - 146 + "px";  /*225*/
+                        var contentArea = element.querySelector(".contentarea");
+                        if (contentArea) {
+                            var width = contentArea.clientWidth;
+                            var height = contentArea.clientHeight;
+                            if (width > 0 && width !== that.prevWidth || height > 0 && height !== that.prevHeight) {
+                                function adjustContentHeight(content) {
+                                    if (content && content.style) {
+                                        var offsetTop = Math.max(content.offsetTop - contentArea.scrollTop,0);
+                                        if (content.clientHeight !== height - offsetTop) {
+                                            var headerHeight = 0;
+                                            var headerHost = document.querySelector("#headerhost");
+                                            if (headerHost) {
+                                                var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
+                                                if (stickyHeader) {
+                                                    headerHeight = stickyHeader.clientHeight;
+                                                }
+                                            }
+                                            var contentHeight = Math.max(Math.min(height - headerHeight,height - offsetTop),400);
+                                            content.style.height = contentHeight.toString() + "px";
+                                            var fragmentElement = content.firstElementChild;
+                                            if (fragmentElement) {
+                                                var fragmentControl = fragmentElement.winControl;
+                                                if (fragmentControl) {
+                                                    fragmentControl.updateLayout.call(fragmentControl, fragmentElement);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                var contents = contentArea.querySelectorAll(".recordedContent-fragmenthost, .conference-fragmenthost");
+                                if (contents) for (var i = 0; i < contents.length; i++) {
+                                    adjustContentHeight(contents[i]);
+                                }
+                                var doAdjustContainerSize = false;
+                                if (width > 0 && that.prevWidth !== width) {
+                                    that.prevWidth = width;
+                                    doAdjustContainerSize = true;
+                                }
+                                if (height > 0 && that.prevHeight !== height) {
+                                    that.prevHeight = height;
+                                    doAdjustContainerSize = true;
+                                }
+                                if (doAdjustContainerSize &&
+                                    typeof that.controller.adjustContainerSize === "function") {
+                                    that.controller.adjustContainerSize();
+                                }
                             }
                         }
                     }
