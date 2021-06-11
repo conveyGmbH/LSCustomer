@@ -1,4 +1,4 @@
-﻿// controller for page: home
+﻿// controller for page: event
 /// <reference path="~/www/lib/convey/scripts/logging.js" />
 /// <reference path="~/www/lib/convey/scripts/appSettings.js" />
 /// <reference path="~/www/lib/convey/scripts/dataService.js" />
