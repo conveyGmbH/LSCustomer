@@ -49,15 +49,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .portal--27FHYi .default--Z19H5du {
     border: var(--border-size-large) solid transparent !important;
 }
-#conference.mediaview .audioBtn--1H6rCK span:first-child,
-.portal--27FHYi .audioBtn--1H6rCK span:first-child {
-    color: #1b3c4b !important;
-    background-color: #f1f8ff !important;
-    box-shadow: none !important;
-    border: 5px solid #f1f8ff !important;
-    font-size: 3.5rem !important;
-}
-
 #conference.mediaview .primary--1IbqAO:hover,
 #conference.mediaview .buttonWrapper--x8uow:hover .primary--1IbqAO {
     color: var(--btn-primary-color) !important;
@@ -66,8 +57,20 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .buttonWrapper--x8uow:hover .default--Z19H5du {
     color: var(--btn-default-color) !important;
 }
+
+/* Audio buttons */
+#conference.mediaview .audioBtn--1H6rCK span:first-child,
+.portal--27FHYi .audioBtn--1H6rCK span:first-child {
+    color: #1b3c4b !important;
+    background-color: #f1f8ff !important;
+    box-shadow: none !important;
+    border: 5px solid #f1f8ff !important;
+    font-size: 3.5rem !important;
+}
 #conference.mediaview .audioBtn--1H6rCK:hover span:first-child,
-#conference.mediaview .audioBtn--1H6rCK:focus span:first-child {
+#conference.mediaview .audioBtn--1H6rCK:focus span:first-child,
+.portal--27FHYi .audioBtn--1H6rCK:hover span:first-child,
+.portal--27FHYi .audioBtn--1H6rCK:focus span:first-child {
     border: 5px solid var(--color-primary) !important;
     background-color: #f1f8ff !important;
 }
