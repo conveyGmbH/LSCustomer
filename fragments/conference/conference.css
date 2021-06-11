@@ -9,10 +9,27 @@
 }
 
 /* protect button */
-#conference.mediaview button:not(.buttonWrapper--x8uow):not(.circle--Z2c8umk) {
+#conference.mediaview button) {
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
     border-radius: 2px !important;
+}
+#conference.mediaview .buttonWrapper--x8uow {
+    padding: 0 !important;
+}
+#conference.mediaview .circle--Z2c8umk {
+    --btn-sm-padding-x: calc(var(--sm-padding-x) / 2);
+    --btn-md-padding-x: calc(var(--md-padding-x) / 2);
+    --btn-lg-padding-x: calc(var(--lg-padding-x) / 2);
+    --btn-jumbo-padding-x: calc(var(--jumbo-padding-x) / 2);
+    border-radius: 50% !important;
+}
+#conference.mediaview .jumbo--Z12Rgj4 {
+    font-size: var(--btn-jumbo-font-size) !important;
+    padding: var(--btn-jumbo-padding) !important;
+}
+#conference.mediaview .circle--Z2c8umk.jumbo--Z12Rgj4 {
+    padding: var(--btn-jumbo-padding-x) !important;
 }
 
 /* protect h2 */
