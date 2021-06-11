@@ -8,24 +8,11 @@
     height: calc(100% - 8px);
 }
 
-#conference.mediaview .dropZoneTop--A7khq,
-#conference.mediaview .dropZoneBottom--ZYMK7J {
-    max-height: 40px;
-}
-
-#conference.mediaview .navbar--Z2lHYbG {
-    position: absolute !important;
-    width: calc(100% - 16px);
-}
-#conference.mediaview .center--2pV1iJ {
-    visibility: hidden;
-}
-
+/* bottons in top nav area */
 #conference.mediaview .left--18SBXP, .right--Z4dKWq {
     z-index: 1;
 }
 
-/*#conference.mediaview .ghost--Z136aiN.default--Z19H5du:hover, #conference.mediaview .buttonWrapper--x8uow:hover .ghost--Z136aiN.default--Z19H5du*/
 #conference.mediaview .ghost--Z136aiN {
     background-color: var(--btn-primary-bg) !important;
     box-shadow: 0 2px 5px 0 black !important;
@@ -39,7 +26,7 @@
 
 #conference.mediaview .media--Z1xJW08 {
     max-width: calc(100% - 36px);
-    max-height: calc(100% - 100px);
+    max-height: calc(100% - 20px);
     margin: 10px !important;
 }
 #conference.mediaview .content--Z2gO9GE {
@@ -49,7 +36,30 @@
 #conference.mediaview .actionsbar--Z1ant6U {
     height: 64px !important;
 }
+:not(view-size-medium) #conference.mediaview .actionsbar--Z1ant6U {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 480px);
+    margin: 0 240px;
+}
+/* dragged video drop zone */
+#conference.mediaview .dropZoneTop--A7khq,
+#conference.mediaview .dropZoneBottom--ZYMK7J {
+    max-height: 40px;
+}
 
+#conference.mediaview .navbar--Z2lHYbG {
+    position: absolute !important;
+    width: calc(100% - 16px);
+}
+
+/* hide event title */
+#conference.mediaview .center--2pV1iJ {
+    visibility: hidden;
+}
+
+/* width of presentation container */
 #conference.mediaview .presentationContainer--1wqUYG:not(:fullscreen) {
     left: 50px;
     right: 50px;
@@ -72,6 +82,7 @@
     display: none;
 }
 
+/* speaking labels on top area */
 #conference.mediaview .speaking--Z2tUpzD > button {
     height: 22px !important;
     padding: 1px 10px !important;
@@ -86,6 +97,7 @@
     height: 100% !important;
 }
 
+/* polling flyout */
 #conference.mediaview .pollingContainer--1xRnAH {
     border: 1px solid var(--color-gray-lighter, #a7b3bd);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
@@ -113,7 +125,7 @@
     opacity: 1;
 }
 
-
+/* videoList overlay */
 #conference.mediaview .video-overlay-fullwidth {
     width: calc(100% - 100px) !important;
     min-width: calc(100% - 100px) !important;
@@ -124,16 +136,18 @@
     display: block !important;
     position: absolute !important;
     left: 0;
+    top: 40px;
     width: 192px !important;
-    height: calc(100% - 100px) !important;
+    height: calc(100% - 40px) !important;
 }
 
 #conference.mediaview .video-overlay-right {
     display: block !important;
     position: absolute !important;
     right: 0;
+    top: 40px;
     width: 192px !important;
-    height: calc(100% - 100px) !important;
+    height: calc(100% - 40px) !important;
 }
 
 #conference.mediaview .video-overlay-top {
@@ -144,9 +158,16 @@
     height: 144px !important;
 }
 
+/* vertical video-list */
 #conference.mediaview .video-list-vertical {
     grid-template-columns: 100% !important;
     grid-template-rows: repeat(auto-fill, 144px) !important;
+    width: 192px !important;
+    height: 100% !important;
+}
+#conference.mediaview .video-list-vertical.video-list-double-columns {
+    grid-template-columns: 50% 50% !important;
+    grid-template-rows: repeat(auto-fill, 72px) !important;
     width: 192px !important;
     height: 100% !important;
 }
