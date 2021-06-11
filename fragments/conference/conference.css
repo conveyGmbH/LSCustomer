@@ -96,8 +96,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 
 
-#conference.mediaview :not(.presentationContainer--1wqUYG) :not(.screenshareContainer--1GSmqo) .default--Z19H5du:focus,
-#conference.mediaview :not(.presentationContainer--1wqUYG) :not(.screenshareContainer--1GSmqo) .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
+#conference.mediaview .default--Z19H5du:focus,
+#conference.mediaview .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
     color: var(--btn-default-color) !important;
     background-color: var(--btn-default-bg) !important;
     background-clip: padding-box;
@@ -250,6 +250,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX) {
     border: 1px solid var(--color-gray-lightest);
 }
+
 /* hide button: hide-presentation  */
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .button--Z2dosza {
     /*
@@ -263,6 +264,19 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .wrapper--Z17x8k2.dark--Z1Y80Wt.bottom--Z1oNR9L {
     top: 0 !important;
     bottom: inherit !important;
+}
+
+#conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt:focus .button--Z1ops0C,
+#conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt .button--Z1ops0C:focus,
+#conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt:focus .button--Z1ops0C,
+#conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt .button--Z1ops0C:active {
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+#conference.mediaview .button--Z1ops0C, .button--Z1ops0C:active, .button--Z1ops0C:hover, .button--Z1ops0C:focus {
+    box-shadow: none !important;
 }
 
 /* hide logoff menu-item in options menu */
