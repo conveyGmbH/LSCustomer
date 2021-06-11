@@ -8,7 +8,14 @@
     height: calc(100% - 8px);
 }
 
-/* bottons in top nav area */
+/* buttons basics */
+#conference.mediaview button:not(".buttonWrapper--x8uow"):not("circle--Z2c8umk") {
+    font-size: var(--btn-sm-font-size) !important;
+    padding: var(--btn-sm-padding) !important;
+    border-radius: 2px !important;
+}
+
+/* buttons in top nav area */
 #conference.mediaview .left--18SBXP, .right--Z4dKWq {
     z-index: 1;
 }
@@ -70,8 +77,6 @@
 #conference.mediaview .video-overlay-is-right .presentationContainer--1wqUYG:not(:fullscreen) {
     right: 200px;
 }
-
-
 
 /* hide logoff menu-item in options menu */
 #conference.mediaview .scrollable--4fyj li.separator--Z1vmd5H {
