@@ -9,7 +9,7 @@
 }
 
 /* buttons basics */
-#conference.mediaview button:not(".buttonWrapper--x8uow"):not("circle--Z2c8umk") {
+#conference.mediaview button:not(.buttonWrapper--x8uow):not(.circle--Z2c8umk) {
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
     border-radius: 2px !important;
