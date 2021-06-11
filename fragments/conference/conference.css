@@ -103,6 +103,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .toolbarWrapper--1qMMEo .default--Z19H5du:focus,
 #conference.mediaview .toolbarWrapper--1qMMEo .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
     color: var(--color-gray-lightest) !important;
+    box-shadow: none;
 }
 
 #conference.mediaview .primary--1IbqAO:hover,
