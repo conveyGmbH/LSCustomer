@@ -22,7 +22,12 @@
 
             Application.Controller.apply(this, [pageElement, {
                 showConference: false,
-                modSessionLink: null
+                modSessionLink: null,
+                eventId: AppData.getRecordId("Veranstaltung"),
+                dataEvent: {},
+                dataText: {},
+                dataDoc: getEmptyDefaultValue(Event.medienView.defaultValue),
+                dataDocText: {}
             }, commandList]);
 
             var onScrollResizePromise = null;
