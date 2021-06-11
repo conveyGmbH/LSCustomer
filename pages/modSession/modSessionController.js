@@ -26,7 +26,7 @@
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
-                dataDoc: getEmptyDefaultValue(Event.medienView.defaultValue),
+                dataDoc: getEmptyDefaultValue(ModSession.medienView.defaultValue),
                 dataDocText: {}
             }, commandList]);
 
