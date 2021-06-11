@@ -85,7 +85,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--toolbar-button-bg) !important;
     border-color: var(--toolbar-button-border-color) !important;
 }
-.toolbarListButton--1pCqT3 {
+#conference.mediaview .toolbarListButton--1pCqT3 {
     font-size: var(--toolbar-button-font-size) !important;
     background-color: var(--toolbar-list-bg) !important;
     border: 0 !important;
@@ -93,6 +93,17 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding: initial !important;
 }
 
+#conference.mediaview .default--Z19H5du:focus,
+#conference.mediaview .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
+    color: var(--btn-default-color) !important;
+    background-color: var(--btn-default-bg) !important;
+    background-clip: padding-box;
+    box-shadow: 0 0 0 var(--border-size) var(--btn-primary-border);
+}
+#conference.mediaview .toolbarWrapper--1qMMEo .default--Z19H5du:focus,
+#conference.mediaview .toolbarWrapper--1qMMEo .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
+    color: var(--color-gray-lightest) !important;
+}
 
 #conference.mediaview .primary--1IbqAO:hover,
 #conference.mediaview .buttonWrapper--x8uow:hover .primary--1IbqAO {
