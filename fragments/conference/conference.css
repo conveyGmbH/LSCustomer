@@ -97,7 +97,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-top-left-radius: var(--toolbar-button-border-radius) !important;
     border-top-right-radius: var(--toolbar-button-border-radius) !important;
 }
-
 #conference.mediaview .toolbarButton--Zak4uG {
     padding: 0 !important;
     border: 0 !important;
@@ -106,6 +105,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--toolbar-button-color) !important;
     background-color: var(--toolbar-button-bg) !important;
     border-color: var(--toolbar-button-border-color) !important;
+}
+#conference.mediaview .toolbarListButton--1pCqT3:hover, .toolbarListButton--1pCqT3:focus {
+    background-color: #bbb !important;
+}
+#conference.mediaview .default--Z19H5du:hover, .buttonWrapper--x8uow:hover .default--Z19H5du {
+    color: var(--btn-default-color) !important;
 }
 
 /* protect h1 */
