@@ -8,11 +8,25 @@
     height: calc(100% - 8px);
 }
 
-/* buttons basics */
+/* protect button */
 #conference.mediaview button:not(.buttonWrapper--x8uow):not(.circle--Z2c8umk) {
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
     border-radius: 2px !important;
+}
+
+/* protect h2 */
+#conference.mediaview h2 {
+    color: inherit !important;
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+}
+#conference.mediaview .smallTitle--2wz4kP {
+    font-size: 0.85rem !important;
+    text-transform: uppercase !important;
+    padding: 0 var(--sm-padding-x) !important;
+    margin: 0 0 var(--lg-padding-x)/2 0 !important;
+    color: var(--color-gray) !important;
 }
 
 /* buttons in top nav area */
