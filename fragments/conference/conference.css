@@ -93,6 +93,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* protect h1 */
+#conference.mediaview h1 {
+    color: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
 #conference.mediaview .presentationTitle--1LT79g {
     font-weight: 200 !important;
     color: var(--color-white) !important;
@@ -101,8 +106,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 /* protect h2 */
 #conference.mediaview h2 {
     color: inherit !important;
-    font-size: 2rem !important;
-    line-height: 1.2 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
 }
 #conference.mediaview .smallTitle--2wz4kP {
     font-size: 0.85rem !important;
