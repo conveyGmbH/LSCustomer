@@ -72,6 +72,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .portal--27FHYi .buttonWrapper--x8uow:hover .default--Z19H5du {
     color: var(--btn-default-color) !important;
 }
+#conference.mediaview .audioBtn--1H6rCK:hover span:first-child,
+#conference.mediaview .audioBtn--1H6rCK:focus span:first-child,
+.portal--27FHYi .audioBtn--1H6rCK:hover span:first-child,
+.portal--27FHYi .audioBtn--1H6rCK:focus span:first-child {
+    border: 5px solid var(--color-primary);
+    background-color: #f1f8ff;
+}
 
 /* buttons in top nav area */
 #conference.mediaview .left--18SBXP,
