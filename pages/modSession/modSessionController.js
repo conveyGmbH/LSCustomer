@@ -37,6 +37,8 @@
                 that.binding.dataEvent = newDataEvent;
                 // convert Startdatum 
                 that.binding.dataEvent.dateBegin = getDateObject(newDataEvent.Startdatum);
+                that.binding.dataEvent.dateStartDatum = getDateObject(newDataEvent.LiveStartDatum);
+                that.binding.dataEvent.dateEndDatum = getDateObject(newDataEvent.LiveEndDatum);
                 if (AppData._persistentStates.registerData.dateBegin !== that.binding.dataEvent.dateBegin) {
                     AppData._persistentStates.registerData.dateBegin = that.binding.dataEvent.dateBegin;
                     Application.pageframe.savePersistentStates();
@@ -86,17 +88,14 @@
 
             var setDataDoc = function(results) {
                 Log.call(Log.l.trace, "ModSession.Controller.");
-                var newDataDoc = {};
+                var newDataDoc = getEmptyDefaultValue(ModSession.medienView.defaultValue);
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
-                        var docContent = row.DocContentDOCCNT1
-                            ? row.DocContentDOCCNT1
-                            : row.DocContentDOCCNT1;
-                        if (docContent) {
-                            var sub = docContent.search("\r\n\r\n");
+                        if (row.DocContentDOCCNT1) {
+                            var sub = row.DocContentDOCCNT1.search("\r\n\r\n");
                             if (sub >= 0) {
-                                var data = docContent.substr(sub + 4);
+                                var data = row.DocContentDOCCNT1.substr(sub + 4);
                                 if (data && data !== "null") {
                                     row.DocContentDOCCNT1 = "data:image/jpeg;base64," + data;
                                 } else {
@@ -115,6 +114,35 @@
                 Log.ret(Log.l.trace);
             }
             this.setDataDoc = setDataDoc;
+
+            var setDataDocText = function (results) {
+                Log.call(Log.l.trace, "ModSession.Controller.");
+                var newDataDocText = {};
+                for (var i = 0; i < results.length; i++) {
+                    var row = results[i];
+                    if (row.LabelTitle) {
+                        newDataDocText[row.LabelTitle] = row.Title ? row.Title : "";
+                    }
+                    if (row.LabelDescription) {
+                        newDataDocText[row.LabelDescription] = row.Description ? row.Description : "";
+                    }
+                    if (row.LabelMainTitle) {
+                        newDataDocText[row.LabelMainTitle] = row.MainTitle ? row.MainTitle : "";
+                    }
+                    if (row.LabelSubTitle) {
+                        newDataDocText[row.LabelSubTitle] = row.SubTitle ? row.SubTitle : "";
+                    }
+                    if (row.LabelSummary) {
+                        newDataDocText[row.LabelSummary] = row.Summary ? row.Summary : "";
+                    }
+                    if (row.LabelBody) {
+                        newDataDocText[row.LabelBody] = row.Body ? row.Body : "";
+                    }
+                }
+                that.binding.dataDocText = newDataDocText;
+                Log.ret(Log.l.trace);
+            }
+            this.setDataDocText = setDataDocText;
 
             // define handlers
             this.eventHandlers = {
@@ -165,7 +193,7 @@
                     Log.ret(Log.l.trace);
                 },
                 onScroll: function (event) {
-                    Log.call(Log.l.u1, "Event.Controller.");
+                    Log.call(Log.l.u1, "ModSession.Controller.");
                     var pageControl = pageElement.winControl;
                     if (pageControl) {
                         pageControl.prevWidth = 0;
@@ -241,7 +269,75 @@
                 }
                 AppData.setErrorMsg(that.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    return WinJS.Promise.as();/*AppData.call("PRC_BBBModeratorLink", {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select eventView...");
+                        return ModSession.eventView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "eventView: success!");
+                            if (json && json.d) {
+                                // now always edit!
+                                that.setDataEvent(json.d);
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select textView...");
+                        return ModSession.textView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "labelView: success!");
+                            if (json && json.d) {
+                                // now always edit!
+                                that.setDataText(json.d.results);
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select medienView...");
+                        return ModSession.medienView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "labelView: success!");
+                            if (json && json.d) {
+                                // now always edit!
+                                that.setDataDoc(json.d.results);
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select medienTextView...");
+                        return ModSession.medienTextView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "labelView: success!");
+                            if (json && json.d) {
+                                // now always edit!
+                                that.setDataDocText(json.d.results);
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                /*}).then(function () {
+                    return WinJS.Promise.as();AppData.call("PRC_BBBModeratorLink", {
                         pVeranstaltungID: 0,
                         pAlias: null,
                         pUserToken: modToken //aus startlink 
@@ -288,7 +384,7 @@
             }
 
             var adjustContainerSize = function() {
-                Log.call(Log.l.trace, "Event.Controller.");
+                Log.call(Log.l.trace, "ModSession.Controller.");
                 var ret = new WinJS.Promise.as().then(function() {
                     var headerHost = document.querySelector("#headerhost");
                     if (contentArea && headerHost) {

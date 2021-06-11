@@ -18,12 +18,21 @@
                 return AppData.getFormatView("MandantDokument", 20635);
             }
         },
+        /**
+         * LangMandantDokument_20634
+         */
+        _medienTextView: {
+            get: function () {
+                return AppData.getFormatView("LangMandantDokument", 20634);
+            }
+        },
         textView: {
             select: function (complete, error, eventId) {
                 Log.call(Log.l.trace, "eventView.");
                 var restriction = {
                     VeranstaltungID: eventId,
-                    LanguageSpecID: AppData.getLanguageId()
+                    LanguageSpecID: AppData.getLanguageId(),
+                    NameLanguageID: 1033
                 };
                 var ret = ModSession._textView.select(complete, error, restriction, {
                     ordered: true,
@@ -46,8 +55,30 @@
                 });
                 Log.ret(Log.l.trace);
                 return ret;
+            },
+            defaultValue: {
+                ev_doc_mod1: "",
+                ev_doc_mod2: "",
+                ev_doc_mod3: ""
             }
-        }/*,
+        },
+        medienTextView: {
+            select: function (complete, error, eventId) {
+                Log.call(Log.l.trace, "eventView.");
+                var restriction = {
+                    VeranstaltungID: eventId,
+                    /*DokVerwendungID: 3,*/
+                    LanguageSpecID: AppData.getLanguageId(),
+                    NameLanguageID: 1033
+                };
+                var ret = ModSession._medienTextView.select(complete, error, restriction, {
+                    ordered: true
+                    //orderAttribute: "Sortierung"
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+        },
         _eventView: {
             get: function () {
                 return AppData.getFormatView("Veranstaltung", 20620);
@@ -65,6 +96,6 @@
                 Titel: "",
                 Untertitel: ""
             }
-        }*/
+        }
     });
 })();
