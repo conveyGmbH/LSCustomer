@@ -89,6 +89,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .ghost--Z136aiN.default--Z19H5du:active {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
+    color: var(--btn-primary-color) !important;
 }
 
 
