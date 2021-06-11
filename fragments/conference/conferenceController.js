@@ -692,11 +692,12 @@ var __meteor_runtime_config__;
             }
             that.clickCloseDesc = clickCloseDesc;
 
-            var onScrollPresentationHandler = function(event) {
+            var onWheelPresentationHandler = function(event) {
                 if (event) {
                     event.stopPropagation();
                 }
             }
+            that.onWheelPresentationHandler = null;
 
             var placeVideoList = function() {
                 var ret = null;
@@ -712,9 +713,9 @@ var __meteor_runtime_config__;
                 }
                 var presentationContainer = fragmentElement.querySelector(".presentationContainer--1wqUYG");
                 if (presentationContainer) {
-                    if (!that.onScrollPresentationHandler) {
-                        that.onScrollPresentationHandler = onScrollPresentationHandler;
-                        that.addRemovableEventListener(presentationContainer, "scroll", that.onScrollPresentationHandler.bind(that));
+                    if (!that.onWheelPresentationHandler) {
+                        that.onWheelPresentationHandler = onWheelPresentationHandler;
+                        that.addRemovableEventListener(presentationContainer, "wheel", that.onWheelPresentationHandler.bind(that));
                     }
                 }
                 var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
