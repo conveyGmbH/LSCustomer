@@ -7,7 +7,10 @@
     width: calc(100% - 24px);
     height: calc(100% - 8px);
 }
-
+/* protect input, select, textarea */
+input[type=date], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], select, textarea {
+    padding: inherit !important;
+}
 /* protect button */
 #conference.mediaview button,
 .portal--27FHYi button {
@@ -36,13 +39,16 @@
 #conference.mediaview .circle--Z2c8umk.jumbo--Z12Rgj4 {
     padding: var(--btn-jumbo-padding-x) !important;
 }
-#conference.mediaview .primary--1IbqAO {
+#conference.mediaview .primary--1IbqAO,
+.portal--27FHYi .primary--1IbqAO {
     color: var(--btn-primary-color) !important;
     background-color: var(--btn-primary-bg) !important;
     border: var(--border-size-large) solid transparent !important;
 }
 #conference.mediaview .primary--1IbqAO:hover,
-#conference.mediaview .buttonWrapper--x8uow:hover .primary--1IbqAO {
+#conference.mediaview .buttonWrapper--x8uow:hover .primary--1IbqAO,
+.portal--27FHYi .primary--1IbqAO:hover,
+.portal--27FHYi .buttonWrapper--x8uow:hover .primary--1IbqAO {
     color: var(--btn-primary-color) !important;
 }
 
