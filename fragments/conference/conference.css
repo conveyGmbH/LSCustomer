@@ -229,6 +229,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 50px;
     width: calc(100% - 100px);
     position: absolute;
+}
+#conference.mediaview .screenshareContainer--1GSmqo:not(:fullscreen) {
     border: 1px solid var(--color-gray-lightest);
     background-color: var(--color-off-white);
 }
