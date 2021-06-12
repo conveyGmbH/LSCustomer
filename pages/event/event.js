@@ -59,6 +59,8 @@
             var ret = WinJS.Promise.as().then(function (response) {
                 // reset query string and other event-specific settings!
                 if (Application.query && window.history) {
+                    Application.hookXhrOnReadyStateChange = null;
+                    Application.hookXhrSend = null;
                     var state = {};
                     var title = "";
                     if (Application.query.eventId) {

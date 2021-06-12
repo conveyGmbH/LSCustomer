@@ -1205,6 +1205,76 @@ var __meteor_runtime_config__;
             }
             this.loadData = loadData;
 
+            var groupChatStart = "a[\"{\\\"msg\\\":\\\"added\\\",\\\"collection\\\":\\\"group-chat-msg\\\"";
+            var messageStart = "\\\"message\\\":\\\"";
+            var magicStart = "&lt;!--";
+            var magicStop = "--&gt;";
+            Application.hookXhrOnReadyStateChange = function(res) {
+                var ret = "";
+                var responseText = res && res.responseText;
+                if (responseText && responseText.substr(0, groupChatStart.length) === groupChatStart) {
+                    var posMessageStart = responseText.indexOf(messageStart);
+                    if (posMessageStart > 0) {
+                        var messageLength = responseText.substr(posMessageStart + messageStart.length).indexOf("\\\"");
+                        if (messageLength > 0) {
+                            var message = responseText.substr(posMessageStart + messageStart.length, messageLength);
+                            var posMagicStart = message.indexOf(magicStart);
+                            if (posMagicStart >= 0) {
+                                var posMagicStop = message.indexOf(magicStop);
+                                if (posMagicStop > posMagicStart+magicStart.length) {
+                                    ret = message.substr(posMagicStart+magicStart.length, posMagicStop - (posMagicStart+magicStart.length));
+                                    if (message.length > magicStart.length + ret.length + magicStop.length) {
+                                        res.responseText = responseText.substr(0, posMessageStart + messageStart.length + posMagicStart) + responseText.substr(posMessageStart + messageStart.length + posMagicStop + magicStop.length);
+                                    } else {
+                                        res.responseText = "";
+                                    }
+                                } else {
+                                    res.responseText = responseText;
+                                }
+                            } else {
+                                res.responseText = responseText;
+                            }
+                        } else {
+                            res.responseText = responseText;
+                        }
+                    } else {
+                        res.responseText = responseText;
+                    }
+                }
+                if (ret) {
+                    Log.print(Log.l.info, "<!--" + ret + "-->");
+                }
+                return ret;
+            };
+            var sendGroupChatStart = "[\"{\\\"msg\\\":\\\"method\\\",\\\"method\\\":\\\"sendGroupChatMsg\\\"";
+            var magicStartReplace = "&lt;!&#8211;&#8211;";
+            var magicStopReplace = "&#8211;&#8211;&gt;";
+            Application.hookXhrSend = function(body) {
+                var ret = body;
+                if (body && body.substr(0, sendGroupChatStart.length) === sendGroupChatStart) {
+                    var posMessageStart = body.indexOf(messageStart);
+                    if (posMessageStart > 0) {
+                        var messageLength = body.substr(posMessageStart + messageStart.length).indexOf("\\\"");
+                        if (messageLength > 0) {
+                            var message = body.substr(posMessageStart + messageStart.length, messageLength);
+                            var posMagicStart = message.indexOf(magicStart);
+                            if (posMagicStart >= 0) {
+                                var posMagicStop = message.indexOf(magicStop);
+                                if (posMagicStop > posMagicStart+magicStart.length) {
+                                    var magicMessage = message.substr(posMagicStart+magicStart.length, posMagicStop - (posMagicStart+magicStart.length));
+                                    if (message.length > magicStart.length + magicStop.length) {
+                                        ret = body.substr(0, posMessageStart + messageStart.length) + magicStartReplace + magicMessage + magicStopReplace + 
+                                            body.substr(posMessageStart + messageStart.length + posMagicStop + magicStop.length);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return ret;
+            }
+
+
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 return that.loadData();
