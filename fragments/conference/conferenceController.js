@@ -730,7 +730,8 @@ var __meteor_runtime_config__;
                             fullScreenButton.setAttribute("class", "button--Z2dosza sm--Q7ujg default--Z19H5du button--Z1ops0C fullScreenButton--Z1bf0vj");
                             fullScreenButton.onclick = function(event) {
                                 if (videoPlayer && document.fullscreenEnabled) {
-                                    if (WinJS.Utilites.hasClass(videoPlayer, ":fulscreen")) {
+                                    // detect fullscreen state
+                                    if (videoPlayer.parentElement.querySelector(':fullscreen') === videoPlayer) {
                                         videoPlayer.exitFullscreen();
                                     } else {
                                         videoPlayer.requestFullscreen();
