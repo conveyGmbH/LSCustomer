@@ -195,8 +195,8 @@
     visibility: hidden;
 }
 .body-content-bottom section {
+    margin-left: var(--max-content-margin-left) !important;
     width: var(--max-content-width) !important;
-    left: var(--max-content-margin-left) !important;
     position: absolute !important;
     padding: 0 15px !important;
 }
