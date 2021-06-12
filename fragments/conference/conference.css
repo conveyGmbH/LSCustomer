@@ -304,7 +304,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .videoPlayer--1MGUuy .wrapper--Z17x8k2.dark--Z1Y80Wt {
     left: 0 !important;
     top: 0 !important;
-    right: inherit !important;
+    right: auto !important;
 }
 
 #conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt:focus .button--Z1ops0C,
