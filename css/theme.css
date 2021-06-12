@@ -199,6 +199,10 @@
     left: 0 !important;
     position: absolute !important;
 }
+.body-content-bottom section > div {
+    margin: 0 !important;
+    width: 100% !important;
+}
 .view-size-biggest .body-content-bottom section {
     width: 100% !important;
 }
