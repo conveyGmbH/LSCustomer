@@ -728,6 +728,15 @@ var __meteor_runtime_config__;
                         if (!fullScreenButton) {
                             fullScreenButton = document.createElement("button");
                             fullScreenButton.setAttribute("class", "button--Z2dosza sm--Q7ujg default--Z19H5du button--Z1ops0C fullScreenButton--Z1bf0vj");
+                            fullScreenButton.onclick = function(event) {
+                                if (videoPlayer && document.fullscreenEnabled) {
+                                    if (WinJS.Utilites.hasClass(videoPlayer, ":fulscreen")) {
+                                        videoPlayer.exitFullscreen();
+                                    } else {
+                                        videoPlayer.requestFullscreen();
+                                    }
+                                }
+                            }
                             var fullScreenButtonIcon = document.createElement("i");
                             fullScreenButtonIcon.setAttribute("class", "icon--2q1XXw icon-bbb-fullscreen");
                             fullScreenButtonIcon.content = "before";
