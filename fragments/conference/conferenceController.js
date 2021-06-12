@@ -34,7 +34,8 @@ var __meteor_runtime_config__;
                 inactivityDelay: 7000,
                 activeVideoCount: 0,
                 mediaContainerObserver: null,
-                videoListObserver: null
+                videoListObserver: null,
+                contentObserver: null
             };
             var userListDefaults = {
                 show: true,
@@ -742,8 +743,6 @@ var __meteor_runtime_config__;
                                         document.exitFullscreen();
                                     } else {
                                         videoPlayer.requestFullscreen();
-                                        if (WinJS.Utilities)
-                                        "icon-bbb-exit_fullscreen"
                                     }
                                 }
                             }
@@ -823,6 +822,18 @@ var __meteor_runtime_config__;
                             childList: true
                         });
                     }
+                    var content = mediaContainer.querySelector(".content--Z2gO9GE");
+                    if (!videoListDefaults.contentObserver) {
+                        videoListDefaults.contentObserver = new MutationObserver(function(mutationList, observer) {
+                            Log.print(Log.l.trace, "content childList changed!");
+                            WinJS.Promise.timeout(50).then(function() {
+                                that.adjustContentPositions();
+                            });
+                        });
+                        videoListDefaults.contentObserver.observe(content, {
+                            childList: true
+                        });
+                    }
                     var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .video-overlay-left, .video-overlay-right, .video-overlay-top");
                     if (overlayElement) {
                         var videoList = overlayElement.querySelector(".videoList--1OC49P");
@@ -843,7 +854,6 @@ var __meteor_runtime_config__;
                             if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
                                 WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
                             }
-                            var content = mediaContainer.querySelector(".content--Z2gO9GE");
                             if (!content ||
                                 direction === videoListDefaults.default ||
                                 WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
