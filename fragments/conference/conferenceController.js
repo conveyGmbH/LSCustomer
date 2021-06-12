@@ -717,13 +717,14 @@ var __meteor_runtime_config__;
                 var videoPlayer = fragmentElement.querySelector(".videoPlayer--1MGUuy");
                 if (videoPlayer && videoPlayer.firstElementChild) {
                     var videoElement = videoPlayer.firstElementChild;
+                    var fullScreenButton = null;
                     if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
                         // hide controls on event page!
                         if (videoElement.controls) {
                             videoElement.controls = false;
                         }
                         // add fullscreen button on event page!
-                        var fullScreenButton = videoPlayer.querySelector(".fullScreenButton--Z1bf0vj");
+                        fullScreenButton = videoPlayer.querySelector(".fullScreenButton--Z1bf0vj");
                         if (!fullScreenButton) {
                             fullScreenButton = document.createElement("button");
                             fullScreenButton.setAttribute("class", "button--Z2dosza sm--Q7ujg default--Z19H5du button--Z1ops0C fullScreenButton--Z1bf0vj");
@@ -743,20 +744,30 @@ var __meteor_runtime_config__;
                     }
                     if (videoElement.videoWidth && videoElement.videoHeight) {
                         var aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
-                        var newWidth, newHeight = videoPlayer.clientWidth / aspectRatio;
+                        var newLeft, newTop, newWidth, newHeight = videoPlayer.clientWidth / aspectRatio;
                         if (newHeight > videoPlayer.clientHeight) {
                             newHeight = videoPlayer.clientHeight;
                             newWidth = newHeight * aspectRatio;
-                            videoElement.style.marginLeft = ((videoPlayer.clientWidth - newWidth) / 2).toString() + "px";
-                            videoElement.style.marginTop = "0";
+                            newLeft = ((videoPlayer.clientWidth - newWidth) / 2);
+                            newTop = 0;
+                            videoElement.style.marginLeft = newLeft.toString() + "px";
+                            videoElement.style.marginTop = newTop.toString() + "px";;
                         } else {
                             newWidth = videoPlayer.clientWidth;
                             newHeight = newWidth / aspectRatio;
-                            videoElement.style.marginLeft = "0";
-                            videoElement.style.marginTop = ((videoPlayer.clientHeight - newHeight) / 2).toString() + "px";
+                            newLeft = 0;
+                            newTop = ((videoPlayer.clientHeight - newHeight) / 2);
                         }
+                        videoElement.style.marginLeft = newLeft.toString() + "px";
+                        videoElement.style.marginTop = newTop.toString() + "px";;
                         videoElement.style.width = newWidth.toString() + "px";
                         videoElement.style.height = newHeight.toString() + "px";
+                        if (fullScreenButton &&
+                            fullScreenButton.parentElement &&
+                            fullScreenButton.parentElement.style) {
+                            fullScreenButton.parentElement.style.left = (newLeft + newWidth - fullScreenButton.parentElement.clientWidth).toString() + "px !important";
+                            fullScreenButton.parentElement.style.top = newTop.toString() + "px !important";
+                        }
                     }
                 }
                 var svgContainer = fragmentElement.querySelector(".svgContainer--Z1z3wO0");
