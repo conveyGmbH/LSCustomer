@@ -771,9 +771,6 @@ var __meteor_runtime_config__;
                             fullScreenButtonWrapper.setAttribute("class", "wrapper--Z17x8k2 dark--Z1Y80Wt top--1p9eDv");
                             fullScreenButtonWrapper.appendChild(fullScreenButton);
                             videoPlayer.appendChild(fullScreenButtonWrapper);
-                            WinJS.Promise.timeout(250).then(function() {
-                                that.adjustContentPositions();
-                            });
                         }
                     }
                     if (videoElement.videoWidth && videoElement.videoHeight) {
@@ -803,6 +800,10 @@ var __meteor_runtime_config__;
                             fullScreenButton.parentElement.style.marginLeft = fullScreenButtonLeft.toString() + "px";
                             fullScreenButton.parentElement.style.marginTop = newTop.toString() + "px";
                         }
+                    } else if (!that.adjustContentPositionsPromise) {
+                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
+                            that.adjustContentPositions();
+                        });
                     }
                 }
                 var svgContainer = fragmentElement.querySelector(".svgContainer--Z1z3wO0");
@@ -817,9 +818,11 @@ var __meteor_runtime_config__;
                     if (!videoListDefaults.mediaContainerObserver) {
                         videoListDefaults.mediaContainerObserver = new MutationObserver(function(mutationList, observer) {
                             Log.print(Log.l.trace, "mediaContainer childList changed!");
-                            WinJS.Promise.timeout(50).then(function() {
-                                that.adjustContentPositions();
-                            });
+                            if (!that.adjustContentPositionsPromise) {
+                                that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                    that.adjustContentPositions();
+                                });
+                            }
                         });
                         videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
                             childList: true
@@ -829,9 +832,11 @@ var __meteor_runtime_config__;
                     if (!videoListDefaults.contentObserver) {
                         videoListDefaults.contentObserver = new MutationObserver(function(mutationList, observer) {
                             Log.print(Log.l.trace, "content childList changed!");
-                            WinJS.Promise.timeout(50).then(function() {
-                                that.adjustContentPositions();
-                            });
+                            if (!that.adjustContentPositionsPromise) {
+                                that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                    that.adjustContentPositions();
+                                });
+                            }
                         });
                         videoListDefaults.contentObserver.observe(content, {
                             childList: true
@@ -844,9 +849,11 @@ var __meteor_runtime_config__;
                             if (!videoListDefaults.videoListObserver) {
                                 videoListDefaults.videoListObserver = new MutationObserver(function(mutationList, observer) {
                                     Log.print(Log.l.trace, "videoList childList changed!");
-                                    WinJS.Promise.timeout(50).then(function() {
-                                        that.adjustContentPositions();
-                                    });
+                                    if (!that.adjustContentPositionsPromise) {
+                                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                            that.adjustContentPositions();
+                                        });
+                                    }
                                 });
                                 videoListDefaults.videoListObserver.observe(videoList, {
                                     childList: true
@@ -986,9 +993,11 @@ var __meteor_runtime_config__;
                                 videoListDefaults.videoListObserver = null;
                             }
                             Log.print(Log.l.trace, "videoList not yet created - try later again!");
-                            that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
-                                that.adjustContentPositions();
-                            });
+                            if (!that.adjustContentPositionsPromise) {
+                                that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                    that.adjustContentPositions();
+                                });
+                            }
                         }
                     } else {
                         if (videoListDefaults.videoListObserver) {
@@ -1008,9 +1017,11 @@ var __meteor_runtime_config__;
                         videoListDefaults.mediaContainerObserver = null;
                     }
                     Log.print(Log.l.trace, "mediaContainer not yet created - try later again!");
-                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
-                        that.adjustContentPositions();
-                    });
+                    if (!that.adjustContentPositionsPromise) {
+                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                            that.adjustContentPositions();
+                        });
+                    }
                 }
                 Log.ret(Log.l.trace);
                 return ret;
