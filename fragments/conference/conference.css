@@ -338,6 +338,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     height: var(--talker-height) !important;
     border-radius: var(--talker-border-radius) var(--talker-border-radius) !important;
     font-size: var(--font-size-base) !important;
+    font-weight: var(--talker-font-weight);
     padding: var(--talker-padding-xsm) var(--talker-padding-lg) var(--talker-padding-xsm) var(--talker-padding-lg) !important;
 }
 
