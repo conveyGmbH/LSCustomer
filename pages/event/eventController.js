@@ -304,6 +304,12 @@
                     }
                 }).then(function () {
                     if (!fragmentController) {
+                        var pageControl = pageElement.winControl;
+                        if (pageControl) {
+                            pageControl.prevWidth = 0;
+                            pageControl.prevHeight = 0;
+                            pageControl.updateLayout.call(pageControl, pageElement);
+                        }
                         fragmentController = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath(fragmentName));
                     }
                     return fragmentController;

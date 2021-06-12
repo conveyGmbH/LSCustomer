@@ -339,7 +339,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     margin-top: 2px !important;
 }
 
-#conference.mediaview .overlay--Arkp5 {
+.overlay--Arkp5 {
     width: 100% !important;
     height: 100% !important;
 }

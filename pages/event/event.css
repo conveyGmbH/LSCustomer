@@ -236,7 +236,7 @@
 .event .recordedContent-fragmenthost,
 .event .conference-fragmenthost {
     width: auto;
-    height: auto;
+    height: 400px;
     margin: 0;
     background-color: rgba(128,128,128,0.1);
 }
