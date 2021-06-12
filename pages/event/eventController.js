@@ -530,6 +530,10 @@
                     AppData.setErrorMsg(that.binding, errorResponse);
                     error({});
                     Log.print(Log.l.error, "PRC_RegisterContact error! ");
+                }).then(function () {
+                    if (contentArea && contentArea.scrollTop > 0) {
+                        contentArea.scrollTop = 0;
+                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
