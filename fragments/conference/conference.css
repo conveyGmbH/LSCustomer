@@ -247,7 +247,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 50px;
     width: calc(100% - 100px) !important;
     position: absolute;
-    height: auto !important;
+    height: 100% !important;
 }
 
 #conference.mediaview .presentationContainer--1wqUYG:not(:fullscreen),

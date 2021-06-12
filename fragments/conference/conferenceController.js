@@ -711,9 +711,37 @@ var __meteor_runtime_config__;
                     that.placeVideoListPromise.cancel();
                     that.placeVideoListPromise = null;
                 }
-                var videoPlayer = fragmentElement.querySelector(".event .videoPlayer--1MGUuy");
-                if (videoPlayer && videoPlayer.firstElementChild && videoPlayer.firstElementChild.controls) {
-                    videoPlayer.firstElementChild.controls = false;
+                var videoPlayer = fragmentElement.querySelector(".videoPlayer--1MGUuy");
+                if (videoPlayer && videoPlayer.firstElementChild) {
+                    var videoElement = videoPlayer.firstElementChild;
+                    if (AppBar.scope.element && AppBar.scope.element.id === "eventController" && 
+                        videoElement.controls) {
+                        videoElement.controls = false;
+                    }
+                    if (videoPlayer && videoPlayer.firstElementChild) {
+                        var videoElement = videoPlayer.firstElementChild;
+                        if (AppBar.scope.element && AppBar.scope.element.id === "eventController" && 
+                            videoElement.controls) {
+                            videoElement.controls = false;
+                        }
+                        if (videoElement.videoWidth && videoElement.videoHeight) {
+                            var aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
+                            var newWidth, newHeight = videoPlayer.clientWidth / aspectRatio;
+                            if (newHeight > videoPlayer.clientHeight) {
+                                newHeight = videoPlayer.clientHeight;
+                                newWidth = newHeight * aspectRatio;
+                                videoElement.style.marginLeft = ((videoPlayer.clientWidth - newWidth) / 2).toString() + "px";
+                                videoElement.style.marginTop = "0";
+                            } else {
+                                newWidth = videoPlayer.clientWidth;
+                                newHeight = newWidth / aspectRatio;
+                                videoElement.style.marginLeft = "0";
+                                videoElement.style.marginTop = ((videoPlayer.clientHeight - newHeight) / 2).toString() + "px";
+                            }
+                            videoElement.style.width = newWidth.toString() + "px";
+                            videoElement.style.height = newHeight.toString() + "px";
+                        }
+                    }
                 }
                 var svgContainer = fragmentElement.querySelector(".svgContainer--Z1z3wO0");
                 if (svgContainer && svgContainer.firstElementChild) {
