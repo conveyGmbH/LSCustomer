@@ -765,8 +765,9 @@ var __meteor_runtime_config__;
                         if (fullScreenButton &&
                             fullScreenButton.parentElement &&
                             fullScreenButton.parentElement.style) {
-                            fullScreenButton.parentElement.style.marginLeft = (newLeft + newWidth - fullScreenButton.parentElement.clientWidth).toString() + "px !important";
-                            fullScreenButton.parentElement.style.marginTop = newTop.toString() + "px !important";
+                            var fullScreenButtonLeft = newLeft + newWidth - fullScreenButton.parentElement.clientWidth;
+                            fullScreenButton.parentElement.style.marginLeft = fullScreenButtonLeft.toString() + "px";
+                            fullScreenButton.parentElement.style.marginTop = newTop.toString() + "px";
                         }
                     }
                 }
