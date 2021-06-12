@@ -296,10 +296,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     display: none;
 }
 /* set fulldcreen buttonto the top */
-    #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn):not(.videoPlayer--1MGUuy) > .wrapper--Z17x8k2.dark--Z1Y80Wt.bottom--Z1oNR9L {
-        top: 0 !important;
-        bottom: inherit !important;
-    }
+#conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .wrapper--Z17x8k2.dark--Z1Y80Wt.bottom--Z1oNR9L {
+    top: 0 !important;
+    bottom: inherit !important;
+}
+
+#conference.mediaview .videoPlayer--1MGUuy .wrapper--Z17x8k2.dark--Z1Y80Wt {
+    left: 0 !important;
+    top: 0 !important;
+}
 
 #conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt:focus .button--Z1ops0C,
 #conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt .button--Z1ops0C:focus,
