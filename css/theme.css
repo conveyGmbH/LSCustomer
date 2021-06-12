@@ -194,7 +194,7 @@
 .body-content-bottom {
     visibility: hidden;
 }
-.body-content-bottom section {
+.body-content-bottom section:not(.elementor-inner-section) {
     margin-left: 0 !important;
     margin-right: 0 !important;
     left: var(--max-content-margin-left) !important;
