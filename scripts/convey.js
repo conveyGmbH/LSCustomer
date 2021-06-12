@@ -89,26 +89,13 @@
             }
             return data;
         }
-        function createRootElement() {
+        function saveBodyContent() {
             var customerElement = document.querySelector("#"+rootElementId);
             if (customerElement && customerElement.parentElement) {
                 var customerRootElement = customerElement;
                 while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
                     customerRootElement = customerRootElement.parentElement;
                 }
-                var data = getDataset(customerElement);
-                if (data) {
-                    AppData.customer = data.customer;
-                    AppData.customerId = data.customerid;
-                    if (data.language) {
-                        Application.language = data.language;
-                    }
-                    if (data.theme) {
-                        Application.theme = data.theme;
-                    }
-                    Log.print(Log.l.info, "customer=" + AppData.customer + "customerId=" + AppData.customerId + " language=" + Application.language);
-                }
-
                 // save customer page content
                 var bodyContentTop = document.createElement("DIV");
                 bodyContentTop.setAttribute("class", "saved-body-content-top");
@@ -137,6 +124,27 @@
                 document.body.insertBefore(bodyContentTop, customerRootElement);
                 document.body.insertBefore(bodyContentBottom, customerRootElement.nextElementSibling);
                 bodyContentTop.appendChild(customerRootElement);
+            }
+        }
+        function createRootElement() {
+            var customerElement = document.querySelector("#"+rootElementId);
+            if (customerElement && customerElement.parentElement) {
+                var customerRootElement = customerElement;
+                while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
+                    customerRootElement = customerRootElement.parentElement;
+                }
+                var data = getDataset(customerElement);
+                if (data) {
+                    AppData.customer = data.customer;
+                    AppData.customerId = data.customerid;
+                    if (data.language) {
+                        Application.language = data.language;
+                    }
+                    if (data.theme) {
+                        Application.theme = data.theme;
+                    }
+                    Log.print(Log.l.info, "customer=" + AppData.customer + "customerId=" + AppData.customerId + " language=" + Application.language);
+                }
 
                 // Page-Navigationbar Templates
                 var barHorizontalTemplate = document.createElement("DIV");
@@ -298,6 +306,7 @@
             }, 20);
         }
 
+        saveBodyContent();
         // WinJS references 
         include("lib/WinJS/scripts/base.min.js").then(function() {
             return include("lib/WinJS/scripts/ui.js");
