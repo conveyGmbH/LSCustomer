@@ -9,6 +9,7 @@
     "tooltip.home"          : "Back to the overview page",
 
     "events.title"          : "Serie",
+    "tooltip.fullscreen"    : "Show fullscreen",
 
     "event.title"           : "Veranstaltung",
     "event.moderators"      : "Moderators",
