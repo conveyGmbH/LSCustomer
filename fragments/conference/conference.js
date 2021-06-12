@@ -62,7 +62,7 @@
                                 doResizeContent = true;
                             }
                             if (doResizeContent && that.controller) {
-                                that.controller.placeVideoList();
+                                that.controller.adjustContentPositions();
                             }
                         }
                     }
