@@ -711,6 +711,10 @@ var __meteor_runtime_config__;
                     that.placeVideoListPromise.cancel();
                     that.placeVideoListPromise = null;
                 }
+                var videoPlayer = fragmentElement.querySelector(".event .videoPlayer--1MGUuy");
+                if (videoPlayer && videoPlayer.firstElementChild && videoPlayer.firstElementChild.controls) {
+                    videoPlayer.firstElementChild.controls = false;
+                }
                 var svgContainer = fragmentElement.querySelector(".svgContainer--Z1z3wO0");
                 if (svgContainer && svgContainer.firstElementChild) {
                     if (!that.onWheelSvg) {
