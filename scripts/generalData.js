@@ -82,7 +82,7 @@
                 Log.ret(Log.l.error, "parent element not specified!");
                 return;
             }
-            var bodyContentBottom = element.querySelector("body-content-bottom");
+            var bodyContentBottom = element.querySelector(".body-content-bottom");
             if (bodyContentBottom && bodyContentBottom.style) {
                 bodyContentBottom.style.visibility = show ? "visible" : "hidden";
             }
