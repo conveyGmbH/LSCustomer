@@ -436,6 +436,7 @@
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
             }).then(function () {
+                Application.showBodyContentBottom(pageElement, true);
                 Log.print(Log.l.trace, "Data loaded");
             });
             Log.ret(Log.l.trace);

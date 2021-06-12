@@ -738,6 +738,7 @@
                 AppData.setSeoText(AppData._persistentStates.registerData.confirmStatusID, that.binding.dataText);
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
+                Application.showBodyContentBottom(pageElement, true);
                 that.binding.showShare = true;
             })/*.then(function () {
                 var dateEnd = that.binding.dataEvent.dateEndDatum;

@@ -10,6 +10,86 @@
 (function () {
     "use strict";
 
+    WinJS.Namespace.define("Application", {
+        insertBodyContent: function(element, headerClassName, footerClassName) {
+            Log.call(Log.l.trace, "AppData.", "headerClassName=" + headerClassName + " footerClassName=" + footerClassName);
+            if (!element) {
+                Log.ret(Log.l.error, "parent element not specified!");
+                return;
+            }
+            var sibling,nextSibling;
+            var listHeader = element.querySelector(headerClassName);
+            if (listHeader) {
+                var bodyContentTop = Application.navigator.pageElement &&
+                    Application.navigator.pageElement.querySelector(".body-content-top");
+                if (bodyContentTop) {
+                    bodyContentTop.parentElement.removeChild(bodyContentTop);
+                } else {
+                    bodyContentTop = document.createElement("DIV");
+                    bodyContentTop.setAttribute("class", "body-content-top");
+                    var savedBodyContentTop = document.querySelector(".saved-body-content-top");
+                    if (savedBodyContentTop) {
+                        sibling = savedBodyContentTop.firstElementChild;
+                        while (sibling) {
+                            nextSibling = sibling.nextElementSibling;
+                            var hasFixedChild = false;
+                            var firstElementChild = sibling.firstElementChild;
+                            while (firstElementChild) {
+                                var styles = getComputedStyle(firstElementChild);
+                                if (styles && styles.getPropertyValue("position") === "fixed") {
+                                    hasFixedChild = true;
+                                    break;
+                                }
+                                firstElementChild = firstElementChild.firstElementChild;
+                            }
+                            if (!hasFixedChild) {
+                                savedBodyContentTop.removeChild(sibling);
+                                bodyContentTop.appendChild(sibling);
+                            }
+                            sibling = nextSibling;
+                        }
+                    }
+                }
+                listHeader.insertBefore(bodyContentTop, listHeader.firstElementChild);
+            }
+            var listFooter = element.querySelector(footerClassName);
+            if (listFooter) {
+                var bodyContentBottom = Application.navigator.pageElement &&
+                    Application.navigator.pageElement.querySelector(".body-content-bottom");
+                if (bodyContentBottom) {
+                    bodyContentBottom.parentElement.removeChild(bodyContentBottom);
+                } else {
+                    bodyContentBottom = document.createElement("DIV");
+                    bodyContentBottom.setAttribute("class", "body-content-bottom");
+                    var savedBodyContentBottom = document.querySelector(".saved-body-content-bottom");
+                    if (savedBodyContentBottom) {
+                        sibling = savedBodyContentBottom.firstElementChild;
+                        while (sibling) {
+                            nextSibling = sibling.nextElementSibling;
+                            savedBodyContentBottom.removeChild(sibling);
+                            bodyContentBottom.appendChild(sibling);
+                            sibling = nextSibling;
+                        }
+                    }
+                }
+                listFooter.appendChild(bodyContentBottom);
+            }
+            Log.ret(Log.l.trace);
+        },
+        showBodyContentBottom: function(element, show) {
+            Log.call(Log.l.trace, "AppData.", "show=" + show);
+            if (!element) {
+                Log.ret(Log.l.error, "parent element not specified!");
+                return;
+            }
+            var bodyContentBottom = element.querySelector("body-content-bottom");
+            if (bodyContentBottom && bodyContentBottom.style) {
+                bodyContentBottom.style.visibility = show ? "visible" : "hidden";
+            }
+            Log.ret(Log.l.trace);
+        }
+    });
+
     WinJS.Namespace.define("AppData", {
         getRecordId: function (relationName) {
             Log.call(Log.l.trace, "AppData.", "relationName=" + relationName);

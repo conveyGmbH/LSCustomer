@@ -32,64 +32,7 @@
                     contentarea.style.backgroundColor = Colors.tileBackgroundColor;
                 }
             }*/
-            // insert body-content
-            var sibling,nextSibling;
-            var listHeader = element.querySelector(".hero-header");
-            if (listHeader) {
-                var bodyContentTop = Application.navigator.pageElement &&
-                    Application.navigator.pageElement.querySelector(".body-content-top");
-                if (bodyContentTop) {
-                    bodyContentTop.parentElement.removeChild(bodyContentTop);
-                } else {
-                    bodyContentTop = document.createElement("DIV");
-                    bodyContentTop.setAttribute("class", "body-content-top");
-                    var savedBodyContentTop = document.querySelector(".saved-body-content-top");
-                    if (savedBodyContentTop) {
-                        sibling = savedBodyContentTop.firstElementChild;
-                        while (sibling) {
-                            nextSibling = sibling.nextElementSibling;
-                            var hasFixedChild;
-                            var firstElementChild = sibling.firstElementChild;
-                            while (firstElementChild) {
-                                var styles = getComputedStyle(firstElementChild);
-                                if (styles && styles.getPropertyValue("position") === "fixed") {
-                                    hasFixedChild = true;
-                                    break;
-                                }
-                                firstElementChild = firstElementChild.firstElementChild;
-                            }
-                            if (!hasFixedChild) {
-                                savedBodyContentTop.removeChild(sibling);
-                                bodyContentTop.appendChild(sibling);
-                            }
-                            sibling = nextSibling;
-                        }
-                    }
-                }
-                listHeader.insertBefore(bodyContentTop, listHeader.firstElementChild);
-            }
-            var listFooter = element.querySelector(".hero-footer");
-            if (listFooter) {
-                var bodyContentBottom = Application.navigator.pageElement &&
-                    Application.navigator.pageElement.querySelector(".body-content-bottom");
-                if (bodyContentBottom) {
-                    bodyContentBottom.parentElement.removeChild(bodyContentBottom);
-                } else {
-                    bodyContentBottom = document.createElement("DIV");
-                    bodyContentBottom.setAttribute("class", "body-content-bottom");
-                    var savedBodyContentBottom = document.querySelector(".saved-body-content-bottom");
-                    if (savedBodyContentBottom) {
-                        sibling = savedBodyContentBottom.firstElementChild;
-                        while (sibling) {
-                            nextSibling = sibling.nextElementSibling;
-                            savedBodyContentBottom.removeChild(sibling);
-                            bodyContentBottom.appendChild(sibling);
-                            sibling = nextSibling;
-                        }
-                    }
-                }
-                listFooter.appendChild(bodyContentBottom);
-            }
+            Application.insertBodyContent(element, ".hero-header", ".hero-footer");
 
             this.inResize = 0;
             this.prevWidth = 0;
