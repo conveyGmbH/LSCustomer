@@ -431,3 +431,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     font-weight: var(--btn-font-weight) !important;
     margin-bottom: var(--line-height-computed) !important;
 }
+
+#conference.mediaview .messageList--hsNac .content--Z2nhld9 {
+    margin-top: -2px;
+}
+
+#conference.mediaview .messageList--hsNac .meta--ZDfdOI {
+    line-height: 1.33 !important;
+}
