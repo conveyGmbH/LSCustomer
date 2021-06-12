@@ -726,10 +726,10 @@ var __meteor_runtime_config__;
                         var fullScreenButton = videoPlayer.querySelector(".fullScreenButton--Z1bf0vj");
                         if (!fullScreenButton) {
                             fullScreenButton = document.createElement("button");
-                            fullScreenButton.setAttribute("class", "wrapper--Z17x8k2 dark--Z1Y80Wt top--1p9eDv");
+                            fullScreenButton.setAttribute("class", "button--Z2dosza sm--Q7ujg default--Z19H5du button--Z1ops0C fullScreenButton--Z1bf0vj");
                             var fullScreenButtonIcon = document.createElement("i");
                             fullScreenButtonIcon.setAttribute("class", "icon--2q1XXw icon-bbb-fullscreen");
-                            fullScreenButtonIcon.innerHTML = "::before";
+                            fullScreenButtonIcon.content = "before";
                             var fullScreenButtonTooltip = document.createElement("span");
                             fullScreenButtonTooltip.setAttribute("class", "label--Z12LMR3 hideLabel--2vEtaU");
                             fullScreenButtonTooltip.textContent = getResourceText("tooltip.fullscreen");
