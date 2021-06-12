@@ -194,6 +194,14 @@
 .body-content-bottom {
     visibility: hidden;
 }
+.body-content-bottom section {
+    width: var(--max-content-width) !important;
+    left: 0 !important;
+    position: absolute !important;
+}
+.view-size-biggest .body-content-bottom section {
+    width: 100% !important;
+}
 .contentarea {
     background-color: var(--e-global-color-d4faeed, #F3FBFC);
 }
