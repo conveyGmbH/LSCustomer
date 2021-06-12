@@ -732,7 +732,7 @@ var __meteor_runtime_config__;
                                 if (videoPlayer && document.fullscreenEnabled) {
                                     // detect fullscreen state
                                     if (videoPlayer.parentElement.querySelector(':fullscreen') === videoPlayer) {
-                                        videoPlayer.exitFullscreen();
+                                        document.exitFullscreen();
                                     } else {
                                         videoPlayer.requestFullscreen();
                                     }
