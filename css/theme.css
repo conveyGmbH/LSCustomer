@@ -220,6 +220,7 @@
 }
 
 section.elementor-inner-section > div {
+    max-width: 100% !important;
     width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
