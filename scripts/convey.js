@@ -112,10 +112,9 @@
                 // save customer page content
                 var bodyContentTop = document.createElement("DIV");
                 bodyContentTop.setAttribute("class", "saved-body-content-top");
-                //bodyContentTop.setAttribute("style", "display: none");
                 var bodyContentBottom = document.createElement("DIV");
                 bodyContentBottom.setAttribute("class", "saved-body-content-bottom");
-                //bodyContentBottom.setAttribute("style", "display: none");
+                bodyContentBottom.setAttribute("style", "visibility: hidden");
                 var nextBodyChild;
                 var curBodyChild = document.body.firstElementChild;
                 while (curBodyChild && curBodyChild !== customerRootElement) {
