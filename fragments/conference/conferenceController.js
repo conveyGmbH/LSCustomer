@@ -58,7 +58,7 @@ var __meteor_runtime_config__;
             var conference = fragmentElement.querySelector("#conference");
 
             this.showUserListPromise = null;
-            this.placeVideoListPromise = null;
+            this.adjustContentPositionsPromise = null;
             this.checkForInactiveVideoPromise = null;
             this.filterModeratorsPromise = null;
             this.observeToggleUserListBtnPromise = null;
@@ -72,9 +72,9 @@ var __meteor_runtime_config__;
                     that.showUserListPromise.cancel();
                     that.showUserListPromise = null;
                 }
-                if (that.placeVideoListPromise) {
-                    that.placeVideoListPromise.cancel();
-                    that.placeVideoListPromise = null;
+                if (that.adjustContentPositionsPromise) {
+                    that.adjustContentPositionsPromise.cancel();
+                    that.adjustContentPositionsPromise = null;
                 }
                 if (that.checkForInactiveVideoPromise) {
                     that.checkForInactiveVideoPromise.cancel();
@@ -560,6 +560,9 @@ var __meteor_runtime_config__;
                         that.filterModerators();
                     });
                 }
+                WinJS.Promise.timeout(50).then(function() {
+                    that.adjustContentPositions();
+                });
                 Log.ret(Log.l.trace);
             }
             that.clickToggleUserList = clickToggleUserList;
@@ -655,7 +658,7 @@ var __meteor_runtime_config__;
                     videoListDefaults.restoreDesc(event);
                 }
                 WinJS.Promise.timeout(50).then(function() {
-                    that.placeVideoList();
+                    that.adjustContentPositions();
                     return WinJS.Promise.timeout(250);
                 }).then(function () {
                     var closeDescButton = fragmentElement.querySelector('button[aria-describedby="closeDesc"]');
@@ -677,7 +680,7 @@ var __meteor_runtime_config__;
                     videoListDefaults.closeDesc(event);
                 }
                 WinJS.Promise.timeout(50).then(function() {
-                    that.placeVideoList();
+                    that.adjustContentPositions();
                     return WinJS.Promise.timeout(250);
                 }).then(function () {
                     var restoreDescButton = fragmentElement.querySelector("button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF");
@@ -699,7 +702,7 @@ var __meteor_runtime_config__;
             }
             that.onWheelSvg = null;
 
-            var placeVideoList = function() {
+            var adjustContentPositions = function() {
                 var ret = null;
                 var direction = videoListDefaults.direction;
                 Log.call(Log.l.trace, "Conference.Controller.", "direction="+direction);
@@ -707,9 +710,9 @@ var __meteor_runtime_config__;
                     Log.ret(Log.l.trace, "extra ignored");
                     return null;
                 }
-                if (that.placeVideoListPromise) {
-                    that.placeVideoListPromise.cancel();
-                    that.placeVideoListPromise = null;
+                if (that.adjustContentPositionsPromise) {
+                    that.adjustContentPositionsPromise.cancel();
+                    that.adjustContentPositionsPromise = null;
                 }
                 var videoPlayer = fragmentElement.querySelector(".videoPlayer--1MGUuy");
                 if (videoPlayer && videoPlayer.firstElementChild) {
@@ -756,7 +759,7 @@ var __meteor_runtime_config__;
                         videoListDefaults.mediaContainerObserver = new MutationObserver(function(mutationList, observer) {
                             Log.print(Log.l.trace, "mediaContainer childList changed!");
                             WinJS.Promise.timeout(50).then(function() {
-                                that.placeVideoList();
+                                that.adjustContentPositions();
                             });
                         });
                         videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
@@ -771,7 +774,7 @@ var __meteor_runtime_config__;
                                 videoListDefaults.videoListObserver = new MutationObserver(function(mutationList, observer) {
                                     Log.print(Log.l.trace, "videoList childList changed!");
                                     WinJS.Promise.timeout(50).then(function() {
-                                        that.placeVideoList();
+                                        that.adjustContentPositions();
                                     });
                                 });
                                 videoListDefaults.videoListObserver.observe(videoList, {
@@ -913,8 +916,8 @@ var __meteor_runtime_config__;
                                 videoListDefaults.videoListObserver = null;
                             }
                             Log.print(Log.l.trace, "videoList not yet created - try later again!");
-                            that.placeVideoListPromise = WinJS.Promise.timeout(50).then(function() {
-                                that.placeVideoList();
+                            that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                that.adjustContentPositions();
                             });
                         }
                     } else {
@@ -935,14 +938,14 @@ var __meteor_runtime_config__;
                         videoListDefaults.mediaContainerObserver = null;
                     }
                     Log.print(Log.l.trace, "mediaContainer not yet created - try later again!");
-                    that.placeVideoListPromise = WinJS.Promise.timeout(50).then(function() {
-                        that.placeVideoList();
+                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                        that.adjustContentPositions();
                     });
                 }
                 Log.ret(Log.l.trace);
                 return ret;
             }
-            this.placeVideoList = placeVideoList;
+            this.adjustContentPositions = adjustContentPositions;
 
             var checkForInactiveVideo = function() {
                 var hideInactive = videoListDefaults.hideInactive;
@@ -1128,7 +1131,7 @@ var __meteor_runtime_config__;
                 Log.print(Log.l.trace, "Data loaded");
                 that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
                 videoListDefaults.direction = videoListDefaults.right;
-                that.placeVideoList();
+                that.adjustContentPositions();
                 videoListDefaults.hideInactive = !!that.binding.dataEvent.HideSilentVideos;
                 that.checkForInactiveVideo();
             });
