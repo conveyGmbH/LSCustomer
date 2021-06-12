@@ -726,6 +726,13 @@ var __meteor_runtime_config__;
                         // add fullscreen button on event page!
                         fullScreenButton = videoPlayer.querySelector(".fullScreenButton--Z1bf0vj");
                         if (!fullScreenButton) {
+                            var fullScreenButtonIcon = document.createElement("i");
+                            fullScreenButtonIcon.setAttribute("class", "icon--2q1XXw icon-bbb-fullscreen");
+                            fullScreenButtonIcon.content = "before";
+                            var fullScreenButtonTooltip = document.createElement("span");
+                            fullScreenButtonTooltip.setAttribute("class", "label--Z12LMR3 hideLabel--2vEtaU");
+                            fullScreenButtonTooltip.textContent = getResourceText("tooltip.fullscreen");
+                            fullScreenButtonIcon.appendChild(fullScreenButtonTooltip);
                             fullScreenButton = document.createElement("button");
                             fullScreenButton.setAttribute("class", "button--Z2dosza sm--Q7ujg default--Z19H5du button--Z1ops0C fullScreenButton--Z1bf0vj");
                             fullScreenButton.onclick = function(event) {
@@ -735,16 +742,31 @@ var __meteor_runtime_config__;
                                         document.exitFullscreen();
                                     } else {
                                         videoPlayer.requestFullscreen();
+                                        if (WinJS.Utilities)
+                                        "icon-bbb-exit_fullscreen"
                                     }
                                 }
                             }
-                            var fullScreenButtonIcon = document.createElement("i");
-                            fullScreenButtonIcon.setAttribute("class", "icon--2q1XXw icon-bbb-fullscreen");
-                            fullScreenButtonIcon.content = "before";
-                            var fullScreenButtonTooltip = document.createElement("span");
-                            fullScreenButtonTooltip.setAttribute("class", "label--Z12LMR3 hideLabel--2vEtaU");
-                            fullScreenButtonTooltip.textContent = getResourceText("tooltip.fullscreen");
-                            fullScreenButtonIcon.appendChild(fullScreenButtonTooltip);
+                            that.addRemovableEventListener(document, "fullscreenchange", function() {
+                                if (videoPlayer && videoPlayer.firstElementChild &&
+                                    fullScreenButtonIcon && fullScreenButtonIcon.firstElementChild) {
+                                    if (document.fullscreenElement === videoPlayer) {
+                                        if (WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-fullscreen")) {
+                                            WinJS.Utilities.removeClass(fullScreenButtonIcon, "icon-bbb-fullscreen");
+                                        }
+                                        if (!WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen")) {
+                                            WinJS.Utilities.addClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen");
+                                        }
+                                    } else {
+                                        if (WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen")) {
+                                            WinJS.Utilities.removeClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen");
+                                        }
+                                        if (!WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-fullscreen")) {
+                                            WinJS.Utilities.addClass(fullScreenButtonIcon, "icon-bbb-fullscreen");
+                                        }
+                                    }
+                                }
+                            });
                             fullScreenButton.appendChild(fullScreenButtonIcon);
                             var fullScreenButtonWrapper = document.createElement("div");
                             fullScreenButtonWrapper.setAttribute("class", "wrapper--Z17x8k2 dark--Z1Y80Wt top--1p9eDv");
