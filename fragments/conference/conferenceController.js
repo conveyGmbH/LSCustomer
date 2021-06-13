@@ -1233,6 +1233,7 @@ var __meteor_runtime_config__;
                             var posMessageStart = curText.indexOf(messageStart);
                             if (posMessageStart > 0) {
                                 var messageReplaced = false;
+                                var skipMessage = false;
                                 var messageLength = curText.substr(posMessageStart + messageStart.length).indexOf(messageStop);
                                 if (messageLength > 0) {
                                     var message = curText.substr(posMessageStart + messageStart.length, messageLength);
@@ -1251,6 +1252,8 @@ var __meteor_runtime_config__;
                                                     }
                                                     newResponseText += curMessage.substr(0, posMagicStart);
                                                     messageReplaced = true;
+                                                } else if (!prevMessageStartPos) {
+                                                    skipMessage = true;
                                                 }
                                                 if (res.readyState === 4 &&
                                                     res.status === 200 &&
@@ -1275,7 +1278,7 @@ var __meteor_runtime_config__;
                                         if (messageReplaced) {
                                             newResponseText += messageStop + curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length,
                                                 posFieldsStop + 1 + posGroupChatStop + 1);
-                                        } else {
+                                        } else if (!skipMessage) {
                                             newResponseText += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
                                         }
                                         prevStartPos += posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1;
@@ -1331,13 +1334,11 @@ var __meteor_runtime_config__;
                                                 var command = "";
                                                 if (posMagicStop > posMagicStart + magicStart.length) {
                                                     command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
-                                                    if (curMessage.length > magicStart.length + command.length + magicStop.length) {
-                                                        if (!prevMessageStartPos) {
-                                                            newBody += curText.substr(0, posMessageStart + messageStart.length);
-                                                        }
-                                                        newBody += curMessage.substr(0, posMagicStart) + magicStartReplace + command + magicStopReplace;
-                                                        messageReplaced = true;
+                                                    if (!prevMessageStartPos) {
+                                                        newBody += curText.substr(0, posMessageStart + messageStart.length);
                                                     }
+                                                    newBody += curMessage.substr(0, posMagicStart) + magicStartReplace + command + magicStopReplace;
+                                                    messageReplaced = true;
                                                 } 
                                                 prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
                                             } else {
