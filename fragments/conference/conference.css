@@ -433,11 +433,19 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     width: calc(calc(100% - 100px) * 0.38) !important;
 }
 
-#conference.mediaview .presenter-mode-full .video-overlay-left,
+#conference.mediaview .presenter-mode-full .video-overlay-left, {
+    width: 384px !important;
+    height: 288px !important;
+    top: calc(100% - 300px);
+    left: 10px;
+    box-shadow: 0 2px 5px 0 black !important;
+}
 #conference.mediaview .presenter-mode-full .video-overlay-right {
     width: 384px !important;
-    height: 300px !important;
-    top: calc(100% - 288px);
+    height: 288px !important;
+    top: calc(100% - 300px);
+    right: 10px;
+    box-shadow: 0 2px 5px 0 black !important;
 }
 
 #conference.mediaview .video-overlay-left button,
