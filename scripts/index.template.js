@@ -18,7 +18,8 @@
     AppData.persistentStatesDefaults = {
         colorSettings: {
             // navigation-color with 100% saturation and brightness
-            accentColor: "#fe3600"
+            //accentColor: "#fe3600"
+            accentColor: "#c2d63e"
         },
         logEnabled: true,
         logLevel: 3,
@@ -96,6 +97,71 @@
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
         Log.call(Log.l.trace, "Application.", "id=" + id + " login=" + AppData._persistentStates.odata.login);
+        if (!XMLHttpRequest.prototype._oriOpen) {
+            XMLHttpRequest.prototype._oriOpen = XMLHttpRequest.prototype.open;
+            XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+                // hook into xhr requests
+                if (this.__lookupSetter__ && this.__lookupGetter__) {
+                    var that = this;
+                    var oriOnreadystatechangeSet = this.__lookupSetter__("onreadystatechange");
+                    var oriOnreadystatechangeGet = this.__lookupGetter__("onreadystatechange");
+                    if (oriOnreadystatechangeSet && oriOnreadystatechangeGet) {
+                        Object.defineProperty(this, "_onreadystatechange", {
+                            set: oriOnreadystatechangeSet,
+                            get: oriOnreadystatechangeGet
+                        });
+                        Object.defineProperty(this, "onreadystatechange", {
+                            set: function (newOnreadystatechange) {
+                                that._onreadystatechange = function() {
+                                    Log.print(Log.l.trace, "onreadystatechange readyState=" + that.readyState + " status=" + that.status + " responseURL="+ that.responseURL +
+                                        (that.readyState === 4 && that.status === 200 ? " responseText=" + (typeof that.responseText === "string" ? that.responseText.substr(0, 1024) : ""): "" ));
+                                    if (typeof Application.hookXhrOnReadyStateChange === "function" /* && that.readyState === 4 &&that.status === 200 */) {
+                                        that._newResponseText = null;
+                                        Application.hookXhrOnReadyStateChange(that);
+                                    } else {
+                                        that._newResponseText = that._responseText;
+                                    }
+                                    if (typeof newOnreadystatechange === "function") {
+                                        newOnreadystatechange();
+                                    }
+                                };
+                            },
+                            get: function() {
+                                return that._onreadystatechange;
+                            }
+                        });
+                    }
+                    var oriResponseTextGet = this.__lookupGetter__("responseText");
+                    if (oriResponseTextGet) {
+                        this._newResponseText = null;
+                        Object.defineProperty(this, "_responseText", {
+                            get: oriResponseTextGet
+                        });
+                    }
+                    Object.defineProperty(this, "responseText", {
+                        set: function (newResponseText) {
+                            that._newResponseText = newResponseText;
+                        },
+                        get: function() {
+                            if (typeof that._newResponseText === "string") {
+                                return that._newResponseText;
+                            } else {
+                                return that._responseText;  
+                            } 
+                        }
+                    });
+                }
+                Log.print(Log.l.info, "XMLHttpRequest: method=" + method + " url=" + url);
+                return this._oriOpen(method, url, async, user, password);
+            };
+            XMLHttpRequest.prototype._oriSend = XMLHttpRequest.prototype.send;
+            XMLHttpRequest.prototype.send = function(body) {
+                if (typeof Application.hookXhrSend === "function") {
+                    body = Application.hookXhrSend(body) || body;
+                }
+                return this._oriSend(body);
+            }
+        }
         // ensure login 
         if (AppData && 
             AppData._persistentStates && 
