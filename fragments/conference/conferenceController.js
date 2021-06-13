@@ -35,6 +35,7 @@ var __meteor_runtime_config__;
                 closeDesc: null,
                 restoreDesc: null,
                 hideInactive: false,
+                hideMuted: false,
                 contentActivity: [],
                 inactivityDelay: 7000,
                 activeVideoCount: 0,
@@ -903,7 +904,7 @@ var __meteor_runtime_config__;
                             }
                             ret = videoListDefaults.direction;
                             var numVideos;
-                            if (videoListDefaults.hideInactive) {
+                            if (videoListDefaults.hideInactive || videoListDefaults.hideMuted) {
                                 numVideos = videoListDefaults.activeVideoCount;
                             } else {
                                 numVideos = videoList.childElementCount;
@@ -1111,7 +1112,8 @@ var __meteor_runtime_config__;
 
             var checkForInactiveVideo = function() {
                 var hideInactive = videoListDefaults.hideInactive;
-                Log.call(Log.l.trace, "Conference.Controller.", "hideInactive="+hideInactive);
+                var hideMuted = videoListDefaults.hideMuted;
+                Log.call(Log.l.trace, "Conference.Controller.", "hideInactive="+hideInactive+" hideMuted="+hideMuted);
                 if (that.checkForInactiveVideoPromise) {
                     that.checkForInactiveVideoPromise.cancel();
                     that.checkForInactiveVideoPromise = null;
@@ -1130,12 +1132,14 @@ var __meteor_runtime_config__;
                             if (WinJS.Utilities.hasClass(content, "talking--26lGzY")) {
                                 videoListDefaults.contentActivity[i] = now;
                             } else {
-                                muted = content.querySelector(".muted--quAxq");
+                                muted = content.querySelector(".muted--quAxq") || content.querySelector(".icon-bbb-listen");
                             }
                             if ((muted || !videoListDefaults.contentActivity[i] ||
                                  now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay)) {
-                                if (hideInactive) {
+                                if (hideMuted && muted || hideInactive) {
                                     videoListItem.style.display = "none";
+                                } else if (hideMuted) {
+                                    videoListItem.style.display = "flex";
                                 }
                             } else {
                                 if (prevActiveItem) {
@@ -1148,7 +1152,7 @@ var __meteor_runtime_config__;
                                     }
                                 }
                                 prevActiveItem = videoListItem;
-                                if (hideInactive) {
+                                if (hideInactive || hideMuted) {
                                     videoListItem.style.display = "flex";
                                 }
                                 numVideos++;
@@ -1345,6 +1349,47 @@ var __meteor_runtime_config__;
                     }
                     that.adjustContentPositions();
                     that.sendResize(20);
+                    Log.ret(Log.l.info);
+                },
+                presenterModeOff: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    if (mediaContainer) {
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "presenter-mode");
+                        }
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "presenter-mode-tiled");
+                        }
+                    }
+                    that.adjustContentPositions();
+                    that.sendResize(20);
+                    videoListDefaults.hideMuted = false;
+                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(0).then(function() {
+                        that.checkForInactiveVideo();
+                    });
+                    Log.ret(Log.l.info);
+                },
+                presenterModeTiled: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    if (mediaContainer) {
+                        if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
+                            WinJS.Utilities.addClass(mediaContainer, "presenter-mode");
+                        }
+                        if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
+                            WinJS.Utilities.addClass(mediaContainer, "presenter-mode-tiled");
+                        }
+                    }
+                    if (videoListDefaults.direction === videoListDefaults.default) {
+                        videoListDefaults.direction = videoListDefaults.left;
+                    };
+                    that.adjustContentPositions();
+                    that.sendResize(20);
+                    videoListDefaults.hideMuted = true;
+                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(0).then(function() {
+                        that.checkForInactiveVideo();
+                    });
                     Log.ret(Log.l.info);
                 }
             }
