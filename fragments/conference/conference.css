@@ -282,7 +282,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     left: 392px;
     width: calc(calc(100% - 100px) * 0.62);
 }
-#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy {
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy {
     right: 200px;
     width: calc(100% - 250px) !important;
 }
