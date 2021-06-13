@@ -415,6 +415,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     top: 40px;
     width: 192px !important;
     height: calc(100% - 40px) !important;
+    pointer-events: none;
 }
 
 #conference.mediaview .video-overlay-right {
@@ -424,6 +425,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     top: 40px;
     width: 192px !important;
     height: calc(100% - 40px) !important;
+    pointer-events: none;
 }
 
 #conference.mediaview .presenter-mode-tiled .video-overlay-left,
@@ -438,6 +440,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     top: calc(100% - 288px);
 }
 
+#conference.mediaview .video-overlay-left button,
+#conference.mediaview .video-overlay-right button {
+    pointer-events: auto;
+}
 
 #conference.mediaview .video-overlay-top {
     display: block !important;
