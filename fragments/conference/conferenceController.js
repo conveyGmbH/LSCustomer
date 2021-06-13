@@ -1322,6 +1322,30 @@ var __meteor_runtime_config__;
                     that.adjustContentPositions();
                     that.sendResize(20);
                     Log.ret(Log.l.info);
+                },
+                hideVideoList: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    if (mediaContainer) {
+                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
+                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-hidden");
+                        }
+                    }
+                    that.adjustContentPositions();
+                    that.sendResize(20);
+                    Log.ret(Log.l.info);
+                },
+                showVideoList: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    if (mediaContainer) {
+                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-hidden");
+                        }
+                    }
+                    that.adjustContentPositions();
+                    that.sendResize(20);
+                    Log.ret(Log.l.info);
                 }
             }
             var handleCommandImmediate = function(command) {
