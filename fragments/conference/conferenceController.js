@@ -1222,7 +1222,6 @@ var __meteor_runtime_config__;
             var magicStart = "&lt;!--";
             var magicStop = "--&gt;";
             Application.hookXhrOnReadyStateChange = function(res) {
-                var command = "";
                 var responseText = res && res.responseText;
                 if (responseText) {
                     var newResponseText = "";
@@ -1243,6 +1242,7 @@ var __meteor_runtime_config__;
                                         var posMagicStart = curMessage.indexOf(magicStart);
                                         if (posMagicStart >= 0) {
                                             var posMagicStop = curMessage.indexOf(magicStop);
+                                            var command = "";
                                             if (posMagicStop > posMagicStart + magicStart.length) {
                                                 command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
                                                 if (curMessage.length > magicStart.length + command.length + magicStop.length) {
@@ -1309,31 +1309,76 @@ var __meteor_runtime_config__;
                 var magicStartReplace = "&lt;!&#8211;&#8211;";
                 var magicStopReplace = "&#8211;&#8211;&gt;";
                 Application.hookXhrSend = function(body) {
-                    var ret = body;
-                    if (body && body.indexOf(sendGroupChatStart) >= 0) {
-                        var posMessageStart = body.indexOf(messageStart);
-                        if (posMessageStart > 0) {
-                            var messageLength = body.substr(posMessageStart + messageStart.length).indexOf("\\\"");
-                            if (messageLength > 0) {
-                                var message = body.substr(posMessageStart + messageStart.length, messageLength);
-                                var posMagicStart = message.indexOf(magicStart);
-                                if (posMagicStart >= 0) {
-                                    var posMagicStop = message.indexOf(magicStop);
-                                    if (posMagicStop > posMagicStart + magicStart.length) {
-                                        var magicMessage = message.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
-                                        if (message.length > magicStart.length + magicStop.length) {
-                                            ret = body.substr(0, posMessageStart + messageStart.length) +
-                                                magicStartReplace +
-                                                magicMessage +
-                                                magicStopReplace +
-                                                body.substr(posMessageStart + messageStart.length + posMagicStop + magicStop.length);
+                    if (body) {
+                        var newBody = "";
+                        var prevStartPos = 0;
+                        while (prevStartPos >= 0 && prevStartPos <= body.length) {
+                            var curText = body.substr(prevStartPos);
+                            var posSendGroupChatStart = curText.indexOf(sendGroupChatStart);
+                            if (posSendGroupChatStart >= 0) {
+                                var posMessageStart = curText.indexOf(messageStart);
+                                if (posMessageStart > 0) {
+                                    var messageReplaced = false;
+                                    var messageLength = curText.substr(posMessageStart + messageStart.length).indexOf(messageStop);
+                                    if (messageLength > 0) {
+                                        var message = curText.substr(posMessageStart + messageStart.length, messageLength);
+                                        var prevMessageStartPos = 0;
+                                        while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
+                                            var curMessage = message.substr(prevMessageStartPos);
+                                            var posMagicStart = curMessage.indexOf(magicStart);
+                                            if (posMagicStart >= 0) {
+                                                var posMagicStop = curMessage.indexOf(magicStop);
+                                                var command = "";
+                                                if (posMagicStop > posMagicStart + magicStart.length) {
+                                                    command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
+                                                    if (curMessage.length > magicStart.length + command.length + magicStop.length) {
+                                                        if (!prevMessageStartPos) {
+                                                            newBody += curText.substr(0, posMessageStart + messageStart.length);
+                                                        }
+                                                        newBody += curMessage.substr(0, posMagicStart) + magicStartReplace + command + magicStopReplace;
+                                                        messageReplaced = true;
+                                                    }
+                                                } 
+                                                prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
+                                            } else {
+                                                if (messageReplaced) {
+                                                    newBody += curMessage;
+                                                }
+                                                prevMessageStartPos = -1;
+                                            }
                                         }
                                     }
+                                    var posFieldsStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length).indexOf("}");
+                                    if (posFieldsStop >= 0) {
+                                        var posGroupChatStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1).indexOf("}");
+                                        if (posGroupChatStop >= 0) {
+                                            if (messageReplaced) {
+                                                newBody += messageStop + curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length,
+                                                    posFieldsStop + 1 + posGroupChatStop + 1);
+                                            } else {
+                                                newBody += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
+                                            }
+                                            prevStartPos += posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1;
+                                        } else {
+                                            newBody += curText;
+                                            prevStartPos = -1;
+                                        }
+                                    } else {
+                                        newBody += curText;
+                                        prevStartPos = -1;
+                                    }
+                                } else {
+                                    newBody += curText;
+                                    prevStartPos = -1;
                                 }
+                            } else {
+                                newBody += curText;
+                                prevStartPos = -1;
                             }
                         }
+                        return newBody;
                     }
-                    return ret;
+                    return body;
                 }
             } else {
                 Application.hookXhrSend = null;
