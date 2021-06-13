@@ -1298,6 +1298,15 @@ var __meteor_runtime_config__;
                     videoListDefaults.direction = videoListDefaults.default;
                     that.adjustContentPositions();
                     that.sendResize(20);
+                    WinJS.Promise.timeout(50).then(function() {
+                        var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                        if (mediaContainer) {
+                            var overlayElement = mediaContainer.querySelector(".overlay--nP1TK:not(.hideOverlay--Z13uLxg)");
+                            if (overlayElement && overlayElement.style) {
+                                overlayElement.style.height = videoListDefaults.height;
+                            }
+                        }
+                    });
                     Log.ret(Log.l.info);
                 },
                 videoListLeft: function() {
