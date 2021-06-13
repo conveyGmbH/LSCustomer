@@ -1180,10 +1180,10 @@ var __meteor_runtime_config__;
                             var video = videoListItem.querySelector("video");
                             if (video && video.style) {
                                 if (presenterModeTiledIsSet && !isHidden) {
-                                    var left = (video.clientWidth - video.clientHeight * video.videoWidth / video.videoHeight) / 2;
-                                    videoListItem.style.left = left.toString() + "px";
+                                    var left = (videoListItem.clientWidth - (videoListItem.clientHeight * video.videoWidth / video.videoHeight)) / 2;
+                                    video.style.left = left.toString() + "px";
                                 } else {
-                                    videoListItem.style.left = "0";
+                                    video.style.left = "";
                                 }
                             }
                             i++;
