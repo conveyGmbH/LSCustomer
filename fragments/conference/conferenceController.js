@@ -1358,37 +1358,37 @@ var __meteor_runtime_config__;
             }
             that.handleCommandImmediate = handleCommandImmediate;
 
-            if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
-                var groupChatStart = "\"{\\\"msg\\\":\\\"added\\\",\\\"collection\\\":\\\"group-chat-msg\\\"";
-                var messageStart = "\\\"message\\\":\\\"";
-                var messageStop = "\\\"";
-                var magicStart = "&lt;!--";
-                var magicStop = "--&gt;";
-                Application.hookXhrOnReadyStateChange = function(res) {
-                    var responseText = res && res.responseText;
-                    if (responseText) {
-                        var newResponseText = "";
-                        var prevStartPos = 0;
-                        while (prevStartPos >= 0 && prevStartPos <= responseText.length) {
-                            var curText = responseText.substr(prevStartPos);
-                            var posGroupChatStart = curText.indexOf(groupChatStart);
-                            if (posGroupChatStart >= 0) {
-                                var posMessageStart = curText.indexOf(messageStart);
-                                if (posMessageStart > 0) {
-                                    var messageReplaced = false;
-                                    var skipMessage = false;
-                                    var messageLength = curText.substr(posMessageStart + messageStart.length).indexOf(messageStop);
-                                    if (messageLength > 0) {
-                                        var message = curText.substr(posMessageStart + messageStart.length, messageLength);
-                                        var prevMessageStartPos = 0;
-                                        while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
-                                            var curMessage = message.substr(prevMessageStartPos);
-                                            var posMagicStart = curMessage.indexOf(magicStart);
-                                            if (posMagicStart >= 0) {
-                                                var posMagicStop = curMessage.indexOf(magicStop);
-                                                var command = "";
-                                                if (posMagicStop > posMagicStart + magicStart.length) {
-                                                    command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
+            var groupChatStart = "\"{\\\"msg\\\":\\\"added\\\",\\\"collection\\\":\\\"group-chat-msg\\\"";
+            var messageStart = "\\\"message\\\":\\\"";
+            var messageStop = "\\\"";
+            var magicStart = "&lt;!--";
+            var magicStop = "--&gt;";
+            Application.hookXhrOnReadyStateChange = function(res) {
+                var responseText = res && res.responseText;
+                if (responseText) {
+                    var newResponseText = "";
+                    var prevStartPos = 0;
+                    while (prevStartPos >= 0 && prevStartPos <= responseText.length) {
+                        var curText = responseText.substr(prevStartPos);
+                        var posGroupChatStart = curText.indexOf(groupChatStart);
+                        if (posGroupChatStart >= 0) {
+                            var posMessageStart = curText.indexOf(messageStart);
+                            if (posMessageStart > 0) {
+                                var messageReplaced = false;
+                                var skipMessage = false;
+                                var messageLength = curText.substr(posMessageStart + messageStart.length).indexOf(messageStop);
+                                if (messageLength > 0) {
+                                    var message = curText.substr(posMessageStart + messageStart.length, messageLength);
+                                    var prevMessageStartPos = 0;
+                                    while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
+                                        var curMessage = message.substr(prevMessageStartPos);
+                                        var posMagicStart = curMessage.indexOf(magicStart);
+                                        if (posMagicStart >= 0) {
+                                            var posMagicStop = curMessage.indexOf(magicStop);
+                                            var command = "";
+                                            if (posMagicStop > posMagicStart + magicStart.length) {
+                                                command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
+                                                if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
                                                     if (curMessage.length > magicStart.length + command.length + magicStop.length) {
                                                         if (!prevMessageStartPos) {
                                                             newResponseText += curText.substr(0, posMessageStart + messageStart.length);
@@ -1398,35 +1398,32 @@ var __meteor_runtime_config__;
                                                     } else if (!prevMessageStartPos) {
                                                         skipMessage = true;
                                                     }
-                                                    if (res.readyState === 4 && res.status === 200) {
-                                                        Log.print(Log.l.info, "received command=" + command);
-                                                        that.handleCommandImmediate(command);
-                                                    }
-                                                } 
-                                                prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
-                                            } else {
-                                                if (messageReplaced) {
-                                                    newResponseText += curMessage;
                                                 }
-                                                prevMessageStartPos = -1;
+                                                if (res.readyState === 4 && res.status === 200) {
+                                                    Log.print(Log.l.info, "received command=" + command);
+                                                    that.handleCommandImmediate(command);
+                                                }
+                                            } 
+                                            prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
+                                        } else {
+                                            if (messageReplaced) {
+                                                newResponseText += curMessage;
                                             }
+                                            prevMessageStartPos = -1;
                                         }
                                     }
-                                    var posFieldsStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length).indexOf("}");
-                                    if (posFieldsStop >= 0) {
-                                        var posGroupChatStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1).indexOf("}");
-                                        if (posGroupChatStop >= 0) {
-                                            if (messageReplaced) {
-                                                newResponseText += messageStop + curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length,
-                                                    posFieldsStop + 1 + posGroupChatStop + 1);
-                                            } else if (!skipMessage) {
-                                                newResponseText += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
-                                            }
-                                            prevStartPos += posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1;
-                                        } else {
-                                            newResponseText += curText;
-                                            prevStartPos = -1;
+                                }
+                                var posFieldsStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length).indexOf("}");
+                                if (posFieldsStop >= 0) {
+                                    var posGroupChatStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1).indexOf("}");
+                                    if (posGroupChatStop >= 0) {
+                                        if (messageReplaced) {
+                                            newResponseText += messageStop + curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length,
+                                                posFieldsStop + 1 + posGroupChatStop + 1);
+                                        } else if (!skipMessage) {
+                                            newResponseText += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
                                         }
+                                        prevStartPos += posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1;
                                     } else {
                                         newResponseText += curText;
                                         prevStartPos = -1;
@@ -1439,15 +1436,15 @@ var __meteor_runtime_config__;
                                 newResponseText += curText;
                                 prevStartPos = -1;
                             }
+                        } else {
+                            newResponseText += curText;
+                            prevStartPos = -1;
                         }
-                        res.responseText = newResponseText;
                     }
-                    if (command) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                };
+                    res.responseText = newResponseText;
+                }
+            };
+            if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
                 var sendGroupChatStart = "\"{\\\"msg\\\":\\\"method\\\",\\\"method\\\":\\\"sendGroupChatMsg\\\"";
                 var magicStartReplace = "&lt;!&#8211;&#8211;";
                 var magicStopReplace = "&#8211;&#8211;&gt;";
