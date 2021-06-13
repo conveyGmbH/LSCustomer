@@ -263,7 +263,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--color-off-white);
 }
 
-#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy {
+#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy {
     left: 200px;
     width: calc(100% - 250px) !important;
 }
@@ -272,8 +272,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     width: calc(calc(100% - 100px) * 0.62) !important;
 }
 
-#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen) {
+#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
+#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
     left: 200px;
     width: calc(100% - 250px);
 }
@@ -286,13 +286,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 200px;
     width: calc(100% - 250px) !important;
 }
-#conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy {
+#conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy {
     right: 392px;
     width: calc(calc(100% - 100px) * 0.62) !important;
 }
 
-#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen) {
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
     right: 200px;
     width: calc(100% - 250px);
 }
@@ -431,6 +431,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     width: calc(calc(100% - 100px) * 0.38) !important;
 }
 
+#conference.mediaview .presenter-mode-full .video-overlay-left,
+#conference.mediaview .presenter-mode-full .video-overlay-right {
+    width: 384px !important;
+    height: 300px !important;
+    top: calc(100% - 288px);
+}
+
 
 #conference.mediaview .video-overlay-top {
     display: block !important;
@@ -444,13 +451,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .video-list-vertical {
     grid-template-columns: 100% !important;
     grid-template-rows: repeat(auto-fill, 144px) !important;
-    width: 192px !important;
+    width: 100% !important;
     height: 100% !important;
 }
 #conference.mediaview .video-list-vertical.video-list-double-columns {
     grid-template-columns: 50% 50% !important;
     grid-template-rows: repeat(auto-fill, 72px) !important;
-    width: 192px !important;
+    width: 100% !important;
     height: 100% !important;
 }
 
@@ -472,7 +479,23 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute;
 }
 
+#conference.mediaview .presenter-mode-full .video-list-vertical {
+    grid-template-columns: 100% !important;
+    grid-template-rows: repeat(auto-fill, 288px) !important;
+    width: 100% !important;
+}
 
+#conference.mediaview .presenter-mode-full .video-list-vertical.video-list-double-columns {
+    grid-template-rows: repeat(auto-fill, 144px) !important;
+    width: 100% !important;
+}
+
+#conference.mediaview .presenter-mode-full .video-list-vertical .videoContainer--rssHk > video {
+    height: 100%;
+    width: auto !important;
+    display: inline-block;
+    position: absolute;
+}
 
 
 /* Chat textarea */

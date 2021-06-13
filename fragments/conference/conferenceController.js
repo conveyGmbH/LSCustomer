@@ -1390,6 +1390,9 @@ var __meteor_runtime_config__;
                         if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
                             WinJS.Utilities.removeClass(mediaContainer, "presenter-mode-tiled");
                         }
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-full")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "presenter-mode-full");
+                        }
                     }
                     that.adjustContentPositions();
                     that.sendResize(20);
@@ -1406,8 +1409,36 @@ var __meteor_runtime_config__;
                         if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
                             WinJS.Utilities.addClass(mediaContainer, "presenter-mode");
                         }
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-full")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "presenter-mode-full");
+                        }
                         if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
                             WinJS.Utilities.addClass(mediaContainer, "presenter-mode-tiled");
+                        }
+                    }
+                    if (videoListDefaults.direction === videoListDefaults.default) {
+                        videoListDefaults.direction = videoListDefaults.left;
+                    };
+                    that.adjustContentPositions();
+                    that.sendResize(20);
+                    videoListDefaults.hideMuted = true;
+                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(0).then(function() {
+                        that.checkForInactiveVideo();
+                    });
+                    Log.ret(Log.l.info);
+                },
+                presenterModeFull: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    if (mediaContainer) {
+                        if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
+                            WinJS.Utilities.addClass(mediaContainer, "presenter-mode");
+                        }
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "presenter-mode-tiled");
+                        }
+                        if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-full")) {
+                            WinJS.Utilities.addClass(mediaContainer, "presenter-mode-full");
                         }
                     }
                     if (videoListDefaults.direction === videoListDefaults.default) {
