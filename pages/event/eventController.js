@@ -613,8 +613,7 @@
                     if (teaserFragment &&
                         teaserFragment.controller &&
                         teaserFragment.controller.binding) {
-                        if (AppData._persistentStates.registerData.resultCode === 21 ||
-                            AppData._persistentStates.registerData.confirmStatusID > 0 && AppData._persistentStates.registerData.confirmStatusID < 30) {
+                        if (AppData._persistentStates.registerData.confirmStatusID > 0 && AppData._persistentStates.registerData.confirmStatusID < 30) {
                             teaserFragment.controller.binding.showEvDoc = false;
                             teaserFragment.controller.binding.showOnDoc = true;
                             teaserFragment.controller.binding.showOffDoc = false;
