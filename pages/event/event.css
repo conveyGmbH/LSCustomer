@@ -79,7 +79,10 @@
     line-height: 28px;
 }
 
-
+.event .win-type-caption {
+    font-size: 18px;
+    font-weight: 600;
+}
 
 .event .color_container2 {
     position: absolute;
@@ -199,7 +202,10 @@
 .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
 .event .section-3 { grid-area: 2/1/span 3/span 4; padding-right: 10px;}
 .event .section-4 { grid-area: 5/1/span 3/span 5;}
+.event .section-4 .caption-field {
+    color: #c2d63e;
 
+}
 .event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px;}
 .event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
 .event .speaker-image-container {
@@ -222,16 +228,24 @@
     object-fit: cover;
 }
 .event .speaker-text { display: block; position: relative; width: 75%; float: right; }
-.event .speaker-text > span { display: block; margin: 0 0 0 15px; padding: 5px; font-size: 16px;}
-.event .speaker-text .win-h3 > span {
-    font-size: 18px;
-}
-.event .speaker-name {
+
+.event .speaker-name, .event .speaker-vorname {
+    font-size: 28px;
+    line-height: 32px;
     font-weight: 600;
+    display: block;
+    margin: 0;
+    padding: 5px 0;
 }
-.event .speaker-title .win-type-caption {
+.event .speaker-title, .event .speaker-link {
     font-size: 16px;
+    line-height: 28px;
     font-weight: 600;
+}
+
+.event .speaker-cv {
+    font-size: 18px;
+    line-height: 28px;
 }
 .event .recordedContent-fragmenthost,
 .event .conference-fragmenthost {
@@ -290,6 +304,8 @@
     width: 100%; 
     text-align: left;
     top: 20px;
+    font-size: 16px;
+    color: #2a2f3d;
 }
 .event .caption-block {
      width: auto; display: block; padding-right: 10px; margin-right: 10px;
@@ -358,7 +374,7 @@
 
 .view-size-medium .event .win-h3, 
 .view-size-medium .event .win-h5 {
-    font-size: 1em;
+    font-size: 1.3em;
 }
 
 .view-size-medium .event .countdown-fragmenthost {
@@ -388,6 +404,10 @@
 .view-size-medium .event .section-4 {
     grid-row: 4/span 1;
     grid-column: 1/span 6;
+}
+
+.view-size-medium .event .speaker-text {
+    width: 55%;
 }
 
 
@@ -442,7 +462,6 @@
 }
 
 .view-size-small .event .speaker-text > span {
-    float: left;
     width: auto;
     margin: 0;
 }
