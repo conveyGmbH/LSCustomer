@@ -94,14 +94,24 @@
     // home page of app
     Application.startPage = Application.getPagePath("home");
 
+
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
         Log.call(Log.l.trace, "Application.", "id=" + id + " login=" + AppData._persistentStates.odata.login);
         if (!XMLHttpRequest.prototype._oriOpen) {
             XMLHttpRequest.prototype._oriOpen = XMLHttpRequest.prototype.open;
             XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+                if (AppData &&
+                    AppData._persistentStates &&
+                    AppData._persistentStates.odata) {
+                    var hookPath = (AppData._persistentStates.odata.https ? "https" : "http") + "://" +
+                        AppData._persistentStates.odata.hostName + 
+                        (AppData._persistentStates.odata.onlinePort ? ":" + AppData._persistentStates.odata.onlinePort : "") +
+                        "/html5client/sockjs/";
                 // hook into xhr requests
-                if (this.__lookupSetter__ && this.__lookupGetter__) {
+                    if (url && url.substr(0, hookPath.length) === hookPath &&
+                        !this._onreadystatechange &&
+                        this.__lookupSetter__ && this.__lookupGetter__) {
                     var that = this;
                     var oriOnreadystatechangeSet = this.__lookupSetter__("onreadystatechange");
                     var oriOnreadystatechangeGet = this.__lookupGetter__("onreadystatechange");
@@ -116,7 +126,7 @@
                                     Log.print(Log.l.trace, "onreadystatechange readyState=" + that.readyState + " status=" + that.status + " responseURL="+ that.responseURL +
                                         (that.readyState === 4 && that.status === 200 ? " responseText=" + (typeof that.responseText === "string" ? that.responseText.substr(0, 1024) : ""): "" ));
                                     if (typeof Application.hookXhrOnReadyStateChange === "function" 
-                                       && that.readyState === 4 &&that.status === 200 
+                                           //&& that.readyState === 4 &&that.status === 200 
                                     ) {
                                         that._newResponseText = null;
                                         Application.hookXhrOnReadyStateChange(that);
@@ -153,12 +163,14 @@
                         }
                     });
                 }
+                }
                 Log.print(Log.l.info, "XMLHttpRequest: method=" + method + " url=" + url);
                 return this._oriOpen(method, url, async, user, password);
             };
             XMLHttpRequest.prototype._oriSend = XMLHttpRequest.prototype.send;
             XMLHttpRequest.prototype.send = function(body) {
-                if (typeof Application.hookXhrSend === "function") {
+                if (this._onreadystatechange &&
+                    typeof Application.hookXhrSend === "function") {
                     body = Application.hookXhrSend(body) || body;
                 }
                 return this._oriSend(body);
