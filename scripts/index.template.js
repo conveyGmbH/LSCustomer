@@ -94,7 +94,6 @@
     // home page of app
     Application.startPage = Application.getPagePath("home");
 
-
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
         Log.call(Log.l.trace, "Application.", "id=" + id + " login=" + AppData._persistentStates.odata.login);
@@ -106,7 +105,9 @@
                     AppData._persistentStates.odata) {
                     var hookPath = (AppData._persistentStates.odata.https ? "https" : "http") + "://" +
                         AppData._persistentStates.odata.hostName + 
-                        (AppData._persistentStates.odata.onlinePort ? ":" + AppData._persistentStates.odata.onlinePort : "") +
+                        (AppData._persistentStates.odata.onlinePort &&
+                            !(AppData._persistentStates.odata.https && AppData._persistentStates.odata.onlinePort === 443 ||
+                                AppData._persistentStates.odata.onlinePort === 80) ? ":" + AppData._persistentStates.odata.onlinePort : "") +
                         "/html5client/sockjs/";
                 // hook into xhr requests
                     if (url && url.substr(0, hookPath.length) === hookPath &&
