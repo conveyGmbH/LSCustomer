@@ -853,13 +853,17 @@ var __meteor_runtime_config__;
                 if (screenshareContainer) {
                     screenShareOpened = true;
                 }
-                var svgContainer = fragmentElement.querySelector(".svgContainer--Z1z3wO0");
-                if (svgContainer && svgContainer.firstElementChild) {
-                    presentationOpened = true;
-                    if (!that.onWheelSvg) {
-                        that.onWheelSvg = onWheelSvg;
-                        that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
+                // prevent scrolling on zoom per mouse wheel!
+                if (AppBar.scope.element && AppBar.scope.element.id === "modSession") {
+                    var svgContainer = fragmentElement.querySelector(".svgContainer--Z1z3wO0");
+                    if (svgContainer && svgContainer.firstElementChild) {
+                        presentationOpened = true;
+                        if (!that.onWheelSvg) {
+                            that.onWheelSvg = onWheelSvg;
+                            that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
+                        }
                     }
+
                 }
                 var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                 if (mediaContainer) {
