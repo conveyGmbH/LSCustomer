@@ -1493,10 +1493,8 @@ var __meteor_runtime_config__;
             
             var handleCommandImmediate = function(command) {
                 return WinJS.Promise.timeout(0).then(function() {
-                    if (typeof commandHandler[command] === "function") {
-                        Log.print(Log.l.info, "handle command=" + command);
-                        that.commandHandler[command]();
-                    }
+                    Log.print(Log.l.info, "handle command=" + command);
+                    that.commandHandler[command]();
                 });
             }
             that.handleCommandImmediate = handleCommandImmediate;
@@ -1532,20 +1530,23 @@ var __meteor_runtime_config__;
                                             var command = "";
                                             if (posMagicStop > posMagicStart + magicStart.length) {
                                                 command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
-                                                if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
-                                                    if (curMessage.length > magicStart.length + command.length + magicStop.length) {
-                                                        if (!prevMessageStartPos) {
-                                                            newResponseText += curText.substr(0, posMessageStart + messageStart.length);
+                                                if (command && typeof commandHandler[command] === "function") {
+                                                    if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
+                                                        if (curMessage.length > magicStart.length + command.length + magicStop.length) {
+                                                            if (!prevMessageStartPos) {
+                                                                newResponseText += curText.substr(0, posMessageStart + messageStart.length);
+                                                            }
+                                                            newResponseText += curMessage.substr(0, posMagicStart);
+                                                            messageReplaced = true;
+                                                        } else if (!prevMessageStartPos) {
+                                                            skipMessage = true;
                                                         }
-                                                        newResponseText += curMessage.substr(0, posMagicStart);
-                                                        messageReplaced = true;
-                                                    } else if (!prevMessageStartPos) {
-                                                        skipMessage = true;
                                                     }
-                                                }
-                                                if (res.readyState === 4 && res.status === 200) {
-                                                    Log.print(Log.l.info, "received command=" + command);
-                                                    that.handleCommandImmediate(command);
+                                                    if (res.readyState === 4 && res.status === 200) {
+                                                        Log.print(Log.l.info, "received command=" + command);
+                                                        that.handleCommandImmediate(command);
+                                                    }
+                                                    responseReplaced = true;
                                                 }
                                             } 
                                             prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
@@ -1566,6 +1567,8 @@ var __meteor_runtime_config__;
                                                 posFieldsStop + 1 + posGroupChatStop + 1);
                                         } else if (!skipMessage) {
                                             newResponseText += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
+                                        } else {
+                                            newResponseText += curText.substr(0, groupChatStart);
                                         }
                                         prevStartPos += posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1;
                                     } else {
@@ -1575,9 +1578,6 @@ var __meteor_runtime_config__;
                                 } else {
                                     newResponseText += curText;
                                     prevStartPos = -1;
-                                }
-                                if (messageReplaced) {
-                                    responseReplaced = true;
                                 }
                             } else {
                                 newResponseText += curText;
@@ -1622,11 +1622,14 @@ var __meteor_runtime_config__;
                                                 var command = "";
                                                 if (posMagicStop > posMagicStart + magicStart.length) {
                                                     command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
-                                                    if (!prevMessageStartPos) {
-                                                        newBody += curText.substr(0, posMessageStart + messageStart.length);
+                                                    if (command && typeof commandHandler[command] === "function") {
+                                                        if (!prevMessageStartPos) {
+                                                            newBody += curText.substr(0, posMessageStart + messageStart.length);
+                                                        }
+                                                        newBody += curMessage.substr(0, posMagicStart) + magicStartReplace + command + magicStopReplace;
+                                                        messageReplaced = true;
+                                                        bodyReplaced = true;
                                                     }
-                                                    newBody += curMessage.substr(0, posMagicStart) + magicStartReplace + command + magicStopReplace;
-                                                    messageReplaced = true;
                                                 } 
                                                 prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
                                             } else {
@@ -1655,9 +1658,6 @@ var __meteor_runtime_config__;
                                     } else {
                                         newBody += curText;
                                         prevStartPos = -1;
-                                    }
-                                    if (messageReplaced) {
-                                        bodyReplaced = true;
                                     }
                                 } else {
                                     newBody += curText;
