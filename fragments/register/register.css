@@ -29,7 +29,7 @@
     border-color: var(--e-global-color-accent, #c2d63e);
     /*cursor: pointer;*/
 }
-.register #loginButton > span, .register #re_registerEvent > span {
+    .register #loginButton > div > span, .register #re_registerEvent > span {
     font-weight: 400;
     color: var(--e-global-color-accent, #c2d63e);
     font-size: 16px;
