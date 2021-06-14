@@ -10,11 +10,12 @@
     float: left;
 }
 
-.countdown .confirm-container { margin: 0;}
+.countdown .confirm-container { margin: 0; height: 100px; background: inherit;}
 .countdown .field_line_full {
     margin: 5px 15px;
     padding: 5px 10px;
     text-align: center;
+    font-weight: 600;
 }
 
 .countdown .large_field .win-h4 { line-height: 2;}
@@ -24,14 +25,13 @@
     width: 100%;
     text-align: center;
     background-color: #ffffff;
-    border: 1px solid #ffffff;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
-    /*box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
     -webkit-transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
-    -moz-transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;*/
+    -moz-transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 }
 
 .countdown .count-block {
@@ -48,7 +48,7 @@
     position: relative;
     width: 1%;
     vertical-align: top;
-    padding-top: 15px;
+    padding-top: 35px;
 }
 
 @keyframes blink {
@@ -97,14 +97,14 @@
         -ms-animation: blink normal 1s infinite none; /* IE */
         animation: blink normal 1s infinite none; /* Opera */ 
 }
-    .countdown .win-h3 {
-        display: block;
-        color: #2a2f3d;
-        font-size: 1.5em;
-        font-weight: 700;
-        margin: 5px;
-        padding: 0;
-    }
+.countdown .win-h3 {
+    display: block;
+    color: #2a2f3d;
+    font-size: 3em;
+    font-weight: 400;
+    margin: 5px;
+    padding: 0;
+}
 .countdown .win-h5 {
     display: block;
     color: #2a2f3d;
@@ -116,17 +116,17 @@
 
 /*for max-width 1024px*/
 .view-size-bigger .countdown .count-block { width: 15%; margin: 5px;}
-.view-size-bigger .countdown .win-h3 { font-size: 2em; margin: 10px;}
+.view-size-bigger .countdown .win-h3 { font-size: 3em; margin: 10px 0; font-weight: 400;}
 .view-size-bigger .countdown .win-h5 { font-size: 0.75em; padding: 0;}
-.view-size-bigger .countdown .count { padding-top: 25px;}
+.view-size-bigger .countdown .count { padding-top: 35px;}
 
 
 /*for max-width 786px*/
     .view-size-medium .countdown .countdown-line { width: 100%;}
-    .view-size-medium .countdown .count { padding-top: 20px;}
+    .view-size-medium .countdown .count { padding-top: 35px;}
 /*for max-width 425px*/
 
     .view-size-small .countdown .count-block { width: 10%; margin: 5px;}
-    .view-size-small .countdown .win-h3 { font-size: 1em; margin: 3px; padding: 0;}
+    .view-size-small .countdown .win-h3 { font-size: 1.75em; margin: 3px; padding: 0;}
     .view-size-small .countdown .win-h5 { font-size: x-small; padding: 0; margin: 0 0 0 -3px;}
-    .view-size-small .countdown .count { padding-top: 8px;}
+    .view-size-small .countdown .count { padding-top: 15px;}
