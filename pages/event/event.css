@@ -197,7 +197,7 @@
     grid-column: 1/span 4;
 }
 .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
-.event .section-3 { grid-area: 2/1/span 3/span 4;}
+.event .section-3 { grid-area: 2/1/span 3/span 4; padding-right: 10px;}
 .event .section-4 { grid-area: 5/1/span 3/span 5;}
 
 .event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px;}
@@ -242,7 +242,7 @@
 }
 .event .teaser-fragmenthost {
     height: auto;
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 .event .register-fragmenthost {
@@ -302,7 +302,7 @@
 .event .logOff-container {
     float: right;
     height: auto;
-    width: 10%;
+    width: auto;
 }
 
 
@@ -327,7 +327,6 @@
 
     use: .view-size-bigger
 */
-
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
@@ -363,12 +362,11 @@
 }
 
 .view-size-medium .event .countdown-fragmenthost {
-    position: fixed;
+    position: relative;
     float: right;
     right: 0;
     width: 40%;
     margin-right: 10px;
-    top: 15%;
 }
 
 .view-size-medium .event .color_container2 { height: 300%;}
@@ -419,21 +417,11 @@
 }
 
 .view-size-small .event .countdown-fragmenthost {
-    position: absolute;
+    position: initial;
     left: 0;
-    top: 22em;
-    width: 90%;
+    float: none;
+    width: auto;
     margin-left: 10px;
-}
-
-.view-size-small .event .teaser-fragmenthost {
-    position: relative;
-    top: 30%;
-}
-
-.view-size-small .event .section-1 > .content-header {
-    position: relative;
-    margin-top: 42%;
 }
 
 .view-size-small .event .color_container2 {

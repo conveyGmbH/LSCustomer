@@ -37,8 +37,8 @@
 .countdown .count-block {
     display: inline-block;
     width: 13%;
-    margin: 5px;
-    padding: 5px;
+    margin: 5px 0;
+    padding: 5px 0;
     background-color: #ffffff;
     
 }
