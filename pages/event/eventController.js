@@ -580,7 +580,7 @@
 
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as()/*.then(function() {
                     var dateEnd = that.binding.dataEvent.dateEndDatum;
                     var now = new Date().getTime();
                     var remainderTime = dateEnd - now;
@@ -603,7 +603,7 @@
                             that.binding.showOffText = false;
                         }
                     }, 1000);
-                }).then(function() {
+                })*/.then(function() {
                     return that.getFragmentByName("teaser");
                 }).then(function (teaserFragment) {
                     that.binding.showRegister = false;
