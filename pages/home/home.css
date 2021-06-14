@@ -248,13 +248,13 @@
     font-size: 20px;
     font-weight: 600;
     line-height: 1.167;
-    padding: 15px 0 5px 0;
+    padding: 10px 0 5px 0;
 }
 
 .home .event-item .event-subtitle {
     width: calc(100% - 20px);
     height: auto;
-    padding: 0 0 15px 0;
+    padding: 0 0 5px 0;
     font-size: 16px;
 }
 
@@ -339,12 +339,20 @@
 .view-size-medium .home .event-item .event-comment {
     font-size: 14px;
 }
-/*margins/paddings for medium size screens or orientation landscape
+
+.view-size-medium .home .event-item .event-title {
+    font-size: 18px;
+}
+
+.view-size-medium .home .event-item .event-subtitle {
+    padding: 0;
+}
+    /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
 
     use: .view-size-medium-small
 */
-/*margins/paddings for small screens and orientation vertical
+    /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
         }
     use: .view-size-small

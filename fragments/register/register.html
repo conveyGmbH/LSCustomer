@@ -121,8 +121,12 @@
                                                 class="text-lightcolor win-button"
                                                 onclick="AppBar.handleEvent('click', 'clickOk', event)"
                                                 data-win-bind="disabled: loginDisabled">
-                                            <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_button_registration_text; style.display: showEvText Binding.Converter.toDisplay"></span>
-                                            <span class="win-type-title" data-win-bind="textContent: dataText.off_text_button_registration_text; style.display: showOffText Binding.Converter.toDisplay"></span>
+                                            <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
+                                                <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_button_registration_text"></span>
+                                            </div>
+                                            <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                                <span class="win-type-title" data-win-bind="textContent: dataText.off_text_button_registration_text"></span>
+                                            </div>
                                             <!--<span data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>-->
                                         </button>
                                     </div>

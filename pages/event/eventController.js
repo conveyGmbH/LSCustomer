@@ -29,7 +29,7 @@
                 showConference: false,
                 showRecordedContent: false,
                 showLogOffEventMail: false,
-                showEvText: false,
+                showEvText: true,
                 showOffText: false,
                 registerStatus: "",
                 //showRegisterConfirm: false,
@@ -580,7 +580,7 @@
 
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as()/*.then(function() {
                     var dateEnd = that.binding.dataEvent.dateEndDatum;
                     var now = new Date().getTime();
                     var remainderTime = dateEnd - now;
@@ -603,7 +603,7 @@
                             that.binding.showOffText = false;
                         }
                     }, 1000);
-                }).then(function() {
+                })*/.then(function() {
                     return that.getFragmentByName("teaser");
                 }).then(function (teaserFragment) {
                     that.binding.showRegister = false;
@@ -613,8 +613,7 @@
                     if (teaserFragment &&
                         teaserFragment.controller &&
                         teaserFragment.controller.binding) {
-                        if (AppData._persistentStates.registerData.resultCode === 21 ||
-                            AppData._persistentStates.registerData.confirmStatusID > 0 && AppData._persistentStates.registerData.confirmStatusID < 30) {
+                        if (AppData._persistentStates.registerData.confirmStatusID > 0 && AppData._persistentStates.registerData.confirmStatusID < 30) {
                             teaserFragment.controller.binding.showEvDoc = false;
                             teaserFragment.controller.binding.showOnDoc = true;
                             teaserFragment.controller.binding.showOffDoc = false;
