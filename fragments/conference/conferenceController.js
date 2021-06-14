@@ -1508,11 +1508,8 @@ var __meteor_runtime_config__;
             var magicStop = "--&gt;";
             Application.hookXhrOnReadyStateChange = function(res) {
                 var responseText = res && res.responseText;
-                if (responseText) {
-                    if (responseText.indexOf(magicStart) < 0) {
-                        // extra ignored!
-                        return;
-                    }
+                if (typeof responseText === "string" && responseText.indexOf(magicStart) >= 0) {
+                    var responseReplaced = false;
                     var newResponseText = "";
                     var prevStartPos = 0;
                     while (prevStartPos >= 0 && prevStartPos <= responseText.length) {
@@ -1579,6 +1576,9 @@ var __meteor_runtime_config__;
                                     newResponseText += curText;
                                     prevStartPos = -1;
                                 }
+                                if (messageReplaced) {
+                                    responseReplaced = true;
+                                }
                             } else {
                                 newResponseText += curText;
                                 prevStartPos = -1;
@@ -1588,7 +1588,10 @@ var __meteor_runtime_config__;
                             prevStartPos = -1;
                         }
                     }
-                    res.responseText = newResponseText;
+                    if (responseReplaced) {
+                        res.responseText = newResponseText;
+                    }
+                      
                 }
             };
             if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
@@ -1596,7 +1599,8 @@ var __meteor_runtime_config__;
                 var magicStartReplace = "&lt;!&#8211;&#8211;";
                 var magicStopReplace = "&#8211;&#8211;&gt;";
                 Application.hookXhrSend = function(body) {
-                    if (body) {
+                    if (typeof body === "string" && body.indexOf(magicStart) >= 0) {
+                        var bodyReplaced = false;
                         var newBody = "";
                         var prevStartPos = 0;
                         while (prevStartPos >= 0 && prevStartPos <= body.length) {
@@ -1652,6 +1656,9 @@ var __meteor_runtime_config__;
                                         newBody += curText;
                                         prevStartPos = -1;
                                     }
+                                    if (messageReplaced) {
+                                        bodyReplaced = true;
+                                    }
                                 } else {
                                     newBody += curText;
                                     prevStartPos = -1;
@@ -1661,7 +1668,9 @@ var __meteor_runtime_config__;
                                 prevStartPos = -1;
                             }
                         }
-                        return newBody;
+                        if (bodyReplaced) {
+                            return newBody;
+                        }
                     }
                     return body;
                 }
