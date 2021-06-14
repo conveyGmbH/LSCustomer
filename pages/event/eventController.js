@@ -29,6 +29,8 @@
                 showConference: false,
                 showRecordedContent: false,
                 showLogOffEventMail: false,
+                showEvText: false,
+                showOffText: false,
                 registerStatus: "",
                 //showRegisterConfirm: false,
                 recordedLink: null,
@@ -246,7 +248,8 @@
                 clickLogOffEvent: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     var logOffButton = pageElement.querySelector("#logOffButton");
-                    var confirmTitle = getResourceText("event.labelLogOff");
+                    that.binding.registerEmail = AppData._persistentStates.registerData.Email;
+                    var confirmTitle = getResourceText("event.labelLogOff") + that.binding.registerEmail;
                     confirm(confirmTitle, function (result) {
                         if (result) {
                             AppBar.busy = true;
@@ -577,7 +580,32 @@
 
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var ret = that.getFragmentByName("teaser").then(function (teaserFragment) {
+                var ret = new WinJS.Promise.as().then(function() {
+                    var dateEnd = that.binding.dataEvent.dateEndDatum;
+                    var now = new Date().getTime();
+                    var remainderTime = dateEnd - now;
+                    if (remainderTime > 0) {
+                        that.binding.showICS = true;
+                    } else {
+                        that.binding.showICS = false;
+                    }
+                    var countDown = setInterval(function () {
+                        var now = new Date().getTime();
+                        var timeleft = dateEnd - now;
+                        if (timeleft < 0) {
+                            clearInterval(countDown);
+                            AppData._persistentStates.registerData.confirmStatusID = 30;
+                            Application.pageframe.savePersistentStates();
+                            that.binding.showEvText = false;
+                            that.binding.showOffText = true;
+                        } else {
+                            that.binding.showEvText = true;
+                            that.binding.showOffText = false;
+                        }
+                    }, 1000);
+                }).then(function() {
+                    return that.getFragmentByName("teaser");
+                }).then(function (teaserFragment) {
                     that.binding.showRegister = false;
                     that.binding.showTeaser = false;
                     that.binding.showCountdown = false;
@@ -586,12 +614,18 @@
                         teaserFragment.controller &&
                         teaserFragment.controller.binding) {
                         if (AppData._persistentStates.registerData.resultCode === 21 ||
-                            AppData._persistentStates.registerData.confirmStatusID > 0) {
+                            AppData._persistentStates.registerData.confirmStatusID > 0 && AppData._persistentStates.registerData.confirmStatusID < 30) {
                             teaserFragment.controller.binding.showEvDoc = false;
                             teaserFragment.controller.binding.showOnDoc = true;
+                            teaserFragment.controller.binding.showOffDoc = false;
+                        } else if (AppData._persistentStates.registerData.confirmStatusID >= 30) {
+                            teaserFragment.controller.binding.showEvDoc = false;
+                            teaserFragment.controller.binding.showOnDoc = false;
+                            teaserFragment.controller.binding.showOffDoc = true;
                         } else {
                             teaserFragment.controller.binding.showEvDoc = true;
                             teaserFragment.controller.binding.showOnDoc = false;
+                            teaserFragment.controller.binding.showOffDoc = false;
                         }
                     }
                     return that.getFragmentByName("register");
@@ -687,6 +721,7 @@
                             registerFragment.controller.binding.showRegisterMail = true;
                             registerFragment.controller.binding.showResendEditableMail = false;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
+                            registerFragment.controller.binding.showEvText = true;
                         }
                         return WinJS.Promise.as();
                         //return that.getFragmentByName("teaser");
@@ -740,31 +775,7 @@
                 Log.print(Log.l.trace, "Data loaded");
                 Application.showBodyContentBottom(pageElement, true);
                 that.binding.showShare = true;
-            })/*.then(function () {
-                var dateEnd = that.binding.dataEvent.dateEndDatum;
-                var now = new Date().getTime();
-                var remainderTime = dateEnd - now;
-                if (remainderTime > 0) {
-                    that.binding.showICS = true;
-                } else {
-                    that.binding.showICS = false;
-                }
-                var countDown = setInterval(function () {
-                    var now = new Date().getTime();
-                    var timeleft = dateEnd - now;
-                    if (timeleft < 0) {
-                        clearInterval(countDown);
-                        //AppBar.scope.binding.showConference = true;
-                        //lade fragment mediathek
-                        /*if (typeof AppBar.scope.loadData === "function") {
-                            return AppBar.scope.loadData();
-                        }
-                        AppData._persistentStates.registerData.confirmStatusID = 30;
-                        return that.updateFragment();
-                        //return WinJS.Promise.as();
-                    }
-                }, 1000);
-            })*/;
+            });
             Log.ret(Log.l.trace);
         })
     });

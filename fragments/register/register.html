@@ -107,7 +107,8 @@
                             <div class="field_line field_line_full">
                                 <label class="list-privacy-field">
                                     <input type="checkbox" class="win-checkbox" value="1" data-win-bind="checked: dataRegister.privacyPolicyFlag Binding.Mode.twoway" /> <!--onclick  -->
-                                    <span class="checkbox" data-win-bind="innerHTML: dataText.ev_text_privacy_body"></span>
+                                    <span class="checkbox" data-win-bind="innerHTML: dataText.ev_text_privacy_body; style.display: showEvText Binding.Converter.toDisplay"></span>
+                                    <span class="checkbox" data-win-bind="innerHTML: dataText.off_text_privacy_body; style.display: showOffText Binding.Converter.toDisplay"></span>
                                 </label>
                             </div>
                             <div class="field_line field_line_full">
@@ -120,7 +121,8 @@
                                                 class="text-lightcolor win-button"
                                                 onclick="AppBar.handleEvent('click', 'clickOk', event)"
                                                 data-win-bind="disabled: loginDisabled">
-                                            <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_button_registration_text"></span>
+                                            <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_button_registration_text; style.display: showEvText Binding.Converter.toDisplay"></span>
+                                            <span class="win-type-title" data-win-bind="textContent: dataText.off_text_button_registration_text; style.display: showOffText Binding.Converter.toDisplay"></span>
                                             <!--<span data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>-->
                                         </button>
                                     </div>
@@ -179,7 +181,9 @@
                         <div class="resend-editable-mail-container" data-win-bind="style.display: showResendEditableMail Binding.Converter.toDisplay">
                             <div class="field_line register-email">
                                 <span class="large_field"
-                                      data-win-bind="textContent: dataText.on_text_reg_confirm"></span><!--registerMessage-->
+                                      data-win-bind="textContent: dataText.on_text_reg_confirm; style.display: showEvText Binding.Converter.toDisplay"></span><!--registerMessage-->
+                                <span class="large_field"
+                                      data-win-bind="textContent: dataText.off_text_reg_confirm; style.display: showOffText Binding.Converter.toDisplay"></span>
                             </div>
                             <div class="field_line register-email">
                                 <span class="large_field"
@@ -191,7 +195,9 @@
                             </div>-->
                             <div class="field_line register-email">
                                 <span class="large_field"
-                                      data-win-bind="textContent: dataText.on_text_wait_body"></span><!--registerMessage-->
+                                      data-win-bind="textContent: dataText.on_text_wait_body; style.display: showEvText Binding.Converter.toDisplay"></span><!--registerMessage-->
+                                <span class="large_field"
+                                      data-win-bind="textContent: dataText.off_text_wait_body; style.display: showOffText Binding.Converter.toDisplay"></span>
                             </div>
 
 
@@ -206,7 +212,7 @@
                                 </div>-->
                             <div class="field_line_full register_button">
                                 
-                                    <div class="button-element">
+                                <div class="button-element" data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                                         <div id="resendButton"
                                              class="win-link"
                                              onclick="AppBar.handleEvent('click', 'clickResend', event)"
@@ -219,10 +225,22 @@
                                          data-win-bind="disabled: editDisabled; title: dataText.on_text_button_edit_tooltip">
                                         <span data-win-bind="textContent: dataText.on_text_button_edit_text"></span>
                                         </div>
-
-
                                     </div>
                                 
+                                <div class="button-element" data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                    <div id="resendButton"
+                                         class="win-link"
+                                         onclick="AppBar.handleEvent('click', 'clickResend', event)"
+                                         data-win-bind="disabled: resendDisabled; title: dataText.off_text_button_resend_tooltip">
+                                        <span data-win-bind="textContent: dataText.off_text_button_resend_text"></span>
+                                    </div>
+                                    <div id="editButton"
+                                         class="win-link"
+                                         onclick="AppBar.handleEvent('click', 'clickEdit', event)"
+                                         data-win-bind="disabled: editDisabled; title: dataText.off_text_button_edit_tooltip">
+                                        <span data-win-bind="textContent: dataText.off_text_button_edit_text"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="field_line_full register_button">
                                 <div class="button_line">
@@ -255,7 +273,7 @@
                             </div>
                             <div class="field_line_full register_button">
 
-                                <div class="button-element">
+                                <div class="button-element" data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                                     <div id="resendButton"
                                          class="win-link"
                                          onclick="AppBar.handleEvent('click', 'clickChangeEvent', event)"
@@ -273,6 +291,28 @@
                                             class="win-link"
                                             onclick="AppBar.handleEvent('click', 'clickChangeEvent', event)"
                                             data-win-bind="disabled: editDisabled; title: dataText.on_text_button_edit_tooltip">
+                                        <span data-win-res="{textContent: 'register.re_registerEvent'}"></span>
+                                    </div>-->
+
+                                </div>
+                                <div class="button-element" data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                    <div id="resendButton"
+                                         class="win-link"
+                                         onclick="AppBar.handleEvent('click', 'clickChangeEvent', event)"
+                                         data-win-bind="disabled: resendDisabled; title: dataText.off_text_button_resend_tooltip">
+                                        <span data-win-res="{textContent: 'register.re_registerEvent'}"></span>
+                                    </div>
+                                    <div id="editButton"
+                                         class="win-link"
+                                         onclick="AppBar.handleEvent('click', 'clickEdit', event)"
+                                         data-win-bind="disabled: editDisabled; title: dataText.off_text_button_edit_tooltip">
+                                        <span data-win-bind="textContent: dataText.off_text_button_edit_text"></span>
+                                    </div>
+
+                                    <!--<div id="reRegisterButton"
+                                             class="win-link"
+                                             onclick="AppBar.handleEvent('click', 'clickChangeEvent', event)"
+                                             data-win-bind="disabled: editDisabled; title: dataText.on_text_button_edit_tooltip">
                                         <span data-win-res="{textContent: 'register.re_registerEvent'}"></span>
                                     </div>-->
 
