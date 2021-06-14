@@ -44,6 +44,7 @@
                             </div>
                         </div>
                         <div class="content-header">
+                            <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                             <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
                                 <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>
                             </div>
@@ -59,6 +60,25 @@
                                         </div>
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+                            <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.off_text_detail_name_h1 Binding.Converter.toDisplay">
+                                    <h1 class="win-h1" data-win-bind="textContent: dataText.off_text_detail_name_h1"></h1>
+                                </div>
+                                <!--<div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.off_text_detail_time_h2 Binding.Converter.toDisplay">
+                                    <h2 class="win-h2" data-win-bind="textContent: dataText.off_text_detail_time_h2"></h2>
+                                </div>
+                                <div class="content-header-line" data-win-bind="style.display: dataText.off_text_calender_text Binding.Converter.toDisplay">
+                                    <div class="button-element">
+                                        <button id="calenderButton" class="win-button" data-win-bind="style.display: showICS Binding.Converter.toDisplay" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
+                                            <div class="button-tip">
+                                                <span class="win-type-title" data-win-bind="textContent: dataText.off_text_calender_text"></span>
+                                                <span class="win-tooltip" data-win-bind="textContent: dataText.off_text_calender_tooltip"></span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>-->
                             </div>
                         </div>
                         <div id="recordedContenthost" class="recordedContent-fragmenthost" data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"></div>
@@ -96,16 +116,20 @@
                                         </div>
                                         <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
                                     </div>
+                                    <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                                     <div class="caption-field" data-win-bind="style.display: dataText.ev_text_other_name_h1 Binding.Converter.toDisplay">
                                         <span data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                             <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
                             <div class="section-2">
                                 <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
                             </div>
                             <div class="section-3">
+                                <!--evText-->
+                                <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                                 <div class="win-h2 content-header" data-win-bind="style.display: dataText.ev_text_para_h2 Binding.Converter.toDisplay">
                                     <span data-win-bind="textContent: dataText.ev_text_para_h2"></span>
                                 </div>
@@ -124,7 +148,28 @@
                                 </div>
                                 <div class="div-separator"></div>
                             </div>
-                            <div class="section-4 speakerblock">
+                                <!--OffText-->
+                                <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                    <div class="win-h2 content-header" data-win-bind="style.display: dataText.off_text_para_h2 Binding.Converter.toDisplay">
+                                        <span data-win-bind="textContent: dataText.off_text_para_h2"></span>
+                                    </div>
+                                    <div class="div-separator"></div>
+                                    <div class="" data-win-bind="style.display: dataText.off_text_detail_summary Binding.Converter.toDisplay">
+                                        <p data-win-bind="innerHTML: dataText.off_text_detail_summary"></p>
+                                    </div>
+                                    <div class="" data-win-bind="style.display: dataText.off_text_agenda_body Binding.Converter.toDisplay">
+                                        <p data-win-bind="innerHTML: dataText.off_text_agenda_body"></p>
+                                    </div>
+                                    <div class="" data-win-bind="style.display: dataText.off_text_para_body Binding.Converter.toDisplay">
+                                        <p data-win-bind="innerHTML: dataText.off_text_para_body"></p>
+                                    </div>
+                                    <div class="" data-win-bind="style.display: dataText.off_text_free_body Binding.Converter.toDisplay">
+                                        <p data-win-bind="innerHTML: dataText.off_text_free_body"></p>
+                                    </div>
+                                    <div class="div-separator"></div>
+                                </div>
+                            </div>
+                            <div class="section-4 speakerblock" data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                                 <div class="content-header" data-win-bind="style.display: dataText.ev_text_mod1_name Binding.Converter.toDisplay">
                                     <div class="caption-field">
                                         <span data-win-bind="">Speaker</span>

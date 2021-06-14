@@ -21,7 +21,8 @@
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
                 showEvDoc: false,
-                showOnDoc: false
+                showOnDoc: false,
+                showOffDoc: false
             }, commandList]);
 
             var that = this;
