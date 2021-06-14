@@ -198,7 +198,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute;
     width: calc(100% - 120px);
     left: 60px;
-    z-index: 1000;
+    z-index: 10;
+    pointer-events: none;
 }
 
 
@@ -329,6 +330,17 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview button[aria-describedby="closeDesc"] {
     margin-right: 42px;
 }
+
+#conference.mediaview button[aria-describedby="closeDesc"]/*,
+#conference.mediaview button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF*/ {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 8.5px 15px !important;
+    border-radius: 0 !important;
+    opacity: 1;
+}
+
 /* hide button: hide-presentation  */
 .event #conference.mediaview button[aria-describedby="closeDesc"],
 .event #conference.mediaview button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF {
@@ -338,6 +350,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .wrapper--Z17x8k2.dark--Z1Y80Wt.bottom--Z1oNR9L {
     top: 0 !important;
     bottom: inherit !important;
+    z-index: 100;
 }
 
 #conference.mediaview .videoPlayer--1MGUuy .wrapper--Z17x8k2.dark--Z1Y80Wt {
@@ -345,6 +358,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     top: 0 !important;
     right: auto !important;
 }
+#conference.mediaview .fullScreenButton--Z1bf0vj,
+#conference.mediaview .videoPlayer--1MGUuy .wrapper--Z17x8k2.dark--Z1Y80Wt > button {
+    z-index: 100;
+}
+
 
 #conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt:focus .button--Z1ops0C,
 #conference.mediaview .wrapper--Z17x8k2.dark--Z1Y80Wt .button--Z1ops0C:focus,
@@ -379,6 +397,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     font-size: var(--font-size-small) !important;
     font-weight: var(--talker-font-weight);
     padding: var(--talker-padding-xsm) var(--talker-padding-lg) var(--talker-padding-xsm) var(--talker-padding-lg) !important;
+}
+
+#conference.mediaview .talker--2eNUIW span {
+    height: 22px;
 }
 
 .overlay--Arkp5 {
