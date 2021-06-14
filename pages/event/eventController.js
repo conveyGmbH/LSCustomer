@@ -29,7 +29,7 @@
                 showConference: false,
                 showRecordedContent: false,
                 showLogOffEventMail: false,
-                showEvText: false,
+                showEvText: true,
                 showOffText: false,
                 registerStatus: "",
                 //showRegisterConfirm: false,
