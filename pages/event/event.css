@@ -256,7 +256,7 @@
 }
 .event .teaser-fragmenthost {
     height: auto;
-    margin-top: 0;
+    margin-top: 20px;
 }
 
 .event .register-fragmenthost {
@@ -312,7 +312,8 @@
 }
 
 .event p {
-    white-space: pre-wrap
+    white-space: pre-wrap;
+    font-weight: 400;
 }
 
 .event .logOff-container {

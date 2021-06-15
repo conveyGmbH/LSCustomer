@@ -9,6 +9,7 @@
 .register .label,
 .register .checkbox {
     font-family: "Barlow";
+    font-weight: 400;
 }
 
 .register .label {
