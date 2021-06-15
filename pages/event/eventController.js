@@ -328,8 +328,12 @@
                 Log.call(Log.l.trace, "Event.Controller.");
                 if (json && json.d && json.d.results) {
                     var result = json.d.results[0];
-                    if (result.UserToken &&
-                        result.UserToken !== AppData._persistentStates.registerData.userToken) {
+                    //Absicherung wenn 
+                    if (result.resultCode === 21) {
+                        //copyToken = AppData._persistentStates.registerData.userToken;
+                        AppData._persistentStates.registerData.userToken = null;
+                    }
+                    if (result.UserToken !== AppData._persistentStates.registerData.userToken) {
                         AppData._persistentStates.registerData.userToken = result.UserToken;
                     }
                     if (result.VeranstaltungID &&
@@ -641,16 +645,18 @@
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
-                            registerFragment.controller.binding.showRegisterMail = false;
-                            registerFragment.controller.binding.showResendEditableMail = true;
-                            registerFragment.controller.binding.registerStatus = getResourceText("register.sendEmailMessage");
                             if (AppData._persistentStates.registerData.resultCode === 21) {
-                                registerFragment.controller.binding.showReRegisterEventMail = true;
-                                registerFragment.controller.binding.showRegisterMail = false;
+                                // Stand 15.6 setze showRegisterMail auf true und tuhe so als müssen der user neu registrieren
+                                // Feature showReRegisterEventMail erstmal deaktiviert dadurch
+                                registerFragment.controller.binding.showReRegisterEventMail = false;
+                                registerFragment.controller.binding.showRegisterMail = true;
                                 registerFragment.controller.binding.showResendEditableMail = false;
-                                registerFragment.controller.binding.registerStatus =
-                                    getResourceText("register.re_registerMessage");
+                                //registerFragment.controller.binding.registerStatus = getResourceText("register.re_registerMessage");
+                            } else {
+                                registerFragment.controller.binding.showRegisterMail = false;
+                                registerFragment.controller.binding.showResendEditableMail = true;
                             }
+                            //registerFragment.controller.binding.registerStatus = getResourceText("register.sendEmailMessage");
                         }
                         return WinJS.Promise.as();
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
