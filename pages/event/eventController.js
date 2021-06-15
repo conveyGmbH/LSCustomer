@@ -555,10 +555,12 @@
                 Log.call(Log.l.trace, "Event.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var userToken = AppData._persistentStates.registerData.userToken;
+                var email = AppData._persistentStates.registerData.Email;
                 AppBar.busy = true;
                 var ret = AppData.call("PRC_ResendVAMail", {
                     pVeranstaltungID: that.binding.eventId,
-                    pUserToken: userToken
+                    pUserToken: userToken,
+                    pUserMail: email
                 }, function (json) {
                     if (json && json.d && json.d.results) {
                         var result = json.d.results[0];
