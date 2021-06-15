@@ -29,7 +29,7 @@
                 showConference: false,
                 showRecordedContent: false,
                 showLogOffEventMail: false,
-                showEvText: true,
+                showEvText: false,
                 showOffText: false,
                 registerStatus: "",
                 //showRegisterConfirm: false,
@@ -45,6 +45,9 @@
 
             var onScrollResizePromise = null;
             var contentArea = pageElement.querySelector(".contentarea");
+            this.refreshWaitTimeMs = 10000;
+            this.refreshResultsPromise = null;
+            this.inLoadData = false;
 
             var that = this;
 
@@ -527,6 +530,7 @@
                                 AppData._persistentStates.registerData.resultCode = result.ResultCode;
                             }
                         }
+                        Application.pageframe.savePersistentStates();
                     }
                     complete({});
                 }, function (errorResponse) {
@@ -580,30 +584,20 @@
 
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as()/*.then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
                     var dateEnd = that.binding.dataEvent.dateEndDatum;
                     var now = new Date().getTime();
                     var remainderTime = dateEnd - now;
                     if (remainderTime > 0) {
                         that.binding.showICS = true;
+                        that.binding.showEvText = true;
+                        that.binding.showOffText = false;
                     } else {
                         that.binding.showICS = false;
-                    }
-                    var countDown = setInterval(function () {
-                        var now = new Date().getTime();
-                        var timeleft = dateEnd - now;
-                        if (timeleft < 0) {
-                            clearInterval(countDown);
-                            AppData._persistentStates.registerData.confirmStatusID = 30;
-                            Application.pageframe.savePersistentStates();
                             that.binding.showEvText = false;
                             that.binding.showOffText = true;
-                        } else {
-                            that.binding.showEvText = true;
-                            that.binding.showOffText = false;
                         }
-                    }, 1000);
-                })*/.then(function() {
+                }).then(function () {
                     return that.getFragmentByName("teaser");
                 }).then(function (teaserFragment) {
                     that.binding.showRegister = false;
@@ -622,9 +616,19 @@
                             teaserFragment.controller.binding.showOnDoc = false;
                             teaserFragment.controller.binding.showOffDoc = true;
                         } else {
+                            var dateEnd = that.binding.dataEvent.dateEndDatum;
+                            var now = new Date().getTime();
+                            var remainderTime = dateEnd - now;
+                            if (remainderTime > 0) {
                             teaserFragment.controller.binding.showEvDoc = true;
                             teaserFragment.controller.binding.showOnDoc = false;
                             teaserFragment.controller.binding.showOffDoc = false;
+                            } else {
+                                teaserFragment.controller.binding.showEvDoc = false;
+                                teaserFragment.controller.binding.showOnDoc = false;
+                                teaserFragment.controller.binding.showOffDoc = true;
+                            }
+
                         }
                     }
                     return that.getFragmentByName("register");
@@ -720,16 +724,49 @@
                             registerFragment.controller.binding.showRegisterMail = true;
                             registerFragment.controller.binding.showResendEditableMail = false;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
-                            registerFragment.controller.binding.showEvText = true;
                         }
                         return WinJS.Promise.as();
-                        //return that.getFragmentByName("teaser");
                     }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
             }
             this.updateFragment = updateFragment;
+
+            var showEvOffText = function () {
+                if (that.inLoadData) {
+                    Log.ret(Log.l.trace, "extra ignored");
+                    return WinJS.Promise.as();
+                }
+                that.inLoadData = true;
+                if (that.refreshResultsPromise) {
+                    that.refreshResultsPromise.cancel();
+                    that.removeDisposablePromise(that.refreshResultsPromise);
+                }
+                var ret = new WinJS.Promise.as().then(function () {
+                    var dateEnd = that.binding.dataEvent.dateEndDatum;
+                    var now = new Date().getTime();
+                    var timeleft = dateEnd - now;
+                    if (timeleft < 0) {
+                        //clearInterval(countDown);
+                        AppData._persistentStates.registerData.confirmStatusID = 30;
+                        Application.pageframe.savePersistentStates();
+                        that.binding.showEvText = false;
+                        that.binding.showOffText = true;
+                    } else {
+                        that.binding.showEvText = true;
+                        that.binding.showOffText = false;
+                    }
+                }).then(function () {
+                    that.inLoadData = false;
+                    that.refreshResultsPromise = WinJS.Promise.timeout(that.refreshWaitTimeMs).then(function () {
+                        that.showEvOffText();
+                    });
+                    that.addDisposablePromise(that.refreshResultsPromise);
+                });
+                return ret;
+            }
+            that.showEvOffText = showEvOffText;
 
             if (contentArea) {
                 this.addRemovableEventListener(contentArea, "scroll", this.eventHandlers.onScroll.bind(this));
@@ -774,6 +811,8 @@
                 Log.print(Log.l.trace, "Data loaded");
                 Application.showBodyContentBottom(pageElement, true);
                 that.binding.showShare = true;
+            }).then(function () {
+                return that.showEvOffText();
             });
             Log.ret(Log.l.trace);
         })
