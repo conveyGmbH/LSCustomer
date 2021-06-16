@@ -114,7 +114,7 @@
 
 
 /*for max-width 1024px*/
-.view-size-bigger .countdown .count-block { width: 17%; margin: 5px;}
+.view-size-bigger .countdown .count-block { width: 17%; margin: 5px 0;}
 .view-size-bigger .countdown .win-h3 { font-size: 3em; margin: 10px 0; font-weight: 400;}
 .view-size-bigger .countdown .win-h5 { font-size: 0.75em; padding: 0 15px 0 0;}
 .view-size-bigger .countdown .count { padding-top: 35px;}
