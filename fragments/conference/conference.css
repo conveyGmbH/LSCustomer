@@ -20,6 +20,11 @@
     z-index: 9;
 }
 
+.recordingControlON--ZTT4Mq {
+    padding: 0 5px;
+    font-size: var(--font-size-small);
+}
+
 .modSession .presenter-button-container > button.win-button {
     z-index: 11;
     margin: 0 5px 5px 0;
