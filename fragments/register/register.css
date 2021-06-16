@@ -9,6 +9,7 @@
 .register .label,
 .register .checkbox {
     font-family: "Barlow";
+    font-weight: 400;
 }
 
 .register .label {
@@ -228,6 +229,6 @@ input[disabled] {
     cursor: pointer;
 }
 .text-lightcolor.win-button:disabled {
-    background-color: #dcdcE4;
+    background-color: #ffffff;
     cursor: default;
 }
