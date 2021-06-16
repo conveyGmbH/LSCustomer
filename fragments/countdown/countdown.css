@@ -36,17 +36,16 @@
 
 .countdown .count-block {
     display: inline-block;
-    width: 13%;
+    width: 15%;
     margin: 5px 0;
-    padding: 5px 0;
+    padding: 5px;
     background-color: #ffffff;
-    
 }
 
 .countdown .count {
     display: inline-block;
     position: relative;
-    width: 1%;
+    width: 3%;
     vertical-align: top;
     padding-top: 35px;
 }
@@ -100,7 +99,7 @@
 .countdown .win-h3 {
     display: block;
     color: #2a2f3d;
-    font-size: 3em;
+    font-size: 2.8em;
     font-weight: 400;
     margin: 5px;
     padding: 0;
@@ -109,15 +108,15 @@
     display: block;
     color: #2a2f3d;
     font-size: 12px;
-    padding: 2px;
+    padding: 0 2px;
     margin: 0;
 }
 
 
 /*for max-width 1024px*/
-.view-size-bigger .countdown .count-block { width: 15%; margin: 5px;}
+.view-size-bigger .countdown .count-block { width: 17%; margin: 5px;}
 .view-size-bigger .countdown .win-h3 { font-size: 3em; margin: 10px 0; font-weight: 400;}
-.view-size-bigger .countdown .win-h5 { font-size: 0.75em; padding: 0;}
+.view-size-bigger .countdown .win-h5 { font-size: 0.75em; padding: 0 15px 0 0;}
 .view-size-bigger .countdown .count { padding-top: 35px;}
 
 
