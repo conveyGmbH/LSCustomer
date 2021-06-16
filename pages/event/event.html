@@ -45,40 +45,30 @@
                         </div>
                         <div class="content-header">
                             <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
-                            <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
-                                <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>
-                            </div>
-                            <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ev_text_detail_time_h2 Binding.Converter.toDisplay">
-                                <h2 class="win-h2" data-win-bind="textContent: dataText.ev_text_detail_time_h2"></h2>
-                            </div>
-                            <div class="content-header-line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
-                                <div class="button-element">
-                                    <button id="calenderButton" class="win-button" data-win-bind="style.display: showICS Binding.Converter.toDisplay" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
-                                        <div class="button-tip">
-                                            <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
-                                            <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
-                                        </div>
-                                    </button>
+                                <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
+                                    <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>
+                                </div>
+                                <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ev_text_detail_time_h2 Binding.Converter.toDisplay">
+                                    <h2 class="win-h2" data-win-bind="textContent: dataText.ev_text_detail_time_h2"></h2>
+                                </div>
+                                <div class="content-header-line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
+                                    <div class="button-element">
+                                        <button id="calenderButton" class="win-button" data-win-bind="style.display: showICS Binding.Converter.toDisplay" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
+                                            <div class="button-tip">
+                                                <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
+                                                <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                             <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
                                 <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.off_text_detail_name_h1 Binding.Converter.toDisplay">
                                     <h1 class="win-h1" data-win-bind="textContent: dataText.off_text_detail_name_h1"></h1>
                                 </div>
-                                <!--<div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.off_text_detail_time_h2 Binding.Converter.toDisplay">
+                                <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.off_text_detail_time_h2 Binding.Converter.toDisplay">
                                     <h2 class="win-h2" data-win-bind="textContent: dataText.off_text_detail_time_h2"></h2>
                                 </div>
-                                <div class="content-header-line" data-win-bind="style.display: dataText.off_text_calender_text Binding.Converter.toDisplay">
-                                    <div class="button-element">
-                                        <button id="calenderButton" class="win-button" data-win-bind="style.display: showICS Binding.Converter.toDisplay" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
-                                            <div class="button-tip">
-                                                <span class="win-type-title" data-win-bind="textContent: dataText.off_text_calender_text"></span>
-                                                <span class="win-tooltip" data-win-bind="textContent: dataText.off_text_calender_tooltip"></span>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>-->
                             </div>
                         </div>
                         <div id="recordedContenthost" class="recordedContent-fragmenthost" data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"></div>
