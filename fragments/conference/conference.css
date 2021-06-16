@@ -25,8 +25,9 @@
 }
 
 .recordingControlON--ZTT4Mq {
-    padding: 0 5px;
-    font-size: var(--font-size-small);
+    padding: 0 !important;
+    min-width: 70px !important;
+    font-size: var(--font-size-small) !important;
 }
 
 .modSession .presenter-button-container > button.win-button {
