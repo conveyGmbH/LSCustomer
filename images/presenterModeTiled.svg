@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="393px" height="211px" viewBox="51 264.718 393 211" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="nonzero" clip-rule="nonzero" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect x="312.167" y="268.718" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" width="127.833" height="203"/>
+<path fill="#FFFFFF" stroke="#FFFFFF" stroke-miterlimit="10" d="M395.339,338.431c0,9.651-7.813,17.475-17.466,17.475
+	s-17.473-7.823-17.473-17.475c0-9.648,7.818-17.465,17.473-17.465C387.523,320.966,395.339,328.782,395.339,338.431z"/>
+<path fill="#FFFFFF" stroke="#FFFFFF" stroke-miterlimit="10" d="M407.541,391.218c0,16-13.444,0-30.025,0
+	c-16.585,0-30.027,16-30.027,0c0-20,13.442-30.029,30.027-30.029C394.097,361.188,407.541,371.218,407.541,391.218z"/>
+<path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" d="M55,268.718v203h245v-203H55z M181.602,433.458
+	c-35.735,0-64.768-28.973-64.768-64.707c0-35.575,29.167-64.436,64.167-64.693v-5.979l0.478,5.966c-0.16,0-0.478,0.011-0.478,0.012
+	v65.021l65.244-0.328C246.244,404.487,217.337,433.458,181.602,433.458z"/>
+</svg>

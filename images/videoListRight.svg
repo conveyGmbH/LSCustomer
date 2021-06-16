@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="325px" height="211px" viewBox="26 265.723 325 211" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="nonzero" clip-rule="nonzero" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect x="289" y="269.723" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" width="58" height="47"/>
+<circle fill="#FFFFFF" stroke="#FFFFFF" stroke-miterlimit="10" cx="318.098" cy="286.101" r="5.517"/>
+<path fill="#FFFFFF" stroke="#FFFFFF" stroke-miterlimit="10" d="M327.469,302.223c0,5-4.246,0-9.48,0c-5.238,0-9.483,5-9.483,0
+	s4.245-9.482,9.483-9.482C323.223,292.74,327.469,297.223,327.469,302.223z"/>
+<rect x="289" y="326.723" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" width="58" height="47"/>
+<circle fill="#FFFFFF" stroke="#FFFFFF" stroke-miterlimit="10" cx="318.098" cy="342.669" r="5.517"/>
+<path fill="#FFFFFF" stroke="#FFFFFF" stroke-miterlimit="10" d="M327.469,359.223c0,5-4.246,0-9.48,0c-5.238,0-9.483,5-9.483,0
+	c0-6,4.245-9.482,9.483-9.482C323.223,349.74,327.469,353.223,327.469,359.223z"/>
+<rect x="289" y="382.723" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" width="58" height="47"/>
+<circle fill="#FFFFFF" stroke="#FFFFFF" stroke-miterlimit="10" cx="318.098" cy="398.427" r="5.517"/>
+<path fill="#FFFFFF" stroke="#FFFFFF" stroke-miterlimit="10" d="M327.469,415.223c0,5-4.246,0-9.48,0c-5.238,0-9.483,5-9.483,0
+	c0-6,4.245-9.483,9.483-9.483C323.223,405.739,327.469,409.223,327.469,415.223z"/>
+<path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" d="M30,269.723v203h245v-203H30z M156.477,435.101
+	c-35.735,0-64.705-28.97-64.705-64.706c0-35.576,28.713-64.436,64.229-64.693v-5.979l0.477,5.966c-0.16,0-0.316,0.011-0.477,0.013
+	v65.021l65.184-0.328C221.184,406.131,192.213,435.101,156.477,435.101z"/>
+</svg>
