@@ -14,7 +14,7 @@
     align-items: flex-start;
 }
 
-.modSession .presenter-button-container {
+.presenter-button-container {
     display: none;
     margin: 0 10px;
     z-index: 9;
