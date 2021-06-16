@@ -127,7 +127,7 @@
                                     Log.print(Log.l.trace, "onreadystatechange readyState=" + that.readyState + " status=" + that.status + " responseURL="+ that.responseURL +
                                         (that.readyState === 4 && that.status === 200 ? " responseText=" + (typeof that.responseText === "string" ? that.responseText.substr(0, 1024) : ""): "" ));
                                     if (typeof Application.hookXhrOnReadyStateChange === "function" 
-                                           && that.readyState === 4 &&that.status === 200 
+                                           //&& that.readyState === 4 &&that.status === 200 
                                     ) {
                                         that._newResponseText = null;
                                         Application.hookXhrOnReadyStateChange(that);
