@@ -877,7 +877,6 @@ var __meteor_runtime_config__;
                                 navBarTopCenter.insertBefore(presenterButtonContainer, navBarTopCenter.firstElementChild);
                                 if (presenterButtonContainer.style) {
                                     presenterButtonContainer.style.display = "inline-block";
-                                    that.sendResize(1000);
                                 }
                             }
                         }
@@ -1790,14 +1789,14 @@ var __meteor_runtime_config__;
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
                 that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
-                if (!that.adjustContentPositionsPromise) {
-                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(0).then(function() {
-                        that.adjustContentPositions();
-                    });
-                }
                 that.checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
                     that.checkForInactiveVideo();
                 });
+                if (!that.adjustContentPositionsPromise) {
+                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.adjustContentPositions();
+                    });
+                }
             });
             Log.ret(Log.l.trace);
         })
