@@ -8,6 +8,12 @@
 
 	"tooltip.home"          : "Retour à la page d'aperçu",
     "tooltip.fullscreen"    : "Afficher en plein écran",
+    "tooltip.presenterModeTiled" : "Mode présentation : la présentation et l'image vidéo du haut-parleur sont affichées côte à côte dans un rapport approximatif de 2:1",
+    "tooltip.presenterModeFull" : "Mode présentation : la présentation occupe le maximum d'espace en arrière-plan, l'image vidéo du haut-parleur flotte plus petite au-dessus d'elle",
+    "tooltip.presenterModeSmall" : "Mode présentation : la présentation est réduite en taille et flotte au-dessus de l'image vidéo du haut-parleur, plus grande, en arrière-plan",
+    "tooltip.videoListLeft" : "Mode conférence : les images vidéo des participants sont affichées à gauche de la présentation dans une liste verticale",
+    "tooltip.videoListRight" : "Mode conférence : les images vidéo des participants sont affichées à droite de la présentation dans une liste verticale",
+    "tooltip.videoListDefault" : "Mode conférence : les images vidéo des participants sont en liste horizontale et peuvent être déplacées au-dessus ou au-dessous de la présentation",
 
     "events.title"          : "Série",
 

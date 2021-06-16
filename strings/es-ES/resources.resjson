@@ -8,6 +8,12 @@
 
     "tooltip.home"          : "Back to the overview page",
     "tooltip.fullscreen"    : "Show fullscreen",
+    "tooltip.presenterModeTiled" : "Presentation mode: presentation and speaker video image are displayed side by side in about 2:1 ratio",
+    "tooltip.presenterModeFull" : "Presentation mode: presentation occupies the maximum area in the background, speaker video image floats smaller above it",
+    "tooltip.presenterModeSmall" : "Presentation mode: presentation is reduced in size and floats above the larger speaker video image in the background",
+    "tooltip.videoListLeft" : "Conference mode: video images of participants are displayed to the left of the presentation in vertical list",
+    "tooltip.videoListRight" : "Conference mode: video images of participants are displayed to the right of the presentation in vertical list",
+    "tooltip.videoListDefault" : "Conference mode: participants' video images are in horizontal list and can be moved above or below the presentation",
 
     "events.title"          : "Serie",
 

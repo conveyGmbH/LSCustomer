@@ -14,6 +14,50 @@
             <div class="contentarea content-noscroll win-type-body">
                 <div class="doc-container">
                     <div id="conference" class="mediaview"></div>
+                    <div class="presenter-button-container">
+                        <button id="presenterModeTiled" class="win-button"
+                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                            <div class="button-tip">
+                                <div class="presenter-mode-image" id="presenter_mode_tiled"></div>
+                                <span class="win-tooltip" data-win-res="{textContent: 'tooltip.presenterModeTiled'}"></span>
+                            </div>
+                        </button>
+                        <button id="presenterModeFull" class="win-button"
+                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                            <div class="button-tip">
+                                <div class="presenter-mode-image" id="presenter_mode_full"></div>
+                                <span class="win-tooltip" data-win-res="{textContent: 'tooltip.presenterModeFull'}"></span>
+                            </div>
+                        </button>
+                        <button id="presenterModeSmall" class="win-button"
+                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                            <div class="button-tip">
+                                <div class="presenter-mode-image" id="presenter_mode_small"></div>
+                                <span class="win-tooltip" data-win-res="{textContent: 'tooltip.presenterModeSmall'}"></span>
+                            </div>
+                        </button>
+                        <button id="videoListLeft" class="win-button"
+                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                            <div class="button-tip">
+                                <div class="presenter-mode-image" id="video_list_left"></div>
+                                <span class="win-tooltip" data-win-res="{textContent: 'tooltip.videoListLeft'}"></span>
+                            </div>
+                        </button>
+                        <button id="videoListRight" class="win-button"
+                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                            <div class="button-tip">
+                                <div class="presenter-mode-image" id="video_list_right"></div>
+                                <span class="win-tooltip" data-win-res="{textContent: 'tooltip.videoListRight'}"></span>
+                            </div>
+                        </button>
+                        <button id="videoListDefault" class="win-button"
+                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                            <div class="button-tip">
+                                <div class="presenter-mode-image" id="video_list_default"></div>
+                                <span class="win-tooltip" data-win-res="{textContent: 'tooltip.videoListDefault'}"></span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

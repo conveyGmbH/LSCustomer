@@ -7,10 +7,58 @@
     width: calc(100% - 24px);
     height: calc(100% - 8px);
 }
+
+.modSession #conference.mediaview .left--18SBXP,
+.modSession #conference.mediaview .right--Z4dKWq,
+.modSession #conference.mediaview .center--2pV1iJ {
+    align-items: flex-start;
+}
+
+.modSession .presenter-button-container {
+    display: none;
+    margin: 0 10px;
+    z-index: 9;
+}
+
+.modSession .presenter-button-container > button.win-button {
+    z-index: 11;
+    margin: 0 5px 5px 0;
+    background-color: var(--btn-primary-bg);
+    border-color: transparent;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    box-shadow: 0 2px 5px 0 black !important;
+    opacity: 0.8;
+}
+.modSession .presenter-button-container > button.win-button:hover,
+.modSession .presenter-button-container > button.win-button:active {
+    background-color: var(--btn-primary-bg) !important;
+    opacity: 1;
+    color: var(--btn-primary-color) !important;
+}
+
+.modSession .presenter-button-container > button.win-button .button-tip .win-tooltip {
+    top: 50px;
+    left: -80px;
+    min-height: 40px;
+    transition-duration: 500ms;
+    transition-property: top, opacity;
+    opacity: 0;
+    border-radius: 5px;
+}
+
+.modSession .presenter-button-container > button.win-button:hover .button-tip .win-tooltip,
+.modSession .presenter-button-container > button.win-button:active .button-tip .win-tooltip {
+    top: 70px;
+    opacity: 1;
+}
+
 /* protect input, select, textarea */
 input[type=date], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], select, textarea {
     padding: inherit !important;
 }
+
 /* protect button */
 #conference.mediaview button,
 .portal--27FHYi button {
@@ -187,6 +235,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-top: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
 }
+#conference.mediaview .wrapper--Z20hQYP.hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI),
+#conference.mediaview .wrapper--Z20hQYP.hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) > div,
+#conference.mediaview .wrapper--Z20hQYP.hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) > section {
+    display: none;
+}
+
 #conference.mediaview .chat--Z1w8gP7,
 #conference.mediaview .userlistPad--o5KDX {
     border-right: 1px solid var(--color-gray-lightest);
@@ -200,6 +254,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     left: 60px;
     z-index: 10;
     pointer-events: none;
+    margin-top: 0 !important;
+    top: -7px;
 }
 
 
@@ -232,11 +288,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .navbar--Z2lHYbG {
     position: absolute !important;
     width: calc(100% - 16px);
+    padding-top: 0;
 }
 
 /* hide event title */
-#conference.mediaview .center--2pV1iJ {
-    visibility: hidden;
+#conference.mediaview .presentationTitle--1LT79g {
+    display: none;
 }
 
 /* width of presentation container */
@@ -336,7 +393,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: rgba(0, 0, 0, 0.3) !important;
     border: none !important;
     box-shadow: none !important;
-    padding: 8.5px 15px !important;
+    padding: 8.25px 14.5px !important;
     border-radius: 0 !important;
     opacity: 1;
 }

@@ -22,6 +22,8 @@
             this.prevWidth = 0;
             this.prevHeight = 0;
 
+            Colors.loadSVGImageElements(element, "presenter-mode-image", 42, "#ffffff");
+
             // add page specific commands to AppBar
             var commandList = [];
             this.controller = new Conference.Controller(element, options, commandList);

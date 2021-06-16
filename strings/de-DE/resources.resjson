@@ -9,6 +9,12 @@
 
     "tooltip.home"          : "Zurück zur Übersichtseite",
     "tooltip.fullscreen"    : "Bildschirmfüllend anzeigen",
+    "tooltip.presenterModeTiled" : "Präsentations-Modus: Präsentation und Sprecher-Videobild werden nebeneinander etwa im Verhältnis 2:1 angezeigt",
+    "tooltip.presenterModeFull" : "Präsentations-Modus: Präsentation nimmt die maximale Fläche im Hintergrund ein, Sprecher-Videobild schwebt kleiner darüber",
+    "tooltip.presenterModeSmall" : "Präsentations-Modus: Präsentation ist verkleinert und schwebt über dem größeren Sprecher-Videobild im Hintergrund",
+    "tooltip.videoListLeft" : "Konferenz-Modus: Videobilder der Teilnehmer werden links neben der Präsentation in vertikaler Liste angezeigt",
+    "tooltip.videoListRight" : "Konferenz-Modus: Videobilder der Teilnehmer sind rechts neben der Präsentation in vertikaler Liste angezeigt",
+    "tooltip.videoListDefault" : "Konferenz-Modus: Videobilder der Teilnehmer sind in horizontaler Liste und können über oder unter die Präsentation verschoben werden",
 
     "events.title"          : "Serie",
 
