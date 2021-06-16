@@ -1663,14 +1663,15 @@ var __meteor_runtime_config__;
                                         if (messageReplaced) {
                                             newResponseText += messageStop + curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length,
                                                 posFieldsStop + 1 + posGroupChatStop + 1);
-                                        } else if (!skipMessage) {
-                                            newResponseText += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
-                                        } else {
+                                        } else if (skipMessage) {
                                             var nonSkippedMessages = curText.substr(0, posGroupChatStart);
                                             // skip list-separators!
-                                            if (nonSkippedMessages !== "\",") {
-                                                newResponseText += nonSkippedMessages;
+                                            if (nonSkippedMessages.substr(nonSkippedMessages.length-2) === "\",") {
+                                                nonSkippedMessages = nonSkippedMessages.substr(0, nonSkippedMessages.length-2);
                                             }
+                                            newResponseText += nonSkippedMessages;
+                                        } else {
+                                            newResponseText += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
                                         }
                                         prevStartPos += posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1;
                                     } else {
