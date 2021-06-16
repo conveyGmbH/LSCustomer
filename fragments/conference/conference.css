@@ -579,6 +579,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     top: calc(100% - 300px);
     left: 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1) !important;
+    z-index: 10;
 }
 #conference.mediaview .presenter-mode-full .video-overlay-right {
     width: 384px !important;
@@ -586,6 +587,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     top: calc(100% - 300px);
     right: 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1) !important;
+    z-index: 10;
 }
 
 #conference.mediaview .video-overlay-left button,
