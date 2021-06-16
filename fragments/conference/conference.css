@@ -46,6 +46,10 @@
     transition-property: top, opacity;
     opacity: 0;
     border-radius: 5px;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 13px !important;
+    white-space: normal;
 }
 
 .modSession .presenter-button-container > button.win-button:hover .button-tip .win-tooltip,
