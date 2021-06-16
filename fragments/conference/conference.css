@@ -55,18 +55,38 @@
     transition-duration: 500ms;
     transition-property: top, opacity;
     opacity: 0;
-    border-radius: 5px;
     text-transform: none;
     letter-spacing: normal;
     font-size: 13px !important;
     white-space: normal;
+    background: transparent;
+    border: none;
+    padding: 0;
 }
-
 .modSession .presenter-button-container > button.win-button:hover .button-tip .win-tooltip,
 .modSession .presenter-button-container > button.win-button:active .button-tip .win-tooltip {
-    top: 70px;
+    top: 64px;
     opacity: 1;
 }
+.modSession .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-arrow {
+    width: 20px;
+    height: 20px;
+    margin-left: calc(50% - 10px);
+    transform: rotate(45deg);
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
+    position: absolute;
+    top: 0;
+}
+.modSession .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-body {
+    border-radius: 5px;
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
+    padding: 4px 7px 6px;
+    position: absolute;
+    top: 4px;
+}
+
 
 /* protect input, select, textarea */
 input[type=date], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], select, textarea {
