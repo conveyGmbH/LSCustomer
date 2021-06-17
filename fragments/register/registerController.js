@@ -26,7 +26,8 @@
                     Position: "",
                         Firmenname: "",
                     privacyPolicyFlag: false,
-                        UserTZ: AppData._persistentStates.registerData.UserTZ || moment.tz.guess()
+                    UserTZ: AppData._persistentStates.registerData.UserTZ || moment.tz.guess(),
+                    LanguageId: AppData._persistentStates.languageId
                 },
                 InitAnredeItem: { AnredeID: 0, TITLE: "" },
                 registerMessage: "",
