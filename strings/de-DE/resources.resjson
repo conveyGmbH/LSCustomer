@@ -8,6 +8,7 @@
 	"label.overview"	    : "Überblick",
     "label.on"	            : "An",
     "label.off"	            : "Aus",
+	"label.me"              : "Ich",
 
     "tooltip.home"          : "Zurück zur Übersichtseite",
     "tooltip.fullscreen"    : "Bildschirmfüllend anzeigen",

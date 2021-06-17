@@ -741,7 +741,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute;
 }
 
-
+#conference.mediaview .selfie-video .videoContainer--rssHk > video {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
 /* Chat textarea */
 #conference.mediaview .input--2wilPX {
     padding: calc(var(--sm-padding-y) * 2.5) calc(var(--sm-padding-x) * 1.25) !important;

@@ -7,6 +7,7 @@
     "label.event"           : "Événement",
     "label.on"	            : "On",
     "label.off"	            : "Off",
+    "label.me"              : "Moi",
 
 	"tooltip.home"          : "Retour à la page d'aperçu",
     "tooltip.fullscreen"    : "Afficher en plein écran",

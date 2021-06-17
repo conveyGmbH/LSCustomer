@@ -8,6 +8,7 @@
     "label.overview"	    : "Overview",
     "label.on"	            : "On",
     "label.off"	            : "Off",
+    "label.me"              : "Me",
 
     "tooltip.home"          : "Back to the overview page",
     "tooltip.fullscreen"    : "Show fullscreen",
