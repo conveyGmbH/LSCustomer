@@ -32,7 +32,6 @@
                 showEvText: false,
                 showOffText: false,
                 registerStatus: "",
-                //showRegisterConfirm: false,
                 recordedLink: null,
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
@@ -210,10 +209,8 @@
                     Log.call(Log.l.trace, "Event.Controller.");
                     var cal = ics();
                     cal.addEvent(that.binding.dataEvent.Name, that.binding.dataEvent.LiveTyp, "", that.binding.dataEvent.dateStartDatum, that.binding.dataEvent.dateEndDatum);
-                    var calendar_ics = cal.calendar();
-                    //window.open("data:text/calendar;charset=utf8," + escape(calendar_ics));
+                    cal.calendar();
                     cal.download(that.binding.dataEvent.Name);
-                    /*cal.addEvent('Demo Event', 'This is thirty minute event', 'Nome, AK', '8/7/2013 5:30 pm', '8/7/2013 6:00 pm');*/
                     Log.ret(Log.l.trace);
                 },
                 onScroll: function (event) {
@@ -593,15 +590,20 @@
             var updateFragment = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
                 var ret = new WinJS.Promise.as().then(function () {
+                    var dateBegin = that.binding.dataEvent.dateBegin;
                     var dateEnd = that.binding.dataEvent.dateEndDatum;
                     var now = new Date().getTime();
-                    var remainderTime = dateEnd - now;
+                    var remainderTime = dateBegin - now;
                     if (remainderTime > 0) {
                         that.binding.showICS = true;
+                    } else {
+                        that.binding.showICS = false;
+                    }
+                    remainderTime = dateEnd - now;
+                    if (remainderTime > 0) {
                         that.binding.showEvText = true;
                         that.binding.showOffText = false;
                     } else {
-                        that.binding.showICS = false;
                             that.binding.showEvText = false;
                             that.binding.showOffText = true;
                         }
@@ -678,7 +680,7 @@
                         //im prinzip könnte man sessionToken hernehmen 
 
                         //AppData._persistentStates.registerData.dateBegin > date heute 
-                        var countDownDate = AppData._persistentStates.registerData.dateBegin;
+                        var countDownDate = that.binding.dataEvent.dateBegin;
                         var now = new Date().getTime();
                         var timeleft = countDownDate - now;
                         if (timeleft > 0) {
@@ -693,6 +695,7 @@
                             return that.getFragmentByName("conference");
                         }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
+                        that.binding.showICS = true;
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
@@ -758,7 +761,6 @@
                     var now = new Date().getTime();
                     var timeleft = dateEnd - now;
                     if (timeleft < 0) {
-                        //clearInterval(countDown);
                         AppData._persistentStates.registerData.confirmStatusID = 30;
                         Application.pageframe.savePersistentStates();
                         that.binding.showEvText = false;

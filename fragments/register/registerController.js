@@ -47,8 +47,6 @@
             var that = this;
 
             this.anrede = null;
-            // select combo
-            var initAnrede = fragmentElement.querySelector("#InitAnrede");
             //var register = fragmentElement.querySelector("#register");
             // now do anything...
             var listView = fragmentElement.querySelector("#anredeList.listview");
@@ -116,23 +114,16 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    //if (!AppData.initAnredeView.getResults().length) {
                         Log.print(Log.l.trace, "calling select initAnredeData...");
-                        //@nedra:25.09.2015: load the list of INITAnrede for Combobox
+                    //load the list of INITAnrede for Checkbox
                         return AppData.initAnredeView.select(function (json) {
                             Log.print(Log.l.trace, "initAnredeView: success!");
                             if (json && json.d && json.d.results) {
-                                // Now, we call WinJS.Binding.List to get the bindable list
-                                if (initAnrede && initAnrede.winControl) {
-                                    initAnrede.winControl.data = new WinJS.Binding.List(json.d.results);
-                                }
-                                //var results = json.d.results;
                                 // Now, we call WinJS.Binding.List to get the bindable list
                                 var results = json.d.results.filter(function (item, index) {
                                     return (item && (item.INITAnredeID !== 0 && item.INITAnredeID !== 3));
                                 });
                             that.anrede = new WinJS.Binding.List(results);
-                                //that.files = results;
                                 if (listView.winControl) {
                                     // add ListView dataSource
                                 listView.winControl.itemDataSource = that.anrede.dataSource;
@@ -143,20 +134,9 @@
                             // or server returns response with an error status.
                             AppData.setErrorMsg(that.binding, errorResponse);
                         });
-                    /*} else {
-                        if (initAnrede && initAnrede.winControl &&
-                            (!initAnrede.winControl.data || !initAnrede.winControl.data.length)) {
-                            initAnrede.winControl.data = new WinJS.Binding.List(AppData.initAnredeView.getResults());
-                        }
-                        if (listView.winControl) {
-                            // add ListView dataSource
-                            listView.winControl.itemDataSource = new WinJS.Binding.List(AppData.initAnredeView.getResults()).dataSource;
-                    }
-                        return WinJS.Promise.as();
-                    }*/
                 }).then(function () {
                     // pUUID: window.device && window.device.uuid
-                    function create_UUID() {
+                    /*function create_UUID() {
                         var dt = new Date().getTime();
                         var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
                             var r = (dt + Math.random() * 16) % 16 | 0;
@@ -164,26 +144,21 @@
                             return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
                         });
                         return uuid;
-                    }
+                    }*/
                     if (AppData._persistentStates.registerData.Email) {
                         that.binding.dataRegister = copyByValue(AppData._persistentStates.registerData);
-                        //showRegisterMail: true,
-                        //showResendEditableMail: false,
-                        //    editDisabled: false,
-                        //    resendDisabled: false,
                         that.binding.showRegisterMail = false;
                         that.binding.showResendEditableMail = true;
 
                     }
                     that.binding.dataRegister.AnredeID = 0;
-                    if (!AppData._persistentStates.registerData.userToken) {
+                    /*if (!AppData._persistentStates.registerData.userToken) {
                         AppData._persistentStates.registerData.userToken = create_UUID();
                         Application.pageframe.savePersistentStates();
-                    }
+                    }*/
 
                     if (typeof AppData._persistentStates.registerData.confirmStatusID === "undefined") {
                         AppData._persistentStates.registerData.confirmStatusID = null;
-                        Application.pageframe.savePersistentStates();
                     }
 
                     if (!AppData._persistentStates.registerData.eventId) {
@@ -193,6 +168,7 @@
                     if (AppBar.scope.binding.registerStatus) {
                         that.binding.registerStatus = AppBar.scope.binding.registerStatus;
                     }
+                    Application.pageframe.savePersistentStates();
                 }).then(function () {
                     that.loadInitSelection();
                 });
@@ -367,11 +343,6 @@
             this.disableHandlers = {
                 clickOk: function () {
                     that.binding.loginDisabled = AppBar.busy || (that.binding.dataRegister.Email.length === 0 || !that.binding.dataRegister.Email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)|| !that.binding.dataRegister.privacyPolicyFlag);
-                    /*if (that.binding.dataRegister.Email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-                        that.binding.loginDisabled = false;
-                    } else {
-                        that.binding.loginDisabled = true;
-                    }*/
                     var loginButton = fragmentElement.querySelector("#loginButton");
                     if (loginButton) {
                         loginButton.disabled = that.binding.loginDisabled;
@@ -412,18 +383,6 @@
                             }
                         }
                     }
-                    /*if (typeof that.binding.dataContact.INITLandID !== "undefined") {
-                        Log.print(Log.l.trace, "calling select initLandData: Id=" + that.binding.dataRegister.INITLandID + "...");
-                        map = AppData.initLandView.getMap();
-                        results = AppData.initLandView.getResults();
-                        if (map && results) {
-                            curIndex = map[that.binding.dataContact.INITLandID];
-                            if (typeof curIndex !== "undefined") {
-                                that.setInitLandItem(results[curIndex]);
-                            }
-                        }
-                    }*/
-                //}
                 Log.ret(Log.l.trace);
                 return WinJS.Promise.as();
             }
