@@ -1251,7 +1251,7 @@ var __meteor_runtime_config__;
                                 var video = videoListItem.querySelector("video");
                                 if (video && video.style) {
                                     if (WinJS.Utilities.hasClass(videoListItem, "selfie-video")) {
-                                        var userName = videoListItem.querySelector(".userName--ZsKYfV");
+                                        var userName = videoListItem.querySelector(".userName--ZsKYfV, .dropdownTrigger--Z1Fp5dg");
                                         if (userName) {
                                             var userNameText = userName.textContent;
                                             if (typeof userNameText === "string") {
