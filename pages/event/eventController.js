@@ -249,7 +249,7 @@
                     Log.call(Log.l.trace, "Register.Controller.");
                     var logOffButton = pageElement.querySelector("#logOffButton");
                     that.binding.registerEmail = AppData._persistentStates.registerData.Email;
-                    var confirmTitle = getResourceText("event.labelLogOff") + that.binding.registerEmail;
+                    var confirmTitle = getResourceText("event.labelLogOff") + " " + that.binding.registerEmail;
                     confirm(confirmTitle, function (result) {
                         if (result) {
                             AppBar.busy = true;
