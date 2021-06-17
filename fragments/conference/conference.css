@@ -646,10 +646,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     pointer-events: none;
 }
 
+#conference.mediaview .video-overlay-is-left:not(.presenter-mode) .video-overlay-left,
+#conference.mediaview .video-overlay-is-right:not(.presenter-mode) .video-overlay-right {
+    z-index: 10;
+}
+
 #conference.mediaview .presenter-mode-tiled .video-overlay-left,
 #conference.mediaview .presenter-mode-tiled .video-overlay-right {
     width: calc(calc(100% - 100px) * 0.38) !important;
     height: calc(100% - 50px) !important;
+    z-index: 10;
 }
 
 #conference.mediaview .presenter-mode-small .video-overlay-left,
