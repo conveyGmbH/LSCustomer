@@ -6,6 +6,8 @@
     "label.events"          : "Series",
     "label.event"           : "Event",
     "label.overview"	    : "Overview",
+    "label.on"	            : "On",
+    "label.off"	            : "Off",
 
     "tooltip.home"          : "Back to the overview page",
     "tooltip.fullscreen"    : "Show fullscreen",
@@ -21,6 +23,8 @@
     "event.title"           : "Event",
     "event.moderators"      : "Moderators",
     "event.labelLogOff"     : "Would you like to log out?",
+    "event.showPresentation" : "Show presentation",
+    "event.showVideoList"    : "Show videos",
 
     "conference.waitMessage": "Have fun on your online conference today",
 

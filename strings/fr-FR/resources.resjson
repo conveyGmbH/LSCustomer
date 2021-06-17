@@ -5,6 +5,8 @@
     "label.home"            : "Démarrer",
     "label.events"          : "Série",
     "label.event"           : "Événement",
+    "label.on"	            : "On",
+    "label.off"	            : "Off",
 
 	"tooltip.home"          : "Retour à la page d'aperçu",
     "tooltip.fullscreen"    : "Afficher en plein écran",
@@ -20,6 +22,8 @@
     "event.title"           : "Événement",
     "event.moderators"      : "Modérateurs",
     "event.labelLogOff": "Voulez-vous vous déconnecter ?",
+    "event.showPresentation" : "Montrer la présentation",
+    "event.showVideoList"    : "Montrer les vidéos",
 
     "conference.waitMessage": "Amusez-vous avec votre conférence en ligne aujourd'hui",
 
