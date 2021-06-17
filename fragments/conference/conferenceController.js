@@ -1535,14 +1535,17 @@ var __meteor_runtime_config__;
                 },
                 clickToggleSwitch: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    if (event.currentTarget && AppBar.notifyModified) {
+                    if (event.currentTarget) {
                         var command = event.currentTarget.id;
                         var toggle = event.currentTarget.winControl;
-                        if (toggle && command && typeof that.binding[command] !== "undefined") {
-                            if (!toggle.checked) {
-                                command = command.replace(/show/, "hide");
+                        if (toggle && command) {
+                            var value = that.binding[command];
+                            if (typeof value === "boolean" && value !== toggle.checked) {
+                                if (!toggle.checked) {
+                                    command = command.replace(/show/, "hide");
+                                }
+                                that.submitCommandMessage(command, event);
                             }
-                            that.submitCommandMessage(command, event);
                         }
                     }
                     Log.ret(Log.l.info);
@@ -1626,6 +1629,7 @@ var __meteor_runtime_config__;
                 presenterModeSmall: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull"] }
             };
             var handleCommand = function(command) {
+                var prevNotivyModified = AppBar.notifyModified;
                 Log.print(Log.l.info, "queue command=" + command);
                 var commandInfo = that.commandInfo[command];
                 if (!commandInfo) {
@@ -1636,15 +1640,17 @@ var __meteor_runtime_config__;
                     return !commandInfo.redundantList || commandInfo.redundantList.indexOf(commandToFilter) < 0;
                 });
                 that.commandQueue.push(command);
-                return WinJS.Promise.timeout(50).then(function() {
+                return WinJS.Promise.timeout(250).then(function() {
                     var commandsToHandle = that.commandQueue;
                     that.commandQueue = [];
+                    AppBar.notifyModified = false;
                     commandsToHandle.forEach(function(queuedCommand) {
                         if (typeof that.eventHandlers[queuedCommand] === "function") {
                             Log.print(Log.l.info, "handle command=" + queuedCommand);
                             that.eventHandlers[queuedCommand]();
                         }
                     });
+                    AppBar.notifyModified = prevNotivyModified;
                     if (!that.adjustContentPositionsPromise) {
                         that.adjustContentPositionsPromise = WinJS.Promise.timeout(0).then(function() {
                             that.adjustContentPositions();
