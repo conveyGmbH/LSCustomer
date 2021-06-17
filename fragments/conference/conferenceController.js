@@ -944,11 +944,13 @@ var __meteor_runtime_config__;
                         var overlayIsHidden = WinJS.Utilities.hasClass(overlayElement, "hideOverlay--Z13uLxg");
                         var videoList = mediaContainer.querySelector(".videoList--1OC49P");
                         if (videoList && videoList.style && overlayElement.style) {
-                            if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
-                                actionsBarRight = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .right--DUFDc");
-                                if (actionsBarRight && actionsBarRight.lastElementChild !== showVideoListToggleContainer) {
-                                    actionsBarRight.appendChild(showVideoListToggleContainer);
-                                    showVideoListToggleContainer.style.display = "inline-block";
+                            if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                                if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
+                                    actionsBarRight = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .right--DUFDc");
+                                    if (actionsBarRight && actionsBarRight.lastElementChild !== showVideoListToggleContainer) {
+                                        actionsBarRight.appendChild(showVideoListToggleContainer);
+                                        showVideoListToggleContainer.style.display = "inline-block";
+                                    }
                                 }
                             }
                             if (!videoListDefaults.videoListObserver) {
