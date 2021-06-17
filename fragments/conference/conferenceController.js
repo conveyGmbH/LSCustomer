@@ -43,7 +43,9 @@ var __meteor_runtime_config__;
                 activeVideoCount: 0,
                 mediaContainerObserver: null,
                 videoListObserver: null,
-                contentObserver: null
+                contentObserver: null,
+                showPresentation: true,
+                showVideos: true
             };
             var userListDefaults = {
                 show: true,
@@ -1278,17 +1280,19 @@ var __meteor_runtime_config__;
                 }).then(function () {
                     var url = that.binding.dataConference && that.binding.dataConference.URL;
                     if (url) {
-                        var query = url.split("?")[1];
+                        var query = getQueryStringParameters(url);
                         if (window.history && query && Application.query) {
                             var state = {};
                             var title = "";
-                            var key = query.split("=")[0];
-                            var value = query.split("=")[1];
-                            if (key && value) {
-                                Application.query[key] = value;
-                                var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
-                                window.history.pushState(state, title, location);
+                            for (var key in query) {
+                                if (query.hasOwnProperty(key)) {
+                                    var value = query[key];
+                                    Log.print(Log.l.trace, "added "+ key + "=" + value);
+                                    Application.query[key] = value;
+                                }
                             }
+                            var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
+                            window.history.pushState(state, title, location);
                         };
                         var path = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
                         return renderImpl(path, conference, false);
@@ -1487,6 +1491,14 @@ var __meteor_runtime_config__;
                         Log.print(Log.l.info, "command=" + command);
                         that.submitCommandMessage(command, event);
                     }
+                    Log.ret(Log.l.info);
+                },
+                clickShowPresentation: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    Log.ret(Log.l.info);
+                },
+                clickShowVideos: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
                     Log.ret(Log.l.info);
                 }
             }
