@@ -1090,7 +1090,7 @@ var __meteor_runtime_config__;
                                         WinJS.Utilities.addClass(overlayElement, "video-overlay-left");
                                     }
                                 }
-                                if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
                                     var heightFullSize = videoList.childElementCount * videoListDefaults.height;
                                     if (heightFullSize > videoList.clientHeight) {
                                         if (!WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
