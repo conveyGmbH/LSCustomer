@@ -351,17 +351,19 @@
                         that.binding.recordedLink = result.ConferenceLink;
                         if (that.binding.recordedLink) {
                             var url = that.binding.recordedLink;
-                            var query = url.split("?")[1];
+                            var query = getQueryStringParameters(url);
                             if (window.history && query && Application.query) {
                                 var state = {};
                                 var title = "";
-                                var key = query.split("=")[0];
-                                var value = query.split("=")[1];
-                                if (key && value) {
-                                    Application.query[key] = value;
-                                    var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
-                                    window.history.pushState(state, title, location);
+                                for (var key in query) {
+                                    if (query.hasOwnProperty(key)) {
+                                        var value = query[key];
+                                        Log.print(Log.l.trace, "added "+ key + "=" + value);
+                                        Application.query[key] = value;
+                                    }
                                 }
+                                var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
+                                window.history.pushState(state, title, location);
                             };
                         } else {
                             // wenn keine recordedContent vorhanden dann zeige meldung -> recordedContent läuft noch nicht -> zurück button auf events
