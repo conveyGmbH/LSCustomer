@@ -359,7 +359,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .media--Z1xJW08 {
     max-width: calc(100% - 36px);
     max-height: calc(100% - 72px);
-    margin: 10px 10px 50px 10px !important;
+    margin: 20px 10px 50px 10px !important;
 }
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden) .content--Z2gO9GE,
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden) .content--Z2gO9GE {
