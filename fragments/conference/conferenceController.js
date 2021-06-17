@@ -14,7 +14,7 @@ var __meteor_runtime_config__;
 
     var elementSelectors = {
         closeDesc: "#conference.mediaview button[aria-describedby=\"closeDesc\"]",
-        restoreDesc: "button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF"
+        restoreDesc: "#conference.mediaview .right--DUFDc button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF"
     };
 
     var magicStart = "&lt;!--";
@@ -43,9 +43,7 @@ var __meteor_runtime_config__;
                 activeVideoCount: 0,
                 mediaContainerObserver: null,
                 videoListObserver: null,
-                contentObserver: null,
-                showPresentation: true,
-                showVideos: true
+                contentObserver: null
             };
             var userListDefaults = {
                 show: true,
@@ -63,11 +61,20 @@ var __meteor_runtime_config__;
                 },
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
-                dataDocText: AppBar.scope.binding.dataDocText
+                dataDocText: AppBar.scope.binding.dataDocText,
+                showConference: false,
+                showPresentation: true,
+                showVideoList: true,
+                labelShowPresentation: getResourceText("event.showPresentation"),
+                labelShowVideoList: getResourceText("event.showVideoList"),
+                labelOn: getResourceText("label.on"),
+                labelOff: getResourceText("label.off")
             }, commandList]);
 
             var conference = fragmentElement.querySelector("#conference");
             var presenterButtonContainer = fragmentElement.querySelector(".modSession .presenter-button-container");
+            var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
+            var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
 
             this.sendResizePromise = null;
             this.showUserListPromise = null;
@@ -78,6 +85,7 @@ var __meteor_runtime_config__;
             this.submitCommandMessagePromise = null;
             this.meetingDoc = null;
             this.commandQueue = [];
+            this.deviceList = [];
             
             this.showUserListFailedCount = 0;
             this.adjustContentPositionsFailedCount = 0;
@@ -533,6 +541,10 @@ var __meteor_runtime_config__;
                     that.filterModeratorsPromise.cancel();
                     that.filterModeratorsPromise = null;
                 }
+                if (!that.binding.dataConference || !that.binding.dataConference.URL) {
+                    Log.ret(Log.l.trace, "no conference URL!");
+                    return;
+                }
                 var userList = fragmentElement.querySelector(".userList--11btR3");
                 if (userList) {
                     var moderatorCount = 0;
@@ -642,6 +654,10 @@ var __meteor_runtime_config__;
             var showUserList = function(show, onlyModerators) {
                 var ret = null;
                 Log.call(Log.l.trace, "Conference.Controller.", "show="+show+" onlyModerators="+onlyModerators);
+                if (!that.binding.dataConference || !that.binding.dataConference.URL) {
+                    Log.ret(Log.l.trace, "no conference URL!");
+                    return ret;
+                }
                 if (typeof show === "undefined") {
                     show = userListDefaults.show;
                 } else {
@@ -755,6 +771,7 @@ var __meteor_runtime_config__;
 
             var adjustContentPositions = function() {
                 var ret = null;
+                var actionsBarRight = null;
                 var direction = videoListDefaults.direction;
                 Log.call(Log.l.trace, "Conference.Controller.", "direction="+direction);
                 if (!direction) {
@@ -764,6 +781,10 @@ var __meteor_runtime_config__;
                 if (that.adjustContentPositionsPromise) {
                     that.adjustContentPositionsPromise.cancel();
                     that.adjustContentPositionsPromise = null;
+                }
+                if (!that.binding.dataConference || !that.binding.dataConference.URL) {
+                    Log.ret(Log.l.trace, "no conference URL!");
+                    return;
                 }
                 var videoPLayerOpened = false;
                 var screenShareOpened = false;
@@ -873,13 +894,18 @@ var __meteor_runtime_config__;
                             that.onWheelSvg = onWheelSvg;
                             that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
                         }
-                        if (presenterButtonContainer) {
+                        if (presenterButtonContainer && presenterButtonContainer.style) {
                             var navBarTopCenter = fragmentElement.querySelector(".navbar--Z2lHYbG .top--Z25OvN9 .center--2pV1iJ");
                             if (navBarTopCenter && navBarTopCenter.firstElementChild !== presenterButtonContainer) {
                                 navBarTopCenter.insertBefore(presenterButtonContainer, navBarTopCenter.firstElementChild);
-                                if (presenterButtonContainer.style) {
-                                    presenterButtonContainer.style.display = "inline-block";
-                                }
+                                presenterButtonContainer.style.display = "inline-block";
+                            }
+                        }
+                        if (showPresentationToggleContainer && showPresentationToggleContainer.style) {
+                            actionsBarRight = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .right--DUFDc");
+                            if (actionsBarRight && actionsBarRight.firstElementChild !== showPresentationToggleContainer) {
+                                actionsBarRight.insertBefore(showPresentationToggleContainer, actionsBarRight.firstElementChild);
+                                showPresentationToggleContainer.style.display = "inline-block";
                             }
                         }
                     }
@@ -918,6 +944,13 @@ var __meteor_runtime_config__;
                         var overlayIsHidden = WinJS.Utilities.hasClass(overlayElement, "hideOverlay--Z13uLxg");
                         var videoList = mediaContainer.querySelector(".videoList--1OC49P");
                         if (videoList && videoList.style && overlayElement.style) {
+                            if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
+                                actionsBarRight = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .right--DUFDc");
+                                if (actionsBarRight && actionsBarRight.lastElementChild !== showVideoListToggleContainer) {
+                                    actionsBarRight.appendChild(showVideoListToggleContainer);
+                                    showVideoListToggleContainer.style.display = "inline-block";
+                                }
+                            }
                             if (!videoListDefaults.videoListObserver) {
                                 videoListDefaults.videoListObserver = new MutationObserver(function(mutationList, observer) {
                                     Log.print(Log.l.trace, "videoList childList changed!");
@@ -1080,7 +1113,7 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             }
-                            that.adjustContentPositionsFailedCount = 0
+                            that.adjustContentPositionsFailedCount = 0;
                         } else {
                             if (videoListDefaults.videoListObserver) {
                                 videoListDefaults.videoListObserver.disconnect();
@@ -1143,6 +1176,7 @@ var __meteor_runtime_config__;
             }
             this.adjustContentPositions = adjustContentPositions;
 
+            var lastDeviceListTime = 0;
             var checkForInactiveVideo = function() {
                 var hideInactive = videoListDefaults.hideInactive;
                 var hideMuted = videoListDefaults.hideMuted;
@@ -1152,71 +1186,121 @@ var __meteor_runtime_config__;
                     that.checkForInactiveVideoPromise.cancel();
                     that.checkForInactiveVideoPromise = null;
                 }
-                var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
-                if (mediaContainer) {
-                    if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
-                        presenterModeTiledIsSet = true;
-                    }
+                if (!that.binding.dataConference || !that.binding.dataConference.URL) {
+                    Log.ret(Log.l.trace, "no conference URL!");
+                    return WinJS.Promise.as();
                 }
-                var videoList = fragmentElement.querySelector(".videoList--1OC49P");
-                if (videoList) {
-                    var i = 0;
-                    var numVideos = 0;
-                    var now = Date.now();
-                    var videoListItem = videoList.firstElementChild;
-                    var prevActiveItem = null;
-                    while (videoListItem) {
-                        var content = videoListItem.firstElementChild;
-                        if (content) {
-                            var muted = null;
-                            var isHidden = false;
-                            if (WinJS.Utilities.hasClass(content, "talking--26lGzY")) {
-                                videoListDefaults.contentActivity[i] = now;
-                            } else {
-                                muted = content.querySelector(".muted--quAxq") || content.querySelector(".icon-bbb-listen");
-                            }
-                            if ((muted || !videoListDefaults.contentActivity[i]) && (hideInactive || hideMuted) ||
-                                hideInactive && now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay) {
-                                videoListItem.style.display = "none";
-                                isHidden = true;
-                            } else {
-                                if (prevActiveItem) {
-                                    if (videoListItem !== prevActiveItem.nextSibling) {
-                                        videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
-                                    }
-                                } else {
-                                    if (videoListItem !== videoList.firstElementChild) {
-                                        videoList.insertBefore(videoListItem, videoList.firstElementChild);
-                                    }
-                                }
-                                prevActiveItem = videoListItem;
-                                videoListItem.style.display = "flex";
-                                numVideos++;
-                            }
-                            var video = videoListItem.querySelector("video");
-                            if (video && video.style) {
-                                if (presenterModeTiledIsSet && !isHidden) {
-                                    var left = (videoListItem.clientWidth - (videoListItem.clientHeight * video.videoWidth / video.videoHeight)) / 2;
-                                    video.style.left = left.toString() + "px";
-                                } else {
-                                    video.style.left = "";
-                                }
-                            }
-                            i++;
-                        }
-                        videoListItem = videoListItem.nextElementSibling;
+                var ret = new WinJS.Promise.as().then(function() {
+                    var deviceListTime = Date.now();
+                    if (deviceListTime - lastDeviceListTime > 30000 &&
+                        typeof navigator.mediaDevices === "object" &&
+                        typeof navigator.mediaDevices.enumerateDevices === "function") {
+                        lastDeviceListTime = deviceListTime;
+                        return navigator.mediaDevices.enumerateDevices();
+                    } else {
+                        return WinJS.Promise.as();
                     }
-                    videoListDefaults.activeVideoCount = numVideos;
-                    if (!that.adjustContentPositionsPromise) {
-                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
-                            that.adjustContentPositions();
+                }).then(function(deviceList) {
+                    if (deviceList && typeof deviceList.filter === "function" && 
+                        that.deviceList !== deviceList) {
+                        that.deviceList = deviceList.filter(function(device) {
+                            return device.kind === "videoinput";
                         });
                     }
-                }
-                that.checkForInactiveVideoPromise = WinJS.Promise.timeout(hideInactive ? 500 : 2000).then(function() {
-                    that.checkForInactiveVideo();
+                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    if (mediaContainer) {
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
+                            presenterModeTiledIsSet = true;
+                        }
+                    }
+                    var videoList = fragmentElement.querySelector(".videoList--1OC49P");
+                    if (videoList) {
+                        var i = 0;
+                        var numVideos = 0;
+                        var now = Date.now();
+                        var videoListItem = videoList.firstElementChild;
+                        var prevActiveItem = null;
+                        while (videoListItem) {
+                            var content = videoListItem.firstElementChild;
+                            if (content) {
+                                var muted = null;
+                                var isHidden = false;
+                                if (WinJS.Utilities.hasClass(content, "talking--26lGzY")) {
+                                    videoListDefaults.contentActivity[i] = now;
+                                } else {
+                                    muted = content.querySelector(".muted--quAxq") || content.querySelector(".icon-bbb-listen");
+                                }
+                                if ((muted || !videoListDefaults.contentActivity[i]) && (hideInactive || hideMuted) ||
+                                    hideInactive && now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay) {
+                                    videoListItem.style.display = "none";
+                                    isHidden = true;
+                                } else {
+                                    if (prevActiveItem) {
+                                        if (videoListItem !== prevActiveItem.nextSibling) {
+                                            videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                        }
+                                    } else {
+                                        if (videoListItem !== videoList.firstElementChild) {
+                                            videoList.insertBefore(videoListItem, videoList.firstElementChild);
+                                        }
+                                    }
+                                    prevActiveItem = videoListItem;
+                                    videoListItem.style.display = "flex";
+                                    numVideos++;
+                                }
+                                var video = videoListItem.querySelector("video");
+                                if (video && video.style) {
+                                    if (WinJS.Utilities.hasClass(videoListItem, "selfie-video")) {
+                                        var userName = videoListItem.querySelector(".userName--ZsKYfV");
+                                        if (userName) {
+                                            var userNameText = userName.textContent;
+                                            if (typeof userNameText === "string") {
+                                                var myLabel = " (" + getResourceText("label.me") + ")";
+                                                if (userNameText.indexOf(myLabel) < 0) {
+                                                    userName.textContent = userNameText + myLabel;
+                                                }
+                                            }
+                                        }
+                                    } else if (that.deviceList && that.deviceList.length > 0) {
+                                        var mediaStream = video.srcObject;
+                                        if (mediaStream && typeof mediaStream.getVideoTracks === "function") {
+                                            var videoTrack = mediaStream.getVideoTracks() ? mediaStream.getVideoTracks()[0] : null;
+                                            if (videoTrack && typeof videoTrack.getSettings === "function") {
+                                                var settings = videoTrack.getSettings();
+                                                for (var j = 0; j < that.deviceList.length; j++) {
+                                                    if (that.deviceList[j].deviceId === settings.deviceId) {
+                                                        Log.print(Log.l.trace, "found local "+ that.deviceList[j].kind + ":" + that.deviceList[j].label + " with deviceId=" + that.deviceList[j].deviceId);
+                                                        WinJS.Utilities.addClass(videoListItem, "selfie-video");
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (presenterModeTiledIsSet && !isHidden) {
+                                        var left = (videoListItem.clientWidth - (videoListItem.clientHeight * video.videoWidth / video.videoHeight)) / 2;
+                                        video.style.left = left.toString() + "px";
+                                    } else {
+                                        video.style.left = "";
+                                    }
+                                }
+                                i++;
+                            }
+                            videoListItem = videoListItem.nextElementSibling;
+                        }
+                        videoListDefaults.activeVideoCount = numVideos;
+                        if (!that.adjustContentPositionsPromise) {
+                            that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                that.adjustContentPositions();
+                            });
+                        }
+                    }
+                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(hideInactive ? 500 : 2000).then(function() {
+                        that.checkForInactiveVideo();
+                    });
                 });
                 Log.ret(Log.l.trace);
+                return ret;
             }
             that.checkForInactiveVideo = checkForInactiveVideo;
 
@@ -1227,26 +1311,25 @@ var __meteor_runtime_config__;
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     if (pageControllerName === "eventController") {
-                        return AppData.call("PRC_BBBConferenceLink",
-                            {
-                        //zum test da es für diesen token eine online Event vorhanden ist 
-                        //sonst AppData._persistentStates.registerData.userToken
-                                pUserToken:
-                                    AppData._persistentStates.registerData
-                                        .userToken //'0b24e593-127e-46f6-b034-c2cc178d8c71'  
-                            },
-                            function(json) {
-                        if (json && json.d && json.d.results) {
-                            that.binding.dataConference = json.d.results[0];
-                            AppData._persistentStates.registerData.urlbbb = that.binding.dataConference.URL;
-                            AppBar.scope.binding.showRegister = false;
-                            AppBar.scope.binding.showConference = true;
-                        }
-                        Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
-                            },
-                            function(error) {
-                        Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
-                    });
+                        return AppData.call("PRC_BBBConferenceLink", {
+                            //zum test da es für diesen token eine online Event vorhanden ist 
+                            //sonst AppData._persistentStates.registerData.userToken
+                            pUserToken: AppData._persistentStates.registerData.userToken
+                        }, function(json) {
+                            if (json && json.d && json.d.results) {
+                                that.binding.dataConference = json.d.results[0];
+                                if (that.binding.dataConference) {
+                                    if (that.binding.dataConference.URL) {
+                                        AppData._persistentStates.registerData.urlbbb = that.binding.dataConference.URL;
+                                        AppBar.scope.binding.showConference = true;
+                                    }
+                                }
+                            }
+                            Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
+                        }, function(error) {
+                            Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
+                            AppData.setErrorMsg(AppBar.scope.binding, error);
+                        });
                     } else {
                         return WinJS.Promise.as();
                     }
@@ -1256,24 +1339,24 @@ var __meteor_runtime_config__;
                         modToken = Application.query.UserToken;
                     }
                     if (pageControllerName === "modSessionController") {
-                        return AppData.call("PRC_BBBModeratorLink",
-                            {
-                        pVeranstaltungID: 0,
-                        pAlias: null,
-                        pUserToken: modToken //aus startlink 
-                            },
-                            function(json) {
-                        if (json && json.d && json.d.results) {
-                            that.binding.dataConference = json.d.results[0];
-                            var modSessionLink = that.binding.dataConference.URL;
-                            AppBar.scope.binding.modSessionLink = that.binding.dataConference.URL;
-                            AppBar.scope.binding.showConference = true;
-                        }
-                        Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
-                            },
-                            function(error) {
-                        Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
-                    });
+                        return AppData.call("PRC_BBBModeratorLink", {
+                            pVeranstaltungID: 0,
+                            pAlias: null,
+                            pUserToken: modToken //aus startlink 
+                        }, function(json) {
+                            if (json && json.d && json.d.results) {
+                                that.binding.dataConference = json.d.results[0];
+                                if (that.binding.dataConference) {
+                                    if (that.binding.dataConference.URL) {
+                                        AppBar.scope.binding.showConference = true;
+                                    }
+                                }
+                            }
+                            Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
+                        }, function(error) {
+                            Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
+                            AppData.setErrorMsg(AppBar.scope.binding, error);
+                        });
                     } else {
                         return WinJS.Promise.as();
                     }
@@ -1297,6 +1380,7 @@ var __meteor_runtime_config__;
                         var path = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
                         return renderImpl(path, conference, false);
                     } else {
+                        AppData.setErrorMsg(AppBar.scope.binding, that.binding.dataConference.ResultMessage);
                         // wenn keine conference vorhanden dann zeige meldung -> Conference läuft noch nicht -> zurück button auf events
                         // setze manuell auf ein ungültigen Status
                         AppData._persistentStates.registerData.confirmStatusID = 403;
@@ -1400,6 +1484,7 @@ var __meteor_runtime_config__;
                     if (restoreDescButton) {
                         restoreDescButton.click();
                     }
+                    that.binding.showPresentation = true;
                     if (videoListDefaults.direction === videoListDefaults.default) {
                         WinJS.Promise.timeout(50).then(function() {
                             var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
@@ -1419,17 +1504,8 @@ var __meteor_runtime_config__;
                     if (closeDescButton) {
                         closeDescButton.click();
                     }
+                    that.binding.showPresentation = false;
                     that.setPresenterModeState("off");
-                    Log.ret(Log.l.info);
-                },
-                hideVideoList: function() {
-                    Log.call(Log.l.info, "Conference.Controller.");
-                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
-                    if (mediaContainer) {
-                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
-                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-hidden");
-                        }
-                    }
                     Log.ret(Log.l.info);
                 },
                 showVideoList: function() {
@@ -1439,6 +1515,18 @@ var __meteor_runtime_config__;
                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-hidden");
                         }
+                        that.binding.showVideoList = true;
+                    } 
+                    Log.ret(Log.l.info);
+                },
+                hideVideoList: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    if (mediaContainer) {
+                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
+                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-hidden");
+                        }
+                        that.binding.showVideoList = false;
                     }
                     Log.ret(Log.l.info);
                 },
@@ -1486,19 +1574,28 @@ var __meteor_runtime_config__;
                 },
                 clickPresenterMode: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var command = event && event.currentTarget && event && event.currentTarget.id;
+                    var command = event && event.currentTarget && event.currentTarget.id;
                     if (command) {
                         Log.print(Log.l.info, "command=" + command);
                         that.submitCommandMessage(command, event);
                     }
                     Log.ret(Log.l.info);
                 },
-                clickShowPresentation: function(event) {
+                clickToggleSwitch: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    Log.ret(Log.l.info);
-                },
-                clickShowVideos: function(event) {
-                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (event.currentTarget) {
+                        var command = event.currentTarget.id;
+                        var toggle = event.currentTarget.winControl;
+                        if (toggle && command) {
+                            var value = that.binding[command];
+                            if (typeof value === "boolean" && value !== toggle.checked) {
+                                if (!toggle.checked) {
+                                    command = command.replace(/show/, "hide");
+                                }
+                                that.submitCommandMessage(command, event);
+                            }
+                        }
+                    }
                     Log.ret(Log.l.info);
                 }
             }
@@ -1580,6 +1677,7 @@ var __meteor_runtime_config__;
                 presenterModeSmall: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull"] }
             };
             var handleCommand = function(command) {
+                var prevNotivyModified = AppBar.notifyModified;
                 Log.print(Log.l.info, "queue command=" + command);
                 var commandInfo = that.commandInfo[command];
                 if (!commandInfo) {
@@ -1590,15 +1688,17 @@ var __meteor_runtime_config__;
                     return !commandInfo.redundantList || commandInfo.redundantList.indexOf(commandToFilter) < 0;
                 });
                 that.commandQueue.push(command);
-                return WinJS.Promise.timeout(50).then(function() {
+                return WinJS.Promise.timeout(250).then(function() {
                     var commandsToHandle = that.commandQueue;
                     that.commandQueue = [];
+                    AppBar.notifyModified = false;
                     commandsToHandle.forEach(function(queuedCommand) {
                         if (typeof that.eventHandlers[queuedCommand] === "function") {
                             Log.print(Log.l.info, "handle command=" + queuedCommand);
                             that.eventHandlers[queuedCommand]();
                         }
                     });
+                    AppBar.notifyModified = prevNotivyModified;
                     if (!that.adjustContentPositionsPromise) {
                         that.adjustContentPositionsPromise = WinJS.Promise.timeout(0).then(function() {
                             that.adjustContentPositions();
@@ -1793,23 +1893,33 @@ var __meteor_runtime_config__;
             } else {
                 Application.hookXhrSend = null;
             }
+
+            if (typeof navigator.mediaDevices === "object" &&
+                typeof navigator.mediaDevices.enumerateDevices === "function") {
+                navigator.mediaDevices.enumerateDevices().then(function(deviceList) {
+                    that.deviceList = deviceList;
+                });
+            }
             videoListDefaults.direction = videoListDefaults.right;
             videoListDefaults.hideInactive = !!that.binding.dataEvent.HideSilentVideos;
 
             that.processAll().then(function () {
+                AppBar.notifyModified = false;
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
+                AppBar.notifyModified = true;
                 that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
                 that.checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
                     that.checkForInactiveVideo();
                 });
-                if (!that.adjustContentPositionsPromise) {
-                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
-                        that.adjustContentPositions();
-                    });
-                }
+                that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
+                    that.adjustContentPositions();
+                });
+                return that.adjustContentPositionsPromise;
+            }).then(function () {
+                return that.sendResize(2000);
             });
             Log.ret(Log.l.trace);
         })

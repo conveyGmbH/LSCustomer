@@ -8,12 +8,75 @@
     height: calc(100% - 8px);
 }
 
-.modSession #conference.mediaview .left--18SBXP,
+.modSession #conference.mediaview :not(section.actionsbar--Z1ant6U) .left--18SBXP,
 .modSession #conference.mediaview .right--Z4dKWq,
 .modSession #conference.mediaview .center--2pV1iJ {
     align-items: flex-start;
 }
 
+.show-presentation-toggle-container,
+.show-videolist-toggle-container {
+    display: none;
+    margin: 0 10px;
+}
+
+.show-presentation-toggle-container .win-toggleswitch .win-toggleswitch-header,
+.show-videolist-toggle-container .win-toggleswitch .win-toggleswitch-header {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--color-gray);
+    line-height: 1;
+}
+
+.show-presentation-toggle-container .win-toggleswitch .win-toggleswitch-value,
+.show-videolist-toggle-container .win-toggleswitch .win-toggleswitch-value {
+    margin-left: 10px;
+    height: 20px;
+    vertical-align: top;
+    position: absolute;
+    font-weight: 400;
+    font-size: var(--font-size-small);
+    color: var(--color-gray-dark);
+    flex-grow: 1;
+    line-height: 1.7;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.show-presentation-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
+.show-videolist-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
+.show-presentation-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-thumb,
+.show-videolist-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-thumb {
+    background-color: var(--btn-primary-bg);
+}
+.show-presentation-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
+.show-videolist-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track {
+    opacity: 0.8;
+}
+.show-presentation-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-track,
+.show-videolist-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-track {
+    border-color: var(--btn-primary-bg);
+    opacity: 0.8;
+}
+
+.show-presentation-toggle-container .win-toggleswitch-on:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
+.show-videolist-toggle-container .win-toggleswitch-on:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
+.show-presentation-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-thumb,
+.show-videolist-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-thumb { 
+    background-color: var(--btn-primary-bg) !important;
+    opacity: 1;
+}
+.show-presentation-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
+.show-videolist-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track {
+    border-color: var(--btn-primary-bg) !important;
+    opacity: 1;
+}
+.win-toggleswitch-pressed .win-toggleswitch-track {
+    background-color: rgba(128,128,128,0.4);
+}
 .presenter-button-container {
     display: none;
     margin: 0 10px;
@@ -296,7 +359,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .media--Z1xJW08 {
     max-width: calc(100% - 36px);
     max-height: calc(100% - 72px);
-    margin: 10px 10px 50px 10px !important;
+    margin: 20px 10px 50px 10px !important;
 }
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden) .content--Z2gO9GE,
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden) .content--Z2gO9GE {
@@ -306,13 +369,35 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .actionsbar--Z1ant6U {
     height: 64px !important;
 }
-:not(view-size-medium) #conference.mediaview .actionsbar--Z1ant6U {
+/*:not(view-size-medium)*/ 
+#conference.mediaview .actionsbar--Z1ant6U {
     display: block;
     position: absolute;
     bottom: 0;
+    width: 100%;
+    margin: 0;
+    /*
     width: calc(100% - 480px);
     margin: 0 240px;
+    */
 }
+
+#conference.mediaview .actionsbar--Z1ant6U .left--Z1rLKlO {
+    align-items: center;
+    flex: 1;
+}
+#conference.mediaview .actionsbar--Z1ant6U .center--ZyfFaC {
+    justify-content: center;
+    flex: 2;
+}
+#conference.mediaview .actionsbar--Z1ant6U .right--DUFDc {
+    position: relative;
+    bottom: 0;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1
+}
+#conference.mediaview
 /* dragged video drop zone */
 #conference.mediaview .dropZoneTop--A7khq,
 #conference.mediaview .dropZoneBottom--ZYMK7J {
@@ -433,8 +518,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* hide button: hide-presentation  */
-.event #conference.mediaview button[aria-describedby="closeDesc"],
-.event #conference.mediaview button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF {
+/*.event*/ #conference.mediaview button[aria-describedby="closeDesc"],
+/*.event*/ #conference.mediaview .right--DUFDc button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF {
     display: none;
 }
 /* set fulldcreen buttonto the top */
@@ -656,7 +741,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute;
 }
 
-
+#conference.mediaview .selfie-video .videoContainer--rssHk > video {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
 /* Chat textarea */
 #conference.mediaview .input--2wilPX {
     padding: calc(var(--sm-padding-y) * 2.5) calc(var(--sm-padding-x) * 1.25) !important;

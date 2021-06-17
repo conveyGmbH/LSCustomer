@@ -6,6 +6,9 @@
     "label.events"          : "Serie",
     "label.event"           : "Veranstaltung",
 	"label.overview"	    : "Überblick",
+    "label.on"	            : "An",
+    "label.off"	            : "Aus",
+	"label.me"              : "Ich",
 
     "tooltip.home"          : "Zurück zur Übersichtseite",
     "tooltip.fullscreen"    : "Bildschirmfüllend anzeigen",
@@ -21,6 +24,8 @@
     "event.title"           : "Veranstaltung",
     "event.moderators"      : "Moderatoren",
 	"event.labelLogOff"     : "Möchten Sie sich abmelden?",
+    "event.showPresentation" : "Präsentation anzeigen",
+    "event.showVideoList"    : "Videos anzeigen",
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 
