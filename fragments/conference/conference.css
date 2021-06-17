@@ -491,12 +491,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     z-index: 10;
 }
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy > video:not(:fullscreen) {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2) !important;
 }
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 > div {
     z-index: 10;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2) !important;
 }
 
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX) {
@@ -587,7 +587,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 /* polling flyout */
 #conference.mediaview .pollingContainer--1xRnAH {
     border: 1px solid var(--color-gray-lighter, #a7b3bd);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     transform: translate3d(0,0,0);
     transition-property: box-shadow,transform;
     transition-duration: 200ms;
@@ -598,7 +598,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .pollingContainer--1xRnAH:hover,
 #conference.mediaview .pollingContainer--1xRnAH:focus {
     transform: translate3d(0,-2px,0);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     transition-property: box-shadow,transform;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
@@ -663,15 +663,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     height: 288px !important;
     top: calc(100% - 300px);
     left: 10px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1) !important;
-    z-index: 10;
 }
 #conference.mediaview .presenter-mode-full .video-overlay-right {
     width: 384px !important;
     height: 288px !important;
     top: calc(100% - 300px);
     right: 10px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1) !important;
+}
+#conference.mediaview .presenter-mode-full:not(.video-overlay-is-empty) .video-overlay-left,
+#conference.mediaview .presenter-mode-full:not(.video-overlay-is-empty) .video-overlay-right {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2) !important;
     z-index: 10;
 }
 

@@ -973,6 +973,15 @@ var __meteor_runtime_config__;
                             } else {
                                 numVideos = videoList.childElementCount;
                             }
+                            if (numVideos > 0) {
+                                if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-empty");
+                                }
+                            } else {
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
+                                    WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-empty");
+                                }
+                            }
                             var curChild = videoList.firstElementChild;
                             if (!content ||
                                 direction === videoListDefaults.default ||
@@ -1081,37 +1090,39 @@ var __meteor_runtime_config__;
                                         WinJS.Utilities.addClass(overlayElement, "video-overlay-left");
                                     }
                                 }
-                                var heightFullSize = videoList.childElementCount * videoListDefaults.height;
-                                if (heightFullSize > videoList.clientHeight) {
-                                    if (!WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
-                                        WinJS.Utilities.addClass(videoList, "video-list-double-columns");
-                                    }
-                                    var heightHalfSize = Math.floor(videoList.childElementCount / 2.0 + 0.5) * videoListDefaults.height / 2;
-                                    var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoListDefaults.height);
-                                    var curCount = 0;
-                                    while (curChild) {
-                                        if (curChild.style) {
-                                            if (curCount < resCount) {
-                                                curChild.style.gridColumn = "span 2";
-                                                curChild.style.gridRow = "span 2";
-                                                curCount++;
-                                            } else {
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
+                                    var heightFullSize = videoList.childElementCount * videoListDefaults.height;
+                                    if (heightFullSize > videoList.clientHeight) {
+                                        if (!WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
+                                            WinJS.Utilities.addClass(videoList, "video-list-double-columns");
+                                        }
+                                        var heightHalfSize = Math.floor(videoList.childElementCount / 2.0 + 0.5) * videoListDefaults.height / 2;
+                                        var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoListDefaults.height);
+                                        var curCount = 0;
+                                        while (curChild) {
+                                            if (curChild.style) {
+                                                if (curCount < resCount) {
+                                                    curChild.style.gridColumn = "span 2";
+                                                    curChild.style.gridRow = "span 2";
+                                                    curCount++;
+                                                } else {
+                                                    curChild.style.gridColumn = "";
+                                                    curChild.style.gridRow = "";
+                                                }
+                                            }
+                                            curChild = curChild.nextSibling;
+                                        }
+                                    } else {
+                                        while (curChild) {
+                                            if (curChild.style) {
                                                 curChild.style.gridColumn = "";
                                                 curChild.style.gridRow = "";
                                             }
+                                            curChild = curChild.nextSibling;
                                         }
-                                        curChild = curChild.nextSibling;
-                                    }
-                                } else {
-                                    while (curChild) {
-                                        if (curChild.style) {
-                                            curChild.style.gridColumn = "";
-                                            curChild.style.gridRow = "";
+                                        if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
+                                            WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
                                         }
-                                        curChild = curChild.nextSibling;
-                                    }
-                                    if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
-                                        WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
                                     }
                                 }
                             }
