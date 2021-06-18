@@ -1244,6 +1244,7 @@ var __meteor_runtime_config__;
                                 var now = Date.now();
                                 var videoListItem = videoList.firstElementChild;
                                 var prevActiveItem = null;
+                                var prevInactiveItem = null;
                                 while (videoListItem) {
                                     var content = videoListItem.firstElementChild;
                                     if (content) {
@@ -1259,7 +1260,7 @@ var __meteor_runtime_config__;
                                              hideInactive && now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay)) {
                                             videoListItem.style.display = "none";
                                             isHidden = true;
-                                        } else {
+                                        } else if (hideInactive || hideMuted) {
                                             if (prevActiveItem) {
                                                 if (videoListItem !== prevActiveItem.nextSibling) {
                                                     videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
@@ -1270,6 +1271,30 @@ var __meteor_runtime_config__;
                                                 }
                                             }
                                             prevActiveItem = videoListItem;
+                                            videoListItem.style.display = "flex";
+                                            numVideos++;
+                                        } else {
+                                            if (muted || now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay) {
+                                                if (prevInactiveItem) {
+                                                    if (videoListItem !== prevInactiveItem.nextSibling) {
+                                                        videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
+                                                    }
+                                                } else {
+                                                    videoList.appendChild(videoListItem);
+                                                }
+                                                prevInactiveItem = videoListItem;
+                                            } else {
+                                                if (prevActiveItem) {
+                                                    if (videoListItem !== prevActiveItem.nextSibling) {
+                                                        videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                    }
+                                                } else {
+                                                    if (videoListItem !== videoList.firstElementChild) {
+                                                        videoList.insertBefore(videoListItem, videoList.firstElementChild);
+                                                    }
+                                                }
+                                                prevActiveItem = videoListItem;
+                                            }
                                             videoListItem.style.display = "flex";
                                             numVideos++;
                                         }
