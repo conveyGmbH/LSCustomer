@@ -210,6 +210,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .right--Z4dKWq {
     z-index: 1;
 }
+
 #conference.mediaview .wrapper--ZhSWmd .button--Z2dosza,
 #conference.mediaview .ghost--Z136aiN,
 #conference.mediaview .button--yKJ5d {
@@ -369,7 +370,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .actionsbar--Z1ant6U {
     height: 64px !important;
 }
-/*:not(view-size-medium)*/ 
 #conference.mediaview .actionsbar--Z1ant6U {
     display: block;
     position: absolute;
@@ -410,6 +410,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding-top: 0;
 }
 
+.modSession #conference.mediaview .navbar--Z2lHYbG .arrowRight--Zbqp1D,
+.modSession #conference.mediaview .navbar--Z2lHYbG .arrowLeft--1CFBz1 {
+    top: 14px;
+}
 /* hide event title */
 #conference.mediaview .presentationTitle--1LT79g {
     display: none;
@@ -441,18 +445,32 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy {
+    left: 400px;
+    width: calc(100% - 450px) !important;
+}
+.view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy {
     left: 200px;
     width: calc(100% - 250px) !important;
 }
 
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
+    left: 400px;
+    width: calc(100% - 450px);
+}
+.view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
+.view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
     left: 200px;
     width: calc(100% - 250px);
 }
+
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy {
     right: 200px;
     width: calc(100% - 250px) !important;
+}
+.view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy {
+    right: 400px;
+    width: calc(100% - 450px) !important;
 }
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy {
     right: 392px;
@@ -464,6 +482,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
+    right: 400px;
+    width: calc(100% - 450px);
+}
+.view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
+.view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
     right: 200px;
     width: calc(100% - 250px);
 }
@@ -635,7 +658,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute !important;
     left: 0;
     top: 40px;
-    width: 192px !important;
     height: calc(100% - 40px) !important;
     pointer-events: none;
 }
@@ -645,9 +667,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute !important;
     right: 0;
     top: 40px;
-    width: 192px !important;
     height: calc(100% - 40px) !important;
     pointer-events: none;
+}
+#conference.mediaview .video-overlay-left,
+#conference.mediaview .video-overlay-right {
+    width: 384px !important;
+}
+.view-size-biggest #conference.mediaview .video-overlay-left,
+.view-size-biggest #conference.mediaview .video-overlay-right {
+    width: 192px !important;
 }
 
 #conference.mediaview .video-overlay-is-left:not(.presenter-mode) .video-overlay-left,
@@ -702,15 +731,21 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 /* vertical video-list */
 #conference.mediaview .video-list-vertical {
     grid-template-columns: 100% !important;
-    grid-template-rows: repeat(auto-fill, 144px) !important;
+    grid-template-rows: repeat(auto-fill, 288px) !important;
     width: 100% !important;
     height: 100% !important;
 }
 #conference.mediaview .video-list-vertical.video-list-double-columns {
     grid-template-columns: 50% 50% !important;
-    grid-template-rows: repeat(auto-fill, 72px) !important;
+    grid-template-rows: repeat(auto-fill, 144px) !important;
     width: 100% !important;
     height: 100% !important;
+}
+.view-size-biggest #conference.mediaview .video-list-vertical {
+    grid-template-rows: repeat(auto-fill, 144px) !important;
+}
+.view-size-biggest #conference.mediaview .video-list-vertical.video-list-double-columns {
+    grid-template-rows: repeat(auto-fill, 72px) !important;
 }
 
 #conference.mediaview .presenter-mode-tiled .video-list-vertical,
