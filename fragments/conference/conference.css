@@ -654,25 +654,20 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview .video-overlay-left {
-    display: block !important;
-    position: absolute !important;
     left: 0;
-    top: 40px;
-    height: calc(100% - 40px) !important;
-    pointer-events: none;
 }
 
 #conference.mediaview .video-overlay-right {
-    display: block !important;
-    position: absolute !important;
     right: 0;
-    top: 40px;
-    height: calc(100% - 40px) !important;
-    pointer-events: none;
 }
 #conference.mediaview .video-overlay-left,
 #conference.mediaview .video-overlay-right {
+    display: block !important;
+    position: absolute !important;
+    top: 20px;
     width: 384px !important;
+    height: calc(100% - 20px) !important;
+    pointer-events: none;
 }
 .view-size-biggest #conference.mediaview .video-overlay-left,
 .view-size-biggest #conference.mediaview .video-overlay-right {
@@ -785,6 +780,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     width: auto !important;
     display: inline-block;
     position: absolute;
+}
+
+#conference.mediaview .inactive-video-hidden {
+    display: none !important;
 }
 
 #conference.mediaview .selfie-video .videoContainer--rssHk > video {

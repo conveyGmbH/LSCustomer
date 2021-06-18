@@ -771,6 +771,7 @@ var __meteor_runtime_config__;
 
             var adjustContentPositions = function() {
                 var ret = null;
+                var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var actionsBarRight = null;
                 var direction = videoListDefaults.direction;
                 Log.call(Log.l.trace, "Conference.Controller.", "direction="+direction);
@@ -794,7 +795,7 @@ var __meteor_runtime_config__;
                     videoPLayerOpened = true;
                     var videoElement = videoPlayer.firstElementChild;
                     var fullScreenButton = null;
-                    if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
+                    if (pageControllerName === "eventController") {
                         // hide controls on event page!
                         if (videoElement.controls) {
                             videoElement.controls = false;
@@ -982,7 +983,7 @@ var __meteor_runtime_config__;
                                     WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-empty");
                                 }
                             }
-                            var curChild = videoList.firstElementChild;
+                            var videoListItem = videoList.firstElementChild;
                             if (!content ||
                                 direction === videoListDefaults.default ||
                                 WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
@@ -1031,12 +1032,12 @@ var __meteor_runtime_config__;
                                 if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
                                     WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
                                 }
-                                while (curChild) {
-                                    if (curChild.style) {
-                                        curChild.style.gridColumn = "";
-                                        curChild.style.gridRow = "";
+                                while (videoListItem) {
+                                    if (videoListItem.style) {
+                                        videoListItem.style.gridColumn = "";
+                                        videoListItem.style.gridRow = "";
                                     }
-                                    curChild = curChild.nextSibling;
+                                    videoListItem = videoListItem.nextSibling;
                                 }
                                 if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                                     WinJS.Utilities.removeClass(videoList, "video-list-vertical");
@@ -1094,35 +1095,36 @@ var __meteor_runtime_config__;
                                 if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-biggest")) {
                                     imageScale = 0.5;
                                 }
-                                var heightFullSize = videoList.childElementCount * videoListDefaults.height * imageScale;
-                                if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode") &&
-                                    heightFullSize > videoList.clientHeight) {
+                                var videoHeight = videoListDefaults.height * imageScale;
+                                var heightFullSize = numVideos * videoHeight;
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode") && heightFullSize > videoList.clientHeight) {
                                     if (!WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
                                         WinJS.Utilities.addClass(videoList, "video-list-double-columns");
                                     }
-                                    var heightHalfSize = Math.floor(videoList.childElementCount / 2.0 + 0.5) * videoListDefaults.height * imageScale / 2;
-                                    var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoListDefaults.height * imageScale);
+                                    var heightHalfSize = Math.floor(numVideos / 2.0 + 0.5) * videoHeight / 2;
+                                    var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoHeight);
                                     var curCount = 0;
-                                    while (curChild) {
-                                        if (curChild.style) {
-                                            if (curCount < resCount) {
-                                                curChild.style.gridColumn = "span 2";
-                                                curChild.style.gridRow = "span 2";
+                                    while (videoListItem) {
+                                        if (videoListItem.style) {
+                                            if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden") &&
+                                                curCount < resCount) {
+                                                videoListItem.style.gridColumn = "span 2";
+                                                videoListItem.style.gridRow = "span 2";
                                                 curCount++;
                                             } else {
-                                                curChild.style.gridColumn = "";
-                                                curChild.style.gridRow = "";
+                                                videoListItem.style.gridColumn = "";
+                                                videoListItem.style.gridRow = "";
                                             }
                                         }
-                                        curChild = curChild.nextSibling;
+                                        videoListItem = videoListItem.nextSibling;
                                     }
                                 } else {
-                                    while (curChild) {
-                                        if (curChild.style) {
-                                            curChild.style.gridColumn = "";
-                                            curChild.style.gridRow = "";
+                                    while (videoListItem) {
+                                        if (videoListItem.style) {
+                                            videoListItem.style.gridColumn = "";
+                                            videoListItem.style.gridRow = "";
                                         }
-                                        curChild = curChild.nextSibling;
+                                        videoListItem = videoListItem.nextSibling;
                                     }
                                     if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
                                         WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
@@ -1265,57 +1267,12 @@ var __meteor_runtime_config__;
                                         var inactivity = now - videoListDefaults.contentActivity[mediaStreamId];
                                         if ((hideInactive || hideMuted) && muted ||
                                             hideInactive && inactivity > videoListDefaults.inactivityDelay) {
-                                            videoListItem.style.display = "none";
-                                            isHidden = true;
-                                        } else if (hideInactive || hideMuted) {
-                                            if (prevActiveItem) {
-                                                if (videoListItem !== prevActiveItem.nextSibling) {
-                                                    videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
-                                                }
-                                            } else {
-                                                if (videoListItem !== videoList.firstElementChild) {
-                                                    videoList.insertBefore(videoListItem, videoList.firstElementChild);
-                                                }
+                                            if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
+                                                WinJS.Utilities.addClass(videoListItem, "inactive-video-hidden");
                                             }
-                                            prevActiveItem = videoListItem;
-                                            videoListItem.style.display = "flex";
-                                            numVideos++;
+                                            isHidden = true;
                                         } else {
-                                            if (muted) {
-                                                if (prevMutedItem) {
-                                                    if (videoListItem !== prevMutedItem.nextSibling) {
-                                                        videoList.insertBefore(videoListItem, prevMutedItem.nextSibling);
-                                                    }
-                                                } else if (prevInactiveItem) {
-                                                    if (videoListItem !== prevInactiveItem.nextSibling) {
-                                                        videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
-                                                    }
-                                                } else if (prevActiveItem) {
-                                                    if (videoListItem !== prevActiveItem.nextSibling) {
-                                                        videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
-                                                    }
-                                                } else {
-                                                    if (videoListItem !== videoList.firstElementChild) {
-                                                        videoList.insertBefore(videoListItem, videoList.firstElementChild);
-                                                    }
-                                                }
-                                                prevMutedItem = videoListItem;
-                                            } else if (inactivity > videoListDefaults.inactivityDelay) {
-                                                if (prevInactiveItem) {
-                                                    if (videoListItem !== prevInactiveItem.nextSibling) {
-                                                        videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
-                                                    }
-                                                } else if (prevActiveItem) {
-                                                    if (videoListItem !== prevActiveItem.nextSibling) {
-                                                        videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
-                                                    }
-                                                } else {
-                                                    if (videoListItem !== videoList.firstElementChild) {
-                                                        videoList.insertBefore(videoListItem, videoList.firstElementChild);
-                                                    }
-                                                }
-                                                prevInactiveItem = videoListItem;
-                                            } else {
+                                            if (hideInactive || hideMuted) {
                                                 if (prevActiveItem) {
                                                     if (videoListItem !== prevActiveItem.nextSibling) {
                                                         videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
@@ -1326,8 +1283,57 @@ var __meteor_runtime_config__;
                                                     }
                                                 }
                                                 prevActiveItem = videoListItem;
+                                            } else {
+                                                if (muted) {
+                                                    if (prevMutedItem) {
+                                                        if (videoListItem !== prevMutedItem.nextSibling) {
+                                                            videoList.insertBefore(videoListItem, prevMutedItem.nextSibling);
+                                                        }
+                                                    } else if (prevInactiveItem) {
+                                                        if (videoListItem !== prevInactiveItem.nextSibling) {
+                                                            videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
+                                                        }
+                                                    } else if (prevActiveItem) {
+                                                        if (videoListItem !== prevActiveItem.nextSibling) {
+                                                            videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                        }
+                                                    } else {
+                                                        if (videoListItem !== videoList.firstElementChild) {
+                                                            videoList.insertBefore(videoListItem, videoList.firstElementChild);
+                                                        }
+                                                    }
+                                                    prevMutedItem = videoListItem;
+                                                } else if (inactivity > videoListDefaults.inactivityDelay) {
+                                                    if (prevInactiveItem) {
+                                                        if (videoListItem !== prevInactiveItem.nextSibling) {
+                                                            videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
+                                                        }
+                                                    } else if (prevActiveItem) {
+                                                        if (videoListItem !== prevActiveItem.nextSibling) {
+                                                            videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                        }
+                                                    } else {
+                                                        if (videoListItem !== videoList.firstElementChild) {
+                                                            videoList.insertBefore(videoListItem, videoList.firstElementChild);
+                                                        }
+                                                    }
+                                                    prevInactiveItem = videoListItem;
+                                                } else {
+                                                    if (prevActiveItem) {
+                                                        if (videoListItem !== prevActiveItem.nextSibling) {
+                                                            videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                        }
+                                                    } else {
+                                                        if (videoListItem !== videoList.firstElementChild) {
+                                                            videoList.insertBefore(videoListItem, videoList.firstElementChild);
+                                                        }
+                                                    }
+                                                    prevActiveItem = videoListItem;
+                                                }
                                             }
-                                            videoListItem.style.display = "flex";
+                                            if (WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
+                                                WinJS.Utilities.removeClass(videoListItem, "inactive-video-hidden");
+                                            }
                                             numVideos++;
                                         }
                                         if (video && video.style) {
@@ -1814,6 +1820,7 @@ var __meteor_runtime_config__;
             var messageStart = "\\\"message\\\":\\\"";
             var messageStop = "\\\"";
             Application.hookXhrOnReadyStateChange = function(res) {
+                var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var responseText = res && res.responseText;
                 if (typeof responseText === "string" && responseText.indexOf(magicStart) >= 0) {
                     var responseReplaced = false;
