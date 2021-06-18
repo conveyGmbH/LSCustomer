@@ -17,6 +17,15 @@ var __meteor_runtime_config__;
         restoreDesc: "#conference.mediaview .right--DUFDc button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF"
     };
 
+    var floatingEmojis = [
+        "\u2764",  //"❤️"
+        "\u1f389", //"🎉"
+        "\u1f44f", //"👏"
+        "\u1f917", //"🤗"
+        "\u1f914", //"🤔"
+        "\u1f625"  //"😥"
+    ];
+
     var magicStart = "&lt;!--";
     var magicStop = "--&gt;";
 
@@ -1707,6 +1716,26 @@ var __meteor_runtime_config__;
                 }
             }
 
+            var handleFloatingEmoji = function(emoji) {
+                Log.call(Log.l.info, "Conference.Controller.", "emoji=" + emoji);
+                WinJS.Promise.timeout(0).then(function() {
+                    if (typeof window.floating === "function") {
+                        var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                        if (mediaContainer) {
+                            window.floating({
+                                content: emoji,
+                                duration: 11,
+                                size: [5,15],
+                                element: mediaContainer,
+                                width: 30 + 20 * Math.random()
+                            });
+                        }
+                    }
+                });
+                Log.ret(Log.l.info);
+            }
+            that.handleFloatingEmoji = handleFloatingEmoji;
+
             var submitCommandMessage = function(command, event, openedUserList, openedChat) {
                 var btnToggleChat, btnToggleUserList, panelWrapper;
                 Log.call(Log.l.info, "Conference.Controller.");
@@ -1816,20 +1845,30 @@ var __meteor_runtime_config__;
             }
             that.handleCommand = handleCommand;
 
+
             var groupChatStart = "\"{\\\"msg\\\":\\\"added\\\",\\\"collection\\\":\\\"group-chat-msg\\\"";
             var messageStart = "\\\"message\\\":\\\"";
             var messageStop = "\\\"";
+            var textContainsEmoji = function(text) {
+                for (var i = 0; i < floatingEmojis.length; i++) {
+                    if (text.indexOf(floatingEmojis[i]) >= 0) {
+                        return true;
+                    }
+                }
+                return false;
+            }
             Application.hookXhrOnReadyStateChange = function(res) {
                 var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var responseText = res && res.responseText;
-                if (typeof responseText === "string" && responseText.indexOf(magicStart) >= 0) {
+                if (typeof responseText === "string") {
                     var responseReplaced = false;
                     var newResponseText = "";
                     var prevStartPos = 0;
                     while (prevStartPos >= 0 && prevStartPos <= responseText.length) {
                         var curText = responseText.substr(prevStartPos);
                         var posGroupChatStart = curText.indexOf(groupChatStart);
-                        if (posGroupChatStart >= 0) {
+                        if (posGroupChatStart >= 0 && 
+                            (curText.indexOf(magicStart) >= 0 || textContainsEmoji(curText) === true)) {
                             var posMessageStart = curText.substr(posGroupChatStart + groupChatStart.length).indexOf(messageStart);
                             if (posMessageStart > 0) {
                                 posMessageStart += posGroupChatStart + groupChatStart.length;
@@ -1838,40 +1877,47 @@ var __meteor_runtime_config__;
                                 var messageLength = curText.substr(posMessageStart + messageStart.length).indexOf(messageStop);
                                 if (messageLength > 0) {
                                     var message = curText.substr(posMessageStart + messageStart.length, messageLength);
-                                    var prevMessageStartPos = 0;
-                                    while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
-                                        var curMessage = message.substr(prevMessageStartPos);
-                                        var posMagicStart = curMessage.indexOf(magicStart);
-                                        if (posMagicStart >= 0) {
-                                            var posMagicStop = curMessage.indexOf(magicStop);
-                                            var command = "";
-                                            if (posMagicStop > posMagicStart + magicStart.length) {
-                                                command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
-                                                if (command && that.commandInfo[command]) {
-                                                    if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
-                                                        if (curMessage.length > magicStart.length + command.length + magicStop.length) {
-                                                            if (!prevMessageStartPos) {
-                                                                newResponseText += curText.substr(0, posMessageStart + messageStart.length);
+                                    if (floatingEmojis.indexOf(message) >= 0) {
+                                        if (res.readyState === 4 && res.status === 200) {
+                                            Log.print(Log.l.info, "received emoji=" + message);
+                                            that.handleFloatingEmoji(message);
+                                        }
+                                    } else {
+                                        var prevMessageStartPos = 0;
+                                        while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
+                                            var curMessage = message.substr(prevMessageStartPos);
+                                            var posMagicStart = curMessage.indexOf(magicStart);
+                                            if (posMagicStart >= 0) {
+                                                var posMagicStop = curMessage.indexOf(magicStop);
+                                                var command = "";
+                                                if (posMagicStop > posMagicStart + magicStart.length) {
+                                                    command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
+                                                    if (command && that.commandInfo[command]) {
+                                                        if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
+                                                            if (curMessage.length > magicStart.length + command.length + magicStop.length) {
+                                                                if (!prevMessageStartPos) {
+                                                                    newResponseText += curText.substr(0, posMessageStart + messageStart.length);
+                                                                }
+                                                                newResponseText += curMessage.substr(0, posMagicStart);
+                                                                messageReplaced = true;
+                                                            } else if (!prevMessageStartPos) {
+                                                                skipMessage = true;
                                                             }
-                                                            newResponseText += curMessage.substr(0, posMagicStart);
-                                                            messageReplaced = true;
-                                                        } else if (!prevMessageStartPos) {
-                                                            skipMessage = true;
                                                         }
+                                                        if (res.readyState === 4 && res.status === 200) {
+                                                            Log.print(Log.l.info, "received command=" + command);
+                                                            that.handleCommand(command);
+                                                        }
+                                                        responseReplaced = true;
                                                     }
-                                                    if (res.readyState === 4 && res.status === 200) {
-                                                        Log.print(Log.l.info, "received command=" + command);
-                                                        that.handleCommand(command);
-                                                    }
-                                                    responseReplaced = true;
+                                                } 
+                                                prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
+                                            } else {
+                                                if (messageReplaced) {
+                                                    newResponseText += curMessage;
                                                 }
-                                            } 
-                                            prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
-                                        } else {
-                                            if (messageReplaced) {
-                                                newResponseText += curMessage;
+                                                prevMessageStartPos = -1;
                                             }
-                                            prevMessageStartPos = -1;
                                         }
                                     }
                                 }
