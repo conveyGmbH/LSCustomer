@@ -1247,18 +1247,24 @@ var __meteor_runtime_config__;
                                 var prevInactiveItem = null;
                                 var prevMutedItem = null;
                                 while (videoListItem) {
+                                    var video = videoListItem.querySelector("video");
+                                    var mediaStream = video && video.srcObject;
+                                    var mediaStreamId = mediaStream && mediaStream.id || "0";
                                     var content = videoListItem.firstElementChild;
                                     if (content) {
                                         var muted = null;
                                         var isHidden = false;
                                         if (WinJS.Utilities.hasClass(content, "talking--26lGzY")) {
-                                            videoListDefaults.contentActivity[i] = now;
+                                            videoListDefaults.contentActivity[mediaStreamId] = now;
                                         } else {
+                                            if (typeof videoListDefaults.contentActivity[mediaStreamId] === "undefined") {
+                                                videoListDefaults.contentActivity[mediaStreamId] = 0;
+                                            }
                                             muted = content.querySelector(".muted--quAxq") || content.querySelector(".icon-bbb-listen");
                                         }
+                                        var inactivity = now - videoListDefaults.contentActivity[mediaStreamId];
                                         if ((hideInactive || hideMuted) && muted ||
-                                            hideInactive && (!videoListDefaults.contentActivity[i] ||
-                                             hideInactive && now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay)) {
+                                            hideInactive && inactivity > videoListDefaults.inactivityDelay) {
                                             videoListItem.style.display = "none";
                                             isHidden = true;
                                         } else if (hideInactive || hideMuted) {
@@ -1294,7 +1300,7 @@ var __meteor_runtime_config__;
                                                     }
                                                 }
                                                 prevMutedItem = videoListItem;
-                                            } else if (now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay) {
+                                            } else if (inactivity > videoListDefaults.inactivityDelay) {
                                                 if (prevInactiveItem) {
                                                     if (videoListItem !== prevInactiveItem.nextSibling) {
                                                         videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
@@ -1324,7 +1330,6 @@ var __meteor_runtime_config__;
                                             videoListItem.style.display = "flex";
                                             numVideos++;
                                         }
-                                        var video = videoListItem.querySelector("video");
                                         if (video && video.style) {
                                             if (WinJS.Utilities.hasClass(videoListItem, "selfie-video")) {
                                                 var userName = videoListItem.querySelector(".userName--ZsKYfV, .dropdownTrigger--Z1Fp5dg");
@@ -1338,7 +1343,6 @@ var __meteor_runtime_config__;
                                                     }
                                                 }
                                             } else if (that.deviceList && that.deviceList.length > 0) {
-                                                var mediaStream = video.srcObject;
                                                 if (mediaStream && typeof mediaStream.getVideoTracks === "function") {
                                                     var videoTrack = mediaStream.getVideoTracks() ? mediaStream.getVideoTracks()[0] : null;
                                                     if (videoTrack && typeof videoTrack.getSettings === "function") {
@@ -1392,7 +1396,7 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(hideInactive ? 500 : 2000).then(function() {
+                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(500).then(function() {
                         that.checkForInactiveVideo();
                     });
                 });
