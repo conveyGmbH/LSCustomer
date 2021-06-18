@@ -1279,6 +1279,10 @@ var __meteor_runtime_config__;
                                                     if (videoListItem !== prevInactiveItem.nextSibling) {
                                                         videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
                                                     }
+                                                } if (prevActiveItem) {
+                                                    if (videoListItem !== prevActiveItem.nextSibling) {
+                                                        videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                    }
                                                 } else {
                                                     videoList.appendChild(videoListItem);
                                                 }
