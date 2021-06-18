@@ -74,9 +74,10 @@
     line-height: 28px;
 }
 
-.event .win-type-body{
+.event .win-type-body {
     font-size: 18px;
     line-height: 28px;
+    background-color: #ffffff;
 }
 
 .event .win-type-caption {
@@ -85,17 +86,18 @@
 }
 
 .event .color_container2 {
-    position: absolute;
+    background-color: #f3fbfc;
+    position: relative;
     z-index: -2;
-    height: 60%;
+    height: auto;
     width: 100%;
     top: 0;
 }
 .event .color_container4 {
-    background-color: #ffffff;
-    position: absolute;
+    background-color: #f3fbfc;
+    position: relative;
     z-index: -2;
-    height: 50px;
+    height: auto;
     width: 100%;
 }
 .event .win-h1, event .win-h3 {
