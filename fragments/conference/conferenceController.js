@@ -1245,6 +1245,7 @@ var __meteor_runtime_config__;
                                 var videoListItem = videoList.firstElementChild;
                                 var prevActiveItem = null;
                                 var prevInactiveItem = null;
+                                var prevMutedItem = null;
                                 while (videoListItem) {
                                     var content = videoListItem.firstElementChild;
                                     if (content) {
@@ -1274,17 +1275,38 @@ var __meteor_runtime_config__;
                                             videoListItem.style.display = "flex";
                                             numVideos++;
                                         } else {
-                                            if (muted || now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay) {
-                                                if (prevInactiveItem) {
+                                            if (muted) {
+                                                if (prevMutedItem) {
+                                                    if (videoListItem !== prevMutedItem.nextSibling) {
+                                                        videoList.insertBefore(videoListItem, prevMutedItem.nextSibling);
+                                                    }
+                                                } else if (prevInactiveItem) {
                                                     if (videoListItem !== prevInactiveItem.nextSibling) {
                                                         videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
                                                     }
-                                                } if (prevActiveItem) {
+                                                } else if (prevActiveItem) {
                                                     if (videoListItem !== prevActiveItem.nextSibling) {
                                                         videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
                                                     }
                                                 } else {
-                                                    videoList.appendChild(videoListItem);
+                                                    if (videoListItem !== videoList.firstElementChild) {
+                                                        videoList.insertBefore(videoListItem, videoList.firstElementChild);
+                                                    }
+                                                }
+                                                prevMutedItem = videoListItem;
+                                            } else if (now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay) {
+                                                if (prevInactiveItem) {
+                                                    if (videoListItem !== prevInactiveItem.nextSibling) {
+                                                        videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
+                                                    }
+                                                } else if (prevActiveItem) {
+                                                    if (videoListItem !== prevActiveItem.nextSibling) {
+                                                        videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                    }
+                                                } else {
+                                                    if (videoListItem !== videoList.firstElementChild) {
+                                                        videoList.insertBefore(videoListItem, videoList.firstElementChild);
+                                                    }
                                                 }
                                                 prevInactiveItem = videoListItem;
                                             } else {
