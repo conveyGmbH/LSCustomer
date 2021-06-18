@@ -210,6 +210,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .right--Z4dKWq {
     z-index: 1;
 }
+
 #conference.mediaview .wrapper--ZhSWmd .button--Z2dosza,
 #conference.mediaview .ghost--Z136aiN,
 #conference.mediaview .button--yKJ5d {
@@ -410,6 +411,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding-top: 0;
 }
 
+.modSession #conference.mediaview .navbar--Z2lHYbG .arrowRight--Zbqp1D,
+.modSession #conference.mediaview .navbar--Z2lHYbG .arrowLeft--1CFBz1 {
+    top: 14px;
+}
 /* hide event title */
 #conference.mediaview .presentationTitle--1LT79g {
     display: none;
