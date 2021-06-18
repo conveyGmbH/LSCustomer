@@ -1727,7 +1727,8 @@ var __meteor_runtime_config__;
                                 duration: 11,
                                 size: [5,15],
                                 element: mediaContainer,
-                                width: 30 + 20 * Math.random()
+                                width: 30 + 20 * Math.random(),
+                                max: 20
                             });
                         }
                     }
@@ -1881,6 +1882,7 @@ var __meteor_runtime_config__;
                                         if (res.readyState === 4 && res.status === 200) {
                                             Log.print(Log.l.info, "received emoji=" + message);
                                             that.handleFloatingEmoji(message);
+                                            skipMessage = true;
                                         }
                                     } else {
                                         var prevMessageStartPos = 0;
