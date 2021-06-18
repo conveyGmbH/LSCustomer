@@ -1885,6 +1885,7 @@ var __meteor_runtime_config__;
                                             that.handleFloatingEmoji(message);
                                         }
                                         skipMessage = true;
+                                        responseReplaced = true;
                                     } else {
                                         var prevMessageStartPos = 0;
                                         while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
