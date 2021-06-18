@@ -1231,99 +1231,110 @@ var __meteor_runtime_config__;
                         } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-small")) {
                             presenterModeSmallIsSet = true;
                         }
-                    }
-                    var videoList = fragmentElement.querySelector(".videoList--1OC49P");
-                    if (videoList) {
-                        var i = 0;
-                        var numVideos = 0;
-                        var now = Date.now();
-                        var videoListItem = videoList.firstElementChild;
-                        var prevActiveItem = null;
-                        while (videoListItem) {
-                            var content = videoListItem.firstElementChild;
-                            if (content) {
-                                var muted = null;
-                                var isHidden = false;
-                                if (WinJS.Utilities.hasClass(content, "talking--26lGzY")) {
-                                    videoListDefaults.contentActivity[i] = now;
-                                } else {
-                                    muted = content.querySelector(".muted--quAxq") || content.querySelector(".icon-bbb-listen");
-                                }
-                                if ((hideInactive || hideMuted) && muted ||
-                                    hideInactive && (!videoListDefaults.contentActivity[i] ||
-                                     hideInactive && now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay)) {
-                                    videoListItem.style.display = "none";
-                                    isHidden = true;
-                                } else {
-                                    if (prevActiveItem) {
-                                        if (videoListItem !== prevActiveItem.nextSibling) {
-                                            videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                        var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                        if (overlayElement) {
+                            var videoList = overlayElement.querySelector(".videoList--1OC49P");
+                            if (videoList) {
+                                var i = 0;
+                                var numVideos = 0;
+                                var now = Date.now();
+                                var videoListItem = videoList.firstElementChild;
+                                var prevActiveItem = null;
+                                while (videoListItem) {
+                                    var content = videoListItem.firstElementChild;
+                                    if (content) {
+                                        var muted = null;
+                                        var isHidden = false;
+                                        if (WinJS.Utilities.hasClass(content, "talking--26lGzY")) {
+                                            videoListDefaults.contentActivity[i] = now;
+                                        } else {
+                                            muted = content.querySelector(".muted--quAxq") || content.querySelector(".icon-bbb-listen");
                                         }
-                                    } else {
-                                        if (videoListItem !== videoList.firstElementChild) {
-                                            videoList.insertBefore(videoListItem, videoList.firstElementChild);
-                                        }
-                                    }
-                                    prevActiveItem = videoListItem;
-                                    videoListItem.style.display = "flex";
-                                    numVideos++;
-                                }
-                                var video = videoListItem.querySelector("video");
-                                if (video && video.style) {
-                                    if (WinJS.Utilities.hasClass(videoListItem, "selfie-video")) {
-                                        var userName = videoListItem.querySelector(".userName--ZsKYfV, .dropdownTrigger--Z1Fp5dg");
-                                        if (userName) {
-                                            var userNameText = userName.textContent;
-                                            if (typeof userNameText === "string") {
-                                                var myLabel = " (" + getResourceText("label.me") + ")";
-                                                if (userNameText.indexOf(myLabel) < 0) {
-                                                    userName.textContent = userNameText + myLabel;
+                                        if ((hideInactive || hideMuted) && muted ||
+                                            hideInactive && (!videoListDefaults.contentActivity[i] ||
+                                             hideInactive && now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay)) {
+                                            videoListItem.style.display = "none";
+                                            isHidden = true;
+                                        } else {
+                                            if (prevActiveItem) {
+                                                if (videoListItem !== prevActiveItem.nextSibling) {
+                                                    videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                }
+                                            } else {
+                                                if (videoListItem !== videoList.firstElementChild) {
+                                                    videoList.insertBefore(videoListItem, videoList.firstElementChild);
                                                 }
                                             }
+                                            prevActiveItem = videoListItem;
+                                            videoListItem.style.display = "flex";
+                                            numVideos++;
                                         }
-                                    } else if (that.deviceList && that.deviceList.length > 0) {
-                                        var mediaStream = video.srcObject;
-                                        if (mediaStream && typeof mediaStream.getVideoTracks === "function") {
-                                            var videoTrack = mediaStream.getVideoTracks() ? mediaStream.getVideoTracks()[0] : null;
-                                            if (videoTrack && typeof videoTrack.getSettings === "function") {
-                                                var settings = videoTrack.getSettings();
-                                                for (var j = 0; j < that.deviceList.length; j++) {
-                                                    if (that.deviceList[j].deviceId === settings.deviceId) {
-                                                        Log.print(Log.l.trace, "found local "+ that.deviceList[j].kind + ":" + that.deviceList[j].label + " with deviceId=" + that.deviceList[j].deviceId);
-                                                        WinJS.Utilities.addClass(videoListItem, "selfie-video");
-                                                        break;
+                                        var video = videoListItem.querySelector("video");
+                                        if (video && video.style) {
+                                            if (WinJS.Utilities.hasClass(videoListItem, "selfie-video")) {
+                                                var userName = videoListItem.querySelector(".userName--ZsKYfV, .dropdownTrigger--Z1Fp5dg");
+                                                if (userName) {
+                                                    var userNameText = userName.textContent;
+                                                    if (typeof userNameText === "string") {
+                                                        var myLabel = " (" + getResourceText("label.me") + ")";
+                                                        if (userNameText.indexOf(myLabel) < 0) {
+                                                            userName.textContent = userNameText + myLabel;
+                                                        }
+                                                    }
+                                                }
+                                            } else if (that.deviceList && that.deviceList.length > 0) {
+                                                var mediaStream = video.srcObject;
+                                                if (mediaStream && typeof mediaStream.getVideoTracks === "function") {
+                                                    var videoTrack = mediaStream.getVideoTracks() ? mediaStream.getVideoTracks()[0] : null;
+                                                    if (videoTrack && typeof videoTrack.getSettings === "function") {
+                                                        var settings = videoTrack.getSettings();
+                                                        for (var j = 0; j < that.deviceList.length; j++) {
+                                                            if (that.deviceList[j].deviceId === settings.deviceId) {
+                                                                Log.print(Log.l.trace, "found local "+ that.deviceList[j].kind + ":" + that.deviceList[j].label + " with deviceId=" + that.deviceList[j].deviceId);
+                                                                WinJS.Utilities.addClass(videoListItem, "selfie-video");
+                                                                break;
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
-                                    }
-                                    if ((presenterModeTiledIsSet || presenterModeSmallIsSet) && !isHidden) {
-                                        var left = (videoListItem.clientWidth - (videoListItem.clientHeight * video.videoWidth / video.videoHeight)) / 2;
-                                        if (left < 0) {
-                                            video.style.left = left.toString() + "px";
-                                        } else {
-                                            if (videoOverlayIsRightIsSet) {
-                                                video.style.left = "";
-                                                video.style.right = "0";
+                                            if ((presenterModeTiledIsSet || presenterModeSmallIsSet) && !isHidden) {
+                                                var left = (overlayElement.clientWidth - (overlayElement.clientHeight * video.videoWidth / video.videoHeight)) / 2;
+                                                var width;
+                                                if (left < 0) {
+                                                    video.style.left = left.toString() + "px";
+                                                    video.style.right = "";
+                                                    width = overlayElement.clientWidth;
+                                                    videoListItem.style.marginLeft = "";
+                                                } else {
+                                                    video.style.left = "0";
+                                                    video.style.right = "";
+                                                    width = overlayElement.clientWidth - 2 * left;
+                                                    if (videoOverlayIsRightIsSet) {
+                                                        videoListItem.style.marginLeft = Math.abs(left).toString() + "px";;
+                                                    } else {
+                                                        videoListItem.style.marginLeft = "";
+                                                    }
+                                                }
+                                                videoListItem.style.width = width.toString() + "px";
                                             } else {
-                                                video.style.left = "0";
+                                                video.style.left = "";
                                                 video.style.right = "";
+                                                videoListItem.style.width = "";
+                                                videoListItem.style.marginLeft = "";
                                             }
                                         }
-                                    } else {
-                                        video.style.left = "";
-                                        video.style.right = "";
+                                        i++;
                                     }
+                                    videoListItem = videoListItem.nextElementSibling;
                                 }
-                                i++;
+                                videoListDefaults.activeVideoCount = numVideos;
+                                if (!that.adjustContentPositionsPromise) {
+                                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                        that.adjustContentPositions();
+                                    });
+                                }
                             }
-                            videoListItem = videoListItem.nextElementSibling;
-                        }
-                        videoListDefaults.activeVideoCount = numVideos;
-                        if (!that.adjustContentPositionsPromise) {
-                            that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
-                                that.adjustContentPositions();
-                            });
                         }
                     }
                     that.checkForInactiveVideoPromise = WinJS.Promise.timeout(hideInactive ? 500 : 2000).then(function() {
