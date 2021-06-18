@@ -1242,8 +1242,9 @@ var __meteor_runtime_config__;
                                 } else {
                                     muted = content.querySelector(".muted--quAxq") || content.querySelector(".icon-bbb-listen");
                                 }
-                                if ((muted || !videoListDefaults.contentActivity[i]) && (hideInactive || hideMuted) ||
-                                    hideInactive && now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay) {
+                                if ((hideInactive || hideMuted) && muted ||
+                                    hideInactive && (!videoListDefaults.contentActivity[i] ||
+                                     hideInactive && now - videoListDefaults.contentActivity[i] > videoListDefaults.inactivityDelay)) {
                                     videoListItem.style.display = "none";
                                     isHidden = true;
                                 } else {
