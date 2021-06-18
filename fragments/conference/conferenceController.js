@@ -26,8 +26,8 @@ var __meteor_runtime_config__;
 
             var videoListDefaults = {
                 aspect: 4.0/3.0,
-                width: 192,
-                height: 144,
+                width: 384,
+                height: 288,
                 left: "left",
                 right: "right",
                 default: "default",
@@ -1090,14 +1090,18 @@ var __meteor_runtime_config__;
                                         WinJS.Utilities.addClass(overlayElement, "video-overlay-left");
                                     }
                                 }
-                                var heightFullSize = videoList.childElementCount * videoListDefaults.height;
+                                var imageScale = 1;
+                                if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-biggest")) {
+                                    imageScale = 0.5;
+                                }
+                                var heightFullSize = videoList.childElementCount * videoListDefaults.height * imageScale;
                                 if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode") &&
                                     heightFullSize > videoList.clientHeight) {
                                     if (!WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
                                         WinJS.Utilities.addClass(videoList, "video-list-double-columns");
                                     }
-                                    var heightHalfSize = Math.floor(videoList.childElementCount / 2.0 + 0.5) * videoListDefaults.height / 2;
-                                    var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoListDefaults.height);
+                                    var heightHalfSize = Math.floor(videoList.childElementCount / 2.0 + 0.5) * videoListDefaults.height * imageScale / 2;
+                                    var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoListDefaults.height * imageScale);
                                     var curCount = 0;
                                     while (curChild) {
                                         if (curChild.style) {
