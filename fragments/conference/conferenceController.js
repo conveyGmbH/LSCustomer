@@ -1193,6 +1193,8 @@ var __meteor_runtime_config__;
                 var hideInactive = videoListDefaults.hideInactive;
                 var hideMuted = videoListDefaults.hideMuted;
                 var presenterModeTiledIsSet = false;
+                var presenterModeSmallIsSet = false;
+                var videoOverlayIsRightIsSet = false;
                 Log.call(Log.l.trace, "Conference.Controller.", "hideInactive="+hideInactive+" hideMuted="+hideMuted);
                 if (that.checkForInactiveVideoPromise) {
                     that.checkForInactiveVideoPromise.cancel();
@@ -1221,8 +1223,13 @@ var __meteor_runtime_config__;
                     }
                     var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                     if (mediaContainer) {
+                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                            videoOverlayIsRightIsSet = true;
+                        }
                         if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
                             presenterModeTiledIsSet = true;
+                        } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-small")) {
+                            presenterModeSmallIsSet = true;
                         }
                     }
                     var videoList = fragmentElement.querySelector(".videoList--1OC49P");
@@ -1290,11 +1297,22 @@ var __meteor_runtime_config__;
                                             }
                                         }
                                     }
-                                    if (presenterModeTiledIsSet && !isHidden) {
+                                    if ((presenterModeTiledIsSet || presenterModeSmallIsSet) && !isHidden) {
                                         var left = (videoListItem.clientWidth - (videoListItem.clientHeight * video.videoWidth / video.videoHeight)) / 2;
-                                        video.style.left = left.toString() + "px";
+                                        if (left < 0) {
+                                            video.style.left = left.toString() + "px";
+                                        } else {
+                                            if (videoOverlayIsRightIsSet) {
+                                                video.style.left = "";
+                                                video.style.right = "0";
+                                            } else {
+                                                video.style.left = "0";
+                                                video.style.right = "";
+                                            }
+                                        }
                                     } else {
                                         video.style.left = "";
+                                        video.style.right = "";
                                     }
                                 }
                                 i++;
