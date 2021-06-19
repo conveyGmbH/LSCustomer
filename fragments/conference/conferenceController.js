@@ -107,7 +107,8 @@ var __meteor_runtime_config__;
             this.commandQueue = [];
             this.deviceList = [];
             this.toolboxIds = ["emojiToolbar"];
-            
+            this.emojiCount = {};
+
             this.showUserListFailedCount = 0;
             this.adjustContentPositionsFailedCount = 0;
 
@@ -1226,6 +1227,7 @@ var __meteor_runtime_config__;
 
             var lastDeviceListTime = 0;
             var checkForInactiveVideo = function() {
+                var videoList = null;
                 var hideInactive = videoListDefaults.hideInactive;
                 var hideMuted = videoListDefaults.hideMuted;
                 var presenterModeTiledIsSet = false;
@@ -1269,7 +1271,7 @@ var __meteor_runtime_config__;
                         }
                         var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
                         if (overlayElement) {
-                            var videoList = overlayElement.querySelector(".videoList--1OC49P");
+                            videoList = overlayElement.querySelector(".videoList--1OC49P");
                             if (videoList) {
                                 var i = 0;
                                 var numVideos = 0;
@@ -1432,7 +1434,7 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(500).then(function() {
+                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(videoList && videoList.childElementCount > 0 ? 500 : 2000).then(function() {
                         that.checkForInactiveVideo();
                     });
                 });
@@ -1606,7 +1608,10 @@ var __meteor_runtime_config__;
                             videoListDefaults.hideMuted = false;
                         }
                     }
-                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
+                    if (that.checkForInactiveVideoPromise) {
+                        that.checkForInactiveVideoPromise.cancel();
+                    }
+                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(50).then(function() {
                         that.checkForInactiveVideo();
                     });
                 }
@@ -1785,27 +1790,28 @@ var __meteor_runtime_config__;
                 }
             }
 
-            var handleFloatingEmoji = function(emoji) {
-                Log.call(Log.l.info, "Conference.Controller.", "emoji=" + emoji);
-                WinJS.Promise.timeout(0).then(function() {
-                    if (typeof window.floating === "function") {
-                        var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
-                        if (mediaContainer) {
-                            window.floating({
-                                content: emoji,
-                                duration: 11,
-                                size: [5,15],
-                                element: mediaContainer,
-                                width: 30 + 20 * Math.random(),
-                                left: "calc(50% + 50px)",
-                                max: 20
-                            });
+            var initEmojiToolbar = function() {
+                if (emojiToolbar && emojiToolbar.winControl) {
+                    var emojiData = new WinJS.Binding.List([]);
+                    floatingEmojisSymbols.forEach(function(item, index) {
+                        var className = "emoji" + index;
+                        var style = document.getElementById(className);
+                        if (!style) {
+                            style = document.createElement("style");
+                            style.id = className;
+                            style.innerHTML = "#conferenceController ." + className + ":before { content:\"" + item + "\"; }";
+                            document.head.appendChild(style);
                         }
-                    }
-                });
-                Log.ret(Log.l.info);
+                        emojiData.push({
+                            index: index,
+                            text: item,
+                            className: "emoji-button-icon " + className
+                        });
+                    });
+                    emojiToolbar.winControl.data = emojiData;
+                }
             }
-            that.handleFloatingEmoji = handleFloatingEmoji;
+            that.initEmojiToolbar = initEmojiToolbar;
 
             var submitCommandMessage = function(command, event, openedUserList, openedChat) {
                 var btnToggleChat, btnToggleUserList, panelWrapper;
@@ -1916,10 +1922,46 @@ var __meteor_runtime_config__;
             }
             that.handleCommand = handleCommand;
 
+            var handleFloatingEmoji = function(emoji) {
+                Log.call(Log.l.info, "Conference.Controller.", "emoji=" + emoji);
+                if (typeof that.emojiCount[emoji] === "number") {
+                    that.emojiCount[emoji]++;
+                } else {
+                    that.emojiCount[emoji] = 1;
+                }
+                WinJS.Promise.timeout(750).then(function() {
+                    if (typeof window.floating === "function") {
+                        var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                        if (mediaContainer) {
+                            for (var prop in that.emojiCount) {
+                                if (that.emojiCount.hasOwnProperty(prop)) {
+                                    var number = that.emojiCount[prop];
+                                    if (number > 0) {
+                                        window.floating({
+                                            content: prop,
+                                            number: number,
+                                            duration: 11,
+                                            size: [5,15],
+                                            element: mediaContainer,
+                                            width: 30 + 20 * Math.random(),
+                                            left: "calc(50% + 50px)",
+                                            max: 20
+                                        });
+                                        that.emojiCount[prop] = 0;
+                                    }
+                                }
+                            };
+                        }
+                    }
+                });
+                Log.ret(Log.l.info);
+            }
+            that.handleFloatingEmoji = handleFloatingEmoji;
 
             var groupChatStart = "\"{\\\"msg\\\":\\\"added\\\",\\\"collection\\\":\\\"group-chat-msg\\\"";
             var messageStart = "\\\"message\\\":\\\"";
             var messageStop = "\\\"";
+            var timeStampStart = "\\\"timestamp\\\":";
             var textContainsEmoji = function(text) {
                 for (var i = 0; i < floatingEmojisMessage.length; i++) {
                     if (text.indexOf(floatingEmojisMessage[i]) >= 0) {
@@ -1929,6 +1971,7 @@ var __meteor_runtime_config__;
                 return false;
             }
             Application.hookXhrOnReadyStateChange = function(res) {
+                var now = Date.now();
                 var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var responseText = res && res.responseText;
                 if (typeof responseText === "string") {
@@ -1951,8 +1994,22 @@ var __meteor_runtime_config__;
                                     var idxEmoji = floatingEmojisMessage.indexOf(message);
                                     if (idxEmoji >= 0) {
                                         if (res.readyState === 4 && res.status === 200) {
-                                            Log.print(Log.l.info, "received emoji=" + message);
-                                            that.handleFloatingEmoji(floatingEmojisSymbols[idxEmoji]);
+                                            var timestamp = 0;
+                                            var posTimestampStart = curText.indexOf(timeStampStart);
+                                            if (posTimestampStart >= 0) {
+                                                var timestampString = curText.substr(posTimestampStart + timeStampStart.length);
+                                                var posTimestampStop = timestampString.indexOf(",");
+                                                if (posTimestampStop >= 0) {
+                                                    timestampString = timestampString.substr(0, posTimestampStop);
+                                                }
+                                                timestamp = parseInt(timestampString);
+                                            }
+                                            if (timestamp && now - timestamp > 30000) {
+                                                Log.print(Log.l.info, "extra ignored: emoji=" + message + " timestamp=" + timestamp + " now=" + now);
+                                            } else {
+                                                Log.print(Log.l.info, "handling: emoji=" + message + " timestamp=" + timestamp + " now=" + now);
+                                                that.handleFloatingEmoji(floatingEmojisSymbols[idxEmoji]);
+                                            }
                                         }
                                         skipMessage = true;
                                         responseReplaced = true;
@@ -1967,7 +2024,7 @@ var __meteor_runtime_config__;
                                                 if (posMagicStop > posMagicStart + magicStart.length) {
                                                     command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
                                                     if (command && that.commandInfo[command]) {
-                                                        if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
+                                                        if (pageControllerName === "eventController") {
                                                             if (curMessage.length > magicStart.length + command.length + magicStop.length) {
                                                                 if (!prevMessageStartPos) {
                                                                     newResponseText += curText.substr(0, posMessageStart + messageStart.length);
@@ -2122,30 +2179,6 @@ var __meteor_runtime_config__;
                 Application.hookXhrSend = null;
             }
 
-            var initEmojiToolbar = function() {
-                
-                if (emojiToolbar && emojiToolbar.winControl) {
-                    var emojiData = new WinJS.Binding.List([]);
-                    floatingEmojisSymbols.forEach(function(item, index) {
-                        var className = "emoji" + index;
-                        var style = document.getElementById(className);
-                        if (!style) {
-                            style = document.createElement("style");
-                            style.id = className;
-                            style.innerHTML = "#conferenceController ." + className + ":before { content:\"" + item + "\"; }";
-                            document.head.appendChild(style);
-                        }
-                        emojiData.push({
-                            index: index,
-                            text: item,
-                            className: "emoji-button-icon " + className
-                        });
-                    });
-                    emojiToolbar.winControl.data = emojiData;
-                }
-            }
-            that.initEmojiToolbar = initEmojiToolbar;
-
             if (typeof navigator.mediaDevices === "object" &&
                 typeof navigator.mediaDevices.enumerateDevices === "function") {
                 navigator.mediaDevices.enumerateDevices().then(function(deviceList) {
@@ -2164,7 +2197,7 @@ var __meteor_runtime_config__;
                 Log.print(Log.l.trace, "Data loaded");
                 AppBar.notifyModified = true;
                 that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
-                that.checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
+                that.checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
                     that.checkForInactiveVideo();
                 });
                 that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {

@@ -387,6 +387,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     */
 }
 
+#conference.mediaview .actionsbar--Z1ant6U {
+    z-index: 10;
+}
+
 #conference.mediaview .actionsbar--Z1ant6U .left--Z1rLKlO {
     align-items: center;
     flex: 1;
@@ -923,7 +927,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     height: 46px;
     padding: 1px;
     opacity: 0.9;
-    z-index: 10;
     border-radius: 23px;
 }
 #conferenceController .box-bkg {
