@@ -71,6 +71,9 @@ var __meteor_runtime_config__;
                 toggleUserList: null
             };
 
+            var emojiToolbarPositionObserver = null
+
+
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataEvent: options ? options.dataEvent : {},
@@ -1234,6 +1237,23 @@ var __meteor_runtime_config__;
                     var actionsBarCenter = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .center--ZyfFaC");
                     if (actionsBarCenter && emojiButtonContainer && emojiToolbar &&
                         actionsBarCenter.lastElementChild !== emojiToolbar) {
+                        var audioControlsContainer = actionsBarCenter.querySelector(".container--1hUthh");
+                        if (audioControlsContainer) {
+                            emojiToolbarPositionObserver = new MutationObserver(function(mutationList, observer) {
+                                if (audioControlsContainer.childElementCount === 2) {
+                                    if (!WinJS.Utilities.hasClass(actionsBarCenter, "wide-audio-container")) {
+                                        WinJS.Utilities.addClass(actionsBarCenter, "wide-audio-container");
+                                    }
+                                } else {
+                                    if (WinJS.Utilities.hasClass(actionsBarCenter, "wide-audio-container")) {
+                                        WinJS.Utilities.removeClass(actionsBarCenter, "wide-audio-container");
+                                    }
+                                }
+                            });
+                            emojiToolbarPositionObserver.observe(audioControlsContainer, {
+                                childList: true
+                            });
+                        }
                         actionsBarCenter.appendChild(emojiButtonContainer);
                         emojiButtonContainer.style.display = "inline-block";
                         actionsBarCenter.appendChild(emojiToolbar);
@@ -1771,7 +1791,8 @@ var __meteor_runtime_config__;
                 hideToolbox: function(id) {
                     var curToolbox = fragmentElement.querySelector('#' + id);
                     if (curToolbox && curToolbox.style) {
-                        WinJS.UI.Animation.slideRightOut(curToolbox).done(function() {
+                        WinJS.Utilities.addClass(curToolbox, "box-is-minimized");
+                        WinJS.Promise.timeout(300).then(function() {
                             curToolbox.style.display = "none";
                         });
                     }
@@ -1780,8 +1801,7 @@ var __meteor_runtime_config__;
                     WinJS.Promise.timeout(0).then(function () {
                         var curToolbox = fragmentElement.querySelector('#' + id);
                         if (curToolbox && curToolbox.style) {
-                            var computedStyle = window.getComputedStyle(curToolbox);
-                            if (!computedStyle || computedStyle.display !== "block") {
+                            if (WinJS.Utilities.hasClass(curToolbox, "box-is-minimized")) {
                                 for (var i = 0; i < that.toolboxIds.length; i++) {
                                     if (that.toolboxIds[i] !== id) {
                                         var otherToolbox = document.querySelector('#' + that.toolboxIds[i]);
@@ -1792,9 +1812,7 @@ var __meteor_runtime_config__;
                                     }
                                 }
                                 curToolbox.style.display = "block";
-                                WinJS.UI.Animation.slideLeftIn(curToolbox).done(function () {
-                                    // now visible
-                                });
+                                WinJS.Utilities.removeClass(curToolbox, "box-is-minimized");
                             } else {
                                 that.eventHandlers.hideToolbox(id);
                             }

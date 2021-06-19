@@ -842,6 +842,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conferenceController .emoji-button-container {
     display: none;
     margin: 0 10px;
+    z-index: 10;
 }
 
 .event #conferenceController .emoji-button-container > .win-button {
@@ -923,14 +924,59 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 #conferenceController .tool-box {
     display: none;
-    bottom: 0px;
+    bottom: 2px;
+    left: 185px;
+    width: 330px;
     height: 46px;
-    padding: 1px;
     opacity: 0.9;
     border-radius: 23px;
+    position: absolute;
+    margin-left: calc(50% - 140px);
+    margin-bottom: 5px;
+    padding: 1px 1px 1px 50px;
+    width: auto;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
 }
+
+#conferenceController .wide-audio-container .tool-box {
+    left: 210px;
+}
+
+.view-size-medium #conferenceController .tool-box {
+    left: -55px;
+    position: relative;
+    margin-left: 0;
+    margin-bottom: 0;
+    bottom: 0;
+}
+
 #conferenceController .box-bkg {
     background-color: rgba(255,186,16,0.8);
+}
+
+@keyframes tool-box-collapse {
+    from {
+        width: 330px;
+    } to {
+        width: 40px;
+    }
+}
+@keyframes tool-box-expand {
+    from {
+        width: 40px;
+    }
+    to {
+        width: 330px;
+    }
+}
+#conferenceController .tool-box.box-is-minimized {
+    width: 40px;
+    padding: 0;
+    animation: 0.2s ease-in 1 0s normal tool-box-collapse
+}
+#conferenceController .tool-box:not(.box-is-minimized) {
+    animation: 0.2s ease-out 1 0s normal tool-box-expand
 }
 
 #conferenceController .tool-box .emoji {
