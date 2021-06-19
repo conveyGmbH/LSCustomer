@@ -1958,18 +1958,47 @@ var __meteor_runtime_config__;
             }
             that.handleFloatingEmoji = handleFloatingEmoji;
 
-            var groupChatStart = "\"{\\\"msg\\\":\\\"added\\\",\\\"collection\\\":\\\"group-chat-msg\\\"";
-            var messageStart = "\\\"message\\\":\\\"";
-            var messageStop = "\\\"";
-            var timeStampStart = "\\\"timestamp\\\":";
-            var textContainsEmoji = function(text) {
+            var textContainsEmoji = function(text, fromIndex) {
+                fromIndex = (fromIndex > 0) ? fromIndex : 0;
                 for (var i = 0; i < floatingEmojisMessage.length; i++) {
-                    if (text.indexOf(floatingEmojisMessage[i]) >= 0) {
+                    if (text.indexOf(floatingEmojisMessage[i], fromIndex) >= 0) {
                         return true;
                     }
                 }
                 return false;
             }
+            var findEndOfStruct = function(text, fromIndex) {
+                fromIndex = (fromIndex > 0) ? fromIndex : 0;
+                if (text && text[fromIndex] === "\"") {
+                    var quoted = false;
+                    var blockCount = 0;
+                    for (var i = fromIndex + 1; i < text.length; i++) {
+                        if (text[i] === "\\" && text[i + 1] === "\"") {
+                            quoted = !quoted;
+                            i++;
+                        } else if (!quoted) { 
+                            if (text[i] === "{") {
+                                blockCount++;
+                            } else if (text[i] === "}") {
+                                blockCount--;
+                            }
+                        }
+                        if (!blockCount) {
+                            if (text[i + 1] === "\"") {
+                                return i + 2 ;
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+                }
+                return 0;
+            }
+
+            var groupChatStart = "\"{\\\"msg\\\":\\\"added\\\",\\\"collection\\\":\\\"group-chat-msg\\\"";
+            var messageStart = "\\\"message\\\":\\\"";
+            var messageStop = "\\\"";
+            var timeStampStart = "\\\"timestamp\\\":";
             Application.hookXhrOnReadyStateChange = function(res) {
                 var now = Date.now();
                 var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
@@ -1978,120 +2007,115 @@ var __meteor_runtime_config__;
                     var responseReplaced = false;
                     var newResponseText = "";
                     var prevStartPos = 0;
-                    while (prevStartPos >= 0 && prevStartPos <= responseText.length) {
-                        var curText = responseText.substr(prevStartPos);
-                        var posGroupChatStart = curText.indexOf(groupChatStart);
-                        if (posGroupChatStart >= 0 && 
-                            (curText.indexOf(magicStart) >= 0 || textContainsEmoji(curText) === true)) {
-                            var posMessageStart = curText.substr(posGroupChatStart + groupChatStart.length).indexOf(messageStart);
-                            if (posMessageStart > 0) {
-                                posMessageStart += posGroupChatStart + groupChatStart.length;
-                                var messageReplaced = false;
-                                var skipMessage = false;
-                                var messageLength = curText.substr(posMessageStart + messageStart.length).indexOf(messageStop);
-                                if (messageLength > 0) {
-                                    var message = curText.substr(posMessageStart + messageStart.length, messageLength);
-                                    var idxEmoji = floatingEmojisMessage.indexOf(message);
-                                    if (idxEmoji >= 0) {
-                                        if (res.readyState === 4 && res.status === 200) {
-                                            var timestamp = 0;
-                                            var posTimestampStart = curText.indexOf(timeStampStart);
-                                            if (posTimestampStart >= 0) {
-                                                var timestampString = curText.substr(posTimestampStart + timeStampStart.length);
-                                                var posTimestampStop = timestampString.indexOf(",");
-                                                if (posTimestampStop >= 0) {
-                                                    timestampString = timestampString.substr(0, posTimestampStop);
+                    var prevStopPos = 0;
+                    while (prevStartPos >= 0 && prevStartPos < responseText.length) {
+                        var posGroupChatStart = responseText.indexOf(groupChatStart, prevStartPos);
+                        if (posGroupChatStart >= 0 && (responseText.indexOf(magicStart, posGroupChatStart + groupChatStart.length) >= 0 ||
+                            textContainsEmoji(responseText, posGroupChatStart) === true)) {
+                            var posGroupChatStop = findEndOfStruct(responseText, posGroupChatStart);
+                            if (posGroupChatStop > posGroupChatStart + groupChatStart.length) {
+                                var posMessageStart = responseText.indexOf(messageStart, posGroupChatStart + groupChatStart.length);
+                                if (posMessageStart >= posGroupChatStart + groupChatStart.length &&
+                                    posMessageStart < posGroupChatStop) {
+                                    var messageReplaced = false;
+                                    var skipMessage = false;
+                                    var messageLength = responseText.indexOf(messageStop, posMessageStart + messageStart.length) - (posMessageStart + messageStart.length);
+                                    if (messageLength > 0) {
+                                        var message = responseText.substr(posMessageStart + messageStart.length, messageLength);
+                                        var idxEmoji = floatingEmojisMessage.indexOf(message);
+                                        if (idxEmoji >= 0) {
+                                            if (res.readyState === 4 && res.status === 200) {
+                                                var timestamp = 0;
+                                                var posTimestampStart = responseText.indexOf(timeStampStart, posGroupChatStart + groupChatStart.length);
+                                                if (posTimestampStart > posGroupChatStart + groupChatStart.length &&
+                                                    posTimestampStart < posGroupChatStop) {
+                                                    var posTimestampStop = responseText.indexOf(",", posTimestampStart + timeStampStart.length);
+                                                    var timestampString = "0";
+                                                    if (posTimestampStop > posTimestampStart + timeStampStart.length) {
+                                                        timestampString = responseText.substr(posTimestampStart + timeStampStart.length, posTimestampStop -
+                                                            (posTimestampStart + timeStampStart.length));
+                                                    }
+                                                    timestamp = parseInt(timestampString);
                                                 }
-                                                timestamp = parseInt(timestampString);
+                                                if (timestamp && now - timestamp > 30000) {
+                                                    Log.print(Log.l.info, "extra ignored: emoji=" + message + " timestamp=" + timestamp + " now=" + now);
+                                                } else {
+                                                    Log.print(Log.l.info, "handling: emoji=" + message + " timestamp=" + timestamp + " now=" + now);
+                                                    that.handleFloatingEmoji(floatingEmojisSymbols[idxEmoji]);
+                                                }
                                             }
-                                            if (timestamp && now - timestamp > 30000) {
-                                                Log.print(Log.l.info, "extra ignored: emoji=" + message + " timestamp=" + timestamp + " now=" + now);
-                                            } else {
-                                                Log.print(Log.l.info, "handling: emoji=" + message + " timestamp=" + timestamp + " now=" + now);
-                                                that.handleFloatingEmoji(floatingEmojisSymbols[idxEmoji]);
-                                            }
-                                        }
-                                        skipMessage = true;
-                                        responseReplaced = true;
-                                    } else {
-                                        var prevMessageStartPos = 0;
-                                        while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
-                                            var curMessage = message.substr(prevMessageStartPos);
-                                            var posMagicStart = curMessage.indexOf(magicStart);
-                                            if (posMagicStart >= 0) {
-                                                var posMagicStop = curMessage.indexOf(magicStop);
-                                                var command = "";
-                                                if (posMagicStop > posMagicStart + magicStart.length) {
-                                                    command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
-                                                    if (command && that.commandInfo[command]) {
-                                                        if (pageControllerName === "eventController") {
-                                                            if (curMessage.length > magicStart.length + command.length + magicStop.length) {
-                                                                if (!prevMessageStartPos) {
-                                                                    newResponseText += curText.substr(0, posMessageStart + messageStart.length);
+                                            skipMessage = true;
+                                            responseReplaced = true;
+                                        } else {
+                                            var prevMessageStartPos = 0;
+                                            while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
+                                                var posMagicStart = message.indexOf(magicStart, prevMessageStartPos);
+                                                if (posMagicStart >= prevMessageStartPos) {
+                                                    var posMagicStop = message.indexOf(magicStop, posMagicStart);
+                                                    var command = "";
+                                                    var commandLength = posMagicStop - (posMagicStart + magicStart.length);
+                                                    if (commandLength > 0) {
+                                                        command = message.substr(posMagicStart + magicStart.length, commandLength);
+                                                        if (command && that.commandInfo[command]) {
+                                                            if (pageControllerName === "eventController") {
+                                                                if (messageLength > magicStart.length + command.length + magicStop.length) {
+                                                                    if (!prevMessageStartPos) {
+                                                                        newResponseText += responseText.substr(prevStopPos, posMessageStart + messageStart.length - prevStopPos);
+                                                                    }
+                                                                    newResponseText += message.substr(prevMessageStartPos, posMagicStart - prevMessageStartPos);
+                                                                    messageReplaced = true;
+                                                                } else if (!prevMessageStartPos) {
+                                                                    skipMessage = true;
                                                                 }
-                                                                newResponseText += curMessage.substr(0, posMagicStart);
-                                                                messageReplaced = true;
-                                                            } else if (!prevMessageStartPos) {
-                                                                skipMessage = true;
+                                                                responseReplaced = true;
+                                                            }
+                                                            if (res.readyState === 4 && res.status === 200) {
+                                                                Log.print(Log.l.info, "received command=" + command);
+                                                                that.handleCommand(command);
                                                             }
                                                         }
-                                                        if (res.readyState === 4 && res.status === 200) {
-                                                            Log.print(Log.l.info, "received command=" + command);
-                                                            that.handleCommand(command);
-                                                        }
-                                                        responseReplaced = true;
+                                                    } 
+                                                    prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
+                                                } else {
+                                                    if (messageReplaced) {
+                                                        newResponseText += message.substr(prevMessageStartPos, posMagicStart - prevMessageStartPos);
                                                     }
-                                                } 
-                                                prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
-                                            } else {
-                                                if (messageReplaced) {
-                                                    newResponseText += curMessage;
+                                                    prevMessageStartPos = -1;
                                                 }
-                                                prevMessageStartPos = -1;
                                             }
+                                        }
+                                    }
+                                    if (messageReplaced) {
+                                        newResponseText += responseText.substr(posMessageStart + messageStart.length + messageLength, posGroupChatStop -
+                                            (posMessageStart + messageStart.length + messageLength));
+                                    } else if (skipMessage) {
+                                        // dismiss trailing comma
+                                        var nonSkippedMessages = responseText.substr(prevStopPos, posGroupChatStart - prevStopPos);
+                                        if (nonSkippedMessages.length > 0 && nonSkippedMessages[nonSkippedMessages.length - 1] === ",") {
+                                            newResponseText += nonSkippedMessages.substr(0, nonSkippedMessages.length - 1);
+                                        } else {
+                                            newResponseText += nonSkippedMessages;
                                         }
                                     }
                                 }
-                                // respect closing brackets!
-                                var posFieldsStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length).indexOf("}");
-                                if (posFieldsStop >= 0) {
-                                    var posGroupChatStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1).indexOf("}");
-                                    if (posGroupChatStop >= 0) {
-                                        if (messageReplaced) {
-                                            newResponseText += messageStop + curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length,
-                                                posFieldsStop + 1 + posGroupChatStop + 1);
-                                        } else if (skipMessage) {
-                                            var nonSkippedMessages = curText.substr(0, posGroupChatStart);
-                                            // skip list-separators!
-                                            if (nonSkippedMessages.substr(nonSkippedMessages.length-2) === "\",") {
-                                                nonSkippedMessages = nonSkippedMessages.substr(0, nonSkippedMessages.length-2);
-                                            }
-                                            newResponseText += nonSkippedMessages;
-                                        } else {
-                                            newResponseText += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
-                                        }
-                                        prevStartPos += posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1;
-                                    } else {
-                                        newResponseText += curText;
-                                        prevStartPos = -1;
-                                    }
-                                } else {
-                                    newResponseText += curText;
-                                    prevStartPos = -1;
+                                prevStartPos = posGroupChatStop;
+                                if (responseReplaced) {
+                                    prevStopPos = posGroupChatStop;
                                 }
                             } else {
-                                newResponseText += curText;
                                 prevStartPos = -1;
                             }
                         } else {
-                            newResponseText += curText;
                             prevStartPos = -1;
                         }
                     }
                     if (responseReplaced) {
+                        if (prevStopPos > 0) {
+                            var responseTextAdd = responseText.substr(prevStopPos);
+                            newResponseText += responseTextAdd;
+                        }
                         res.responseText = newResponseText;
                     }
-                      
                 }
             };
             if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
@@ -2103,73 +2127,65 @@ var __meteor_runtime_config__;
                         var bodyReplaced = false;
                         var newBody = "";
                         var prevStartPos = 0;
-                        while (prevStartPos >= 0 && prevStartPos <= body.length) {
-                            var curText = body.substr(prevStartPos);
-                            var posSendGroupChatStart = curText.indexOf(sendGroupChatStart);
-                            if (posSendGroupChatStart >= 0) {
-                                var posMessageStart = curText.substr(posSendGroupChatStart + sendGroupChatStart.length).indexOf(messageStart);
-                                if (posMessageStart > 0) {
-                                    posMessageStart += posSendGroupChatStart + sendGroupChatStart.length;
-                                    var messageReplaced = false;
-                                    var messageLength = curText.substr(posMessageStart + messageStart.length).indexOf(messageStop);
-                                    if (messageLength > 0) {
-                                        var message = curText.substr(posMessageStart + messageStart.length, messageLength);
-                                        var prevMessageStartPos = 0;
-                                        while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
-                                            var curMessage = message.substr(prevMessageStartPos);
-                                            var posMagicStart = curMessage.indexOf(magicStart);
-                                            if (posMagicStart >= 0) {
-                                                var posMagicStop = curMessage.indexOf(magicStop);
-                                                var command = "";
-                                                if (posMagicStop > posMagicStart + magicStart.length) {
-                                                    command = curMessage.substr(posMagicStart + magicStart.length, posMagicStop - (posMagicStart + magicStart.length));
-                                                    if (command && that.commandInfo[command]) {
-                                                        if (!prevMessageStartPos) {
-                                                            newBody += curText.substr(0, posMessageStart + messageStart.length);
+                        var prevStopPos = 0;
+                        while (prevStartPos >= 0 && prevStartPos < body.length) {
+                            var posSendGroupChatStart = body.indexOf(sendGroupChatStart, prevStartPos);
+                            if (posSendGroupChatStart >= prevStartPos && body.indexOf(magicStart, posSendGroupChatStart + sendGroupChatStart.length) >= 0) {
+                                var posSendGroupChatStop = findEndOfStruct(body, posSendGroupChatStart);
+                                if (posSendGroupChatStop > posSendGroupChatStart + sendGroupChatStart.length) {
+                                    var posMessageStart = body.indexOf(messageStart, posSendGroupChatStart + sendGroupChatStart.length);
+                                    if (posMessageStart >= posSendGroupChatStart + sendGroupChatStart.length &&
+                                        posMessageStart < posSendGroupChatStop) {
+                                        var messageReplaced = false;
+                                        var messageLength = body.indexOf(messageStop, posMessageStart + messageStart.length) - (posMessageStart + messageStart.length);
+                                        if (messageLength > 0) {
+                                            var message = body.substr(posMessageStart + messageStart.length, messageLength);
+                                            var prevMessageStartPos = 0;
+                                            while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
+                                                var posMagicStart = message.indexOf(magicStart, prevMessageStartPos);
+                                                if (posMagicStart >= prevMessageStartPos) {
+                                                    var posMagicStop = message.indexOf(magicStop, posMagicStart);
+                                                    var command = "";
+                                                    var commandLength = posMagicStop - (posMagicStart + magicStart.length);
+                                                    if (commandLength > 0) {
+                                                        command = message.substr(posMagicStart + magicStart.length, commandLength);
+                                                        if (command && that.commandInfo[command]) {
+                                                            if (!prevMessageStartPos) {
+                                                                newBody += body.substr(prevStopPos, posMessageStart + messageStart.length - prevStopPos);
+                                                            }
+                                                            newBody += message.substr(prevMessageStartPos, posMagicStart - prevMessageStartPos) +
+                                                                magicStartReplace + command + magicStopReplace;
+                                                            messageReplaced = true;
+                                                            bodyReplaced = true;
                                                         }
-                                                        newBody += curMessage.substr(0, posMagicStart) + magicStartReplace + command + magicStopReplace;
-                                                        messageReplaced = true;
-                                                        bodyReplaced = true;
+                                                    } 
+                                                    prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
+                                                } else {
+                                                    if (messageReplaced) {
+                                                        newBody += message.substr(prevMessageStartPos, posMagicStart - prevMessageStartPos);
                                                     }
-                                                } 
-                                                prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
-                                            } else {
-                                                if (messageReplaced) {
-                                                    newBody += curMessage;
+                                                    prevMessageStartPos = -1;
                                                 }
-                                                prevMessageStartPos = -1;
                                             }
+                                        }
+                                        if (messageReplaced) {
+                                            newBody += body.substr(posMessageStart + messageStart.length + messageLength, posSendGroupChatStop -
+                                                (posMessageStart + messageStart.length + messageLength));
                                         }
                                     }
-                                    var posFieldsStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length).indexOf("}");
-                                    if (posFieldsStop >= 0) {
-                                        var posGroupChatStop = curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1).indexOf("}");
-                                        if (posGroupChatStop >= 0) {
-                                            if (messageReplaced) {
-                                                newBody += messageStop + curText.substr(posMessageStart + messageStart.length + messageLength + messageStop.length,
-                                                    posFieldsStop + 1 + posGroupChatStop + 1);
-                                            } else {
-                                                newBody += curText.substr(0, posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1);
-                                            }
-                                            prevStartPos += posMessageStart + messageStart.length + messageLength + messageStop.length + posFieldsStop + 1 + posGroupChatStop + 1;
-                                        } else {
-                                            newBody += curText;
-                                            prevStartPos = -1;
-                                        }
-                                    } else {
-                                        newBody += curText;
-                                        prevStartPos = -1;
+                                    prevStartPos = posSendGroupChatStop;
+                                    if (bodyReplaced) {
+                                        prevStopPos = prevStartPos;
                                     }
                                 } else {
-                                    newBody += curText;
                                     prevStartPos = -1;
                                 }
                             } else {
-                                newBody += curText;
                                 prevStartPos = -1;
                             }
                         }
                         if (bodyReplaced) {
+                            newBody += body.substr(prevStopPos);
                             return newBody;
                         }
                     }
