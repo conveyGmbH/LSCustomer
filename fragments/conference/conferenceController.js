@@ -2089,11 +2089,15 @@ var __meteor_runtime_config__;
                                         newResponseText += responseText.substr(posMessageStart + messageStart.length + messageLength, posGroupChatStop -
                                             (posMessageStart + messageStart.length + messageLength));
                                     } else if (skipMessage) {
-                                        // dismiss trailing comma
                                         var nonSkippedMessages = responseText.substr(prevStopPos, posGroupChatStart - prevStopPos);
                                         if (nonSkippedMessages.length > 0 && nonSkippedMessages[nonSkippedMessages.length - 1] === ",") {
+                                            // dismiss trailing comma from prev. message 
                                             newResponseText += nonSkippedMessages.substr(0, nonSkippedMessages.length - 1);
                                         } else {
+                                            if (responseText[posGroupChatStop] === ",") {
+                                                // dismiss leading comma from next message
+                                                posGroupChatStop++;
+                                            } 
                                             newResponseText += nonSkippedMessages;
                                         }
                                     }
