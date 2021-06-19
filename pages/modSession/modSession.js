@@ -118,8 +118,12 @@
                                                     headerHeight = stickyHeader.clientHeight;
                                                 }
                                             }
-                                            //var contentHeight = Math.max(Math.min(height - headerHeight,height - offsetTop),400);
-                                            var contentHeight = Math.max(height - (offsetTop + headerHeight),400);
+                                            var contentHeight;
+                                            if (WinJS.Utilities.hasClass(content, "recordedContent-fragmenthost")) {
+                                                contentHeight = Math.max(height - (offsetTop + headerHeight), 400);
+                                            } else {
+                                                contentHeight = Math.max(Math.min(height - headerHeight,height - offsetTop),400);
+                                            }
                                             content.style.height = contentHeight.toString() + "px";
                                             var fragmentElement = content.firstElementChild;
                                             if (fragmentElement) {
