@@ -100,8 +100,31 @@
                              data-win-bind="winControl.checked: showVideoList; winControl.title: labelShowVideoList; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
                              onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
                     </div>
+                    <div class="emoji-button-container">
+                        <button id="toggleEmojiChooser" class="win-button"
+                                onclick="AppBar.handleEvent('click', 'clickToggleEmojiButton', event)">
+                            <div class="button-tip">
+                                <span class="emoji-button-icon"></span>
+                                <div class="win-tooltip">
+                                    <div class="bubble-arrow"></div>
+                                    <div class="bubble-body">
+                                        <span data-win-res="{textContent: 'tooltip.emojiChooserc'}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <div id="emojiToolbar" class="tool-box box-bkg"
+                         data-win-control="WinJS.UI.Repeater">
+                        <div class="win-button emoji"
+                                onclick="AppBar.handleEvent('click', 'clickEmoji', event)"
+                                data-win-bind="name: text">
+                            <div class="button-tip">
+                                <div data-win-bind="className: className"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </section>
     </div>
 </div>

@@ -17,6 +17,7 @@
     "tooltip.videoListLeft" : "Mode conférence : les images vidéo des participants sont affichées à gauche de la présentation dans une liste verticale",
     "tooltip.videoListRight" : "Mode conférence : les images vidéo des participants sont affichées à droite de la présentation dans une liste verticale",
     "tooltip.videoListDefault" : "Mode conférence : les images vidéo des participants sont en liste horizontale et peuvent être déplacées au-dessus ou au-dessous de la présentation",
+    "tooltip.emojiChooserc" : "Sélectionnez un emoji pour donner un feedback spontané à tous les participants",
 
     "events.title"          : "Série",
 

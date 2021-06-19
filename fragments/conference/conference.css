@@ -77,7 +77,7 @@
 .win-toggleswitch-pressed .win-toggleswitch-track {
     background-color: rgba(128,128,128,0.4);
 }
-.presenter-button-container {
+#conferenceController .presenter-button-container {
     display: none;
     margin: 0 10px;
     z-index: 9;
@@ -93,7 +93,7 @@
     font-size: var(--font-size-small) !important;
 }
 
-.modSession .presenter-button-container > button.win-button {
+.modSession #conferenceController .presenter-button-container > button.win-button {
     z-index: 11;
     margin: 0 5px 5px 0;
     background-color: var(--btn-primary-bg);
@@ -104,14 +104,14 @@
     box-shadow: 0 2px 5px 0 black !important;
     opacity: 0.8;
 }
-.modSession .presenter-button-container > button.win-button:hover,
-.modSession .presenter-button-container > button.win-button:active {
+.modSession #conferenceController .presenter-button-container > button.win-button:hover,
+.modSession #conferenceController .presenter-button-container > button.win-button:active {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
     color: var(--btn-primary-color) !important;
 }
 
-.modSession .presenter-button-container > button.win-button .button-tip .win-tooltip {
+.modSession #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip {
     top: 50px;
     left: -80px;
     min-height: 40px;
@@ -126,12 +126,12 @@
     border: none;
     padding: 0;
 }
-.modSession .presenter-button-container > button.win-button:hover .button-tip .win-tooltip,
-.modSession .presenter-button-container > button.win-button:active .button-tip .win-tooltip {
+.modSession #conferenceController .presenter-button-container > button.win-button:hover .button-tip .win-tooltip,
+.modSession #conferenceController .presenter-button-container > button.win-button:active .button-tip .win-tooltip {
     top: 64px;
     opacity: 1;
 }
-.modSession .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-arrow {
+.modSession #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
     margin-left: calc(50% - 10px);
@@ -141,7 +141,7 @@
     position: absolute;
     top: 0;
 }
-.modSession .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-body {
+.modSession #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 5px;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
@@ -157,7 +157,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* protect button */
-#conference.mediaview button,
+#conferenceController .presenter-button-container > button,
 .portal--27FHYi button {
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
@@ -401,6 +401,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     justify-content: flex-end;
     align-items: center;
     flex: 1
+}
+.event #conference.mediaview .actionsbar--Z1ant6U .left--Z1rLKlO,
+.event #conference.mediaview .actionsbar--Z1ant6U .right--DUFDc {
+    flex: 0
 }
 #conference.mediaview
 /* dragged video drop zone */
@@ -826,4 +830,126 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 #conference.mediaview .float-container div * {
     font-family: emoji;
+}
+
+
+/* emoji chooser */
+
+#conferenceController .emoji-button-container {
+    display: none;
+    margin: 0 10px;
+}
+
+.event #conferenceController .emoji-button-container > .win-button {
+    background-color: var(--btn-primary-bg);
+    border-color: transparent;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    box-shadow: 0 2px 5px 0 black !important;
+    opacity: 0.8;
+    padding: 4px;
+    margin-top: 2px;
+}
+
+.event #conferenceController .emoji-button-container > .win-button:hover,
+.event #conferenceController .emoji-button-container > .win-button:active {
+    background-color: var(--btn-primary-bg) !important;
+    opacity: 1;
+}
+
+.event #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon {
+    font-family: emoji-color;
+    font-size: 130%;
+}
+.event #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
+    content: "\1f642";
+}
+
+.event #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip {
+    top: -55px;
+    left: -86px;
+    min-height: 40px;
+    transition-duration: 500ms;
+    transition-property: top, opacity;
+    opacity: 0;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 13px !important;
+    white-space: normal;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.event #conferenceController .emoji-button-container > .win-button:hover .button-tip .win-tooltip,
+.event #conferenceController .emoji-button-container > .win-button:active .button-tip .win-tooltip {
+    top: -70px;
+    opacity: 1;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.event #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
+    width: 20px;
+    height: 20px;
+    margin-left: calc(50% - 10px);
+    transform: rotate(45deg);
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
+    position: absolute;
+    top: 33px;
+}
+
+.event #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
+    border-radius: 5px;
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
+    padding: 4px 7px 6px;
+    position: absolute;
+    top: -4px;
+}
+
+
+#conferenceController .tool-box {
+    display: none;
+    bottom: 0px;
+    height: 46px;
+    padding: 1px;
+    opacity: 0.9;
+    z-index: 10;
+    border-radius: 23px;
+}
+#conferenceController .box-bkg {
+    background-color: rgba(255,186,16,0.8);
+}
+
+#conferenceController .tool-box .emoji {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    margin: 5px;
+    border-radius: 50%;
+    padding: 2px;
+    float: left;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: none;
+    transition-duration: 0.3s;
+    transition-property: transform;
+    transform: scale(1);
+}
+
+#conferenceController .tool-box .emoji:hover {
+    transform: scale(1.2);
+}
+
+#conferenceController .tool-box > button.win-button .button-tip {
+    margin: 0;
+    padding: 0;
+}
+
+#conferenceController .tool-box > button.win-button .button-tip .emoji-button-icon {
+    font-family: emoji-color;
+    font-size: 180%;
 }

@@ -17,14 +17,23 @@ var __meteor_runtime_config__;
         restoreDesc: "#conference.mediaview .right--DUFDc button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF"
     };
 
-    var floatingEmojis = [
-        "\u2764",  //"❤️"
-        "\u1f389", //"🎉"
-        "\u1f44f", //"👏"
-        "\u1f917", //"🤗"
-        "\u1f914", //"🤔"
-        "\u1f625"  //"😥"
+    var floatingEmojisSymbols = [
+        "\u2764",       //"❤️"
+        "\ud83d\udc4f", //"👏"
+        "\ud83c\udf89", //"🎉"
+        "\ud83d\ude42", //"🙂"
+        "\ud83e\udd14", //"🤔"
+        "\ud83d\ude25"  //"😥"
     ];
+    var floatingEmojisMessage = [
+        "\u2764",         //"❤️"
+        "\\ud83d\\udc4f", //"👏"
+        "\\ud83c\\udf89", //"🎉"
+        "\\ud83d\\ude42", //"🙂"
+        "\\ud83e\\udd14", //"🤔"
+        "\\ud83d\\ude25"  //"😥"
+    ];
+    
 
     var magicStart = "&lt;!--";
     var magicStop = "--&gt;";
@@ -84,6 +93,8 @@ var __meteor_runtime_config__;
             var presenterButtonContainer = fragmentElement.querySelector(".modSession .presenter-button-container");
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
+            var emojiButtonContainer = fragmentElement.querySelector(".emoji-button-container");
+            var emojiToolbar = fragmentElement.querySelector("#emojiToolbar");
 
             this.sendResizePromise = null;
             this.showUserListPromise = null;
@@ -95,6 +106,7 @@ var __meteor_runtime_config__;
             this.meetingDoc = null;
             this.commandQueue = [];
             this.deviceList = [];
+            this.toolboxIds = ["emojiToolbar"];
             
             this.showUserListFailedCount = 0;
             this.adjustContentPositionsFailedCount = 0;
@@ -1198,6 +1210,15 @@ var __meteor_runtime_config__;
                 } else {
                     videoListDefaults.restoreDesc = null;
                 }
+                if (pageControllerName === "eventController") {
+                    var actionsBarCenter = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .center--ZyfFaC");
+                    if (actionsBarCenter && emojiButtonContainer && emojiToolbar &&
+                        actionsBarCenter.lastElementChild !== emojiToolbar) {
+                        actionsBarCenter.appendChild(emojiButtonContainer);
+                        emojiButtonContainer.style.display = "inline-block";
+                        actionsBarCenter.appendChild(emojiToolbar);
+                    }
+                }
                 Log.ret(Log.l.trace);
                 return ret;
             }
@@ -1693,7 +1714,7 @@ var __meteor_runtime_config__;
                     var command = event && event.currentTarget && event.currentTarget.id;
                     if (command) {
                         Log.print(Log.l.info, "command=" + command);
-                        that.submitCommandMessage(command, event);
+                        that.submitCommandMessage(magicStart + command + magicStop, event);
                     }
                     Log.ret(Log.l.info);
                 },
@@ -1708,11 +1729,59 @@ var __meteor_runtime_config__;
                                 if (!toggle.checked) {
                                     command = command.replace(/show/, "hide");
                                 }
-                                that.submitCommandMessage(command, event);
+                                that.submitCommandMessage(magicStart + command + magicStop, event);
                             }
                         }
                     }
                     Log.ret(Log.l.info);
+                },
+                clickToggleEmojiButton: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    that.eventHandlers.toggleToolbox("emojiToolbar");
+                    Log.ret(Log.l.info);
+                },
+                clickEmoji: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    var command = event && event.currentTarget && event.currentTarget.name;
+                    if (command) {
+                        Log.print(Log.l.info, "command=" + command);
+                        that.submitCommandMessage(command, event);
+                    }
+                    that.eventHandlers.hideToolbox("emojiToolbar");
+                    Log.ret(Log.l.info);
+                },
+                hideToolbox: function(id) {
+                    var curToolbox = fragmentElement.querySelector('#' + id);
+                    if (curToolbox && curToolbox.style) {
+                        WinJS.UI.Animation.slideRightOut(curToolbox).done(function() {
+                            curToolbox.style.display = "none";
+                        });
+                    }
+                },
+                toggleToolbox: function (id) {
+                    WinJS.Promise.timeout(0).then(function () {
+                        var curToolbox = fragmentElement.querySelector('#' + id);
+                        if (curToolbox && curToolbox.style) {
+                            var computedStyle = window.getComputedStyle(curToolbox);
+                            if (!computedStyle || computedStyle.display !== "block") {
+                                for (var i = 0; i < that.toolboxIds.length; i++) {
+                                    if (that.toolboxIds[i] !== id) {
+                                        var otherToolbox = document.querySelector('#' + that.toolboxIds[i]);
+                                        if (otherToolbox && otherToolbox.style &&
+                                            otherToolbox.style.display === "block") {
+                                            otherToolbox.style.display = "none";
+                                        }
+                                    }
+                                }
+                                curToolbox.style.display = "block";
+                                WinJS.UI.Animation.slideLeftIn(curToolbox).done(function () {
+                                    // now visible
+                                });
+                            } else {
+                                that.eventHandlers.hideToolbox(id);
+                            }
+                        }
+                    });
                 }
             }
 
@@ -1745,14 +1814,14 @@ var __meteor_runtime_config__;
                     that.submitCommandMessagePromise.cancel();
                     that.submitCommandMessagePromise = null;
                 }
-                var messageInput = fragmentElement.querySelector(".modSession #conference.mediaview .chat--111wNM .form--1S2xdc textarea#message-input");
+                var messageInput = fragmentElement.querySelector("#conference.mediaview .chat--111wNM .form--1S2xdc textarea#message-input");
                 if (messageInput) {
                     //messageInput.focus();
-                    messageInput.innerHTML = magicStart + command + magicStop;
+                    messageInput.innerHTML = command;
                     var inputEvent = document.createEvent('event');
                     inputEvent.initEvent('input', true, true);
                     messageInput.dispatchEvent(inputEvent);
-                    var submitButton = fragmentElement.querySelector(".modSession #conference.mediaview .chat--111wNM .form--1S2xdc button[type=\"submit\"]");
+                    var submitButton = fragmentElement.querySelector("#conference.mediaview .chat--111wNM .form--1S2xdc button[type=\"submit\"]");
                     if (submitButton) {
                         submitButton.click();
                     }
@@ -1852,8 +1921,8 @@ var __meteor_runtime_config__;
             var messageStart = "\\\"message\\\":\\\"";
             var messageStop = "\\\"";
             var textContainsEmoji = function(text) {
-                for (var i = 0; i < floatingEmojis.length; i++) {
-                    if (text.indexOf(floatingEmojis[i]) >= 0) {
+                for (var i = 0; i < floatingEmojisMessage.length; i++) {
+                    if (text.indexOf(floatingEmojisMessage[i]) >= 0) {
                         return true;
                     }
                 }
@@ -1879,10 +1948,11 @@ var __meteor_runtime_config__;
                                 var messageLength = curText.substr(posMessageStart + messageStart.length).indexOf(messageStop);
                                 if (messageLength > 0) {
                                     var message = curText.substr(posMessageStart + messageStart.length, messageLength);
-                                    if (floatingEmojis.indexOf(message) >= 0) {
+                                    var idxEmoji = floatingEmojisMessage.indexOf(message);
+                                    if (idxEmoji >= 0) {
                                         if (res.readyState === 4 && res.status === 200) {
                                             Log.print(Log.l.info, "received emoji=" + message);
-                                            that.handleFloatingEmoji(message);
+                                            that.handleFloatingEmoji(floatingEmojisSymbols[idxEmoji]);
                                         }
                                         skipMessage = true;
                                         responseReplaced = true;
@@ -2052,6 +2122,30 @@ var __meteor_runtime_config__;
                 Application.hookXhrSend = null;
             }
 
+            var initEmojiToolbar = function() {
+                
+                if (emojiToolbar && emojiToolbar.winControl) {
+                    var emojiData = new WinJS.Binding.List([]);
+                    floatingEmojisSymbols.forEach(function(item, index) {
+                        var className = "emoji" + index;
+                        var style = document.getElementById(className);
+                        if (!style) {
+                            style = document.createElement("style");
+                            style.id = className;
+                            style.innerHTML = "#conferenceController ." + className + ":before { content:\"" + item + "\"; }";
+                            document.head.appendChild(style);
+                        }
+                        emojiData.push({
+                            index: index,
+                            text: item,
+                            className: "emoji-button-icon " + className
+                        });
+                    });
+                    emojiToolbar.winControl.data = emojiData;
+                }
+            }
+            that.initEmojiToolbar = initEmojiToolbar;
+
             if (typeof navigator.mediaDevices === "object" &&
                 typeof navigator.mediaDevices.enumerateDevices === "function") {
                 navigator.mediaDevices.enumerateDevices().then(function(deviceList) {
@@ -2064,6 +2158,7 @@ var __meteor_runtime_config__;
             that.processAll().then(function () {
                 AppBar.notifyModified = false;
                 Log.print(Log.l.trace, "Binding wireup page complete");
+                that.initEmojiToolbar();
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");

@@ -18,6 +18,7 @@
     "tooltip.videoListLeft" : "Konferenz-Modus: Videobilder der Teilnehmer werden links neben der Präsentation in vertikaler Liste angezeigt",
     "tooltip.videoListRight" : "Konferenz-Modus: Videobilder der Teilnehmer sind rechts neben der Präsentation in vertikaler Liste angezeigt",
     "tooltip.videoListDefault" : "Konferenz-Modus: Videobilder der Teilnehmer sind in horizontaler Liste und können über oder unter die Präsentation verschoben werden",
+	"tooltip.emojiChooserc" : "Wählen Sie ein Emoji aus um allen Teilnehmern eine spontane Rückmeldung zu geben",
 
     "events.title"          : "Serie",
 
