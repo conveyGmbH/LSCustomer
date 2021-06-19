@@ -577,6 +577,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .fullScreenButton--Z1bf0vj,
 #conference.mediaview .videoPlayer--1MGUuy .wrapper--Z17x8k2.dark--Z1Y80Wt > button {
     z-index: 100;
+    padding: 5px;
+    font-size: var(--btn-sm-font-size);
+    line-height: 1;
 }
 
 
