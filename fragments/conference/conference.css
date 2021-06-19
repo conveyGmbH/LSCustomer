@@ -858,6 +858,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     opacity: 1;
 }
 
+.event #conferenceController .emoji-button-container > .win-button .button-tip {
+    text-align: center;
+    vertical-align: middle;
+
+}
+
 .event #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon {
     font-family: emoji-color;
     font-size: 130%;
@@ -947,6 +953,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conferenceController .tool-box > button.win-button .button-tip {
     margin: 0;
     padding: 0;
+    text-align: center;
+    vertical-align: middle;
 }
 
 #conferenceController .tool-box > button.win-button .button-tip .emoji-button-icon {
