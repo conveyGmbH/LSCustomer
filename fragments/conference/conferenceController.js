@@ -1866,14 +1866,16 @@ var __meteor_runtime_config__;
                         messageInput.form.reset();
                     }
                     if (openedChat) {
-                        btnToggleChat = fragmentElement.querySelector("div[role=\"button\"]#chat-toggle-button");
+                        btnToggleChat = fragmentElement.querySelector("div[role=\"button\"][aria-expanded=\"true\"]#chat-toggle-button");
                         if (btnToggleChat) {
                             btnToggleChat.click();
                         }
                     }
                     if (openedUserList) {
-                        btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
-                        if (btnToggleUserList) {
+                        btnToggleUserList = fragmentElement.querySelector("button[accesskey=\"U\"].btn--Z25OApd");
+                        if (btnToggleUserList && 
+                            !(btnToggleUserList.nextElementSibling &&
+                              WinJS.Utilities.hasClass(btnToggleUserList.nextElementSibling, "icon-bbb-right_arrow"))) {
                             btnToggleUserList.click();
                         }
                     }
@@ -1893,7 +1895,7 @@ var __meteor_runtime_config__;
                         }
                     }
                 } else {
-                    btnToggleChat = fragmentElement.querySelector("div[role=\"button\"]#chat-toggle-button");
+                    btnToggleChat = fragmentElement.querySelector("div[role=\"button\"][aria-expanded=\"false\"]#chat-toggle-button");
                     if (btnToggleChat) {
                         panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
                         if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
@@ -1907,8 +1909,10 @@ var __meteor_runtime_config__;
                         if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
                             WinJS.Utilities.addClass(panelWrapper, "hide-panel-section");
                         } else {
-                            btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
-                            if (btnToggleUserList) {
+                            btnToggleUserList = fragmentElement.querySelector("button[accesskey=\"U\"].btn--Z25OApd");
+                            if (btnToggleUserList && 
+                                (btnToggleUserList.nextElementSibling &&
+                                 WinJS.Utilities.hasClass(btnToggleUserList.nextElementSibling, "icon-bbb-right_arrow"))) {
                                 btnToggleUserList.click();
                                 openedUserList = true;
                             }
