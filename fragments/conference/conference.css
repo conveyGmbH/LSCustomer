@@ -333,10 +333,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-top: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
 }
-#conference.mediaview .wrapper--Z20hQYP.hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI),
-#conference.mediaview .wrapper--Z20hQYP.hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) > div,
-#conference.mediaview .wrapper--Z20hQYP.hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) > section {
-    display: none;
+#conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div),
+#conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div) *,
+#conference.mediaview .hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI),
+#conference.mediaview .hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) * {
+    display: none !important;
 }
 
 #conference.mediaview .chat--Z1w8gP7,
@@ -935,7 +936,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     display: none;
     bottom: 2px;
     left: 185px;
-    width: 330px;
+    width: auto;
     height: 46px;
     opacity: 0.9;
     border-radius: 23px;

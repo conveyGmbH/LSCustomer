@@ -1879,19 +1879,29 @@ var __meteor_runtime_config__;
                     }
                     if (openedChat || openedUserList) {
                         panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
-                        if (panelWrapper && WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
-                            WinJS.Utilities.removeClass(panelWrapper, "hide-panel-section");
+                        if (panelWrapper) {
+                            if (WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
+                                WinJS.Utilities.removeClass(panelWrapper, "hide-chat-section");
+                            }
+                            if (WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                WinJS.Utilities.removeClass(panelWrapper, "hide-panel-section");
+                            }
                         }
                     }
                 } else {
-                    panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
-                    if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
-                        WinJS.Utilities.addClass(panelWrapper, "hide-panel-section");
-                    } else {
-                        btnToggleChat = fragmentElement.querySelector("div[role=\"button\"]#chat-toggle-button");
-                        if (btnToggleChat) {
+                    btnToggleChat = fragmentElement.querySelector("div[role=\"button\"]#chat-toggle-button");
+                    if (btnToggleChat) {
+                        panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
+                        if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
+                            WinJS.Utilities.addClass(panelWrapper, "hide-chat-section");
+                        } else {
                             btnToggleChat.click();
                             openedChat = true;
+                        }
+                    } else {
+                        panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
+                        if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                            WinJS.Utilities.addClass(panelWrapper, "hide-panel-section");
                         } else {
                             btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
                             if (btnToggleUserList) {
