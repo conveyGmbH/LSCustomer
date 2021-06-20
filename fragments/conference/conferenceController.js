@@ -1881,10 +1881,14 @@ var __meteor_runtime_config__;
                         panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
                         if (panelWrapper) {
                             if (WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
-                                WinJS.Utilities.removeClass(panelWrapper, "hide-chat-section");
+                                WinJS.Promise.timeout(50).then(function() {
+                                    WinJS.Utilities.removeClass(panelWrapper, "hide-chat-section");
+                                });
                             }
                             if (WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
-                                WinJS.Utilities.removeClass(panelWrapper, "hide-panel-section");
+                                WinJS.Promise.timeout(50).then(function() {
+                                    WinJS.Utilities.removeClass(panelWrapper, "hide-panel-section");
+                                });
                             }
                         }
                     }

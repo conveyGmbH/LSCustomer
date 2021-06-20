@@ -333,8 +333,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-top: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
 }
-#conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div),
-#conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div) *,
+#conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX),
+#conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX) *,
 #conference.mediaview .hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI),
 #conference.mediaview .hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) * {
     display: none !important;
