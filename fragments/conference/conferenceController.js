@@ -112,6 +112,7 @@ var __meteor_runtime_config__;
             this.toolboxIds = ["emojiToolbar"];
             this.emojiCount = {};
 
+            this.filterModeratorsFailedCount = 0;
             this.showUserListFailedCount = 0;
             this.adjustContentPositionsFailedCount = 0;
 
@@ -600,11 +601,16 @@ var __meteor_runtime_config__;
                         if (participantsListParent && participantsListParent.firstElementChild) {
                             userListDefaults.userListObserver = new MutationObserver(function(mutationList, observer) {
                                 WinJS.Promise.timeout(0).then(function() {
-                                    mutationList.forEach(function(mutation) {
-                                        if (mutation.type === "childList") {
-                                            that.filterModerators(mutation.addedNodes);
+                                    if (mutationList) {
+                                        for (var i = 0; i < mutationList.length; i++) {
+                                            var mutation = mutationList[i];
+                                            if (mutation && mutation.type === "childList" && 
+                                                mutation.addedNodes && mutation.addedNodes.length > 0) {
+                                                that.filterModerators(mutation.addedNodes);
+                                                break;
+                                            }
                                         }
-                                    });
+                                    }
                                 });
                             });
                             if (userListDefaults.userListObserver) {
@@ -614,8 +620,10 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                } else {
-                    that.filterModeratorsPromise = WinJS.Promise.timeout(500).then(function() {
+                } else if (!addedNodes) {
+                    that.filterModeratorsFailedCount++;
+                    Log.print(Log.l.trace, "not yet created - try later again! that.filterModeratorsFailedCount=" + that.filterModeratorsFailedCount);
+                    that.filterModeratorsPromise = WinJS.Promise.timeout(Math.min(that.filterModeratorsFailedCount * 10,5000)).then(function() {
                         that.filterModerators();
                     });
                 }
@@ -633,7 +641,8 @@ var __meteor_runtime_config__;
                     userListDefaults.toggleUserList(event);
                 }
                 if (userListDefaults.onlyModerators && !userList) {
-                    that.filterModeratorsPromise = WinJS.Promise.timeout(250).then(function() {
+                    that.filterModeratorsFailedCount = 0;
+                    that.filterModeratorsPromise = WinJS.Promise.timeout(0).then(function() {
                         that.filterModerators();
                     });
                 }
@@ -707,19 +716,16 @@ var __meteor_runtime_config__;
                         ret = true;
                         if (!show) {
                             btnToggleUserList.click();
+                        } else if (onlyModerators) {
+                            that.filterModeratorsFailedCount = 0;
+                            that.filterModeratorsPromise = WinJS.Promise.timeout(0).then(function() {
+                                that.filterModerators();
+                            });
                         }
                     } else {
                         ret = false;
                         if (show) {
                             btnToggleUserList.click();
-                        }
-                    }
-                    if (onlyModerators) {
-                        that.filterModerators();
-                    } else {
-                        if (that.filterModeratorsPromise) {
-                            that.filterModeratorsPromise.cancel();
-                            that.filterModeratorsPromise = null;
                         }
                     }
                 }
@@ -2260,6 +2266,9 @@ var __meteor_runtime_config__;
             }
             videoListDefaults.direction = videoListDefaults.right;
             videoListDefaults.hideInactive = !!that.binding.dataEvent.HideSilentVideos;
+            if (!that.binding.dataEvent.SharedNotes) {
+                WinJS.Utilities.addClass(conference, "hide-shared-notes");
+            }
 
             that.processAll().then(function () {
                 AppBar.notifyModified = false;
