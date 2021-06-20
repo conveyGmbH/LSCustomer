@@ -581,7 +581,9 @@ var __meteor_runtime_config__;
                                 var participantsListEntry = participantsList[i];
                                 if (participantsListEntry && !participantsListEntry.querySelector(".moderator--24bqCT")) {
                                     try {
-                                        participantsListEntry.parentNode.removeChild(participantsListEntry);
+                                        while (participantsListEntry.firstElementChild) {
+                                            participantsListEntry.removeChild(participantsListEntry.firstElementChild);
+                                        }
                                     } catch (ex) {
                                         Log.print(Log.l.trace, "participantsList[" + i + "] is not a child entry of userList");
                                     }
