@@ -345,6 +345,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-right: 1px solid var(--color-gray-lightest);
 }
 
+/* increase line-size of chat-dropdown-button menu-list */
+#conference.mediaview .verticalList--Ghtxj .item--yl1AH {
+    padding: calc(var(--line-height-computed) / 2) 0;
+}
+
 /* protect speaking bar */
 #conference.mediaview .bottom--2oxmox {
     display: block;
@@ -602,7 +607,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     display: none;
 }
 #conference.mediaview .scrollable--4fyj li[aria-labelledby="dropdown-item-label-14"].item--yl1AH,
-#conference.mediaview .scrollable--4fyj li[aria-labelledby="dropdown-item-label-15"].item--yl1AH {
+#conference.mediaview .scrollable--4fyj li[aria-labelledby="dropdown-item-label-15"].item--yl1AH,
+#conference.mediaview .scrollable--4fyj li[aria-labelledby="dropdown-item-label-16"].item--yl1AH {
     display: none;
 }
 
