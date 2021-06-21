@@ -1070,6 +1070,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--color-off-white);
     font-family: Barlow;
 }
+
 .notification-popup {
     position: absolute;
     right: 20px;
@@ -1077,6 +1078,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     z-index: 10;
     max-width: 70%;
 }
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden) .notification-popup {
+    left: 20px;
+    right: auto;
+}
+c
 .post-notification-popup .notification-title {
     font-weight: 600;
     text-transform: uppercase;
