@@ -37,6 +37,8 @@ var __meteor_runtime_config__;
 
     var magicStart = "&lt;!--";
     var magicStop = "--&gt;";
+    var magicStartReplace = "&lt;!&#8211;&#8211;";
+    var magicStopReplace = "&#8211;&#8211;&gt;";
 
     WinJS.Namespace.define("Conference", {
         Controller: WinJS.Class.derive(Fragments.Controller, function Controller(fragmentElement, options, commandList) {
@@ -72,9 +74,8 @@ var __meteor_runtime_config__;
                 toggleChat: null
             };
 
-            var emojiToolbarPositionObserver = null
-
-
+            var emojiToolbarPositionObserver = null;
+            
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataEvent: options ? options.dataEvent : {},
@@ -95,6 +96,11 @@ var __meteor_runtime_config__;
                     name: "",
                     time: "",
                     text: ""
+                },
+                dataNotification: {
+                    name: "",
+                    time: "",
+                    text: ""
                 }
             }, commandList]);
 
@@ -105,6 +111,7 @@ var __meteor_runtime_config__;
             var emojiButtonContainer = fragmentElement.querySelector(".emoji-button-container");
             var emojiToolbar = fragmentElement.querySelector("#emojiToolbar");
             var postNotificationPopup = fragmentElement.querySelector("#postNotificationPopup");
+            var notificationPopup = fragmentElement.querySelector("#notificationPopup");
 
             this.sendResizePromise = null;
             this.showUserListPromise = null;
@@ -114,6 +121,8 @@ var __meteor_runtime_config__;
             this.observeToggleUserListBtnPromise = null;
             this.observeChatMessageListPromise = null;
             this.submitCommandMessagePromise = null;
+            this.showNotificationPromise = null;
+            this.hideNotificationPromise = null;
             this.meetingDoc = null;
             this.commandQueue = [];
             this.deviceList = [];
@@ -159,6 +168,14 @@ var __meteor_runtime_config__;
                 if (that.submitCommandMessagePromise) {
                     that.submitCommandMessagePromise.cancel();
                     that.submitCommandMessagePromise = null;
+                }
+                if (that.showNotificationPromise) {
+                    that.showNotificationPromise.cancel();
+                    that.showNotificationPromise = null;
+                }
+                if (that.hideNotificationPromise) {
+                    that.hideNotificationPromise.cancel();
+                    that.hideNotificationPromise = null;
                 }
                 conference = null;
                 videoListDefaults = {};
@@ -231,10 +248,12 @@ var __meteor_runtime_config__;
                     if (inline) {
                         var text = scriptTag.text;
                         promise = lastNonInlineScriptPromise.then(function() {
-                            n.text = text;
-                        }).then(null, function() {
-                            // eat error
-                        });
+                                n.text = text;
+                            })
+                            .then(null,
+                                function() {
+                                    // eat error
+                                });
                     } else {
                         if (!isBody) {
                             promise = new WinJS.Promise(function(c) {
@@ -246,11 +265,14 @@ var __meteor_runtime_config__;
                                 n.setAttribute("src", scriptTag.src);
                             });
                         } else {
-                            promise = getScriptFromSrcXhr(scriptTag.src).then(function(scriptText) {
-                                n.text = scriptText;
-                            }).then(null, function() {
-                                // eat error
-                            });
+                            promise = getScriptFromSrcXhr(scriptTag.src)
+                                .then(function(scriptText) {
+                                    n.text = scriptText;
+                                })
+                                .then(null,
+                                    function() {
+                                        // eat error
+                                    });
                         }
                     }
                     if (target) {
@@ -264,6 +286,7 @@ var __meteor_runtime_config__;
                         inline: inline
                     };
                 }
+                return null;
             }
 
             var addStyle = function (styleTag, fragmentHref, position) {
@@ -704,7 +727,7 @@ var __meteor_runtime_config__;
                 Log.call(Log.l.trace, "Conference.Controller.", "show="+show+" onlyModerators="+onlyModerators);
                 if (!that.binding.dataConference || !that.binding.dataConference.URL) {
                     Log.ret(Log.l.trace, "no conference URL!");
-                    return ret;
+                    return null;
                 }
                 if (typeof show === "undefined") {
                     show = userListDefaults.show;
@@ -1881,10 +1904,117 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
+                showNotification: function(paramsWithQuotes) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (that.showNotificationPromise) {
+                        that.showNotificationPromise.cancel();
+                        that.showNotificationPromise = null;
+                    }
+                    if (typeof paramsWithQuotes !== "string") {
+                        Log.ret(Log.l.info, "invalid param: extra ignored!");
+                        return;
+                    }
+                    var mediaContainer = null;
+                    if (that.hideNotificationPromise) {
+                        that.eventHandlers.clickNotification();
+                    } else {
+                        mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    }
+                    if (mediaContainer) {
+                        if (notificationPopup &&
+                            notificationPopup.style) {
+                            that.binding.dataNotification.name = "";
+                            that.binding.dataNotification.time = "";
+                            that.binding.dataNotification.text = "";
+                            var name = "";
+                            var time = "";
+                            var text = "";
+                            var startName = "name=";
+                            var startTime = "&amp;time=";
+                            var startText = "&amp;text=";
+                            var params = paramsWithQuotes
+                                .replace(/&#32;&quot;&#32;/g, "")
+                                .replace(/ &quot; /g, "")
+                                .replace(/&quot;&quot;/g, "&quot;");
+                            var posStart = params.indexOf(startName);
+                            if (posStart >= 0) {
+                                posStart += startName.length;
+                                var posStop = params.indexOf(startTime, posStart);
+                                if (posStop >= posStart) {
+                                    name = params.substr(posStart, posStop - posStart);
+                                    posStart = posStop + startTime.length;
+                                    posStop = params.indexOf(startText, posStart);
+                                    if (posStop >= posStart) {
+                                        time = params.substr(posStart, posStop - posStart);
+                                        posStart = posStop + startText.length;
+                                        text = params.substr(posStart);
+                                    }
+                                }
+                                if (name && time && text) {
+                                    that.binding.dataNotification.name = name;
+                                    that.binding.dataNotification.time = time;
+                                    that.binding.dataNotification.text = text;
+                                    mediaContainer.appendChild(notificationPopup);
+                                    notificationPopup.style.display = "block";
+                                    WinJS.UI.Animation.slideUp(notificationPopup).done(function() {
+                                        that.hideNotificationPromise = WinJS.Promise.timeout(7000).then(function() {
+                                            that.eventHandlers.clickNotification();
+                                        });
+                                    });
+                                }
+                            }
+                        }
+                    } else {
+                        that.showNotificationPromise = WinJS.Promise.timeout(500).then(function() {
+                            that.eventHandlers.showNotification(paramsWithQuotes);
+                        });
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickNotification: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (that.hideNotificationPromise) {
+                        that.hideNotificationPromise.cancel();
+                        that.hideNotificationPromise = null;
+                    }
+                    if (notificationPopup && 
+                        notificationPopup.style) {
+                        WinJS.UI.Animation.slideDown(notificationPopup).done(function() {
+                            notificationPopup.style.display = "none";
+                            var notificationContainer = fragmentElement.querySelector(".notification-container");
+                            if (notificationContainer) {
+                                notificationContainer.appendChild(notificationPopup);
+                            }
+                        });
+                    }
+                    Log.ret(Log.l.info);
+                },
                 clickSendNotification: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    if (postNotificationPopup && postNotificationPopup.winControl) {
-                        postNotificationPopup.winControl.hide();
+                    if (that.binding.dataMessage) {
+                        var name = that.binding.dataMessage.name;
+                        var time = that.binding.dataMessage.time;
+                        var text = that.binding.dataMessage.text;
+                        var regExprMagicStart =  new RegExp(magicStart, "g");
+                        var regExprMagicStop =  new RegExp(magicStop, "g");
+                        if (name && time && text) {
+                            var q = "&#32;&quot;&#32;";
+                            name = q + name
+                                .replace(regExprMagicStart, magicStartReplace)
+                                .replace(regExprMagicStop, magicStopReplace)
+                                .replace(/&quot;/g, "&quot;&quot;") + q;
+                            time = q + time + q;
+                            text = q + text
+                                .replace(regExprMagicStart, magicStartReplace)
+                                .replace(regExprMagicStop, magicStopReplace)
+                                .replace(/&quot;/g, "&quot;&quot;") + q;
+                            var command = "showNotification(name=" + name + "&amp;time=" + time + "&amp;text=" + text + ")";
+                            Log.print(Log.l.info, "command=" + command);
+                            that.submitCommandMessage(magicStart + command + magicStop, event);
+                        }
+                        if (postNotificationPopup && postNotificationPopup.winControl) {
+                            postNotificationPopup.winControl.hide();
+                        }
                     }
                     Log.ret(Log.l.info);
                 },
@@ -1895,7 +2025,7 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
-                                clickToggleSwitch: function(event) {
+                clickToggleSwitch: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (event.currentTarget) {
                         var command = event.currentTarget.id;
@@ -2065,7 +2195,7 @@ var __meteor_runtime_config__;
             }
             that.submitCommandMessage = submitCommandMessage;
 
-            that.commandInfo = {
+            that.allCommandInfos = {
                 showPresentation: { redundantList: ["hidePresentation"] },
                 hidePresentation: { redundantList: ["showPresentation"] },
                 videoListDefault: { redundantList: ["videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
@@ -2075,31 +2205,47 @@ var __meteor_runtime_config__;
                 showVideoList: { redundantList: ["hideVideoList"] },
                 presenterModeTiled: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeFull", "presenterModeSmall"] },
                 presenterModeFull: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeSmall"] },
-                presenterModeSmall: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull"] }
+                presenterModeSmall: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull"] },
+                showNotification: { redundantList: null }
             };
-            var handleCommand = function(command) {
-                var prevNotivyModified = AppBar.notifyModified;
+
+            var handleCommandWithParam = function(commandWithParam) {
+                if (!commandWithParam) {
+                    Log.ret(Log.L.info, "null param");
+                    return WinJS.Promise.as();
+                }
+                var command = commandWithParam.command;
+                var prevNotifyModified = AppBar.notifyModified;
                 Log.print(Log.l.info, "queue command=" + command);
-                var commandInfo = that.commandInfo[command];
+                var commandInfo = that.allCommandInfos[command];
                 if (!commandInfo) {
                     Log.ret(Log.L.info, "unknown command=" + command);
                     return WinJS.Promise.as();
                 }
-                that.commandQueue = that.commandQueue.filter(function(commandToFilter) {
-                    return !commandInfo.redundantList || commandInfo.redundantList.indexOf(commandToFilter) < 0;
+                that.commandQueue = that.commandQueue.filter(function(item) {
+                    return item.command !== command && (!commandInfo.redundantList || commandInfo.redundantList.indexOf(item.command) < 0);
                 });
-                that.commandQueue.push(command);
+                that.commandQueue.push(commandWithParam);
                 return WinJS.Promise.timeout(250).then(function() {
                     var commandsToHandle = that.commandQueue;
                     that.commandQueue = [];
                     AppBar.notifyModified = false;
-                    commandsToHandle.forEach(function(queuedCommand) {
+                    commandsToHandle.forEach(function(queuedCommandWithParam) {
+                        var queuedCommand = queuedCommandWithParam.command;
+                        var queuedParam = null;
+                        if (queuedCommandWithParam.param) {
+                            queuedParam = queuedCommandWithParam.param;
+                        };
                         if (typeof that.eventHandlers[queuedCommand] === "function") {
                             Log.print(Log.l.info, "handle command=" + queuedCommand);
-                            that.eventHandlers[queuedCommand]();
+                            if (queuedParam) {
+                                that.eventHandlers[queuedCommand](queuedParam);
+                            } else {
+                                that.eventHandlers[queuedCommand]();
+                            }
                         }
                     });
-                    AppBar.notifyModified = prevNotivyModified;
+                    AppBar.notifyModified = prevNotifyModified;
                     if (that.adjustContentPositionsPromise) {
                         that.adjustContentPositionsPromise.cancel();
                     }
@@ -2110,7 +2256,7 @@ var __meteor_runtime_config__;
                     });
                 });
             }
-            that.handleCommand = handleCommand;
+            that.handleCommandWithParam = handleCommandWithParam;
 
             var handleFloatingEmoji = function(emoji) {
                 Log.call(Log.l.info, "Conference.Controller.", "emoji=" + emoji);
@@ -2156,6 +2302,29 @@ var __meteor_runtime_config__;
                     }
                 }
                 return false;
+            }
+            var getCommandWithParam = function (text) {
+                if (text) {
+                    if (that.allCommandInfos[text]) {
+                        return {
+                             command: text, 
+                             param: ""
+                        };
+                    }
+                    for (var prop in that.allCommandInfos) {
+                        if (that.allCommandInfos.hasOwnProperty(prop)) {
+                            if (that.allCommandInfos[text.substr(0, prop.length)] && 
+                                text[prop.length] === "(" && text[text.length - 1] === ")") {
+                                return {
+                                     command: text.substr(0, prop.length), 
+                                     param: text.substr(prop.length + 1, text.length - prop.length - 2)
+                                };
+                            }
+                        }
+                    }
+
+                }
+                return null;
             }
             var findEndOfStruct = function(text, fromIndex) {
                 fromIndex = (fromIndex > 0) ? fromIndex : 0;
@@ -2246,7 +2415,8 @@ var __meteor_runtime_config__;
                                                     var commandLength = posMagicStop - (posMagicStart + magicStart.length);
                                                     if (commandLength > 0) {
                                                         command = message.substr(posMagicStart + magicStart.length, commandLength);
-                                                        if (command && that.commandInfo[command]) {
+                                                        var commandWithParam = getCommandWithParam(command);
+                                                        if (commandWithParam) {
                                                             if (pageControllerName === "eventController") {
                                                                 if (messageLength > magicStart.length + command.length + magicStop.length) {
                                                                     if (!prevMessageStartPos) {
@@ -2260,8 +2430,8 @@ var __meteor_runtime_config__;
                                                                 responseReplaced = true;
                                                             }
                                                             if (res.readyState === 4 && res.status === 200) {
-                                                                Log.print(Log.l.info, "received command=" + command);
-                                                                that.handleCommand(command);
+                                                                Log.print(Log.l.info, "received command=" + commandWithParam.command);
+                                                                that.handleCommandWithParam(commandWithParam);
                                                             }
                                                         }
                                                     } 
@@ -2314,8 +2484,6 @@ var __meteor_runtime_config__;
             };
             if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
                 var sendGroupChatStart = "\"{\\\"msg\\\":\\\"method\\\",\\\"method\\\":\\\"sendGroupChatMsg\\\"";
-                var magicStartReplace = "&lt;!&#8211;&#8211;";
-                var magicStopReplace = "&#8211;&#8211;&gt;";
                 Application.hookXhrSend = function(body) {
                     if (typeof body === "string" && body.indexOf(magicStart) >= 0) {
                         var bodyReplaced = false;
@@ -2343,7 +2511,8 @@ var __meteor_runtime_config__;
                                                     var commandLength = posMagicStop - (posMagicStart + magicStart.length);
                                                     if (commandLength > 0) {
                                                         command = message.substr(posMagicStart + magicStart.length, commandLength);
-                                                        if (command && that.commandInfo[command]) {
+                                                        var commandWithParam = getCommandWithParam(command);
+                                                        if (commandWithParam) {
                                                             if (!prevMessageStartPos) {
                                                                 newBody += body.substr(prevStopPos, posMessageStart + messageStart.length - prevStopPos);
                                                             }

@@ -155,6 +155,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="notification-container">
+                        <div id="notificationPopup" class="notification-popup"
+                             onclick="AppBar.handleEvent('click', 'clickNotification', event)">
+                            <div class="notification-content">
+                                <div class="notification-meta">
+                                    <div class="notification-name">
+                                        <span data-win-bind="textContent: dataNotification.name"></span>
+                                    </div>
+                                    <div class="notification-time">
+                                        <span data-win-bind="textContent: dataNotification.time"></span>
+                                    </div>
+                                </div>
+                                <div class="notification-text">
+                                    <span data-win-bind="textContent: dataNotification.text"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

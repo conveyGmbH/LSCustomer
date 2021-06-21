@@ -657,6 +657,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* videoList overlay */
+#conference.mediaview .floatingOverlay--ZU51zt {
+    /* default style */
+}
+
 #conference.mediaview .video-overlay-fullwidth {
     width: calc(100% - 100px) !important;
     min-width: calc(100% - 100px) !important;
@@ -797,6 +801,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     width: auto !important;
     display: inline-block;
     position: absolute;
+}
+
+#conference.mediaview .videoList--1OC49P > div.talking--26lGzY {
+    /* active speaker */
 }
 
 #conference.mediaview .inactive-video-hidden {
@@ -1047,11 +1055,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* post notifications */
-#conferenceController .post-notification-container {
+#conferenceController .post-notification-container,
+#conferenceController .notification-container {
     display: none;
 }
 
-.post-notification-popup {
+.post-notification-popup, .notification-popup {
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 3px 10px 0 rgb(0 0 0 / 20%);
     border-radius: var(--border-radius);
     border-color: var(--color-gray-lightest) !important;
@@ -1061,12 +1070,19 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--color-off-white);
     font-family: Barlow;
 }
+.notification-popup {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 10;
+}
 .post-notification-popup .notification-title {
     font-weight: 600;
     text-transform: uppercase;
     margin: 10px
 }
-.post-notification-popup .notification-content {
+.post-notification-popup .notification-content,
+.notification-popup .notification-content {
     margin: 10px;
     background: var(--systemMessage-background-color);
     border: 1px solid var(--systemMessage-border-color);
@@ -1077,12 +1093,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     display: flex;
     flex-direction: column;
     letter-spacing: 0.1;
-
 }
-.post-notification-popup .notification-meta {
+.post-notification-popup .notification-meta,
+.notification-popup .notification-meta {
     flex: 25px;
 }
-.post-notification-popup .notification-name {
+.post-notification-popup .notification-name,
+.notification-popup .notification-name {
     font-weight: 600;
     font-size: 14px;
     text-transform: capitalize;
@@ -1093,7 +1110,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     text-overflow: ellipsis;
     vertical-align: middle;
 }
-.post-notification-popup .notification-time {
+.post-notification-popup .notification-time,
+.notification-popup .notification-time {
     font-weight: 400;
     color: var(--color-gray-lighter);
     font-size: 10px;
@@ -1104,13 +1122,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     height: 18px;
     vertical-align: middle;
 }
-.post-notification-popup .notification-time:before {
+.post-notification-popup .notification-time:before,
+.notification-popup .notification-time:before {
     content: "(";
 }
-.post-notification-popup .notification-time:after {
+.post-notification-popup .notification-time:after,
+.notification-popup .notification-time:after {
     content: ")";
 }
-.post-notification-popup .notification-text {
+.post-notification-popup .notification-text,
+.notification-popup .notification-text {
     font-size: 16px;
     flex: 1;
     font-weight: 300;
