@@ -2183,6 +2183,9 @@ var __meteor_runtime_config__;
                 var messageInput = fragmentElement.querySelector("#conference.mediaview .chat--111wNM .form--1S2xdc textarea#message-input");
                 if (messageInput) {
                     //messageInput.focus();
+                    if (messageInput.form && typeof messageInput.form.reset === "function") {
+                        messageInput.form.reset();
+                    }
                     messageInput.innerHTML = command;
                     var inputEvent = document.createEvent('event');
                     inputEvent.initEvent('input', true, true);
