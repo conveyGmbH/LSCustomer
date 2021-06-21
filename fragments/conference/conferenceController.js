@@ -95,12 +95,14 @@ var __meteor_runtime_config__;
                 dataMessage: {
                     name: "",
                     time: "",
-                    text: ""
+                    text: "",
+                    milliseconds: 0
                 },
                 dataNotification: {
                     name: "",
                     time: "",
-                    text: ""
+                    text: "",
+                    milliseconds: 0
                 }
             }, commandList]);
 
@@ -841,12 +843,17 @@ var __meteor_runtime_config__;
             var chatMessageClicked = function(message) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (message && postNotificationPopup && postNotificationPopup.winControl) {
-                    that.binding.dataMessage.name = message.name;
-                    var date = new Date(message.dateTime);
-                    that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
-                    that.binding.dataMessage.text = message.textContent;
-                    document.body.appendChild(postNotificationPopup);
-                    postNotificationPopup.winControl.showAt(message.event);
+                    try {
+                        var date = new Date(message.dateTime);
+                        that.binding.dataMessage.milliseconds = Date.now();
+                        that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
+                        that.binding.dataMessage.name = message.name;
+                        that.binding.dataMessage.text = message.textContent;
+                        document.body.appendChild(postNotificationPopup);
+                        postNotificationPopup.winControl.showAt(message.event);
+                    } catch (ex) {
+                        Log.print(Log.l.error, "Exception in message handling dateTime=" + message.dateTime);
+                    }
                 }
                 Log.ret(Log.l.trace);
             }
@@ -1951,41 +1958,68 @@ var __meteor_runtime_config__;
                             that.binding.dataNotification.name = "";
                             that.binding.dataNotification.time = "";
                             that.binding.dataNotification.text = "";
+                            that.binding.dataNotification.milliseconds = 0;
                             var name = "";
                             var time = "";
                             var text = "";
+                            var milliseconds = 0;
                             var startName = "name=";
                             var startTime = "&amp;time=";
                             var startText = "&amp;text=";
+                            var startMilliseconds = "&amp;milliseconds=";
                             var params = paramsWithQuotes
                                 .replace(/&#32;&quot;&#32;/g, "")
                                 .replace(/ &quot; /g, "")
                                 .replace(/&quot;&quot;/g, "&quot;");
                             var posStart = params.indexOf(startName);
-                            if (posStart >= 0) {
+                            if (posStart < 0) {
+                                Log.print(Log.l.info, "missing name in notification");
+                            } else {
                                 posStart += startName.length;
                                 var posStop = params.indexOf(startTime, posStart);
-                                if (posStop >= posStart) {
+                                if (posStop < posStart) {
+                                    Log.print(Log.l.info, "missing time in notification");
+                                } else {
                                     name = params.substr(posStart, posStop - posStart);
                                     posStart = posStop + startTime.length;
                                     posStop = params.indexOf(startText, posStart);
-                                    if (posStop >= posStart) {
+                                    if (posStop < posStart) {
+                                        Log.print(Log.l.info, "missing text in notification");
+                                    } else {
                                         time = params.substr(posStart, posStop - posStart);
                                         posStart = posStop + startText.length;
-                                        text = params.substr(posStart);
+                                        posStop = params.indexOf(startMilliseconds, posStart);
+                                        if (posStop < posStart) {
+                                            Log.print(Log.l.info, "missing milliseconds in notification");
+                                        } else {
+                                            text = params.substr(posStart, posStop - posStart);
+                                            posStart = posStop + startMilliseconds.length;
+                                            var millisecondsString = params.substr(posStart);
+                                            try {
+                                                milliseconds = parseInt(millisecondsString);
+                                            } catch (ex) {
+                                                Log.print(Log.l.error, "invalid millisecondsString=" + millisecondsString);
+                                            }
+                                        }
                                     }
                                 }
-                                if (name && time && text) {
-                                    that.binding.dataNotification.name = name;
-                                    that.binding.dataNotification.time = time;
-                                    that.binding.dataNotification.text = text;
-                                    mediaContainer.appendChild(notificationPopup);
-                                    notificationPopup.style.display = "block";
-                                    WinJS.UI.Animation.slideLeftIn(notificationPopup).done(function() {
-                                        that.hideNotificationPromise = WinJS.Promise.timeout(7000).then(function() {
-                                            that.eventHandlers.clickNotification();
+                                if (name && time && text && milliseconds) {
+                                    var now = Date.now();
+                                    var delayInSec = (now - milliseconds) / 1000;
+                                    if (delayInSec > 300) {
+                                        Log.print(Log.l.info, "extra ignored message delayed by " + delayInSec + "sec");
+                                    } else {
+                                        that.binding.dataNotification.name = name;
+                                        that.binding.dataNotification.time = time;
+                                        that.binding.dataNotification.text = text;
+                                        mediaContainer.appendChild(notificationPopup);
+                                        notificationPopup.style.display = "block";
+                                        WinJS.UI.Animation.slideLeftIn(notificationPopup).done(function() {
+                                            that.hideNotificationPromise = WinJS.Promise.timeout(7000).then(function() {
+                                                that.eventHandlers.clickNotification();
+                                            });
                                         });
-                                    });
+                                    }
                                 }
                             }
                         }
@@ -2017,23 +2051,24 @@ var __meteor_runtime_config__;
                 clickSendNotification: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (that.binding.dataMessage) {
-                        var name = that.binding.dataMessage.name;
-                        var time = that.binding.dataMessage.time;
-                        var text = that.binding.dataMessage.text;
                         var regExprMagicStart =  new RegExp(magicStart, "g");
                         var regExprMagicStop =  new RegExp(magicStop, "g");
-                        if (name && time && text) {
+                        if (that.binding.dataMessage.name && 
+                            that.binding.dataMessage.time && 
+                            that.binding.dataMessage.text && 
+                            that.binding.dataMessage.milliseconds) {
                             var q = "&#32;&quot;&#32;";
-                            name = q + name
+                            var name = q + that.binding.dataMessage.name
                                 .replace(regExprMagicStart, magicStartReplace)
                                 .replace(regExprMagicStop, magicStopReplace)
                                 .replace(/&quot;/g, "&quot;&quot;") + q;
-                            time = q + time + q;
-                            text = q + text
+                            var time = q + that.binding.dataMessage.time + q;
+                            var text = q + that.binding.dataMessage.text
                                 .replace(regExprMagicStart, magicStartReplace)
                                 .replace(regExprMagicStop, magicStopReplace)
                                 .replace(/&quot;/g, "&quot;&quot;") + q;
-                            var command = "showNotification(name=" + name + "&amp;time=" + time + "&amp;text=" + text + ")";
+                            var milliseconds = q + that.binding.dataMessage.milliseconds + q;
+                            var command = "showNotification(name=" + name + "&amp;time=" + time + "&amp;text=" + text + "&amp;milliseconds=" + milliseconds + ")";
                             Log.print(Log.l.info, "command=" + command);
                             that.submitCommandMessage(magicStart + command + magicStop, event);
                         }

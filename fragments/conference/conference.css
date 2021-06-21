@@ -1075,6 +1075,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 20px;
     bottom: 20px;
     z-index: 10;
+    max-width: 70%;
 }
 .post-notification-popup .notification-title {
     font-weight: 600;
