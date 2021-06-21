@@ -124,6 +124,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="chat-menu-container">
+                        <div id="chatMenu" class="chat-menu"
+                             data-win-control="WinJS.UI.Menu">
+                            <button data-win-control="WinJS.UI.MenuCommand"
+                                    data-win-options="{id: 'postNotification'}"
+                                    data-win-res="{winControl: {label: 'event.sendPostLabel'}}"
+                                    onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
+                            <hr data-win-control="WinJS.UI.MenuCommand"
+                                data-win-options="{id:'separator',type:'separator'}" />
+                            <button data-win-control="WinJS.UI.MenuCommand"
+                                    data-win-options="{id: 'lockChatMessage'}"
+                                    data-win-res="{winControl: {label: 'event.lockPostLabel'}}"
+                                    onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
+                            <button data-win-control="WinJS.UI.MenuCommand"
+                                    data-win-options="{id: 'unlockChatMessage'}"
+                                    data-win-res="{winControl: {label: 'event.unlockPostLabel'}}"
+                                    onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
+                        </div>
+                    </div>
                     <div class="post-notification-container">
                         <div id="postNotificationPopup" class="post-notification-popup"
                              data-win-control="WinJS.UI.Flyout">

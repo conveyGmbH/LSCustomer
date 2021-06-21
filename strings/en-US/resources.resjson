@@ -28,6 +28,9 @@
     "event.showPresentation" : "Show presentation",
     "event.showVideoList"    : "Show videos",
     "event.sendNotification" : "Send this message to all participants:",
+    "event.sendPostLabel" : "Share message with all",
+    "event.lockPostLabel" : "Lock message",
+    "event.unlockPostLabel" : "Unlock message",
 
     "conference.waitMessage": "Have fun on your online conference today",
 

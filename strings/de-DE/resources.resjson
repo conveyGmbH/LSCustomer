@@ -27,7 +27,10 @@
 	"event.labelLogOff"     : "Möchten Sie sich abmelden?",
     "event.showPresentation" : "Präsentation anzeigen",
     "event.showVideoList"    : "Videos anzeigen",
-	"event.sendNotification" : "Diese Mitteilung an alle Teilnehmer senden:",
+    "event.sendNotification" : "Diese Mitteilung an alle Teilnehmer senden:",
+    "event.sendPostLabel" : "Beitrag allen mitteilen",
+    "event.lockPostLabel" : "Beitrag sperren",
+    "event.unlockPostLabel" : "Beitrag entsperren",
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 

@@ -1154,9 +1154,39 @@ c
     color: var(--btn-primary-color);
     background-color: var(--btn-primary-bg);
     opacity: 0.8;
+    font-family: Barlow;
 }
 .post-notification-popup .notification-action button:hover,
 .post-notification-popup .notification-action button:active {
     opacity: 1;
+}
+
+/* chat menu */
+#conferenceController .chat-menu-container {
+    display: none
+}
+.chat-menu {
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 3px 10px 0 rgb(0 0 0 / 20%);
+    border-radius: var(--border-radius);
+    border-color: var(--color-gray-lightest) !important;
+    background-color: var(--color-off-white);
+}
+.chat-menu button:hover, .chat-menu button:active {
+    background-color: var(--btn-primary-bg) !important;
+}
+.chat-menu button .win-label {
+    font-size: var(--font-size-base) !important;
+    color: var(--color-gray) !important;
+    font-family: Barlow !important;
+    font-weight: 300 !important;
+}
+
+.chat-menu button:hover, 
+.chat-menu button:active {
+    background-color: var(--btn-primary-bg) !important;
+}
+.chat-menu button:hover .win-label,
+.chat-menu button:active .win-label {
+    color: var(--btn-primary-color) !important;
 }
 

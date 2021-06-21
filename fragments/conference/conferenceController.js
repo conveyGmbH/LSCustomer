@@ -39,6 +39,8 @@ var __meteor_runtime_config__;
     var magicStop = "--&gt;";
     var magicStartReplace = "&lt;!&#8211;&#8211;";
     var magicStopReplace = "&#8211;&#8211;&gt;";
+    var regExprMagicStart =  new RegExp(magicStart, "g");
+    var regExprMagicStop =  new RegExp(magicStop, "g");
 
     WinJS.Namespace.define("Conference", {
         Controller: WinJS.Class.derive(Fragments.Controller, function Controller(fragmentElement, options, commandList) {
@@ -116,6 +118,7 @@ var __meteor_runtime_config__;
             var emojiToolbar = fragmentElement.querySelector("#emojiToolbar");
             var postNotificationPopup = fragmentElement.querySelector("#postNotificationPopup");
             var notificationPopup = fragmentElement.querySelector("#notificationPopup");
+            var chatMenu = fragmentElement.querySelector("#chatMenu");
 
             this.sendResizePromise = null;
             this.showUserListPromise = null;
@@ -834,6 +837,14 @@ var __meteor_runtime_config__;
             }
             that.clickCloseDesc = clickCloseDesc;
 
+            if (chatMenu) {
+                that.addRemovableEventListener(chatMenu, "afterhide", function() {
+                    var chatMenuContainer = fragmentElement.querySelector(".chat-menu-container");
+                    if (chatMenuContainer) {
+                        chatMenuContainer.appendChild(chatMenu);
+                    }
+                });
+            }
             if (postNotificationPopup) {
                 that.addRemovableEventListener(postNotificationPopup, "afterhide", function() {
                     var postNotificationContainer = fragmentElement.querySelector(".post-notification-container");
@@ -844,7 +855,7 @@ var __meteor_runtime_config__;
             }
             var chatMessageClicked = function(message) {
                 Log.call(Log.l.trace, "Conference.Controller.");
-                if (message && postNotificationPopup && postNotificationPopup.winControl) {
+                if (message && chatMenu && chatMenu.winControl) {
                     try {
                         var date = new Date(message.dateTime);
                         that.binding.dataMessage.commandTs = Date.now();
@@ -852,8 +863,8 @@ var __meteor_runtime_config__;
                         that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
                         that.binding.dataMessage.name = message.name;
                         that.binding.dataMessage.text = message.textContent;
-                        document.body.appendChild(postNotificationPopup);
-                        postNotificationPopup.winControl.showAt(message.event);
+                        document.body.appendChild(chatMenu);
+                        chatMenu.winControl.showAt(message.event);
                     } catch (ex) {
                         Log.print(Log.l.error, "Exception in message handling dateTime=" + message.dateTime);
                     }
@@ -870,7 +881,8 @@ var __meteor_runtime_config__;
                 }
                 var messageList = fragmentElement.querySelector("#chat-messages.messageList--hsNac");
                 if (messageList) {
-                    if (!messageList._onClickHandler) {
+                    if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController" &&
+                        !messageList._onClickHandler) {
                         messageList._onClickHandler = function(event) {
                             if (event && event.currentTarget === messageList) {
                                 var target = event.target;
@@ -924,10 +936,9 @@ var __meteor_runtime_config__;
                     userListDefaults.messageListObserver = null;
                 } else {
                     if (!that.observeChatMessageListPromise) {
-                        that.observeChatMessageListPromise = WinJS.Promise.timeout(50)
-                            .then(function() {
-                                that.observeChatMessageList();
-                            });
+                        that.observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function() {
+                            that.observeChatMessageList();
+                        });
                     }
                 }
                 Log.ret(Log.l.trace);
@@ -1835,6 +1846,125 @@ var __meteor_runtime_config__;
             }
             that.setPresenterModeState = setPresenterModeState;
 
+            var extractChatFromParamsWithQuotes = function (paramsWithQuotes) {
+                Log.call(Log.l.info, "Conference.Controller.", "paramsWithQuotes=" + paramsWithQuotes);
+                if (paramsWithQuotes) {
+                    var name = "";
+                    var time = "";
+                    var text = "";
+                    var chatTs = 0
+                    var commandTs = 0;
+                    var startName = "name=";
+                    var startTime = "&amp;time=";
+                    var startText = "&amp;text=";
+                    var startChatTs = "&amp;chatTs=";
+                    var startCommandTs = "&amp;commandTs=";
+                    var params = paramsWithQuotes
+                        .replace(/&#32;&quot;&#32;/g, "")
+                        .replace(/ &quot; /g, "")
+                        .replace(/&quot;&quot;/g, "&quot;")
+                        .replace(/\\\\n/g, "\n")
+                        .replace(/&lt;br.\/&gt;/g, "\n");
+                    var posStart = params.indexOf(startName);
+                    if (posStart < 0) {
+                        Log.print(Log.l.info, "missing name in notification");
+                    } else {
+                        posStart += startName.length;
+                        var posStop = params.indexOf(startTime, posStart);
+                        if (posStop < posStart) {
+                            Log.print(Log.l.info, "missing time in notification");
+                        } else {
+                            name = params.substr(posStart, posStop - posStart);
+                            posStart = posStop + startTime.length;
+                            posStop = params.indexOf(startText, posStart);
+                            if (posStop < posStart) {
+                                Log.print(Log.l.info, "missing text in notification");
+                            } else {
+                                time = params.substr(posStart, posStop - posStart);
+                                posStart = posStop + startText.length;
+                                posStop = params.indexOf(startChatTs, posStart);
+                                if (posStop < posStart) {
+                                    Log.print(Log.l.info, "missing chatTs in notification");
+                                } else {
+                                    text = params.substr(posStart, posStop - posStart);
+                                    posStart = posStop + startChatTs.length;
+                                    posStop = params.indexOf(startCommandTs, posStart);
+                                    if (posStop < posStart) {
+                                        Log.print(Log.l.info, "missing commandTs in notification");
+                                    } else {
+                                        var chatTsString = params.substr(posStart, posStop - posStart);
+                                        try {
+                                            chatTs = parseInt(chatTsString);
+                                            posStart = posStop + startCommandTs.length;
+                                            var commandTsString = params.substr(posStart);
+                                            try {
+                                                commandTs = parseInt(commandTsString);
+                                                Log.ret(Log.l.trace, "name=" + name +
+                                                    " time=" + time + 
+                                                    " text=" + text +
+                                                    " chatTs=" + chatTs +
+                                                    " commandTs=" + commandTs);
+                                                return {
+                                                    name: name,
+                                                    time: time,
+                                                    text: text,
+                                                    chatTs: chatTs,
+                                                    commandTs: commandTs
+                                                }
+                                            } catch (ex) {
+                                                Log.print(Log.l.error, "invalid commandTsString=" + commandTsString);
+                                            }
+                                        } catch (ex) {
+                                            Log.print(Log.l.error, "invalid chatTsString=" + chatTsString);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                Log.ret(Log.l.trace, "invalid params");
+                return {
+                    name: "",
+                    time: "",
+                    text: "",
+                    chatTs: 0,
+                    commandTs: 0
+                }
+            }
+            that.extractChatFromParamsWithQuotes = extractChatFromParamsWithQuotes;
+
+            var buildParamsWithQuotesFromChat = function (dataMessage) {
+                var paramsWithQuotes = "";
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (dataMessage &&
+                    dataMessage.name &&
+                    dataMessage.time &&
+                    dataMessage.text &&
+                    dataMessage.chatTs &&
+                    dataMessage.commandTs) {
+                    var q = "&#32;&quot;&#32;";
+                    var name = q + that.binding.dataMessage.name
+                        .replace(regExprMagicStart, magicStartReplace)
+                        .replace(regExprMagicStop, magicStopReplace)
+                        .replace(/&quot;/g, "&quot;&quot;") + q;
+                    var time = q + that.binding.dataMessage.time + q;
+                    var text = q + that.binding.dataMessage.text
+                        .replace(regExprMagicStart, magicStartReplace)
+                        .replace(regExprMagicStop, magicStopReplace)
+                        .replace(/\n/g, "&lt;br /&gt;")
+                        .replace(/&quot;/g, "&quot;&quot;") + q;
+                    var chatTs = q + that.binding.dataMessage.chatTs + q;
+                    var commandTs = q + that.binding.dataMessage.commandTs + q;
+                    paramsWithQuotes = "name=" + name + "&amp;time=" + time + "&amp;text=" + text + "&amp;chatTs=" + chatTs + "&amp;commandTs=" + commandTs;
+                    Log.ret(Log.l.trace, "paramsWithQuotes=" + paramsWithQuotes);
+                } else {
+                    Log.ret(Log.l.trace, "invalid params");
+                }
+                return paramsWithQuotes;
+            }
+            that.buildParamsWithQuotesFromChat = buildParamsWithQuotesFromChat;
+
             this.eventHandlers = {
                 showPresentation: function() {
                     Log.call(Log.l.info, "Conference.Controller.");
@@ -1958,88 +2088,23 @@ var __meteor_runtime_config__;
                     if (mediaContainer) {
                         if (notificationPopup &&
                             notificationPopup.style) {
-                            that.binding.dataNotification.name = "";
-                            that.binding.dataNotification.time = "";
-                            that.binding.dataNotification.text = "";
-                            that.binding.dataNotification.chatTs = 0;
-                            that.binding.dataNotification.commandTs = 0;
-                            var name = "";
-                            var time = "";
-                            var text = "";
-                            var chatTs = 0
-                            var commandTs = 0;
-                            var startName = "name=";
-                            var startTime = "&amp;time=";
-                            var startText = "&amp;text=";
-                            var startChatTs = "&amp;chatTs=";
-                            var startCommandTs = "&amp;commandTs=";
-                            var params = paramsWithQuotes
-                                .replace(/&#32;&quot;&#32;/g, "")
-                                .replace(/ &quot; /g, "")
-                                .replace(/&quot;&quot;/g, "&quot;")
-                                .replace(/\\\\n/g, "\n")
-                                .replace(/&lt;br.\/&gt;/g, "\n");
-                            var posStart = params.indexOf(startName);
-                            if (posStart < 0) {
-                                Log.print(Log.l.info, "missing name in notification");
-                            } else {
-                                posStart += startName.length;
-                                var posStop = params.indexOf(startTime, posStart);
-                                if (posStop < posStart) {
-                                    Log.print(Log.l.info, "missing time in notification");
+                            var result = that.extractChatFromParamsWithQuotes(paramsWithQuotes);
+                            if (result && result.name && result.time && result.text && result.commandTs) {
+                                var now = Date.now();
+                                var delayInSec = (now - result.commandTs) / 1000;
+                                if (delayInSec > 300) {
+                                    Log.print(Log.l.info, "extra ignored message delayed by " + delayInSec + "sec");
                                 } else {
-                                    name = params.substr(posStart, posStop - posStart);
-                                    posStart = posStop + startTime.length;
-                                    posStop = params.indexOf(startText, posStart);
-                                    if (posStop < posStart) {
-                                        Log.print(Log.l.info, "missing text in notification");
-                                    } else {
-                                        time = params.substr(posStart, posStop - posStart);
-                                        posStart = posStop + startText.length;
-                                        posStop = params.indexOf(startChatTs, posStart);
-                                        if (posStop < posStart) {
-                                            Log.print(Log.l.info, "missing chatTs in notification");
-                                        } else {
-                                            text = params.substr(posStart, posStop - posStart);
-                                            posStart = posStop + startChatTs.length;
-                                            posStop = params.indexOf(startCommandTs, posStart);
-                                            if (posStop < posStart) {
-                                                Log.print(Log.l.info, "missing commandTs in notification");
-                                            } else {
-                                                var chatTsString = params.substr(posStart, posStop - posStart);
-                                                try {
-                                                    chatTs = parseInt(chatTsString);
-                                                } catch (ex) {
-                                                    Log.print(Log.l.error, "invalid chatTsString=" + chatTsString);
-                                                }
-                                                posStart = posStop + startCommandTs.length;
-                                                var commandTsString = params.substr(posStart);
-                                                try {
-                                                    commandTs = parseInt(commandTsString);
-                                                } catch (ex) {
-                                                    Log.print(Log.l.error, "invalid commandTsString=" + commandTsString);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                if (name && time && text && commandTs) {
-                                    var now = Date.now();
-                                    var delayInSec = (now - commandTs) / 1000;
-                                    if (delayInSec > 300) {
-                                        Log.print(Log.l.info, "extra ignored message delayed by " + delayInSec + "sec");
-                                    } else {
-                                        that.binding.dataNotification.name = name;
-                                        that.binding.dataNotification.time = time;
-                                        that.binding.dataNotification.text = text;
-                                        mediaContainer.appendChild(notificationPopup);
-                                        notificationPopup.style.display = "block";
-                                        WinJS.UI.Animation.slideLeftIn(notificationPopup).done(function() {
-                                            that.hideNotificationPromise = WinJS.Promise.timeout(7000).then(function() {
-                                                that.eventHandlers.clickNotification();
-                                            });
+                                    that.binding.dataNotification.name = result.name;
+                                    that.binding.dataNotification.time = result.time;
+                                    that.binding.dataNotification.text = result.text;
+                                    mediaContainer.appendChild(notificationPopup);
+                                    notificationPopup.style.display = "block";
+                                    WinJS.UI.Animation.slideLeftIn(notificationPopup).done(function() {
+                                        that.hideNotificationPromise = WinJS.Promise.timeout(7000).then(function() {
+                                            that.eventHandlers.clickNotification();
                                         });
-                                    }
+                                    });
                                 }
                             }
                         }
@@ -2047,6 +2112,50 @@ var __meteor_runtime_config__;
                         that.showNotificationPromise = WinJS.Promise.timeout(500).then(function() {
                             that.eventHandlers.showNotification(paramsWithQuotes);
                         });
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickChatMenuCommand: function (event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (event && event.currentTarget) {
+                        var id = event.currentTarget.id;
+                        WinJS.Promise.timeout(50).then(function () {
+                            switch (id) {
+                                case "postNotification":
+                                document.body.appendChild(postNotificationPopup);
+                                postNotificationPopup.winControl.showAt(event);
+                                break;
+                                case "lockChatMessage":
+                                case "unlockChatMessage":
+                                var paramsWithQuotes = that.buildParamsWithQuotesFromChat(that.binding.dataMessage);
+                                if (paramsWithQuotes) {
+                                    var command = id + "(" + paramsWithQuotes + ")";
+                                    Log.print(Log.l.info, "command=" + command);
+                                    that.submitCommandMessage(magicStart + command + magicStop, event);
+                                }
+                                break;
+                            }
+                        })
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickSendNotification: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    var paramsWithQuotes = that.buildParamsWithQuotesFromChat(that.binding.dataMessage);
+                    if (paramsWithQuotes) {
+                        var command = "showNotification(" + paramsWithQuotes + ")";
+                        Log.print(Log.l.info, "command=" + command);
+                        that.submitCommandMessage(magicStart + command + magicStop, event);
+                        if (postNotificationPopup && postNotificationPopup.winControl) {
+                            postNotificationPopup.winControl.hide();
+                        }
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickCancelNotification: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (postNotificationPopup && postNotificationPopup.winControl) {
+                        postNotificationPopup.winControl.hide();
                     }
                     Log.ret(Log.l.info);
                 },
@@ -2065,46 +2174,6 @@ var __meteor_runtime_config__;
                                 notificationContainer.appendChild(notificationPopup);
                             }
                         });
-                    }
-                    Log.ret(Log.l.info);
-                },
-                clickSendNotification: function(event) {
-                    Log.call(Log.l.info, "Conference.Controller.");
-                    if (that.binding.dataMessage) {
-                        var regExprMagicStart =  new RegExp(magicStart, "g");
-                        var regExprMagicStop =  new RegExp(magicStop, "g");
-                        if (that.binding.dataMessage.name && 
-                            that.binding.dataMessage.time && 
-                            that.binding.dataMessage.text && 
-                            that.binding.dataMessage.chatTs && 
-                            that.binding.dataMessage.commandTs) {
-                            var q = "&#32;&quot;&#32;";
-                            var name = q + that.binding.dataMessage.name
-                                .replace(regExprMagicStart, magicStartReplace)
-                                .replace(regExprMagicStop, magicStopReplace)
-                                .replace(/&quot;/g, "&quot;&quot;") + q;
-                            var time = q + that.binding.dataMessage.time + q;
-                            var text = q + that.binding.dataMessage.text
-                                .replace(regExprMagicStart, magicStartReplace)
-                                .replace(regExprMagicStop, magicStopReplace)
-                                .replace(/\n/g, "&lt;br /&gt;")
-                                .replace(/&quot;/g, "&quot;&quot;") + q;
-                            var chatTs = q + that.binding.dataMessage.chatTs + q;
-                            var commandTs = q + that.binding.dataMessage.commandTs + q;
-                            var command = "showNotification(name=" + name + "&amp;time=" + time + "&amp;text=" + text + "&amp;chatTs=" + chatTs + "&amp;commandTs=" + commandTs + ")";
-                            Log.print(Log.l.info, "command=" + command);
-                            that.submitCommandMessage(magicStart + command + magicStop, event);
-                        }
-                        if (postNotificationPopup && postNotificationPopup.winControl) {
-                            postNotificationPopup.winControl.hide();
-                        }
-                    }
-                    Log.ret(Log.l.info);
-                },
-                clickCancelNotification: function(event) {
-                    Log.call(Log.l.info, "Conference.Controller.");
-                    if (postNotificationPopup && postNotificationPopup.winControl) {
-                        postNotificationPopup.winControl.hide();
                     }
                     Log.ret(Log.l.info);
                 },
