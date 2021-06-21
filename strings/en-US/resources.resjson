@@ -27,6 +27,7 @@
     "event.labelLogOff"     : "Would you like to log out?",
     "event.showPresentation" : "Show presentation",
     "event.showVideoList"    : "Show videos",
+    "event.sendNotification" : "Send this message to all participants:",
 
     "conference.waitMessage": "Have fun on your online conference today",
 

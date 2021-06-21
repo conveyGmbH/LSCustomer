@@ -26,6 +26,7 @@
     "event.labelLogOff"     : "Vuoi disconnetterti?",
     "event.showPresentation" : "Mostra la presentazione",
     "event.showVideoList"    : "Mostra i video",
+    "event.sendNotification" : "Invia questo messaggio a tutti i partecipanti:",
 
     "conference.waitMessage": "Divertiti con la tua conferenza online oggi",
 

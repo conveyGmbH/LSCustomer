@@ -68,7 +68,8 @@ var __meteor_runtime_config__;
                 onlyModerators: false,
                 userListObserver: null,
                 toggleBtnObserver: null,
-                toggleUserList: null
+                toggleUserList: null,
+                toggleChat: null
             };
 
             var emojiToolbarPositionObserver = null
@@ -89,7 +90,12 @@ var __meteor_runtime_config__;
                 labelShowPresentation: getResourceText("event.showPresentation"),
                 labelShowVideoList: getResourceText("event.showVideoList"),
                 labelOn: getResourceText("label.on"),
-                labelOff: getResourceText("label.off")
+                labelOff: getResourceText("label.off"),
+                dataMessage: {
+                    name: "",
+                    time: "",
+                    text: ""
+                }
             }, commandList]);
 
             var conference = fragmentElement.querySelector("#conference");
@@ -98,6 +104,7 @@ var __meteor_runtime_config__;
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var emojiButtonContainer = fragmentElement.querySelector(".emoji-button-container");
             var emojiToolbar = fragmentElement.querySelector("#emojiToolbar");
+            var postNotificationPopup = fragmentElement.querySelector("#postNotificationPopup");
 
             this.sendResizePromise = null;
             this.showUserListPromise = null;
@@ -105,6 +112,7 @@ var __meteor_runtime_config__;
             this.checkForInactiveVideoPromise = null;
             this.filterModeratorsPromise = null;
             this.observeToggleUserListBtnPromise = null;
+            this.observeChatMessageListPromise = null;
             this.submitCommandMessagePromise = null;
             this.meetingDoc = null;
             this.commandQueue = [];
@@ -143,6 +151,10 @@ var __meteor_runtime_config__;
                 if (that.observeToggleUserListBtnPromise) {
                     that.observeToggleUserListBtnPromise.cancel();
                     that.observeToggleUserListBtnPromise = null;
+                }
+                if (that.observeChatMessageListPromise) {
+                    that.observeChatMessageListPromise.cancel();
+                    that.observeChatMessageListPromise = null;
                 }
                 if (that.submitCommandMessagePromise) {
                     that.submitCommandMessagePromise.cancel();
@@ -795,6 +807,100 @@ var __meteor_runtime_config__;
             }
             that.clickCloseDesc = clickCloseDesc;
 
+            if (postNotificationPopup) {
+                that.addRemovableEventListener(postNotificationPopup, "afterhide", function() {
+                    var postNotificationContainer = fragmentElement.querySelector(".post-notification-container");
+                    if (postNotificationContainer) {
+                        postNotificationContainer.appendChild(postNotificationPopup);
+                    }
+                });
+            }
+            var chatMessageClicked = function(message) {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (message && postNotificationPopup && postNotificationPopup.winControl) {
+                    that.binding.dataMessage.name = message.name;
+                    var date = new Date(message.dateTime);
+                    that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
+                    that.binding.dataMessage.text = message.textContent;
+                    document.body.appendChild(postNotificationPopup);
+                    postNotificationPopup.winControl.showAt(message.event);
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.chatMessageClicked = chatMessageClicked;
+
+            var observeChatMessageList = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (that.observeChatMessageListPromise) {
+                    that.observeChatMessageListPromise.cancel();
+                    that.observeChatMessageListPromise = null;
+                }
+                var messageList = fragmentElement.querySelector("#chat-messages.messageList--hsNac");
+                if (messageList) {
+                    if (!messageList._onClickHandler) {
+                        messageList._onClickHandler = function(event) {
+                            if (event && event.currentTarget === messageList) {
+                                var target = event.target;
+                                if (target && event.currentTarget !== target) {
+                                    if (target.parentElement === messageList ||
+                                        target.parentElement.parentElement === messageList) {
+                                        var nameElement = target.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
+                                        var timeElement = target.querySelector(".meta--ZDfdOI .time--ZDehNy");
+                                        var messageElements = target.querySelectorAll(".message--Z2n2nXu");
+                                        if (nameElement && timeElement && messageElements) {
+                                            var message = {
+                                                event: event,
+                                                name: nameElement.textContent,
+                                                dateTime: timeElement.dateTime,
+                                                textContent: ""
+                                            }
+                                            for (var i = 0; i < messageElements.length; i++) {
+                                                var messageElement = messageElements[i];
+                                                if (messageElement) {
+                                                    if (message.textContent) {
+                                                        message.textContent += "\n";
+                                                    }
+                                                    message.textContent += messageElement.textContent;
+                                                }
+                                            }
+                                            WinJS.Promise.timeout(0).then(function() {
+                                                that.chatMessageClicked(message);
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        messageList.addEventListener('click', messageList._onClickHandler.bind(messageList), false);
+                    }
+                } else {
+                    that.observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function() {
+                        that.observeChatMessageListPromise();
+                    });
+                }
+            }
+            that.observeChatMessageList = observeChatMessageList;
+
+            var clickToggleChat = function(event) {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                var messageList = fragmentElement.querySelector("#chat-messages.messageList--hsNac");
+                if (typeof userListDefaults.toggleChat === "function") {
+                    userListDefaults.toggleChat(event);
+                }
+                if (messageList) {
+                    userListDefaults.messageListObserver = null;
+                } else {
+                    if (!that.observeChatMessageListPromise) {
+                        that.observeChatMessageListPromise = WinJS.Promise.timeout(50)
+                            .then(function() {
+                                that.observeChatMessageList();
+                            });
+                    }
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.clickToggleChat = clickToggleChat;
+
             var onWheelSvg = function(event) {
                 if (event) {
                     event.preventDefault();
@@ -818,7 +924,18 @@ var __meteor_runtime_config__;
                 }
                 if (!that.binding.dataConference || !that.binding.dataConference.URL) {
                     Log.ret(Log.l.trace, "no conference URL!");
-                    return;
+                    return null;
+                }
+                if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                    var userList = fragmentElement.querySelector(".userList--11btR3");
+                    if (userList) {
+                        var btnToggleChat = fragmentElement.querySelector("div[role=\"button\"][aria-expanded=\"false\"]#chat-toggle-button");
+                        if (btnToggleChat && btnToggleChat.onclick !== that.clickToggleChat) {
+                            userListDefaults.toggleChat = btnToggleChat.onclick;
+                            btnToggleChat.onclick = that.clickToggleChat;
+                        }
+                    }
+
                 }
                 var videoPLayerOpened = false;
                 var screenShareOpened = false;
@@ -1764,7 +1881,21 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
-                clickToggleSwitch: function(event) {
+                clickSendNotification: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (postNotificationPopup && postNotificationPopup.winControl) {
+                        postNotificationPopup.winControl.hide();
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickCancelNotification: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (postNotificationPopup && postNotificationPopup.winControl) {
+                        postNotificationPopup.winControl.hide();
+                    }
+                    Log.ret(Log.l.info);
+                },
+                                clickToggleSwitch: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (event.currentTarget) {
                         var command = event.currentTarget.id;

@@ -117,14 +117,46 @@
                     <div id="emojiToolbar" class="tool-box box-bkg box-is-minimized"
                          data-win-control="WinJS.UI.Repeater">
                         <div class="win-button emoji"
-                                onclick="AppBar.handleEvent('click', 'clickEmoji', event)"
-                                data-win-bind="name: text">
+                             onclick="AppBar.handleEvent('click', 'clickEmoji', event)"
+                             data-win-bind="name: text">
                             <div class="button-tip">
                                 <div data-win-bind="className: className"></div>
                             </div>
                         </div>
                     </div>
+                    <div class="post-notification-container">
+                        <div id="postNotificationPopup" class="post-notification-popup"
+                             data-win-control="WinJS.UI.Flyout">
+                            <div class="notification-title">
+                                <span data-win-res="{textContent: 'event.sendNotification'}"></span>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-meta">
+                                    <div class="notification-name">
+                                        <span data-win-bind="textContent: dataMessage.name"></span>
+                                    </div>
+                                    <div class="notification-time">
+                                        <span data-win-bind="textContent: dataMessage.time"></span>
+                                    </div>
+                                </div>
+                                <div class="notification-text">
+                                    <span data-win-bind="textContent: dataMessage.text"></span>
+                                </div>
+                            </div>
+                            <div class="notification-action">
+                                <button class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickSendNotification', event)">
+                                    <span data-win-res="{textContent: 'flyout.ok'}"></span>
+                                </button>
+                                <button class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickCancelNotification', event)">
+                                    <span data-win-res="{textContent: 'flyout.cancel'}"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </section>
     </div>
 </div>

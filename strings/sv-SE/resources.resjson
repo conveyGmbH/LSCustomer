@@ -26,6 +26,7 @@
     "event.labelLogOff"     : "Möchten Sie sich abmelden?",
     "event.showPresentation" : "Show presentation",
     "event.showVideoList"    : "Show videos",
+    "event.sendNotification" : "Send this message to all participants:",
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 

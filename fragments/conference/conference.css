@@ -819,12 +819,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     text-overflow: ellipsis;
 }
 
-/* Chat textarea */
-#conference.mediaview .input--2wilPX {
-    padding: calc(var(--sm-padding-y) * 2.5) calc(var(--sm-padding-x) * 1.25) !important;
-    border-radius: var(--border-radius) !important;
-    font-family: Barlow, color-emoji !important;
-}
+/* Chat List */
+
 #conference.mediaview .systemMessage--ZYspJQ {
     font-weight: var(--btn-font-weight) !important;
     margin-bottom: var(--line-height-computed) !important;
@@ -842,9 +838,32 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     font-family: Barlow, color-emoji !important;
 }
 
+#conference.mediaview .messageList--hsNac .wrapper--Z1BLczb {
+    margin: 0;
+    padding: 4px;
+}
+
+.modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb:hover,
+.modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb:active {
+    background-color: var(--list-item-bg-hover);
+    box-shadow: inset 0 0 0 var(--border-size) var(--item-focus-border), inset 1px 0 0 1px var(--item-focus-border);
+}
+
+.modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb * {
+    pointer-events: none;
+}
+/* Chat textarea */
+#conference.mediaview .input--2wilPX {
+    padding: calc(var(--sm-padding-y) * 2.5) calc(var(--sm-padding-x) * 1.25) !important;
+    border-radius: var(--border-radius) !important;
+    font-family: Barlow, color-emoji !important;
+}
+
 #conference.mediaview .float-container div * {
     font-family: emoji;
 }
+
+
 
 
 /* emoji chooser */
@@ -1024,5 +1043,90 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 /* hide shared notes */
 .hide-shared-notes .userList--Z2q1D0p .messages--Z1feno8 + .messages--Z1feno8 > .container--Z1UAd2a,
 .hide-shared-notes .userList--Z2q1D0p div[aria-describedby="lockedNote"][role="button"] {
-    display: none
+    display: none;
 }
+
+/* post notifications */
+#conferenceController .post-notification-container {
+    display: none;
+}
+
+.post-notification-popup {
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 3px 10px 0 rgb(0 0 0 / 20%);
+    border-radius: var(--border-radius);
+    border-color: var(--color-gray-lightest) !important;
+    font-size: var(--font-size-base);
+    color: var(--color-gray);
+    line-height: 1;
+    background-color: var(--color-off-white);
+    font-family: Barlow;
+}
+.post-notification-popup .notification-title {
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 10px
+}
+.post-notification-popup .notification-content {
+    margin: 10px;
+    background: var(--systemMessage-background-color);
+    border: 1px solid var(--systemMessage-border-color);
+    border-radius: var(--border-radius);
+    font-weight: var(--btn-font-weight);
+    padding: var(--font-size-base);
+    margin-bottom: var(--line-height-computed);
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 0.1;
+
+}
+.post-notification-popup .notification-meta {
+    flex: 25px;
+}
+.post-notification-popup .notification-name {
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: var(--color-gray-dark);
+    float: left;
+    height: 18px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+.post-notification-popup .notification-time {
+    font-weight: 400;
+    color: var(--color-gray-lighter);
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-left: 5px;
+    float: left;
+    padding-top: 4px;
+    height: 18px;
+    vertical-align: middle;
+}
+.post-notification-popup .notification-time:before {
+    content: "(";
+}
+.post-notification-popup .notification-time:after {
+    content: ")";
+}
+.post-notification-popup .notification-text {
+    font-size: 16px;
+    flex: 1;
+    font-weight: 300;
+    font-family: Barlow, color-emoji;
+}
+.post-notification-popup .notification-action {
+    margin: 10px;
+}
+.post-notification-popup .notification-action button {
+    border-radius: var(--border-radius);
+    color: var(--btn-primary-color);
+    background-color: var(--btn-primary-bg);
+    opacity: 0.8;
+}
+.post-notification-popup .notification-action button:hover,
+.post-notification-popup .notification-action button:active {
+    opacity: 1;
+}
+
