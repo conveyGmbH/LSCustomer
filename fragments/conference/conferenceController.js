@@ -96,13 +96,15 @@ var __meteor_runtime_config__;
                     name: "",
                     time: "",
                     text: "",
-                    milliseconds: 0
+                    chatTs: 0,
+                    commandTs: 0
                 },
                 dataNotification: {
                     name: "",
                     time: "",
                     text: "",
-                    milliseconds: 0
+                    chatTs: 0,
+                    commandTs: 0
                 }
             }, commandList]);
 
@@ -845,7 +847,8 @@ var __meteor_runtime_config__;
                 if (message && postNotificationPopup && postNotificationPopup.winControl) {
                     try {
                         var date = new Date(message.dateTime);
-                        that.binding.dataMessage.milliseconds = Date.now();
+                        that.binding.dataMessage.commandTs = Date.now();
+                        that.binding.dataMessage.chatTs = date.getTime();
                         that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
                         that.binding.dataMessage.name = message.name;
                         that.binding.dataMessage.text = message.textContent;
@@ -1958,15 +1961,18 @@ var __meteor_runtime_config__;
                             that.binding.dataNotification.name = "";
                             that.binding.dataNotification.time = "";
                             that.binding.dataNotification.text = "";
-                            that.binding.dataNotification.milliseconds = 0;
+                            that.binding.dataNotification.chatTs = 0;
+                            that.binding.dataNotification.commandTs = 0;
                             var name = "";
                             var time = "";
                             var text = "";
-                            var milliseconds = 0;
+                            var chatTs = 0
+                            var commandTs = 0;
                             var startName = "name=";
                             var startTime = "&amp;time=";
                             var startText = "&amp;text=";
-                            var startMilliseconds = "&amp;milliseconds=";
+                            var startChatTs = "&amp;chatTs=";
+                            var startCommandTs = "&amp;commandTs=";
                             var params = paramsWithQuotes
                                 .replace(/&#32;&quot;&#32;/g, "")
                                 .replace(/ &quot; /g, "")
@@ -1990,24 +1996,36 @@ var __meteor_runtime_config__;
                                     } else {
                                         time = params.substr(posStart, posStop - posStart);
                                         posStart = posStop + startText.length;
-                                        posStop = params.indexOf(startMilliseconds, posStart);
+                                        posStop = params.indexOf(startChatTs, posStart);
                                         if (posStop < posStart) {
-                                            Log.print(Log.l.info, "missing milliseconds in notification");
+                                            Log.print(Log.l.info, "missing chatTs in notification");
                                         } else {
                                             text = params.substr(posStart, posStop - posStart);
-                                            posStart = posStop + startMilliseconds.length;
-                                            var millisecondsString = params.substr(posStart);
-                                            try {
-                                                milliseconds = parseInt(millisecondsString);
-                                            } catch (ex) {
-                                                Log.print(Log.l.error, "invalid millisecondsString=" + millisecondsString);
+                                            posStart = posStop + startChatTs.length;
+                                            posStop = params.indexOf(startCommandTs, posStart);
+                                            if (posStop < posStart) {
+                                                Log.print(Log.l.info, "missing commandTs in notification");
+                                            } else {
+                                                var chatTsString = params.substr(posStart, posStop - posStart);
+                                                try {
+                                                    chatTs = parseInt(chatTsString);
+                                                } catch (ex) {
+                                                    Log.print(Log.l.error, "invalid chatTsString=" + chatTsString);
+                                                }
+                                                posStart = posStop + startCommandTs.length;
+                                                var commandTsString = params.substr(posStart);
+                                                try {
+                                                    commandTs = parseInt(commandTsString);
+                                                } catch (ex) {
+                                                    Log.print(Log.l.error, "invalid commandTsString=" + commandTsString);
+                                                }
                                             }
                                         }
                                     }
                                 }
-                                if (name && time && text && milliseconds) {
+                                if (name && time && text && commandTs) {
                                     var now = Date.now();
-                                    var delayInSec = (now - milliseconds) / 1000;
+                                    var delayInSec = (now - commandTs) / 1000;
                                     if (delayInSec > 300) {
                                         Log.print(Log.l.info, "extra ignored message delayed by " + delayInSec + "sec");
                                     } else {
@@ -2058,7 +2076,8 @@ var __meteor_runtime_config__;
                         if (that.binding.dataMessage.name && 
                             that.binding.dataMessage.time && 
                             that.binding.dataMessage.text && 
-                            that.binding.dataMessage.milliseconds) {
+                            that.binding.dataMessage.chatTs && 
+                            that.binding.dataMessage.commandTs) {
                             var q = "&#32;&quot;&#32;";
                             var name = q + that.binding.dataMessage.name
                                 .replace(regExprMagicStart, magicStartReplace)
@@ -2070,8 +2089,9 @@ var __meteor_runtime_config__;
                                 .replace(regExprMagicStop, magicStopReplace)
                                 .replace(/\n/g, "&lt;br /&gt;")
                                 .replace(/&quot;/g, "&quot;&quot;") + q;
-                            var milliseconds = q + that.binding.dataMessage.milliseconds + q;
-                            var command = "showNotification(name=" + name + "&amp;time=" + time + "&amp;text=" + text + "&amp;milliseconds=" + milliseconds + ")";
+                            var chatTs = q + that.binding.dataMessage.chatTs + q;
+                            var commandTs = q + that.binding.dataMessage.commandTs + q;
+                            var command = "showNotification(name=" + name + "&amp;time=" + time + "&amp;text=" + text + "&amp;chatTs=" + chatTs + "&amp;commandTs=" + commandTs + ")";
                             Log.print(Log.l.info, "command=" + command);
                             that.submitCommandMessage(magicStart + command + magicStop, event);
                         }
