@@ -1956,7 +1956,7 @@ var __meteor_runtime_config__;
                                     that.binding.dataNotification.text = text;
                                     mediaContainer.appendChild(notificationPopup);
                                     notificationPopup.style.display = "block";
-                                    WinJS.UI.Animation.slideUp(notificationPopup).done(function() {
+                                    WinJS.UI.Animation.slideLeftIn(notificationPopup).done(function() {
                                         that.hideNotificationPromise = WinJS.Promise.timeout(7000).then(function() {
                                             that.eventHandlers.clickNotification();
                                         });
@@ -1979,7 +1979,7 @@ var __meteor_runtime_config__;
                     }
                     if (notificationPopup && 
                         notificationPopup.style) {
-                        WinJS.UI.Animation.slideDown(notificationPopup).done(function() {
+                        WinJS.UI.Animation.slideRightOut(notificationPopup).done(function() {
                             notificationPopup.style.display = "none";
                             var notificationContainer = fragmentElement.querySelector(".notification-container");
                             if (notificationContainer) {
@@ -2417,7 +2417,7 @@ var __meteor_runtime_config__;
                                                         command = message.substr(posMagicStart + magicStart.length, commandLength);
                                                         var commandWithParam = getCommandWithParam(command);
                                                         if (commandWithParam) {
-                                                            if (pageControllerName === "eventController") {
+                                                            //if (pageControllerName === "eventController") {
                                                                 if (messageLength > magicStart.length + command.length + magicStop.length) {
                                                                     if (!prevMessageStartPos) {
                                                                         newResponseText += responseText.substr(prevStopPos, posMessageStart + messageStart.length - prevStopPos);
@@ -2428,7 +2428,7 @@ var __meteor_runtime_config__;
                                                                     skipMessage = true;
                                                                 }
                                                                 responseReplaced = true;
-                                                            }
+                                                            //}
                                                             if (res.readyState === 4 && res.status === 200) {
                                                                 Log.print(Log.l.info, "received command=" + commandWithParam.command);
                                                                 that.handleCommandWithParam(commandWithParam);

@@ -1072,7 +1072,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 .notification-popup {
     position: absolute;
-    left: 20px;
+    right: 20px;
     bottom: 20px;
     z-index: 10;
 }
