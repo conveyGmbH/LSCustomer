@@ -890,7 +890,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     min-width: 42px;
     box-shadow: 0 2px 5px 0 black !important;
     opacity: 0.8;
-    padding: 4px;
+    padding: 0;
+    border: none;
     margin-top: 2px;
 }
 
@@ -903,7 +904,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .event #conferenceController .emoji-button-container > .win-button .button-tip {
     text-align: center;
     vertical-align: middle;
-
+    margin: 6px;
 }
 
 .event #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon {
