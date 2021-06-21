@@ -1144,6 +1144,7 @@ c
     flex: 1;
     font-weight: 300;
     font-family: Barlow, color-emoji;
+    white-space: pre-line;
 }
 .post-notification-popup .notification-action {
     margin: 10px;

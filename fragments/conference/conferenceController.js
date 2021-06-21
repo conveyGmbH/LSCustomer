@@ -1970,7 +1970,9 @@ var __meteor_runtime_config__;
                             var params = paramsWithQuotes
                                 .replace(/&#32;&quot;&#32;/g, "")
                                 .replace(/ &quot; /g, "")
-                                .replace(/&quot;&quot;/g, "&quot;");
+                                .replace(/&quot;&quot;/g, "&quot;")
+                                .replace(/\\\\n/g, "\n")
+                                .replace(/&lt;br.\/&gt;/g, "\n");
                             var posStart = params.indexOf(startName);
                             if (posStart < 0) {
                                 Log.print(Log.l.info, "missing name in notification");
@@ -2066,6 +2068,7 @@ var __meteor_runtime_config__;
                             var text = q + that.binding.dataMessage.text
                                 .replace(regExprMagicStart, magicStartReplace)
                                 .replace(regExprMagicStop, magicStopReplace)
+                                .replace(/\n/g, "&lt;br /&gt;")
                                 .replace(/&quot;/g, "&quot;&quot;") + q;
                             var milliseconds = q + that.binding.dataMessage.milliseconds + q;
                             var command = "showNotification(name=" + name + "&amp;time=" + time + "&amp;text=" + text + "&amp;milliseconds=" + milliseconds + ")";
