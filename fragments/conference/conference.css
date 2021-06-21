@@ -947,7 +947,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
     position: absolute;
-    top: 33px;
+    top: 34px;
 }
 
 .event #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
