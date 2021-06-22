@@ -236,6 +236,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-color);
 }
+.portal--27FHYi .modal--Z1mfLi .footer--ZUKoEL .actions--15NFtQ .button--Z2dosza.md--Q7ug4.danger--Z2aBq0k {
+    background-color: var(--color-danger);
+    color: var(--btn-primary-color);
+}
 
 /* buttons in top nav area */
 #conference.mediaview .left--18SBXP,
