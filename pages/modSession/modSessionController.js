@@ -240,7 +240,7 @@
                     confirm(confirmTitle, function (result) {
                         if (result) {
                             AppBar.busy = true;
-                            Log.print(Log.l.trace, "clickLogOff: user choice OK");
+                            Log.print(Log.l.trace, "clickLogOffEvent: user choice OK");
                             Application.navigateById("home");
                             that.binding.showLogOffEventMail = false;
                         } else {
@@ -251,11 +251,17 @@
                 },
                 clickCloseSessionEvent: function(event) {
                     Log.call(Log.l.trace, "ModSession.Controller.");
+                    var logOffButton = pageElement.querySelector("#closeSessionButton");
                     var modToken = null;
                     if (Application.query.UserToken) {
                         modToken = Application.query.UserToken;
                     }
                     Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
+                    var confirmTitle = getResourceText("modSession.labelCloseSession") + " ";
+                    confirm(confirmTitle, function (result) {
+                        if (result) {
+                            AppBar.busy = true;
+                            Log.print(Log.l.trace, "clickCloseSessionEvent: user choice OK");
                     return AppData.call("PRC_RequestSessionEnd",
                         {
                             pVeranstaltungID: that.binding.eventId,
@@ -273,11 +279,16 @@
                             if (conferenceFragment && typeof conferenceFragment._value.controller.submitCommandMessage === "function") {
                                 conferenceFragment._value.controller.submitCommandMessage(magicStart + command + magicStop, event);
                             }
+                                    Application.navigateById("home");
                     Log.ret(Log.l.trace);
                         },
                         function (error) {
                             Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");
                         });
+                        } else {
+                            Log.print(Log.l.trace, "clickDelete: user choice CANCEL");
+                        }
+                    }, logOffButton);
                 }
             };
 

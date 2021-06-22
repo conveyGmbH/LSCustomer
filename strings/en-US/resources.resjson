@@ -72,5 +72,6 @@
     "countdown.countDownOverMessage": "Your online event is already taking place or has already ended. Please take a look at your media library",
 
     "modSession.logOffEvent"   : "Log off",
-    "modSession.closeSessionEvent"   : "End session"
+    "modSession.closeSessionEvent"   : "End session",
+    "modSession.labelCloseSession": "Would you like to end the session"
 }

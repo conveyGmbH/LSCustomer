@@ -71,5 +71,6 @@
     "countdown.countDownOverMessage": "Votre événement en ligne a déjà lieu ou est déjà terminé. Veuillez consulter votre médiathèque",
 
     "modSession.logOffEvent"   : "Se déconnecter",
-    "modSession.closeSessionEvent"   : "Terminer la session"
+    "modSession.closeSessionEvent"   : "Terminer la session",
+    "mode Session.label Close Session": "Voulez-vous terminer la session"
 }

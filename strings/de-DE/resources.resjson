@@ -72,5 +72,6 @@
 	"countdown.countDownOverMessage" : "Ihre Onlineveranstaltung findet bereits statt oder ist bereits zu Ende. Bitte schauen Sie in Ihrer Mediathek rein",
 
 	"modSession.logOffEvent"   : "Abmelden",
-    "modSession.closeSessionEvent"   : "Session beenden"
+    "modSession.closeSessionEvent"   : "Session beenden",
+    "modSession.labelCloseSession"  : "Möchten Sie die Session beenden"
 }			
