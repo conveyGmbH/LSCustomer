@@ -351,16 +351,19 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw,
-#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw {
+#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw,
+#conference.mediaview .navbar--Z2hKYyK .right--Z4dKWq .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw {
     color: var(--btn-default-color) !important;
 }
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .button--Z2dosza:hover .icon--2q1XXw,
-#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza:hover .icon--2q1XXw {
+#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza:hover .icon--2q1XXw,
+#conference.mediaview .navbar--Z2hKYyK .right--Z4dKWq .dropdown--Z10dYoc .button--Z2dosza:hover .icon--2q1XXw {
     color: var(--color-gray-light) !important;
 }
 
 #conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza,
-#conference.mediaview .chat--111wNM .header--W8C2z .button--Z2dosza.dark--2q1jrB {
+#conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .button--Z2dosza.circle--Z2c8umk,
+#conference.mediaview .navbar--Z2hKYyK .right--Z4dKWq .dropdown--Z10dYoc .button--Z2dosza.circle--Z2c8umk {
     background-color: transparent !important;
     box-shadow: none !important;
 }
