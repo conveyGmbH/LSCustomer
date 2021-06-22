@@ -196,6 +196,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border: var(--border-size-large) solid transparent !important;
 }
 
+.portal--27FHYi .dismiss--1zWwpv .default--Z19H5du {
+    box-shadow: none !important;
+}
 /*#conference.mediaview .default--Z19H5du,
 .portal--27FHYi .default--Z19H5du {
     border: var(--border-size-large) solid transparent !important;
@@ -347,18 +350,26 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     opacity: 1;
 }
 
-button--Z2dosza
-
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw,
 #conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw {
-    color: var(--btn-primary-color) !important;
-    opacity: 0.8;
+    color: var(--btn-default-color) !important;
 }
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .button--Z2dosza:hover .icon--2q1XXw,
 #conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza:hover .icon--2q1XXw {
-    color: var(--color-gray-lightest) !important;
-    opacity: 1;
+    color: var(--color-gray-light) !important;
 }
+
+#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza,
+#conference.mediaview .chat--111wNM .header--W8C2z .button--Z2dosza.dark--2q1jrB {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza:focus,
+#conference.mediaview .chat--111wNM .header--W8C2z .default--Z19H5du:focus,
+#conference.mediaview .chat--111wNM .header--W8C2z .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
+    box-shadow: none;
+}
+
 
 /* buttons in bottom actionsbar area */
 #conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow {
@@ -773,6 +784,10 @@ button--Z2dosza
     opacity: 1;
 }
 
+#conference.mediaview .poll--Z1w6wQt .header--2wRKDg .default--Z19H5du:focus,
+#conference.mediaview .poll--Z1w6wQt .header--2wRKDg .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
+    box-xhadow: none;
+}
 /* videoList overlay */
 #conference.mediaview .floatingOverlay--ZU51zt {
     /* default style */
