@@ -194,7 +194,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .portal--27FHYi .default--Z19H5du {
     border: var(--border-size-large) solid transparent !important;
 }
-#conference.mediaview button.default--Z19H5du {
+#conference.mediaview .chat--111wNM .header--W8C2z button.default--Z19H5du {
     font-size: 0.85rem !important;
     text-transform: uppercase !important;
     padding: 0 var(--sm-padding-x) !important;
@@ -226,6 +226,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     box-shadow: 0 2px 5px 0 black !important;
     opacity: 0.8;
 }
+
 
 /* Toolbar Buttons */
 #conference.mediaview .toolbarWrapper--1qMMEo .buttonWrapper--2kvywT:first-child > .toolbarButton--Zak4uG {
@@ -289,22 +290,34 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     opacity: 1;
     color: var(--btn-primary-color) !important;
 }
-#conference.mediaview .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN {
+#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN {
     padding: 0;
 }
-#conference.mediaview .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN > i.icon--2q1XXw.icon-bbb-settings {
+#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN > i.icon--2q1XXw.icon-bbb-settings {
     margin: 5px;
 }
 #conference.mediaview .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN:hover {
     opacity: 1;
 }
 
-#conference.mediaview .button--Z2dosza .icon--2q1XXw {
+button--Z2dosza
+
+#conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw,
+#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw {
     color: var(--btn-primary-color) !important;
     opacity: 0.8;
 }
-#conference.mediaview .button--Z2dosza:hover .icon--2q1XXw {
-    color: var(--btn-primary-color) !important;
+#conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .button--Z2dosza:hover .icon--2q1XXw,
+#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza:hover .icon--2q1XXw {
+    color: var(--color-gray-lightest) !important;
+    opacity: 1;
+}
+
+/* buttons in bottom actionsbar area */
+#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow {
+    opacity: 0.8;
+}
+#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow:hover {
     opacity: 1;
 }
 
