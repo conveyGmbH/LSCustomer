@@ -2095,9 +2095,9 @@ var __meteor_runtime_config__;
                                 }
                             }
                             if (i < messagesForName.length) {
-                                messagesForName[message.chatTs].splice(i, 0, message);
+                                messagesForName.splice(i, 0, message);
                             } else {
-                                messagesForName[message.chatTs].push(message);
+                                messagesForName.push(message);
                             }
                         } else {
                             messagesForName = [message];
