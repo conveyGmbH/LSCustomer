@@ -73,5 +73,5 @@
 
     "modSession.logOffEvent"   : "Log off",
     "modSession.closeSessionEvent"   : "End session",
-    "modSession.labelCloseSession": "Would you like to end the session"
+    "modSession.labelCloseSession": "Would you like to end the session?"
 }
