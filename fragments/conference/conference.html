@@ -127,7 +127,7 @@
                     <div class="chat-menu-container">
                         <div id="chatMenu" class="chat-menu"
                              data-win-control="WinJS.UI.Menu">
-                            <button data-win-control="WinJS.UI.MenuCommand" class="first-menu-item"
+                            <button data-win-control="WinJS.UI.MenuCommand"
                                     data-win-options="{id: 'showNotification'}"
                                     data-win-res="{winControl: {label: 'event.sendPostLabel'}}"
                                     data-win-bind="winControl.disabled: dataMessage.locked"
@@ -139,7 +139,7 @@
                                     data-win-bind="winControl.disabled: dataMessage.locked"
                                     data-win-res="{winControl: {label: 'event.lockPostLabel'}}"
                                     onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
-                            <button data-win-control="WinJS.UI.MenuCommand" class="last-menu-item"
+                            <button data-win-control="WinJS.UI.MenuCommand"
                                     data-win-options="{id: 'unlockChatMessage'}"
                                     data-win-bind="winControl.disabled: dataMessage.locked Binding.Converter.not"
                                     data-win-res="{winControl: {label: 'event.unlockPostLabel'}}"
