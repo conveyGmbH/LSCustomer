@@ -202,8 +202,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     margin: 0 0 var(--lg-padding-x)/2 0 !important;
     color: var(--color-gray) !important;
     background-color: transparent !important;
+    letter-spacing: normal;
 }
-
+#conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .icon--2q1XXw {
+    color: var(--btn-primary-color) !important;
+    letter-spacing: normal;
+}
 /* Audio buttons */
 #conference.mediaview .audioBtn--1H6rCK span:first-child,
 .portal--27FHYi .audioBtn--1H6rCK span:first-child {
