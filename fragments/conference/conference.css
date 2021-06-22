@@ -87,6 +87,9 @@
 .recordingIndicator--Z1hMjfp {
     z-index: 11;
 }
+.recordingIndicator--Z1hMjfp > div {
+    box-shadow: var(--toolbar-box-shadow);
+}
 
 .recordingControlON--ZTT4Mq {
     padding: 0 !important;
@@ -708,6 +711,7 @@ button--Z2dosza
     letter-spacing: normal;
     line-height: 1;
     font-family: var(--font-family-default);
+    box-shadow: var(--toolbar-box-shadow);
 }
 
 #conference.mediaview .talker--2eNUIW span {
