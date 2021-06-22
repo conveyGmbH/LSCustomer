@@ -68,5 +68,8 @@
     "teaser.info2": "Après votre inscription, vous recevrez un e-mail de confirmation de notre part avec les données d'accès correspondantes.",
 
     "countdown.waitMessage": "Votre événement en ligne est sur le point d'avoir lieu. Veuillez patienter",
-    "countdown.countDownOverMessage": "Votre événement en ligne a déjà lieu ou est déjà terminé. Veuillez consulter votre médiathèque"
+    "countdown.countDownOverMessage": "Votre événement en ligne a déjà lieu ou est déjà terminé. Veuillez consulter votre médiathèque",
+
+    "modSession.logOffEvent"   : "Se déconnecter",
+    "modSession.closeSessionEvent"   : "Terminer la session"
 }

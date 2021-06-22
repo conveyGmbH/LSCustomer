@@ -68,5 +68,8 @@
 	"teaser.info2": "Dopo la registrazione riceverai un'e-mail di conferma da parte nostra con i dati di accesso corrispondenti.",
 
 	"countdown.waitMessage": "Il tuo evento online sta per svolgersi. Sii paziente",
-	"countdown.countDownOverMessage": "Il tuo evento online è già in corso o è già terminato. Dai un'occhiata alla tua libreria multimediale"
+	"countdown.countDownOverMessage": "Il tuo evento online è già in corso o è già terminato. Dai un'occhiata alla tua libreria multimediale",
+
+    "modSession.logOffEvent"   : "Disconnetti",
+    "modSession.closeSessionEvent"   : "Termina sessione"
 }

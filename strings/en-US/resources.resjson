@@ -69,5 +69,8 @@
     "teaser.info2"             : "After your registration you will receive a confirmation email with the corresponding access data from us.",
 
     "countdown.waitMessage": "Your online event will take place soon. Please be patient",
-    "countdown.countDownOverMessage": "Your online event is already taking place or has already ended. Please take a look at your media library"
+    "countdown.countDownOverMessage": "Your online event is already taking place or has already ended. Please take a look at your media library",
+
+    "modSession.logOffEvent"   : "Log off",
+    "modSession.closeSessionEvent"   : "End session"
 }

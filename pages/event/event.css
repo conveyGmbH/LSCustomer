@@ -275,6 +275,10 @@
     width: 30%;
     margin-right: 5%;
 }
+.event .maintenance-fragmenthost {
+    height: auto;
+    margin-top: 20px;
+}
 
 .event .share-block {
     text-align: left;
@@ -321,7 +325,8 @@
     font-weight: 400;
 }
 
-.event .logOff-container {
+.event .logOff-container,
+.event.closeSession-container {
     float: right;
     height: auto;
     width: auto;

@@ -32,6 +32,8 @@
 
             var onScrollResizePromise = null;
             var contentArea = pageElement.querySelector(".contentarea");
+            var magicStart = "&lt;!--";
+            var magicStop = "--&gt;";
 
             var that = this;
 
@@ -228,6 +230,54 @@
                         window.dispatchEvent(resizeEvent);
                     });
                     Log.ret(Log.l.u1);
+                },
+                clickLogOffEvent: function (event) {
+                    Log.call(Log.l.trace, "ModSession.Controller.");
+                    var logOffButton = pageElement.querySelector("#logOffButton");
+                   // that.binding.registerEmail = AppData._persistentStates.registerData.Email;
+                    // Email vom Moderator?!
+                    var confirmTitle = getResourceText("event.labelLogOff") + " ";
+                    confirm(confirmTitle, function (result) {
+                        if (result) {
+                            AppBar.busy = true;
+                            Log.print(Log.l.trace, "clickLogOff: user choice OK");
+                            Application.navigateById("home");
+                            that.binding.showLogOffEventMail = false;
+                        } else {
+                            Log.print(Log.l.trace, "clickDelete: user choice CANCEL");
+                        }
+                    }, logOffButton);
+                    Log.ret(Log.l.trace);
+                },
+                clickCloseSessionEvent: function(event) {
+                    Log.call(Log.l.trace, "ModSession.Controller.");
+                    var modToken = null;
+                    if (Application.query.UserToken) {
+                        modToken = Application.query.UserToken;
+                    }
+                    Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
+                    return AppData.call("PRC_RequestSessionEnd",
+                        {
+                            pVeranstaltungID: that.binding.eventId,
+                            pUserToken: modToken
+                        },
+                        function (json) {
+                            AppBar.busy = false;
+                            Log.print(Log.l.trace, "PRC_RequestSessionEnd success!");
+                            if (json && json.d && json.d.results) {
+                                var result = json.d.results[0];
+                            }
+                            // call submitCommandMessage
+                            var command = event && event.currentTarget && event.currentTarget.id;
+                            var conferenceFragment = that.updateFragment();
+                            if (conferenceFragment && typeof conferenceFragment._value.controller.submitCommandMessage === "function") {
+                                conferenceFragment._value.controller.submitCommandMessage(magicStart + command + magicStop, event);
+                            }
+                    Log.ret(Log.l.trace);
+                        },
+                        function (error) {
+                            Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");
+                        });
                 }
             };
 
