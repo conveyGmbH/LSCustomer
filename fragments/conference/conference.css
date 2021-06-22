@@ -189,11 +189,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding: var(--btn-jumbo-padding-x) !important;
 }
 #conference.mediaview .primary--1IbqAO,
-#conference.mediaview .portal--27FHYi .primary--1IbqAO {
+#conference.mediaview .portal--27FHYi .primary--1IbqAO,
+#conference.mediaview .actionsbar--Z1mcyA0 .centerWithActions--Z3YTGj.center--ZyfFaC .default--Z19H5du {
     color: var(--btn-primary-color) !important;
     background-color: var(--btn-primary-bg) !important;
     border: var(--border-size-large) solid transparent !important;
 }
+
 /*#conference.mediaview .default--Z19H5du,
 .portal--27FHYi .default--Z19H5du {
     border: var(--border-size-large) solid transparent !important;
@@ -307,7 +309,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .toolbarWrapper--1qMMEo .default--Z19H5du:focus,
 #conference.mediaview .toolbarWrapper--1qMMEo .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
     color: var(--color-gray-lightest) !important;
-    box-shadow: none;
+    /*box-shadow: none;*/
 }
 
 #conference.mediaview .button--Z2dosza.ghost--Z136aiN.circle--Z2c8umk:hover,
