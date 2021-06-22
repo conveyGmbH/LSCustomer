@@ -2090,11 +2090,11 @@ var __meteor_runtime_config__;
                         if (messagesForName) {
                             var i;
                             for (i = 0; i < messagesForName.length; i++) {
-                                if (message.commandTs > messagesAtTs[i].commandTs) {
+                                if (message.commandTs > messagesForName[i].commandTs) {
                                     break;
                                 }
                             }
-                            if (i < messagesAtTs.length) {
+                            if (i < messagesForName.length) {
                                 messagesForName[message.chatTs].splice(i, 0, message);
                             } else {
                                 messagesForName[message.chatTs].push(message);
