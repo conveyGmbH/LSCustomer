@@ -2061,26 +2061,15 @@ var __meteor_runtime_config__;
                 if (message && message.name && message.chatTs) {
                     var messagesAtTs = that.lockedChatMessages[message.chatTs];
                     if (messagesAtTs) {
-                        var lockedMessage = null;
-                        var found = false;
-                        var unlocked = false;
-                        var commandTs = 0;
-                        for (var i = 0; i < messagesAtTs.length; i++) {
-                            lockedMessage = messagesAtTs[i];
-                            if (lockedMessage.name === message.name &&
-                                lockedMessage.commandTs > commandTs) {
-                                commandTs = lockedMessage.commandTs;
-                                found = true;
-                                unlocked = lockedMessage.unlocked;
-                            }
-                        }
-                        if (found) {
+                        var messagesForName = messagesAtTs[message.name];
+                        if (messagesForName) {
+                            var lockedMessage = messagesForName[0];
                             Log.print(Log.l.info, "lockedMessage unlocked=" + (lockedMessage && lockedMessage.unlocked) +
                                 " name=" + (lockedMessage && lockedMessage.name) +
                                 " chatTs="  + (lockedMessage && lockedMessage.chatTs) +
                                 " commandTs="  + (lockedMessage && lockedMessage.commandTs) +
                                 " text="  + (lockedMessage && lockedMessage.text));
-                            return !unlocked;
+                            return !lockedMessage.unlocked;
                         }
                     }
                 }
@@ -2097,10 +2086,27 @@ var __meteor_runtime_config__;
                 if (message && message.name && message.chatTs) {
                     var messagesAtTs = that.lockedChatMessages[message.chatTs];
                     if (messagesAtTs) {
-                        that.lockedChatMessages[message.chatTs].push(message);
+                        var messagesForName = messagesAtTs[message.name];
+                        if (messagesForName) {
+                            var i;
+                            for (i = 0; i < messagesForName.length; i++) {
+                                if (message.commandTs > messagesAtTs[i].commandTs) {
+                                    break;
+                                }
+                            }
+                            if (i < messagesAtTs.length) {
+                                messagesForName[message.chatTs].splice(i, 0, message);
+                            } else {
+                                messagesForName[message.chatTs].push(message);
+                            }
+                        } else {
+                            messagesForName = [message];
+                        }
+                        messagesAtTs[message.name] = messagesForName;
                     } else {
-                        that.lockedChatMessages[message.chatTs] = [message];
+                        messagesAtTs[message.name] = [message];
                     }
+                    that.lockedChatMessages[message.chatTs] = messagesAtTs;
                     Log.ret(Log.l.info, "added " + that.lockedChatMessages[message.chatTs].length + ". entry");
                 } else {
                     Log.ret(Log.l.error, "invalid param");
