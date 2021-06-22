@@ -37,7 +37,8 @@ var __meteor_runtime_config__;
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
                 showEvText: AppBar.scope.binding.showEvText,
-                showOffText: AppBar.scope.binding.showOffText
+                showOffText: AppBar.scope.binding.showOffText,
+                showDelayContent: true
             }, commandList]);
 
             var that = this;

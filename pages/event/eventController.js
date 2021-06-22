@@ -722,7 +722,12 @@
                             that.binding.showCountdown = false;
                             that.binding.showConference = true;
                             that.binding.showTeaser = false;
-                            return that.getFragmentByName("conference");
+                            return that.getFragmentByName("conference").then(function(conferenceFragment) {
+                                conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
+                                    alert("sessionEndRequested received: " + (param ? param : ""));
+                                    // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
+                                });
+                            });
                         }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
                         // session noch nicht da 
@@ -739,7 +744,9 @@
                         that.binding.showConference = false;
                         that.binding.showRecordedContent = true;
                         that.binding.showLogOffEventMail = true;
-                        return that.getFragmentByName("recordedContent");
+                        return that.getFragmentByName("recordedContent").then(function(recordedContentFragment) {
+                            recordedContentFragment.binding.showDelayContent = false;
+                        });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
                         that.binding.showICS = true;
                         if (registerFragment &&
