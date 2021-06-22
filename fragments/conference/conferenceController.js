@@ -2104,6 +2104,7 @@ var __meteor_runtime_config__;
                         }
                         messagesAtTs[message.name] = messagesForName;
                     } else {
+                        messagesAtTs = {};
                         messagesAtTs[message.name] = [message];
                     }
                     that.lockedChatMessages[message.chatTs] = messagesAtTs;
