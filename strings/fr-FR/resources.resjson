@@ -72,5 +72,5 @@
 
     "modSession.logOffEvent"   : "Se déconnecter",
     "modSession.closeSessionEvent"   : "Terminer la session",
-    "mode Session.label Close Session": "Voulez-vous terminer la session"
+    "modSession.labelCloseSession": "Voulez-vous terminer la session?"
 }

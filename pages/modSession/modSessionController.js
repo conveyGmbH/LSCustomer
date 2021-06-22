@@ -251,7 +251,7 @@
                 },
                 clickCloseSessionEvent: function(event) {
                     Log.call(Log.l.trace, "ModSession.Controller.");
-                    var logOffButton = pageElement.querySelector("#closeSessionButton");
+                    var closeSessionButton = pageElement.querySelector("#closeSessionButton");
                     var modToken = null;
                     if (Application.query.UserToken) {
                         modToken = Application.query.UserToken;
@@ -289,7 +289,7 @@
                         } else {
                             Log.print(Log.l.trace, "clickDelete: user choice CANCEL");
                         }
-                    }, logOffButton);
+                    }, closeSessionButton);
                 }
             };
 

@@ -70,5 +70,5 @@
 
     "modSession.logOffEvent"   : "Abmelden",
     "modSession.closeSessionEvent"   : "Session beenden",
-    "modSession.labelCloseSession"  : "Möchten Sie die Session beenden"
+    "modSession.labelCloseSession"  : "Möchten Sie die Session beenden?"
 }			
