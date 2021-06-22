@@ -872,14 +872,30 @@ var __meteor_runtime_config__;
                                 var chatTs = date.getTime();
                                 if (that.lockedChatMessages[chatTs]) {
                                     var nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
-                                    messageElements = item.querySelectorAll(".message--Z2n2nXu");
-                                    if (nameElement && messageElements) {
+                                    if (nameElement) {
                                         var message = {
                                             name: nameElement.textContent,
                                             chatTs: chatTs
                                         }
-                                        if (that.isChatMessageLocked(message)) {
-                                            isLocked = true;
+                                        if (that.existsChatMessageTsName(message)) {
+                                            message.text = "";
+                                            var lineCount = 0;
+                                            if (item._lockedContent) {
+                                                lineCount = item._lockedContent.length;
+                                            } else {
+                                                messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                                lineCount = messageElements && messageElements.length;
+                                            }
+                                            for (i = 0; i < lineCount; i++) {
+                                                if (message.text) {
+                                                    message.text += "\n";
+                                                }
+                                                message.text += item._lockedContent ? item._lockedContent[i] : 
+                                                    (messageElements && messageElements[i] ? messageElements[i].textContent : "");
+                                            }
+                                            if (that.isChatMessageLocked(message)) {
+                                                isLocked = true;
+                                            }
                                         }
                                     }
                                 }
@@ -972,14 +988,19 @@ var __meteor_runtime_config__;
                                                 text: "",
                                                 locked: locked
                                             }
-                                            for (var i = 0; i < messageElements.length; i++) {
-                                                var messageElement = messageElements[i];
-                                                if (messageElement) {
-                                                    if (message.text) {
-                                                        message.text+= "\n";
-                                                    }
-                                                    message.text += locked ? (item._lockedContent && item._lockedContent[i]) : messageElement.textContent;
+                                            var lineCount;
+                                            if (item._lockedContent) {
+                                                lineCount = item._lockedContent.length;
+                                            } else {
+                                                messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                                lineCount = messageElements && messageElements.length;
+                                            }
+                                            for (var i = 0; i < lineCount; i++) {
+                                                if (message.text) {
+                                                    message.text += "\n";
                                                 }
+                                                message.text += locked ? (item._lockedContent && item._lockedContent[i]) : 
+                                                    (messageElements && messageElements[i] ? messageElements[i].textContent : "");
                                             }
                                             WinJS.Promise.timeout(0).then(function () {
                                                 that.eventHandlers.clickChatMessageList(message);
@@ -1944,7 +1965,7 @@ var __meteor_runtime_config__;
                     var name = "";
                     var time = "";
                     var text = "";
-                    var chatTs = 0
+                    var chatTs = 0;
                     var commandTs = 0;
                     var startName = "name=";
                     var startTime = "&amp;time=";
@@ -2057,19 +2078,43 @@ var __meteor_runtime_config__;
             }
             that.buildParamsWithQuotesFromChat = buildParamsWithQuotesFromChat;
 
+
+            var existsChatMessageTsName = function (message) {
+                if (message && message.name && message.chatTs) {
+                    var messagesAtTs = that.lockedChatMessages[message.chatTs];
+                    if (messagesAtTs) {
+                        var messagesForName = messagesAtTs[message.name];
+                        if (messagesForName && messagesForName.length > 0) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            that.existsChatMessageTsName = existsChatMessageTsName;
+
             var isChatMessageLocked = function (message) {
                 if (message && message.name && message.chatTs) {
                     var messagesAtTs = that.lockedChatMessages[message.chatTs];
                     if (messagesAtTs) {
                         var messagesForName = messagesAtTs[message.name];
                         if (messagesForName) {
-                            var lockedMessage = messagesForName[0];
-                            Log.print(Log.l.info, "lockedMessage unlocked=" + (lockedMessage && lockedMessage.unlocked) +
-                                " name=" + (lockedMessage && lockedMessage.name) +
-                                " chatTs="  + (lockedMessage && lockedMessage.chatTs) +
-                                " commandTs="  + (lockedMessage && lockedMessage.commandTs) +
-                                " text="  + (lockedMessage && lockedMessage.text));
-                            return !lockedMessage.unlocked;
+                            var commandTs = 0;
+                            for (var i = 0; i < messagesForName.length; i++) {
+                                if (commandTs && commandTs > messagesForName[i].commandTs) {
+                                    break;
+                                }
+                                if (message.text === messagesForName[i].text) {
+                                    var lockedMessage = messagesForName[i];
+                                    Log.print(Log.l.info, "lockedMessage unlocked=" + (lockedMessage && lockedMessage.unlocked) +
+                                        " name=" + (lockedMessage && lockedMessage.name) +
+                                        " chatTs="  + (lockedMessage && lockedMessage.chatTs) +
+                                        " commandTs="  + (lockedMessage && lockedMessage.commandTs) +
+                                        " text="  + (lockedMessage && lockedMessage.text));
+                                    return !lockedMessage.unlocked;
+                                }
+                                commandTs = messagesForName[i].commandTs;
+                            }
                         }
                     }
                 }
@@ -2709,7 +2754,7 @@ var __meteor_runtime_config__;
             var timeStampStart = "\\\"timestamp\\\":";
             Application.hookXhrOnReadyStateChange = function(res) {
                 var now = Date.now();
-                var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
+                //var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var responseText = res && res.responseText;
                 if (typeof responseText === "string") {
                     var responseReplaced = false;
