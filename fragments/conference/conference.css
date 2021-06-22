@@ -227,6 +227,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     opacity: 0.8;
 }
 
+
 /* Toolbar Buttons */
 #conference.mediaview .toolbarWrapper--1qMMEo .buttonWrapper--2kvywT:first-child > .toolbarButton--Zak4uG {
     border-top-left-radius: var(--toolbar-button-border-radius) !important;
@@ -307,6 +308,14 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .chat--111wNM .header--W8C2z .button--Z2dosza:hover .icon--2q1XXw,
 #conference.mediaview .userListColumn--6vKQL .button--Z2dosza:hover .icon--2q1XXw {
     color: var(--color-gray-lightest) !important;
+    opacity: 1;
+}
+
+/* buttons in bottom actionsbar area */
+#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow {
+    opacity: 0.8;
+}
+#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow:hover {
     opacity: 1;
 }
 
