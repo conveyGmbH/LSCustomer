@@ -21,7 +21,7 @@
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
                 showEvDoc: true, /*test setze auf true*/
-                showOnDoc: false,
+                showOnDoc: true,
                 showOffDoc: false
             }, commandList]);
 
