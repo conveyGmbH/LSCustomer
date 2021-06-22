@@ -711,7 +711,6 @@ button--Z2dosza
     letter-spacing: normal;
     line-height: 1;
     font-family: var(--font-family-default);
-    box-shadow: var(--toolbar-box-shadow);
 }
 
 #conference.mediaview .talker--2eNUIW span {
