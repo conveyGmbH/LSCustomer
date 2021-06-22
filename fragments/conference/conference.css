@@ -294,13 +294,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 
 
-#conference.mediaview .default--Z19H5du:focus,
+/*#conference.mediaview .default--Z19H5du:focus,
 #conference.mediaview .buttonWrapper--x8uow:focus:not([aria-disabled="true"]) .default--Z19H5du {
     color: var(--btn-default-color) !important;
     background-color: var(--btn-default-bg) !important;
     background-clip: padding-box;
     box-shadow: 0 0 0 var(--border-size) var(--btn-primary-border);
-}
+}*/
 #conference.mediaview .default--Z19H5du:hover,
 #conference.mediaview .buttonWrapper--x8uow:hover:not([aria-disabled="true"]) .default--Z19H5du {
     color: var(--color-gray-lightest) !important;
