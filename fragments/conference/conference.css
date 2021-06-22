@@ -953,7 +953,7 @@ button--Z2dosza
 .event #conferenceController .emoji-button-container > .win-button .button-tip {
     text-align: center;
     vertical-align: middle;
-    margin: 6px;
+    margin: 0;
 }
 
 .event #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon {
