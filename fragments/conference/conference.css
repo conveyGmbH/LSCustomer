@@ -198,7 +198,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .portal--27FHYi .default--Z19H5du {
     border: var(--border-size-large) solid transparent !important;
 }*/
-#conference.mediaview .chat--111wNM .header--W8C2z button.default--Z19H5du {
+#conference.mediaview .chat--111wNM .header--W8C2z button.default--Z19H5du,
+#conference.mediaview .poll--Z1w6wQt .header--2wRKDg button.default--Z19H5du {
     font-size: 0.85rem !important;
     text-transform: uppercase !important;
     padding: 0 var(--sm-padding-x) !important;
@@ -207,6 +208,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: transparent !important;
     letter-spacing: normal;
 }
+#conference.mediaview .poll--Z1w6wQt .header--2wRKDg button.primary--1IbqAO {
+    font-size: 0.85rem !important;
+    text-transform: uppercase !important;
+    padding: 0 var(--sm-padding-x) !important;
+    margin: 0 0 var(--lg-padding-x)/2 0 !important;
+    color: var(--btn-primary-color) !important;
+    background-color: var(--btn-primary-bg);
+    letter-spacing: normal;
+}
+
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .icon--2q1XXw {
     color: var(--btn-primary-color) !important;
     letter-spacing: normal;
