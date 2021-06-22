@@ -214,16 +214,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     letter-spacing: normal;
     box-shadow: none !important;
 }
-#conference.mediaview .poll--Z1w6wQt .header--2wRKDg button.primary--1IbqAO {
+#conference.mediaview .poll--Z1w6wQt button.primary--1IbqAO {
     text-transform: uppercase !important;
-    padding: 0 var(--sm-padding-x) !important;
+    padding: var(--btn-md-padding) !important;
     margin: 0 0 var(--lg-padding-x)/2 0 !important;
     color: var(--btn-primary-color) !important;
     background-color: var(--btn-primary-bg);
     letter-spacing: normal;
     border-radius: var(--border-radius) !important;
-    font-size: var(--btn-md-font-size);
-    padding: var(--btn-md-padding);
+    font-size: var(--btn-md-font-size) !important;
 }
 
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .icon--2q1XXw {
