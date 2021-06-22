@@ -1178,22 +1178,23 @@ c
     border-color: var(--color-gray-lightest) !important;
     background-color: var(--color-off-white);
 }
-.chat-menu button:hover, .chat-menu button:active {
-    background-color: var(--btn-primary-bg) !important;
-}
 .chat-menu button .win-label {
     font-size: var(--font-size-base) !important;
     color: var(--color-gray) !important;
     font-family: Barlow !important;
     font-weight: 300 !important;
 }
+.chat-menu button:disabled .win-label {
+    color: var(--color-gray-lighter) !important;
+}
 
-.chat-menu button:hover, 
-.chat-menu button:active {
+.chat-menu button:hover:not(:disabled),
+.chat-menu button:active:not(:disabled) {
     background-color: var(--btn-primary-bg) !important;
 }
-.chat-menu button:hover .win-label,
-.chat-menu button:active .win-label {
+.chat-menu button:hover:not(:disabled) .win-label,
+.chat-menu button:active:not(:disabled) .win-label {
     color: var(--btn-primary-color) !important;
 }
+
 

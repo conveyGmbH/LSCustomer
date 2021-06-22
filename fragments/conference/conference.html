@@ -130,15 +130,18 @@
                             <button data-win-control="WinJS.UI.MenuCommand"
                                     data-win-options="{id: 'showNotification'}"
                                     data-win-res="{winControl: {label: 'event.sendPostLabel'}}"
+                                    data-win-bind="winControl.disabled: dataMessage.locked"
                                     onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
                             <hr data-win-control="WinJS.UI.MenuCommand"
                                 data-win-options="{id:'separator',type:'separator'}" />
                             <button data-win-control="WinJS.UI.MenuCommand"
                                     data-win-options="{id: 'lockChatMessage'}"
+                                    data-win-bind="winControl.disabled: dataMessage.locked"
                                     data-win-res="{winControl: {label: 'event.lockPostLabel'}}"
                                     onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
                             <button data-win-control="WinJS.UI.MenuCommand"
                                     data-win-options="{id: 'unlockChatMessage'}"
+                                    data-win-bind="winControl.disabled: dataMessage.locked Binding.Converter.not"
                                     data-win-res="{winControl: {label: 'event.unlockPostLabel'}}"
                                     onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
                         </div>
