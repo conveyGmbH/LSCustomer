@@ -1266,7 +1266,7 @@ c
 }
 .chat-menu button .win-label {
     font-size: 90% !important;
-    color: var(--color-gray) !important;
+    color: var(--color-gray-dark) !important;
     font-family: Barlow !important;
     font-weight: 300 !important;
 }
