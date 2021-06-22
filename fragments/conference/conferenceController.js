@@ -33,7 +33,6 @@ var __meteor_runtime_config__;
         "\\ud83e\\udd14", //"🤔"
         "\\ud83d\\ude25"  //"😥"
     ];
-    
 
     var magicStart = "&lt;!--";
     var magicStop = "--&gt;";
@@ -99,7 +98,8 @@ var __meteor_runtime_config__;
                     time: "",
                     text: "",
                     chatTs: 0,
-                    commandTs: 0
+                    commandTs: 0,
+                    locked: false
                 },
                 dataNotification: {
                     name: "",
@@ -926,26 +926,6 @@ var __meteor_runtime_config__;
             }
             that.markupLockedMessages = markupLockedMessages
 
-            var chatMessageClicked = function (message) {
-                Log.call(Log.l.trace, "Conference.Controller.");
-                if (message && chatMenu && chatMenu.winControl) {
-                    try {
-                        var date = new Date(message.dateTime);
-                        that.binding.dataMessage.commandTs = Date.now();
-                        that.binding.dataMessage.chatTs = date.getTime();
-                        that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
-                        that.binding.dataMessage.name = message.name;
-                        that.binding.dataMessage.text = message.textContent;
-                        document.body.appendChild(chatMenu);
-                        chatMenu.winControl.showAt(message.event);
-                    } catch (ex) {
-                        Log.print(Log.l.error, "Exception in message handling dateTime=" + message.dateTime);
-                    }
-                }
-                Log.ret(Log.l.trace);
-            }
-            that.chatMessageClicked = chatMessageClicked;
-
             var observeChatMessageList = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (that.observeChatMessageListPromise) {
@@ -962,17 +942,25 @@ var __meteor_runtime_config__;
                                 if (target && event.currentTarget !== target) {
                                     if (target.parentElement === messageList ||
                                         target.parentElement.parentElement === messageList) {
-                                        var nameElement = target.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
-                                        var timeElement = target.querySelector(".meta--ZDfdOI .time--ZDehNy");
-                                        var messageElements = target.querySelectorAll(".message--Z2n2nXu");
+                                        var item;
+                                        if (target.parentElement.parentElement === messageList) {
+                                            item = target.parentElement;
+                                        } else {
+                                            item = target
+                                        }
+                                        var locked = WinJS.Utilities.hasClass(item, "chat-message-locked");
+                                        var nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
+                                        var timeElement = item.querySelector(".meta--ZDfdOI .time--ZDehNy");
+                                        var messageElements = item.querySelectorAll(".message--Z2n2nXu");
                                         if (nameElement && timeElement && messageElements) {
                                             var message = {
                                                 event: event,
                                                 name: nameElement.textContent,
                                                 dateTime: timeElement.dateTime,
-                                                textContent: ""
+                                                textContent: locked ? item._lockedContent : "",
+                                                locked: locked
                                             }
-                                            for (var i = 0; i < messageElements.length; i++) {
+                                            if (!locked) for (var i = 0; i < messageElements.length; i++) {
                                                 var messageElement = messageElements[i];
                                                 if (messageElement) {
                                                     if (message.textContent) {
@@ -982,7 +970,7 @@ var __meteor_runtime_config__;
                                                 }
                                             }
                                             WinJS.Promise.timeout(0).then(function () {
-                                                that.chatMessageClicked(message);
+                                                that.eventHandlers.clickChatMessageList(message);
                                             });
                                         }
                                     }
@@ -2061,11 +2049,12 @@ var __meteor_runtime_config__;
                 if (message && message.name && message.chatTs) {
                     var messagesAtTs = that.lockedChatMessages[message.chatTs];
                     if (messagesAtTs) {
+                        var lockedMessage = null;
                         var found = false;
                         var unlocked = false;
                         var commandTs = 0;
                         for (var i = 0; i < messagesAtTs.length; i++) {
-                            var lockedMessage = messagesAtTs[i];
+                            lockedMessage = messagesAtTs[i];
                             if (lockedMessage.name === message.name &&
                                 lockedMessage.commandTs > commandTs) {
                                 found = true;
@@ -2073,6 +2062,11 @@ var __meteor_runtime_config__;
                             }
                         }
                         if (found) {
+                            Log.print(Log.l.info, "lockedMessage unlocked=" + (lockedMessage && lockedMessage.unlocked) +
+                                " name=" + (lockedMessage && lockedMessage.name) +
+                                " chatTs="  + (lockedMessage && lockedMessage.chatTs) +
+                                " commandTs="  + (lockedMessage && lockedMessage.commandTs) +
+                                " text="  + (lockedMessage && lockedMessage.text));
                             return !unlocked;
                         }
                     }
@@ -2082,6 +2076,11 @@ var __meteor_runtime_config__;
             that.isChatMessageLocked = isChatMessageLocked;
             
             var addLockedChatMessage = function(message) {
+                Log.call(Log.l.info, "Conference.Controller.", "unlocked=" + (message && message.unlocked) +
+                    " name=" + (message && message.name) +
+                    " chatTs=" + (message && message.chatTs) +
+                    " commandTs=" + (message && message.commandTs) +
+                    " text=" + (message + message.text));
                 if (message && message.name && message.chatTs) {
                     var messagesAtTs = that.lockedChatMessages[message.chatTs];
                     if (messagesAtTs) {
@@ -2089,6 +2088,9 @@ var __meteor_runtime_config__;
                     } else {
                         that.lockedChatMessages[message.chatTs] = [message];
                     }
+                    Log.ret(Log.l.info, "added " + that.lockedChatMessages[message.chatTs].length + ". entry");
+                } else {
+                    Log.ret(Log.l.error, "invalid param");
                 }
             }
             that.addLockedChatMessage = addLockedChatMessage;
@@ -2270,6 +2272,25 @@ var __meteor_runtime_config__;
                         that.markupLockedMessages();
                     });
                     Log.ret(Log.l.info);
+                },
+                clickChatMessageList: function (message) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (message && chatMenu && chatMenu.winControl) {
+                        try {
+                            var date = new Date(message.dateTime);
+                            that.binding.dataMessage.commandTs = Date.now();
+                            that.binding.dataMessage.chatTs = date.getTime();
+                            that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
+                            that.binding.dataMessage.name = message.name;
+                            that.binding.dataMessage.text = message.textContent;
+                            that.binding.dataMessage.locked = !!message.locked;
+                            document.body.appendChild(chatMenu);
+                            chatMenu.winControl.showAt(message.event);
+                        } catch (ex) {
+                            Log.print(Log.l.error, "Exception in message handling dateTime=" + message.dateTime);
+                        }
+                    }
+                    Log.ret(Log.l.trace);
                 },
                 clickChatMenuCommand: function (event) {
                     Log.call(Log.l.info, "Conference.Controller.");
