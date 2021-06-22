@@ -165,7 +165,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .portal--27FHYi button {
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
-    border-radius: 3px !important;
+    border-radius: var(--border-radius) !important;
     line-height: 1 !important;
     font-weight: var(--btn-font-weight) !important;
 }
@@ -205,22 +205,25 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }*/
 #conference.mediaview .chat--111wNM .header--W8C2z button.default--Z19H5du,
 #conference.mediaview .poll--Z1w6wQt .header--2wRKDg button.default--Z19H5du {
-    font-size: 0.85rem !important;
+    font-size: var(--btn-md-font-size);
     text-transform: uppercase !important;
     padding: 0 var(--sm-padding-x) !important;
     margin: 0 0 var(--lg-padding-x)/2 0 !important;
     color: var(--color-gray) !important;
     background-color: transparent !important;
     letter-spacing: normal;
+    box-shadow: none !important;
 }
 #conference.mediaview .poll--Z1w6wQt .header--2wRKDg button.primary--1IbqAO {
-    font-size: 0.85rem !important;
     text-transform: uppercase !important;
     padding: 0 var(--sm-padding-x) !important;
     margin: 0 0 var(--lg-padding-x)/2 0 !important;
     color: var(--btn-primary-color) !important;
     background-color: var(--btn-primary-bg);
     letter-spacing: normal;
+    border-radius: var(--border-radius) !important;
+    font-size: var(--btn-md-font-size);
+    padding: var(--btn-md-padding);
 }
 
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .icon--2q1XXw {
