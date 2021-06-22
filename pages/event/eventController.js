@@ -31,6 +31,7 @@
                 showLogOffEventMail: false,
                 showEvText: false,
                 showOffText: false,
+                showMaintenance: false,
                 registerStatus: "",
                 recordedLink: null,
                 eventId: AppData.getRecordId("Veranstaltung"),
@@ -39,7 +40,8 @@
                 dataDoc: getEmptyDefaultValue(Event.medienView.defaultValue),
                 dataDocText: {},
                 link: window.location.href,
-                registerEmail: null
+                registerEmail: null,
+                conferenceLink: null
             }, commandList]);
 
             var onScrollResizePromise = null;
@@ -47,6 +49,9 @@
             this.refreshWaitTimeMs = 10000;
             this.refreshResultsPromise = null;
             this.inLoadData = false;
+
+            this.refreshMaintenanceTimeMs = 10000 + (Math.random() * 20 * 1000);
+            this.refreshMaintenanceResultsPromise = null;
 
             var that = this;
 
@@ -248,7 +253,7 @@
                 clickLogOffEvent: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     var logOffButton = pageElement.querySelector("#logOffButton");
-                    that.binding.registerEmail = AppData._persistentStates.registerData.Email;
+                    that.binding.registerEmail = AppData._persistentStates.registerData.Email || "";
                     var confirmTitle = getResourceText("event.labelLogOff") + " " + that.binding.registerEmail;
                     confirm(confirmTitle, function (result) {
                         if (result) {
@@ -344,6 +349,10 @@
                         AppData._persistentStates.registerData.Email = result.EMail;
                         that.binding.registerEmail = result.EMail;
                     }
+                    if (result.ConferenceLink && result.ConferenceLink !== that.binding.conferenceLink) {
+                        that.binding.conferenceLink = result.ConferenceLink;
+                    }
+
                     if (result.ConfirmStatusID === 20) {
                         that.binding.recordedLink = result.ConferenceLink;
                         if (that.binding.recordedLink) {
@@ -475,6 +484,16 @@
                                 AppBar.busy = false;
                                 Log.print(Log.l.trace, "PRC_RegisterContact success!");
                                 that.resultConverter(json);
+                                if (json && json.d && json.d.results) {
+                                    var result = json.d.results[0];
+                                    if (result.ResultCode !== AppData._persistentStates.registerData.resultCode) {
+                                        AppData._persistentStates.registerData.resultCode = result.ResultCode;
+                                    }
+                                    if (result.ResultMessage) {
+                                        that.binding.registerStatus = result.ResultMessage;
+                                    }
+                                    Application.pageframe.savePersistentStates();
+                                }
                             },
                             function (error) {
                                 Log.print(Log.l.error, "PRC_RegisterContact error! ");
@@ -492,6 +511,14 @@
                     return WinJS.Promise.timeout(50);
                 }).then(function () {
                     return that.adjustContainerSize();
+                }).then(function () {
+                    that.inLoadData = false;
+                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13) {
+                        that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
+                            that.loadData();
+                        });
+                    }
+                    that.addDisposablePromise(that.refreshMaintenanceResultsPromise);
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -568,9 +595,6 @@
                         }
                         if (result.ResultMessage) {
                             that.binding.registerStatus = result.ResultMessage;
-                            if (result.ResultCode === 21) {
-                                AppData._persistentStates.registerData.resultCode = result.ResultCode;
-                            }
                         }
                         Application.pageframe.savePersistentStates();
                     }
@@ -614,17 +638,27 @@
                     that.binding.showTeaser = false;
                     that.binding.showCountdown = false;
                     that.binding.showConference = false;
+                    that.binding.showMaintenance = false;
+                    //Behandlung welches Bild in teaser-fragment angezeigt wird
                     if (teaserFragment &&
                         teaserFragment.controller &&
                         teaserFragment.controller.binding) {
-                        if (AppData._persistentStates.registerData.confirmStatusID > 0 && AppData._persistentStates.registerData.confirmStatusID < 30) {
+                        if (AppData._persistentStates.registerData.confirmStatusID > 0 && AppData._persistentStates.registerData.confirmStatusID < 15) {
                             teaserFragment.controller.binding.showEvDoc = false;
                             teaserFragment.controller.binding.showOnDoc = true;
                             teaserFragment.controller.binding.showOffDoc = false;
-                        } else if (AppData._persistentStates.registerData.confirmStatusID >= 30) {
+                        } else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
+                            // Status = 15 bedeutet Event zuende und recordedContent noch nicht da
                             teaserFragment.controller.binding.showEvDoc = false;
                             teaserFragment.controller.binding.showOnDoc = false;
                             teaserFragment.controller.binding.showOffDoc = true;
+                            that.binding.showMaintenance = true;
+                        } else if (AppData._persistentStates.registerData.confirmStatusID > 15) {
+                            // Status = 15 bedeutet Event zuende und recordedContent da
+                            teaserFragment.controller.binding.showEvDoc = false;
+                            teaserFragment.controller.binding.showOnDoc = false;
+                            teaserFragment.controller.binding.showOffDoc = true;
+                            that.binding.showMaintenance = false;
                         } else {
                             var dateEnd = that.binding.dataEvent.dateEndDatum;
                             var now = new Date().getTime();
@@ -635,10 +669,9 @@
                             teaserFragment.controller.binding.showOffDoc = false;
                             } else {
                                 teaserFragment.controller.binding.showEvDoc = false;
-                                teaserFragment.controller.binding.showOnDoc = false;
-                                teaserFragment.controller.binding.showOffDoc = true;
+                                teaserFragment.controller.binding.showOnDoc = true;
+                                teaserFragment.controller.binding.showOffDoc = false;
                             }
-
                         }
                     }
                     return that.getFragmentByName("register");
@@ -675,9 +708,6 @@
                         }
                         that.binding.showRegister = false;
                         that.binding.showLogOffEventMail = true;
-                        // Fehlt Bedingung für wann countdown geladen wird
-                        // AppData._persistentStates.registerData.urlbb
-                        //im prinzip könnte man sessionToken hernehmen 
 
                         //AppData._persistentStates.registerData.dateBegin > date heute 
                         var countDownDate = that.binding.dataEvent.dateBegin;
@@ -694,6 +724,22 @@
                             that.binding.showTeaser = false;
                             return that.getFragmentByName("conference");
                         }
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
+                        // session noch nicht da 
+                        that.binding.showRegister = false;
+                        that.binding.showTeaser = false;
+                        that.binding.showCountdown = false;
+                        that.binding.showConference = false;
+                        that.binding.showMaintenance = true;
+                        return that.getFragmentByName("maintenance");
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
+                        that.binding.showRegister = false;
+                        that.binding.showTeaser = false;
+                        that.binding.showCountdown = false;
+                        that.binding.showConference = false;
+                        that.binding.showRecordedContent = true;
+                        that.binding.showLogOffEventMail = true;
+                        return that.getFragmentByName("recordedContent");
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
                         that.binding.showICS = true;
                         if (registerFragment &&
@@ -709,14 +755,6 @@
 
                         }
                         return WinJS.Promise.as();
-                    } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
-                        that.binding.showRegister = false;
-                        that.binding.showTeaser = false;
-                        that.binding.showCountdown = false;
-                        that.binding.showConference = false;
-                        that.binding.showRecordedContent = true;
-                        that.binding.showLogOffEventMail = true;
-                        return that.getFragmentByName("recordedContent");
                     } /*else if (AppData._persistentStates.registerData.confirmStatusID === 30) {
                          that.getFragmentByName("teaser").then(function (teaserFragment) {
                              teaserFragment.controller.binding.showEvDoc = false;
@@ -728,9 +766,22 @@
                           that.binding.showConference = true;
                           that.binding.showTeaser = false;
                     }*/ else {
+                        if (AppData._persistentStates.registerData.resultCode === 13) {
                         that.binding.showRegister = true;
                         that.binding.showTeaser = true;
                         that.binding.showLogOffEventMail = false;
+                            that.binding.showMaintenance = false;
+                        } else if (AppData._persistentStates.registerData.confirmStatusID === null && !that.binding.conferenceLink) {
+                            that.binding.showRegister = false;
+                            that.binding.showTeaser = false;
+                            that.binding.showLogOffEventMail = true;
+
+                            that.binding.showCountdown = false;
+                            that.binding.showConference = false;
+                            that.binding.showTeaser = false;
+                            that.binding.showMaintenance = true;
+                            return that.getFragmentByName("maintenance");
+                        }
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
@@ -761,7 +812,7 @@
                     var now = new Date().getTime();
                     var timeleft = dateEnd - now;
                     if (timeleft < 0) {
-                        AppData._persistentStates.registerData.confirmStatusID = 30;
+                        AppData._persistentStates.registerData.confirmStatusID = 15;
                         Application.pageframe.savePersistentStates();
                         that.binding.showEvText = false;
                         that.binding.showOffText = true;

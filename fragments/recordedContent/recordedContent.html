@@ -28,6 +28,17 @@
         <div id="recordedContentController" class="data-container">
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea content-noscroll win-type-body">
+                    <div class="delay-container" data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                        <div class="ITbackground">
+                            <img class="ipadImg" data-win-bind="src: dataDoc.off_doc_delay; alt: dataDocText.off_doc_delay_alt" />
+                        </div>
+                        <div class="field_line_full">
+                            <span class="large_field" data-win-bind="innerHTML: dataText.off_text_delay_title"></span>
+                        </div>
+                        <div class="field_line_full">
+                            <span class="large_field" data-win-bind="innerHTML: dataText.off_text_delay_body"></span>
+                        </div>
+                    </div>
                     <div class="doc-container">
                         <div id="recordedContent" class="mediaview"></div>
                     </div>

@@ -35,7 +35,9 @@ var __meteor_runtime_config__;
                 },
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
-                dataDocText: AppBar.scope.binding.dataDocText
+                dataDocText: AppBar.scope.binding.dataDocText,
+                showEvText: AppBar.scope.binding.showEvText,
+                showOffText: AppBar.scope.binding.showOffText
             }, commandList]);
 
             var that = this;
