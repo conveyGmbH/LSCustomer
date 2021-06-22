@@ -1,4 +1,4 @@
-﻿
+﻿a
 #conferenceController .doc-container {
     width: 100%;
     float: none;
@@ -208,14 +208,30 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--btn-primary-color) !important;
     letter-spacing: normal;
 }
-/* Audio buttons */
-#conference.mediaview .audioBtn--1H6rCK span:first-child,
-.portal--27FHYi .audioBtn--1H6rCK span:first-child {
+/* Audio selection dialog buttons */
+.portal--27FHYi .modal--Z1mfLi .audioBtn--1H6rCK span:first-child {
     color: #1b3c4b !important;
     background-color: #f1f8ff !important;
     box-shadow: none !important;
     border: 5px solid #f1f8ff !important;
     font-size: 3.5rem !important;
+}
+
+/* camera selection popup */
+.portal--27FHYi .title--ZTufc {
+    min-height: 30px;
+}
+
+.portal--27FHYi .select--ZuxQgB {
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-md);
+    border-color: var(--color-gray-lighter);
+}
+
+.portal--27FHYi .modal--Z1mfLi .footer--ZUKoEL .actions--15NFtQ .button--Z2dosza.md--Q7ug4.default--Z19H5du,
+.portal--27FHYi .modal--Z1mfLi .footer--ZUKoEL .actions--15NFtQ .button--Z2dosza.md--Q7ug4.primary--1IbqAO {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-color);
 }
 
 /* buttons in top nav area */
@@ -1292,3 +1308,4 @@ c
 #conferenceController .parent--ZQqoCg .modal--MalHB .button--Z2dosza .md--Q7ug4 .primary--1IbqAO .button--Z1j2w3P {
     display: none;
 }
+
