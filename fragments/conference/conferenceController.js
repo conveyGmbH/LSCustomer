@@ -906,7 +906,7 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             } else if (!isLocked && WinJS.Utilities.hasClass(item, "chat-message-locked")) {
-                                WinJS.Utilities.removeClass(messageElement, "chat-message-locked");
+                                WinJS.Utilities.removeClass(item, "chat-message-locked");
                                 if (item._lockedContent) {
                                     if (!messageElements) {
                                         messageElements = item.querySelectorAll(".message--Z2n2nXu");
@@ -928,7 +928,7 @@ var __meteor_runtime_config__;
                     }
                 }
             }
-            that.markupLockedMessages = markupLockedMessages
+            that.markupLockedMessages = markupLockedMessages;
 
             var observeChatMessageList = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
@@ -950,18 +950,26 @@ var __meteor_runtime_config__;
                                         if (target.parentElement.parentElement === messageList) {
                                             item = target.parentElement;
                                         } else {
-                                            item = target
+                                            item = target;
                                         }
                                         var locked = WinJS.Utilities.hasClass(item, "chat-message-locked");
                                         var nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
                                         var timeElement = item.querySelector(".meta--ZDfdOI .time--ZDehNy");
                                         var messageElements = item.querySelectorAll(".message--Z2n2nXu");
                                         if (nameElement && timeElement && messageElements) {
+                                            var date = null;
+                                            try {
+                                                date = new Date(timeElement.dateTime);
+                                            } catch (ex) {
+                                                Log.print(Log.l.error, "Exception in message handling dateTime=" + timeElement.dateTime);
+                                            }
                                             var message = {
                                                 event: event,
                                                 name: nameElement.textContent,
-                                                dateTime: timeElement.dateTime,
-                                                textContent: "",
+                                                time: date ? date.getHours() + ":" + date.getMinutes() : "",
+                                                chatTs: date ? date.getTime() : 0,
+                                                commandTs: Date.now(),
+                                                text: "",
                                                 locked: locked
                                             }
                                             for (var i = 0; i < messageElements.length; i++) {
@@ -2061,6 +2069,7 @@ var __meteor_runtime_config__;
                             lockedMessage = messagesAtTs[i];
                             if (lockedMessage.name === message.name &&
                                 lockedMessage.commandTs > commandTs) {
+                                commandTs = lockedMessage.commandTs;
                                 found = true;
                                 unlocked = lockedMessage.unlocked;
                             }
@@ -2280,19 +2289,14 @@ var __meteor_runtime_config__;
                 clickChatMessageList: function (message) {
                     Log.call(Log.l.trace, "Conference.Controller.");
                     if (message && chatMenu && chatMenu.winControl) {
-                        try {
-                            var date = new Date(message.dateTime);
-                            that.binding.dataMessage.commandTs = Date.now();
-                            that.binding.dataMessage.chatTs = date.getTime();
-                            that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
-                            that.binding.dataMessage.name = message.name;
-                            that.binding.dataMessage.text = message.text;
-                            that.binding.dataMessage.locked = !!message.locked;
-                            document.body.appendChild(chatMenu);
-                            chatMenu.winControl.showAt(message.event);
-                        } catch (ex) {
-                            Log.print(Log.l.error, "Exception in message handling dateTime=" + message.dateTime);
-                        }
+                        that.binding.dataMessage.commandTs = message.commandTs;
+                        that.binding.dataMessage.chatTs = message.chatTs;
+                        that.binding.dataMessage.time = message.time;
+                        that.binding.dataMessage.name = message.name;
+                        that.binding.dataMessage.text = message.text;
+                        that.binding.dataMessage.locked = !!message.locked;
+                        document.body.appendChild(chatMenu);
+                        chatMenu.winControl.showAt(message.event);
                     }
                     Log.ret(Log.l.trace);
                 },
