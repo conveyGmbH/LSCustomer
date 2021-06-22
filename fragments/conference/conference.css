@@ -1330,6 +1330,7 @@ c
     padding: 0 !important;
     background-color: transparent !important;
     letter-spacing: normal !important;
+    transition: none;
 }
 .chat-menu button:first-child {
     border-top-left-radius: var(--border-radius) !important;
