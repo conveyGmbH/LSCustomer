@@ -1155,7 +1155,7 @@ var __meteor_runtime_config__;
                             return device.kind === "videoinput";
                         });
                     }
-                    if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                    //if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
                         var userList = fragmentElement.querySelector(".userList--11btR3");
                         if (userList) {
                             var btnToggleChat = fragmentElement.querySelector("div[role=\"button\"][aria-expanded=\"false\"]#chat-toggle-button");
@@ -1164,7 +1164,7 @@ var __meteor_runtime_config__;
                                 btnToggleChat.onclick = that.clickToggleChat;
                             }
                         }
-                    }
+                    //}
                     var videoPLayerOpened = false;
                     var screenShareOpened = false;
                     var presentationOpened = false;
