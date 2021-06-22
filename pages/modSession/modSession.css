@@ -243,4 +243,10 @@
     font-size: 16px;
 }
 
-
+.modSession .logOff-container {
+    float: right;
+}
+.modSession .closeSession-container {
+    float: right;
+    width: 200px;
+}
