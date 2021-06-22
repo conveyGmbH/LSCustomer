@@ -886,37 +886,41 @@ var __meteor_runtime_config__;
                             }
                             if (isLocked && !WinJS.Utilities.hasClass(item, "chat-message-locked")) {
                                 WinJS.Utilities.addClass(item, "chat-message-locked");
-                                if (!messageElements) {
-                                    messageElements = item.querySelectorAll(".message--Z2n2nXu");
-                                }
-                                if (messageElements) {
-                                    item._lockedContent = [];
-                                    for (i = 0; i < messageElements.length; i++) {
-                                        messageElement = messageElements[i];
-                                        if (messageElement) {
-                                            item._lockedContent.push(messageElement.textContent);
-                                            if (!i) {
-                                                messageElement.textContent = getResourceText("event.lockedMessage");
-                                            } else {
-                                                messageElement.textContent = "";
+                                if (!item._lockedContent) {
+                                    if (!messageElements) {
+                                        messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                    }
+                                    if (messageElements) {
+                                        item._lockedContent = [];
+                                        for (i = 0; i < messageElements.length; i++) {
+                                            messageElement = messageElements[i];
+                                            if (messageElement) {
+                                                item._lockedContent.push(messageElement.textContent);
+                                                if (!i) {
+                                                    messageElement.textContent = getResourceText("event.lockedMessage");
+                                                } else {
+                                                    messageElement.textContent = "";
+                                                }
                                             }
                                         }
                                     }
                                 }
                             } else if (!isLocked && WinJS.Utilities.hasClass(item, "chat-message-locked")) {
                                 WinJS.Utilities.removeClass(messageElement, "chat-message-locked");
-                                if (!messageElements) {
-                                    messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                if (item._lockedContent) {
+                                    if (!messageElements) {
+                                        messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                    }
+                                    if (messageElements) {
+                                        for (i = 0; i < messageElements.length && i < item._lockedContent.length; i++) {
+                                            messageElement = messageElements[i];
+                                            if (messageElement) {
+                                                messageElement.textContent = item._lockedContent[i];
+                                            }
+                                        }                                
+                                    }
+                                    delete item._lockedContent;
                                 }
-                                if (messageElements) {
-                                    for (i = 0; i < messageElements.length && i < item._lockedContent.length; i++) {
-                                        messageElement = messageElements[i];
-                                        if (messageElement) {
-                                            messageElement.textContent = item._lockedContent[i];
-                                        }
-                                    }                                
-                                }
-                                delete item._lockedContent;
                             }
                         }
                         counter++;
@@ -957,16 +961,16 @@ var __meteor_runtime_config__;
                                                 event: event,
                                                 name: nameElement.textContent,
                                                 dateTime: timeElement.dateTime,
-                                                textContent: locked ? item._lockedContent : "",
+                                                textContent: "",
                                                 locked: locked
                                             }
-                                            if (!locked) for (var i = 0; i < messageElements.length; i++) {
+                                            for (var i = 0; i < messageElements.length; i++) {
                                                 var messageElement = messageElements[i];
                                                 if (messageElement) {
-                                                    if (message.textContent) {
-                                                        message.textContent += "\n";
+                                                    if (message.text) {
+                                                        message.text+= "\n";
                                                     }
-                                                    message.textContent += messageElement.textContent;
+                                                    message.text += locked ? (item._lockedContent && item._lockedContent[i]) : messageElement.textContent;
                                                 }
                                             }
                                             WinJS.Promise.timeout(0).then(function () {
@@ -2282,7 +2286,7 @@ var __meteor_runtime_config__;
                             that.binding.dataMessage.chatTs = date.getTime();
                             that.binding.dataMessage.time = date.getHours() + ":" + date.getMinutes();
                             that.binding.dataMessage.name = message.name;
-                            that.binding.dataMessage.text = message.textContent;
+                            that.binding.dataMessage.text = message.text;
                             that.binding.dataMessage.locked = !!message.locked;
                             document.body.appendChild(chatMenu);
                             chatMenu.winControl.showAt(message.event);
@@ -2296,14 +2300,14 @@ var __meteor_runtime_config__;
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (event && event.currentTarget) {
                         var id = event.currentTarget.id;
-                        WinJS.Promise.timeout(50).then(function () {
+                        WinJS.Promise.timeout(50).then(function() {
                             switch (id) {
-                                case "showNotification":
+                            case "showNotification":
                                 document.body.appendChild(postNotificationPopup);
                                 postNotificationPopup.winControl.showAt(event);
                                 break;
-                                case "lockChatMessage":
-                                case "unlockChatMessage":
+                            case "lockChatMessage":
+                            case "unlockChatMessage":
                                 var paramsWithQuotes = that.buildParamsWithQuotesFromChat(that.binding.dataMessage);
                                 if (paramsWithQuotes) {
                                     var command = id + "(" + paramsWithQuotes + ")";
@@ -2312,7 +2316,7 @@ var __meteor_runtime_config__;
                                 }
                                 break;
                             }
-                        })
+                        });
                     }
                     Log.ret(Log.l.info);
                 },
