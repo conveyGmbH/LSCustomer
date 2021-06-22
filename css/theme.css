@@ -190,6 +190,7 @@
     --e-global-color-accent: #C2D63E;
     --e-global-color-d4faeed: #F3FBFC;
     */
+    --font-family-default: 'Barlow';
 }
 .body-content-bottom {
     visibility: hidden;
