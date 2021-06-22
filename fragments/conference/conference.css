@@ -396,6 +396,7 @@ button--Z2dosza
 
 #conference.mediaview .verticalList--Ghtxj .item--yl1AH {
     padding: calc(var(--line-height-computed) / 2) 1rem;
+    min-height: 32px;
 }
 #conference.mediaview .verticalList--Ghtxj .item--yl1AH:hover,
 #conference.mediaview .verticalList--Ghtxj .item--yl1AH:focus {
@@ -1245,22 +1246,22 @@ c
 .chat-menu button {
     text-transform: none !important;
     text-decoration: none !important;
-    border-radius: 0;
+    border-radius: 0 !important;
     border-width: 0;
     padding: 0 !important;
     background-color: transparent !important;
     letter-spacing: normal !important;
 }
 .chat-menu button.first-menu-item {
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
+    border-top-left-radius: var(--border-radius) !important;
+    border-top-right-radius: var(--border-radius) !important;
 }
 .chat-menu button.last-menu-item {
-    border-bottom-right-radius: var(--border-radius);
-    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius) !important;
+    border-bottom-left-radius: var(--border-radius) !important;
 }
 .chat-menu button .win-label {
-    font-size: var(--font-size-base) !important;
+    font-size: 90% !important;
     color: var(--color-gray) !important;
     font-family: Barlow !important;
     font-weight: 300 !important;
