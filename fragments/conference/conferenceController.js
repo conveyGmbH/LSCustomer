@@ -3038,15 +3038,6 @@ var __meteor_runtime_config__;
                 return WinJS.Promise.timeout(250);;
             }).then(function () {
                 return that.sendResize(2000);
-            }).then(function () {
-                return WinJS.Promise.timeout(10000);
-            }).then(function () {
-                that.setCommandMessageHandler("sessionEndRequested", function(param) {
-                    alert("sessionEndRequested received: " + (param ? param : ""));
-                });
-                if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
-                    that.sendCommandMessage("sessionEndRequested", "optional parameters");
-                }
             });
             Log.ret(Log.l.trace);
         })
