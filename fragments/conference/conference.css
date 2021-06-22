@@ -1197,4 +1197,9 @@ c
     color: var(--btn-primary-color) !important;
 }
 
+/* end of conference message box */
 
+#conferenceController .parent--ZQqoCg .modal--MalHB .text--10B0Vs,
+#conferenceController .parent--ZQqoCg .modal--MalHB .button--Z2dosza .md--Q7ug4 .primary--1IbqAO .button--Z1j2w3P {
+    display: none;
+}
