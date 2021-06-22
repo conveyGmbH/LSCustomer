@@ -276,8 +276,9 @@
                             // call submitCommandMessage
                             var command = event && event.currentTarget && event.currentTarget.id;
                             var conferenceFragment = that.updateFragment();
-                            if (conferenceFragment && typeof conferenceFragment._value.controller.submitCommandMessage === "function") {
-                                conferenceFragment._value.controller.submitCommandMessage(magicStart + command + magicStop, event);
+                                    // call sendCommandMessage 
+                                    if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
+                                        conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
                             }
                                     Application.navigateById("home");
                     Log.ret(Log.l.trace);
@@ -428,6 +429,11 @@
                     });*/
                 }).then(function () {
                     return that.updateFragment();
+                }).then(function(conferenceFragment) {
+                    conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
+                        alert("sessionEndRequested received: " + (param ? param : ""));
+                        // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
+                    });
                 }).then(function () {
                     AppBar.notifyModified = true;
                     return WinJS.Promise.timeout(1000);
