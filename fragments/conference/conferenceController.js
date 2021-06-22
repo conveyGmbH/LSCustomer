@@ -47,7 +47,7 @@ var __meteor_runtime_config__;
             Log.call(Log.l.trace, "Conference.Controller.", "eventId=" + (options && options.eventId));
 
             var videoListDefaults = {
-                aspect: 4.0/3.0,
+                aspect: 4.0 / 3.0,
                 width: 384,
                 height: 288,
                 left: "left",
@@ -77,7 +77,7 @@ var __meteor_runtime_config__;
             };
 
             var emojiToolbarPositionObserver = null;
-            
+
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataEvent: options ? options.dataEvent : {},
@@ -135,6 +135,7 @@ var __meteor_runtime_config__;
             this.deviceList = [];
             this.toolboxIds = ["emojiToolbar"];
             this.emojiCount = {};
+            this.lockedChatMessages = {};
 
             this.filterModeratorsFailedCount = 0;
             this.showUserListFailedCount = 0;
@@ -142,7 +143,7 @@ var __meteor_runtime_config__;
 
             var that = this;
 
-            that.dispose = function() {
+            that.dispose = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (that.sendResizePromise) {
                     that.sendResizePromise.cancel();
@@ -208,12 +209,12 @@ var __meteor_runtime_config__;
             var getScriptFromSrcXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
                     a.href = "/";
-                    var reBase = "function rebase(url){if(!url||typeof url!=\"string\"||url.indexOf(\""+a.hostname+"\")>=0)return url;let p=url.indexOf(\"://\"),q=(p>=0)?url.substr(p+3).substr(url.substr(p+3).indexOf(\"/\")):url;return q};";
+                    var reBase = "function rebase(url){if(!url||typeof url!=\"string\"||url.indexOf(\"" + a.hostname + "\")>=0)return url;let p=url.indexOf(\"://\"),q=(p>=0)?url.substr(p+3).substr(url.substr(p+3).indexOf(\"/\")):url;return q};";
                     var newHostname = "(function(){return\"" + a.hostname + "\"})()";
                     var newHref = "(function(){return\"" + a.href + "\"})()";
-                    var eGetImageUri = "let t=(function(){"+reBase+"let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,r=e.svgHeight;";
-                    var aGetImageUri = "s,u=(function(){"+reBase+"let au=rebase(a.imageUri);Log.print(Log.l.info,\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
-                    var uGetImageUri = "k,{imageUri:(function(){"+reBase+"let uu=rebase(u);Log.print(Log.l.info,\"uu=\"+JSON.stringify(uu));return uu})(),";
+                    var eGetImageUri = "let t=(function(){" + reBase + "let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,r=e.svgHeight;";
+                    var aGetImageUri = "s,u=(function(){" + reBase + "let au=rebase(a.imageUri);Log.print(Log.l.info,\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
+                    var uGetImageUri = "k,{imageUri:(function(){" + reBase + "let uu=rebase(u);Log.print(Log.l.info,\"uu=\"+JSON.stringify(uu));return uu})(),";
                     var scriptText = req.responseText
                         .replace(/window\.document\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.hostname/g, newHostname)
@@ -226,7 +227,7 @@ var __meteor_runtime_config__;
                 });
             }
 
-            var addScript = function(scriptTag, fragmentHref, position, lastNonInlineScriptPromise, target, isBody) {
+            var addScript = function (scriptTag, fragmentHref, position, lastNonInlineScriptPromise, target, isBody) {
                 // We synthesize a name for inline scripts because today we put the
                 // inline scripts in the same processing pipeline as src scripts. If
                 // we seperated inline scripts into their own logic, we could simplify
@@ -254,17 +255,17 @@ var __meteor_runtime_config__;
                     }
                     if (inline) {
                         var text = scriptTag.text;
-                        promise = lastNonInlineScriptPromise.then(function() {
-                                n.text = text;
-                            })
+                        promise = lastNonInlineScriptPromise.then(function () {
+                            n.text = text;
+                        })
                             .then(null,
-                                function() {
+                                function () {
                                     // eat error
                                 });
                     } else {
                         if (!isBody) {
-                            promise = new WinJS.Promise(function(c) {
-                                n.onload = n.onerror = function() {
+                            promise = new WinJS.Promise(function (c) {
+                                n.onload = n.onerror = function () {
                                     c();
                                 };
 
@@ -273,11 +274,11 @@ var __meteor_runtime_config__;
                             });
                         } else {
                             promise = getScriptFromSrcXhr(scriptTag.src)
-                                .then(function(scriptText) {
+                                .then(function (scriptText) {
                                     n.text = scriptText;
                                 })
                                 .then(null,
-                                    function() {
+                                    function () {
                                         // eat error
                                     });
                         }
@@ -384,7 +385,7 @@ var __meteor_runtime_config__;
                     s.parentNode.removeChild(s);
                 }
 
-                return WinJS.Promise.join(sp).then(function() {
+                return WinJS.Promise.join(sp).then(function () {
                     // Create the docfrag which is just the body children
                     //
                     var fragment = document.createDocumentFragment();
@@ -564,11 +565,11 @@ var __meteor_runtime_config__;
                     if (target) {
                         target.appendChild(frag);
                         if (state.localScripts) {
-                            retVal = new WinJS.Promise.as().then(function() {
+                            retVal = new WinJS.Promise.as().then(function () {
                                 var sp = [];
                                 var lastNonInlineScriptPromise = WinJS.Promise.as();
                                 forEach(state.localScripts,
-                                    function(e, i) {
+                                    function (e, i) {
                                         var result = addScript(e, href, state.headScripts.length + i, lastNonInlineScriptPromise, target, true);
                                         if (result) {
                                             if (!result.inline) {
@@ -578,7 +579,7 @@ var __meteor_runtime_config__;
                                         }
                                     });
                                 return WinJS.Promise.join(sp);
-                            }).then(function() {
+                            }).then(function () {
                                 return target;
                             });
                         } else {
@@ -591,11 +592,11 @@ var __meteor_runtime_config__;
                 });
             }
 
-            var sendResize = function(delay) {
+            var sendResize = function (delay) {
                 if (that.sendResizePromise) {
                     that.sendResizePromise.cancel();
                 }
-                that.sendResizePromise = WinJS.Promise.timeout(delay || 0).then(function() {
+                that.sendResizePromise = WinJS.Promise.timeout(delay || 0).then(function () {
                     var resizeEvent = document.createEvent('uievent');
                     resizeEvent.initEvent('resize', true, true);
                     window.dispatchEvent(resizeEvent);
@@ -603,7 +604,7 @@ var __meteor_runtime_config__;
             }
             that.sendResize = sendResize;
 
-            var filterModerators = function(addedNodes) {
+            var filterModerators = function (addedNodes) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (that.filterModeratorsPromise) {
                     that.filterModeratorsPromise.cancel();
@@ -641,12 +642,12 @@ var __meteor_runtime_config__;
                         }
                         var participantsListParent = userListColumn.querySelector(".list--Z2pj65C");
                         if (participantsListParent && participantsListParent.firstElementChild) {
-                            userListDefaults.userListObserver = new MutationObserver(function(mutationList, observer) {
-                                WinJS.Promise.timeout(0).then(function() {
+                            userListDefaults.userListObserver = new MutationObserver(function (mutationList, observer) {
+                                WinJS.Promise.timeout(0).then(function () {
                                     if (mutationList) {
                                         for (var i = 0; i < mutationList.length; i++) {
                                             var mutation = mutationList[i];
-                                            if (mutation && mutation.type === "childList" && 
+                                            if (mutation && mutation.type === "childList" &&
                                                 mutation.addedNodes && mutation.addedNodes.length > 0) {
                                                 that.filterModerators(mutation.addedNodes);
                                                 break;
@@ -665,7 +666,7 @@ var __meteor_runtime_config__;
                 } else if (!addedNodes) {
                     that.filterModeratorsFailedCount++;
                     Log.print(Log.l.trace, "not yet created - try later again! that.filterModeratorsFailedCount=" + that.filterModeratorsFailedCount);
-                    that.filterModeratorsPromise = WinJS.Promise.timeout(Math.min(that.filterModeratorsFailedCount * 10,5000)).then(function() {
+                    that.filterModeratorsPromise = WinJS.Promise.timeout(Math.min(that.filterModeratorsFailedCount * 10, 5000)).then(function () {
                         that.filterModerators();
                     });
                 }
@@ -673,7 +674,7 @@ var __meteor_runtime_config__;
             }
             that.filterModerators = filterModerators;
 
-            var clickToggleUserList = function(event) {
+            var clickToggleUserList = function (event) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (userListDefaults.userListObserver) {
                     userListDefaults.userListObserver.disconnect();
@@ -684,12 +685,12 @@ var __meteor_runtime_config__;
                 }
                 if (userListDefaults.onlyModerators && !userList) {
                     that.filterModeratorsFailedCount = 0;
-                    that.filterModeratorsPromise = WinJS.Promise.timeout(0).then(function() {
+                    that.filterModeratorsPromise = WinJS.Promise.timeout(0).then(function () {
                         that.filterModerators();
                     });
                 }
                 if (!that.adjustContentPositionsPromise) {
-                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
                         that.adjustContentPositions();
                     });
                 }
@@ -697,7 +698,7 @@ var __meteor_runtime_config__;
             }
             that.clickToggleUserList = clickToggleUserList;
 
-            var observeToggleUserListBtn = function() {
+            var observeToggleUserListBtn = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (that.observeToggleUserListBtnPromise) {
                     that.observeToggleUserListBtnPromise.cancel();
@@ -706,9 +707,9 @@ var __meteor_runtime_config__;
                 var btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
                 if (btnToggleUserList) {
                     if (!userListDefaults.toggleBtnObserver) {
-                        userListDefaults.toggleBtnObserver = new MutationObserver(function(mutationList, observer) {
+                        userListDefaults.toggleBtnObserver = new MutationObserver(function (mutationList, observer) {
                             userListDefaults.toggleBtnObserver.disconnect();
-                            WinJS.Promise.timeout(250).then(function() {
+                            WinJS.Promise.timeout(250).then(function () {
                                 that.observeToggleUserListBtn();
                             });
                         });
@@ -721,7 +722,7 @@ var __meteor_runtime_config__;
                     userListDefaults.toggleUserList = btnToggleUserList.onclick;
                     btnToggleUserList.onclick = that.clickToggleUserList;
                 } else {
-                    that.observeToggleUserListBtnPromise = WinJS.Promise.timeout(250).then(function() {
+                    that.observeToggleUserListBtnPromise = WinJS.Promise.timeout(250).then(function () {
                         that.observeToggleUserListBtn();
                     });
                 }
@@ -729,9 +730,9 @@ var __meteor_runtime_config__;
             }
             that.observeToggleUserListBtn = observeToggleUserListBtn;
 
-            var showUserList = function(show, onlyModerators) {
+            var showUserList = function (show, onlyModerators) {
                 var ret = null;
-                Log.call(Log.l.trace, "Conference.Controller.", "show="+show+" onlyModerators="+onlyModerators);
+                Log.call(Log.l.trace, "Conference.Controller.", "show=" + show + " onlyModerators=" + onlyModerators);
                 if (!that.binding.dataConference || !that.binding.dataConference.URL) {
                     Log.ret(Log.l.trace, "no conference URL!");
                     return null;
@@ -760,7 +761,7 @@ var __meteor_runtime_config__;
                             btnToggleUserList.click();
                         } else if (onlyModerators) {
                             that.filterModeratorsFailedCount = 0;
-                            that.filterModeratorsPromise = WinJS.Promise.timeout(0).then(function() {
+                            that.filterModeratorsPromise = WinJS.Promise.timeout(0).then(function () {
                                 that.filterModerators();
                             });
                         }
@@ -774,7 +775,7 @@ var __meteor_runtime_config__;
                 if (ret === null) {
                     that.showUserListFailedCount++;
                     Log.print(Log.l.trace, "not yet created - try later again! that.showUserListFailedCount=" + that.showUserListFailedCount);
-                    that.showUserListPromise = WinJS.Promise.timeout(Math.min(that.showUserListFailedCount * 10,5000)).then(function() {
+                    that.showUserListPromise = WinJS.Promise.timeout(Math.min(that.showUserListFailedCount * 10, 5000)).then(function () {
                         that.showUserList(show, onlyModerators);
                     });
                 } else {
@@ -785,14 +786,14 @@ var __meteor_runtime_config__;
             }
             this.showUserList = showUserList;
 
-            var clickRestoreDesc = function(event) {
+            var clickRestoreDesc = function (event) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (typeof videoListDefaults.restoreDesc === "function") {
                     videoListDefaults.restoreDesc(event);
                 }
-                WinJS.Promise.as().then(function() {
+                WinJS.Promise.as().then(function () {
                     if (!that.adjustContentPositionsPromise) {
-                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
                             that.adjustContentPositions();
                         });
                     }
@@ -811,14 +812,14 @@ var __meteor_runtime_config__;
             }
             that.clickRestoreDesc = clickRestoreDesc;
 
-            var clickCloseDesc = function(event) {
+            var clickCloseDesc = function (event) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (typeof videoListDefaults.closeDesc === "function") {
                     videoListDefaults.closeDesc(event);
                 }
-                WinJS.Promise.as().then(function() {
+                WinJS.Promise.as().then(function () {
                     if (!that.adjustContentPositionsPromise) {
-                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
                             that.adjustContentPositions();
                         });
                     }
@@ -838,7 +839,7 @@ var __meteor_runtime_config__;
             that.clickCloseDesc = clickCloseDesc;
 
             if (chatMenu) {
-                that.addRemovableEventListener(chatMenu, "afterhide", function() {
+                that.addRemovableEventListener(chatMenu, "afterhide", function () {
                     var chatMenuContainer = fragmentElement.querySelector(".chat-menu-container");
                     if (chatMenuContainer) {
                         chatMenuContainer.appendChild(chatMenu);
@@ -846,14 +847,86 @@ var __meteor_runtime_config__;
                 });
             }
             if (postNotificationPopup) {
-                that.addRemovableEventListener(postNotificationPopup, "afterhide", function() {
+                that.addRemovableEventListener(postNotificationPopup, "afterhide", function () {
                     var postNotificationContainer = fragmentElement.querySelector(".post-notification-container");
                     if (postNotificationContainer) {
                         postNotificationContainer.appendChild(postNotificationPopup);
                     }
                 });
             }
-            var chatMessageClicked = function(message) {
+
+            var markupLockedMessages = function (addedNodes) {
+                var messageList = fragmentElement.querySelector("#chat-messages.messageList--hsNac");
+                if (messageList) {
+                    var counter = 0, i, messageElement;
+                    var elementCount = addedNodes ? addedNodes.length : messageList.childElementCount;
+                    var item = addedNodes ? addedNodes[0] : messageList.firstElementChild;
+                    while (counter < elementCount && item) {
+                        if (item.parentElement === messageList &&
+                            WinJS.Utilities.hasClass(item, "item--ZDfG6l")) {
+                            var messageElements = null;
+                            var isLocked = false;
+                            var timeElement = item.querySelector(".meta--ZDfdOI .time--ZDehNy");
+                            if (timeElement && timeElement.dateTime) {
+                                var date = new Date(timeElement.dateTime);
+                                var chatTs = date.getTime();
+                                if (that.lockedChatMessages[chatTs]) {
+                                    var nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
+                                    messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                    if (nameElement && messageElements) {
+                                        var message = {
+                                            name: nameElement.textContent,
+                                            chatTs: chatTs
+                                        }
+                                        if (that.isChatMessageLocked(message)) {
+                                            isLocked = true;
+                                        }
+                                    }
+                                }
+                            }
+                            if (isLocked && !WinJS.Utilities.hasClass(item, "chat-message-locked")) {
+                                WinJS.Utilities.addClass(item, "chat-message-locked");
+                                if (!messageElements) {
+                                    messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                }
+                                if (messageElements) {
+                                    item._lockedContent = [];
+                                    for (i = 0; i < messageElements.length; i++) {
+                                        messageElement = messageElements[i];
+                                        if (messageElement) {
+                                            item._lockedContent.push(messageElement.textContent);
+                                            if (!i) {
+                                                messageElement.textContent = getResourceText("event.lockedMessage");
+                                            } else {
+                                                messageElement.textContent = "";
+                                            }
+                                        }
+                                    }
+                                }
+                            } else if (!isLocked && WinJS.Utilities.hasClass(item, "chat-message-locked")) {
+                                WinJS.Utilities.removeClass(messageElement, "chat-message-locked");
+                                if (!messageElements) {
+                                    messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                }
+                                if (messageElements) {
+                                    for (i = 0; i < messageElements.length && i < item._lockedContent.length; i++) {
+                                        messageElement = messageElements[i];
+                                        if (messageElement) {
+                                            messageElement.textContent = item._lockedContent[i];
+                                        }
+                                    }                                
+                                }
+                                delete item._lockedContent;
+                            }
+                        }
+                        counter++;
+                        item = addedNodes ? addedNodes[counter] : item.nextElementSibling;
+                    }
+                }
+            }
+            that.markupLockedMessages = markupLockedMessages
+
+            var chatMessageClicked = function (message) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (message && chatMenu && chatMenu.winControl) {
                     try {
@@ -873,7 +946,7 @@ var __meteor_runtime_config__;
             }
             that.chatMessageClicked = chatMessageClicked;
 
-            var observeChatMessageList = function() {
+            var observeChatMessageList = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (that.observeChatMessageListPromise) {
                     that.observeChatMessageListPromise.cancel();
@@ -883,7 +956,7 @@ var __meteor_runtime_config__;
                 if (messageList) {
                     if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController" &&
                         !messageList._onClickHandler) {
-                        messageList._onClickHandler = function(event) {
+                        messageList._onClickHandler = function (event) {
                             if (event && event.currentTarget === messageList) {
                                 var target = event.target;
                                 if (target && event.currentTarget !== target) {
@@ -908,7 +981,7 @@ var __meteor_runtime_config__;
                                                     message.textContent += messageElement.textContent;
                                                 }
                                             }
-                                            WinJS.Promise.timeout(0).then(function() {
+                                            WinJS.Promise.timeout(0).then(function () {
                                                 that.chatMessageClicked(message);
                                             });
                                         }
@@ -918,15 +991,34 @@ var __meteor_runtime_config__;
                         }
                         messageList.addEventListener('click', messageList._onClickHandler.bind(messageList), false);
                     }
+                    if (!messageList._chatMessagesObserver) {
+                        messageList._chatMessagesObserver = new MutationObserver(function (mutationList, observer) {
+                            for (var i = 0; i < mutationList.length; i++) {
+                                var mutation = mutationList[i];
+                                if (mutation && mutation.type === "childList" &&
+                                    mutation.addedNodes && mutation.addedNodes.length > 0) {
+                                    Log.print(Log.l.trace, "chat messageList changed!");
+                                    that.markupLockedMessages(mutation.addedNodes);
+                                    break;
+                                }
+                            }
+                        });
+                        messageList._chatMessagesObserver.observe(messageList, {
+                            childList: true
+                        });
+                    }
+                    WinJS.Promise.timeout(0).then(function() {
+                        that.markupLockedMessages();
+                    });
                 } else {
-                    that.observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function() {
+                    that.observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
                         that.observeChatMessageListPromise();
                     });
                 }
             }
             that.observeChatMessageList = observeChatMessageList;
 
-            var clickToggleChat = function(event) {
+            var clickToggleChat = function (event) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 var messageList = fragmentElement.querySelector("#chat-messages.messageList--hsNac");
                 if (typeof userListDefaults.toggleChat === "function") {
@@ -936,7 +1028,7 @@ var __meteor_runtime_config__;
                     userListDefaults.messageListObserver = null;
                 } else {
                     if (!that.observeChatMessageListPromise) {
-                        that.observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function() {
+                        that.observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
                             that.observeChatMessageList();
                         });
                     }
@@ -945,14 +1037,14 @@ var __meteor_runtime_config__;
             }
             that.clickToggleChat = clickToggleChat;
 
-            var onWheelSvg = function(event) {
+            var onWheelSvg = function (event) {
                 if (event) {
                     event.preventDefault();
                 }
             }
             that.onWheelSvg = null;
 
-            var adjustVideoPosition = function(mediaContainer, overlayElement, videoListItem) {
+            var adjustVideoPosition = function (mediaContainer, overlayElement, videoListItem) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 var video = videoListItem.querySelector("video");
                 if (video && video.style) {
@@ -986,7 +1078,7 @@ var __meteor_runtime_config__;
                                 var settings = videoTrack.getSettings();
                                 for (var j = 0; j < that.deviceList.length; j++) {
                                     if (that.deviceList[j].deviceId === settings.deviceId) {
-                                        Log.print(Log.l.trace, "found local "+ that.deviceList[j].kind + ":" + that.deviceList[j].label + " with deviceId=" + that.deviceList[j].deviceId);
+                                        Log.print(Log.l.trace, "found local " + that.deviceList[j].kind + ":" + that.deviceList[j].label + " with deviceId=" + that.deviceList[j].deviceId);
                                         WinJS.Utilities.addClass(videoListItem, "selfie-video");
                                         break;
                                     }
@@ -1029,11 +1121,11 @@ var __meteor_runtime_config__;
             that.adjustVideoPosition = adjustVideoPosition;
 
             var lastDeviceListTime = 0;
-            var adjustContentPositions = function() {
+            var adjustContentPositions = function () {
                 var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var actionsBarRight = null;
                 var direction = videoListDefaults.direction;
-                Log.call(Log.l.trace, "Conference.Controller.", "direction="+direction);
+                Log.call(Log.l.trace, "Conference.Controller.", "direction=" + direction);
                 if (!direction) {
                     Log.ret(Log.l.trace, "extra ignored");
                     return WinJS.Promise.as();
@@ -1046,7 +1138,7 @@ var __meteor_runtime_config__;
                     Log.ret(Log.l.trace, "no conference URL!");
                     return WinJS.Promise.as();
                 }
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
                     var deviceListTime = Date.now();
                     if (deviceListTime - lastDeviceListTime > 30000 &&
                         typeof navigator.mediaDevices === "object" &&
@@ -1056,10 +1148,10 @@ var __meteor_runtime_config__;
                     } else {
                         return WinJS.Promise.as();
                     }
-                }).then(function(deviceList) {
-                    if (deviceList && typeof deviceList.filter === "function" && 
+                }).then(function (deviceList) {
+                    if (deviceList && typeof deviceList.filter === "function" &&
                         that.deviceList !== deviceList) {
-                        that.deviceList = deviceList.filter(function(device) {
+                        that.deviceList = deviceList.filter(function (device) {
                             return device.kind === "videoinput";
                         });
                     }
@@ -1098,7 +1190,7 @@ var __meteor_runtime_config__;
                                 fullScreenButtonIcon.appendChild(fullScreenButtonTooltip);
                                 fullScreenButton = document.createElement("button");
                                 fullScreenButton.setAttribute("class", "button--Z2dosza sm--Q7ujg default--Z19H5du button--Z1ops0C fullScreenButton--Z1bf0vj");
-                                fullScreenButton.onclick = function(event) {
+                                fullScreenButton.onclick = function (event) {
                                     if (videoPlayer && document.fullscreenEnabled) {
                                         // detect fullscreen state
                                         if (videoPlayer.parentElement.querySelector(':fullscreen') === videoPlayer) {
@@ -1108,7 +1200,7 @@ var __meteor_runtime_config__;
                                         }
                                     }
                                 }
-                                that.addRemovableEventListener(document, "fullscreenchange", function() {
+                                that.addRemovableEventListener(document, "fullscreenchange", function () {
                                     if (videoPlayer && videoPlayer.firstElementChild &&
                                         fullScreenButtonIcon && fullScreenButtonIcon.firstElementChild) {
                                         if (document.fullscreenElement === videoPlayer) {
@@ -1165,7 +1257,7 @@ var __meteor_runtime_config__;
                         } else {
                             Log.print(Log.l.trace, "videoPlayer not ready yet!");
                             if (!that.adjustContentPositionsPromise) {
-                                that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
+                                that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
                                     that.adjustContentPositions();
                                 });
                             }
@@ -1203,10 +1295,10 @@ var __meteor_runtime_config__;
                     var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                     if (mediaContainer) {
                         if (!videoListDefaults.mediaContainerObserver) {
-                            videoListDefaults.mediaContainerObserver = new MutationObserver(function(mutationList, observer) {
+                            videoListDefaults.mediaContainerObserver = new MutationObserver(function (mutationList, observer) {
                                 Log.print(Log.l.trace, "mediaContainer childList changed!");
                                 if (!that.adjustContentPositionsPromise) {
-                                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
                                         that.adjustContentPositions();
                                     });
                                 }
@@ -1217,10 +1309,10 @@ var __meteor_runtime_config__;
                         }
                         var content = mediaContainer.querySelector(".content--Z2gO9GE");
                         if (!videoListDefaults.contentObserver) {
-                            videoListDefaults.contentObserver = new MutationObserver(function(mutationList, observer) {
+                            videoListDefaults.contentObserver = new MutationObserver(function (mutationList, observer) {
                                 Log.print(Log.l.trace, "content childList changed!");
                                 if (!that.adjustContentPositionsPromise) {
-                                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
                                         that.adjustContentPositions();
                                     });
                                 }
@@ -1244,31 +1336,31 @@ var __meteor_runtime_config__;
                                     }
                                 }
                                 if (!videoListDefaults.videoListObserver) {
-                                    videoListDefaults.videoListObserver = new MutationObserver(function(mutationList, observer) {
-                                        mutationList.forEach(function(mutation) {
-                                            switch(mutation.type) {
-                                            case "attributes":
-                                                Log.print(Log.l.trace, "videoList attributes changed!");
-                                                if (!that.checkForInactiveVideoPromise) {
-                                                    that.checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
-                                                        that.checkForInactiveVideo();
-                                                    });
-                                                }
-                                                break;
-                                            case "childList":
-                                                Log.print(Log.l.trace, "videoList childList changed!");
-                                                if (!that.adjustContentPositionsPromise) {
-                                                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
-                                                        that.adjustContentPositions();
-                                                    });
-                                                }
-                                                break;
+                                    videoListDefaults.videoListObserver = new MutationObserver(function (mutationList, observer) {
+                                        mutationList.forEach(function (mutation) {
+                                            switch (mutation.type) {
+                                                case "attributes":
+                                                    Log.print(Log.l.trace, "videoList attributes changed!");
+                                                    if (!that.checkForInactiveVideoPromise) {
+                                                        that.checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
+                                                            that.checkForInactiveVideo();
+                                                        });
+                                                    }
+                                                    break;
+                                                case "childList":
+                                                    Log.print(Log.l.trace, "videoList childList changed!");
+                                                    if (!that.adjustContentPositionsPromise) {
+                                                        that.adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                                            that.adjustContentPositions();
+                                                        });
+                                                    }
+                                                    break;
                                             }
                                         });
                                     });
                                     videoListDefaults.videoListObserver.observe(videoList, {
                                         childList: true,
-                                        attributeFilter: [ "class" ],
+                                        attributeFilter: ["class"],
                                         subtree: true
                                     });
                                 }
@@ -1291,7 +1383,7 @@ var __meteor_runtime_config__;
                                 if (!content ||
                                     direction === videoListDefaults.default ||
                                     WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
-                                    !(videoPLayerOpened || screenShareOpened ||  presentationOpened && !overlayIsHidden)) {
+                                    !(videoPLayerOpened || screenShareOpened || presentationOpened && !overlayIsHidden)) {
                                     if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
                                         WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
                                     }
@@ -1444,7 +1536,7 @@ var __meteor_runtime_config__;
                                 that.adjustContentPositionsFailedCount++;
                                 Log.print(Log.l.trace, "videoList not yet created - try later again! that.adjustContentPositionsFailedCount=" + that.adjustContentPositionsFailedCount);
                                 if (!that.adjustContentPositionsPromise) {
-                                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount*10,5000)).then(function() {
+                                    that.adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount * 10, 5000)).then(function () {
                                         that.adjustContentPositions();
                                     });
                                 }
@@ -1470,7 +1562,7 @@ var __meteor_runtime_config__;
                         that.adjustContentPositionsFailedCount++;
                         Log.print(Log.l.trace, "mediaContainer not yet created - try later again! adjustContentPositionsFailedCount=" + that.adjustContentPositionsFailedCount);
                         if (!that.adjustContentPositionsPromise) {
-                            that.adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount*10,5000)).then(function() {
+                            that.adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount * 10, 5000)).then(function () {
                                 that.adjustContentPositions();
                             });
                         }
@@ -1499,7 +1591,7 @@ var __meteor_runtime_config__;
                             actionsBarCenter.lastElementChild !== emojiToolbar) {
                             var audioControlsContainer = actionsBarCenter.querySelector(".container--1hUthh");
                             if (audioControlsContainer) {
-                                emojiToolbarPositionObserver = new MutationObserver(function(mutationList, observer) {
+                                emojiToolbarPositionObserver = new MutationObserver(function (mutationList, observer) {
                                     if (audioControlsContainer.childElementCount === 2) {
                                         if (!WinJS.Utilities.hasClass(actionsBarCenter, "wide-audio-container")) {
                                             WinJS.Utilities.addClass(actionsBarCenter, "wide-audio-container");
@@ -1520,7 +1612,7 @@ var __meteor_runtime_config__;
                         }
                     }
                     return WinJS.Promise.timeout(20);
-                }).then(function(deviceList) {
+                }).then(function (deviceList) {
                     var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                     if (mediaContainer) {
                         var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
@@ -1541,11 +1633,11 @@ var __meteor_runtime_config__;
             }
             this.adjustContentPositions = adjustContentPositions;
 
-            var checkForInactiveVideo = function() {
+            var checkForInactiveVideo = function () {
                 var videoList = null;
                 var hideInactive = videoListDefaults.hideInactive;
                 var hideMuted = videoListDefaults.hideMuted;
-                Log.call(Log.l.trace, "Conference.Controller.", "hideInactive="+hideInactive+" hideMuted="+hideMuted);
+                Log.call(Log.l.trace, "Conference.Controller.", "hideInactive=" + hideInactive + " hideMuted=" + hideMuted);
                 if (that.checkForInactiveVideoPromise) {
                     that.checkForInactiveVideoPromise.cancel();
                     that.checkForInactiveVideoPromise = null;
@@ -1554,7 +1646,7 @@ var __meteor_runtime_config__;
                     Log.ret(Log.l.trace, "no conference URL!");
                     return WinJS.Promise.as();
                 }
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
                     var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                     if (mediaContainer) {
                         var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
@@ -1687,7 +1779,7 @@ var __meteor_runtime_config__;
                             //zum test da es für diesen token eine online Event vorhanden ist 
                             //sonst AppData._persistentStates.registerData.userToken
                             pUserToken: AppData._persistentStates.registerData.userToken
-                        }, function(json) {
+                        }, function (json) {
                             if (json && json.d && json.d.results) {
                                 that.binding.dataConference = json.d.results[0];
                                 if (that.binding.dataConference) {
@@ -1698,7 +1790,7 @@ var __meteor_runtime_config__;
                                 }
                             }
                             Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
-                        }, function(error) {
+                        }, function (error) {
                             Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
                             AppData.setErrorMsg(AppBar.scope.binding, error);
                         });
@@ -1715,7 +1807,7 @@ var __meteor_runtime_config__;
                             pVeranstaltungID: 0,
                             pAlias: null,
                             pUserToken: modToken //aus startlink 
-                        }, function(json) {
+                        }, function (json) {
                             if (json && json.d && json.d.results) {
                                 that.binding.dataConference = json.d.results[0];
                                 if (that.binding.dataConference) {
@@ -1725,7 +1817,7 @@ var __meteor_runtime_config__;
                                 }
                             }
                             Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
-                        }, function(error) {
+                        }, function (error) {
                             Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
                             AppData.setErrorMsg(AppBar.scope.binding, error);
                         });
@@ -1742,14 +1834,14 @@ var __meteor_runtime_config__;
                             for (var key in query) {
                                 if (query.hasOwnProperty(key)) {
                                     var value = query[key];
-                                    Log.print(Log.l.trace, "added "+ key + "=" + value);
+                                    Log.print(Log.l.trace, "added " + key + "=" + value);
                                     Application.query[key] = value;
                                 }
                             }
                             var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
                             window.history.pushState(state, title, location);
                         };
-                        var path = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g,'/html5client');
+                        var path = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g, '/html5client');
                         return renderImpl(path, conference, false);
                     } else {
                         AppData.setErrorMsg(AppBar.scope.binding, that.binding.dataConference.ResultMessage);
@@ -1769,12 +1861,12 @@ var __meteor_runtime_config__;
             }
             this.loadData = loadData;
 
-            var setPresenterModeState = function(state) {
+            var setPresenterModeState = function (state) {
                 Log.call(Log.l.info, "Conference.Controller.", "state=" + state);
                 var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                 if (mediaContainer) {
                     switch (state) {
-                        case "tiled":{
+                        case "tiled": {
                             if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
                                 WinJS.Utilities.addClass(mediaContainer, "presenter-mode");
                             }
@@ -1790,8 +1882,8 @@ var __meteor_runtime_config__;
                             videoListDefaults.direction = videoListDefaults.right;
                             videoListDefaults.hideMuted = true;
                         }
-                        break;
-                        case "full":{
+                            break;
+                        case "full": {
                             if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
                                 WinJS.Utilities.addClass(mediaContainer, "presenter-mode");
                             }
@@ -1807,8 +1899,8 @@ var __meteor_runtime_config__;
                             videoListDefaults.direction = videoListDefaults.right;
                             videoListDefaults.hideMuted = true;
                         }
-                        break;
-                        case "small":{
+                            break;
+                        case "small": {
                             if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
                                 WinJS.Utilities.addClass(mediaContainer, "presenter-mode");
                             }
@@ -1824,7 +1916,7 @@ var __meteor_runtime_config__;
                             videoListDefaults.direction = videoListDefaults.right;
                             videoListDefaults.hideMuted = true;
                         }
-                        break;
+                            break;
                         default: {
                             if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
                                 WinJS.Utilities.removeClass(mediaContainer, "presenter-mode");
@@ -1900,7 +1992,7 @@ var __meteor_runtime_config__;
                                             try {
                                                 commandTs = parseInt(commandTsString);
                                                 Log.ret(Log.l.trace, "name=" + name +
-                                                    " time=" + time + 
+                                                    " time=" + time +
                                                     " text=" + text +
                                                     " chatTs=" + chatTs +
                                                     " commandTs=" + commandTs);
@@ -1965,8 +2057,44 @@ var __meteor_runtime_config__;
             }
             that.buildParamsWithQuotesFromChat = buildParamsWithQuotesFromChat;
 
+            var isChatMessageLocked = function (message) {
+                if (message && message.name && message.chatTs) {
+                    var messagesAtTs = that.lockedChatMessages[message.chatTs];
+                    if (messagesAtTs) {
+                        var found = false;
+                        var unlocked = false;
+                        var commandTs = 0;
+                        for (var i = 0; i < messagesAtTs.length; i++) {
+                            var lockedMessage = messagesAtTs[i];
+                            if (lockedMessage.name === message.name &&
+                                lockedMessage.commandTs > commandTs) {
+                                found = true;
+                                unlocked = lockedMessage.unlocked;
+                            }
+                        }
+                        if (found) {
+                            return !unlocked;
+                        }
+                    }
+                }
+                return false;
+            }
+            that.isChatMessageLocked = isChatMessageLocked;
+            
+            var addLockedChatMessage = function(message) {
+                if (message && message.name && message.chatTs) {
+                    var messagesAtTs = that.lockedChatMessages[message.chatTs];
+                    if (messagesAtTs) {
+                        that.lockedChatMessages[message.chatTs].push(message);
+                    } else {
+                        that.lockedChatMessages[message.chatTs] = [message];
+                    }
+                }
+            }
+            that.addLockedChatMessage = addLockedChatMessage;
+
             this.eventHandlers = {
-                showPresentation: function() {
+                showPresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc);
                     if (restoreDescButton) {
@@ -1974,7 +2102,7 @@ var __meteor_runtime_config__;
                     }
                     that.binding.showPresentation = true;
                     if (videoListDefaults.direction === videoListDefaults.default) {
-                        WinJS.Promise.timeout(50).then(function() {
+                        WinJS.Promise.timeout(50).then(function () {
                             var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                             if (mediaContainer) {
                                 var overlayElement = mediaContainer.querySelector(".overlay--nP1TK");
@@ -1986,7 +2114,7 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
-                hidePresentation: function() {
+                hidePresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
                     if (closeDescButton) {
@@ -1996,7 +2124,7 @@ var __meteor_runtime_config__;
                     that.setPresenterModeState("off");
                     Log.ret(Log.l.info);
                 },
-                showVideoList: function() {
+                showVideoList: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                     if (mediaContainer) {
@@ -2004,10 +2132,10 @@ var __meteor_runtime_config__;
                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-hidden");
                         }
                         that.binding.showVideoList = true;
-                    } 
+                    }
                     Log.ret(Log.l.info);
                 },
-                hideVideoList: function() {
+                hideVideoList: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                     if (mediaContainer) {
@@ -2018,11 +2146,11 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
-                videoListDefault: function() {
+                videoListDefault: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     videoListDefaults.direction = videoListDefaults.default;
                     that.setPresenterModeState("off");
-                    WinJS.Promise.timeout(250).then(function() {
+                    WinJS.Promise.timeout(250).then(function () {
                         var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
                         if (mediaContainer) {
                             var overlayElement = mediaContainer.querySelector(".overlay--nP1TK:not(.hideOverlay--Z13uLxg)");
@@ -2033,34 +2161,34 @@ var __meteor_runtime_config__;
                     });
                     Log.ret(Log.l.info);
                 },
-                videoListLeft: function() {
+                videoListLeft: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     videoListDefaults.direction = videoListDefaults.left;
                     that.setPresenterModeState("off");
                     Log.ret(Log.l.info);
                 },
-                videoListRight: function() {
+                videoListRight: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     videoListDefaults.direction = videoListDefaults.right;
                     that.setPresenterModeState("off");
                     Log.ret(Log.l.info);
                 },
-                presenterModeTiled: function() {
+                presenterModeTiled: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     that.setPresenterModeState("tiled");
                     Log.ret(Log.l.info);
                 },
-                presenterModeFull: function() {
+                presenterModeFull: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     that.setPresenterModeState("full");
                     Log.ret(Log.l.info);
                 },
-                presenterModeSmall: function() {
+                presenterModeSmall: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     that.setPresenterModeState("small");
                     Log.ret(Log.l.info);
                 },
-                clickPresenterMode: function(event) {
+                clickPresenterMode: function (event) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     var command = event && event.currentTarget && event.currentTarget.id;
                     if (command) {
@@ -2069,7 +2197,7 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
-                showNotification: function(paramsWithQuotes) {
+                showNotification: function (paramsWithQuotes) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (that.showNotificationPromise) {
                         that.showNotificationPromise.cancel();
@@ -2100,8 +2228,8 @@ var __meteor_runtime_config__;
                                     that.binding.dataNotification.text = result.text;
                                     mediaContainer.appendChild(notificationPopup);
                                     notificationPopup.style.display = "block";
-                                    WinJS.UI.Animation.slideLeftIn(notificationPopup).done(function() {
-                                        that.hideNotificationPromise = WinJS.Promise.timeout(7000).then(function() {
+                                    WinJS.UI.Animation.slideLeftIn(notificationPopup).done(function () {
+                                        that.hideNotificationPromise = WinJS.Promise.timeout(7000).then(function () {
                                             that.eventHandlers.clickNotification();
                                         });
                                     });
@@ -2109,10 +2237,38 @@ var __meteor_runtime_config__;
                             }
                         }
                     } else {
-                        that.showNotificationPromise = WinJS.Promise.timeout(500).then(function() {
+                        that.showNotificationPromise = WinJS.Promise.timeout(500).then(function () {
                             that.eventHandlers.showNotification(paramsWithQuotes);
                         });
                     }
+                    Log.ret(Log.l.info);
+                },
+                lockChatMessage: function (paramsWithQuotes) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (typeof paramsWithQuotes !== "string") {
+                        Log.ret(Log.l.info, "invalid param: extra ignored!");
+                        return;
+                    }
+                    var message = that.extractChatFromParamsWithQuotes(paramsWithQuotes);
+                    message.unlocked = false;
+                    that.addLockedChatMessage(message);
+                    WinJS.Promise.timeout(0).then(function() {
+                        that.markupLockedMessages();
+                    });
+                    Log.ret(Log.l.info);
+                },
+                unlockChatMessage: function (paramsWithQuotes) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (typeof paramsWithQuotes !== "string") {
+                        Log.ret(Log.l.info, "invalid param: extra ignored!");
+                        return;
+                    }
+                    var message = that.extractChatFromParamsWithQuotes(paramsWithQuotes);
+                    message.unlocked = true;
+                    that.addLockedChatMessage(message);
+                    WinJS.Promise.timeout(0).then(function() {
+                        that.markupLockedMessages();
+                    });
                     Log.ret(Log.l.info);
                 },
                 clickChatMenuCommand: function (event) {
@@ -2121,7 +2277,7 @@ var __meteor_runtime_config__;
                         var id = event.currentTarget.id;
                         WinJS.Promise.timeout(50).then(function () {
                             switch (id) {
-                                case "postNotification":
+                                case "showNotification":
                                 document.body.appendChild(postNotificationPopup);
                                 postNotificationPopup.winControl.showAt(event);
                                 break;
@@ -2351,17 +2507,19 @@ var __meteor_runtime_config__;
             that.submitCommandMessage = submitCommandMessage;
 
             that.allCommandInfos = {
-                showPresentation: { redundantList: ["hidePresentation"] },
-                hidePresentation: { redundantList: ["showPresentation"] },
-                videoListDefault: { redundantList: ["videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                videoListLeft: { redundantList: ["videoListDefault", "videoListRight", "presenterModeTiled", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                videoListRight: { redundantList: ["videoListDefault", "videoListLeft", "presenterModeTiled", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                hideVideoList: { redundantList: ["showVideoList"] },
-                showVideoList: { redundantList: ["hideVideoList"] },
-                presenterModeTiled: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeFull", "presenterModeSmall"] },
-                presenterModeFull: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeSmall"] },
-                presenterModeSmall: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull"] },
-                showNotification: { redundantList: null }
+                showPresentation: { redundantList: ["hidePresentation", "showPresentation"] },
+                hidePresentation: { redundantList: ["hidePresentation", "showPresentation"] },
+                videoListDefault: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
+                videoListLeft: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
+                videoListRight: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
+                hideVideoList: { redundantList: ["hideVideoList", "showVideoList"] },
+                showVideoList: { redundantList: ["hideVideoList", "showVideoList"] },
+                presenterModeTiled: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
+                presenterModeFull: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
+                presenterModeSmall: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
+                showNotification: { redundantList: null },
+                lockChatMessage:  { redundantList: null },
+                unlockChatMessage:  { redundantList: null }
             };
 
             var handleCommandWithParam = function(commandWithParam) {
@@ -2378,7 +2536,7 @@ var __meteor_runtime_config__;
                     return WinJS.Promise.as();
                 }
                 that.commandQueue = that.commandQueue.filter(function(item) {
-                    return item.command !== command && (!commandInfo.redundantList || commandInfo.redundantList.indexOf(item.command) < 0);
+                    return (!commandInfo.redundantList || commandInfo.redundantList.indexOf(item.command) < 0);
                 });
                 that.commandQueue.push(commandWithParam);
                 return WinJS.Promise.timeout(250).then(function() {

@@ -30,6 +30,7 @@
     "event.sendPostLabel" : "Invia il messaggio a tutti",
     "event.lockPostLabel" : "Messaggio di blocco",
     "event.unlockPostLabel" : "Sblocca il messaggio",
+    "event.lockedMessage"   : "Messaggio bloccato",
 
     "conference.waitMessage": "Divertiti con la tua conferenza online oggi",
 

@@ -31,6 +31,7 @@
     "event.sendPostLabel" : "Share message with all",
     "event.lockPostLabel" : "Lock message",
     "event.unlockPostLabel" : "Unlock message",
+    "event.lockedMessage"   : "Locked message",
 
     "conference.waitMessage": "Have fun on your online conference today",
 
