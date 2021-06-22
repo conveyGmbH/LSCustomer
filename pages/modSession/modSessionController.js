@@ -273,13 +273,12 @@
                             if (json && json.d && json.d.results) {
                                 var result = json.d.results[0];
                             }
-                            // call submitCommandMessage
-                            var command = event && event.currentTarget && event.currentTarget.id;
-                            var conferenceFragment = that.updateFragment();
+                                    that.updateFragment().then(function (conferenceFragment) {
                                     // call sendCommandMessage 
                                     if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
                                         conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
                             }
+                                    });
                                     Application.navigateById("home");
                     Log.ret(Log.l.trace);
                         },

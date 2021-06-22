@@ -726,6 +726,8 @@
                                 conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
                                     alert("sessionEndRequested received: " + (param ? param : ""));
                                     // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
+                                    // call PRC_RegisterContact?!
+                                    that.loadData();
                                 });
                             });
                         }
