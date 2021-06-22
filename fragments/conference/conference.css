@@ -891,7 +891,7 @@ button--Z2dosza
 
 #conference.mediaview .systemMessage--ZYspJQ {
     font-weight: var(--btn-font-weight) !important;
-    margin-bottom: var(--line-height-computed) !important;
+    margin: var(--line-height-computed) 0 !important;
 }
 
 #conference.mediaview .messageList--hsNac .content--Z2nhld9 {
