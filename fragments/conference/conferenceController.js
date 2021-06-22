@@ -2502,9 +2502,51 @@ var __meteor_runtime_config__;
             }
             that.initEmojiToolbar = initEmojiToolbar;
 
+            var sendCommandMessage = function (command, param) {
+                Log.call(Log.l.info, "Conference.Controller.", "command=" + command);
+                if (!that.allCommandInfos[command]) {
+                    Log.ret(Log.l.error, "invalid command=" + command);
+                    return;
+                }
+                if (typeof param === "string") {
+                    var q = "&#32;&quot;&#32;";
+                    command = command + "(" + q + param
+                        .replace(/\n/g, "&lt;br /&gt;")
+                        .replace(/&quot;/g, "&quot;&quot;") + q + ")";
+                }
+                that.submitCommandMessage(magicStart + command + magicStop);
+                Log.ret(Log.l.info);
+            }
+            that.sendCommandMessage = sendCommandMessage;
+
+            var setCommandMessageHandler = function(command, callback) {
+                Log.call(Log.l.info, "Conference.Controller.", "command=" + command);
+                if (typeof callback !== "function") {
+                    Log.ret(Log.l.error, "invalid param: callback function");
+                    return;
+                }
+                var commandInfo = that.allCommandInfos[command];
+                if (!commandInfo) {
+                    Log.ret(Log.l.error, "invalid command=" + command);
+                    return;
+                }
+                commandInfo.callback = callback;
+                Log.ret(Log.l.info);
+            }
+            that.setCommandMessageHandler = setCommandMessageHandler;
+
             var submitCommandMessage = function(command, event, openedUserList, openedChat) {
                 var btnToggleChat, btnToggleUserList, panelWrapper;
-                Log.call(Log.l.info, "Conference.Controller.");
+                Log.call(Log.l.info, "Conference.Controller.", "command=" + command);
+                if (typeof command !== "string") {
+                    Log.ret(Log.l.error, "invalid param");
+                    return;
+                }
+                if (command.indexOf(magicStart) >= 0 &&
+                    !(AppBar.scope.element && AppBar.scope.element.id === "modSessionController")) {
+                    Log.ret(Log.l.error, "access denied if not modSessionController");
+                    return;
+                }
                 if (that.submitCommandMessagePromise) {
                     that.submitCommandMessagePromise.cancel();
                     that.submitCommandMessagePromise = null;
@@ -2600,7 +2642,8 @@ var __meteor_runtime_config__;
                 presenterModeSmall: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
                 showNotification: { redundantList: null },
                 lockChatMessage:  { redundantList: null },
-                unlockChatMessage:  { redundantList: null }
+                unlockChatMessage:  { redundantList: null },
+                sessionEndRequested: { redundantList: "sessionEndRequested" }
             };
 
             var handleCommandWithParam = function(commandWithParam) {
@@ -2630,7 +2673,20 @@ var __meteor_runtime_config__;
                         if (queuedCommandWithParam.param) {
                             queuedParam = queuedCommandWithParam.param;
                         };
-                        if (typeof that.eventHandlers[queuedCommand] === "function") {
+                        var queuedCommandInfo = that.allCommandInfos[queuedCommand];
+                        if (typeof queuedCommandInfo.callback === "function") {
+                            if (queuedParam) {
+                                var param = queuedParam
+                                    .replace(/&#32;&quot;&#32;/g, "")
+                                    .replace(/ &quot; /g, "")
+                                    .replace(/&quot;&quot;/g, "&quot;")
+                                    .replace(/\\\\n/g, "\n")
+                                    .replace(/&lt;br.\/&gt;/g, "\n");
+                                queuedCommandInfo.callback(param);
+                            } else {
+                                queuedCommandInfo.callback();
+                            }
+                        } else if (typeof that.eventHandlers[queuedCommand] === "function") {
                             Log.print(Log.l.info, "handle command=" + queuedCommand);
                             if (queuedParam) {
                                 that.eventHandlers[queuedCommand](queuedParam);
@@ -2979,9 +3035,18 @@ var __meteor_runtime_config__;
                 that.adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
                     that.adjustContentPositions();
                 });
-                return that.adjustContentPositionsPromise;
+                return WinJS.Promise.timeout(250);;
             }).then(function () {
                 return that.sendResize(2000);
+            }).then(function () {
+                return WinJS.Promise.timeout(10000);
+            }).then(function () {
+                that.setCommandMessageHandler("sessionEndRequested", function(param) {
+                    alert("sessionEndRequested received: " + (param ? param : ""));
+                });
+                if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                    that.sendCommandMessage("sessionEndRequested", "optional parameters");
+                }
             });
             Log.ret(Log.l.trace);
         })
