@@ -815,9 +815,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     height: 100% !important;
 }
 
+    
 /* polling flyout */
-#conference.mediaview .pollingContainer--1xRnAH {
-    border: 1px solid var(--color-gray-lighter, #a7b3bd);
+#conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH {
+    background: var(--systemMessage-background-color);
+    border: 1px solid var(--systemMessage-border-color);
+    border-radius: var(--border-radius);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     transform: translate3d(0,0,0);
     transition-property: box-shadow,transform;
@@ -826,19 +829,22 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 30px;
     bottom: 90px;
 }
-#conference.mediaview .pollingContainer--1xRnAH:hover,
-#conference.mediaview .pollingContainer--1xRnAH:focus {
+
+#conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH:hover,
+#conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH:focus {
     transform: translate3d(0,-2px,0);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     transition-property: box-shadow,transform;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
 }
-#conference.mediaview .pollingContainer--1xRnAH button {
+#conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH button {
     background-color: var(--btn-primary-bg) !important;
+    border-radius: var(--border-radius);
+    padding: .5rem 1rem;
     opacity: 0.8;
 }
-#conference.mediaview .pollingContainer--1xRnAH button:hover {
+#conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH button:hover {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
 }
