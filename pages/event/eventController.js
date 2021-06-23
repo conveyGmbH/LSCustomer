@@ -652,7 +652,14 @@
                             teaserFragment.controller.binding.showEvDoc = false;
                             teaserFragment.controller.binding.showOnDoc = false;
                             teaserFragment.controller.binding.showOffDoc = true;
-                            that.binding.showMaintenance = true;
+                            //that.binding.showMaintenance = true;
+                            return that.getFragmentByName("recordedContent").then(function (recordedContentFragment) {
+                                if (recordedContentFragment &&
+                                    recordedContentFragment.controller &&
+                                    recordedContentFragment.controller.binding) {
+                                    recordedContentFragment.controller.binding.showDelayContent = true;
+                                }
+                            });
                         } else if (AppData._persistentStates.registerData.confirmStatusID > 15) {
                             // Status = 15 bedeutet Event zuende und recordedContent da
                             teaserFragment.controller.binding.showEvDoc = false;
@@ -746,13 +753,6 @@
                         that.binding.showConference = false;
                         that.binding.showRecordedContent = true;
                         that.binding.showLogOffEventMail = true;
-                        return that.getFragmentByName("recordedContent").then(function(recordedContentFragment) {
-                            if (recordedContentFragment &&
-                                recordedContentFragment.controller &&
-                                recordedContentFragment.controller.binding) {
-                                recordedContentFragment.controller.binding.showDelayContent = false;
-                            }
-                        });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
                         that.binding.showICS = true;
                         if (registerFragment &&
