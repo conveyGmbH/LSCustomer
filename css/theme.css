@@ -232,6 +232,7 @@ section.elementor-inner-section > div {
 .contentarea {
     background-color: var(--e-global-color-d4faeed, #F3FBFC);
 }
+
 .win-type-body {
     color: var(--e-global-color-text, #2A2F3D);
 }
@@ -253,6 +254,14 @@ section.elementor-inner-section > div {
 .text-lightcolor.win-button:disabled {
     background-color: #dcdcE4;
     cursor: default;
+}
+
+.event .contentarea {
+    background-color: transparent;
+}
+
+.event .color_container2, .event .color_container4 {
+    background-color: var(--e-global-color-d4faeed, #F3FBFC);
 }
 
 /******** Ende Fonts for LiveBridge*********/
