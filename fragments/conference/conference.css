@@ -217,7 +217,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .poll--Z1w6wQt .header--2wRKDg ~ div button.primary--1IbqAO {
     text-transform: uppercase !important;
     padding: var(--btn-md-padding) !important;
-    margin: var(--lg-padding-y) var(--lg-padding-x) !important;
+    margin: var(--lg-padding-y) 0 !important;
     color: var(--btn-primary-color) !important;
     background-color: var(--btn-primary-bg);
     letter-spacing: normal;
@@ -227,12 +227,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .poll--Z1w6wQt .header--2wRKDg ~ div button.default--Z19H5du {
     text-transform: uppercase !important;
     padding: var(--btn-md-padding) !important;
-    margin: var(--lg-padding-y) var(--lg-padding-x) !important;
+    margin: var(--lg-padding-y) 0 !important;
     color: var(--btn-default-color) !important;
     background-color: var(--btn-default-bg);
     letter-spacing: normal;
     border-radius: var(--border-radius) !important;
     font-size: var(--btn-lg-font-size) !important;
+}
+#conference.mediaview .poll--Z1w6wQt .header--2wRKDg ~ div button.default--Z19H5du.pollBtn--119tJ5 {
+    margin: var(--lg-padding-y) var(--lg-padding-x) !important;
 }
 
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .icon--2q1XXw {
