@@ -747,7 +747,11 @@
                         that.binding.showRecordedContent = true;
                         that.binding.showLogOffEventMail = true;
                         return that.getFragmentByName("recordedContent").then(function(recordedContentFragment) {
-                            recordedContentFragment.binding.showDelayContent = false;
+                            if (recordedContentFragment &&
+                                recordedContentFragment.controller &&
+                                recordedContentFragment.controller.binding) {
+                                recordedContentFragment.controller.binding.showDelayContent = false;
+                            }
                         });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
                         that.binding.showICS = true;
