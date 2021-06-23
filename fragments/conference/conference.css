@@ -92,8 +92,9 @@
     font-size: var(--font-size-small) !important;
     opacity: 0.8;
 }
-.recordingIndicator--Z1hMjfp > div:hover,
-.recordingIndicator--Z1hMjfp > div:focus {
+
+.recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):hover,
+.recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):focus {
     opacity: 1;
 }
 
