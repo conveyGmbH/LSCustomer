@@ -103,6 +103,10 @@
     min-width: 75px !important;
 }
 
+.recordingIndicator--Z1hMjfp > div.recordingStatusViewOnly--Z9UOXT > recordingIndicatorIcon--1aoKxW > svg:last-child:after {
+    content: "Pause";
+}
+
 .recordingIndicator--Z1hMjfp > div.recordingControlON--ZTT4Mq {
     padding: 0 !important;
     min-width: 75px !important;
