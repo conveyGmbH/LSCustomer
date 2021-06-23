@@ -242,13 +242,28 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--btn-primary-color) !important;
     letter-spacing: normal;
 }
+
+/* input elements */
+#conference.mediaview .poll--Z1w6wQt .input--2daaGm {
+    border-radius: var(--border-radius) !important;
+    padding: 0.3rem 0.075rem !important;
+    padding-left: var(--lg-padding-y) !important;
+    line-height: 1.5;
+}
+
+
+
+dklfnasdiöuoh
+
+
+
 /* Audio selection dialog buttons */
 .portal--27FHYi .modal--Z1mfLi .audioBtn--1H6rCK span:first-child {
     color: #1b3c4b !important;
     background-color: #f1f8ff !important;
     box-shadow: none !important;
-    border: 5px solid #f1f8ff !important;*/
-    font-size: 3.5rem !important;
+    border: 5px solid #f1f8ff !important;
+    */ font-size: 3.5rem !important;
 }
 
 /* camera selection popup */
