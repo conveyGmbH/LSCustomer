@@ -309,8 +309,8 @@
                     fragmentController = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath(fragmentName));
                     if (!fragmentController) {
                         var parentElement = pageElement.querySelector("#"+fragmentName+"host");
-                        if (parentElement) {
-                            return Application.loadFragmentById(parentElement, fragmentName, null);
+                        if (parentElement && that.binding.eventId) {
+                            return Application.loadFragmentById(parentElement, fragmentName, { eventId: that.binding.eventId, dataEvent: that.binding.dataEvent });
                         } else {
                             return WinJS.Promise.as();
                         }

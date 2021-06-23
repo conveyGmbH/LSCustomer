@@ -136,6 +136,7 @@ var __meteor_runtime_config__;
             this.toolboxIds = ["emojiToolbar"];
             this.emojiCount = {};
             this.lockedChatMessages = {};
+            this.questions = null;
 
             this.filterModeratorsFailedCount = 0;
             this.showUserListFailedCount = 0;
@@ -1815,19 +1816,11 @@ var __meteor_runtime_config__;
                             Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
                             AppData.setErrorMsg(AppBar.scope.binding, error);
                         });
-                    } else {
-                        return WinJS.Promise.as();
-                    }
-                }).then(function () {
-                    var modToken = null;
-                    if (Application.query.UserToken) {
-                        modToken = Application.query.UserToken;
-                    }
-                    if (pageControllerName === "modSessionController") {
+                    } else if (pageControllerName === "modSessionController") {
                         return AppData.call("PRC_BBBModeratorLink", {
                             pVeranstaltungID: 0,
                             pAlias: null,
-                            pUserToken: modToken //aus startlink 
+                            pUserToken: Application.query.UserToken //aus startlink 
                         }, function (json) {
                             if (json && json.d && json.d.results) {
                                 that.binding.dataConference = json.d.results[0];
@@ -1843,6 +1836,7 @@ var __meteor_runtime_config__;
                             AppData.setErrorMsg(AppBar.scope.binding, error);
                         });
                     } else {
+                        Log.print(Log.l.error, "called from unknown pageController=" + pageControllerName);
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
@@ -1875,6 +1869,25 @@ var __meteor_runtime_config__;
                         } else {
                             return WinJS.Promise.as();
                         }
+                    }
+                }).then(function () {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select questionnaireView...");
+                        return Conference.questionnaireView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "questionnaireView: success!");
+                            if (json && json.d) {
+                                // create binding list
+                                that.questions = new WinJS.Binding.List(json.d.results);
+                            } else {
+                                Log.print(Log.l.trace, "no data found");
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
                     }
                 });
                 Log.ret(Log.l.trace);
