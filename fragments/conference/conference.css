@@ -101,6 +101,9 @@
 .recordingIndicator--Z1hMjfp > div.recordingStatusViewOnly--Z9UOXT {
     padding: 2px;
 }
+.recordingIndicator--Z1hMjfp > div.recordingStatusViewOnly--Z9UOXT .presentationTitle--Z1JrxcV {
+    margin-right: 6px;
+}
 
 .recordingIndicator--Z1hMjfp > div.recordingControlON--ZTT4Mq {
     padding: 0 !important;
