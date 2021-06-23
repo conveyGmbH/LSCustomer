@@ -1237,7 +1237,7 @@ dklfnasdiöuoh
 }
 
 /* hide shared notes */
-.hide-shared-notes .userList--Z2q1D0p .messages--Z1feno8 + .messages--Z1feno8 > .container--Z1UAd2a,
+.hide-shared-notes .userList--Z2q1D0p .messages--Z1feno8:first-child ~ .messages--Z1feno8 > .container--Z1UAd2a,
 .hide-shared-notes .userList--Z2q1D0p div[aria-describedby="lockedNote"][role="button"] {
     display: none;
 }
