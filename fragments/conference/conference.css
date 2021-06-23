@@ -98,11 +98,11 @@
     opacity: 1;
 }
 
-.recordingControlON--ZTT4Mq {
+.recordingIndicator--Z1hMjfp > div.recordingControlON--ZTT4Mq {
     padding: 0 !important;
     min-width: 75px !important;
 }
-recordingControlOFF--26cqft {
+.recordingIndicator--Z1hMjfp > div:recordingControlOFF--26cqft {
     padding: 3px 6px !important;
     border: none !important;
 }
