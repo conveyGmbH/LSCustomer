@@ -508,7 +508,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview .chat--Z1w8gP7,
-#conference.mediaview .userlistPad--o5KDX {
+#conference.mediaview .userlistPad--o5KDX,
+#conference.mediaview .poll--Z1w6wQt {
     border-right: 1px solid var(--color-gray-lightest);
 }
 
@@ -543,8 +544,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 #conference.mediaview .media--Z1xJW08 {
     max-width: calc(100% - 36px);
-    max-height: calc(100% - 70px);
-    margin: 20px 10px 50px 10px !important;
+    max-height: calc(100% - 90px);
+    margin: 30px 10px 60px 10px !important;
 }
 .event #conference.mediaview .media--Z1xJW08 {
     max-height: calc(100% - 55px);
@@ -1449,3 +1450,7 @@ c
     display: none;
 }
 
+/* question combobox for poll answer selection */
+.poll-question-container {
+    display: none
+}
