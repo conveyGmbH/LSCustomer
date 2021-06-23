@@ -208,7 +208,7 @@
     color: #c2d63e;
 
 }
-.event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px;}
+.event .speakerblock { width: 100%; display: inline-block; margin-bottom: 20px; background-color: #f3fbfc;}
 .event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
 .event .speaker-image-container {
     display: block;
@@ -396,7 +396,7 @@
     margin-right: 10px;
 }
 
-.view-size-medium .event .color_container2 { height: 300%;}
+.view-size-medium .event .color_container2 { height: auto;}
 .view-size-medium .event .section-1 {
             grid-row: 1/span 1;
             grid-column: 1/span 6;
