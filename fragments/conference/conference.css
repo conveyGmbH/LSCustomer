@@ -261,12 +261,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     line-height: 1.5;
 }
 
-
-
-dklfnasdiöuoh
-
-
-
 /* Audio selection dialog buttons */
 .portal--27FHYi .modal--Z1mfLi .audioBtn--1H6rCK span:first-child {
     color: #1b3c4b !important;
@@ -1234,6 +1228,11 @@ dklfnasdiöuoh
 #conferenceController .tool-box > button.win-button .button-tip .emoji-button-icon {
     font-family: emoji-color;
     font-size: 180%;
+}
+
+/* bugfix chat toggle button name padding */
+#conference.mediaview .userList--Z2q1D0p div[role=\"button\"]#chat-toggle-button .chatNameMain--Z1S9hh4 {
+    padding: 0 0 0 var(--sm-padding-x);
 }
 
 /* hide shared notes */
