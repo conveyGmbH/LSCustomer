@@ -97,13 +97,26 @@
     opacity: 1;
 }
 
+.recordingIndicator--Z1hMjfp > div.recordingStatusViewOnly--Z9UOXT {
+    padding: 2px;
+    min-width: 75px !important;
+}
+
 .recordingIndicator--Z1hMjfp > div.recordingControlON--ZTT4Mq {
     padding: 0 !important;
     min-width: 75px !important;
 }
+
 .recordingIndicator--Z1hMjfp > div.recordingControlOFF--26cqft {
     padding: 3px 6px !important;
     border: none !important;
+}
+
+.recordingIndicator--Z1hMjfp > div.recordingControlON--ZTT4Mq,
+.recordingIndicator--Z1hMjfp > div.recordingControlOFF--26cqft,
+.recordingIndicator--Z1hMjfp > div.recordingStatusViewOnly--Z9UOXT {
+    display: flex;
+    border-radius: 2em 2em;
 }
 
 .modSession #conferenceController .presenter-button-container > button.win-button {
