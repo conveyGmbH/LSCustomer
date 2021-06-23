@@ -88,13 +88,23 @@
     z-index: 11;
 }
 .recordingIndicator--Z1hMjfp > div {
+    background-color: var(--btn-primary-bg);
     box-shadow: var(--toolbar-box-shadow);
+    font-size: var(--font-size-small) !important;
+    opacity: 0.8;
+}
+.recordingIndicator--Z1hMjfp > div:hover,
+.recordingIndicator--Z1hMjfp > div:focus {
+    opacity: 1;
 }
 
 .recordingControlON--ZTT4Mq {
     padding: 0 !important;
     min-width: 75px !important;
-    font-size: var(--font-size-small) !important;
+}
+recordingControlOFF--26cqft {
+    padding: 3px 6px !important;
+    border: none !important;
 }
 
 .modSession #conferenceController .presenter-button-container > button.win-button {
