@@ -263,6 +263,17 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     margin: var(--lg-padding-y) var(--lg-padding-x) !important;
 }
 
+#conference.mediaview .poll--Z1w6wQt .theading--2wLeYv,
+#conference.mediaview .poll--Z1w6wQt .resultLeft--Z1r23fc,
+#conference.mediaview .poll--Z1w6wQt .resultRight--129A0v {
+    padding: var(--sm-padding-y);
+}
+#conference.mediaview .poll--Z1w6wQt .resultLeft--Z1r23fc {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .icon--2q1XXw {
     color: var(--btn-primary-color) !important;
     letter-spacing: normal;
