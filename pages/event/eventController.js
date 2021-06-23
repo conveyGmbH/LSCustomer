@@ -779,7 +779,7 @@
                           that.binding.showConference = true;
                           that.binding.showTeaser = false;
                     }*/ else {
-                        if (AppData._persistentStates.registerData.resultCode === 13) {
+                        if (AppData._persistentStates.registerData.resultCode === 0 || AppData._persistentStates.registerData.resultCode === 13) {
                         that.binding.showRegister = true;
                         that.binding.showTeaser = true;
                         that.binding.showLogOffEventMail = false;
