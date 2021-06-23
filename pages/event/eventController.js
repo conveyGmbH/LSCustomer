@@ -825,8 +825,8 @@
                     var now = new Date().getTime();
                     var timeleft = dateEnd - now;
                     if (timeleft < 0) {
-                        AppData._persistentStates.registerData.confirmStatusID = 15;
-                        Application.pageframe.savePersistentStates();
+                       /* AppData._persistentStates.registerData.confirmStatusID = 15;
+                        Application.pageframe.savePersistentStates();*/
                         that.binding.showEvText = false;
                         that.binding.showOffText = true;
                     } else {
@@ -835,9 +835,11 @@
                     }
                 }).then(function () {
                     that.inLoadData = false;
+                    if (that.binding.showEvText) {
                     that.refreshResultsPromise = WinJS.Promise.timeout(that.refreshWaitTimeMs).then(function () {
                         that.showEvOffText();
                     });
+                    }
                     that.addDisposablePromise(that.refreshResultsPromise);
                 });
                 return ret;
