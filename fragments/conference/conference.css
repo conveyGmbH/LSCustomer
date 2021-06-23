@@ -261,12 +261,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     line-height: 1.5;
 }
 
-
-
-dklfnasdiöuoh
-
-
-
 /* Audio selection dialog buttons */
 .portal--27FHYi .modal--Z1mfLi .audioBtn--1H6rCK span:first-child {
     color: #1b3c4b !important;
@@ -1236,6 +1230,13 @@ dklfnasdiöuoh
     font-size: 180%;
 }
 
+#conference.mediaview .userList--Z2q1D0p .chatNameMain--Z1S9hh4 {
+    padding: 0 0 0 var(--sm-padding-x);
+}
+#conference.mediaview .userList--Z2q1D0p .noteTitle--DWw20,
+#conference.mediaview .userList--Z2q1D0p .icon-bbb-polling ~ span {
+    padding: 0;
+}
 /* hide shared notes */
 .hide-shared-notes .userList--Z2q1D0p .messages--Z1feno8:nth-child(2) > .container--Z1UAd2a,
 .hide-shared-notes .userList--Z2q1D0p div[aria-describedby="lockedNote"][role="button"] {
