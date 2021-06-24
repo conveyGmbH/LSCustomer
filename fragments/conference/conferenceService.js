@@ -24,6 +24,14 @@
                 Log.ret(Log.l.trace);
                 return ret;
             }
+        },
+        defaultValue: {
+            FragebogenzeileVIEWID: 0,
+            SS01: "",
+            SS02: "",
+            SS03: "",
+            SS04: "",
+            SS05: ""
         }
     });
 })();

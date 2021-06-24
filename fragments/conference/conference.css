@@ -293,7 +293,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: #f1f8ff !important;
     box-shadow: none !important;
     border: 5px solid #f1f8ff !important;
-    */ font-size: 3.5rem !important;
+    font-size: 3.5rem !important;
 }
 
 /* camera selection popup */
@@ -1276,7 +1276,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 /* hide shared notes */
 .hide-shared-notes .userList--Z2q1D0p .messages--Z1feno8:nth-child(2) > .container--Z1UAd2a,
-.hide-shared-notes .userList--Z2q1D0p div[aria-describedby="lockedNote"][role="button"] {
+.hide-shared-notes .userList--Z2q1D0p .messages--Z1feno8:nth-child(2) div[aria-describedby="lockedNote"][role="button"] {
     display: none;
 }
 
@@ -1451,6 +1451,54 @@ c
 }
 
 /* question combobox for poll answer selection */
-.poll-question-container {
+#conferenceController .poll-question-container {
     display: none
+}
+#conferenceController .poll-question-and-answers {
+    width: 100%;
+    font-family: var(--font-family-default);
+
+}
+#conferenceController .poll-question-and-answers select.poll-question {
+    width: 100%;
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-md);
+    border-color: var(--color-gray-lighter);
+    border-radius: var(--border-radius);
+}
+#conferenceController .poll-question-and-answers select.poll-question > * {
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-md);
+}
+
+#conferenceController .poll-question-and-answers .selected-answers {
+    width: 100%;
+    counter-reset: answer-counter 0;
+}
+#conferenceController .poll-question-and-answers .selected-answer {
+    width: 100%;
+    padding: var(--md-padding-y);
+    counter-increment: answer-counter 1;
+    display: flex;
+    font-weight: 600;
+    font-size: var(--btn-lg-font-size);
+}
+#conferenceController .poll-question-and-answers .answer-counter {
+    flex: 1;
+    text-align: right;
+    padding-right: var(--sm-padding-y);
+}
+#conferenceController .poll-question-and-answers .answer-counter > span:before {
+    content: counter(answer-counter) ". ";
+}
+
+#conferenceController .poll-question-and-answers .selected-answer > span {
+    flex: 10;
+}
+
+.poll-question-selection .grid--1noQvi,
+.poll-question-selection .instructions--5npoP:not(:first-child),
+.poll-question-selection .customBtn--Z8fMMN,
+.poll-question-selection .pollInput--Z2euEV9 {
+    display: none;
 }
