@@ -89,7 +89,9 @@ var __meteor_runtime_config__;
                 userListObserver: null,
                 toggleBtnObserver: null,
                 toggleUserList: null,
-                toggleChat: null
+                toggleChat: null,
+                panelWrapperObserver: null,
+                pollContentObserver: null
             };
 
             var emojiToolbarPositionObserver = null;
@@ -147,6 +149,7 @@ var __meteor_runtime_config__;
             var filterModeratorsPromise = null;
             var observeToggleUserListBtnPromise = null;
             var observeChatMessageListPromise = null;
+            var observePollPromise = null;
             var submitCommandMessagePromise = null;
             var showNotificationPromise = null;
             var hideNotificationPromise = null;
@@ -209,6 +212,10 @@ var __meteor_runtime_config__;
                 if (hideNotificationPromise) {
                     hideNotificationPromise.cancel();
                     hideNotificationPromise = null;
+                }
+                if (observePollPromise) {
+                    observePollPromise.cancel();
+                    observePollPromise = null;
                 }
                 conference = null;
                 videoListDefaults = {};
@@ -863,21 +870,94 @@ var __meteor_runtime_config__;
             }
             that.clickCloseDesc = clickCloseDesc;
 
+            var updateQuestionSelection = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (observePollPromise) {
+                    observePollPromise.cancel();
+                    observePollPromise = null;
+                }
+                var pollSection = fragmentElement.querySelector(".poll--Z1w6wQt");
+                if (pollSection &&
+                    pollSection.parentElement &&
+                    pollQuestion &&
+                    pollQuestion.winControl &&
+                    pollQuestion.winControl.data &&
+                    pollQuestion.winControl.data.length > 1) {
+                    var publishButton = pollSection.querySelector(".status--1gjKnt ~ .primary--1IbqAO");
+                    if (publishButton) {
+                        if (!WinJS.Utilities.hasClass(pollSection, "poll-results")) {
+                            WinJS.Utilities.addClass(pollSection, "poll-results");
+                        }
+                        pollQuestion.selectedIndex = 0;
+                        that.binding.dataQuestionnaire = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
+                    } else {
+                        var customBtn = pollSection.querySelector(".customBtn--Z8fMMN");
+                        if (customBtn) {
+                            if (WinJS.Utilities.hasClass(pollSection, "poll-results")) {
+                                WinJS.Utilities.removeClass(pollSection, "poll-results");
+                            }
+                            if (pollQuestion.parentElement &&
+                                pollQuestion.parentElement.parentElement !== customBtn.parentElement) {
+                                customBtn.parentElement.insertBefore(pollQuestion.parentElement, customBtn);
+                            }
+                            var ariaExpanded = customBtn.getAttribute("aria-expanded");
+                            if (ariaExpanded === "false") {
+                                customBtn.click();
+                            }
+                            var startCustomPollBtn = pollSection.querySelector(".customInputWrapper--Z2wG4AP .primary--1IbqAO");
+                            if (startCustomPollBtn) {
+                                var ariaDisabled = startCustomPollBtn.getAttribute("aria-disabled");
+                                if (ariaDisabled === "true") {
+                                    pollQuestion.selectedIndex = 0;
+                                    that.binding.dataQuestionnaire = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
+                                }
+                            }
+                        } else {
+                            if (WinJS.Utilities.hasClass(pollSection, "poll-results")) {
+                                WinJS.Utilities.removeClass(pollSection, "poll-results");
+                            }
+                        }
+                    }
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.updateQuestionSelection = updateQuestionSelection;
+
             var createQuestionSelection = function() {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 var pollSection = fragmentElement.querySelector(".poll--Z1w6wQt");
                 if (pollSection && pollSection.parentElement &&
                     pollQuestion && pollQuestion.winControl &&
                     pollQuestion.winControl.data &&
-                    pollQuestion.winControl.data.length > 0) {
-                    var customBtn = pollSection.querySelector(".customBtn--Z8fMMN");
-                    if (customBtn) {
-                        customBtn.parentElement.insertBefore(pollQuestion.parentElement, customBtn);
-                        customBtn.click();
-                    }
+                    pollQuestion.winControl.data.length > 1) {
                     if (!WinJS.Utilities.hasClass(pollSection, "poll-question-selection")) {
                         WinJS.Utilities.addClass(pollSection, "poll-question-selection");
                     }
+                    if (!userListDefaults.pollContentObserver) {
+                        userListDefaults.pollContentObserver = new MutationObserver(function (mutationList, observer) {
+                            if (mutationList) {
+                                for (var i = 0; i < mutationList.length; i++) {
+                                    var mutation = mutationList[i];
+                                    if (mutation && mutation.type === "childList" &&
+                                        mutation.addedNodes && mutation.addedNodes.length > 0) {
+                                        if (!observePollPromise) {
+                                            observePollPromise = WinJS.Promise.timeout(20).then(function() {
+                                                that.updateQuestionSelection();
+                                            });
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        });
+                        userListDefaults.pollContentObserver.observe(pollSection, {
+                            childList: true,
+                            subtree: true
+                        });
+                    }
+                    observePollPromise = WinJS.Promise.timeout(20).then(function() {
+                        that.updateQuestionSelection();
+                    });
                 }
                 Log.ret(Log.l.trace);
             }
@@ -885,17 +965,13 @@ var __meteor_runtime_config__;
 
             var removeQuestionSelection = function() {
                 Log.call(Log.l.trace, "Conference.Controller.");
-                var pollSection = fragmentElement.querySelector(".poll--Z1w6wQt");
-                if (pollSection && pollSection.parentElement &&
-                    pollQuestion && pollQuestion.winControl &&
-                    pollQuestion.winControl.data &&
-                    pollQuestion.winControl.data.length > 0) {
-                    if (WinJS.Utilities.hasClass(pollSection, "poll-question-selection")) {
-                        WinJS.Utilities.removeClass(pollSection, "poll-question-selection");
-                    }
-                    if (pollQuestionContainer) {
-                        pollQuestionContainer.appendChild(pollQuestion.parentElement);
-                    }
+                if (userListDefaults.pollContentObserver) {
+                    userListDefaults.pollContentObserver.disconnect();
+                    userListDefaults.pollContentObserver = null;
+                }
+                if (pollQuestionContainer && pollQuestion.parentElement &&
+                    pollQuestion.parentElement.parentElement !== pollQuestionContainer) {
+                    pollQuestionContainer.appendChild(pollQuestion.parentElement);
                 }
                 Log.ret(Log.l.trace);
             }
@@ -916,9 +992,7 @@ var __meteor_runtime_config__;
                             }
                             if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "poll--Z1w6wQt")) {
                                 Log.print(Log.l.trace, "poll panel opened" );
-                                WinJS.Promise.timeout(0).then(function () {
-                                    that.createQuestionSelection();
-                                });
+                                that.createQuestionSelection();
                             }
                         }
                     }
@@ -1917,10 +1991,16 @@ var __meteor_runtime_config__;
                         return Conference.questionnaireView.select(function (json) {
                             AppData.setErrorMsg(that.binding);
                             Log.print(Log.l.trace, "questionnaireView: success!");
-                            if (json && json.d) {
+                            if (json && json.d && json.d.results && json.d.results.length > 0) {
                                 // create binding list
                                 if (pollQuestion) {
-                                    pollQuestion.winControl.data = new WinJS.Binding.List(json.d.results);
+                                    var initialValue = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
+                                    var questions = new WinJS.Binding.List([initialValue]);
+                                    json.d.results.forEach(function(item) {
+                                        questions.push(item);
+                                    });
+                                    pollQuestion.winControl.data = questions;
+                                    pollQuestion.selectedIndex = 0;
                                 }
                             } else {
                                 Log.print(Log.l.trace, "no data found");
