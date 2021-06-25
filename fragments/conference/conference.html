@@ -201,33 +201,33 @@
                                     class="poll-question win-dropdown"
                                     data-win-control="WinJS.UI.Repeater"
                                     onchange="AppBar.handleEvent('change', 'changePollQuestion', event)">
-                                <option data-win-bind="value: FragebogenzeileVIEWID; textContent: Thema"></option>
+                                <option data-win-bind="value: QuestionID; textContent: QuestionText"></option>
                             </select>
                             <div class="selected-answers">
                                 <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.SS01 Binding.Converter.toDisplay">
+                                     data-win-bind="style.display: dataQuestionnaire.Answer01Text Binding.Converter.toDisplay">
                                     <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.SS01"></span>
+                                    <span data-win-bind="textContent: dataQuestionnaire.Answer01Text"></span>
                                 </div>
                                 <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.SS02 Binding.Converter.toDisplay">
+                                     data-win-bind="style.display: dataQuestionnaire.Answer02Text Binding.Converter.toDisplay">
                                     <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.SS02"></span>
+                                    <span data-win-bind="textContent: dataQuestionnaire.Answer02Text"></span>
                                 </div>
                                 <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.SS03 Binding.Converter.toDisplay">
+                                     data-win-bind="style.display: dataQuestionnaire.Answer03Text Binding.Converter.toDisplay">
                                     <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.SS03"></span>
+                                    <span data-win-bind="textContent: dataQuestionnaire.Answer03Text"></span>
                                 </div>
                                 <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.SS04 Binding.Converter.toDisplay">
+                                     data-win-bind="style.display: dataQuestionnaire.Answer04Text Binding.Converter.toDisplay">
                                     <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.SS04"></span>
+                                    <span data-win-bind="textContent: dataQuestionnaire.Answer04Text"></span>
                                 </div>
                                 <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.SS05 Binding.Converter.toDisplay">
+                                     data-win-bind="style.display: dataQuestionnaire.Answer05Text Binding.Converter.toDisplay">
                                     <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.SS05"></span>
+                                    <span data-win-bind="textContent: dataQuestionnaire.Answer05Text"></span>
                                 </div>
                             </div>
                         </div>

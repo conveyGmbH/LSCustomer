@@ -89,7 +89,6 @@ var __meteor_runtime_config__;
                 userListObserver: null,
                 toggleBtnObserver: null,
                 toggleUserList: null,
-                toggleChat: null,
                 panelWrapperObserver: null,
                 pollContentObserver: null
             };
@@ -153,10 +152,12 @@ var __meteor_runtime_config__;
             var submitCommandMessagePromise = null;
             var showNotificationPromise = null;
             var hideNotificationPromise = null;
+            var setPollingPromise = null;
 
             var filterModeratorsFailedCount = 0;
             var showUserListFailedCount = 0;
             var adjustContentPositionsFailedCount = 0;
+            var setPollingFailedCount = 0;
             
             var commandQueue = [];
             var deviceList = [];
@@ -216,6 +217,10 @@ var __meteor_runtime_config__;
                 if (observePollPromise) {
                     observePollPromise.cancel();
                     observePollPromise = null;
+                }
+                if (setPollingPromise) {
+                    setPollingPromise.cancel();
+                    setPollingPromise = null;
                 }
                 conference = null;
                 videoListDefaults = {};
@@ -706,30 +711,6 @@ var __meteor_runtime_config__;
             }
             that.filterModerators = filterModerators;
 
-            var clickToggleUserList = function (event) {
-                Log.call(Log.l.trace, "Conference.Controller.");
-                if (userListDefaults.userListObserver) {
-                    userListDefaults.userListObserver.disconnect();
-                }
-                var userList = fragmentElement.querySelector(".userList--11btR3");
-                if (typeof userListDefaults.toggleUserList === "function") {
-                    userListDefaults.toggleUserList(event);
-                }
-                if (userListDefaults.onlyModerators && !userList) {
-                    filterModeratorsFailedCount = 0;
-                    filterModeratorsPromise = WinJS.Promise.timeout(0).then(function () {
-                        that.filterModerators();
-                    });
-                }
-                if (!adjustContentPositionsPromise) {
-                    adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                        that.adjustContentPositions();
-                    });
-                }
-                Log.ret(Log.l.trace);
-            }
-            that.clickToggleUserList = clickToggleUserList;
-
             var observeToggleUserListBtn = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (observeToggleUserListBtnPromise) {
@@ -752,7 +733,7 @@ var __meteor_runtime_config__;
                         });
                     }
                     userListDefaults.toggleUserList = btnToggleUserList.onclick;
-                    btnToggleUserList.onclick = that.clickToggleUserList;
+                    btnToggleUserList.onclick = that.eventHandlers.clickToggleUserList;
                 } else {
                     observeToggleUserListBtnPromise = WinJS.Promise.timeout(250).then(function () {
                         that.observeToggleUserListBtn();
@@ -817,58 +798,6 @@ var __meteor_runtime_config__;
                 return ret;
             }
             this.showUserList = showUserList;
-
-            var clickRestoreDesc = function (event) {
-                Log.call(Log.l.trace, "Conference.Controller.");
-                if (typeof videoListDefaults.restoreDesc === "function") {
-                    videoListDefaults.restoreDesc(event);
-                }
-                WinJS.Promise.as().then(function () {
-                    if (!adjustContentPositionsPromise) {
-                        adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
-                            that.adjustContentPositions();
-                        });
-                    }
-                    return WinJS.Promise.timeout(250);
-                }).then(function () {
-                    var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
-                    if (closeDescButton) {
-                        if (!videoListDefaults.closeDesc) {
-                            videoListDefaults.closeDesc = closeDescButton.onclick;
-                        }
-                        closeDescButton.onclick = that.clickCloseDesc;
-                    }
-                    that.sendResize(20);
-                });
-                Log.ret(Log.l.trace);
-            }
-            that.clickRestoreDesc = clickRestoreDesc;
-
-            var clickCloseDesc = function (event) {
-                Log.call(Log.l.trace, "Conference.Controller.");
-                if (typeof videoListDefaults.closeDesc === "function") {
-                    videoListDefaults.closeDesc(event);
-                }
-                WinJS.Promise.as().then(function () {
-                    if (!adjustContentPositionsPromise) {
-                        adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
-                            that.adjustContentPositions();
-                        });
-                    }
-                    return WinJS.Promise.timeout(250);
-                }).then(function () {
-                    var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc);
-                    if (restoreDescButton) {
-                        if (!videoListDefaults.restoreDesc) {
-                            videoListDefaults.restoreDesc = restoreDescButton.onclick;
-                        }
-                        restoreDescButton.onclick = that.clickRestoreDesc;
-                    }
-                    that.sendResize(20);
-                });
-                Log.ret(Log.l.trace);
-            }
-            that.clickCloseDesc = clickCloseDesc;
 
             var updateQuestionSelection = function() {
                 Log.call(Log.l.trace, "Conference.Controller.");
@@ -989,6 +918,11 @@ var __meteor_runtime_config__;
                             }
                             if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "chat--Z1w8gP7")) {
                                 Log.print(Log.l.trace, "chat panel opened" );
+                                if (!observeChatMessageListPromise) {
+                                    observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
+                                        that.observeChatMessageList();
+                                    });
+                                }
                             }
                             if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "poll--Z1w6wQt")) {
                                 Log.print(Log.l.trace, "poll panel opened" );
@@ -1200,32 +1134,13 @@ var __meteor_runtime_config__;
                     WinJS.Promise.timeout(0).then(function() {
                         that.markupLockedMessages();
                     });
-                } else {
-                    observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
-                        that.observeChatMessageList();
-                    });
+                //} else {
+                //    observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
+                //        that.observeChatMessageList();
+                //    });
                 }
             }
             that.observeChatMessageList = observeChatMessageList;
-
-            var clickToggleChat = function (event) {
-                Log.call(Log.l.trace, "Conference.Controller.");
-                var messageList = fragmentElement.querySelector("#chat-messages.messageList--hsNac");
-                if (typeof userListDefaults.toggleChat === "function") {
-                    userListDefaults.toggleChat(event);
-                }
-                if (messageList) {
-                    userListDefaults.messageListObserver = null;
-                } else {
-                    if (!observeChatMessageListPromise) {
-                        observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
-                            that.observeChatMessageList();
-                        });
-                    }
-                }
-                Log.ret(Log.l.trace);
-            }
-            that.clickToggleChat = clickToggleChat;
 
             var onWheelSvg = function (event) {
                 if (event) {
@@ -1347,14 +1262,6 @@ var __meteor_runtime_config__;
                     }
                     var panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
                     if (panelWrapper) {
-                        var userList = panelWrapper.querySelector(".userList--11btR3");
-                        if (userList) {
-                            var btnToggleChat = userList.querySelector("div[role=\"button\"][aria-expanded=\"false\"]#chat-toggle-button");
-                            if (btnToggleChat && btnToggleChat.onclick !== that.clickToggleChat) {
-                                userListDefaults.toggleChat = btnToggleChat.onclick;
-                                btnToggleChat.onclick = that.clickToggleChat;
-                            }
-                        }
                         if (!userListDefaults.panelWrapperObserver) {
                             userListDefaults.panelWrapperObserver = new MutationObserver(function (mutationList, observer) {
                                 for (var i = 0; i < mutationList.length; i++) {
@@ -1782,7 +1689,7 @@ var __meteor_runtime_config__;
                     if (closeDescButton) {
                         if (!videoListDefaults.closeDesc) {
                             videoListDefaults.closeDesc = closeDescButton.onclick;
-                            closeDescButton.onclick = that.clickCloseDesc;
+                            closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
                         }
                     } else {
                         videoListDefaults.closeDesc = null;
@@ -1791,7 +1698,7 @@ var __meteor_runtime_config__;
                     if (restoreDescButton) {
                         if (!videoListDefaults.restoreDesc) {
                             videoListDefaults.restoreDesc = restoreDescButton.onclick;
-                            restoreDescButton.onclick = that.restoreCloseDesc;
+                            restoreDescButton.onclick = that.eventHandlers.clickRestoreDesc;
                         }
                     } else {
                         videoListDefaults.restoreDesc = null;
@@ -1979,43 +1886,64 @@ var __meteor_runtime_config__;
             }
             that.checkForInactiveVideo = checkForInactiveVideo;
 
+            var savePollingAnswer = function(answerCode) {
+                var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
+                Log.call(Log.l.trace, "Conference.Controller.");
+                AppData.setErrorMsg(AppBar.scope.binding);
+                var ret = new WinJS.Promise.as().then(function() {
+                    if (pageControllerName === "eventController") {
+                        return AppData.call("PRC_StoreContactAnswer",
+                            {
+                                pUserToken: AppData._persistentStates.registerData.userToken,
+                                pAnswerCode: answerCode
+                            },
+                            function(json) {
+                                Log.print(Log.l.trace, "PRC_StoreContactAnswer success!");
+                            },
+                            function(error) {
+                                Log.print(Log.l.error, "PRC_StoreContactAnswer error! ");
+                                AppData.setErrorMsg(AppBar.scope.binding, error);
+                            });
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            that.savePollingAnswer = savePollingAnswer;
+
             var loadData = function () {
                 var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 AppBar.scope.binding.registerEmail = AppData._persistentStates.registerData.Email;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    if (that.binding.eventId && pageControllerName === "modSessionController") {
-                        //load of format relation record data
-                        Log.print(Log.l.trace, "calling select questionnaireView...");
-                        return Conference.questionnaireView.select(function (json) {
-                            AppData.setErrorMsg(that.binding);
-                            Log.print(Log.l.trace, "questionnaireView: success!");
-                            if (json && json.d && json.d.results && json.d.results.length > 0) {
-                                // create binding list
-                                if (pollQuestion) {
-                                    var initialValue = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
-                                    var questions = new WinJS.Binding.List([initialValue]);
-                                    json.d.results.forEach(function(item) {
-                                        questions.push(item);
-                                    });
-                                    pollQuestion.winControl.data = questions;
-                                    pollQuestion.selectedIndex = 0;
-                                }
-                            } else {
-                                Log.print(Log.l.trace, "no data found");
+                    //load of format relation record data
+                    Log.print(Log.l.trace, "calling select questionnaireView...");
+                    return Conference.questionnaireView.select(function (json) {
+                        AppData.setErrorMsg(that.binding);
+                        Log.print(Log.l.trace, "questionnaireView: success!");
+                        if (json && json.d && json.d.results && json.d.results.length > 0) {
+                            // create binding list
+                            if (pollQuestion) {
+                                var initialValue = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
+                                var questions = new WinJS.Binding.List([initialValue]);
+                                json.d.results.forEach(function(item) {
+                                    questions.push(item);
+                                });
+                                pollQuestion.winControl.data = questions;
+                                pollQuestion.selectedIndex = 0;
                             }
-                        }, function (errorResponse) {
-                            AppData.setErrorMsg(that.binding, errorResponse);
-                        }, that.binding.eventId);
-                    } else {
-                        return WinJS.Promise.as();
-                    }
+                        } else {
+                            Log.print(Log.l.trace, "no data found");
+                        }
+                    }, function (errorResponse) {
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    }, that.binding.eventId);
                 }).then(function () {
                     if (pageControllerName === "eventController") {
                         return AppData.call("PRC_BBBConferenceLink", {
-                            //zum test da es für diesen token eine online Event vorhanden ist 
-                            //sonst AppData._persistentStates.registerData.userToken
                             pUserToken: AppData._persistentStates.registerData.userToken
                         }, function (json) {
                             if (json && json.d && json.d.results) {
@@ -2370,6 +2298,47 @@ var __meteor_runtime_config__;
             }
             that.addLockedChatMessage = addLockedChatMessage;
 
+
+            var setPolling = function() {
+                Log.call(Log.l.info, "Conference.Controller.");
+                if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
+                    if (setPollingPromise) {
+                        setPollingPromise.cancel();
+                        setPollingPromise = null;
+                    }
+                    var pollingContainer = document.querySelector(".overlay--Arkp5 .pollingContainer--1xRnAH");
+                    if (pollingContainer) {
+                        var pollingTitle = pollingContainer.querySelector(".pollingTitle--2ryYAd");
+                        if (pollingTitle) {
+                            pollingTitle.textContent = that.binding.dataQuestionnaire.QuestionText;
+                        }
+                        var pollingAnswers = pollingContainer.querySelector(".pollingAnswers--2tjBC8");
+                        if (pollingAnswers) {
+                            var i = 1;
+                            var pollingAnswer = pollingAnswers.firstElementChild;
+                            while (pollingAnswer) {
+                                var button = pollingAnswer.querySelector("button");
+                                if (button) {
+                                    if (!button._defaultOnClick) {
+                                        var key = "Answer0" + i + "Code";
+                                        button._answerCode = that.binding.dataQuestionnaire[key];
+                                        button._defaultOnClick = button.onclick;
+                                        button.onclick = that.eventHandlers.clickPollingButton;
+                                    }
+                                }
+                                pollingAnswer = pollingAnswer.nextElementSibling;
+                            }
+                        }
+                    } else {
+                        setPollingPromise = WinJS.Promise.timeout(Math.min(setPollingFailedCount * 10, 5000)).then(function() {
+                            that.setPolling();
+                        });
+                    }
+                }
+                Log.ret(Log.l.info);
+            }
+            that.setPolling = setPolling;
+
             this.eventHandlers = {
                 showPresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
@@ -2548,6 +2517,51 @@ var __meteor_runtime_config__;
                     });
                     Log.ret(Log.l.info);
                 },
+                sessionEndRequested: function(param) {
+                    Log.call(Log.l.info, "Conference.Controller.", "param=" + (param ? param : ""));
+                    Log.ret(Log.l.info);
+                },
+                pollQuestionId: function(value) {
+                    var dataQuestionnaire = null;
+                    Log.call(Log.l.info, "Conference.Controller.", "param=" + (value ? value : ""));
+                    if (value &&
+                        pollQuestion &&
+                        pollQuestion.winControl) {
+                        if (typeof value === "string") {
+                            value = parseInt(value);
+                        }
+                        var questions = pollQuestion.winControl.data;
+                        if (questions) {
+                            var selectedQuestions = questions.filter(function(item) {
+                                return (item[Conference.questionnaireView.pkName] === value);
+                            });
+                            if (selectedQuestions && selectedQuestions[0]) {
+                                dataQuestionnaire = selectedQuestions[0];
+                            }
+                        }
+                    }
+                    if (dataQuestionnaire) {
+                        that.binding.dataQuestionnaire = dataQuestionnaire;
+                    } else {
+                        that.binding.dataQuestionnaire = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
+                    }
+                    setPollingFailedCount = 0;
+                    that.setPolling();
+                    Log.ret(Log.l.info);
+                },
+                clickPollingButton: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (event) {
+                        var button = event.currentTarget;
+                        if (button) {
+                            that.savePollingAnswer(button._answerCode);
+                            if (typeof button._defaultOnClick === "function") {
+                                button._defaultOnClick();
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.info);
+                },
                 clickChatMessageList: function (message) {
                     Log.call(Log.l.trace, "Conference.Controller.");
                     if (message && chatMenu && chatMenu.winControl) {
@@ -2586,6 +2600,76 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
+                clickCloseDesc: function (event) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (typeof videoListDefaults.closeDesc === "function") {
+                        videoListDefaults.closeDesc(event);
+                    }
+                    WinJS.Promise.as().then(function () {
+                        if (!adjustContentPositionsPromise) {
+                            adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
+                                that.adjustContentPositions();
+                            });
+                        }
+                        return WinJS.Promise.timeout(250);
+                    }).then(function () {
+                        var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc);
+                        if (restoreDescButton) {
+                            if (!videoListDefaults.restoreDesc) {
+                                videoListDefaults.restoreDesc = restoreDescButton.onclick;
+                            }
+                            restoreDescButton.onclick = that.eventHandlers.clickRestoreDesc;
+                        }
+                        that.sendResize(20);
+                    });
+                    Log.ret(Log.l.trace);
+                },
+                clickRestoreDesc: function (event) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (typeof videoListDefaults.restoreDesc === "function") {
+                        videoListDefaults.restoreDesc(event);
+                    }
+                    WinJS.Promise.as().then(function () {
+                        if (!adjustContentPositionsPromise) {
+                            adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
+                                that.adjustContentPositions();
+                            });
+                        }
+                        return WinJS.Promise.timeout(250);
+                    }).then(function () {
+                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
+                        if (closeDescButton) {
+                            if (!videoListDefaults.closeDesc) {
+                                videoListDefaults.closeDesc = closeDescButton.onclick;
+                            }
+                            closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
+                        }
+                        that.sendResize(20);
+                    });
+                    Log.ret(Log.l.trace);
+                },
+                clickToggleUserList: function (event) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (userListDefaults.userListObserver) {
+                        userListDefaults.userListObserver.disconnect();
+                    }
+                    var userList = fragmentElement.querySelector(".userList--11btR3");
+                    if (typeof userListDefaults.toggleUserList === "function") {
+                        userListDefaults.toggleUserList(event);
+                    }
+                    if (userListDefaults.onlyModerators && !userList) {
+                        filterModeratorsFailedCount = 0;
+                        filterModeratorsPromise = WinJS.Promise.timeout(0).then(function () {
+                            that.filterModerators();
+                        });
+                    }
+                    if (!adjustContentPositionsPromise) {
+                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                            that.adjustContentPositions();
+                        });
+                    }
+                    Log.ret(Log.l.trace);
+                },
                 changePollQuestion: function(event) {
                     var dataQuestionnaire = null;
                     Log.call(Log.l.info, "Conference.Controller.");
@@ -2600,7 +2684,7 @@ var __meteor_runtime_config__;
                             var questions = pollQuestion.winControl.data;
                             if (questions) {
                                 var selectedQuestions = questions.filter(function(item) {
-                                    return (item.FragebogenzeileVIEWID === value);
+                                    return (item[Conference.questionnaireView.pkName] === value);
                                 });
                                 if (selectedQuestions && selectedQuestions[0]) {
                                     dataQuestionnaire = selectedQuestions[0];
@@ -2623,7 +2707,7 @@ var __meteor_runtime_config__;
                                     var inputElement = inputElements[i];
                                     if (inputElement) {
                                         //inputElement.focus();
-                                        var key = "SS0" + (i + 1).toString();
+                                        var key = "Answer0" + (i + 1).toString() + "Text";
                                         var answerValue = that.binding.dataQuestionnaire[key];
                                         if (typeof answerValue === "string" && inputElement.maxLength > 0) {
                                             answerValue = answerValue.substr(0, inputElement.maxLength);
@@ -2894,20 +2978,51 @@ var __meteor_runtime_config__;
             that.submitCommandMessage = submitCommandMessage;
 
             that.allCommandInfos = {
-                showPresentation: { redundantList: ["hidePresentation", "showPresentation"] },
-                hidePresentation: { redundantList: ["hidePresentation", "showPresentation"] },
-                videoListDefault: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                videoListLeft: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                videoListRight: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                hideVideoList: { redundantList: ["hideVideoList", "showVideoList"] },
-                showVideoList: { redundantList: ["hideVideoList", "showVideoList"] },
-                presenterModeTiled: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                presenterModeFull: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                presenterModeSmall: { redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"] },
-                showNotification: { redundantList: null },
-                lockChatMessage:  { redundantList: null },
-                unlockChatMessage:  { redundantList: null },
-                sessionEndRequested: { redundantList: "sessionEndRequested" }
+                showPresentation: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"]
+                },
+                hidePresentation: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"]
+                },
+                videoListDefault: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                videoListLeft: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                videoListRight: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                hideVideoList: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"]
+                },
+                showVideoList: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"]
+                },
+                presenterModeTiled: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                presenterModeFull: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                presenterModeSmall: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                showNotification: {
+                    collection: "group-chat-msg", msg: "added", redundantList: null
+                },
+                lockChatMessage: {
+                    collection: "group-chat-msg", msg: "added", redundantList: null
+                },
+                unlockChatMessage: {
+                    collection: "group-chat-msg", msg: "added", redundantList: null
+                },
+                sessionEndRequested: {
+                    collection: "group-chat-msg", msg: "added", redundantList: "sessionEndRequested"
+                },
+                pollQuestionId: {
+                    collection: "polls", msg: "added", redundantList: "pollQuestionId"
+                }
             };
 
             var handleCommandWithParam = function(commandWithParam) {
@@ -2923,6 +3038,11 @@ var __meteor_runtime_config__;
                     Log.ret(Log.L.info, "unknown command=" + command);
                     return WinJS.Promise.as();
                 }
+                if (commandInfo.collection !== commandWithParam.collection ||
+                    commandInfo.msg !== commandWithParam.msg) {
+                    Log.ret(Log.l.trace, "command=" + command + " not supported in collection=" + commandWithParam.collection + " msg=" + commandWithParam.msg);
+                    return WinJS.Promise.as();
+                }
                 commandQueue = commandQueue.filter(function(item) {
                     return (!commandInfo.redundantList || commandInfo.redundantList.indexOf(item.command) < 0);
                 });
@@ -2932,6 +3052,7 @@ var __meteor_runtime_config__;
                     commandQueue = [];
                     AppBar.notifyModified = false;
                     commandsToHandle.forEach(function(queuedCommandWithParam) {
+                        var param;
                         var queuedCommand = queuedCommandWithParam.command;
                         var queuedParam = null;
                         if (queuedCommandWithParam.param) {
@@ -2940,20 +3061,26 @@ var __meteor_runtime_config__;
                         var queuedCommandInfo = that.allCommandInfos[queuedCommand];
                         if (typeof queuedCommandInfo.callback === "function") {
                             if (queuedParam) {
-                                var param = queuedParam
+                                param = queuedParam
                                     .replace(/&#32;&quot;&#32;/g, "")
                                     .replace(/ &quot; /g, "")
                                     .replace(/&quot;&quot;/g, "&quot;")
                                     .replace(/\\\\n/g, "\n")
                                     .replace(/&lt;br.\/&gt;/g, "\n");
-                                queuedCommandInfo.callback(param);
+                                queuedCommandInfo.callback(param, queuedMsg, queuedCollection);
                             } else {
                                 queuedCommandInfo.callback();
                             }
                         } else if (typeof that.eventHandlers[queuedCommand] === "function") {
                             Log.print(Log.l.info, "handle command=" + queuedCommand);
                             if (queuedParam) {
-                                that.eventHandlers[queuedCommand](queuedParam);
+                                param = queuedParam
+                                    .replace(/&#32;&quot;&#32;/g, "")
+                                    .replace(/ &quot; /g, "")
+                                    .replace(/&quot;&quot;/g, "&quot;")
+                                    .replace(/\\\\n/g, "\n")
+                                    .replace(/&lt;br.\/&gt;/g, "\n");
+                                that.eventHandlers[queuedCommand](param, queuedMsg, queuedCollection);
                             } else {
                                 that.eventHandlers[queuedCommand]();
                             }
@@ -3068,11 +3195,45 @@ var __meteor_runtime_config__;
                 return 0;
             }
 
-            var groupChatStart = "\"{\\\"msg\\\":\\\"added\\\",\\\"collection\\\":\\\"group-chat-msg\\\"";
-            var messageStart = "\\\"message\\\":\\\"";
-            var messageStop = "\\\"";
-            var timeStampStart = "\\\"timestamp\\\":";
-            Application.hookXhrOnReadyStateChange = function(res) {
+            var deleteMagicFromXhrResponse = function(res) {
+                var responseText = res && res.responseText;
+                if (typeof responseText === "string") {
+                    var responseReplaced = false;
+                    var newResponseText = "";
+                    var prevStopPos = 0;
+                    while (prevStopPos >= 0) {
+                        var posMagicStart = responseText.indexOf(magicStart, prevStopPos);
+                        if (posMagicStart >= prevStopPos) {
+                            var posMagicStop = responseText.indexOf(magicStop, posMagicStart + magicStart.length);
+                            if (posMagicStop >= posMagicStart + magicStart.length) {
+                                newResponseText += responseText.substr(prevStopPos, posMagicStart - prevStopPos);
+                                responseReplaced = true;
+                                prevStopPos = posMagicStop + magicStop.length;
+                            } else {
+                                if (responseReplaced) {
+                                    newResponseText += responseText.substr(prevStopPos);
+                                }
+                                prevStopPos = -1;
+                            }
+                        } else {
+                            if (responseReplaced) {
+                                newResponseText += responseText.substr(prevStopPos);
+                            }
+                            prevStopPos = -1;
+                        }
+                    }
+                    if (responseReplaced) {
+                        res.responseText = newResponseText;
+                    }
+                }
+            }
+
+            var msgQuote = "\\\"";
+            var fieldStop = msgQuote;
+            var parseXhrResponse = function(res, msg, collection, fieldStart) {
+                var msgStart = "\"{" + msgQuote + "msg" + msgQuote + ":" + msgQuote + msg + msgQuote + "," + msgQuote + "collection" + msgQuote + ":" + msgQuote + collection + msgQuote;
+                var msgTimestamp = "timestamp";
+                var timeStampStart = msgQuote + msgTimestamp + msgQuote + ":";
                 var now = Date.now();
                 //var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var responseText = res && res.responseText;
@@ -3082,26 +3243,26 @@ var __meteor_runtime_config__;
                     var prevStartPos = 0;
                     var prevStopPos = 0;
                     while (prevStartPos >= 0 && prevStartPos < responseText.length) {
-                        var posGroupChatStart = responseText.indexOf(groupChatStart, prevStartPos);
-                        if (posGroupChatStart >= 0 && (responseText.indexOf(magicStart, posGroupChatStart + groupChatStart.length) >= 0 ||
-                            textContainsEmoji(responseText, posGroupChatStart) === true)) {
-                            var posGroupChatStop = findEndOfStruct(responseText, posGroupChatStart);
-                            if (posGroupChatStop > posGroupChatStart + groupChatStart.length) {
-                                var posMessageStart = responseText.indexOf(messageStart, posGroupChatStart + groupChatStart.length);
-                                if (posMessageStart >= posGroupChatStart + groupChatStart.length &&
-                                    posMessageStart < posGroupChatStop) {
-                                    var messageReplaced = false;
-                                    var skipMessage = false;
-                                    var messageLength = responseText.indexOf(messageStop, posMessageStart + messageStart.length) - (posMessageStart + messageStart.length);
-                                    if (messageLength > 0) {
-                                        var message = responseText.substr(posMessageStart + messageStart.length, messageLength);
+                        var posMsgStart = responseText.indexOf(msgStart, prevStartPos);
+                        if (posMsgStart >= 0 && (responseText.indexOf(magicStart, posMsgStart + msgStart.length) >= 0 ||
+                            textContainsEmoji(responseText, posMsgStart) === true)) {
+                            var posMsgStop = findEndOfStruct(responseText, posMsgStart);
+                            if (posMsgStop > posMsgStart + msgStart.length) {
+                                var posFieldStart = responseText.indexOf(fieldStart, posMsgStart + msgStart.length);
+                                if (posFieldStart >= posMsgStart + msgStart.length &&
+                                    posFieldStart < posMsgStop) {
+                                    var fieldReplaced = false;
+                                    var skipField = false;
+                                    var fieldLength = responseText.indexOf(fieldStop, posFieldStart + fieldStart.length) - (posFieldStart + fieldStart.length);
+                                    if (fieldLength > 0) {
+                                        var message = responseText.substr(posFieldStart + fieldStart.length, fieldLength);
                                         var idxEmoji = floatingEmojisMessage.indexOf(message);
                                         if (idxEmoji >= 0) {
                                             if (res.readyState === 4 && res.status === 200) {
                                                 var timestamp = 0;
-                                                var posTimestampStart = responseText.indexOf(timeStampStart, posGroupChatStart + groupChatStart.length);
-                                                if (posTimestampStart > posGroupChatStart + groupChatStart.length &&
-                                                    posTimestampStart < posGroupChatStop) {
+                                                var posTimestampStart = responseText.indexOf(timeStampStart, posMsgStart + msgStart.length);
+                                                if (posTimestampStart > posMsgStart + msgStart.length &&
+                                                    posTimestampStart < posMsgStop) {
                                                     var posTimestampStop = responseText.indexOf(",", posTimestampStart + timeStampStart.length);
                                                     var timestampString = "0";
                                                     if (posTimestampStop > posTimestampStart + timeStampStart.length) {
@@ -3117,13 +3278,13 @@ var __meteor_runtime_config__;
                                                     that.handleFloatingEmoji(floatingEmojisSymbols[idxEmoji]);
                                                 }
                                             }
-                                            skipMessage = true;
+                                            skipField = true;
                                             responseReplaced = true;
                                         } else {
-                                            var prevMessageStartPos = 0;
-                                            while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
-                                                var posMagicStart = message.indexOf(magicStart, prevMessageStartPos);
-                                                if (posMagicStart >= prevMessageStartPos) {
+                                            var prevFieldStartPos = 0;
+                                            while (prevFieldStartPos >= 0 && prevFieldStartPos < message.length) {
+                                                var posMagicStart = message.indexOf(magicStart, prevFieldStartPos);
+                                                if (posMagicStart >= prevFieldStartPos) {
                                                     var posMagicStop = message.indexOf(magicStop, posMagicStart);
                                                     var command = "";
                                                     var commandLength = posMagicStop - (posMagicStart + magicStart.length);
@@ -3132,53 +3293,55 @@ var __meteor_runtime_config__;
                                                         var commandWithParam = getCommandWithParam(command);
                                                         if (commandWithParam) {
                                                             //if (pageControllerName === "eventController") {
-                                                                if (messageLength > magicStart.length + command.length + magicStop.length) {
-                                                                    if (!prevMessageStartPos) {
-                                                                        newResponseText += responseText.substr(prevStopPos, posMessageStart + messageStart.length - prevStopPos);
+                                                                if (fieldLength > magicStart.length + command.length + magicStop.length) {
+                                                                    if (!prevFieldStartPos) {
+                                                                        newResponseText += responseText.substr(prevStopPos, posFieldStart + fieldStart.length - prevStopPos);
                                                                     }
-                                                                    newResponseText += message.substr(prevMessageStartPos, posMagicStart - prevMessageStartPos);
-                                                                    messageReplaced = true;
-                                                                } else if (!prevMessageStartPos) {
-                                                                    skipMessage = true;
+                                                                    newResponseText += message.substr(prevFieldStartPos, posMagicStart - prevFieldStartPos);
+                                                                    fieldReplaced = true;
+                                                                } else if (!prevFieldStartPos) {
+                                                                    skipField = true;
                                                                 }
                                                                 responseReplaced = true;
                                                             //}
                                                             if (res.readyState === 4 && res.status === 200) {
                                                                 Log.print(Log.l.info, "received command=" + commandWithParam.command);
+                                                                commandWithParam.msg = msg;
+                                                                commandWithParam.collection = collection;
                                                                 that.handleCommandWithParam(commandWithParam);
                                                             }
                                                         }
                                                     } 
-                                                    prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
+                                                    prevFieldStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
                                                 } else {
-                                                    if (messageReplaced) {
-                                                        newResponseText += message.substr(prevMessageStartPos, posMagicStart - prevMessageStartPos);
+                                                    if (fieldReplaced) {
+                                                        newResponseText += message.substr(prevFieldStartPos, message.length - (prevFieldStartPos - (posFieldStart + fieldStart.length)));
                                                     }
-                                                    prevMessageStartPos = -1;
+                                                    prevFieldStartPos = -1;
                                                 }
                                             }
                                         }
                                     }
-                                    if (messageReplaced) {
-                                        newResponseText += responseText.substr(posMessageStart + messageStart.length + messageLength, posGroupChatStop -
-                                            (posMessageStart + messageStart.length + messageLength));
-                                    } else if (skipMessage) {
-                                        var nonSkippedMessages = responseText.substr(prevStopPos, posGroupChatStart - prevStopPos);
+                                    if (fieldReplaced) {
+                                        newResponseText += responseText.substr(posFieldStart + fieldStart.length + fieldLength, posMsgStop -
+                                            (posFieldStart + fieldStart.length + fieldLength));
+                                    } else if (skipField) {
+                                        var nonSkippedMessages = responseText.substr(prevStopPos, posMsgStart - prevStopPos);
                                         if (nonSkippedMessages.length > 0 && nonSkippedMessages[nonSkippedMessages.length - 1] === ",") {
                                             // dismiss trailing comma from prev. message 
                                             newResponseText += nonSkippedMessages.substr(0, nonSkippedMessages.length - 1);
                                         } else {
-                                            if (responseText[posGroupChatStop] === ",") {
+                                            if (responseText[posMsgStop] === ",") {
                                                 // dismiss leading comma from next message
-                                                posGroupChatStop++;
+                                                posMsgStop++;
                                             } 
                                             newResponseText += nonSkippedMessages;
                                         }
                                     }
                                 }
-                                prevStartPos = posGroupChatStop;
+                                prevStartPos = posMsgStop;
                                 if (responseReplaced) {
-                                    prevStopPos = posGroupChatStop;
+                                    prevStopPos = posMsgStop;
                                 }
                             } else {
                                 prevStartPos = -1;
@@ -3195,31 +3358,72 @@ var __meteor_runtime_config__;
                         res.responseText = newResponseText;
                     }
                 }
+            }
+
+            Application.hookXhrOnReadyStateChange = function(res) {
+                var collection = "group-chat-msg";
+                var msgField = "message";
+                var fieldStart = msgQuote + msgField + msgQuote + ":" + msgQuote;
+                parseXhrResponse(res, "added", collection, fieldStart);
+
+                collection = "polls";
+                msgField = "answers";
+                fieldStart = msgQuote + msgField + msgQuote + ":" + "[{" + msgQuote + "id" + msgQuote + ":0," + msgQuote + "key" + msgQuote + ":" + msgQuote;
+                parseXhrResponse(res, "added", collection, fieldStart);
+                
+                deleteMagicFromXhrResponse(res);
             };
-            if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
-                var sendGroupChatStart = "\"{\\\"msg\\\":\\\"method\\\",\\\"method\\\":\\\"sendGroupChatMsg\\\"";
-                Application.hookXhrSend = function(body) {
-                    if (typeof body === "string" && body.indexOf(magicStart) >= 0) {
-                        var bodyReplaced = false;
-                        var newBody = "";
-                        var prevStartPos = 0;
-                        var prevStopPos = 0;
-                        while (prevStartPos >= 0 && prevStartPos < body.length) {
-                            var posSendGroupChatStart = body.indexOf(sendGroupChatStart, prevStartPos);
-                            if (posSendGroupChatStart >= prevStartPos && body.indexOf(magicStart, posSendGroupChatStart + sendGroupChatStart.length) >= 0) {
-                                var posSendGroupChatStop = findEndOfStruct(body, posSendGroupChatStart);
-                                if (posSendGroupChatStop > posSendGroupChatStart + sendGroupChatStart.length) {
-                                    var posMessageStart = body.indexOf(messageStart, posSendGroupChatStart + sendGroupChatStart.length);
-                                    if (posMessageStart >= posSendGroupChatStart + sendGroupChatStart.length &&
-                                        posMessageStart < posSendGroupChatStop) {
-                                        var messageReplaced = false;
-                                        var messageLength = body.indexOf(messageStop, posMessageStart + messageStart.length) - (posMessageStart + messageStart.length);
-                                        if (messageLength > 0) {
-                                            var message = body.substr(posMessageStart + messageStart.length, messageLength);
-                                            var prevMessageStartPos = 0;
-                                            while (prevMessageStartPos >= 0 && prevMessageStartPos < message.length) {
-                                                var posMagicStart = message.indexOf(magicStart, prevMessageStartPos);
-                                                if (posMagicStart >= prevMessageStartPos) {
+            Application.hookXhrSend = function(body) {
+                var msgMethod;
+                var msgField;
+                var fieldStart;
+                if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                    msgMethod = "startPoll";
+                    msgField = "custom"; 
+                    fieldStart = "\\\"" + msgField + "\\\",";
+                } else {
+                    msgMethod = "sendGroupChatMsg";
+                    msgField = "message";
+                    fieldStart = "\\\"" + msgField + "\\\":\\\"";
+                }
+                var msgStart = "\"{" + msgQuote + "msg" + msgQuote + ":" + msgQuote + "method" + msgQuote + "," + msgQuote + "method" + msgQuote + ":" + msgQuote + msgMethod + msgQuote;
+                if (typeof body === "string") {
+                    var bodyReplaced = false;
+                    var newBody = "";
+                    var prevStartPos = 0;
+                    var prevStopPos = 0;
+                    while (prevStartPos >= 0 && prevStartPos < body.length) {
+                        var posMsgStart = body.indexOf(msgStart, prevStartPos);
+                        if (posMsgStart >= prevStartPos && ((msgMethod === "startPoll") || body.indexOf(magicStart, posMsgStart + msgStart.length) >= 0)) {
+                            var posMsgStop = findEndOfStruct(body, posMsgStart);
+                            if (posMsgStop > posMsgStart + msgStart.length) {
+                                var posFieldStart = body.indexOf(fieldStart, posMsgStart + msgStart.length);
+                                if (posFieldStart >= posMsgStart + msgStart.length &&
+                                    posFieldStart < posMsgStop) {
+                                    var fieldReplaced = false;
+                                    var fieldLength = 0;
+                                    if (msgMethod === "startPoll") {
+                                        var posFirstAnswer = body.indexOf("[" + msgQuote, posFieldStart + fieldStart.length);
+                                        if (posFirstAnswer >= posFieldStart + fieldStart.length) {
+                                            fieldLength = body.indexOf(fieldStop, posFirstAnswer + msgQuote.length + 1) - (posFirstAnswer + msgQuote.length + 1);
+                                            if (fieldLength > 0) {
+                                                newBody += body.substr(prevStopPos, posFirstAnswer + msgQuote.length + 1 - prevStopPos);
+                                                var questionId = that.binding.dataQuestionnaire[Conference.questionnaireView.pkName];
+                                                newBody += magicStart + "pollQuestionId(" + questionId + ")" + magicStop; 
+                                                newBody += body.substr(posFirstAnswer + msgQuote.length + 1, fieldLength);
+                                                fieldLength += posFirstAnswer + msgQuote.length + 1 - (posFieldStart + fieldStart.length);
+                                                fieldReplaced = true;
+                                                bodyReplaced = true;
+                                            }
+                                        }
+                                    } else {
+                                        fieldLength = body.indexOf(fieldStop, posFieldStart + fieldStart.length) - (posFieldStart + fieldStart.length);
+                                        if (fieldLength > 0) {
+                                            var message = body.substr(posFieldStart + fieldStart.length, fieldLength);
+                                            var prevFieldStartPos = 0;
+                                            while (prevFieldStartPos >= 0 && prevFieldStartPos < message.length) {
+                                                var posMagicStart = message.indexOf(magicStart, prevFieldStartPos);
+                                                if (posMagicStart >= prevFieldStartPos) {
                                                     var posMagicStop = message.indexOf(magicStop, posMagicStart);
                                                     var command = "";
                                                     var commandLength = posMagicStop - (posMagicStart + magicStart.length);
@@ -3227,49 +3431,47 @@ var __meteor_runtime_config__;
                                                         command = message.substr(posMagicStart + magicStart.length, commandLength);
                                                         var commandWithParam = getCommandWithParam(command);
                                                         if (commandWithParam) {
-                                                            if (!prevMessageStartPos) {
-                                                                newBody += body.substr(prevStopPos, posMessageStart + messageStart.length - prevStopPos);
+                                                            if (!prevFieldStartPos) {
+                                                                newBody += body.substr(prevStopPos, posFieldStart + fieldStart.length - prevStopPos);
                                                             }
-                                                            newBody += message.substr(prevMessageStartPos, posMagicStart - prevMessageStartPos) +
+                                                            newBody += message.substr(prevFieldStartPos, posMagicStart - prevFieldStartPos) +
                                                                 magicStartReplace + command + magicStopReplace;
-                                                            messageReplaced = true;
+                                                            fieldReplaced = true;
                                                             bodyReplaced = true;
                                                         }
                                                     } 
-                                                    prevMessageStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
+                                                    prevFieldStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
                                                 } else {
-                                                    if (messageReplaced) {
-                                                        newBody += message.substr(prevMessageStartPos, posMagicStart - prevMessageStartPos);
+                                                    if (fieldReplaced) {
+                                                        newBody += message.substr(prevFieldStartPos, posMagicStart - prevFieldStartPos);
                                                     }
-                                                    prevMessageStartPos = -1;
+                                                    prevFieldStartPos = -1;
                                                 }
                                             }
                                         }
-                                        if (messageReplaced) {
-                                            newBody += body.substr(posMessageStart + messageStart.length + messageLength, posSendGroupChatStop -
-                                                (posMessageStart + messageStart.length + messageLength));
-                                        }
                                     }
-                                    prevStartPos = posSendGroupChatStop;
-                                    if (bodyReplaced) {
-                                        prevStopPos = prevStartPos;
+                                    if (fieldReplaced) {
+                                        newBody += body.substr(posFieldStart + fieldStart.length + fieldLength, posMsgStop -
+                                            (posFieldStart + fieldStart.length + fieldLength));
                                     }
-                                } else {
-                                    prevStartPos = -1;
+                                }
+                                prevStartPos = posMsgStop;
+                                if (bodyReplaced) {
+                                    prevStopPos = prevStartPos;
                                 }
                             } else {
                                 prevStartPos = -1;
                             }
-                        }
-                        if (bodyReplaced) {
-                            newBody += body.substr(prevStopPos);
-                            return newBody;
+                        } else {
+                            prevStartPos = -1;
                         }
                     }
-                    return body;
+                    if (bodyReplaced) {
+                        newBody += body.substr(prevStopPos);
+                        return newBody;
+                    }
                 }
-            } else {
-                Application.hookXhrSend = null;
+                return body;
             }
 
             if (typeof navigator.mediaDevices === "object" &&
