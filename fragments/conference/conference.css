@@ -77,18 +77,13 @@
 .win-toggleswitch-pressed .win-toggleswitch-track {
     background-color: rgba(128,128,128,0.4);
 }
-#conferenceController .presenter-button-container {
-    display: none;
-    margin: 0 10px;
-    z-index: 9;
-}
 
 .recordingIndicator--Z1hMjfp {
     z-index: 11;
 }
 .recordingIndicator--Z1hMjfp > div {
     background-color: var(--btn-primary-bg);
-    box-shadow: var(--toolbar-box-shadow);
+    box-shadow: var(--box-shadow-popup);
     font-size: var(--font-size-small) !important;
     opacity: 0.8;
 }
@@ -122,25 +117,39 @@
     border-radius: 2em 2em;
 }
 
-.modSession #conferenceController .presenter-button-container > button.win-button {
+#conferenceController .presenter-button-container {
+    display: none;
+    margin: 0 10px;
+    z-index: 9;
+    padding: 0 10px 5px 0;
+    box-shadow: var(--toolbar-box-shadow);
+    border-radius: var(--border-radius);
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-color: var(--color-gray-lightest);
+    background-color: rgba(243, 246, 249, 0.8);
+}
+
+#conferenceController .presenter-button-container > button.win-button {
     z-index: 11;
-    margin: 0 5px 5px 0;
+    margin: 0 8px 5px 8px;
     background-color: var(--btn-primary-bg);
     border-color: transparent;
     width: 64px;
     height: 64px;
     min-width: 64px;
-    box-shadow: 0 2px 5px 0 black !important;
+    box-shadow: var(--box-shadow-button) !important;
     opacity: 0.8;
 }
-.modSession #conferenceController .presenter-button-container > button.win-button:hover,
-.modSession #conferenceController .presenter-button-container > button.win-button:active {
+#conferenceController .presenter-button-container > button.win-button:hover,
+#conferenceController .presenter-button-container > button.win-button:active {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
     color: var(--btn-primary-color) !important;
 }
 
-.modSession #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip {
+#conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip {
     top: 50px;
     left: -80px;
     min-height: 40px;
@@ -155,12 +164,12 @@
     border: none;
     padding: 0;
 }
-.modSession #conferenceController .presenter-button-container > button.win-button:hover .button-tip .win-tooltip,
-.modSession #conferenceController .presenter-button-container > button.win-button:active .button-tip .win-tooltip {
+#conferenceController .presenter-button-container > button.win-button:hover .button-tip .win-tooltip,
+#conferenceController .presenter-button-container > button.win-button:active .button-tip .win-tooltip {
     top: 64px;
     opacity: 1;
 }
-.modSession #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-arrow {
+#conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
     margin-left: calc(50% - 10px);
@@ -170,7 +179,7 @@
     position: absolute;
     top: 0;
 }
-.modSession #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-body {
+#conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 5px;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
@@ -179,6 +188,71 @@
     top: 4px;
 }
 
+#conferenceController .presenter-button-container > button.container-close-button {
+    color: var(--color-text);
+    width: 15px;
+    padding: 0;
+    text-align: center;
+    border: none !important;
+    background: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    top: -5px;
+    position: relative;
+    float: right;
+    opacity: 0.8
+}
+#conferenceController .presenter-button-container > button.container-close-button:hover {
+    opacity: 1;
+}
+
+#conferenceController .presenter-button-container .container-close-icon {
+    font-size: var(--btn-md-font-size);
+}
+#conferenceController .presenter-button-container > button.container-close-button .presenter-mode-image {
+    display: none !important;
+}
+
+#conferenceController .presenter-button-container.container-collapsed {
+    background: none;
+    box-shadow: none;
+    border: none;
+    margin-left: 485px;
+    width: 50px;
+    height: 50px;
+}
+#conferenceController .presenter-button-container.container-collapsed > button.win-button {
+    display: none;
+}
+#conferenceController .presenter-button-container.container-collapsed > button.container-close-button {
+    top: 0;
+    left: 5px;
+    border-radius: 50%;
+    background-color: var(--btn-primary-bg) !important;
+    box-shadow: var(--box-shadow-button) !important;
+    opacity: 0.8;
+    color: var(--btn-primary-color);
+    width: 34.6px;
+    height: 34.6px;
+}
+#conferenceController .presenter-button-container.container-collapsed > button.container-close-button .container-close-icon {
+    transform: rotate(90deg);
+    top: -20px;
+    font-size: 45%;
+}
+#conferenceController .presenter-button-container.container-collapsed > button.container-close-button .presenter-mode-image {
+    display: inline-block !important;
+    margin-top: 4px;
+}
+#conferenceController .presenter-button-container.container-collapsed > button.container-close-button .presenter-mode-image > svg {
+    width: 24px;
+    height: 24px;
+}
+
+#conferenceController .presenter-button-container.container-collapsed > button.container-close-button:hover,
+#conferenceController .presenter-button-container.container-collapsed > button.container-close-button:focus {
+    opacity: 1;
+}
 
 /* protect input, select, textarea */
 input[type=date], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], select, textarea {
@@ -186,7 +260,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* protect button */
-#conferenceController .presenter-button-container > button,
+#conferenceController .presenter-button-container > button.win-button,
 .portal--27FHYi button {
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
@@ -328,11 +402,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     z-index: 1;
 }
 
+#conference.mediaview .buttonWrapper--x8uow .button--Z2dosza,
 #conference.mediaview .wrapper--ZhSWmd .button--Z2dosza,
 #conference.mediaview .ghost--Z136aiN,
 #conference.mediaview .button--yKJ5d {
     background-color: var(--btn-primary-bg) !important;
-    box-shadow: 0 2px 5px 0 black !important;
+    box-shadow: var(--box-shadow-button) !important;
     opacity: 0.8;
 }
 
@@ -449,7 +524,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow:not([aria-disabled="true"]):hover {
     opacity: 1;
 }
-
 
 #conference.mediaview .audioBtn--1H6rCK:not([aria-disabled="true"]):hover span:first-child,
 #conference.mediaview .audioBtn--1H6rCK:not([aria-disabled="true"]):focus span:first-child,
@@ -720,7 +794,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     z-index: 10;
 }
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy > video:not(:fullscreen) {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2) !important;
+    box-shadow: var(--box-shadow-popup) !important;
 }
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 > div {
@@ -729,7 +803,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 .toolbarContainer--ZqATLX > div {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2) !important;
+    box-shadow: var(--box-shadow-popup) !important;
 }
 
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX) {
@@ -842,7 +916,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     line-height: 1;
     background-color: var(--color-off-white);
     font-family: var(--font-family-default) !important;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow-popup);
     transform: translate3d(0,0,0);
     transition-property: box-shadow,transform;
     transition-duration: 200ms;
@@ -854,7 +928,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH:hover,
 #conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH:focus {
     transform: translate3d(0,-2px,0);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: var(--box-shadow-popup-lifted);
     transition-property: box-shadow,transform;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
@@ -946,7 +1020,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 #conference.mediaview .presenter-mode-full:not(.video-overlay-is-empty) .video-overlay-left,
 #conference.mediaview .presenter-mode-full:not(.video-overlay-is-empty) .video-overlay-right {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2) !important;
+    box-shadow: var(--box-shadow-popup) !important;
     z-index: 10;
 }
 
@@ -1115,7 +1189,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     width: 42px;
     height: 42px;
     min-width: 42px;
-    box-shadow: 0 2px 5px 0 black !important;
+    box-shadow: var(--box-shadow-button) !important;
     opacity: 0.8;
     padding: 0;
     border: none;
@@ -1296,7 +1370,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 }
 
 .post-notification-popup, .notification-popup {
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 3px 10px 0 rgb(0 0 0 / 20%);
+    box-shadow: var(--box-shadow-popup);
     border-radius: var(--border-radius);
     border-color: var(--color-gray-lightest) !important;
     font-size: var(--font-size-base);
@@ -1401,14 +1475,14 @@ c
 }
 
 #conferenceController .dropdown--Z10dYoc .content--ZmitSl {
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 3px 10px 0 rgb(0 0 0 / 20%) !important;
+    box-shadow: var(--box-shadow-popup) !important;
 }
 
 #conferenceController .chat-menu-container {
     display: none
 }
 .chat-menu {
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 3px 10px 0 rgb(0 0 0 / 20%);
+    box-shadow: var(--box-shadow-popup);
     border-radius: var(--border-radius);
     border-width: 0;
     outline-color: var(--color-gray-lightest) !important;

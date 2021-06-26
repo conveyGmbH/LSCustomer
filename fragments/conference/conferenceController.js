@@ -2446,6 +2446,34 @@ var __meteor_runtime_config__;
                     that.setPresenterModeState("small");
                     Log.ret(Log.l.info);
                 },
+                togglePresenterButtonContainer: function () {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (presenterButtonContainer) {
+                        var containerCloseIcon = presenterButtonContainer.querySelector(".container-close-icon");
+                        if (WinJS.Utilities.hasClass(presenterButtonContainer, "container-collapsed")) {
+                            WinJS.Utilities.removeClass(presenterButtonContainer, "container-collapsed");
+                            if (containerCloseIcon) {
+                                if (WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-right_arrow")) {
+                                    WinJS.Utilities.removeClass(containerCloseIcon, "icon-bbb-right_arrow");
+                                }
+                                if (!WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-close")) {
+                                    WinJS.Utilities.addClass(containerCloseIcon, "icon-bbb-close");
+                                }
+                            }
+                        } else {
+                            WinJS.Utilities.addClass(presenterButtonContainer, "container-collapsed")
+                            if (containerCloseIcon) {
+                                if (WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-close")) {
+                                    WinJS.Utilities.removeClass(containerCloseIcon, "icon-bbb-close");
+                                }
+                                if (!WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-right_arrow")) {
+                                    WinJS.Utilities.addClass(containerCloseIcon, "icon-bbb-right_arrow");
+                                }
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.info);
+                },
                 clickPresenterMode: function (event) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     var command = event && event.currentTarget && event.currentTarget.id;

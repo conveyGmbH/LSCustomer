@@ -189,8 +189,13 @@
     --e-global-color-text: #2A2F3D;
     --e-global-color-accent: #C2D63E;
     --e-global-color-d4faeed: #F3FBFC;
+
+    --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
     */
     --font-family-default: 'Barlow';
+    --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    --box-shadow-button: none;
 }
 .body-content-bottom {
     visibility: hidden;
