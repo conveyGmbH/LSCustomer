@@ -2097,6 +2097,30 @@ var __meteor_runtime_config__;
             }
             that.setPresenterModeState = setPresenterModeState;
 
+            var addQuotesToParam = function(param) {
+                Log.call(Log.l.trace, "Conference.Controller.", "param=" + param);
+                var paramsWithQuotes = param
+                    .replace(regExprMagicStart, magicStartReplace)
+                    .replace(regExprMagicStop, magicStopReplace)
+                    .replace(/'/g, "''")
+                    .replace(/\n/g, "&lt;br /&gt;");
+                Log.ret(Log.l.trace, "paramsWithQuotes=" + paramsWithQuotes);
+                return paramsWithQuotes;
+            }
+
+            var removeQuotesFromParam = function(paramsWithQuotes) {
+                Log.call(Log.l.trace, "Conference.Controller.", "paramsWithQuotes=" + paramsWithQuotes);
+                var param = paramsWithQuotes
+                    .replace(/&apos;/g, "'")
+                    .replace(/&#39;/g, "'")
+                    .replace(/ ' /g, "")
+                    .replace(/''/g, "'")
+                    .replace(/\\\\n/g, "\n")
+                    .replace(/&lt;br.\/&gt;/g, "\n");
+                Log.ret(Log.l.trace, "param=" + param);
+                return param;
+            }
+
             var extractChatFromParamsWithQuotes = function (paramsWithQuotes) {
                 Log.call(Log.l.info, "Conference.Controller.", "paramsWithQuotes=" + paramsWithQuotes);
                 if (paramsWithQuotes) {
@@ -2110,12 +2134,7 @@ var __meteor_runtime_config__;
                     var startText = "&amp;text=";
                     var startChatTs = "&amp;chatTs=";
                     var startCommandTs = "&amp;commandTs=";
-                    var params = paramsWithQuotes
-                        .replace(/&#32;&quot;&#32;/g, "")
-                        .replace(/ &quot; /g, "")
-                        .replace(/&quot;&quot;/g, "&quot;")
-                        .replace(/\\\\n/g, "\n")
-                        .replace(/&lt;br.\/&gt;/g, "\n");
+                    var params = removeQuotesFromParam(paramsWithQuotes);
                     var posStart = params.indexOf(startName);
                     if (posStart < 0) {
                         Log.print(Log.l.info, "missing name in notification");
@@ -2194,17 +2213,10 @@ var __meteor_runtime_config__;
                     dataMessage.text &&
                     dataMessage.chatTs &&
                     dataMessage.commandTs) {
-                    var q = "&#32;&quot;&#32;";
-                    var name = q + that.binding.dataMessage.name
-                        .replace(regExprMagicStart, magicStartReplace)
-                        .replace(regExprMagicStop, magicStopReplace)
-                        .replace(/&quot;/g, "&quot;&quot;") + q;
+                    var q = " ' ";
+                    var name = q + addQuotesToParam(that.binding.dataMessage.name) + q;
                     var time = q + that.binding.dataMessage.time + q;
-                    var text = q + that.binding.dataMessage.text
-                        .replace(regExprMagicStart, magicStartReplace)
-                        .replace(regExprMagicStop, magicStopReplace)
-                        .replace(/\n/g, "&lt;br /&gt;")
-                        .replace(/&quot;/g, "&quot;&quot;") + q;
+                    var text = q + addQuotesToParam(that.binding.dataMessage.text) + q;
                     var chatTs = q + that.binding.dataMessage.chatTs + q;
                     var commandTs = q + that.binding.dataMessage.commandTs + q;
                     paramsWithQuotes = "name=" + name + "&amp;time=" + time + "&amp;text=" + text + "&amp;chatTs=" + chatTs + "&amp;commandTs=" + commandTs;
@@ -2565,12 +2577,7 @@ var __meteor_runtime_config__;
                 clickChatMessageList: function (message) {
                     Log.call(Log.l.trace, "Conference.Controller.");
                     if (message && chatMenu && chatMenu.winControl) {
-                        that.binding.dataMessage.commandTs = message.commandTs;
-                        that.binding.dataMessage.chatTs = message.chatTs;
-                        that.binding.dataMessage.time = message.time;
-                        that.binding.dataMessage.name = message.name;
-                        that.binding.dataMessage.text = message.text;
-                        that.binding.dataMessage.locked = !!message.locked;
+                        that.binding.dataMessage = copyByValue(message);
                         document.body.appendChild(chatMenu);
                         chatMenu.winControl.showAt(message.event);
                     }
@@ -2857,10 +2864,8 @@ var __meteor_runtime_config__;
                     return;
                 }
                 if (typeof param === "string") {
-                    var q = "&#32;&quot;&#32;";
-                    command = command + "(" + q + param
-                        .replace(/\n/g, "&lt;br /&gt;")
-                        .replace(/&quot;/g, "&quot;&quot;") + q + ")";
+                    var q = " ' ";
+                    command = command + "(" + q + addQuotesToParam(param) + q + ")";
                 }
                 that.submitCommandMessage(magicStart + command + magicStop);
                 Log.ret(Log.l.info);
@@ -3052,7 +3057,6 @@ var __meteor_runtime_config__;
                     commandQueue = [];
                     AppBar.notifyModified = false;
                     commandsToHandle.forEach(function(queuedCommandWithParam) {
-                        var param;
                         var queuedCommand = queuedCommandWithParam.command;
                         var queuedParam = null;
                         if (queuedCommandWithParam.param) {
@@ -3061,26 +3065,14 @@ var __meteor_runtime_config__;
                         var queuedCommandInfo = that.allCommandInfos[queuedCommand];
                         if (typeof queuedCommandInfo.callback === "function") {
                             if (queuedParam) {
-                                param = queuedParam
-                                    .replace(/&#32;&quot;&#32;/g, "")
-                                    .replace(/ &quot; /g, "")
-                                    .replace(/&quot;&quot;/g, "&quot;")
-                                    .replace(/\\\\n/g, "\n")
-                                    .replace(/&lt;br.\/&gt;/g, "\n");
-                                queuedCommandInfo.callback(param, queuedMsg, queuedCollection);
+                                queuedCommandInfo.callback(removeQuotesFromParam(queuedParam));
                             } else {
                                 queuedCommandInfo.callback();
                             }
                         } else if (typeof that.eventHandlers[queuedCommand] === "function") {
                             Log.print(Log.l.info, "handle command=" + queuedCommand);
                             if (queuedParam) {
-                                param = queuedParam
-                                    .replace(/&#32;&quot;&#32;/g, "")
-                                    .replace(/ &quot; /g, "")
-                                    .replace(/&quot;&quot;/g, "&quot;")
-                                    .replace(/\\\\n/g, "\n")
-                                    .replace(/&lt;br.\/&gt;/g, "\n");
-                                that.eventHandlers[queuedCommand](param, queuedMsg, queuedCollection);
+                                that.eventHandlers[queuedCommand](queuedParam);
                             } else {
                                 that.eventHandlers[queuedCommand]();
                             }
