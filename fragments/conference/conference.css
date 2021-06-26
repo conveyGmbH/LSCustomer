@@ -83,7 +83,7 @@
 }
 .recordingIndicator--Z1hMjfp > div {
     background-color: var(--btn-primary-bg);
-    box-shadow: var(--box-shadow-popup);
+    /*box-shadow: var(--box-shadow-popup);*/
     font-size: var(--font-size-small) !important;
     opacity: 0.8;
 }
@@ -237,12 +237,16 @@
 }
 #conferenceController .presenter-button-container.container-collapsed > button.container-close-button .container-close-icon {
     transform: rotate(90deg);
-    top: -20px;
-    font-size: 45%;
+    position: absolute;
+    top: 25px;
+    font-size: 46%;
+    left: 13px;
 }
 #conferenceController .presenter-button-container.container-collapsed > button.container-close-button .presenter-mode-image {
     display: inline-block !important;
-    margin-top: 4px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
 }
 #conferenceController .presenter-button-container.container-collapsed > button.container-close-button .presenter-mode-image > svg {
     width: 24px;
