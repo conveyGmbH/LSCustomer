@@ -1434,12 +1434,18 @@ c
     border-bottom-right-radius: var(--border-radius) !important;
     border-bottom-left-radius: var(--border-radius) !important;
 }
+.chat-menu button .win-toggleicon,
+.chat-menu button .win-flyouticon,
 .chat-menu button .win-label {
     font-size: 90% !important;
     color: var(--color-gray-dark) !important;
-    font-family: var(--font-family-default) !important;
-    font-weight: 300 !important;
+    font-weight: 400 !important;
 }
+.chat-menu button .win-label {
+    font-family: var(--font-family-default) !important;
+}
+.chat-menu button:disabled .win-toggleicon,
+.chat-menu button:disabled .win-flyouticon,
 .chat-menu button:disabled .win-label {
     color: var(--color-gray-lighter) !important;
 }
@@ -1447,13 +1453,26 @@ c
 .chat-menu button:active:not(:disabled) {
     background-color: var(--btn-primary-bg) !important;
 }
+.chat-menu button:hover:not(:disabled) .win-toggleicon,
+.chat-menu button:active:not(:disabled) .win-toggleicon,
+.chat-menu button:hover:not(:disabled) .win-flyouticon,
+.chat-menu button:active:not(:disabled) .win-flyouticon,
 .chat-menu button:hover:not(:disabled) .win-label,
 .chat-menu button:active:not(:disabled) .win-label {
     color: var(--btn-primary-color) !important;
 }
 
-/* end of conference message box */
+.win-menu-containsicon button.win-command .win-menucommand-liner .win-toggleicon {
+    display: inline-block;
+}
+.win-menu-containsicon button.win-command.win-command-icon .win-menucommand-liner .win-toggleicon {
+    visibility: visible;
+}
+.win-menu-containsicon button.win-command .win-menucommand-liner .win-toggleicon:before {
+    content: attr(data-before);
+}
 
+/* end of conference message box */
 #conferenceController .parent--ZQqoCg .modal--MalHB .text--10B0Vs,
 #conferenceController .parent--ZQqoCg .modal--MalHB .button--Z2dosza .md--Q7ug4 .primary--1IbqAO .button--Z1j2w3P {
     display: none;

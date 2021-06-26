@@ -3478,6 +3478,33 @@ var __meteor_runtime_config__;
                 WinJS.Utilities.addClass(conference, "hide-shared-notes");
             }
 
+            var addMenuCommandIcons = function(menu) {
+                if (menu &&
+                    !WinJS.Utilities.hasClass(menu, "win-menu-containstogglecommand")) {
+                    var menuCommandLiners = menu.querySelectorAll(".win-menucommand-liner");
+                    if (menuCommandLiners) {
+                        for (var i = 0; i < menuCommandLiners.length; i++) {
+                            var menuCommandLiner = menuCommandLiners[i];
+                            if (menuCommandLiner && menuCommandLiner.parentElement &&
+                                menuCommandLiner.parentElement.winControl &&
+                                menuCommandLiner.parentElement.winControl.icon &&
+                                menuCommandLiner.firstElementChild &&
+                                WinJS.Utilities.hasClass(menuCommandLiner.firstElementChild, "win-toggleicon")) {
+                                var icon = WinJS.UI.AppBarIcon[menuCommandLiner.parentElement.winControl.icon];
+                                if (icon) {
+                                    menuCommandLiner.firstElementChild.setAttribute("data-before", icon);
+                                    if (!WinJS.Utilities.hasClass(menu, "win-menu-containsicon")) {
+                                        WinJS.Utilities.addClass(menu, "win-menu-containsicon");
+                                    }
+                                    WinJS.Utilities.addClass(menuCommandLiner.parentElement, "win-command-icon");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            that.addMenuCommandIcons = addMenuCommandIcons;
+
             if (chatMenu) {
                 that.addRemovableEventListener(chatMenu, "afterhide", function () {
                     var chatMenuContainer = fragmentElement.querySelector(".chat-menu-container");
@@ -3499,6 +3526,7 @@ var __meteor_runtime_config__;
                 AppBar.notifyModified = false;
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 that.initEmojiToolbar();
+                that.addMenuCommandIcons(chatMenu);
                 return that.loadData();
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
