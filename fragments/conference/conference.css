@@ -207,7 +207,11 @@
     top: -5px;
     position: relative;
     float: right;
-    opacity: 0.8
+    opacity: 0.8;
+    border-radius: 0 !important;
+    font-size: 21px !important;
+    line-height: inherit !important;
+    font-weight: normal !important;
 }
 #conferenceController .presenter-button-container > button.container-close-button:hover {
     opacity: 1;
@@ -250,7 +254,7 @@
 #conferenceController .presenter-button-container.container-collapsed > button.container-close-button {
     top: 0;
     left: 5px;
-    border-radius: 50%;
+    border-radius: 50% !important;
     background-color: var(--btn-primary-bg) !important;
     box-shadow: var(--box-shadow-button) !important;
     opacity: 0.8;
