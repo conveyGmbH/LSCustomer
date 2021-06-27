@@ -254,9 +254,14 @@
 }
 
 #conferenceController .presenter-button-container.container-collapsed > button.container-close-button:hover,
-#conferenceController .presenter-button-container.container-collapsed > button.container-close-button:focus {
+#conferenceController .presenter-button-container.container-collapsed > button.container-close-button:active {
     opacity: 1;
 }
+
+    #conferenceController .presenter-button-container.container-collapsed > button.container-close-button:focus:not(:hover):not(:active) {
+        outline: var(--outline-focus) !important;
+    }
+
 
 /* protect input, select, textarea */
 input[type=date], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], select, textarea {
@@ -439,7 +444,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 
-
 /*#conference.mediaview .default--Z19H5du:focus,
 #conference.mediaview .buttonWrapper--x8uow:not([aria-disabled="true"]):focus .default--Z19H5du {
     color: var(--btn-default-color) !important;
@@ -447,6 +451,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-clip: padding-box;
     box-shadow: 0 0 0 var(--border-size) var(--btn-primary-border);
 }*/
+#conference.mediaview .buttonWrapper--x8uow:not([aria-disabled="true"]) .default--Z19H5du:focus:not(:hover):not(:active),
+#conference.mediaview .buttonWrapper--x8uow:not([aria-disabled="true"]):focus:not(:hover):not(:active) .default--Z19H5du,
+#conference.mediaview .buttonWrapper--x8uow:focus:not(:hover):not(:active) .default--Z19H5du:not([aria-disabled="true"]),
+#conference.mediaview .buttonWrapper--x8uow:not([aria-disabled="true"]) .primary--1IbqAO:focus:not(:hover):not(:active),
+#conference.mediaview .buttonWrapper--x8uow:not([aria-disabled="true"]):focus:not(:hover):not(:active) .primary--1IbqAO,
+#conference.mediaview .buttonWrapper--x8uow:focus:not(:hover):not(:active) .primary--1IbqAO:not([aria-disabled="true"]) {
+    outline: var(--outline-focus);
+}
+
 #conference.mediaview .default--Z19H5du:not([aria-disabled="true"]):hover,
 #conference.mediaview .buttonWrapper--x8uow:not([aria-disabled="true"]):hover .default--Z19H5du
 #conference.mediaview .buttonWrapper--x8uow:hover .default--Z19H5du:not([aria-disabled="true"]) {
@@ -627,8 +640,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 #conference.mediaview .media--Z1xJW08 {
     max-width: calc(100% - 36px);
-    max-height: calc(100% - 90px);
-    margin: 30px 10px 60px 10px !important;
+    max-height: calc(100% - 100px);
+    margin: 40px 10px 60px 10px !important;
 }
 .event #conference.mediaview .media--Z1xJW08 {
     max-height: calc(100% - 55px);
@@ -688,7 +701,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .navbar--Z2lHYbG {
     position: absolute !important;
     width: calc(100% - 16px);
-    padding-top: 0;
+    padding-top: 1px;
 }
 
 .modSession #conference.mediaview .navbar--Z2lHYbG .arrowRight--Zbqp1D,
@@ -873,7 +886,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     box-shadow: none !important;
 }
 
-#conference.mediaview .button--Z1ops0C, .button--Z1ops0C:active, .button--Z1ops0C:hover, .button--Z1ops0C:focus {
+#conference.mediaview .button--Z1ops0C,
+#conference.mediaview .button--Z1ops0C:active,
+#conference.mediaview .button--Z1ops0C:hover,
+#conference.mediaview .button--Z1ops0C:focus {
     box-shadow: none !important;
 }
 
