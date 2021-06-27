@@ -258,9 +258,9 @@
     opacity: 1;
 }
 
-    #conferenceController .presenter-button-container.container-collapsed > button.container-close-button:focus:not(:hover):not(:active) {
-        outline: var(--outline-focus) !important;
-    }
+#conferenceController .presenter-button-container.container-collapsed > button.container-close-button:focus:not(:hover):not(:active) {
+    outline: var(--outline-focus) !important;
+}
 
 
 /* protect input, select, textarea */
@@ -281,7 +281,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .portal--27FHYi .buttonWrapper--x8uow {
     background: none !important;
     padding: 0 !important;
+    outline: none !important;
 }
+#conference.mediaview .buttonWrapper--x8uow:focus {
+    outline: var(--outline-focus) !important;
+}
+
+
 #conference.mediaview .circle--Z2c8umk {
     --btn-sm-padding-x: calc(var(--sm-padding-x) / 2);
     --btn-md-padding-x: calc(var(--md-padding-x) / 2);
@@ -419,8 +425,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     box-shadow: var(--box-shadow-button) !important;
     opacity: 0.8;
 }
-
-
 /* Toolbar Buttons */
 #conference.mediaview .toolbarWrapper--1qMMEo .buttonWrapper--2kvywT:first-child > .toolbarButton--Zak4uG {
     border-top-left-radius: var(--toolbar-button-border-radius) !important;
@@ -457,7 +461,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .buttonWrapper--x8uow:not([aria-disabled="true"]) .primary--1IbqAO:focus:not(:hover):not(:active),
 #conference.mediaview .buttonWrapper--x8uow:not([aria-disabled="true"]):focus:not(:hover):not(:active) .primary--1IbqAO,
 #conference.mediaview .buttonWrapper--x8uow:focus:not(:hover):not(:active) .primary--1IbqAO:not([aria-disabled="true"]) {
-    outline: var(--outline-focus);
+    outline: none !important;
 }
 
 #conference.mediaview .default--Z19H5du:not([aria-disabled="true"]):hover,
@@ -535,7 +539,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 
 /* buttons in bottom actionsbar area */
-#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow {
+#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow[aria-disabled="true"],
+#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow[aria-disabled="true"] {
+    opacity: 0.65;
+}
+#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow:not([aria-disabled="true"]),
+#conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow:not([aria-disabled="true"]) {
     opacity: 0.8;
 }
 #conference.mediaview .actionsbar--Z1mcyA0 .buttonWrapper--x8uow:not([aria-disabled="true"]):hover {
@@ -591,6 +600,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .userList--Z2q1D0p {
     color: var(--user-list-text) !important;
 }
+
 
 #conference.mediaview .wrapper--Z20hQYP > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) {
     border-top: 1px solid var(--color-gray-lightest);

@@ -145,8 +145,7 @@ var __meteor_runtime_config__;
             var showUserListPromise = null;
             var adjustContentPositionsPromise = null;
             var checkForInactiveVideoPromise = null;
-            var filterModeratorsPromise = null;
-            var observeToggleUserListBtnPromise = null;
+            var filterUserListPromise = null;
             var observeChatMessageListPromise = null;
             var observePollPromise = null;
             var submitCommandMessagePromise = null;
@@ -154,7 +153,7 @@ var __meteor_runtime_config__;
             var hideNotificationPromise = null;
             var setPollingPromise = null;
 
-            var filterModeratorsFailedCount = 0;
+            var filterUserListFailedCount = 0;
             var showUserListFailedCount = 0;
             var adjustContentPositionsFailedCount = 0;
             var setPollingFailedCount = 0;
@@ -190,13 +189,9 @@ var __meteor_runtime_config__;
                     checkForInactiveVideoPromise.cancel();
                     checkForInactiveVideoPromise = null;
                 }
-                if (filterModeratorsPromise) {
-                    filterModeratorsPromise.cancel();
-                    filterModeratorsPromise = null;
-                }
-                if (observeToggleUserListBtnPromise) {
-                    observeToggleUserListBtnPromise.cancel();
-                    observeToggleUserListBtnPromise = null;
+                if (filterUserListPromise) {
+                    filterUserListPromise.cancel();
+                    filterUserListPromise = null;
                 }
                 if (observeChatMessageListPromise) {
                     observeChatMessageListPromise.cancel();
@@ -641,11 +636,11 @@ var __meteor_runtime_config__;
             }
             that.sendResize = sendResize;
 
-            var filterModerators = function (noRetry) {
+            var filterUserList = function (noRetry) {
                 Log.call(Log.l.trace, "Conference.Controller.");
-                if (filterModeratorsPromise) {
-                    filterModeratorsPromise.cancel();
-                    filterModeratorsPromise = null;
+                if (filterUserListPromise) {
+                    filterUserListPromise.cancel();
+                    filterUserListPromise = null;
                 }
                 if (!that.binding.dataConference || !that.binding.dataConference.URL) {
                     Log.ret(Log.l.trace, "no conference URL!");
@@ -653,32 +648,44 @@ var __meteor_runtime_config__;
                 }
                 var userList = fragmentElement.querySelector(".userList--11btR3");
                 if (userList) {
+                    if (userListDefaults.onlyModerators) {
+                        if (!WinJS.Utilities.hasClass(userList, "only-moderators")) {
+                            WinJS.Utilities.addClass(userList, "only-moderators");
+                        }
+                    } else {
+                        if (WinJS.Utilities.hasClass(userList, "only-moderators")) {
+                            WinJS.Utilities.removeClass(userList, "only-moderators");
+                        }
+                    }
                     var moderatorCount = 0;
                     var userListColumn = userList.querySelector(".userListColumn--6vKQL");
                     if (userListColumn) {
                         var participantsList = userListColumn.querySelectorAll(".participantsList--1MvMwF");
                         if (participantsList) {
-                            for (var i = participantsList.length - 1; i >= 0; i--) {
-                                var participantsListEntry = participantsList[i];
-                                if (participantsListEntry && !participantsListEntry.querySelector(".moderator--24bqCT")) {
-                                    try {
-                                        while (participantsListEntry.firstElementChild) {
-                                            participantsListEntry.removeChild(participantsListEntry.firstElementChild);
+                            if (userListDefaults.onlyModerators) {
+                                for (var i = participantsList.length - 1; i >= 0; i--) {
+                                    var participantsListEntry = participantsList[i];
+                                    if (participantsListEntry && !participantsListEntry.querySelector(".moderator--24bqCT")) {
+                                        try {
+                                            while (participantsListEntry.firstElementChild) {
+                                                participantsListEntry.removeChild(participantsListEntry.firstElementChild);
+                                            }
+                                        } catch (ex) {
+                                            Log.print(Log.l.trace, "participantsList[" + i + "] is not a child entry of userList");
                                         }
-                                    } catch (ex) {
-                                        Log.print(Log.l.trace, "participantsList[" + i + "] is not a child entry of userList");
+                                    } else {
+                                        moderatorCount++;
                                     }
-                                } else {
-                                    moderatorCount++;
+                                }
+                                var h2 = userListColumn.querySelector("h2");
+                                if (h2) {
+                                    h2.textContent = getResourceText("event.moderators") + " (" + moderatorCount + ")";
                                 }
                             }
                         }
-                        var h2 = userListColumn.querySelector("h2");
-                        if (h2) {
-                            h2.textContent = getResourceText("event.moderators") + " (" + moderatorCount + ")";
-                        }
                         var participantsListParent = userListColumn.querySelector(".list--Z2pj65C");
-                        if (participantsListParent && participantsListParent.firstElementChild) {
+                        if (participantsListParent && participantsListParent.firstElementChild &&
+                            !userListDefaults.userListObserver) {
                             userListDefaults.userListObserver = new MutationObserver(function (mutationList, observer) {
                                 WinJS.Promise.timeout(0).then(function () {
                                     if (mutationList) {
@@ -686,7 +693,7 @@ var __meteor_runtime_config__;
                                             var mutation = mutationList[i];
                                             if (mutation && mutation.type === "childList" &&
                                                 mutation.addedNodes && mutation.addedNodes.length > 0) {
-                                                that.filterModerators(true);
+                                                that.filterUserList(true);
                                                 break;
                                             }
                                         }
@@ -701,47 +708,15 @@ var __meteor_runtime_config__;
                         }
                     }
                 } else if (!noRetry) {
-                    filterModeratorsFailedCount++;
-                    Log.print(Log.l.trace, "not yet created - try later again! filterModeratorsFailedCount=" + filterModeratorsFailedCount);
-                    filterModeratorsPromise = WinJS.Promise.timeout(Math.min(filterModeratorsFailedCount * 10, 5000)).then(function () {
-                        that.filterModerators();
+                    filterUserListFailedCount++;
+                    Log.print(Log.l.trace, "not yet created - try later again! filterUserListFailedCount=" + filterUserListFailedCount);
+                    filterUserListPromise = WinJS.Promise.timeout(Math.min(filterUserListFailedCount * 10, 5000)).then(function () {
+                        that.filterUserList();
                     });
                 }
                 Log.ret(Log.l.trace);
             }
-            that.filterModerators = filterModerators;
-
-            var observeToggleUserListBtn = function () {
-                Log.call(Log.l.trace, "Conference.Controller.");
-                if (observeToggleUserListBtnPromise) {
-                    observeToggleUserListBtnPromise.cancel();
-                    observeToggleUserListBtnPromise = null;
-                }
-                var btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
-                if (btnToggleUserList) {
-                    if (!userListDefaults.toggleBtnObserver) {
-                        userListDefaults.toggleBtnObserver = new MutationObserver(function (mutationList, observer) {
-                            userListDefaults.toggleBtnObserver.disconnect();
-                            WinJS.Promise.timeout(250).then(function () {
-                                that.observeToggleUserListBtn();
-                            });
-                        });
-                    }
-                    if (userListDefaults.toggleBtnObserver) {
-                        userListDefaults.toggleBtnObserver.observe(btnToggleUserList.parentNode, {
-                            childList: true
-                        });
-                    }
-                    userListDefaults.toggleUserList = btnToggleUserList.onclick;
-                    btnToggleUserList.onclick = that.eventHandlers.clickToggleUserList;
-                } else {
-                    observeToggleUserListBtnPromise = WinJS.Promise.timeout(250).then(function () {
-                        that.observeToggleUserListBtn();
-                    });
-                }
-                Log.ret(Log.l.trace);
-            }
-            that.observeToggleUserListBtn = observeToggleUserListBtn;
+            that.filterUserList = filterUserList;
 
             var showUserList = function (show, onlyModerators) {
                 var ret = null;
@@ -766,16 +741,15 @@ var __meteor_runtime_config__;
                 }
                 var btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
                 if (btnToggleUserList) {
-                    that.observeToggleUserListBtn();
                     var userList = fragmentElement.querySelector(".userList--11btR3");
                     if (userList) {
                         ret = true;
                         if (!show) {
                             btnToggleUserList.click();
                         } else if (onlyModerators) {
-                            filterModeratorsFailedCount = 0;
-                            filterModeratorsPromise = WinJS.Promise.timeout(0).then(function () {
-                                that.filterModerators();
+                            filterUserListFailedCount = 0;
+                            filterUserListPromise = WinJS.Promise.timeout(0).then(function () {
+                                that.filterUserList();
                             });
                         }
                     } else {
@@ -910,21 +884,30 @@ var __meteor_runtime_config__;
                 var i;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (addedNodes && addedNodes.length > 0) {
+                    var panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
                     for (i = 0; i < addedNodes.length; i++) {
                         var addedNode = addedNodes[i];
                         if (addedNode && addedNode.firstElementChild) {
                             if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "userList--11btR3")) {
                                 Log.print(Log.l.trace, "userList panel opened" );
-                            }
-                            if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "chat--Z1w8gP7")) {
-                                Log.print(Log.l.trace, "chat panel opened" );
-                                if (!observeChatMessageListPromise) {
-                                    observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
-                                        that.observeChatMessageList();
-                                    });
+                                if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                    if (!filterUserListPromise) {
+                                        filterUserListFailedCount = 0;
+                                        filterUserListPromise = WinJS.Promise.timeout(0).then(function () {
+                                            that.filterUserList();
+                                        });
+                                    }
                                 }
-                            }
-                            if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "poll--Z1w6wQt")) {
+                            } else if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "chat--Z1w8gP7")) {
+                                Log.print(Log.l.trace, "chat panel opened" );
+                                if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
+                                    if (!observeChatMessageListPromise) {
+                                        observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
+                                            that.observeChatMessageList();
+                                        });
+                                    }
+                                }
+                            } else if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "poll--Z1w6wQt")) {
                                 Log.print(Log.l.trace, "poll panel opened" );
                                 that.createQuestionSelection();
                             }
@@ -944,11 +927,21 @@ var __meteor_runtime_config__;
                         if (removedNode && removedNode.firstElementChild) {
                             if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "userList--11btR3")) {
                                 Log.print(Log.l.trace, "userList panel closed" );
-                            }
-                            if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "chat--Z1w8gP7")) {
+                                if (userListDefaults.userListObserver) {
+                                    userListDefaults.userListObserver.disconnect();
+                                    userListDefaults.userListObserver = null;
+                                }
+                                if (filterUserListPromise) {
+                                    filterUserListPromise.cancel();
+                                    filterUserListPromise = null;
+                                }
+                            } else if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "chat--Z1w8gP7")) {
                                 Log.print(Log.l.trace, "chat panel closed" );
-                            }
-                            if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "poll--Z1w6wQt")) {
+                                if (observeChatMessageListPromise) {
+                                    observeChatMessageListPromise.cancel();
+                                    observeChatMessageListPromise = null;
+                                }
+                            } else if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "poll--Z1w6wQt")) {
                                 Log.print(Log.l.trace, "poll panel closed" );
                                 that.removeQuestionSelection();
                             }
@@ -1164,18 +1157,8 @@ var __meteor_runtime_config__;
                     } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-small")) {
                         presenterModeSmallIsSet = true;
                     }
-                    if (WinJS.Utilities.hasClass(videoListItem, "selfie-video")) {
-                        var userName = videoListItem.querySelector(".userName--ZsKYfV, .dropdownTrigger--Z1Fp5dg");
-                        if (userName) {
-                            var userNameText = userName.textContent;
-                            if (typeof userNameText === "string") {
-                                var myLabel = " (" + getResourceText("label.me") + ")";
-                                if (userNameText.indexOf(myLabel) < 0) {
-                                    userName.textContent = userNameText + myLabel;
-                                }
-                            }
-                        }
-                    } else if (deviceList && deviceList.length > 0) {
+                    if (!WinJS.Utilities.hasClass(videoListItem, "selfie-video") &&
+                        deviceList && deviceList.length > 0) {
                         var mediaStream = video.srcObject;
                         if (mediaStream && typeof mediaStream.getVideoTracks === "function") {
                             var videoTrack = mediaStream.getVideoTracks() ? mediaStream.getVideoTracks()[0] : null;
@@ -1188,6 +1171,16 @@ var __meteor_runtime_config__;
                                         break;
                                     }
                                 }
+                            }
+                        }
+                    }
+                    if (WinJS.Utilities.hasClass(videoListItem, "selfie-video")) {
+                        var userName = videoListItem.querySelector(".userName--ZsKYfV, .dropdownTrigger--Z1Fp5dg");
+                        if (userName) {
+                            if (!userName.firstElementChild) {
+                                var iLabel = document.createElement("i");
+                                iLabel.innerHTML = "&nbsp;(" + getResourceText("label.you") + ")";
+                                userName.appendChild(iLabel);
                             }
                         }
                     }
@@ -2685,18 +2678,8 @@ var __meteor_runtime_config__;
                 },
                 clickToggleUserList: function (event) {
                     Log.call(Log.l.trace, "Conference.Controller.");
-                    if (userListDefaults.userListObserver) {
-                        userListDefaults.userListObserver.disconnect();
-                    }
-                    var userList = fragmentElement.querySelector(".userList--11btR3");
                     if (typeof userListDefaults.toggleUserList === "function") {
                         userListDefaults.toggleUserList(event);
-                    }
-                    if (userListDefaults.onlyModerators && !userList) {
-                        filterModeratorsFailedCount = 0;
-                        filterModeratorsPromise = WinJS.Promise.timeout(0).then(function () {
-                            that.filterModerators();
-                        });
                     }
                     if (!adjustContentPositionsPromise) {
                         adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {

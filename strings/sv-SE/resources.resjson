@@ -8,6 +8,7 @@
     "label.on"	            : "On",
     "label.off"	            : "Off",
     "label.me"              : "Me",
+    "label.you"             : "You",
 
     "tooltip.home"          : "Back to the overview page",
 

@@ -8,6 +8,7 @@
     "label.on"	            : "On",
     "label.off"	            : "Off",
     "label.me"              : "Io",
+    "label.you"             : "Voi",
 
     "tooltip.home"          : "Torna alla pagina riassuntiva",
     "tooltip.fullscreen"    : "Mostra a schermo intero",

@@ -9,6 +9,7 @@
     "label.on"	            : "An",
     "label.off"	            : "Aus",
 	"label.me"              : "Ich",
+    "label.you"             : "Sie",
 
     "tooltip.home"          : "Zurück zur Übersichtseite",
     "tooltip.fullscreen"    : "Bildschirmfüllend anzeigen",
