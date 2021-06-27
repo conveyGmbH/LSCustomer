@@ -685,7 +685,8 @@ var __meteor_runtime_config__;
                                                             userListDefaults.selfColor = style.backgroundColor;
                                                             if (userListDefaults.selfColor && userListDefaults.selfColor.substr(0, 4) === "rgb(") {
                                                                 rgbColor = Colors.rgbStr2rgb(userListDefaults.selfColor);
-                                                                userListDefaults.selfChatColor = "rgba(" + rgbColor.r + "," + rgbColor.g + "," + rgbColor.b + ", 0.2";
+                                                                userListDefaults.selfChatColor = "rgba(" + rgbColor.r + ", " + rgbColor.g + ", " + rgbColor.b + ", 0.2) !important";
+                                                                Colors.changeCSS(".from-myself .messages--Z2vq9Jh p", "background-color", userListDefaults.selfChatColor);
                                                             }
                                                         }
                                                     }
@@ -730,7 +731,8 @@ var __meteor_runtime_config__;
                                                         userListDefaults.selfColor = style.backgroundColor;
                                                         if (userListDefaults.selfColor && userListDefaults.selfColor.substr(0, 4) === "rgb(") {
                                                             rgbColor = Colors.rgbStr2rgb(userListDefaults.selfColor);
-                                                            userListDefaults.selfChatColor = "rgba(" + rgbColor.r + "," + rgbColor.g + "," + rgbColor.b + ", 0.2";
+                                                            userListDefaults.selfChatColor = "rgba(" + rgbColor.r + ", " + rgbColor.g + ", " + rgbColor.b + ", 0.2) !important";
+                                                            Colors.changeCSS(".from-myself .messages--Z2vq9Jh p", "background-color", userListDefaults.selfChatColor);
                                                         }
                                                     }
                                                 }
@@ -1021,7 +1023,7 @@ var __meteor_runtime_config__;
                                     if (!WinJS.Utilities.hasClass(item, "from-myself")) {
                                         WinJS.Utilities.addClass(item, "from-myself");
                                     }
-                                    if (userListDefaults.selfChatColor) {
+                                    /*if (userListDefaults.selfChatColor) {
                                         var chatMessageParagraphs = item.querySelectorAll(".messages--Z2vq9Jh > p");
                                         if (chatMessageParagraphs) {
                                             for (var j = 0; j < chatMessageParagraphs.length; j++) {
@@ -1031,7 +1033,7 @@ var __meteor_runtime_config__;
                                                 }
                                             }
                                         }
-                                    }
+                                    }*/
                                 }
                             }
                             var messageElements = null;
