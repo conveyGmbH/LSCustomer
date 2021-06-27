@@ -633,9 +633,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 #conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI) {
     min-width: 180px !important;
+    max-width: 480px !important;
 }
 #conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI) > section {
     min-width: 180px !important;
+    max-width: 480px !important;
 }
 #conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX),
 #conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX) *,
@@ -1188,6 +1190,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     margin: var(--line-height-computed) 0 !important;
 }
 
+#conference.mediaview .messageList--hsNac {
+    padding-right: var(--sm-padding-x);
+}
+
 #conference.mediaview .messageList--hsNac .content--Z2nhld9 {
     margin-top: -2px;
 }
@@ -1216,6 +1222,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: 5px;
 }
 
+
 .modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb:hover,
 .modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb:active {
     background-color: var(--list-item-bg-hover);
@@ -1225,14 +1232,56 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb * {
     pointer-events: none;
 }
-#conference.mediaview .messageList--hsNac .wrapper--Z1BLczb .messages--Z2vq9Jh {
-    padding: 0 var(--sm-padding-x) var(--sm-padding-y) var(--sm-padding-x);
-    border-radius: 0 10px 10px 10px;
-    background-color: var(--user-list-bg);
-    width: fit-content !important;
-    min-width: 30px !important;
-    max-width: calc(100% - 50px) !important;
+#conference.mediaview .messageList--hsNac .item--ZDfG6l {
+    margin-bottom: 0 !important;
 }
+#conference.mediaview .messageList--hsNac .item--ZDfG6l .messages--Z2vq9Jh {
+    padding: 0;
+    width: fit-content !important;
+    min-width: calc(100% - 80px) !important;
+    max-width: calc(100% - 80px) !important;
+    width: calc(100% - 80px) !important;
+    display: grid;
+    justify-items: left;
+}
+#conference.mediaview .messageList--hsNac .item--ZDfG6l .messages--Z2vq9Jh > p {
+    border-radius: 0 10px 10px 0;
+    background-color: var(--user-list-bg);
+    padding: var(--sm-padding-x);
+    margin-block-start: 2px;
+}
+
+#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .logout--21XEjn,
+#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .name--ZDf6TQ {
+    display: none;
+}
+
+#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .messages--Z2vq9Jh {
+    margin-left: 80px;
+    justify-items: right;
+}
+
+#conference.mediaview .messageList--hsNac .item--ZDfG6l .messages--Z2vq9Jh > p:last-child {
+    border-bottom-left-radius: 10px;
+}
+
+#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .messages--Z2vq9Jh > p {
+    border-radius: 10px 0 0 10px;
+}
+#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .messages--Z2vq9Jh > p:first-child {
+    border-top-right-radius: 10px;
+}
+
+#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .meta--ZDfdOI {
+    justify-content: flex-end;
+}
+#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .time--ZDehNy {
+    flex-basis: auto;
+}
+#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .avatarWrapper--1HtY4z {
+    display: none;
+}
+
 
 #conference.mediaview .messageList--hsNac .chat-message-locked .message--Z2n2nXu {
     font-style: italic;

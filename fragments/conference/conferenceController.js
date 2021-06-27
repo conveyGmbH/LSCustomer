@@ -90,7 +90,9 @@ var __meteor_runtime_config__;
                 toggleBtnObserver: null,
                 toggleUserList: null,
                 panelWrapperObserver: null,
-                pollContentObserver: null
+                pollContentObserver: null,
+                selfLabels: ["(Sie)", "(You)"],
+                selfName: null
             };
 
             var emojiToolbarPositionObserver = null;
@@ -662,24 +664,80 @@ var __meteor_runtime_config__;
                     if (userListColumn) {
                         var participantsList = userListColumn.querySelectorAll(".participantsList--1MvMwF");
                         if (participantsList) {
+                            var i = 0, participantsListEntry = null, userNameMainSelfLabel = null, userName = null, avatar = null, style = null, rgbColor = null;
                             if (userListDefaults.onlyModerators) {
-                                for (var i = participantsList.length - 1; i >= 0; i--) {
-                                    var participantsListEntry = participantsList[i];
-                                    if (participantsListEntry && !participantsListEntry.querySelector(".moderator--24bqCT")) {
-                                        try {
-                                            while (participantsListEntry.firstElementChild) {
-                                                participantsListEntry.removeChild(participantsListEntry.firstElementChild);
+                                for (i = participantsList.length - 1; i >= 0; i--) {
+                                    participantsListEntry = participantsList[i];
+                                    if (participantsListEntry) {
+                                        var userIsMyself = false;
+                                        if (!userListDefaults.selfName) {
+                                            userNameMainSelfLabel = participantsListEntry.querySelector(".userNameMain--2fo2zM > i");
+                                            if (userNameMainSelfLabel && typeof userNameMainSelfLabel.textContent === "string" &&
+                                                userListDefaults.selfLabels.indexOf(userNameMainSelfLabel.textContent) >= 0 &&
+                                                userNameMainSelfLabel.previousElementSibling) {
+                                                userName = userNameMainSelfLabel.previousElementSibling.textContent;
+                                                if (typeof userName === "string") {
+                                                    userListDefaults.selfName = userName.replace(/&nbsp;/g, " ").trim();
+                                                    avatar = participantsListEntry.querySelector(".avatar--Z2lyL8K");
+                                                    if (avatar) {
+                                                        style = window.getComputedStyle(avatar);
+                                                        if (style) {
+                                                            userListDefaults.selfColor = style.backgroundColor;
+                                                            if (userListDefaults.selfColor && userListDefaults.selfColor.substr(0, 4) === "rgb(") {
+                                                                rgbColor = Colors.rgbStr2rgb(userListDefaults.selfColor);
+                                                                userListDefaults.selfChatColor = "rgba(" + rgbColor.r + "," + rgbColor.g + "," + rgbColor.b + ", 0.2";
+                                                            }
+                                                        }
+                                                    }
+                                                    userIsMyself = true;
+                                                }
                                             }
-                                        } catch (ex) {
-                                            Log.print(Log.l.trace, "participantsList[" + i + "] is not a child entry of userList");
                                         }
-                                    } else {
-                                        moderatorCount++;
+                                        if (!participantsListEntry.querySelector(".moderator--24bqCT")) {
+                                            if (!userIsMyself) {
+                                                try {
+                                                    while (participantsListEntry.firstElementChild) {
+                                                        participantsListEntry.removeChild(participantsListEntry.firstElementChild);
+                                                    }
+                                                } catch (ex) {
+                                                    Log.print(Log.l.trace, "participantsList[" + i + "] is not a child entry of userList");
+                                                }
+                                            }
+                                        } else {
+                                            moderatorCount++;
+                                        }
                                     }
                                 }
                                 var h2 = userListColumn.querySelector("h2");
                                 if (h2) {
                                     h2.textContent = getResourceText("event.moderators") + " (" + moderatorCount + ")";
+                                }
+                            } else if (!userListDefaults.selfName) {
+                                for (i = 0; i < participantsList.length; i++ ) {
+                                    participantsListEntry = participantsList[i];
+                                    if (participantsListEntry) {
+                                        userNameMainSelfLabel = participantsListEntry.querySelector(".userNameMain--2fo2zM > i");
+                                        if (userNameMainSelfLabel && typeof userNameMainSelfLabel.textContent === "string" &&
+                                            userListDefaults.selfLabels.indexOf(userNameMainSelfLabel.textContent) >= 0 &&
+                                            userNameMainSelfLabel.previousElementSibling) {
+                                            userName = userNameMainSelfLabel.previousElementSibling.textContent;
+                                            if (typeof userName === "string") {
+                                                userListDefaults.selfName = userName.replace(/&nbsp;/g, " ").trim();
+                                                avatar = participantsListEntry.querySelector(".avatar--Z2lyL8K");
+                                                if (avatar) {
+                                                    style = window.getComputedStyle(avatar);
+                                                    if (style) {
+                                                        userListDefaults.selfColor = style.backgroundColor;
+                                                        if (userListDefaults.selfColor && userListDefaults.selfColor.substr(0, 4) === "rgb(") {
+                                                            rgbColor = Colors.rgbStr2rgb(userListDefaults.selfColor);
+                                                            userListDefaults.selfChatColor = "rgba(" + rgbColor.r + "," + rgbColor.g + "," + rgbColor.b + ", 0.2";
+                                                        }
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -746,11 +804,6 @@ var __meteor_runtime_config__;
                         ret = true;
                         if (!show) {
                             btnToggleUserList.click();
-                        } else if (onlyModerators) {
-                            filterUserListFailedCount = 0;
-                            filterUserListPromise = WinJS.Promise.timeout(0).then(function () {
-                                that.filterUserList();
-                            });
                         }
                     } else {
                         ret = false;
@@ -961,6 +1014,26 @@ var __meteor_runtime_config__;
                     while (counter < elementCount && item) {
                         if (item.parentElement === messageList &&
                             WinJS.Utilities.hasClass(item, "item--ZDfG6l")) {
+                            var nameElement = null;
+                            if (userListDefaults.selfName) {
+                                nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
+                                if (nameElement && nameElement.textContent === userListDefaults.selfName) {
+                                    if (!WinJS.Utilities.hasClass(item, "from-myself")) {
+                                        WinJS.Utilities.addClass(item, "from-myself");
+                                    }
+                                    if (userListDefaults.selfChatColor) {
+                                        var chatMessageParagraphs = item.querySelectorAll(".messages--Z2vq9Jh > p");
+                                        if (chatMessageParagraphs) {
+                                            for (var j = 0; j < chatMessageParagraphs.length; j++) {
+                                                var chatMessageParagraph = chatMessageParagraphs[j];
+                                                if (chatMessageParagraph && chatMessageParagraph.style) {
+                                                    chatMessageParagraph.style.backgroundColor = userListDefaults.selfChatColor;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             var messageElements = null;
                             var isLocked = false;
                             var timeElement = item.querySelector(".meta--ZDfdOI .time--ZDehNy");
@@ -968,7 +1041,9 @@ var __meteor_runtime_config__;
                                 var date = new Date(timeElement.dateTime);
                                 var chatTs = date.getTime();
                                 if (lockedChatMessages[chatTs]) {
-                                    var nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
+                                    if (!nameElement) {
+                                        nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
+                                    }
                                     if (nameElement) {
                                         var message = {
                                             name: nameElement.textContent,
