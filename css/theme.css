@@ -191,12 +191,13 @@
     --e-global-color-d4faeed: #F3FBFC;
 
     --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
+    --outline-focus: 1px solid var(--color-gray-lighter)
     */
     --font-family-default: 'Barlow';
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
-    --outline-focus: 1px solid var(--color-gray-lighter)
+    --outline-focus: none;
 }
 .body-content-bottom {
     visibility: hidden;
