@@ -120,27 +120,34 @@
 #conferenceController .presenter-button-container {
     display: none;
     margin: 0 10px;
-    z-index: 9;
-    padding: 0 10px 5px 0;
+    z-index: 12;
+    padding: 1px 10px 0 0;
     box-shadow: var(--toolbar-box-shadow);
     border-radius: var(--border-radius);
-    border-top: none;
+    border-top: none !important;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-color: var(--color-gray-lightest);
     background-color: rgba(243, 246, 249, 0.8);
+    margin-top: -1px;
 }
 
 #conferenceController .presenter-button-container > button.win-button {
     z-index: 11;
-    margin: 0 8px 5px 8px;
+    margin: 0 5px 5px 5px;
     background-color: var(--btn-primary-bg);
     border-color: transparent;
     width: 64px;
-    height: 64px;
+    height: 48px;
     min-width: 64px;
-    box-shadow: var(--box-shadow-button) !important;
+    box-shadow: none !important;
     opacity: 0.8;
+    font-size: var(--btn-sm-font-size) !important;
+    padding: 0 !important;
+    border-radius: var(--border-radius) !important;
+    line-height: 1 !important;
+    font-weight: var(--btn-font-weight) !important;
+    float: left;
 }
 #conferenceController .presenter-button-container > button.win-button:hover,
 #conferenceController .presenter-button-container > button.win-button:active {
@@ -177,7 +184,7 @@
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
     position: absolute;
-    top: 0;
+    top: -10px;
 }
 #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 5px;
@@ -185,7 +192,7 @@
     border-color: var(--e-global-color-text, #2A2F3D);
     padding: 4px 7px 6px;
     position: absolute;
-    top: 4px;
+    top: -6px;
 }
 
 #conferenceController .presenter-button-container > button.container-close-button {
@@ -213,14 +220,30 @@
     display: none !important;
 }
 
+.view-size-medium-small #conferenceController .presenter-button-container {
+    margin-left: 0;
+    min-height: 107px;
+    max-width: 250px;
+}
+.view-size-medium-small #conferenceController .presenter-button-container > button.container-close-button {
+    margin-top: -55px;
+}
+
 #conferenceController .presenter-button-container.container-collapsed {
     background: none;
     box-shadow: none;
     border: none;
-    margin-left: 485px;
+    margin-left: 455px;
     width: 50px;
     height: 50px;
 }
+.view-size-medium-small #conferenceController .presenter-button-container.container-collapsed {
+    margin-left: 215px;
+}
+.view-size-medium-small #conferenceController .presenter-button-container.container-collapsed > button.container-close-button {
+    margin-top: 0;
+}
+
 #conferenceController .presenter-button-container.container-collapsed > button.win-button {
     display: none;
 }
@@ -269,7 +292,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* protect button */
-#conferenceController .presenter-button-container > button.win-button,
 .portal--27FHYi button {
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
