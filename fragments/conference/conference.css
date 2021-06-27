@@ -627,10 +627,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--user-list-text) !important;
 }
 
-
 #conference.mediaview .wrapper--Z20hQYP > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) {
     border-top: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
+}
+#conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI) {
+    min-width: 180px !important;
+}
+#conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI) > section {
+    min-width: 180px !important;
 }
 #conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX),
 #conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX) *,
@@ -1190,9 +1195,19 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .messageList--hsNac .meta--ZDfdOI {
     line-height: 1.33 !important;
 }
+#conference.mediaview .messageList--hsNac .offline--ZfDX9N {
+    display: none !important;
+}
+#conference.mediaview .messageList--hsNac .logout--21XEjn {
+    font-style: normal !important;
+}
 
 #conference.mediaview .messageList--hsNac .message--Z2n2nXu {
     font-family: var(--font-family-default), color-emoji !important;
+    width: fit-content !important;
+    min-width: 40px !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb {
@@ -1208,6 +1223,14 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 .modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb * {
     pointer-events: none;
+}
+#conference.mediaview .messageList--hsNac .wrapper--Z1BLczb .messages--Z2vq9Jh {
+    padding: 0 var(--sm-padding-x) var(--sm-padding-y) var(--sm-padding-x);
+    border-radius: 0 10px 10px 10px;
+    background-color: var(--user-list-bg);
+    width: fit-content !important;
+    min-width: 30px !important;
+    max-width: calc(100% - 50px) !important;
 }
 
 #conference.mediaview .messageList--hsNac .chat-message-locked .message--Z2n2nXu {
