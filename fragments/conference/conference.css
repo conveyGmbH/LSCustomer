@@ -1213,6 +1213,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb {
     margin: 0;
     padding: 4px;
+    border-radius: 5px;
 }
 
 .modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb:hover,
