@@ -965,9 +965,28 @@ var __meteor_runtime_config__;
                             } else if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "poll--Z1w6wQt")) {
                                 Log.print(Log.l.trace, "poll panel opened" );
                                 that.createQuestionSelection();
+                            } else {
+                                Log.print(Log.l.trace, "other panel opened");
                             }
                         }
                     }
+                    WinJS.Promise.as().then(function () {
+                        if (!adjustContentPositionsPromise) {
+                            adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
+                                that.adjustContentPositions();
+                            });
+                        }
+                        return WinJS.Promise.timeout(250);
+                    }).then(function () {
+                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
+                        if (closeDescButton) {
+                            if (!videoListDefaults.closeDesc) {
+                                videoListDefaults.closeDesc = closeDescButton.onclick;
+                            }
+                            closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
+                        }
+                        that.sendResize(20);
+                    });
                 }
                 Log.ret(Log.l.trace);
             }
@@ -981,7 +1000,7 @@ var __meteor_runtime_config__;
                         var removedNode = removedNodes[i];
                         if (removedNode && removedNode.firstElementChild) {
                             if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "userList--11btR3")) {
-                                Log.print(Log.l.trace, "userList panel closed" );
+                                Log.print(Log.l.trace, "userList panel closed");
                                 if (userListDefaults.userListObserver) {
                                     userListDefaults.userListObserver.disconnect();
                                     userListDefaults.userListObserver = null;
@@ -991,17 +1010,37 @@ var __meteor_runtime_config__;
                                     filterUserListPromise = null;
                                 }
                             } else if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "chat--Z1w8gP7")) {
-                                Log.print(Log.l.trace, "chat panel closed" );
+                                Log.print(Log.l.trace, "chat panel closed");
                                 if (observeChatMessageListPromise) {
                                     observeChatMessageListPromise.cancel();
                                     observeChatMessageListPromise = null;
                                 }
                             } else if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "poll--Z1w6wQt")) {
-                                Log.print(Log.l.trace, "poll panel closed" );
+                                Log.print(Log.l.trace, "poll panel closed");
                                 that.removeQuestionSelection();
+                            } else {
+                                Log.print(Log.l.trace, "other panel closed");
+
                             }
                         }
                     }
+                    WinJS.Promise.as().then(function () {
+                        if (!adjustContentPositionsPromise) {
+                            adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
+                                that.adjustContentPositions();
+                            });
+                        }
+                        return WinJS.Promise.timeout(250);
+                    }).then(function () {
+                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
+                        if (closeDescButton) {
+                            if (!videoListDefaults.closeDesc) {
+                                videoListDefaults.closeDesc = closeDescButton.onclick;
+                            }
+                            closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
+                        }
+                        that.sendResize(20);
+                    });
                 }
                 Log.ret(Log.l.trace);
             }
@@ -2718,23 +2757,6 @@ var __meteor_runtime_config__;
                     if (typeof videoListDefaults.closeDesc === "function") {
                         videoListDefaults.closeDesc(event);
                     }
-                    WinJS.Promise.as().then(function () {
-                        if (!adjustContentPositionsPromise) {
-                            adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
-                                that.adjustContentPositions();
-                            });
-                        }
-                        return WinJS.Promise.timeout(250);
-                    }).then(function () {
-                        var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc);
-                        if (restoreDescButton) {
-                            if (!videoListDefaults.restoreDesc) {
-                                videoListDefaults.restoreDesc = restoreDescButton.onclick;
-                            }
-                            restoreDescButton.onclick = that.eventHandlers.clickRestoreDesc;
-                        }
-                        that.sendResize(20);
-                    });
                     Log.ret(Log.l.trace);
                 },
                 clickRestoreDesc: function (event) {
@@ -2742,34 +2764,12 @@ var __meteor_runtime_config__;
                     if (typeof videoListDefaults.restoreDesc === "function") {
                         videoListDefaults.restoreDesc(event);
                     }
-                    WinJS.Promise.as().then(function () {
-                        if (!adjustContentPositionsPromise) {
-                            adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
-                                that.adjustContentPositions();
-                            });
-                        }
-                        return WinJS.Promise.timeout(250);
-                    }).then(function () {
-                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
-                        if (closeDescButton) {
-                            if (!videoListDefaults.closeDesc) {
-                                videoListDefaults.closeDesc = closeDescButton.onclick;
-                            }
-                            closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
-                        }
-                        that.sendResize(20);
-                    });
                     Log.ret(Log.l.trace);
                 },
                 clickToggleUserList: function (event) {
                     Log.call(Log.l.trace, "Conference.Controller.");
                     if (typeof userListDefaults.toggleUserList === "function") {
                         userListDefaults.toggleUserList(event);
-                    }
-                    if (!adjustContentPositionsPromise) {
-                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                            that.adjustContentPositions();
-                        });
                     }
                     Log.ret(Log.l.trace);
                 },
