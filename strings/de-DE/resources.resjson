@@ -37,8 +37,9 @@
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 
     "register.email"		: "E-Mail *",
+	"register.salutation"   : "Anrede *",
     "register.firstName"     : "Vorname",
-    "register.name"          : "Nachname",
+    "register.name"          : "Nachname *",
     "register.position"      : "Position",
     "register.formOf"        : "Anrede",
     "register.company"       : "Firmenname",

@@ -36,8 +36,9 @@
     "conference.waitMessage": "Divertiti con la tua conferenza online oggi",
 
     "register.email"        : "Email *",
+    "register.salutation"   : "Anrede *",
     "register.firstName"    : "First name",
-    "register.name"         : "Cognome",
+    "register.name"         : "Cognome *",
     "register.position"     : "Position",
     "register.formOf"       : "Saluto",
     "register.company"      : "nome azienda",
