@@ -1330,29 +1330,6 @@ var __meteor_runtime_config__;
                             return device.kind === "videoinput";
                         });
                     }
-                    var panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
-                    if (panelWrapper) {
-                        if (!userListDefaults.panelWrapperObserver) {
-                            userListDefaults.panelWrapperObserver = new MutationObserver(function (mutationList, observer) {
-                                for (var i = 0; i < mutationList.length; i++) {
-                                    var mutation = mutationList[i];
-                                    if (mutation && mutation.type === "childList") {
-                                        if (mutation.addedNodes && mutation.addedNodes.length > 0) {
-                                            Log.print(Log.l.trace, "panelWrapper children added!");
-                                            that.handlePanelsOpened(mutation.addedNodes);
-                                        }
-                                        if (mutation.removedNodes && mutation.removedNodes.length > 0) {
-                                            Log.print(Log.l.trace, "panelWrapper children removed!");
-                                            that.handlePanelsClosed(mutation.removedNodes);
-                                        }
-                                    }
-                                }
-                            });
-                            userListDefaults.panelWrapperObserver.observe(panelWrapper, {
-                                childList: true
-                            });
-                        }
-                    }
                     var videoPLayerOpened = false;
                     var screenShareOpened = false;
                     var presentationOpened = false;
@@ -1480,229 +1457,164 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
-                    if (mediaContainer) {
-                        if (!videoListDefaults.mediaContainerObserver) {
-                            videoListDefaults.mediaContainerObserver = new MutationObserver(function (mutationList, observer) {
-                                Log.print(Log.l.trace, "mediaContainer childList changed!");
-                                if (!adjustContentPositionsPromise) {
-                                    adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                        that.adjustContentPositions();
-                                    });
-                                }
-                            });
-                            videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
-                                childList: true
-                            });
-                        }
-                        var content = mediaContainer.querySelector(".content--Z2gO9GE");
-                        if (!videoListDefaults.contentObserver) {
-                            videoListDefaults.contentObserver = new MutationObserver(function (mutationList, observer) {
-                                Log.print(Log.l.trace, "content childList changed!");
-                                if (!adjustContentPositionsPromise) {
-                                    adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                        that.adjustContentPositions();
-                                    });
-                                }
-                            });
-                            videoListDefaults.contentObserver.observe(content, {
-                                childList: true
-                            });
-                        }
-                        var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
-                        if (overlayElement) {
-                            var overlayIsHidden = WinJS.Utilities.hasClass(overlayElement, "hideOverlay--Z13uLxg");
-                            var videoList = mediaContainer.querySelector(".videoList--1OC49P");
-                            if (videoList && videoList.style && overlayElement.style) {
-                                if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
-                                    if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
-                                        actionsBarRight = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .right--DUFDc");
-                                        if (actionsBarRight && actionsBarRight.lastElementChild !== showVideoListToggleContainer) {
-                                            actionsBarRight.appendChild(showVideoListToggleContainer);
-                                            showVideoListToggleContainer.style.display = "inline-block";
+                    var panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
+                    if (panelWrapper) {
+                        if (!userListDefaults.panelWrapperObserver) {
+                            userListDefaults.panelWrapperObserver = new MutationObserver(function (mutationList, observer) {
+                                for (var i = 0; i < mutationList.length; i++) {
+                                    var mutation = mutationList[i];
+                                    if (mutation && mutation.type === "childList") {
+                                        if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+                                            Log.print(Log.l.trace, "panelWrapper children added!");
+                                            that.handlePanelsOpened(mutation.addedNodes);
+                                        }
+                                        if (mutation.removedNodes && mutation.removedNodes.length > 0) {
+                                            Log.print(Log.l.trace, "panelWrapper children removed!");
+                                            that.handlePanelsClosed(mutation.removedNodes);
                                         }
                                     }
                                 }
-                                if (!videoListDefaults.videoListObserver) {
-                                    videoListDefaults.videoListObserver = new MutationObserver(function (mutationList, observer) {
-                                        mutationList.forEach(function (mutation) {
-                                            switch (mutation.type) {
-                                                case "attributes":
-                                                    Log.print(Log.l.trace, "videoList attributes changed!");
-                                                    if (!checkForInactiveVideoPromise) {
-                                                        checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
-                                                            that.checkForInactiveVideo();
-                                                        });
-                                                    }
-                                                    break;
-                                                case "childList":
-                                                    Log.print(Log.l.trace, "videoList childList changed!");
-                                                    if (!adjustContentPositionsPromise) {
-                                                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                                            that.adjustContentPositions();
-                                                        });
-                                                    }
-                                                    break;
-                                            }
+                            });
+                            userListDefaults.panelWrapperObserver.observe(panelWrapper, {
+                                childList: true
+                            });
+                        }
+                        var mediaContainer = panelWrapper.querySelector(".container--ZmRztk");
+                        if (mediaContainer) {
+                            if (!videoListDefaults.mediaContainerObserver) {
+                                videoListDefaults.mediaContainerObserver = new MutationObserver(function (mutationList, observer) {
+                                    Log.print(Log.l.trace, "mediaContainer childList changed!");
+                                    if (!adjustContentPositionsPromise) {
+                                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                            that.adjustContentPositions();
                                         });
-                                    });
-                                    videoListDefaults.videoListObserver.observe(videoList, {
-                                        childList: true,
-                                        attributeFilter: ["class"],
-                                        subtree: true
-                                    });
-                                }
-                                var numVideos;
-                                if (videoListDefaults.hideInactive || videoListDefaults.hideMuted) {
-                                    numVideos = videoListDefaults.activeVideoCount;
-                                } else {
-                                    numVideos = videoList.childElementCount;
-                                }
-                                if (numVideos > 0) {
-                                    if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
-                                        WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-empty");
                                     }
-                                } else {
-                                    if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
-                                        WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-empty");
+                                });
+                                videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
+                                    childList: true
+                                });
+                            }
+                            var content = mediaContainer.querySelector(".content--Z2gO9GE");
+                            if (!videoListDefaults.contentObserver) {
+                                videoListDefaults.contentObserver = new MutationObserver(function (mutationList, observer) {
+                                    Log.print(Log.l.trace, "content childList changed!");
+                                    if (!adjustContentPositionsPromise) {
+                                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                            that.adjustContentPositions();
+                                        });
                                     }
-                                }
-                                var videoListItem = videoList.firstElementChild;
-                                if (!content ||
-                                    direction === videoListDefaults.default ||
-                                    WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
-                                    !(videoPLayerOpened || screenShareOpened || presentationOpened && !overlayIsHidden)) {
-                                    if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
-                                        WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
-                                    }
-                                    if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
-                                        WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
-                                    }
-                                    if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
-                                        WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
-                                    }
-                                    if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
-                                        WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
-                                    }
-                                    if (!overlayIsHidden) {
-                                        if (!WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
-                                            WinJS.Utilities.addClass(overlayElement, "overlay--nP1TK");
-                                        }
-                                        if (numVideos > 1) {
-                                            //if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                                            //    WinJS.Utilities.addClass(overlayElement, "video-overlay-fullwidth");
-                                            //}
-                                            if (WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
-                                                WinJS.Utilities.removeClass(overlayElement, "autoWidth--24e2xI");
-                                            }
-                                            if (!WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                                                WinJS.Utilities.addClass(overlayElement, "fullWidth--Z1RRil3");
-                                            }
-                                        } else {
-                                            //if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                                            //    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
-                                            //}
-                                            if (!WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
-                                                WinJS.Utilities.addClass(overlayElement, "autoWidth--24e2xI");
-                                            }
-                                            if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                                                WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
+                                });
+                                videoListDefaults.contentObserver.observe(content, {
+                                    childList: true
+                                });
+                            }
+                            var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                            if (overlayElement) {
+                                var overlayIsHidden = WinJS.Utilities.hasClass(overlayElement, "hideOverlay--Z13uLxg");
+                                var videoList = mediaContainer.querySelector(".videoList--1OC49P");
+                                if (videoList && videoList.style && overlayElement.style) {
+                                    if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                                        if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
+                                            actionsBarRight = panelWrapper.querySelector(".actionsbar--Z1mcyA0 .right--DUFDc");
+                                            if (actionsBarRight && actionsBarRight.lastElementChild !== showVideoListToggleContainer) {
+                                                actionsBarRight.appendChild(showVideoListToggleContainer);
+                                                showVideoListToggleContainer.style.display = "inline-block";
                                             }
                                         }
-                                        if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
-                                            WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
+                                    }
+                                    if (!videoListDefaults.videoListObserver) {
+                                        videoListDefaults.videoListObserver = new MutationObserver(function (mutationList, observer) {
+                                            mutationList.forEach(function (mutation) {
+                                                switch (mutation.type) {
+                                                    case "attributes":
+                                                        Log.print(Log.l.trace, "videoList attributes changed!");
+                                                        if (!checkForInactiveVideoPromise) {
+                                                            checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
+                                                                that.checkForInactiveVideo();
+                                                            });
+                                                        }
+                                                        break;
+                                                    case "childList":
+                                                        Log.print(Log.l.trace, "videoList childList changed!");
+                                                        if (!adjustContentPositionsPromise) {
+                                                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                                                that.adjustContentPositions();
+                                                            });
+                                                        }
+                                                        break;
+                                                }
+                                            });
+                                        });
+                                        videoListDefaults.videoListObserver.observe(videoList, {
+                                            childList: true,
+                                            attributeFilter: ["class"],
+                                            subtree: true
+                                        });
+                                    }
+                                    var numVideos;
+                                    if (videoListDefaults.hideInactive || videoListDefaults.hideMuted) {
+                                        numVideos = videoListDefaults.activeVideoCount;
+                                    } else {
+                                        numVideos = videoList.childElementCount;
+                                    }
+                                    if (numVideos > 0) {
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-empty");
+                                        }
+                                    } else {
+                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
+                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-empty");
                                         }
                                     }
-                                    if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
-                                        WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
-                                    }
-                                    while (videoListItem) {
-                                        if (videoListItem.style) {
-                                            videoListItem.style.gridColumn = "";
-                                            videoListItem.style.gridRow = "";
-                                        }
-                                        videoListItem = videoListItem.nextSibling;
-                                    }
-                                    if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
-                                        WinJS.Utilities.removeClass(videoList, "video-list-vertical");
-                                    }
-                                } else {
-                                    if (!WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
-                                        WinJS.Utilities.addClass(videoList, "video-list-vertical");
-                                    }
-                                    //if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                                    //    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
-                                    //}
-                                    if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                                        WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
-                                    }
-                                    if (WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
-                                        WinJS.Utilities.removeClass(overlayElement, "autoWidth--24e2xI");
-                                    }
-                                    if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
-                                        WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
-                                    }
-                                    if (WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
-                                        WinJS.Utilities.removeClass(overlayElement, "overlay--nP1TK");
-                                    }
-                                    if (WinJS.Utilities.hasClass(overlayElement, "floatingOverlay--ZU51zt")) {
-                                        WinJS.Utilities.removeClass(overlayElement, "floatingOverlay--ZU51zt");
-                                    }
-                                    if (direction === videoListDefaults.right) {
+                                    var videoListItem = videoList.firstElementChild;
+                                    if (!content ||
+                                        direction === videoListDefaults.default ||
+                                        WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
+                                        !(videoPLayerOpened || screenShareOpened || presentationOpened && !overlayIsHidden)) {
                                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
                                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
                                         }
-                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
-                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-right");
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
                                         }
                                         if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
                                             WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
                                         }
-                                        if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
-                                            WinJS.Utilities.addClass(overlayElement, "video-overlay-right");
-                                        }
-                                    } else {
-                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
-                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
-                                        }
-                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
-                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-left");
-                                        }
                                         if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
                                             WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
                                         }
-                                        if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
-                                            WinJS.Utilities.addClass(overlayElement, "video-overlay-left");
-                                        }
-                                    }
-                                    var imageScale = 1;
-                                    if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-biggest")) {
-                                        imageScale = 0.5;
-                                    }
-                                    var videoHeight = videoListDefaults.height * imageScale;
-                                    var heightFullSize = numVideos * videoHeight;
-                                    if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode") && heightFullSize > videoList.clientHeight) {
-                                        if (!WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
-                                            WinJS.Utilities.addClass(videoList, "video-list-double-columns");
-                                        }
-                                        var heightHalfSize = Math.floor(numVideos / 2.0 + 0.5) * videoHeight / 2;
-                                        var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoHeight);
-                                        var curCount = 0;
-                                        while (videoListItem) {
-                                            if (videoListItem.style) {
-                                                if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden") &&
-                                                    curCount < resCount) {
-                                                    videoListItem.style.gridColumn = "span 2";
-                                                    videoListItem.style.gridRow = "span 2";
-                                                    curCount++;
-                                                } else {
-                                                    videoListItem.style.gridColumn = "";
-                                                    videoListItem.style.gridRow = "";
+                                        if (!overlayIsHidden) {
+                                            if (!WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
+                                                WinJS.Utilities.addClass(overlayElement, "overlay--nP1TK");
+                                            }
+                                            if (numVideos > 1) {
+                                                //if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                                                //    WinJS.Utilities.addClass(overlayElement, "video-overlay-fullwidth");
+                                                //}
+                                                if (WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
+                                                    WinJS.Utilities.removeClass(overlayElement, "autoWidth--24e2xI");
+                                                }
+                                                if (!WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
+                                                    WinJS.Utilities.addClass(overlayElement, "fullWidth--Z1RRil3");
+                                                }
+                                            } else {
+                                                //if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                                                //    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
+                                                //}
+                                                if (!WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
+                                                    WinJS.Utilities.addClass(overlayElement, "autoWidth--24e2xI");
+                                                }
+                                                if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
+                                                    WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
                                                 }
                                             }
-                                            videoListItem = videoListItem.nextSibling;
+                                            if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
+                                                WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
+                                            }
                                         }
-                                    } else {
+                                        if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
+                                            WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
+                                        }
                                         while (videoListItem) {
                                             if (videoListItem.style) {
                                                 videoListItem.style.gridColumn = "";
@@ -1710,93 +1622,189 @@ var __meteor_runtime_config__;
                                             }
                                             videoListItem = videoListItem.nextSibling;
                                         }
-                                        if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
-                                            WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
+                                        if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
+                                            WinJS.Utilities.removeClass(videoList, "video-list-vertical");
+                                        }
+                                    } else {
+                                        if (!WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
+                                            WinJS.Utilities.addClass(videoList, "video-list-vertical");
+                                        }
+                                        //if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
+                                        //    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
+                                        //}
+                                        if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "autoWidth--24e2xI");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "overlay--nP1TK");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, "floatingOverlay--ZU51zt")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "floatingOverlay--ZU51zt");
+                                        }
+                                        if (direction === videoListDefaults.right) {
+                                            if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
+                                                WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
+                                            }
+                                            if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                                WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-right");
+                                            }
+                                            if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
+                                                WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
+                                            }
+                                            if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
+                                                WinJS.Utilities.addClass(overlayElement, "video-overlay-right");
+                                            }
+                                        } else {
+                                            if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                                WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
+                                            }
+                                            if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
+                                                WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-left");
+                                            }
+                                            if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
+                                                WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
+                                            }
+                                            if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
+                                                WinJS.Utilities.addClass(overlayElement, "video-overlay-left");
+                                            }
+                                        }
+                                        var imageScale = 1;
+                                        if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-biggest")) {
+                                            imageScale = 0.5;
+                                        }
+                                        var videoHeight = videoListDefaults.height * imageScale;
+                                        var heightFullSize = numVideos * videoHeight;
+                                        if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode") && heightFullSize > videoList.clientHeight) {
+                                            if (!WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
+                                                WinJS.Utilities.addClass(videoList, "video-list-double-columns");
+                                            }
+                                            var heightHalfSize = Math.floor(numVideos / 2.0 + 0.5) * videoHeight / 2;
+                                            var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoHeight);
+                                            var curCount = 0;
+                                            while (videoListItem) {
+                                                if (videoListItem.style) {
+                                                    if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden") &&
+                                                        curCount < resCount) {
+                                                        videoListItem.style.gridColumn = "span 2";
+                                                        videoListItem.style.gridRow = "span 2";
+                                                        curCount++;
+                                                    } else {
+                                                        videoListItem.style.gridColumn = "";
+                                                        videoListItem.style.gridRow = "";
+                                                    }
+                                                }
+                                                videoListItem = videoListItem.nextSibling;
+                                            }
+                                        } else {
+                                            while (videoListItem) {
+                                                if (videoListItem.style) {
+                                                    videoListItem.style.gridColumn = "";
+                                                    videoListItem.style.gridRow = "";
+                                                }
+                                                videoListItem = videoListItem.nextSibling;
+                                            }
+                                            if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
+                                                WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
+                                            }
                                         }
                                     }
+                                    adjustContentPositionsFailedCount = 0;
+                                } else {
+                                    if (videoListDefaults.videoListObserver) {
+                                        videoListDefaults.videoListObserver.disconnect();
+                                        videoListDefaults.videoListObserver = null;
+                                    }
+                                    adjustContentPositionsFailedCount++;
+                                    Log.print(Log.l.trace, "videoList not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
+                                    if (!adjustContentPositionsPromise) {
+                                        adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(adjustContentPositionsFailedCount * 10, 5000)).then(function () {
+                                            that.adjustContentPositions();
+                                        });
+                                    }
                                 }
-                                adjustContentPositionsFailedCount = 0;
                             } else {
                                 if (videoListDefaults.videoListObserver) {
                                     videoListDefaults.videoListObserver.disconnect();
                                     videoListDefaults.videoListObserver = null;
                                 }
-                                adjustContentPositionsFailedCount++;
-                                Log.print(Log.l.trace, "videoList not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
-                                if (!adjustContentPositionsPromise) {
-                                    adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(adjustContentPositionsFailedCount * 10, 5000)).then(function () {
-                                        that.adjustContentPositions();
-                                    });
+                                if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
                                 }
                             }
+                            adjustContentPositionsFailedCount = 0;
                         } else {
-                            if (videoListDefaults.videoListObserver) {
-                                videoListDefaults.videoListObserver.disconnect();
-                                videoListDefaults.videoListObserver = null;
+                            if (videoListDefaults.mediaContainerObserver) {
+                                videoListDefaults.mediaContainerObserver.disconnect();
+                                videoListDefaults.mediaContainerObserver = null;
                             }
-                            if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
-                                WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
-                            }
-                            if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
-                                WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
+                            adjustContentPositionsFailedCount++;
+                            Log.print(Log.l.trace, "mediaContainer not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
+                            if (!adjustContentPositionsPromise) {
+                                adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount * 10, 5000)).then(function () {
+                                    that.adjustContentPositions();
+                                });
                             }
                         }
-                        adjustContentPositionsFailedCount = 0;
+                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
+                        if (closeDescButton) {
+                            if (!videoListDefaults.closeDesc) {
+                                videoListDefaults.closeDesc = closeDescButton.onclick;
+                                closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
+                            }
+                        } else {
+                            videoListDefaults.closeDesc = null;
+                        }
+                        var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc);
+                        if (restoreDescButton) {
+                            if (!videoListDefaults.restoreDesc) {
+                                videoListDefaults.restoreDesc = restoreDescButton.onclick;
+                                restoreDescButton.onclick = that.eventHandlers.clickRestoreDesc;
+                            }
+                        } else {
+                            videoListDefaults.restoreDesc = null;
+                        }
+                        if (pageControllerName === "eventController") {
+                            var actionsBarCenter = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .center--ZyfFaC");
+                            if (actionsBarCenter && emojiButtonContainer && emojiToolbar &&
+                                actionsBarCenter.lastElementChild !== emojiToolbar) {
+                                var audioControlsContainer = actionsBarCenter.querySelector(".container--1hUthh");
+                                if (audioControlsContainer) {
+                                    emojiToolbarPositionObserver = new MutationObserver(function (mutationList, observer) {
+                                        if (audioControlsContainer.childElementCount === 2) {
+                                            if (!WinJS.Utilities.hasClass(actionsBarCenter, "wide-audio-container")) {
+                                                WinJS.Utilities.addClass(actionsBarCenter, "wide-audio-container");
+                                            }
+                                        } else {
+                                            if (WinJS.Utilities.hasClass(actionsBarCenter, "wide-audio-container")) {
+                                                WinJS.Utilities.removeClass(actionsBarCenter, "wide-audio-container");
+                                            }
+                                        }
+                                    });
+                                    emojiToolbarPositionObserver.observe(audioControlsContainer, {
+                                        childList: true
+                                    });
+                                }
+                                actionsBarCenter.appendChild(emojiButtonContainer);
+                                emojiButtonContainer.style.display = "inline-block";
+                                actionsBarCenter.appendChild(emojiToolbar);
+                            }
+                        }
                     } else {
-                        if (videoListDefaults.mediaContainerObserver) {
-                            videoListDefaults.mediaContainerObserver.disconnect();
-                            videoListDefaults.mediaContainerObserver = null;
-                        }
                         adjustContentPositionsFailedCount++;
-                        Log.print(Log.l.trace, "mediaContainer not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
+                        Log.print(Log.l.trace, "panelWrapper not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
                         if (!adjustContentPositionsPromise) {
                             adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount * 10, 5000)).then(function () {
                                 that.adjustContentPositions();
                             });
-                        }
-                    }
-                    var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
-                    if (closeDescButton) {
-                        if (!videoListDefaults.closeDesc) {
-                            videoListDefaults.closeDesc = closeDescButton.onclick;
-                            closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
-                        }
-                    } else {
-                        videoListDefaults.closeDesc = null;
-                    }
-                    var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc);
-                    if (restoreDescButton) {
-                        if (!videoListDefaults.restoreDesc) {
-                            videoListDefaults.restoreDesc = restoreDescButton.onclick;
-                            restoreDescButton.onclick = that.eventHandlers.clickRestoreDesc;
-                        }
-                    } else {
-                        videoListDefaults.restoreDesc = null;
-                    }
-                    if (pageControllerName === "eventController") {
-                        var actionsBarCenter = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .center--ZyfFaC");
-                        if (actionsBarCenter && emojiButtonContainer && emojiToolbar &&
-                            actionsBarCenter.lastElementChild !== emojiToolbar) {
-                            var audioControlsContainer = actionsBarCenter.querySelector(".container--1hUthh");
-                            if (audioControlsContainer) {
-                                emojiToolbarPositionObserver = new MutationObserver(function (mutationList, observer) {
-                                    if (audioControlsContainer.childElementCount === 2) {
-                                        if (!WinJS.Utilities.hasClass(actionsBarCenter, "wide-audio-container")) {
-                                            WinJS.Utilities.addClass(actionsBarCenter, "wide-audio-container");
-                                        }
-                                    } else {
-                                        if (WinJS.Utilities.hasClass(actionsBarCenter, "wide-audio-container")) {
-                                            WinJS.Utilities.removeClass(actionsBarCenter, "wide-audio-container");
-                                        }
-                                    }
-                                });
-                                emojiToolbarPositionObserver.observe(audioControlsContainer, {
-                                    childList: true
-                                });
-                            }
-                            actionsBarCenter.appendChild(emojiButtonContainer);
-                            emojiButtonContainer.style.display = "inline-block";
-                            actionsBarCenter.appendChild(emojiToolbar);
                         }
                     }
                     return WinJS.Promise.timeout(20);
