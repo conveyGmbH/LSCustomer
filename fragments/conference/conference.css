@@ -348,7 +348,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     font-size: var(--btn-md-font-size);
     text-transform: uppercase !important;
     padding: 0 var(--sm-padding-x) !important;
-    margin: 0 0 var(--md-padding-x) 0 !important;
+    /*margin: 0 0 var(--md-padding-x) 0 !important;*/
     color: var(--color-gray) !important;
     background-color: transparent !important;
     letter-spacing: normal;

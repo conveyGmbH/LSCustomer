@@ -1509,11 +1509,16 @@ var __meteor_runtime_config__;
                             if (!videoListDefaults.mediaContainerObserver) {
                                 videoListDefaults.mediaContainerObserver = new MutationObserver(function (mutationList, observer) {
                                     Log.print(Log.l.trace, "mediaContainer childList changed!");
-                                    if (!adjustContentPositionsPromise) {
-                                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                            that.adjustContentPositions();
-                                        });
-                                    }
+                                    WinJS.Promise.as().then(function () {
+                                        if (!adjustContentPositionsPromise) {
+                                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                                that.adjustContentPositions();
+                                            });
+                                        }
+                                        return WinJS.Promise.timeout(50);
+                                    }).then(function () {
+                                        that.sendResize(20);
+                                    });
                                 });
                                 videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
                                     childList: true
