@@ -1,7 +1,12 @@
 ﻿/*
     margins/paddings for all screens
 
+.event .contentarea {
+    scroll-snap-type: y proximity;
+}
 */
+
+
 .event .win-type-title,
 .event .win-type-subtitle,
 .event .win-type-body,
@@ -27,6 +32,17 @@
     width: var(--max-content-width);
     padding: 15px;
 }
+.event .recordedContent-fragmenthost,
+.event .conference-fragmenthost {
+    width: auto;
+    height: 400px;
+    margin: 0;
+/*    scroll-snap-align: end;
+}
+.event .content-container {
+    scroll-snap-align: start;*/
+}
+
 .event .speakerblock {
     display: inline-block;
     margin-bottom: 20px;
@@ -254,12 +270,6 @@
     line-height: 28px;
     font-weight: 400;
     display: block;
-}
-.event .recordedContent-fragmenthost,
-.event .conference-fragmenthost {
-    width: auto;
-    height: 400px;
-    margin: 0;
 }
 .event .teaser-fragmenthost {
     height: auto;

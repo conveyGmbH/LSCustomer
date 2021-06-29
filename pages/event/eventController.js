@@ -253,15 +253,14 @@
                 },
                 onScroll: function (event) {
                     Log.call(Log.l.u1, "Event.Controller.");
-                    var pageControl = pageElement.winControl;
-                    if (pageControl) {
-                        pageControl.prevWidth = 0;
-                        pageControl.prevHeight = 0;
-                        pageControl.updateLayout.call(pageControl, pageElement);
-                    }
                     if (contentArea) {
+                        var headerHeight = 0;
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost && headerHost.firstElementChild) {
+                            var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
+                            if (stickyHeader) {
+                                headerHeight = stickyHeader.clientHeight;
+                            }
                             if (contentArea.scrollTop > 0) {
                                 if (!WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
                                     WinJS.Utilities.addClass(headerHost.firstElementChild, "sticky-scrolled");
@@ -272,6 +271,35 @@
                                 }
                             }
                         }
+                        if (!that.mouseDown) {
+                            var content = null;
+                            if (that.binding.showRecordedContent) {
+                                content = contentArea.querySelector(".recordedContent-fragmenthost");
+                            } else if (that.binding.showConference) {
+                                content = contentArea.querySelector(".conference-fragmenthost");
+                            }
+                            if (content) {
+                                var scrollTop = contentArea.scrollTop;
+                                var offsetTop = scrollTop - (content.offsetTop + headerHeight);
+                                if (Math.abs(offsetTop) < (content.offsetTop + headerHeight) / 1.5) {
+                                    if (!that.inSnap) {
+                                        that.inSnap = true;
+                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000)/1.5 + content.offsetTop + headerHeight;
+                                        Log.print(Log.l.trace, "scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop );
+                                        that.noMomentumScroll = true;
+                                        WinJS.Promise.timeout(5).then(function() {
+                                            that.inSnap = false;
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                        var pageControl = pageElement.winControl;
+                        if (pageControl) {
+                            pageControl.prevWidth = 0;
+                            pageControl.prevHeight = 0;
+                            pageControl.updateLayout.call(pageControl, pageElement);
+                        }
                     }
                     if (onScrollResizePromise) {
                         onScrollResizePromise.cancel();
@@ -281,6 +309,27 @@
                         resizeEvent.initEvent('resize', true, true);
                         window.dispatchEvent(resizeEvent);
                     });
+                    Log.ret(Log.l.u1);
+                },
+                onTouchMove: function(event) {
+                    Log.call(Log.l.u1, "Event.Controller.");
+                    if (event && that.noMomentumScroll) {
+                        event.preventDefault();
+                        WinJS.Promise.timeout(20).then(function() {
+                            that.noMomentumScroll = false;
+                        });
+                    }
+                    Log.ret(Log.l.u1);
+                },
+                onWheel: function(event) {
+                    Log.call(Log.l.u1, "Event.Controller.");
+                    Log.print(Log.l.trace, "deltaMode=" + (event && event.deltaMode) + " deltaX=" + (event && event.deltaX) + " deltaY=" + (event && event.deltaY));
+                    if (event && that.noMomentumScroll) {
+                        event.preventDefault();
+                        WinJS.Promise.timeout(20).then(function() {
+                            that.noMomentumScroll = false;
+                        });
+                    }
                     Log.ret(Log.l.u1);
                 },
                 clickLogOffEvent: function (event) {
@@ -921,6 +970,8 @@
 
             if (contentArea) {
                 this.addRemovableEventListener(contentArea, "scroll", this.eventHandlers.onScroll.bind(this));
+                this.addRemovableEventListener(contentArea, "touchmove", this.eventHandlers.onTouchMove.bind(this));
+                this.addRemovableEventListener(contentArea, "wheel", this.eventHandlers.onWheel.bind(this));
             }
 
             var adjustContainerSize = function() {
