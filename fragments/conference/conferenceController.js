@@ -978,14 +978,7 @@ var __meteor_runtime_config__;
                         }
                         return WinJS.Promise.timeout(250);
                     }).then(function () {
-                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
-                        if (closeDescButton) {
-                            if (!videoListDefaults.closeDesc) {
-                                videoListDefaults.closeDesc = closeDescButton.onclick;
-                            }
-                            closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
-                        }
-                        that.sendResize(20);
+                        that.sendResize(50);
                     });
                 }
                 Log.ret(Log.l.trace);
@@ -1032,14 +1025,7 @@ var __meteor_runtime_config__;
                         }
                         return WinJS.Promise.timeout(250);
                     }).then(function () {
-                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
-                        if (closeDescButton) {
-                            if (!videoListDefaults.closeDesc) {
-                                videoListDefaults.closeDesc = closeDescButton.onclick;
-                            }
-                            closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
-                        }
-                        that.sendResize(20);
+                        that.sendResize(50);
                     });
                 }
                 Log.ret(Log.l.trace);
