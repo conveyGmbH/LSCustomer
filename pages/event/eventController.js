@@ -257,10 +257,10 @@
                         var headerHeight = 0;
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost && headerHost.firstElementChild) {
-                            //var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
-                            //if (stickyHeader) {
-                            //    headerHeight = stickyHeader.clientHeight;
-                            //}
+                            var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
+                            if (stickyHeader) {
+                                headerHeight = stickyHeader.clientHeight;
+                            }
                             if (contentArea.scrollTop > 0) {
                                 if (!WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
                                     WinJS.Utilities.addClass(headerHost.firstElementChild, "sticky-scrolled");
@@ -280,11 +280,11 @@
                             }
                             if (content) {
                                 var scrollTop = contentArea.scrollTop;
-                                var offsetTop = scrollTop - (content.offsetTop + headerHeight);
-                                if (Math.abs(offsetTop) < (content.offsetTop + headerHeight) / 2) {
+                                var offsetTop = scrollTop - (content.offsetTop - headerHeight);
+                                if (Math.abs(offsetTop) < (content.offsetTop - headerHeight) / 2) {
                                     if (!that.inSnap) {
                                         that.inSnap = true;
-                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000)/2 + content.offsetTop + headerHeight;
+                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000)/2 + content.offsetTop - headerHeight;
                                         Log.print(Log.l.trace, "scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop );
                                         that.noMomentumScroll = true;
                                         WinJS.Promise.timeout(5).then(function() {
