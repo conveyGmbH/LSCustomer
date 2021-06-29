@@ -726,8 +726,8 @@
                             teaserFragment.controller.binding.showOffDoc = false;
                             } else {
                                 teaserFragment.controller.binding.showEvDoc = false;
-                                teaserFragment.controller.binding.showOnDoc = true;
-                                teaserFragment.controller.binding.showOffDoc = false;
+                                teaserFragment.controller.binding.showOnDoc = false;
+                                teaserFragment.controller.binding.showOffDoc = true;
                             }
                         }
                     }
