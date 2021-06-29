@@ -1508,7 +1508,7 @@ var __meteor_runtime_config__;
                         if (mediaContainer) {
                             if (!videoListDefaults.mediaContainerObserver) {
                                 videoListDefaults.mediaContainerObserver = new MutationObserver(function (mutationList, observer) {
-                                    Log.print(Log.l.trace, "mediaContainer childList changed!");
+                                    Log.print(Log.l.trace, "mediaContainer childList/class changed!");
                                     WinJS.Promise.as().then(function () {
                                         if (!adjustContentPositionsPromise) {
                                             adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
@@ -1521,7 +1521,8 @@ var __meteor_runtime_config__;
                                     });
                                 });
                                 videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
-                                    childList: true
+                                    childList: true,
+                                    attributeFilter: ["class"]
                                 });
                             }
                             var content = mediaContainer.querySelector(".content--Z2gO9GE");
