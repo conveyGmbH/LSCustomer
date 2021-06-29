@@ -421,6 +421,10 @@
 
             var loadData = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
+                if (that.refreshMaintenanceResultsPromise) {
+                    that.refreshMaintenanceResultsPromise.cancel();
+                    that.removeDisposablePromise(that.refreshMaintenanceResultsPromise);
+                }
                 AppData.setErrorMsg(that.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     if (that.binding.eventId) {
