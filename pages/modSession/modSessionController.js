@@ -205,10 +205,10 @@
                         var headerHeight = 0;
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost && headerHost.firstElementChild) {
-                            var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
-                            if (stickyHeader) {
-                                headerHeight = stickyHeader.clientHeight;
-                            }
+                            //var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
+                            //if (stickyHeader) {
+                            //    headerHeight = stickyHeader.clientHeight;
+                            //}
                             if (contentArea.scrollTop > 0) {
                                 if (!WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
                                     WinJS.Utilities.addClass(headerHost.firstElementChild, "sticky-scrolled");
