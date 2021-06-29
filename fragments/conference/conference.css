@@ -631,13 +631,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-top: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
 }
-#conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI) {
+#conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.userlistPad--o5KDX) {
     min-width: 180px !important;
     max-width: 480px !important;
 }
-#conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI) > section {
+#conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.userlistPad--o5KDX) > section {
     min-width: 180px !important;
-    max-width: 480px !important;
+    max-width: 480px !important;c
 }
 #conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX),
 #conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX) *,
