@@ -281,10 +281,10 @@
                             if (content) {
                                 var scrollTop = contentArea.scrollTop;
                                 var offsetTop = scrollTop - (content.offsetTop + headerHeight);
-                                if (Math.abs(offsetTop) < (content.offsetTop + headerHeight) / 1.5) {
+                                if (Math.abs(offsetTop) < (content.offsetTop + headerHeight) / 2) {
                                     if (!that.inSnap) {
                                         that.inSnap = true;
-                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000)/1.5 + content.offsetTop + headerHeight;
+                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000)/2 + content.offsetTop + headerHeight;
                                         Log.print(Log.l.trace, "scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop );
                                         that.noMomentumScroll = true;
                                         WinJS.Promise.timeout(5).then(function() {
