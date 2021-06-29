@@ -776,6 +776,17 @@
                             that.binding.showTeaser = true;
                             return that.getFragmentByName("countdown");
                         } else {
+                            if (!that.binding.conferenceLink) {
+                                that.binding.showRegister = false;
+                                that.binding.showTeaser = false;
+                                that.binding.showLogOffEventMail = true;
+
+                                that.binding.showCountdown = false;
+                                that.binding.showConference = false;
+                                that.binding.showTeaser = false;
+                                that.binding.showMaintenance = true;
+                                return that.getFragmentByName("maintenance");
+                            } else {
                             that.binding.showCountdown = false;
                             that.binding.showConference = true;
                             that.binding.showTeaser = false;
@@ -787,6 +798,7 @@
                                     that.loadData();
                                 });
                             });
+                        }
                         }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
                         // session noch nicht da 
