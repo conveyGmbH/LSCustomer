@@ -529,7 +529,7 @@
                             {
                                 pVeranstaltungID: AppData._persistentStates.registerData.eventId,
                                 pUserToken: AppData._persistentStates.registerData.userToken,
-                                pEMail: AppData._persistentStates.registerData.Email, //wenn über Link bestätigt, dann übergebe Email null 
+                                pEMail: null, //wenn über Link bestätigt, dann übergebe Email null 
                                 pAddressData: null,
                                 pBaseURL: window.location.href,
                                 pCopyToken: null
