@@ -567,7 +567,7 @@
                     return that.adjustContainerSize();
                 }).then(function () {
                     that.inLoadData = false;
-                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 && (AppData._persistentStates.registerData.confirmStatusID !== 1 || AppData._persistentStates.registerData.confirmStatusID !== 2)) {
+                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 && (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11)) {
                         that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
                             that.loadData();
                         });
