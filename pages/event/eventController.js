@@ -563,7 +563,7 @@
                     return that.adjustContainerSize();
                 }).then(function () {
                     that.inLoadData = false;
-                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 && AppData._persistentStates.registerData.confirmStatusID === 15) {
+                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 && (AppData._persistentStates.registerData.confirmStatusID !== 1 || AppData._persistentStates.registerData.confirmStatusID !== 2)) {
                         that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
                             that.loadData();
                         });
@@ -803,6 +803,13 @@
                         that.binding.showConference = false;
                         that.binding.showRecordedContent = true;
                         that.binding.showLogOffEventMail = true;
+                        return that.getFragmentByName("recordedContent").then(function (recordedContentFragment) {
+                            if (recordedContentFragment &&
+                                recordedContentFragment.controller &&
+                                recordedContentFragment.controller.binding) {
+                                recordedContentFragment.controller.binding.showDelayContent = false;
+                            }
+                        });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
                         that.binding.showICS = true;
                         if (registerFragment &&
