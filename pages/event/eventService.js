@@ -26,6 +26,16 @@
                 return AppData.getFormatView("LangMandantDokument", 20634);
             }
         },
+        _eventView: {
+            get: function () {
+                return AppData.getFormatView("Veranstaltung", 20620);
+            }
+        },
+        _speakerView : {
+            get: function () {
+                return AppData.getFormatView("Benutzer", 20654);
+            }
+        },
         textView: {
             select: function (complete, error, eventId) {
                 Log.call(Log.l.trace, "eventView.");
@@ -79,11 +89,6 @@
                 return ret;
             }
         },
-        _eventView: {
-            get: function () {
-                return AppData.getFormatView("Veranstaltung", 20620);
-            }
-        },
         eventView: {
             select: function (complete, error, recordId) {
                 Log.call(Log.l.trace, "eventView.");
@@ -95,6 +100,25 @@
                 Name: "",
                 Titel: "",
                 Untertitel: ""
+            }
+        },
+        speakerView: {
+            select: function (complete, error, eventId) {
+                Log.call(Log.l.trace, "speakerView.");
+                var ret = Event._speakerView.select(complete, error, {
+                    VeranstaltungID: eventId
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            },
+            defaultValue: {
+                Name: "",
+                Vorname: "",
+                AcadTitle: "",
+                FirstName: "",
+                lastName: "",
+                InternalUserID: "",
+                SpeakerIDX: 0
             }
         }
     });

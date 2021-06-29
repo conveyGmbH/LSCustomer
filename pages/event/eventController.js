@@ -46,6 +46,7 @@
 
             var onScrollResizePromise = null;
             var contentArea = pageElement.querySelector(".contentarea");
+            var speakerLines = pageElement.querySelector("#speakerLines");
             this.refreshWaitTimeMs = 10000;
             this.refreshResultsPromise = null;
             this.inLoadData = false;
@@ -168,6 +169,38 @@
                 Log.ret(Log.l.trace);
             }
             this.setDataDocText = setDataDocText;
+
+            var setDataSpeaker = function(results) {
+                Log.call(Log.l.trace, "Event.Controller.");
+                if (results && speakerLines && speakerLines.winControl) {
+                    var speakerData = new WinJS.Binding.List([]);
+                    results.forEach(function(item, index) {
+                        if (item && item.SpeakerIDX > 0) {
+                            speakerData.push({
+                                dataEvent: that.binding.dataEvent,
+                                dataDoc: {
+                                    ev_doc_mod: that.binding.dataDoc["ev_doc_mod" + item.SpeakerIDX] ? 
+                                        that.binding.dataDoc["ev_doc_mod" + item.SpeakerIDX] : "images/user.svg"
+                                },
+                                dataDocText: {
+                                    ev_doc_mod_alt: that.binding.dataDocText["ev_doc_mod" + item.SpeakerIDX + "_alt"],
+                                    ev_doc_mod_title: that.binding.dataDocText["ev_doc_mod" + item.SpeakerIDX + "_title"],
+                                    ev_doc_mod_descr: that.binding.dataDocText["ev_doc_mod" + item.SpeakerIDX + "_descr"]
+                                },
+                                dataText: {
+                                    ev_text_mod_name: that.binding.dataText["ev_text_mod" + item.SpeakerIDX + "_name"],
+                                    ev_text_mod_expertise: that.binding.dataText["ev_text_mod" + item.SpeakerIDX + "_expertise"],
+                                    ev_text_mod_homepage: that.binding.dataText["ev_text_mod" + item.SpeakerIDX + "_homepage"],
+                                    ev_text_mod_cv: that.binding.dataText["ev_text_mod" + item.SpeakerIDX + "_cv"]
+                                }
+                            });
+                        }
+                    });
+                    speakerLines.winControl.data = speakerData;
+                }
+                Log.ret(Log.l.trace);
+            }
+            this.setDataSpeaker = setDataSpeaker;
 
             // define handlers
             this.eventHandlers = {
@@ -412,7 +445,7 @@
                         Log.print(Log.l.trace, "calling select textView...");
                         return Event.textView.select(function (json) {
                             AppData.setErrorMsg(that.binding);
-                            Log.print(Log.l.trace, "labelView: success!");
+                            Log.print(Log.l.trace, "textView: success!");
                             if (json && json.d) {
                                 // now always edit!
                                 that.setDataText(json.d.results);
@@ -429,7 +462,7 @@
                         Log.print(Log.l.trace, "calling select medienView...");
                         return Event.medienView.select(function (json) {
                             AppData.setErrorMsg(that.binding);
-                            Log.print(Log.l.trace, "labelView: success!");
+                            Log.print(Log.l.trace, "medienView: success!");
                             if (json && json.d) {
                                 // now always edit!
                                 that.setDataDoc(json.d.results);
@@ -446,10 +479,27 @@
                         Log.print(Log.l.trace, "calling select medienTextView...");
                         return Event.medienTextView.select(function (json) {
                             AppData.setErrorMsg(that.binding);
-                            Log.print(Log.l.trace, "labelView: success!");
+                            Log.print(Log.l.trace, "medienTextView: success!");
                             if (json && json.d) {
                                 // now always edit!
                                 that.setDataDocText(json.d.results);
+                            }
+                        }, function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        }, that.binding.eventId);
+                    } else {
+                        return WinJS.Promise.as();
+                    }
+                }).then(function () {
+                    if (that.binding.eventId) {
+                        //load of format relation record data
+                        Log.print(Log.l.trace, "calling select speakerView...");
+                        return Event.speakerView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "speakerView: success!");
+                            if (json && json.d) {
+                                // now always edit!
+                                that.setDataSpeaker(json.d.results);
                             }
                         }, function (errorResponse) {
                             AppData.setErrorMsg(that.binding, errorResponse);
