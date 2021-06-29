@@ -37,7 +37,7 @@
 
     "register.email"		: "Email",
     "register.salutation"   : "Anrede *",
-    "register.firstName"     : "Vorname",
+    "register.firstName"     : "Vorname *",
     "register.name"          : "Nachname *",
     "register.position"      : "Position",
     "register.formOf"        : "Anrede",

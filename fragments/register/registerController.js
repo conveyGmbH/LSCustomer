@@ -344,7 +344,7 @@
 
             this.disableHandlers = {
                 clickOk: function () {
-                    that.binding.loginDisabled = AppBar.busy || (that.binding.dataRegister.AnredeID === 0 || that.binding.dataRegister.Name.length === 0 || that.binding.dataRegister.Email.length === 0 || !that.binding.dataRegister.Email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)|| !that.binding.dataRegister.privacyPolicyFlag);
+                    that.binding.loginDisabled = AppBar.busy || (that.binding.dataRegister.Vorname.length === 0 || that.binding.dataRegister.Name.length === 0 || that.binding.dataRegister.Email.length === 0 || !that.binding.dataRegister.Email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)|| !that.binding.dataRegister.privacyPolicyFlag);
                     var loginButton = fragmentElement.querySelector("#loginButton");
                     if (loginButton) {
                         loginButton.disabled = that.binding.loginDisabled;
