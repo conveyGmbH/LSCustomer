@@ -637,7 +637,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 #conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.userlistPad--o5KDX) > section {
     min-width: 180px !important;
-    max-width: 480px !important;c
+    max-width: 480px !important;
 }
 #conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX),
 #conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX) *,
