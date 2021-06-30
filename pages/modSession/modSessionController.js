@@ -10,6 +10,7 @@
 (function () {
     "use strict";
 
+    var useSnapScroll = !!Application._useSnapScroll;
     var nav = WinJS.Navigation;
 
     WinJS.Namespace.define("ModSession", {
@@ -219,7 +220,7 @@
                                 }
                             }
                         }
-                        if (false /*!that.mouseDown*/) {
+                        if (useSnapScroll && !that.mouseDown) {
                             var content = null;
                             if (that.binding.showRecordedContent) {
                                 content = contentArea.querySelector(".recordedContent-fragmenthost");
@@ -507,8 +508,10 @@
 
             if (contentArea) {
                 this.addRemovableEventListener(contentArea, "scroll", this.eventHandlers.onScroll.bind(this));
-                //this.addRemovableEventListener(contentArea, "touchmove", this.eventHandlers.onTouchMove.bind(this));
-                //this.addRemovableEventListener(contentArea, "wheel", this.eventHandlers.onWheel.bind(this));
+                if (useSnapScroll) {
+                    this.addRemovableEventListener(contentArea, "touchmove", this.eventHandlers.onTouchMove.bind(this));
+                    this.addRemovableEventListener(contentArea, "wheel", this.eventHandlers.onWheel.bind(this));
+                }
             }
 
             var adjustContainerSize = function() {
