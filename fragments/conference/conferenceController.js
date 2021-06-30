@@ -2440,12 +2440,13 @@ var __meteor_runtime_config__;
                             while (pollingAnswer) {
                                 var button = pollingAnswer.querySelector("button");
                                 if (button) {
-                                    if (!button._defaultOnClick) {
-                                        var key = "Answer0" + i + "Code";
+                                    var key = "Answer0" + i + "Code";
+                                    if (!button._defaultOnClick && that.binding.dataQuestionnaire[key]) {
                                         button._answerCode = that.binding.dataQuestionnaire[key];
                                         button._defaultOnClick = button.onclick;
                                         button.onclick = that.eventHandlers.clickPollingButton;
                                     }
+                                    i++;
                                 }
                                 pollingAnswer = pollingAnswer.nextElementSibling;
                             }
