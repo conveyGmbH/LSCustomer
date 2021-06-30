@@ -413,13 +413,13 @@
                 if (json && json.d && json.d.results) {
                     var result = json.d.results[0];
                     //Absicherung wenn 
-                    if (result.resultCode === 21) {
+                    /*if (result.resultCode === 21) {
                         //copyToken = AppData._persistentStates.registerData.userToken;
                         AppData._persistentStates.registerData.userToken = null;
                     }
-                    if (result.UserToken !== AppData._persistentStates.registerData.userToken) {
+                    if (result.UserToken && result.UserToken !== AppData._persistentStates.registerData.userToken) {
                         AppData._persistentStates.registerData.userToken = result.UserToken;
-                    }
+                    }*/
                     if (result.VeranstaltungID &&
                         result.VeranstaltungID !== AppData._persistentStates.registerData.eventId) {
                         AppData._persistentStates.registerData.eventId = result.VeranstaltungID;
