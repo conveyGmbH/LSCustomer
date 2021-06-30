@@ -286,7 +286,7 @@
                                     if (!that.inSnap) {
                                         that.inSnap = true;
                                         contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000)/2 + content.offsetTop - headerHeight;
-                                        Log.print(Log.l.trace, "scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop );
+                                        Log.print(Log.l.trace, "onScroll: scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop );
                                         that.noMomentumScroll = true;
                                         WinJS.Promise.timeout(5).then(function() {
                                             that.inSnap = false;
@@ -314,6 +314,9 @@
                 },
                 onTouchMove: function(event) {
                     Log.call(Log.l.u1, "Event.Controller.");
+                    var item = event && event.touches && event.touches.item && event.touches.item(0);
+                    Log.print(Log.l.trace, "onTouchMove: deltaX=" + ((item && item.pageX || that.cursorPos.x) - that.cursorPos.x) + 
+                        " deltaY=" + ((item && item.pageY || that.cursorPos.y) - that.cursorPos.y));
                     if (event && that.noMomentumScroll) {
                         event.preventDefault();
                         WinJS.Promise.timeout(20).then(function() {
@@ -324,7 +327,7 @@
                 },
                 onWheel: function(event) {
                     Log.call(Log.l.u1, "Event.Controller.");
-                    Log.print(Log.l.trace, "deltaMode=" + (event && event.deltaMode) + " deltaX=" + (event && event.deltaX) + " deltaY=" + (event && event.deltaY));
+                    Log.print(Log.l.trace, "onWheel: deltaMode=" + (event && event.deltaMode) + " deltaX=" + (event && event.deltaX) + " deltaY=" + (event && event.deltaY));
                     if (event && that.noMomentumScroll) {
                         event.preventDefault();
                         WinJS.Promise.timeout(20).then(function() {
