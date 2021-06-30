@@ -756,6 +756,7 @@
                             teaserFragment.controller.binding.showOnDoc = false;
                             teaserFragment.controller.binding.showOffDoc = true;
                             //that.binding.showMaintenance = true;
+                            that.binding.showRecordedContent = true;
                             return that.getFragmentByName("recordedContent").then(function (recordedContentFragment) {
                                 if (recordedContentFragment &&
                                     recordedContentFragment.controller &&
@@ -853,15 +854,22 @@
                             });
                         }
                         }
-                    } else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
-                        // session noch nicht da 
+                    } /*else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
+                        // recordedcontent noch nicht da noch nicht da 
                         that.binding.showRegister = false;
                         that.binding.showTeaser = false;
                         that.binding.showCountdown = false;
                         that.binding.showConference = false;
-                        that.binding.showMaintenance = true;
-                        return that.getFragmentByName("maintenance");
-                    } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
+                        that.binding.showMaintenance = false;
+                        that.binding.showRecordedContent = true;
+                        return that.getFragmentByName("recordedContent").then(function (recordedContentFragment) {
+                            if (recordedContentFragment &&
+                                recordedContentFragment.controller &&
+                                recordedContentFragment.controller.binding) {
+                                recordedContentFragment.controller.binding.showDelayContent = true;
+                            }
+                        });;
+                    } */else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
                         that.binding.showRegister = false;
                         that.binding.showTeaser = false;
                         that.binding.showCountdown = false;

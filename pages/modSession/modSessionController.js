@@ -479,7 +479,7 @@
                     return that.updateFragment();
                 }).then(function(conferenceFragment) {
                     conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
-                        alert("sessionEndRequested received: " + (param ? param : ""));
+                        //alert("sessionEndRequested received: " + (param ? param : ""));
                         // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
                     });
                 }).then(function () {
