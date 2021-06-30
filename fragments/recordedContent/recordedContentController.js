@@ -443,13 +443,14 @@ var __meteor_runtime_config__;
                     } else {
                         // wenn keine recordedContent vorhanden dann zeige meldung -> recordedContent läuft noch nicht -> zurück button auf events
                         // setze manuell auf ein ungültigen Status
-                        AppData._persistentStates.registerData.confirmStatusID = 403;
+                        return WinJS.Promise.as();
+                        /*AppData._persistentStates.registerData.confirmStatusID = 403;
                         Application.pageframe.savePersistentStates();
                         if (typeof AppBar.scope.updateFragment === "function") {
                             return AppBar.scope.updateFragment();
                         } else {
                             return WinJS.Promise.as();
-                        }
+                        }*/
                     }
                 }).then(function () {
                     if (url) {
@@ -483,7 +484,11 @@ var __meteor_runtime_config__;
 
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
+                if (AppData._persistentStates.registerData.confirmStatusID === 20) {
                 return that.loadData();
+                } else {
+                    return WinJS.Promise.as();
+                }
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
             });
