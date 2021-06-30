@@ -272,7 +272,7 @@
                                 }
                             }
                         }
-                        if (useSnapScroll && that.mouseDown) {
+                        if (useSnapScroll && !that.mouseDown) {
                             var content = null;
                             if (that.binding.showRecordedContent) {
                                 content = contentArea.querySelector(".recordedContent-fragmenthost");
