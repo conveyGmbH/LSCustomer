@@ -742,6 +742,7 @@
                     that.binding.showCountdown = false;
                     that.binding.showConference = false;
                     that.binding.showMaintenance = false;
+                    that.binding.showRecordedContent = false;
                     //Behandlung welches Bild in teaser-fragment angezeigt wird
                     if (teaserFragment &&
                         teaserFragment.controller &&
