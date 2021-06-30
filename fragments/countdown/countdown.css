@@ -10,7 +10,7 @@
     float: left;
 }
 
-.countdown .confirm-container { margin: 0; height: 100px; background: inherit;}
+.countdown .confirm-container { margin: 0; height: auto; background: inherit;}
 .countdown .field_line_full {
     margin: 5px 15px;
     padding: 5px 10px;
