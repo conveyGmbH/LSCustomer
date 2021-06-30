@@ -2671,7 +2671,7 @@ var __meteor_runtime_config__;
                     Log.call(Log.l.info, "Conference.Controller.", "param=" + (param ? param : ""));
                     Log.ret(Log.l.info);
                 },
-                pollQuestionId: function(value) {
+                pQ: function(value) {
                     var dataQuestionnaire = null;
                     Log.call(Log.l.info, "Conference.Controller.", "param=" + (value ? value : ""));
                     if (value &&
@@ -3114,8 +3114,8 @@ var __meteor_runtime_config__;
                 sessionEndRequested: {
                     collection: "group-chat-msg", msg: "added", redundantList: "sessionEndRequested"
                 },
-                pollQuestionId: {
-                    collection: "polls", msg: "added", redundantList: "pollQuestionId"
+                pQ: {
+                    collection: "polls", msg: "added", redundantList: "pQ"
                 }
             };
 
@@ -3490,8 +3490,9 @@ var __meteor_runtime_config__;
                                             if (fieldLength > 0) {
                                                 newBody += body.substr(prevStopPos, posFirstAnswer + msgQuote.length + 1 - prevStopPos);
                                                 var questionId = that.binding.dataQuestionnaire[Conference.questionnaireView.pkName];
-                                                newBody += magicStart + "pollQuestionId(" + questionId + ")" + magicStop; 
-                                                newBody += body.substr(posFirstAnswer + msgQuote.length + 1, fieldLength);
+                                                var pollQuestionIdMarker = magicStart + "pQ(" + questionId + ")" + magicStop;
+                                                newBody += pollQuestionIdMarker; 
+                                                newBody += body.substr(posFirstAnswer + msgQuote.length + 1, Math.min(fieldLength, 45 - pollQuestionIdMarker.length));
                                                 fieldLength += posFirstAnswer + msgQuote.length + 1 - (posFieldStart + fieldStart.length);
                                                 fieldReplaced = true;
                                                 bodyReplaced = true;
