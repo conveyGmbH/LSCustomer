@@ -616,7 +616,7 @@
                     return that.adjustContainerSize();
                 }).then(function () {
                     that.inLoadData = false;
-                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 && (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11)) {
+                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 && (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11 || AppData._persistentStates.registerData.confirmStatusID === 15)) {
                         that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
                             that.loadData();
                         });
@@ -756,15 +756,6 @@
                             teaserFragment.controller.binding.showEvDoc = false;
                             teaserFragment.controller.binding.showOnDoc = false;
                             teaserFragment.controller.binding.showOffDoc = true;
-                            //that.binding.showMaintenance = true;
-                            that.binding.showRecordedContent = true;
-                            return that.getFragmentByName("recordedContent").then(function (recordedContentFragment) {
-                                if (recordedContentFragment &&
-                                    recordedContentFragment.controller &&
-                                    recordedContentFragment.controller.binding) {
-                                    recordedContentFragment.controller.binding.showDelayContent = true;
-                                }
-                            });
                         } else if (AppData._persistentStates.registerData.confirmStatusID > 15) {
                             // Status = 15 bedeutet Event zuende und recordedContent da
                             teaserFragment.controller.binding.showEvDoc = false;
@@ -855,7 +846,7 @@
                             });
                         }
                         }
-                    } /*else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
                         // recordedcontent noch nicht da noch nicht da 
                         that.binding.showRegister = false;
                         that.binding.showTeaser = false;
@@ -870,7 +861,7 @@
                                 recordedContentFragment.controller.binding.showDelayContent = true;
                             }
                         });;
-                    } */else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
                         that.binding.showRegister = false;
                         that.binding.showTeaser = false;
                         that.binding.showCountdown = false;
