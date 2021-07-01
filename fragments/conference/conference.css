@@ -985,8 +985,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     transition-property: box-shadow,transform;
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
-    right: 30px;
-    bottom: 90px;
+    right: 20px;
+    bottom: 80px;
+    margin: 10px;
 }
 
 #conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH:hover,
@@ -1012,6 +1013,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .poll--Z1w6wQt .header--2wRKDg .buttonWrapper--x8uow:not([aria-disabled="true"]):focus .default--Z19H5du,
 #conference.mediaview .poll--Z1w6wQt .header--2wRKDg .buttonWrapper--x8uow:focus .default--Z19H5du:not([aria-disabled="true"]) {
     box-xhadow: none;
+}
+
+#conference.mediaview .pollingContainer--1xRnAH .pollButtonWrapper--Z12PRiw button {
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 /* videoList overlay */
 #conference.mediaview .floatingOverlay--ZU51zt {

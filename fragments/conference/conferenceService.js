@@ -22,10 +22,15 @@
                 QuestionID: 0,
                 QuestionText: "",
                 Answer01Text: "",
-                Answer01Text: "",
-                Answer01Text: "",
-                Answer01Text: "",
-                Answer01Text: ""
+                Answer02Text: "",
+                Answer03Text: "",
+                Answer04Text: "",
+                Answer05Text: "",
+                Answer01Code: "",
+                Answer02Code: "",
+                Answer03Code: "",
+                Answer04Code: "",
+                Answer05Code: ""
             }
         }
     });
