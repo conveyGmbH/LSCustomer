@@ -2107,7 +2107,7 @@ var __meteor_runtime_config__;
                                 }
                             }
                             var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
-                            window.history.pushState(state, title, location);
+                            window.history.replaceState(state, title, location);
                         };
                         var path = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g, '/html5client');
                         return renderImpl(path, conference, false);

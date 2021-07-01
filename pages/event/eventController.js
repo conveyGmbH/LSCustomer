@@ -76,7 +76,7 @@
                     var title = "";
                     Application.query.eventId = newDataEvent.VeranstaltungVIEWID;
                     var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
-                    window.history.pushState(state, title, location);
+                    window.history.replaceState(state, title, location);
                 }
                 AppBar.notifyModified = prevNotifyModified;
                 AppBar.triggerDisableHandlers();
@@ -455,7 +455,7 @@
                                     }
                                 }
                                 var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
-                                window.history.pushState(state, title, location);
+                                window.history.replaceState(state, title, location);
                             };
                         } else {
                             // wenn keine recordedContent vorhanden dann zeige meldung -> recordedContent läuft noch nicht -> zurück button auf events

@@ -76,7 +76,7 @@
                         delete Application.query.UserToken;
                     }
                     var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
-                    window.history.pushState(state, title, location);
+                    window.history.replaceState(state, title, location);
                 }
                 complete(response);
             });
