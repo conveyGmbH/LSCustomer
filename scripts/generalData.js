@@ -203,8 +203,10 @@
                         WinJS.Promise.timeout(0).then(function () {
                             AppData._persistentStates.colorSettings = copyByValue(AppData.persistentStatesDefaults.colorSettings);
                             var colors = new Colors.ColorsClass(AppData._persistentStates.colorSettings);
-                            AppBar.loadIcons();
-                            NavigationBar.groups = Application.navigationBarGroups;
+                            promise.then(function() {
+                                AppBar.loadIcons();
+                                NavigationBar.groups = Application.navigationBarGroups;
+                            });
                         });
                     }
                     break;
