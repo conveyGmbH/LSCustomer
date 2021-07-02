@@ -51,7 +51,7 @@
     "register.registerFacebook" : "Register with Facebook",
     "register.logoutFacebook" : "Log Out",
     "register.registerConfirm": "CONFIRMED",
-    "register.days": "day",
+    "register.days"         : "days",
     "register.hours": "hours",
     "register.minutes": "minutes",
     "register.seconds": "seconds",
