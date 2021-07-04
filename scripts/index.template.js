@@ -31,6 +31,7 @@
         inputBorderBottom: true,
         iconStrokeWidth: 150,
         loadRemoteResource: true,
+        manualTheme: true,
         odata: {
             https: true,
             hostName: "leadsuccess.convey.de",
