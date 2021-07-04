@@ -7566,7 +7566,7 @@ html.win-hoverable .win-ui-light button.win-splitviewpanetoggle:hover {
     background-color: Highlight;
   }
   .win-toggleswitch-on.win-toggleswitch-disabled .win-toggleswitch-thumb {
-    background-color: Background;
+    background-color: var(--Background);
   }
   .win-toggleswitch-on.win-toggleswitch-disabled .win-toggleswitch-track {
     background-color: GrayText;
