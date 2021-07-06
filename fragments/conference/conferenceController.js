@@ -3462,23 +3462,26 @@ var __meteor_runtime_config__;
                 var collection = "group-chat-msg";
                 var msgField = "message";
                 var fieldStart = msgQuote + msgField + msgQuote + ":" + msgQuote;
-                var responseReplaced = parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
-                if (!responseReplaced) {
-                    parseXhrResponse(res, "added", collection, fieldStart, magicStart2, magicStop2);
-                }
+                //var responseReplaced = 
+                    parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
+                //if (!responseReplaced) {
+                //    parseXhrResponse(res, "added", collection, fieldStart, magicStart2, magicStop2);
+                //}
 
                 collection = "polls";
                 msgField = "answers";
                 fieldStart = msgQuote + msgField + msgQuote + ":" + "[{" + msgQuote + "id" + msgQuote + ":0," + msgQuote + "key" + msgQuote + ":" + msgQuote;
-                responseReplaced = parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
-                if (!responseReplaced) {
-                    parseXhrResponse(res, "added", collection, fieldStart, magicStart2, magicStop2);
-                }
+                //responseReplaced = 
+                    parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
+                //if (!responseReplaced) {
+                //    parseXhrResponse(res, "added", collection, fieldStart, magicStart2, magicStop2);
+                //}
                 
-                responseReplaced = deleteMagicFromXhrResponse(res, magicStart, magicStop);
-                if (!responseReplaced) {
-                    deleteMagicFromXhrResponse(res, magicStart2, magicStop2);
-                }
+                //responseReplaced = 
+                    deleteMagicFromXhrResponse(res, magicStart, magicStop);
+                //if (!responseReplaced) {
+                //    deleteMagicFromXhrResponse(res, magicStart2, magicStop2);
+                //}
             };
 
             var replaceXhrSendBody = function(body, magicStart, magicStop) {
@@ -3586,9 +3589,9 @@ var __meteor_runtime_config__;
 
             Application.hookXhrSend = function(body) {
                 var newBody = replaceXhrSendBody(body, magicStart, magicStop);
-                if (!newBody) {
-                    newBody = replaceXhrSendBody(body, magicStart2, magicStop2);
-                }
+                //if (!newBody) {
+                //    newBody = replaceXhrSendBody(body, magicStart2, magicStop2);
+                //}
                 return newBody || body;
             }
 
