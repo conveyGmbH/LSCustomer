@@ -111,6 +111,17 @@
                                 AppData._persistentStates.odata.onlinePort === 80) ? ":" + AppData._persistentStates.odata.onlinePort : "") +
                         "/html5client/sockjs/";
                 // hook into xhr requests
+                    if (typeof this.__lookupGetter__ !== "function" || typeof this.__lookupSetter__ !== "function") {
+                        if (typeof window.require !== "function") {
+                            window.require = WinJS.Utilities._require;
+                        }
+                        if (typeof this.__lookupGetter__ !== "function") {
+                            require("../lib/core-js/modules/es.object.lookup-getter.js");
+                        }
+                        if (typeof this.__lookupSetter__ !== "function") {
+                            require("../lib/core-js/modules/es.object.lookup-setter.js");
+                        }
+                    }
                     if (url && url.substr(0, hookPath.length) === hookPath &&
                         !this._onreadystatechange &&
                         this.__lookupSetter__ && this.__lookupGetter__) {
