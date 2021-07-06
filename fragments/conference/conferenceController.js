@@ -36,10 +36,16 @@ var __meteor_runtime_config__;
 
     var magicStart = "&lt;!--";
     var magicStop = "--&gt;";
+    var magicStart2 = "&#60;!--";
+    var magicStop2 = "--&#62;";
     var magicStartReplace = "&lt;!&#8211;&#8211;";
     var magicStopReplace = "&#8211;&#8211;&gt;";
     var regExprMagicStart =  new RegExp(magicStart, "g");
     var regExprMagicStop =  new RegExp(magicStop, "g");
+    var regExprMagicStart2 =  new RegExp(magicStart2, "g");
+    var regExprMagicStop2 =  new RegExp(magicStop2, "g");
+
+
 
     function triggerReactOnChange(inputElement) {
         var key = "__reactEventHandlers";
@@ -2211,6 +2217,8 @@ var __meteor_runtime_config__;
                 var paramsWithQuotes = param
                     .replace(regExprMagicStart, magicStartReplace)
                     .replace(regExprMagicStop, magicStopReplace)
+                    .replace(regExprMagicStart2, magicStartReplace)
+                    .replace(regExprMagicStop2, magicStopReplace)
                     .replace(/'/g, "''")
                     .replace(/\n/g, "&lt;br /&gt;");
                 Log.ret(Log.l.trace, "paramsWithQuotes=" + paramsWithQuotes);
@@ -3281,16 +3289,17 @@ var __meteor_runtime_config__;
                 return 0;
             }
 
-            var deleteMagicFromXhrResponse = function(res) {
+            var deleteMagicFromXhrResponse = function(res, magicStart, magicStop) {
+                var responseReplaced = false;
                 var responseText = res && res.responseText;
                 if (typeof responseText === "string") {
-                    var responseReplaced = false;
                     var newResponseText = "";
                     var prevStopPos = 0;
+                    var posMagicStart, posMagicStop;
                     while (prevStopPos >= 0) {
-                        var posMagicStart = responseText.indexOf(magicStart, prevStopPos);
+                        posMagicStart = responseText.indexOf(magicStart, prevStopPos);
                         if (posMagicStart >= prevStopPos) {
-                            var posMagicStop = responseText.indexOf(magicStop, posMagicStart + magicStart.length);
+                            posMagicStop = responseText.indexOf(magicStop, posMagicStart + magicStart.length);
                             if (posMagicStop >= posMagicStart + magicStart.length) {
                                 newResponseText += responseText.substr(prevStopPos, posMagicStart - prevStopPos);
                                 responseReplaced = true;
@@ -3312,11 +3321,13 @@ var __meteor_runtime_config__;
                         res.responseText = newResponseText;
                     }
                 }
+                return responseReplaced;
             }
 
             var msgQuote = "\\\"";
             var fieldStop = msgQuote;
-            var parseXhrResponse = function(res, msg, collection, fieldStart) {
+            var parseXhrResponse = function(res, msg, collection, fieldStart, magicStart, magicStop) {
+                var responseReplaced = false;
                 var msgStart = "\"{" + msgQuote + "msg" + msgQuote + ":" + msgQuote + msg + msgQuote + "," + msgQuote + "collection" + msgQuote + ":" + msgQuote + collection + msgQuote;
                 var msgTimestamp = "timestamp";
                 var timeStampStart = msgQuote + msgTimestamp + msgQuote + ":";
@@ -3324,13 +3335,13 @@ var __meteor_runtime_config__;
                 //var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var responseText = res && res.responseText;
                 if (typeof responseText === "string") {
-                    var responseReplaced = false;
                     var newResponseText = "";
                     var prevStartPos = 0;
                     var prevStopPos = 0;
                     while (prevStartPos >= 0 && prevStartPos < responseText.length) {
                         var posMsgStart = responseText.indexOf(msgStart, prevStartPos);
-                        if (posMsgStart >= 0 && (responseText.indexOf(magicStart, posMsgStart + msgStart.length) >= 0 ||
+                        if (posMsgStart >= 0 && 
+                           (responseText.indexOf(magicStart, posMsgStart + msgStart.length) >= 0 ||
                             textContainsEmoji(responseText, posMsgStart) === true)) {
                             var posMsgStop = findEndOfStruct(responseText, posMsgStart);
                             if (posMsgStop > posMsgStart + msgStart.length) {
@@ -3444,22 +3455,33 @@ var __meteor_runtime_config__;
                         res.responseText = newResponseText;
                     }
                 }
+                return responseReplaced;
             }
 
             Application.hookXhrOnReadyStateChange = function(res) {
                 var collection = "group-chat-msg";
                 var msgField = "message";
                 var fieldStart = msgQuote + msgField + msgQuote + ":" + msgQuote;
-                parseXhrResponse(res, "added", collection, fieldStart);
+                var responseReplaced = parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
+                if (!responseReplaced) {
+                    parseXhrResponse(res, "added", collection, fieldStart, magicStart2, magicStop2);
+                }
 
                 collection = "polls";
                 msgField = "answers";
                 fieldStart = msgQuote + msgField + msgQuote + ":" + "[{" + msgQuote + "id" + msgQuote + ":0," + msgQuote + "key" + msgQuote + ":" + msgQuote;
-                parseXhrResponse(res, "added", collection, fieldStart);
+                responseReplaced = parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
+                if (!responseReplaced) {
+                    parseXhrResponse(res, "added", collection, fieldStart, magicStart2, magicStop2);
+                }
                 
-                deleteMagicFromXhrResponse(res);
+                responseReplaced = deleteMagicFromXhrResponse(res, magicStart, magicStop);
+                if (!responseReplaced) {
+                    deleteMagicFromXhrResponse(res, magicStart2, magicStop2);
+                }
             };
-            Application.hookXhrSend = function(body) {
+
+            var replaceXhrSendBody = function(body, magicStart, magicStop) {
                 var msgMethod;
                 var msgField;
                 var fieldStart;
@@ -3558,7 +3580,16 @@ var __meteor_runtime_config__;
                         return newBody;
                     }
                 }
-                return body;
+                return null;
+            }
+
+
+            Application.hookXhrSend = function(body) {
+                var newBody = replaceXhrSendBody(body, magicStart, magicStop);
+                if (!newBody) {
+                    newBody = replaceXhrSendBody(body, magicStart2, magicStop2);
+                }
+                return newBody || body;
             }
 
             if (typeof navigator.mediaDevices === "object" &&
