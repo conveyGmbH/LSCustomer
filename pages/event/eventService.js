@@ -107,6 +107,9 @@
                 Log.call(Log.l.trace, "speakerView.");
                 var ret = Event._speakerView.select(complete, error, {
                     VeranstaltungID: eventId
+                }, {
+                    ordered: true,
+                    orderAttribute: "SpeakerIDX"
                 });
                 Log.ret(Log.l.trace);
                 return ret;
