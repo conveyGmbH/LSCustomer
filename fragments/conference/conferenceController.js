@@ -2070,6 +2070,11 @@ var __meteor_runtime_config__;
                                 }
                             }
                             Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
+                            if (!adjustContentPositionsPromise) {
+                                adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                    that.adjustContentPositions();
+                                });
+                            }
                         }, function (error) {
                             Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
                             AppData.setErrorMsg(AppBar.scope.binding, error);
