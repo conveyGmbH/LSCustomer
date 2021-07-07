@@ -1332,13 +1332,13 @@ var __meteor_runtime_config__;
                 var actionsBarRight = null;
                 var direction = videoListDefaults.direction;
                 Log.call(Log.l.trace, "Conference.Controller.", "direction=" + direction);
-                if (!direction) {
-                    Log.ret(Log.l.trace, "extra ignored");
-                    return WinJS.Promise.as();
-                }
                 if (adjustContentPositionsPromise) {
                     adjustContentPositionsPromise.cancel();
                     adjustContentPositionsPromise = null;
+                }
+                if (!direction) {
+                    Log.ret(Log.l.trace, "extra ignored");
+                    return WinJS.Promise.as();
                 }
                 if (!that.binding.dataConference || !that.binding.dataConference.URL) {
                     Log.ret(Log.l.trace, "no conference URL!");
