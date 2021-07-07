@@ -3187,13 +3187,15 @@ var __meteor_runtime_config__;
                         }
                     });
                     AppBar.notifyModified = prevNotifyModified;
-                    if (adjustContentPositionsPromise) {
-                        adjustContentPositionsPromise.cancel();
-                    }
-                    adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
-                        that.adjustContentPositions();
-                    }).then(function() {
-                        that.sendResize(20);
+                    WinJS.Promise.as().then(function () {
+                        if (!adjustContentPositionsPromise) {
+                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                that.adjustContentPositions();
+                            });
+                        }
+                        return WinJS.Promise.timeout(50);
+                    }).then(function () {
+                        that.sendResize(50);
                     });
                 });
             }
