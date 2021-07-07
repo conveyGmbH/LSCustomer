@@ -95,12 +95,178 @@
     // home page of app
     Application.startPage = Application.getPagePath("home");
 
+    var xhrOpen = null, xhrSend = null, WsCtor = null;
+
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
         Log.call(Log.l.trace, "Application.", "id=" + id + " login=" + AppData._persistentStates.odata.login);
-        if (!XMLHttpRequest.prototype._oriOpen) {
-            XMLHttpRequest.prototype._oriOpen = XMLHttpRequest.prototype.open;
+        if (!WsCtor && window.WebSocket) {
+            WsCtor = window.WebSocket;
+            window.WebSocket = WinJS.Class.define(function constructor(url, protocols) {
+                this._hook = false;
+                if (AppData &&
+                    AppData._persistentStates &&
+                    AppData._persistentStates.odata) {
+                    var hookPath = (AppData._persistentStates.odata.https ? "wss" : "ws") + "://" +
+                        AppData._persistentStates.odata.hostName +
+                        (AppData._persistentStates.odata.onlinePort &&
+                            !(AppData._persistentStates.odata.https && AppData._persistentStates.odata.onlinePort === 443 ||
+                                AppData._persistentStates.odata.onlinePort === 80) ? ":" + AppData._persistentStates.odata.onlinePort : "") +
+                        "/html5client/sockjs/";
+                    if (url && url.substr(0, hookPath.length) === hookPath) {
+                        this._hook = true;
+				    }
+                }
+                Log.print(Log.l.info, (this._hook ? "hooked " : "") + "WebSocket url=" + url);
+                this._ws = new WsCtor(url, protocols);
+            }, {
+                binaryType: {
+                    get: function() {
+                        return this._ws.binaryType;
+                    },
+                    set: function(value) {
+                        this._ws.binaryType = value;
+                    }
+                },
+                bufferedAmount: {
+                    get: function() {
+                        return this._ws.bufferedAmount;
+                    }
+                },
+                extensions: {
+                    get: function() {
+                        return this._ws.extensions;
+                    }
+                },
+                onclose: {
+                    get: function() {
+                        return this._ws.onclose;
+                    },
+                    set: function(value) {
+                        this._ws.onclose = value;
+                    }
+                },
+                onerror: {
+                    get: function() {
+                        return this._ws.onerror;
+                    },
+                    set: function(value) {
+                        this._ws.onerror = value;
+                    }
+                },
+                onmessage: {
+                    get: function() {
+                        return this._ws.onmessage;
+                    },
+                    set: function(handler) {
+                        var that = this;
+                        this._ws.onmessage = function(ev) {
+                            if (that._hook) {
+                                that.hookOnMessage(ev, handler);
+                            } else if (typeof handler === "function") {
+                                handler(ev);
+                            }
+                        };
+                    }
+                },
+                onopen: {
+                    get: function() {
+                        return this._ws.onopen;
+                    },
+                    set: function(value) {
+                        this._ws.onopen = value;
+                    }
+                },
+                protocol: {
+                    get: function() {
+                        return this._ws.protocol;
+                    }
+                },
+                readyState: {
+                    get: function() {
+                        return this._ws.readyState;
+                    }
+                },
+                url: {
+                    get: function() {
+                        return this._ws.url;
+                    }
+                },
+                URL: {
+                    get: function() {
+                        return this._ws.URL;
+                    }
+                },
+                close: function(code, reason) {
+                    this._ws.close(code, reason);
+                },
+                send: function(data) {
+                    if (this._hook &&
+                        typeof Application.hookXhrSend === "function" &&
+                        typeof data === "string") {
+                        Log.print(Log.l.trace, "send data=" + data.substr(0, 8192));
+                        var newData = Application.hookXhrSend(data);
+                        if (newData) {
+                            data = newData;
+                        }
+                    }
+                    return this._ws.send(data);
+                },
+                addEventListener: function(eventName, handler, options) {
+                    if (this._hook && eventName === "message") {
+                        var that = this;
+                        this._ws.addEventListener(eventName, function(ev) {
+                            that.hookOnMessage(ev, handler);
+                        }, options);
+                    } else {
+                        this._ws.addEventListener(eventName, handler, options);
+                    }
+                },
+                removeEventListener: function(eventName, handler, options) {
+                    if (this._hook && eventName === "message") {
+                        var that = this;
+                        this._ws.removeEventListener(eventName, function(ev) {
+                            that.hookOnMessage(ev, handler);
+                        }, options);
+                    } else {
+                        this._ws.removeEventListener(eventName, handler, options);
+                    }
+                },
+                hookOnMessage: function(ev, handler) {
+                    if (typeof Application.hookXhrOnReadyStateChange === "function" &&
+                        typeof ev.data === "string") {
+                        Log.print(Log.l.trace, "onmessage url="+ this.url + " data=" + ev.data.substr(0, 8192));
+                        var res = {
+                            readyState: 4,
+                            status: 200,
+                            responseText: ev.data
+                        };
+                        Application.hookXhrOnReadyStateChange(res);
+                        if (ev.data !== res.responseText) {
+                            var newEvent = new Event("MessageEvent");
+                            newEvent.data = res.responseText;
+                            newEvent.origin = ev.origin;
+                            newEvent.lastEventId = ev.lastEventId;
+                            newEvent.source = ev.source;
+                            newEvent.ports = ev.ports;
+                            ev = newEvent;
+                        };
+                    }
+                    if (typeof handler === "function") {
+                        handler(ev);
+                    }
+                }
+            }, {
+                CONNECTING: 0,
+                OPEN: 1,
+                CLOSING: 2,
+                CLOSED: 3
+            });
+        }
+        if (!xhrOpen) {
+            xhrOpen = XMLHttpRequest.prototype.open;
             XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+                Log.print(Log.l.info, "XMLHttpRequest: method=" + method + " url=" + url);
                 if (AppData &&
                     AppData._persistentStates &&
                     AppData._persistentStates.odata) {
@@ -137,7 +303,7 @@
                             set: function (newOnreadystatechange) {
                                 that._onreadystatechange = function() {
                                     Log.print(Log.l.trace, "onreadystatechange readyState=" + that.readyState + " status=" + that.status + " responseURL="+ that.responseURL +
-                                        (that.readyState === 4 && that.status === 200 ? " responseText=" + (typeof that.responseText === "string" ? that.responseText.substr(0, 1024) : ""): "" ));
+                                            (that.readyState === 4 && that.status === 200 ? " responseText=" + (typeof that.responseText === "string" ? that.responseText.substr(0, 8192) : ""): "" ));
                                     if (typeof Application.hookXhrOnReadyStateChange === "function" 
                                            //&& that.readyState === 4 &&that.status === 200 
                                     ) {
@@ -177,16 +343,16 @@
                     });
                 }
                 }
-                Log.print(Log.l.info, "XMLHttpRequest: method=" + method + " url=" + url);
-                return this._oriOpen(method, url, async, user, password);
+                return xhrOpen.apply(this, arguments);
             };
-            XMLHttpRequest.prototype._oriSend = XMLHttpRequest.prototype.send;
+            xhrSend = XMLHttpRequest.prototype.send;
             XMLHttpRequest.prototype.send = function(body) {
                 if (this._onreadystatechange &&
                     typeof Application.hookXhrSend === "function") {
-                    body = Application.hookXhrSend(body) || body;
+                    Log.print(Log.l.trace, "send body=" + (typeof body === "string" ? body.substr(0, 8192) : ""));
+                    arguments[0] = Application.hookXhrSend(body) || body;
                 }
-                return this._oriSend(body);
+                return xhrSend.apply(this, arguments);
             }
         }
         // ensure login 
