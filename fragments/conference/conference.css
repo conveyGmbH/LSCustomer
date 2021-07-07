@@ -1843,3 +1843,7 @@ c
 .poll-question-selection .pollInput--Z2euEV9 {
     display: none;
 }
+
+.color-emoji {
+    font-family: color-emoji;
+}
