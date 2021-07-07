@@ -1777,7 +1777,6 @@ var __meteor_runtime_config__;
                                     WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
                                 }
                             }
-                            adjustContentPositionsFailedCount = 0;
                         } else {
                             if (videoListDefaults.mediaContainerObserver) {
                                 videoListDefaults.mediaContainerObserver.disconnect();
