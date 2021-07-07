@@ -3188,11 +3188,9 @@ var __meteor_runtime_config__;
                     });
                     AppBar.notifyModified = prevNotifyModified;
                     WinJS.Promise.as().then(function () {
-                        if (!adjustContentPositionsPromise) {
-                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                that.adjustContentPositions();
-                            });
-                        }
+                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                            that.adjustContentPositions();
+                        });
                         return WinJS.Promise.timeout(50);
                     }).then(function () {
                         that.sendResize(50);
