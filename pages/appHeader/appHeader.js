@@ -21,18 +21,19 @@
             // TODO: Initialize the page here.
 
             // insert body-content
-            var sibling,nextSibling;
+            var hasFixedChild = false;
+            var sibling,nextSibling,firstElementChild,styles;
             var appHeader = element.firstElementChild.firstElementChild || element.firstElementChild || element;
             var savedBodyContentTop = document.querySelector(".saved-body-content-top");
             if (savedBodyContentTop) {
                 sibling = savedBodyContentTop.firstElementChild;
                 while (sibling) {
                     nextSibling = sibling.nextElementSibling;
-                    var hasFixedChild = false;
-                    var firstElementChild = sibling.firstElementChild;
+                    firstElementChild = sibling.firstElementChild;
                     while (firstElementChild) {
-                        var styles = getComputedStyle(firstElementChild);
-                        if (styles && styles.getPropertyValue("position") === "fixed") {
+                        styles = getComputedStyle(firstElementChild);
+                        if (styles && styles.getPropertyValue("position") === "fixed" &&
+                            styles.getPropertyValue("top") && styles.getPropertyValue("top")[0] === "0") {
                             WinJS.Utilities.addClass(firstElementChild, "sticky-header-pinned-fixed");
                             hasFixedChild = true;
                             break;
@@ -47,6 +48,34 @@
                         }
                     }
                     sibling = nextSibling;
+                }
+            }
+            if (!hasFixedChild) {
+                var savedBodyContentBottom = document.querySelector(".saved-body-content-bottom");
+                if (savedBodyContentBottom) {
+                    sibling = savedBodyContentBottom.firstElementChild;
+                    while (sibling) {
+                        nextSibling = sibling.nextElementSibling;
+                        firstElementChild = sibling.firstElementChild;
+                        while (firstElementChild) {
+                            styles = getComputedStyle(firstElementChild);
+                            if (styles && styles.getPropertyValue("position") === "fixed" &&
+                                styles.getPropertyValue("top") && styles.getPropertyValue("top")[0] === "0") {
+                                WinJS.Utilities.addClass(firstElementChild, "sticky-header-pinned-fixed");
+                                hasFixedChild = true;
+                                break;
+                            }
+                            firstElementChild = firstElementChild.firstElementChild;
+                        }
+                        if (hasFixedChild) {
+                            savedBodyContentBottom.removeChild(sibling);
+                            appHeader.appendChild(sibling);
+                            if (appHeader.parentNode && appHeader.parentNode.style) {
+                                appHeader.parentNode.style.position = "absolute";
+                            }
+                        }
+                        sibling = nextSibling;
+                    }
                 }
             }
 
