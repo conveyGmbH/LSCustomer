@@ -29,7 +29,7 @@
                 sibling = savedBodyContentTop.firstElementChild;
                 while (sibling) {
                     nextSibling = sibling.nextElementSibling;
-                    firstElementChild = sibling.firstElementChild;
+                    firstElementChild = sibling;
                     while (firstElementChild) {
                         styles = getComputedStyle(firstElementChild);
                         if (styles && styles.getPropertyValue("position") === "fixed" &&
@@ -56,7 +56,7 @@
                     sibling = savedBodyContentBottom.firstElementChild;
                     while (sibling) {
                         nextSibling = sibling.nextElementSibling;
-                        firstElementChild = sibling.firstElementChild;
+                        firstElementChild = sibling;
                         while (firstElementChild) {
                             styles = getComputedStyle(firstElementChild);
                             if (styles && styles.getPropertyValue("position") === "fixed" &&
