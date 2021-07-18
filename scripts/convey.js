@@ -97,7 +97,7 @@
                 while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
                     if (customerRootElement.parentElement.parentElement === document.body && 
                         customerRootElement.nextElementSibling) {
-                        var nextElementSibling = customerRootElement;
+                        var nextElementSibling = customerRootElement.nextElementSibling;
                         mainBottomElement = document.createElement(customerRootElement.parentElement.tagName);
                         if (mainBottomElement) while (nextElementSibling) {
                             mainBottomElement.appendChild(nextElementSibling);
