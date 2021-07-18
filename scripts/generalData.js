@@ -68,7 +68,7 @@
                         while (sibling) {
                             nextSibling = sibling.nextElementSibling;
                             hasFixedChild = false;
-                            firstElementChild = sibling.firstElementChild;
+                            /*firstElementChild = sibling.firstElementChild;
                             while (firstElementChild) {
                                 styles = getComputedStyle(firstElementChild);
                                 if (styles && 
@@ -78,7 +78,7 @@
                                     break;
                                 }
                                 firstElementChild = firstElementChild.firstElementChild;
-                            }
+                            }*/
                             if (!hasFixedChild) {
                                 savedBodyContentBottom.appendChild(sibling);
                             }
