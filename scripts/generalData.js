@@ -17,7 +17,7 @@
                 Log.ret(Log.l.error, "parent element not specified!");
                 return;
             }
-            var sibling,nextSibling,hasFixedChild,firstElementChild,styles;
+            var sibling,nextSibling;
             var listHeader = element.querySelector(headerClassName);
             if (listHeader) {
                 var bodyContentTop = Application.navigator.pageElement &&
@@ -32,19 +32,18 @@
                         sibling = savedBodyContentTop.firstElementChild;
                         while (sibling) {
                             nextSibling = sibling.nextElementSibling;
-                            hasFixedChild = false;
-                            firstElementChild = sibling.firstElementChild;
+                            var hasFixedChild = false;
+                            var firstElementChild = sibling.firstElementChild;
                             while (firstElementChild) {
-                                styles = getComputedStyle(firstElementChild);
-                                if (styles && 
-                                    styles.getPropertyValue("position") === "fixed" &&
-                                    styles.getPropertyValue("top") && styles.getPropertyValue("top")[0] === "0") {
+                                var styles = getComputedStyle(firstElementChild);
+                                if (styles && styles.getPropertyValue("position") === "fixed") {
                                     hasFixedChild = true;
                                     break;
                                 }
                                 firstElementChild = firstElementChild.firstElementChild;
                             }
                             if (!hasFixedChild) {
+                                savedBodyContentTop.removeChild(sibling);
                                 bodyContentTop.appendChild(sibling);
                             }
                             sibling = nextSibling;
@@ -67,21 +66,8 @@
                         sibling = savedBodyContentBottom.firstElementChild;
                         while (sibling) {
                             nextSibling = sibling.nextElementSibling;
-                            hasFixedChild = false;
-                            /*firstElementChild = sibling.firstElementChild;
-                            while (firstElementChild) {
-                                styles = getComputedStyle(firstElementChild);
-                                if (styles && 
-                                    styles.getPropertyValue("position") === "fixed" &&
-                                    styles.getPropertyValue("top") && styles.getPropertyValue("top")[0] === "0") {
-                                    hasFixedChild = true;
-                                    break;
-                                }
-                                firstElementChild = firstElementChild.firstElementChild;
-                            }*/
-                            if (!hasFixedChild) {
-                                savedBodyContentBottom.appendChild(sibling);
-                            }
+                            savedBodyContentBottom.removeChild(sibling);
+                            bodyContentBottom.appendChild(sibling);
                             sibling = nextSibling;
                         }
                     }
