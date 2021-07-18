@@ -116,8 +116,9 @@
                 var curBodyChild = document.body.firstElementChild;
                 while (curBodyChild && curBodyChild !== customerRootElement) {
                     nextBodyChild = curBodyChild.nextElementSibling;
-                    if (curBodyChild.tagName && curBodyChild.tagName.toLowerCase() !== "script") {
-                        document.body.removeChild(curBodyChild);
+                    if (curBodyChild.tagName && 
+                        curBodyChild.tagName.toLowerCase() !== "script" &&
+                        curBodyChild.tagName.toLowerCase() !== "link") {
                         bodyContentTop.appendChild(curBodyChild);
                     }
                     curBodyChild = nextBodyChild;
@@ -126,16 +127,17 @@
                     bodyContentBottom.appendChild(mainBottomElement);
                 }
                 curBodyChild = customerRootElement.nextElementSibling;
-                while (curBodyChild && curBodyChild !== customerRootElement) {
+                while (curBodyChild) {
                     nextBodyChild = curBodyChild.nextElementSibling;
-                    if (curBodyChild.tagName && curBodyChild.tagName.toLowerCase() !== "script") {
-                        document.body.removeChild(curBodyChild);
+                    if (curBodyChild.tagName && 
+                        curBodyChild.tagName.toLowerCase() !== "script" &&
+                        curBodyChild.tagName.toLowerCase() !== "link") {
                         bodyContentBottom.appendChild(curBodyChild);
                     }
                     curBodyChild = nextBodyChild;
                 }
                 document.body.insertBefore(bodyContentTop, customerRootElement);
-                document.body.insertBefore(bodyContentBottom, customerRootElement.nextElementSibling);
+                document.body.appendChild(bodyContentBottom);
                 bodyContentTop.appendChild(customerRootElement);
             }
         }
