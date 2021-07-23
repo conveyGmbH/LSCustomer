@@ -55,7 +55,8 @@
                 layout = new Application.HomeListLayout.HomeLayout;
                 listView.winControl.layout = {
                     type: layout,
-                    orientation: WinJS.UI.Orientation.vertical
+                    orientation: WinJS.UI.Orientation.vertical,
+                    groupHeaderPosition: "top"
                 };
             }
 
