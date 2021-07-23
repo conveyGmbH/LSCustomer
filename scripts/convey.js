@@ -400,22 +400,22 @@
         }).then(function() {
             js = [];
             js.push(include("lib/jquery/scripts/jquery-ui.min.js"));
-            js.push(include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js"));
             js.push(include("lib/convey/scripts/logging.js"));
-            js.push(include("lib/convey/scripts/winjs-es6promise.js"));
             js.push(include("lib/convey/scripts/strings.js"));
+            js.push(include("lib/convey/scripts/dbinit.js"));
+            js.push(include("lib/convey/scripts/dataService.js"));
             js.push(include("lib/convey/scripts/navigator.js"));
             //js.push(include("lib/convey/scripts/sqlite.js")) not used here!;
             js.push(include("lib/convey/scripts/appSettings.js"));
             //js.push(include("lib/convey/scripts/replService.js")) not used here!;
-            js.push(include("lib/convey/scripts/dbinit.js"));
-            js.push(include("lib/convey/scripts/dataService.js"));
             js.push(include("lib/convey/scripts/colors.js"));
             js.push(include("lib/convey/scripts/appbar.js"));
             js.push(include("lib/convey/scripts/pageFrame.js"));
             js.push(include("lib/convey/scripts/pageController.js"));
             js.push(include("lib/convey/scripts/fragmentController.js"));
             js.push(include("lib/convey/scripts/inertia.js"));
+            js.push(include("lib/convey/scripts/winjs-es6promise.js"));
+            js.push(include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js"));
             js.push(include("scripts/generalData.js"));
             return includeJoined(js);
         }).then(function() {
