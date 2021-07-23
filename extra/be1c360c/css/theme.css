@@ -3,9 +3,9 @@
 /********Start Fonts for MP*********/
 @font-face {
     font-family: "Symbols";
-    src: url(../lib/WinJS/fonts/Symbols.woff2) format("woff2"), 
-         url(../lib/WinJS/fonts/Symbols.woff) format("woff"), 
-         url(../lib/WinJS/fonts/Symbols.ttf) format("truetype");
+    src: url(../../../lib/WinJS/fonts/Symbols.woff2) format("woff2"), 
+         url(../../../lib/WinJS/fonts/Symbols.woff) format("woff"), 
+         url(../../../lib/WinJS/fonts/Symbols.ttf) format("truetype");
 }
 
 @font-face {
