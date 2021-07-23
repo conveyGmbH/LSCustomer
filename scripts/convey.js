@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    var rootElementId = "ls-customer-host";
+    window.rootElementId = "ls-customer-host";
 
     function loadApplication() {
 
@@ -51,8 +51,9 @@
                 },
                 next: function() {
                     if (typeof fnc === "function") {
-                        var r = fnc();
-                        if (n && typeof n.next === "function") {
+                        var r = fnc() || include();
+                        if (r && typeof r.setNext === "function" &&
+                            n && typeof n.next === "function") {
                             r.setNext(n);
                             n = null;
                         }
@@ -79,6 +80,22 @@
             }
             return e;
         };
+        var includeJoined = function(values) {
+            var e = include(null, function() {
+                return include();
+            });
+            var pending = values.length;
+            values.forEach(function(value) {
+                value.then(function() {
+                    if (--pending === 0) {
+                        window.setTimeout(function() {
+                            e.load();
+                        }, 0);
+                    }
+                });
+            });
+            return e;
+        }
 
         function getDataset(element) {
             var data = element.dataset;
@@ -360,59 +377,43 @@
         }
 
         // WinJS references 
+        var js = [];
         include("lib/crc32/scripts/crc32.js").then(function() {
             return extraStartup();
         }).then(function() {
-            return include("lib/WinJS/scripts/base.min.js");
+            js.push(include("lib/WinJS/scripts/base.min.js"));
+            js.push(include("lib/WinJS/scripts/ui.js"));
+            js.push(include("lib/jquery/scripts/jquery.min.js"));
+            js.push(include("lib/jquery/scripts/jquery-ui.min.js"));
+            js.push(include("lib/moment/scripts/moment-with-locales.min.js"));
+            js.push(include("lib/ics/ics.js"));
+            js.push(include("lib/FileSaver/scripts/FileSaver.js"));
+            js.push(include("lib/blob/Blob.js"));
+            return includeJoined(js);
         }).then(function() {
-            return include("lib/WinJS/scripts/ui.js");
+            js = [];
+            js.push(include("lib/convey/scripts/logging.js"));
+            js.push(include("lib/convey/scripts/winjs-es6promise.js"));
+            js.push(include("lib/convey/scripts/inertia.js"));
+            js.push(include("lib/convey/scripts/strings.js"));
+            //js.push(include("lib/convey/scripts/sqlite.js")) not used here!;
+            js.push(include("lib/convey/scripts/appSettings.js"));
+            //js.push(include("lib/convey/scripts/replService.js")) not used here!;
+            js.push(include("lib/convey/scripts/dbinit.js"));
+            js.push(include("lib/convey/scripts/dataService.js"));
+            js.push(include("lib/convey/scripts/colors.js"));
+            js.push(include("lib/convey/scripts/navigator.js"));
+            js.push(include("lib/convey/scripts/appbar.js"));
+            return includeJoined(js);
         }).then(function() {
-            return include("lib/jquery/scripts/jquery.min.js");
+            js = [];
+            js.push(include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js"));
+            js.push(include("lib/convey/scripts/pageFrame.js"));
+            js.push(include("lib/convey/scripts/pageController.js"));
+            js.push(include("lib/convey/scripts/fragmentController.js"));
+            js.push(include("scripts/generalData.js"));
+            return includeJoined(js);
         }).then(function() {
-            return include("lib/jquery/scripts/jquery-ui.min.js");
-        }).then(function() {
-            return include("lib/moment/scripts/moment-with-locales.min.js");
-        }).then(function () {
-            return include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js");
-        }).then(function() {
-            return include("lib/ics/ics.js");
-        }).then(function () {
-            return include("lib/FileSaver/scripts/FileSaver.js");
-        }).then(function () {
-            return include("lib/blob/Blob.js");
-        }).then(function() {
-            return include("lib/convey/scripts/logging.js");
-        }).then(function() {
-            return include("lib/convey/scripts/winjs-es6promise.js");
-        }).then(function() {
-            return include("lib/convey/scripts/inertia.js");
-        }).then(function() {
-            return include("lib/convey/scripts/strings.js");
-        }).then(function() {
-            return include("lib/convey/scripts/sqlite.js");
-        }).then(function() {
-            return include("lib/convey/scripts/appSettings.js");
-        }).then(function() {
-            return include("lib/convey/scripts/replService.js");
-        }).then(function() {
-            return include("lib/convey/scripts/dbinit.js");
-        }).then(function() {
-            return include("lib/convey/scripts/dataService.js");
-        }).then(function() {
-            return include("lib/convey/scripts/colors.js");
-        }).then(function() {
-            return include("lib/convey/scripts/navigator.js");
-        }).then(function() {
-            return include("lib/convey/scripts/appbar.js");
-        }).then(function() {
-            return include("lib/convey/scripts/pageFrame.js");
-        }).then(function() {
-            return include("lib/convey/scripts/pageController.js");
-        }).then(function() {
-            return include("lib/convey/scripts/fragmentController.js");
-        }).then(function() {
-            return include("scripts/generalData.js");
-        }).then(function () {
             createRootElement();
             return include("scripts/index.js");
         }).then(function() {
