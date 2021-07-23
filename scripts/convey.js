@@ -398,11 +398,11 @@
             js.push(include("lib/convey/scripts/strings.js"));
             //js.push(include("lib/convey/scripts/sqlite.js")) not used here!;
             js.push(include("lib/convey/scripts/appSettings.js"));
+            js.push(include("lib/convey/scripts/navigator.js"));
             //js.push(include("lib/convey/scripts/replService.js")) not used here!;
             js.push(include("lib/convey/scripts/dbinit.js"));
             js.push(include("lib/convey/scripts/dataService.js"));
             js.push(include("lib/convey/scripts/colors.js"));
-            js.push(include("lib/convey/scripts/navigator.js"));
             js.push(include("lib/convey/scripts/appbar.js"));
             return includeJoined(js);
         }).then(function() {
