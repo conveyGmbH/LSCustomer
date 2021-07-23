@@ -72,6 +72,10 @@
                     s.addEventListener("load", l);
                     document.head.appendChild(s);
                 }, 0);
+            } else if (!fnc) {
+                window.setTimeout(function() {
+                    e.load();
+                }, 0);
             }
             return e;
         };
@@ -89,6 +93,7 @@
             }
             return data;
         }
+
         function saveBodyContent() {
             var customerElement = document.querySelector("#"+rootElementId);
             if (customerElement && customerElement.parentElement) {
@@ -141,13 +146,30 @@
                 bodyContentTop.appendChild(customerRootElement);
             }
         }
+        var extraPath = null;
+        function extraStartup() {
+            var customerElement = document.querySelector("#"+rootElementId);
+            if (customerElement) {
+                var data = getDataset(customerElement);
+                if (data) {
+                    if (typeof data.extra === "string" &&
+                        typeof crc32 === "object") {
+                        var extraCrc32 = crc32.compute(data.extra);
+                        var extraCrc32Hex = extraCrc32.toString(16);
+                        extraPath = "extra/" + extraCrc32Hex + "/";
+                    }
+                }
+            }
+            if (extraPath) {
+                return include(extraPath + "scripts/startup.js");
+            } else {
+                saveBodyContent();
+                return include();
+            }
+        }
         function createRootElement() {
             var customerElement = document.querySelector("#"+rootElementId);
             if (customerElement && customerElement.parentElement) {
-                var customerRootElement = customerElement;
-                while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
-                    customerRootElement = customerRootElement.parentElement;
-                }
                 var data = getDataset(customerElement);
                 if (data) {
                     AppData.customer = data.customer;
@@ -158,7 +180,23 @@
                     if (data.theme) {
                         Application.theme = data.theme;
                     }
-                    Log.print(Log.l.info, "customer=" + AppData.customer + "customerId=" + AppData.customerId + " language=" + Application.language);
+                    if (typeof data.extra === "string") {
+                        Application.extra = data.extra;
+                    }
+                    if (typeof extraPath === "string") {
+                        Application.extraPath = extraPath;
+                    }
+                    Log.print(Log.l.info, "customer=" + AppData.customer + 
+                        "customerId=" + AppData.customerId + 
+                        " language=" + Application.language + 
+                        " theme=" + Application.theme + 
+                        " extra=" + Application.extra + 
+                        " extraPath=" + Application.extraPath);
+                }
+                
+                var customerRootElement = customerElement;
+                while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
+                    customerRootElement = customerRootElement.parentElement;
                 }
 
                 // Page-Navigationbar Templates
@@ -321,9 +359,12 @@
             }, 20);
         }
 
-        saveBodyContent();
         // WinJS references 
-        include("lib/WinJS/scripts/base.min.js").then(function() {
+        include("lib/crc32/scripts/crc32.js").then(function() {
+            return extraStartup();
+        }).then(function() {
+            return include("lib/WinJS/scripts/base.min.js");
+        }).then(function() {
             return include("lib/WinJS/scripts/ui.js");
         }).then(function() {
             return include("lib/jquery/scripts/jquery.min.js");

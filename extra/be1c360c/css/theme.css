@@ -1,0 +1,121 @@
+﻿/* styles theme for customizations */
+
+/********Start Fonts for MP*********/
+@font-face {
+    font-family: "Symbols";
+    src: url(../lib/WinJS/fonts/Symbols.woff2) format("woff2"), 
+         url(../lib/WinJS/fonts/Symbols.woff) format("woff"), 
+         url(../lib/WinJS/fonts/Symbols.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Barlow";
+    src: url(../fonts/BarlowSemiCondensed-SemiBold.woff2) format("woff2"), 
+         url(../fonts/BarlowSemiCondensed-SemiBold.woff) format("woff"), 
+         url(../fonts/BarlowSemiCondensed-SemiBold.ttf) format("truetype");
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Barlow";
+    src: url(../fonts/Barlow-Regular.woff2) format("woff2"), 
+         url(../fonts/Barlow-Regular.woff) format("woff"), 
+         url(../fonts/Barlow-Regular.ttf) format("truetype");
+    font-style: normal;
+    font-weight: 400;
+}
+
+:root {
+    --max-content-margin-left: calc(50% - 720px);
+    --max-content-width: 1410px;
+    --max-content-width-surface: 1460px !important;
+    /*
+    --e-global-color-primary: #2A2F3D;
+    --e-global-color-secondary: #07B9CB;
+    --e-global-color-text: #2A2F3D;
+    --e-global-color-accent: #C2D63E;
+    --e-global-color-d4faeed: #F3FBFC;
+
+    --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
+    --outline-focus: 1px solid var(--color-gray-lighter)
+    */
+    --font-family-default: 'Barlow';
+    --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    --box-shadow-button: none;
+    --outline-focus: none;
+}
+.body-content-bottom {
+    visibility: hidden;
+}
+.body-content-bottom section:not(.elementor-inner-section) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: var(--max-content-margin-left) !important;
+    width: var(--max-content-width) !important;
+    position: absolute !important;
+    padding: 0 15px !important;
+}
+.body-content-bottom section:not(.elementor-inner-section) > div {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+.view-size-biggest .body-content-bottom section:not(.elementor-inner-section) {
+    left: 20px !important;
+    width: calc(100% - 70px) !important;
+}
+.view-size-medium .body-content-bottom section:not(.elementor-inner-section) {
+    left: 5px !important;
+    width: calc(100% - 30px) !important;
+    padding: 0 10px !important;
+}
+.view-size-small .body-content-bottom section:not(.elementor-inner-section) {
+    left: 0 !important;
+    width: calc(100% - 20px) !important;
+}
+
+section.elementor-inner-section > div {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.contentarea {
+    background-color: var(--e-global-color-d4faeed, #F3FBFC);
+}
+
+.win-type-body {
+    color: var(--e-global-color-text, #2A2F3D);
+}
+.caption-field {
+    color: var(--e-global-color-secondary, #07B9CB);
+}
+.sticky-scrolled .sticky-header-pinned-fixed {
+    background-color: Window;
+}
+
+.win-button {
+    cursor: pointer;
+}
+
+.text-lightcolor.win-button {
+    background-color: Window;
+}
+
+.text-lightcolor.win-button:disabled {
+    background-color: #dcdcE4;
+    cursor: default;
+}
+
+.event .contentarea {
+    background-color: #ffffff;
+}
+
+.event .color_container2, .event .color_container4 {
+    background-color: var(--e-global-color-d4faeed, #F3FBFC);
+}
+
+/******** Ende Fonts for LiveBridge*********/
