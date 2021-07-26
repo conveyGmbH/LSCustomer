@@ -50,7 +50,7 @@
                     sibling = nextSibling;
                 }
             }
-            if (!hasFixedChild) {
+            /*if (!hasFixedChild) {
                 var savedBodyContentBottom = document.querySelector(".saved-body-content-bottom");
                 if (savedBodyContentBottom) {
                     sibling = savedBodyContentBottom.firstElementChild;
@@ -77,7 +77,7 @@
                         sibling = nextSibling;
                     }
                 }
-            }
+            }*/
 
             this.controller = new AppHeader.Controller(element);
             Log.ret(Log.l.trace);
