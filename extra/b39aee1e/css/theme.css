@@ -118,4 +118,7 @@ section.elementor-inner-section > div {
     background-color: var(--e-global-color-d4faeed, #F3FBFC);
 }
 
+.register .checkbox {
+    padding: 12px 0;
+}
 /******** Ende Fonts for LiveBridge*********/

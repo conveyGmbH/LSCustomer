@@ -221,3 +221,7 @@ input[disabled] {
     background-color: #ffffff;
     cursor: default;
 }
+
+label .list-anredecon-field {
+    line-height: normal;
+}
