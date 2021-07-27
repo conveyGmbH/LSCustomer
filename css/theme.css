@@ -216,6 +216,179 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
     --box-shadow-button: none;
     --outline-focus: none;
 }
+
+/*****************Styles für LSCustomer Test deimos******************/
+
+.home .win-type-title,
+.home .win-type-subtitle,
+.home .win-type-body,
+.home .win-type-caption,
+.events .win-type-title,
+.events .win-type-subtitle,
+.events .win-type-body,
+.events .win-type-caption,
+.event .win-type-title,
+.event .win-type-subtitle,
+.event .win-type-body,
+.event .win-h1,
+.event .win-h2,
+.event .win-h3,
+.event .win-h5,
+.event .win-tooltip,
+.event .win-type-caption,
+.event .caption-field,
+.event .content-header {
+    font-family: "Barlow";
+}
+
+.register .win-type-body,
+.register .win-type-title,
+.register .win-link,
+.register .win-container,
+.register .win-textbox,
+.register .field_line,
+.register .field_line_odd,
+.register .field_line_full,
+.register .label,
+.register .checkbox {
+    font-family: "Barlow";
+    font-weight: 400;
+}
+
+.countdown .win-type-body,
+.countdown .field_line_full,
+.countdown .win-h3,
+.countdown .win-h4,
+.countdown .win-h5 {
+    font-family: "Barlow";
+}
+
+.events button.win-button,
+.events button.win-button:focus {
+    border-radius: 40px 40px 40px 40px;
+    outline-style: none;
+}
+
+.events button#homeButton {
+    padding: 14px 26px;
+    color: #ffffff;
+}
+
+.events .button-tip .win-tooltip,
+.event .button-tip .win-tooltip {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    min-width: 200px;
+    width: fit-content;
+    text-align: center;
+    right: -50px;
+    top: 20px;
+    color: #fff;
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    z-index: 99;
+}
+
+.event .share-block .win-tooltip {
+    visibility: hidden;
+    position: relative;
+    opacity: 0;
+    width: 200px;
+    text-align: center;
+    left: 0;
+    top: 100%;
+    color: #fff;
+    background: var(--e-global-color-text, #2A2F3D);
+    border-color: var(--e-global-color-text, #2A2F3D);
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+}
+
+.event .caption-field {
+    color: #2a2f3d;
+}
+
+.event .section-4 .caption-field {
+    color: #c2d63e;
+}
+
+.event .speakerblock {
+    background-color: inherit;
+}
+
+.event button#calenderButton:not(:hover):not(:active):not(:focus) {
+    border-color: var(--e-global-color-accent, #c2d63e);
+}
+
+    .event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
+        color: var(--e-global-color-accent, #c2d63e);
+    }
+
+.register #loginButton, .register #re_registerEvent {
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--e-global-color-accent, #c2d63e);
+}
+
+    .register #loginButton > div > span, .register #re_registerEvent > span {
+        font-weight: 400;
+        color: var(--e-global-color-accent, #c2d63e);
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 20px;
+        letter-spacing: 1px;
+    }
+
+.text-lightcolor.win-button {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+    .text-lightcolor.win-button:disabled {
+        background-color: #ffffff;
+        cursor: default;
+    }
+
+.countdown .countdown-line {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    -webkit-transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    -moz-transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+}
+
+.countdown .count-block {
+    background-color: #ffffff;
+}
+
+.countdown .win-h3, .countdown .win-h5 {
+    color: #2a2f3d;
+}
+
+
+/*****************ENDE Styles für LSCustomer Test deimos************/
+
 .body-content-bottom {
     visibility: hidden;
 }

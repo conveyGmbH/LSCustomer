@@ -6,21 +6,6 @@
 }
 */
 
-
-.event .win-type-title,
-.event .win-type-subtitle,
-.event .win-type-body,
-.event .win-h1,
-.event .win-h2,
-.event .win-h3,
-.event .win-h5,
-.event .win-tooltip,
-.event .win-type-caption,
-.event .caption-field,
-.event .content-header{
-    font-family: "Barlow";
-}
-
 .event .bold {
     font-weight: 600;
 }
@@ -46,7 +31,6 @@
 .event .speakerblock {
     display: inline-block;
     margin-bottom: 20px;
-    background-color: inherit;
 }
 
 .event .content-grid {
@@ -173,11 +157,6 @@
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
     background-color: Window;
-    border-color: var(--e-global-color-accent, #c2d63e);
-}
-
-.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
-    color: var(--e-global-color-accent, #c2d63e);
 }
 
 .event .button-tip {
@@ -189,27 +168,6 @@
     display: inline-block !important;
     position: relative;
     top: 1px;
-}
-
-.event .button-tip .win-tooltip {
-    visibility: hidden;
-    position: absolute;
-    opacity: 0;
-    min-width: 200px;
-    width: fit-content;
-    text-align: center;
-    right: -50px;
-    top: 20px;
-    color: #fff;
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    transition: opacity 0.3s;
-    -webkit-transition: opacity 0.3s;
-    -moz-transition: opacity 0.3s;
-    z-index: 99;
 }
 
 .event .button-tip:hover .win-tooltip {
@@ -224,10 +182,7 @@
 .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
 .event .section-3 { grid-area: 2/1/span 3/span 4; padding-right: 10px;}
 .event .section-4 { grid-area: 5/1/span 3/span 5;}
-.event .section-4 .caption-field {
-    color: #c2d63e;
 
-}
 .event .speaker-line { display: inline-block; width: 100%; margin: 5px;}
 .event .speaker-image-container {
     display: block;
@@ -298,25 +253,6 @@
     box-sizing: content-box;
 }
 
-.event .share-block .win-tooltip {
-    visibility: hidden;
-    position: relative;
-    opacity: 0;
-    width: 200px;
-    text-align: center;
-    left: 0;
-    top: 100%;
-    color: #fff;
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    transition: opacity 0.3s;
-    -webkit-transition: opacity 0.3s;
-    -moz-transition: opacity 0.3s;
-}
-
 .event .share-block:hover .win-tooltip {
     visibility: visible; opacity: 1;
 }
@@ -326,7 +262,6 @@
     text-align: left;
     top: 20px;
     font-size: 16px;
-    color: #2a2f3d;
 }
 .event .caption-block {
      width: auto; display: block; padding-right: 10px; margin-right: 10px;

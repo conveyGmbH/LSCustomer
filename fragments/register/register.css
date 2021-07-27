@@ -1,44 +1,9 @@
-﻿.register .win-type-body,
-.register .win-type-title,
-.register .win-link,
-.register .win-container,
-.register .win-textbox,
-.register .field_line,
-.register .field_line_odd,
-.register .field_line_full,
-.register .label,
-.register .checkbox {
-    font-family: "Barlow";
-    font-weight: 400;
-}
-
-.register .label {
+﻿.register .label {
     width: 130px;
 }
 
 .register .checkbox {
     padding: 7px 0;
-}
-
-.register #loginButton, .register #re_registerEvent {
-    /*background-color: Window;*/
-    border-radius: 30px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: var(--e-global-color-accent, #c2d63e);
-    /*cursor: pointer;*/
-}
-
-    .register #loginButton > div > span, .register #re_registerEvent > span {
-    font-weight: 400;
-    color: var(--e-global-color-accent, #c2d63e);
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 20px;
-    letter-spacing: 1px;
 }
 
 #registerController .doc-container {
@@ -195,9 +160,6 @@ input[disabled] {
     min-width: 76px;
     height: 36px;
     overflow: hidden;
-    /*display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;*/
 }
 
 .list-privacy-item {
@@ -210,16 +172,6 @@ input[disabled] {
     width: 100%;
     height: auto;
     overflow: hidden;
-}
-
-.text-lightcolor.win-button {
-    background-color: #ffffff;
-    cursor: pointer;
-}
-
-.text-lightcolor.win-button:disabled {
-    background-color: #ffffff;
-    cursor: default;
 }
 
 label .list-anredecon-field {

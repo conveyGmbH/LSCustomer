@@ -1,13 +1,6 @@
 /*
     margins/paddings for all screens
 */
-.home .win-type-title,
-.home .win-type-subtitle,
-.home .win-type-body,
-.home .win-type-caption {
-    font-family: "Barlow";
-}
-
 .home .bold {
     font-weight: 600;
 }
@@ -163,9 +156,6 @@
     font-weight: 600;
     line-height: 1.167;
     padding: 5px 0 0 0;
-}
-
-.home .event-comment {
 }
 
 .home .custlogo {
@@ -351,7 +341,7 @@
 .view-size-medium .home .event-item .event-subtitle {
     padding: 0;
 }
-    /*margins/paddings for medium size screens or orientation landscape
+/*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
 
     use: .view-size-medium-small

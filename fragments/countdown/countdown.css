@@ -24,7 +24,7 @@
     margin: 0;
     width: 100%;
     text-align: center;
-    background-color: #ffffff;
+    background-color: inherit;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -39,7 +39,6 @@
     width: 15%;
     margin: 5px 0;
     padding: 5px;
-    background-color: #ffffff;
 }
 
 .countdown .count {
@@ -98,7 +97,7 @@
 }
 .countdown .win-h3 {
     display: block;
-    color: #2a2f3d;
+    color: inherit;
     font-size: 2.8em;
     font-weight: 400;
     margin: 5px;
@@ -106,7 +105,7 @@
 }
 .countdown .win-h5 {
     display: block;
-    color: #2a2f3d;
+    color: inherit;
     font-size: 12px;
     padding: 0 2px;
     margin: 0;
