@@ -119,6 +119,6 @@ section.elementor-inner-section > div {
 }
 
 .register .checkbox {
-    padding: 12px 0;
+    padding: 12px 0 !important;
 }
 /******** Ende Fonts for LiveBridge*********/
