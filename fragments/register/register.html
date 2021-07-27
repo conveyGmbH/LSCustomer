@@ -27,27 +27,20 @@
     </div>-->
                     <div class="centerarea registerEmail">
                         <div class="registermail-container" data-win-bind="style.display: showRegisterMail Binding.Converter.toDisplay">
-                            <!--<div class="field_line field_line_odd">
+                            <div class="field_line field_line_odd">
                                 <span class="label win-type-caption portrait_only"
                                       data-win-res="{textContent: 'register.salutation'}"></span>
                                 <span class="label landscape_only"
                                       data-win-res="{textContent: 'register.salutation'}"></span>
-                            </div>-->
-                            <div class="anredeList-template"
-                                 data-win-control="WinJS.Binding.Template" style="display: none">
+                            </div>
+                            <div id="anredeRepeater"
+                                 data-win-control="WinJS.UI.Repeater">
                                 <div class="list-anredecon-item">
                                     <label class="list-anredecon-field">
-                                        <input type="checkbox" class="anrede win-checkbox" value="1" data-win-bind="textContent: INITAnredeID" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" /> <!--onclick  -->
+                                        <input type="checkbox" class="anrede win-checkbox" value="1" data-win-bind="textContent: INITAnredeID" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" />
                                         <span class="checkbox" data-win-bind="textContent: TITLE"></span>
                                     </label>
                                 </div>
-                            </div>
-                            <div id="anredeList"
-                                 class="listview field_line field_line_odd"
-                                 data-win-control="WinJS.UI.ListView"
-                                 data-win-options="{
-                                     itemTemplate: select('.anredeList-template')
-                                 }">
                             </div>
                             <div class="field_line field_line_odd">
                                 <span class="label win-type-caption portrait_only"

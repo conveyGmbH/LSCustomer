@@ -30,6 +30,7 @@
     border-color: var(--e-global-color-accent, #c2d63e);
     /*cursor: pointer;*/
 }
+
     .register #loginButton > div > span, .register #re_registerEvent > span {
     font-weight: 400;
     color: var(--e-global-color-accent, #c2d63e);
@@ -49,6 +50,7 @@
     width: 100%;
     height: calc(100% - 8px);
 }
+
 .titlearea-bkg {
 	background-color: rgb(216, 97, 65); /*dummy workaround because of exception in color.js*/
 }
@@ -70,28 +72,51 @@
 .register .reRegisterEvent-mail-container {
     background-color: Window;
 }
+
 .register .field_line {
     margin-top: 4px;
     border: none;
 }
-.register .input_field { float: left; width: 100%; margin-top: 8px; background-color: Window; border: 1px solid #d2d2d2; border-radius: 5px;}
 
-.register .field_line_full { width: calc(100% - 38px);}
+.register .input_field {
+    float: left;
+    width: 100%;
+    margin-top: 8px;
+    background-color: Window;
+    border: 1px solid #d2d2d2;
+    border-radius: 5px;
+}
 
-.win-listview .win-gridlayout .win-container { margin: 10px 5px 0 0; }
+.register .field_line_full {
+    width: calc(100% - 38px);
+}
+
+.win-listview .win-gridlayout .win-container {
+    margin: 10px 5px 0 0;
+}
+
 .register .win-container {
     margin-left: 0;
 }
-.register .win-container-odd { margin-left: 10px;}
 
-.register #loginButton { width: 100%; margin: 20px 0;}
+.register .win-container-odd {
+    margin-left: 10px;
+}
+
+.register #loginButton {
+    width: 100%;
+    margin: 20px 0;
+}
+
 .register #resendButton, .register #editButton, .register #reRegisterButton {
     display: inline-block;
     font-size: 12px;
     text-align: left;
 }
 
-.register #re_registerEvent { width: 100%;}
+.register #re_registerEvent {
+    width: 100%;
+}
 
 .button {
     width: 500px;
@@ -119,17 +144,6 @@ input[disabled] {
     line-height: normal;
     box-sizing: content-box;
 }
-
-    /*icon Facebook and Co.
-.fa {
-    min-width: 16px;
-    padding: 15px;
-    font-size: 30px;
-    text-align: center;
-    text-decoration: none;
-    margin: 5px 2px;
-    border-radius: 50%;
-}*/
 
     .circle:hover {
     opacity: 0.7;
@@ -164,52 +178,26 @@ input[disabled] {
     background: #8EE5EE;
     color: white;
 }
-#anredeList .win-headercontainer {
-    height: 0;
-}
 
-#anredeList.listview {
-    /*position: relative;
-    left: 0;
-    top: 0;*/
+#anredeRepeater {
     width: 100%;
-    height: 44px;
-}
-
-#anredeList .win-surface {
-    margin: 0
-}
-
-#anredeList .win-checkbox {
-    margin-right: 2px;
+    margin-left: 16px;
 }
 
 .list-anredecon-item {
-    /*width: 180px;
-    height: 48px;
-    overflow: hidden;
-    display: flex;
-    min-width: 180px;
-            height: 48px;
-    padding-left: 20px;
-
-*/
+    float: left;
     background-color: transparent;
     padding-left: 0;
     padding-right: 0;
     padding-top: 2px;
     padding-bottom: 2px;
-    /*width: 100%;*/
+    width: 25%;
     min-width: 76px;
     height: 36px;
     overflow: hidden;
     /*display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;*/
-}
-
-#anredeList .win-itembox:hover::before {
-    border-color: transparent;
 }
 
 .list-privacy-item {
@@ -228,6 +216,7 @@ input[disabled] {
     background-color: #ffffff;
     cursor: pointer;
 }
+
 .text-lightcolor.win-button:disabled {
     background-color: #ffffff;
     cursor: default;

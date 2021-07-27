@@ -50,7 +50,7 @@
             this.anrede = null;
             //var register = fragmentElement.querySelector("#register");
             // now do anything...
-            var listView = fragmentElement.querySelector("#anredeList.listview");
+            var anredeRepeater = fragmentElement.querySelector("#anredeRepeater");
 
             var fetchMail = function (response) {
                 var vAccessToken = response.authResponse.accessToken;
@@ -126,9 +126,9 @@
                                     return (item && (item.INITAnredeID !== 0 && item.INITAnredeID !== 3));
                                 });
                             that.anrede = new WinJS.Binding.List(results);
-                                if (listView.winControl) {
-                                    // add ListView dataSource
-                                listView.winControl.itemDataSource = that.anrede.dataSource;
+                            if (anredeRepeater.winControl) {
+                                // add anredeRepeater data
+                                anredeRepeater.winControl.data = that.anrede;
                                 }
                             }
                         }, function (errorResponse) {
