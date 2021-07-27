@@ -145,7 +145,7 @@
 }
 .event button#homeButton {
     padding: 14px 26px;
-    color: #ffffff;
+    color: inherit;
 }
 
 .event button .win-type-title {
