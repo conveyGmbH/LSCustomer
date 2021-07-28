@@ -133,6 +133,26 @@
     padding: 0 !important;
 }
 
+.home .content-header-line .win-type-title,
+.event .content-header-line .win-type-title,
+.event .content-header-line .win-type-subtitle{
+    margin: 0 30px;
+}
+
+.home .list-footer {
+    margin-top: 65px;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.events .list-footer {
+    margin-top: 65px;
+}
+
+.event .hero-footer {
+    margin-top: 65px;
+}
+
 .events .win-listview .win-vertical .win-footercontainer,
 .events .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
@@ -151,8 +171,10 @@
 }
 
 .events button.win-button,
-.events button.win-button:focus {
-    border-radius: none;
+.events button.win-button:focus,
+.event button.win-button,
+.event button.win-button:focus {
+    border-radius: 0;
     outline-style: none;
 }
 
@@ -181,14 +203,12 @@
     min-width: 200px;
     width: fit-content;
     text-align: center;
-    right: -50px;
-    top: 20px;
-    color: #fff;
-    background: var(--the7-additional-menu-elements-color, #006b8a);
+    left: 90px;
+    top: 0;
+    color: #006b8a;
+    background-color: #f2f2f2;
     border-color: var(--the7-additional-menu-elements-color, #006b8a);
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
+    border-radius: none !important;
     transition: opacity 0.3s;
     -webkit-transition: opacity 0.3s;
     -moz-transition: opacity 0.3s;
@@ -222,14 +242,11 @@
     color: #006b8a;
 }
 
-.event .speakerblock {
-    background-color: #ffffff;
-}
-
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
     border-color: var(--the7-additional-menu-elements-color, #006b8a);
     background-color: #006b8a !important;
     border-radius: none;
+    margin-left: 30px;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
@@ -353,8 +370,12 @@ section.elementor-inner-section > div {
     background-color: #f2f2f2 !important;
 }
 
-.event .color_container2, .event .color_container4 {
+.event .color_container2{
     background-color: transparent !important;
+}
+
+.event .color_container4 {
+    background-color: #ffffff;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
