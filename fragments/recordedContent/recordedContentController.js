@@ -12,9 +12,16 @@ var __meteor_runtime_config__;
 
     var nav = WinJS.Navigation;
 
+    var magicStart = "<!--";
+    var magicStop = "-->";
+
     WinJS.Namespace.define("RecordedContent", {
         Controller: WinJS.Class.derive(Fragments.Controller, function Controller(fragmentElement, options, commandList) {
             Log.call(Log.l.trace, "RecordedContent.Controller.", "eventId=" + (options && options.eventId));
+
+            var commandQueue = [];
+            var chatObserver = null;
+            var sendResizePromise = null;
 
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
@@ -45,6 +52,14 @@ var __meteor_runtime_config__;
 
             that.dispose = function() {
                 Log.call(Log.l.trace, "RecordedContent.Controller.");
+                if (sendResizePromise) {
+                    sendResizePromise.cancel();
+                    sendResizePromise = null;
+                }
+                if (chatObserver) {
+                    chatObserver.disconnect();
+                    chatObserver = null;
+                }
                 if (BBBPlayback && typeof BBBPlayback.exit === "function") {
                     BBBPlayback.exit();
                 }
@@ -428,6 +443,246 @@ var __meteor_runtime_config__;
                 });
             }
 
+            var sendResize = function (delay) {
+                if (sendResizePromise) {
+                    sendResizePromise.cancel();
+                }
+                sendResizePromise = WinJS.Promise.timeout(delay || 0).then(function () {
+                    var resizeEvent = document.createEvent('uievent');
+                    resizeEvent.initEvent('resize', true, true);
+                    window.dispatchEvent(resizeEvent);
+                });
+            }
+            that.sendResize = sendResize;
+
+            that.eventHandlers = {
+                showPresentation: function () {
+                    Log.call(Log.l.info, "RecordedContent.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && !(mainSection.firstElementChild && mainSection.firstElementChild.id === "presentation-area")) {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
+                    var presentationArea = fragmentElement.querySelector("#presentation-area");
+                    if (presentationArea && WinJS.Utilities.hasClass(presentationArea, "area-is-hidden")) {
+                        WinJS.Utilities.removeClass(presentationArea, "area-is-hidden");
+                    }
+                    that.binding.showPresentation = true;
+                    Log.ret(Log.l.info);
+                },
+                hidePresentation: function () {
+                    Log.call(Log.l.info, "RecordedContent.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && mainSection.firstElementChild && mainSection.firstElementChild.id === "presentation-area") {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
+                    var presentationArea = fragmentElement.querySelector("#presentation-area");
+                    if (presentationArea && !WinJS.Utilities.hasClass(presentationArea, "area-is-hidden")) {
+                        WinJS.Utilities.addClass(presentationArea, "area-is-hidden");
+                    }
+                    that.binding.showPresentation = false;
+                    Log.ret(Log.l.info);
+                },
+                showVideoList: function () {
+                    Log.call(Log.l.info, "RecordedContent.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && !(mainSection.firstElementChild && mainSection.firstElementChild.id === "video-area")) {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
+                    var videoArea = fragmentElement.querySelector("#video-area");
+                    if (videoArea && WinJS.Utilities.hasClass(videoArea, "area-is-hidden")) {
+                        WinJS.Utilities.removeClass(videoArea, "area-is-hidden");
+                    }
+                    that.binding.showVideoList = true;
+                    Log.ret(Log.l.info);
+                },
+                hideVideoList: function () {
+                    Log.call(Log.l.info, "RecordedContent.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && mainSection.firstElementChild && mainSection.firstElementChild.id === "video-area") {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
+                    var videoArea = fragmentElement.querySelector("#video-area");
+                    if (videoArea && !WinJS.Utilities.hasClass(videoArea, "area-is-hidden")) {
+                        WinJS.Utilities.addClass(videoArea, "area-is-hidden");
+                    }
+                    that.binding.showVideoList = false;
+                    Log.ret(Log.l.info);
+                }
+            }
+
+            that.allCommandInfos = {
+                showPresentation: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"]
+                },
+                hidePresentation: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"]
+                },
+                videoListDefault: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                videoListLeft: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                videoListRight: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                hideVideoList: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"]
+                },
+                showVideoList: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"]
+                },
+                presenterModeTiled: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                presenterModeFull: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                presenterModeSmall: {
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                },
+                showNotification: {
+                    collection: "group-chat-msg", msg: "added", redundantList: null
+                },
+                lockChatMessage: {
+                    collection: "group-chat-msg", msg: "added", redundantList: null
+                },
+                unlockChatMessage: {
+                    collection: "group-chat-msg", msg: "added", redundantList: null
+                },
+                sessionEndRequested: {
+                    collection: "group-chat-msg", msg: "added", redundantList: "sessionEndRequested"
+                },
+                pQ: {
+                    collection: "polls", msg: "added", redundantList: "pQ"
+                }
+            };
+
+            var handleCommandWithParam = function(commandWithParam) {
+                if (!commandWithParam) {
+                    Log.ret(Log.L.info, "null param");
+                    return WinJS.Promise.as();
+                }
+                var command = commandWithParam.command;
+                var prevNotifyModified = AppBar.notifyModified;
+                Log.print(Log.l.info, "queue command=" + command);
+                var commandInfo = that.allCommandInfos[command];
+                if (!commandInfo) {
+                    Log.ret(Log.L.info, "unknown command=" + command);
+                    return WinJS.Promise.as();
+                }
+                commandQueue = commandQueue.filter(function(item) {
+                    return (!commandInfo.redundantList || commandInfo.redundantList.indexOf(item.command) < 0);
+                });
+                commandQueue.push(commandWithParam);
+                return WinJS.Promise.timeout(250).then(function() {
+                    var commandsToHandle = commandQueue;
+                    commandQueue = [];
+                    AppBar.notifyModified = false;
+                    commandsToHandle.forEach(function(queuedCommandWithParam) {
+                        var queuedCommand = queuedCommandWithParam.command;
+                        var queuedParam = null;
+                        if (queuedCommandWithParam.param) {
+                            queuedParam = queuedCommandWithParam.param;
+                        };
+                        if (typeof that.eventHandlers[queuedCommand] === "function") {
+                            Log.print(Log.l.info, "handle command=" + queuedCommand);
+                            if (queuedParam) {
+                                that.eventHandlers[queuedCommand](queuedParam);
+                            } else {
+                                that.eventHandlers[queuedCommand]();
+                            }
+                        }
+                    });
+                    AppBar.notifyModified = prevNotifyModified;
+                    WinJS.Promise.as().then(function () {
+                        return WinJS.Promise.timeout(50);
+                    }).then(function () {
+                        that.sendResize(50);
+                    });
+                });
+            }
+            that.handleCommandWithParam = handleCommandWithParam;
+
+            var getCommandWithParam = function (text) {
+                if (text) {
+                    if (that.allCommandInfos[text]) {
+                        return {
+                            command: text, 
+                            param: ""
+                        };
+                    }
+                    for (var prop in that.allCommandInfos) {
+                        if (that.allCommandInfos.hasOwnProperty(prop)) {
+                            if (that.allCommandInfos[text.substr(0, prop.length)] && 
+                                text[prop.length] === "(" && text[text.length - 1] === ")") {
+                                return {
+                                    command: text.substr(0, prop.length), 
+                                    param: text.substr(prop.length + 1, text.length - prop.length - 2)
+                                };
+                            }
+                        }
+                    }
+
+                }
+                return null;
+            }
+            var parseChatMessage = function(message) {
+                var responseReplaced = false;
+                var newResponseText = "";
+                Log.call(Log.l.trace, "RecordedContent.Controller.", "message=" + message);
+                if (typeof message === "string") {
+                    var fieldReplaced = false;
+                    var skipField = false;
+                    var fieldLength = message.length;
+                    var prevFieldStartPos = 0;
+                    while (prevFieldStartPos >= 0 && prevFieldStartPos < message.length) {
+                        var posMagicStart = message.indexOf(magicStart, prevFieldStartPos);
+                        if (posMagicStart >= prevFieldStartPos) {
+                            var posMagicStop = message.indexOf(magicStop, posMagicStart);
+                            var command = "";
+                            var commandLength = posMagicStop - (posMagicStart + magicStart.length);
+                            if (commandLength > 0) {
+                                command = message.substr(posMagicStart + magicStart.length, commandLength);
+                                var commandWithParam = getCommandWithParam(command);
+                                if (commandWithParam) {
+                                    if (fieldLength > magicStart.length + command.length + magicStop.length) {
+                                        newResponseText += message.substr(prevFieldStartPos, posMagicStart - prevFieldStartPos);
+                                        fieldReplaced = true;
+                                    } else if (!prevFieldStartPos) {
+                                        skipField = true;
+                                    }
+                                    responseReplaced = true;
+                                    Log.print(Log.l.info, "received command=" + commandWithParam.command);
+                                    that.handleCommandWithParam(commandWithParam);
+                                }
+                            } 
+                            prevFieldStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
+                        } else {
+                            if (fieldReplaced) {
+                                newResponseText += message.substr(prevFieldStartPos, message.length - prevFieldStartPos);
+                            }
+                            prevFieldStartPos = -1;
+                        }
+                    }
+                }
+                Log.ret(Log.l.trace, responseReplaced ? newResponseText: message);
+                return responseReplaced ? newResponseText: message;
+            }
+            that.parseChatMessage = parseChatMessage;
+
             var loadData = function () {
                 var url;
                 Log.call(Log.l.trace, "RecordedContent.Controller.");
@@ -473,6 +728,62 @@ var __meteor_runtime_config__;
                                 if (playButton) {
                                     playButton.click();
                                 }
+                            });
+                        }
+                        var chat = fragmentElement.querySelector("#chat");
+                        if (chat) {
+                            chatObserver = new MutationObserver(function(mutationList, observer) {
+                                mutationList.forEach(function (mutation) {
+                                    var chatNode;
+                                    switch (mutation.type) {
+                                    case "attributes":
+                                        if (mutation.target) {
+                                            var ariaHidden = mutation.target.getAttribute("aria-hidden");
+                                            Log.print(Log.l.trace, "chat attributes changed! ariaHidden=" + ariaHidden);
+                                            if (ariaHidden === "false") {
+                                                var oldMessageAll = mutation.target.getAttribute("name");
+                                                var newMessageAll = "";
+                                                if (oldMessageAll) {
+                                                    newMessageAll = that.parseChatMessage(oldMessageAll);
+                                                } else {
+                                                    oldMessageAll = "";
+                                                    chatNode = mutation.target.firstElementChild ? mutation.target.firstElementChild.nextSibling: null;
+                                                    while (chatNode) {
+                                                        var newMessage = "";
+                                                        var message = "";
+                                                        switch (chatNode.nodeName && chatNode.nodeName.toLowerCase()) {
+                                                            case "img":
+                                                                message = chatNode.alt;
+                                                                break;
+                                                            default:
+                                                                message = chatNode.textContent;
+                                                        }
+                                                        if (message) {
+                                                            newMessage = that.parseChatMessage(message);
+                                                            if (newMessage !== message) {
+                                                                chatNode.textContent = newMessage;
+                                                            }
+                                                        }
+                                                        oldMessageAll += message;
+                                                        newMessageAll += newMessage;
+                                                        chatNode = chatNode.nextSibling;
+                                                    }
+                                                    if (oldMessageAll && oldMessageAll !== newMessageAll) {
+                                                        mutation.target.setAttribute("name", oldMessageAll);
+                                                    }
+                                                }
+                                                if (!newMessageAll && mutation.target.style) {
+                                                    mutation.target.style.display = "none";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    }
+                                });
+                            });
+                            chatObserver.observe(chat, {
+                                attributeFilter: ["aria-hidden"],
+                                subtree: true
                             });
                         }
                     }
