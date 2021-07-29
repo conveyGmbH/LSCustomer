@@ -50,3 +50,42 @@
 #recordedContent.presenter-mode.presenter-mode-tiled #chat-area {
     height: 15% !important;
 }
+#recordedContent.presenter-mode.presenter-mode-full #main-section {
+    width: 85%;
+}
+#recordedContent.presenter-mode.presenter-mode-full #side-section {
+    height: 0 !important;
+    width: 25% !important;
+}
+#recordedContent.presenter-mode.presenter-mode-small #main-section {
+    width: 80%;
+    right: 0;
+}
+#recordedContent.presenter-mode.presenter-mode-small #presentation-area {
+    left: 0;
+    top: 0;
+}
+#recordedContent.presenter-mode.presenter-mode-small #deskshare-video,
+#recordedContent.presenter-mode.presenter-mode-small #slide {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: fit-content;
+}
+
+#recordedContent.presenter-mode.presenter-mode-small #side-section {
+    left: 0;
+    height: 0 !important;
+    width: 33% !important;
+    margin-top: 10%;
+}
+#recordedContent.presenter-mode.presenter-mode-small #chat-area {
+    height: 0 !important;
+    padding: 0 !important;
+    border: none;
+}
+#recordedContent.presenter-mode.presenter-mode-small #chat {
+    height: 0 !important;
+    padding: 0 !important;
+    border: none;
+}
