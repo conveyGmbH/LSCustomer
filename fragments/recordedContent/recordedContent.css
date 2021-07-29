@@ -21,7 +21,12 @@
     right: 0;
 }
 
-#recordedContent .area-is-hidden {
+#recordedContent.presentation-is-hidden #presentation-area {
     display: none;
 }
+
+#recordedContent.videolist-is-hidden #video-area {
+    height: 0 !important;
+}
+
 
