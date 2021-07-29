@@ -29,4 +29,7 @@
     height: 0 !important;
 }
 
-
+#recordedContent.presentation-is-hidden #chat-area,
+#recordedContent.videolist-is-hidden #chat-area {
+    height: 100% !important;
+}
