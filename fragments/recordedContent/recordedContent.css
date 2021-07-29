@@ -57,6 +57,16 @@
     height: 0 !important;
     width: 25% !important;
 }
+#recordedContent.presenter-mode.presenter-mode-full #chat-area {
+    height: 0 !important;
+    padding: 0 !important;
+    border: none;
+}
+#recordedContent.presenter-mode.presenter-mode-full #chat {
+    height: 0 !important;
+    padding: 0 !important;
+    border: none;
+}
 #recordedContent.presenter-mode.presenter-mode-small #main-section {
     width: 80%;
     right: 0;
