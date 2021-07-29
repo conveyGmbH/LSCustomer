@@ -29,7 +29,24 @@
     height: 0 !important;
 }
 
+#chat {
+    line-height: 1em;
+    font-size: 0.8em;
+}
+
 #recordedContent.presentation-is-hidden #chat-area,
 #recordedContent.videolist-is-hidden #chat-area {
     height: 100% !important;
+}
+
+#recordedContent.presenter-mode.presenter-mode-tiled #video-area {
+    height: 85% !important;
+    padding-top: 18%;
+    overflow: hidden;
+}
+#recordedContent.presenter-mode.presenter-mode-tiled #video-area video {
+    object-fit: cover;
+}
+#recordedContent.presenter-mode.presenter-mode-tiled #chat-area {
+    height: 15% !important;
 }
