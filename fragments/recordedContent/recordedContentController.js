@@ -596,6 +596,13 @@ var __meteor_runtime_config__;
                 },
                 videoListDefault: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && !(mainSection.firstElementChild && mainSection.firstElementChild.id === "video-area")) {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
                     if (recordedContent) {
                         if (WinJS.Utilities.hasClass(recordedContent, "videolist-is-left")) {
                             WinJS.Utilities.removeClass(recordedContent, "videolist-is-left");
@@ -609,6 +616,13 @@ var __meteor_runtime_config__;
                 },
                 videoListLeft: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && !(mainSection.firstElementChild && mainSection.firstElementChild.id === "presentation-area")) {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
                     if (recordedContent) {
                         if (!WinJS.Utilities.hasClass(recordedContent, "videolist-is-left")) {
                             WinJS.Utilities.addClass(recordedContent, "videolist-is-left");
@@ -622,6 +636,13 @@ var __meteor_runtime_config__;
                 },
                 videoListRight: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && !(mainSection.firstElementChild && mainSection.firstElementChild.id === "presentation-area")) {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
                     if (recordedContent) {
                         if (!WinJS.Utilities.hasClass(recordedContent, "videolist-is-right")) {
                             WinJS.Utilities.addClass(recordedContent, "videolist-is-right");
@@ -635,16 +656,37 @@ var __meteor_runtime_config__;
                 },
                 presenterModeTiled: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && !(mainSection.firstElementChild && mainSection.firstElementChild.id === "presentation-area")) {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
                     that.setPresenterModeState("tiled");
                     Log.ret(Log.l.info);
                 },
                 presenterModeFull: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && !(mainSection.firstElementChild && mainSection.firstElementChild.id === "presentation-area")) {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
                     that.setPresenterModeState("full");
                     Log.ret(Log.l.info);
                 },
                 presenterModeSmall: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
+                    var mainSection = fragmentElement.querySelector("#main-section");
+                    if (mainSection && !(mainSection.firstElementChild && mainSection.firstElementChild.id === "video-area")) {
+                        var swapButton = fragmentElement.querySelector(".acorn-swap-button");
+                        if (swapButton) {
+                            swapButton.click();
+                        }
+                    }
                     that.setPresenterModeState("small");
                     Log.ret(Log.l.info);
                 }
