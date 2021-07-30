@@ -39,6 +39,14 @@
     height: 100% !important;
 }
 
+#recordedContent.videolist-is-left #main-section {
+    position: absolute;
+    right: 0;
+}
+#recordedContent.videolist-is-left #side-section {
+    left: 0;
+}
+
 #recordedContent.presenter-mode.presenter-mode-tiled #video-area {
     height: 85% !important;
     padding-top: 18%;
