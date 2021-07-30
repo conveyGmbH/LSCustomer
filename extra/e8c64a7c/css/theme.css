@@ -1,0 +1,459 @@
+﻿/* styles theme for customizations */
+
+/********Start Fonts for BSW*********/
+@font-face {
+    font-family: "Symbols";
+    src: url(../../../lib/WinJS/fonts/Symbols.woff2) format("woff2"), 
+         url(../../../lib/WinJS/fonts/Symbols.woff) format("woff"), 
+         url(../../../lib/WinJS/fonts/Symbols.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url(../fonts/BarlowSemiCondensed-SemiBold.woff2) format("woff2"), 
+         url(../fonts/BarlowSemiCondensed-SemiBold.woff) format("woff"), 
+         url(../fonts/Montserrat-Regular.ttf) format("truetype");
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Open Sans Condensed";
+    src: url(../fonts/BarlowSemiCondensed-SemiBold.woff2) format("woff2"),
+         url(../fonts/BarlowSemiCondensed-SemiBold.woff) format("woff"),
+         url(../fonts/OpenSansCondensed-Light.ttf) format("truetype");
+    font-style: normal;
+    font-weight: 400;
+}
+
+
+:root {
+    --max-content-margin-left: 0 !important;
+    --max-content-width: 1410px;
+    --max-content-width-surface: 1460px !important;
+    --font-family-default: 'Raleway';
+    --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2),  0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4),  0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    --box-shadow-button: none;
+    --outline-focus: none;
+}
+
+:root {
+    --color-primary: #4a8eff;
+    --color-primary-rgb: 74, 142, 255;
+    --color-primary-hover: #4a8eff;
+    --color-primary-active: #4a8eff;
+    --color-secondary: #4a8eff;
+    --color-secondary-rgb: 74, 142, 255;
+    --color-secondary-hover: #4a8eff;
+    --color-secondary-active: #4a8eff;
+    --color-success: #18ce0f;
+    --color-success-rgb: 24, 206, 15;
+    --color-success-hover: #4a8eff;
+    --color-success-active: #4a8eff;
+    --color-info: #2CA8FF;
+    --color-info-rgb: 44, 168, 255;
+    --color-info-hover: #2CA8FF;
+    --color-info-active: #2CA8FF;
+    --color-warning: #f29e0f;
+    --color-warning-rgb: 242, 158, 15;
+    --color-warning-hover: orange;
+    --color-warning-active: orange;
+    --color-danger: #ff5062;
+    --color-danger-rgb: 255, 80, 98;
+    --color-danger-hover: #ff5062;
+    --color-danger-active: #ff5062;
+    --color-green: #30b570;
+    --color-blue: #0073ff;
+    --color-purple: #8557D3;
+    --color-red: #ff5062;
+    --color-muted: rgba(69, 89, 122, 0.6);
+    --wpdm-font: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.home .win-type-body,
+.events .win-type-body,
+.event .win-type-body,
+.register .win-type-body,
+.countdown .win-type-body {
+    font-family: "Open Sans Condensed", sans-serif;
+    font-size: 14px;
+    color: #121212;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+.home .win-type-title,
+.home .win-type-subtitle,
+.home .win-type-caption,
+.events .win-type-title,
+.events .win-type-subtitle,
+.events .win-type-caption,
+.event .win-type-title,
+.event .win-type-subtitle,
+.event .win-h1,
+.event .win-h2,
+.event .win-h3,
+.event .win-h5,
+.event .win-tooltip,
+.event .win-type-caption,
+.event .caption-field,
+.event .content-header {
+    font-family: "Montserrat", sans-serif;
+}
+
+.register .win-type-title,
+.register .win-link,
+.register .win-container,
+.register .win-textbox,
+.register .field_line,
+.register .field_line_odd,
+.register .field_line_full,
+.register .label,
+.register .checkbox {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+
+.countdown .field_line_full,
+.countdown .win-h3,
+.countdown .win-h4,
+.countdown .win-h5 {
+    font-family: "Montserrat", sans-serif;
+}
+
+.home .win-listview .win-vertical .win-footercontainer,
+.home .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+.home .content-header-line,
+.events .content-header-line {
+    margin: 0 30px !important;
+}
+
+.home .content-header-line > h1,
+.events .content-header-line > h1 {
+    text-align: center !important;
+}
+
+.event .content-header-line {
+    margin: 10px 30px 0 30px !important;
+}
+
+.home .list-footer {
+    margin-top: 65px;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.events .list-footer {
+    margin-top: 65px;
+}
+
+.event .hero-footer {
+    margin-top: 65px;
+}
+
+.events .win-listview .win-vertical .win-footercontainer,
+.events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+.event .hero-header {
+    margin-left: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.event .content-header {
+    margin: 15px 30px;
+}
+
+.events button.win-button,
+.events button.win-button:focus,
+.event button.win-button,
+.event button.win-button:focus {
+    border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    outline-style: none;
+}
+
+.events button#homeButton {
+    margin-left: 35px;
+    padding: 14px 26px;
+    color: #ffffff;
+    background-color: #5AB5EC;
+}
+
+.event button#homeButton {
+    margin-left: 30px;
+    padding: 14px 26px;
+    background-color: #5AB5EC;
+}
+
+.event button .win-type-title {
+    color: #ffffff;
+}
+
+.events .button-tip .win-tooltip,
+.event .button-tip .win-tooltip {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    min-width: 200px;
+    width: fit-content;
+    text-align: center;
+    left: 90px;
+    top: 0;
+    color: #121212;
+    background-color: #ffffff;
+    border-color: var(--the7-additional-menu-elements-color, #5AB5EC);
+    border-radius: 0 !important;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    z-index: 99;
+}
+
+.event .share-block .win-tooltip {
+    visibility: hidden;
+    position: relative;
+    opacity: 0;
+    width: 200px;
+    text-align: center;
+    left: 0;
+    top: 100%;
+    color: #121212;
+    background: var(--the7-additional-menu-elements-color, #ffffff);
+    border-color: var(--the7-additional-menu-elements-color, #5AB5EC);
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+}
+
+.event .caption-field {
+    color: #121212;
+}
+
+.event .section-4 .caption-field {
+    color: #3f96cb;
+    font-weight: 700;
+}
+
+.event button#calenderButton:not(:hover):not(:active):not(:focus) {
+    border-color: var(--the7-additional-menu-elements-color, #5AB5EC);
+    background-color: #5AB5EC !important;
+    border-radius: 0 !important;
+}
+
+.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
+    color: #ffffff;
+}
+
+.register #loginButton, .register #re_registerEvent {
+    border-radius: 0 !important;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--the7-additional-menu-elements-color, #5AB5EC);
+    background-color: var(--the7-additional-menu-elements-color, #5AB5EC);
+}
+
+.register #loginButton > div > span, .register #re_registerEvent > span {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+.text-lightcolor.win-button {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.text-lightcolor.win-button:disabled {
+    background-color: #ffffff;
+    cursor: default;
+}
+
+.countdown .countdown-line {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: none;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+    -webkit-transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+    -moz-transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+}
+
+.countdown .count-block {
+    background-color: #ffffff;
+}
+
+.countdown .win-h3, .countdown .win-h5 {
+    color: var(--the7-additional-menu-elements-color, #121212);
+}
+
+.body-content-bottom {
+    visibility: hidden;
+}
+.body-content-bottom section:not(.elementor-inner-section) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: var(--max-content-margin-left) !important;
+    width: var(--max-content-width) !important;
+    position: absolute !important;
+    padding: 0 15px !important;
+}
+.body-content-bottom section:not(.elementor-inner-section) > div {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+.view-size-biggest .body-content-bottom section:not(.elementor-inner-section) {
+    left: 20px !important;
+    width: calc(100% - 70px) !important;
+
+
+}
+.view-size-medium .body-content-bottom section:not(.elementor-inner-section) {
+    left: 5px !important;
+    width: calc(100% - 30px) !important;
+    padding: 0 10px !important;
+}
+.view-size-small .body-content-bottom section:not(.elementor-inner-section) {
+    left: 0 !important;
+    width: calc(100% - 20px) !important;
+}
+
+section.elementor-inner-section > div {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.home .contentarea, .events .contentarea {
+    background-color: #ffffff;
+}
+
+.win-type-body {
+    color: var(--e-global-color-text, #121212);
+}
+.caption-field {
+    color: var(--the7-accent-color, #5AB5EC);
+    font-weight: 700;
+}
+.sticky-scrolled .sticky-header-pinned-fixed {
+    background-color: Window;
+}
+
+.win-button {
+    cursor: pointer;
+}
+
+.text-lightcolor.win-button {
+    background-color: Window;
+}
+
+.text-lightcolor.win-button:disabled {
+    color: var(--the7-additional-menu-elements-color, #5AB5EC);
+    cursor: default;
+}
+
+.event .contentarea {
+    background-color: #ffffff !important;
+}
+
+.event .color_container2, .event .color_container4 {
+    background-color: transparent !important;
+}
+
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1299px 
+    @media (max-width:1299px) {
+    }
+
+    use: .view-size-biggest
+*/
+.view-size-biggest .home .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
+.view-size-biggest .events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+.view-size-biggest .event .hero-header {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1099px 
+    @media (max-width:1099px) {
+    }
+
+    use: .view-size-bigger
+*/
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 899px 
+    @media (max-width:899px) {
+    }
+
+    use: .view-size-medium
+*/
+
+.view-size-medium .home .content-header-line,
+.view-size-medium .events .content-header-line {
+    margin: 0 18px !important;
+}
+
+.view-size-medium .events button#homeButton {
+    margin-left: 18px !important;
+}
+
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 699px 
+
+    use: .view-size-medium-small
+*/
+
+
+
+/*margins/paddings for small screens and orientation vertical
+        @media (max-width:499px) {
+        }
+    use: .view-size-small
+*/
+
+.view-size-small .events button#homeButton {
+    margin-left: 10px !important;
+}
+
+.view-size-small .home .content-header-line,
+.view-size-small .events .content-header-line {
+    margin: 0 10px !important;
+}
