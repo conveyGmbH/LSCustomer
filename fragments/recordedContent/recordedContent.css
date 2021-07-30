@@ -71,6 +71,7 @@
 #recordedContent.presenter-mode.presenter-mode-small #main-section {
     width: 80%;
     right: 0;
+    position: absolute;
 }
 #recordedContent.presenter-mode.presenter-mode-small #presentation-area {
     left: 0;
@@ -78,8 +79,8 @@
 }
 #recordedContent.presenter-mode.presenter-mode-small #deskshare-video,
 #recordedContent.presenter-mode.presenter-mode-small #slide {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 100% !important;
+    max-height: 100% !important;
     width: 100%;
     height: fit-content;
 }
