@@ -149,6 +149,7 @@ var __meteor_runtime_config__;
             var chatMenu = fragmentElement.querySelector("#chatMenu");
             var pollQuestion = fragmentElement.querySelector("#pollQuestion");
 
+            var handleCommandPromise = null;
             var sendResizePromise = null;
             var showUserListPromise = null;
             var adjustContentPositionsPromise = null;
@@ -177,6 +178,10 @@ var __meteor_runtime_config__;
 
             that.dispose = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
+                if (handleCommandPromise) {
+                    handleCommandPromise.cancel();
+                    handleCommandPromise = null;
+                }
                 if (pollQuestion && pollQuestion.winControl) {
                     pollQuestion.winControl.data = null;
                     pollQuestion = null;
@@ -3092,53 +3097,54 @@ var __meteor_runtime_config__;
 
             that.allCommandInfos = {
                 showPresentation: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"], type: "layout"
                 },
                 hidePresentation: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"], type: "layout"
                 },
                 videoListDefault: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 videoListLeft: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 videoListRight: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 hideVideoList: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"], type: "layout"
                 },
                 showVideoList: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"], type: "layout"
                 },
                 presenterModeTiled: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 presenterModeFull: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 presenterModeSmall: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 showNotification: {
-                    collection: "group-chat-msg", msg: "added", redundantList: null
+                    collection: "group-chat-msg", msg: "added", redundantList: null, type: "note"
                 },
                 lockChatMessage: {
-                    collection: "group-chat-msg", msg: "added", redundantList: null
+                    collection: "group-chat-msg", msg: "added", redundantList: null, type: "chat"
                 },
                 unlockChatMessage: {
-                    collection: "group-chat-msg", msg: "added", redundantList: null
+                    collection: "group-chat-msg", msg: "added", redundantList: null, type: "chat"
                 },
                 sessionEndRequested: {
-                    collection: "group-chat-msg", msg: "added", redundantList: "sessionEndRequested"
+                    collection: "group-chat-msg", msg: "added", redundantList: "sessionEndRequested", type: "session"
                 },
                 pQ: {
-                    collection: "polls", msg: "added", redundantList: "pQ"
+                    collection: "polls", msg: "added", redundantList: "pQ", type: "poll"
                 }
             };
 
             var handleCommandWithParam = function(commandWithParam) {
+                Log.call(Log.l.trace, "Conference.Controller.", "commandWithParam=" + commandWithParam);
                 if (!commandWithParam) {
                     Log.ret(Log.L.info, "null param");
                     return WinJS.Promise.as();
@@ -3156,11 +3162,15 @@ var __meteor_runtime_config__;
                     Log.ret(Log.l.trace, "command=" + command + " not supported in collection=" + commandWithParam.collection + " msg=" + commandWithParam.msg);
                     return WinJS.Promise.as();
                 }
+                if (handleCommandPromise) {
+                    handleCommandPromise.cancel();
+                    handleCommandPromise = null;
+                }
                 commandQueue = commandQueue.filter(function(item) {
                     return (!commandInfo.redundantList || commandInfo.redundantList.indexOf(item.command) < 0);
                 });
                 commandQueue.push(commandWithParam);
-                return WinJS.Promise.timeout(250).then(function() {
+                handleCommandPromise = WinJS.Promise.timeout(250).then(function() {
                     var commandsToHandle = commandQueue;
                     commandQueue = [];
                     AppBar.notifyModified = false;
@@ -3196,6 +3206,8 @@ var __meteor_runtime_config__;
                         that.sendResize(50);
                     });
                 });
+                Log.ret(Log.L.trace);
+                return handleCommandPromise;
             }
             that.handleCommandWithParam = handleCommandWithParam;
 

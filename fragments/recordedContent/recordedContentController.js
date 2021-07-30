@@ -21,7 +21,11 @@ var __meteor_runtime_config__;
 
             var commandQueue = [];
             var chatObserver = null;
+            var playButtonObserver = null;
             var sendResizePromise = null;
+            var handleCommandPromise = null;
+            var registerUiHandler= null;
+            var slideClickHandlerDone = false;
 
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
@@ -52,9 +56,21 @@ var __meteor_runtime_config__;
 
             that.dispose = function() {
                 Log.call(Log.l.trace, "RecordedContent.Controller.");
+                if (registerUiHandler) {
+                    registerUiHandler.cancel();
+                    registerUiHandler = null;
+                }
+                if (handleCommandPromise) {
+                    handleCommandPromise.cancel();
+                    handleCommandPromise = null;
+                }
                 if (sendResizePromise) {
                     sendResizePromise.cancel();
                     sendResizePromise = null;
+                }
+                if (playButtonObserver) {
+                    playButtonObserver.disconnect();
+                    playButtonObserver = null;
                 }
                 if (chatObserver) {
                     chatObserver.disconnect();
@@ -694,55 +710,56 @@ var __meteor_runtime_config__;
 
             that.allCommandInfos = {
                 showPresentation: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"], type: "layout"
                 },
                 hidePresentation: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"], type: "layout"
                 },
                 videoListDefault: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 videoListLeft: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 videoListRight: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 hideVideoList: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"], type: "layout"
                 },
                 showVideoList: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["hideVideoList", "showVideoList"], type: "layout"
                 },
                 presenterModeTiled: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 presenterModeFull: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 presenterModeSmall: {
-                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"]
+                    collection: "group-chat-msg", msg: "added", redundantList: ["videoListDefault", "videoListLeft", "videoListRight", "presenterModeTiled", "presenterModeFull", "presenterModeSmall"], type: "layout"
                 },
                 showNotification: {
-                    collection: "group-chat-msg", msg: "added", redundantList: null
+                    collection: "group-chat-msg", msg: "added", redundantList: null, type: "note"
                 },
                 lockChatMessage: {
-                    collection: "group-chat-msg", msg: "added", redundantList: null
+                    collection: "group-chat-msg", msg: "added", redundantList: null, type: "chat"
                 },
                 unlockChatMessage: {
-                    collection: "group-chat-msg", msg: "added", redundantList: null
+                    collection: "group-chat-msg", msg: "added", redundantList: null, type: "chat"
                 },
                 sessionEndRequested: {
-                    collection: "group-chat-msg", msg: "added", redundantList: "sessionEndRequested"
+                    collection: "group-chat-msg", msg: "added", redundantList: "sessionEndRequested", type: "session"
                 },
                 pQ: {
-                    collection: "polls", msg: "added", redundantList: "pQ"
+                    collection: "polls", msg: "added", redundantList: "pQ", type: "poll"
                 }
             };
 
-            var handleCommandWithParam = function(commandWithParam) {
+            var handleCommandWithParam = function(commandWithParam, typeFilter) {
+                Log.call(Log.l.trace, "RecordedContent.Controller.", "commandWithParam=" + commandWithParam);
                 if (!commandWithParam) {
-                    Log.ret(Log.L.info, "null param");
+                    Log.ret(Log.l.info, "null param");
                     return WinJS.Promise.as();
                 }
                 var command = commandWithParam.command;
@@ -750,14 +767,23 @@ var __meteor_runtime_config__;
                 Log.print(Log.l.info, "queue command=" + command);
                 var commandInfo = that.allCommandInfos[command];
                 if (!commandInfo) {
-                    Log.ret(Log.L.info, "unknown command=" + command);
+                    Log.ret(Log.l.info, "unknown command=" + command);
                     return WinJS.Promise.as();
+                }
+                if (typeFilter && typeof typeFilter.indexOf === "function" &&
+                    typeFilter.indexOf(commandInfo.type) < 0) {
+                    Log.ret(Log.l.info, "extra ignored command=" + command);
+                    return WinJS.Promise.as();
+                }
+                if (handleCommandPromise) {
+                    handleCommandPromise.cancel();
+                    handleCommandPromise = null;
                 }
                 commandQueue = commandQueue.filter(function(item) {
                     return (!commandInfo.redundantList || commandInfo.redundantList.indexOf(item.command) < 0);
                 });
                 commandQueue.push(commandWithParam);
-                return WinJS.Promise.timeout(250).then(function() {
+                handleCommandPromise = WinJS.Promise.timeout(250).then(function() {
                     var commandsToHandle = commandQueue;
                     commandQueue = [];
                     AppBar.notifyModified = false;
@@ -777,12 +803,10 @@ var __meteor_runtime_config__;
                         }
                     });
                     AppBar.notifyModified = prevNotifyModified;
-                    WinJS.Promise.as().then(function () {
-                        return WinJS.Promise.timeout(50);
-                    }).then(function () {
-                        that.sendResize(50);
-                    });
+                    that.sendResize(50);
                 });
+                Log.ret(Log.l.trace);
+                return handleCommandPromise;
             }
             that.handleCommandWithParam = handleCommandWithParam;
 
@@ -809,7 +833,7 @@ var __meteor_runtime_config__;
                 }
                 return null;
             }
-            var parseChatMessage = function(message) {
+            var parseChatMessage = function(message, typeFilter) {
                 var responseReplaced = false;
                 var newResponseText = "";
                 Log.call(Log.l.trace, "RecordedContent.Controller.", "message=" + message);
@@ -836,7 +860,7 @@ var __meteor_runtime_config__;
                                     }
                                     responseReplaced = true;
                                     Log.print(Log.l.info, "received command=" + commandWithParam.command);
-                                    that.handleCommandWithParam(commandWithParam);
+                                    that.handleCommandWithParam(commandWithParam, typeFilter);
                                 }
                             } 
                             prevFieldStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
@@ -852,6 +876,155 @@ var __meteor_runtime_config__;
                 return responseReplaced ? newResponseText: message;
             }
             that.parseChatMessage = parseChatMessage;
+
+            var setCurrentPresenterMode = function(chatLine) {
+                Log.call(Log.l.trace, "RecordedContent.Controller.");
+                var oldMessageAll = chatLine.getAttribute("name");
+                var newMessageAll = "";
+                if (oldMessageAll) {
+                    newMessageAll = that.parseChatMessage(oldMessageAll);
+                } else {
+                    oldMessageAll = "";
+                    var chatNode = chatLine.firstElementChild ? chatLine.firstElementChild.nextSibling : null;
+                    while (chatNode) {
+                        var newMessage = "";
+                        var message = "";
+                        switch (chatNode.nodeName && chatNode.nodeName.toLowerCase()) {
+                            case "img":
+                                message = chatNode.alt;
+                                break;
+                            default:
+                                message = chatNode.textContent;
+                        }
+                        if (message) {
+                            newMessage = that.parseChatMessage(message);
+                            if (newMessage !== message) {
+                                chatNode.textContent = newMessage;
+                            }
+                        }
+                        oldMessageAll += message;
+                        newMessageAll += newMessage;
+                        chatNode = chatNode.nextSibling;
+                    }
+                    if (oldMessageAll && oldMessageAll !== newMessageAll) {
+                        chatLine.setAttribute("name", oldMessageAll);
+                    }
+                }
+                if (!newMessageAll && chatLine.style) {
+                    chatLine.style.display = "none";
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.setCurrentPresenterMode = setCurrentPresenterMode;
+
+            var syncPresenterMode = function() {
+                Log.call(Log.l.trace, "RecordedContent.Controller.");
+                var chat = fragmentElement.querySelector("#chat");
+                if (chat) {
+                    var chatLine = chat.firstElementChild;
+                    while (chatLine && chatLine.getAttribute("aria-hidden") === "false") {
+                        var oldMessageAll = chatLine.getAttribute("name");
+                        if (oldMessageAll) {
+                            that.parseChatMessage(oldMessageAll, ["layout"]);
+                        } else {
+                            var chatNode = chatLine.firstElementChild ? chatLine.firstElementChild.nextSibling : null;
+                            while (chatNode) {
+                                var message = "";
+                                switch (chatNode.nodeName && chatNode.nodeName.toLowerCase()) {
+                                    case "img":
+                                        message = chatNode.alt;
+                                        break;
+                                    default:
+                                        message = chatNode.textContent;
+                                }
+                                if (message) {
+                                    that.parseChatMessage(message, ["layout"]);
+                                }
+                                chatNode = chatNode.nextSibling;
+                            }
+                        }
+                        chatLine = chatLine.nextElementSibling;
+                    }
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.syncPresenterMode = syncPresenterMode;
+
+            var registerObserver = function () {
+                Log.call(Log.l.trace, "RecordedContent.Controller.");
+                if (registerUiHandler) {
+                    registerUiHandler.cancel();
+                    registerUiHandler = null;
+                }
+                if (!slideClickHandlerDone) {
+                    var slide = fragmentElement.querySelector("#slide");
+                    if (slide) {
+                        that.addRemovableEventListener(slide, "click", function () {
+                            var playButton = fragmentElement.querySelector(".acorn-play-button");
+                            if (playButton) {
+                                playButton.click();
+                            }
+                        });
+                        slideClickHandlerDone = true;
+                    }
+                }
+                if (!chatObserver) {
+                    var chat = fragmentElement.querySelector("#chat");
+                    if (chat) {
+                        chatObserver = new MutationObserver(function (mutationList, observer) {
+                            mutationList.forEach(function (mutation) {
+                                switch (mutation.type) {
+                                    case "attributes":
+                                    if (mutation.target) {
+                                        var ariaHidden = mutation.target.getAttribute("aria-hidden");
+                                        Log.print(Log.l.trace, "chat attributes changed! ariaHidden=" + ariaHidden);
+                                        if (ariaHidden === "false") {
+                                            that.setCurrentPresenterMode(mutation.target);
+                                        }
+                                    }
+                                    break;
+                                }
+                            });
+                        });
+                        chatObserver.observe(chat, {
+                            attributeFilter: ["aria-hidden"],
+                            subtree: true
+                        });
+                    }
+                }
+                if (!playButtonObserver) {
+                    var playButton = fragmentElement.querySelector(".acorn-play-button");
+                    if (playButton) {
+                        playButtonObserver = new MutationObserver(function (mutationList, observer) {
+                            mutationList.forEach(function (mutation) {
+                                switch (mutation.type) {
+                                    case "attributes":
+                                    if (mutation.target) {
+                                        Log.print(Log.l.trace, "chat attributes changed! disabled=" + mutation.target.disabled);
+                                        if (!mutation.target.disabled) {
+                                            WinJS.Promise.timeout(50).then(function() {
+                                                that.syncPresenterMode();
+                                            });
+                                        }
+                                    }
+                                    break;
+                                }
+                            });
+                        });
+                        playButtonObserver.observe(playButton, {
+                            attributeFilter: ["disabled"]
+                        });
+                    }
+                }
+                if (!playButtonObserver || !chatObserver || !slideClickHandlerDone) {
+                    registerUiHandler = WinJS.Promise.timeout(150).then(function () {
+                        that.registerObserver();
+                    });
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.registerObserver = registerObserver;
+        
 
             var loadData = function () {
                 var url;
@@ -891,71 +1064,7 @@ var __meteor_runtime_config__;
                         if (BBBPlayback && typeof BBBPlayback.playbackLoaded === "function") {
                             BBBPlayback.playbackLoaded();
                         }
-                        var slide = fragmentElement.querySelector("#slide");
-                        if (slide) {
-                            that.addRemovableEventListener(slide, "click", function() {
-                                var playButton = fragmentElement.querySelector(".acorn-play-button");
-                                if (playButton) {
-                                    playButton.click();
-                                }
-                            });
-                        }
-                        var chat = fragmentElement.querySelector("#chat");
-                        if (chat) {
-                            chatObserver = new MutationObserver(function(mutationList, observer) {
-                                mutationList.forEach(function (mutation) {
-                                    var chatNode;
-                                    switch (mutation.type) {
-                                    case "attributes":
-                                        if (mutation.target) {
-                                            var ariaHidden = mutation.target.getAttribute("aria-hidden");
-                                            Log.print(Log.l.trace, "chat attributes changed! ariaHidden=" + ariaHidden);
-                                            if (ariaHidden === "false") {
-                                                var oldMessageAll = mutation.target.getAttribute("name");
-                                                var newMessageAll = "";
-                                                if (oldMessageAll) {
-                                                    newMessageAll = that.parseChatMessage(oldMessageAll);
-                                                } else {
-                                                    oldMessageAll = "";
-                                                    chatNode = mutation.target.firstElementChild ? mutation.target.firstElementChild.nextSibling: null;
-                                                    while (chatNode) {
-                                                        var newMessage = "";
-                                                        var message = "";
-                                                        switch (chatNode.nodeName && chatNode.nodeName.toLowerCase()) {
-                                                            case "img":
-                                                                message = chatNode.alt;
-                                                                break;
-                                                            default:
-                                                                message = chatNode.textContent;
-                                                        }
-                                                        if (message) {
-                                                            newMessage = that.parseChatMessage(message);
-                                                            if (newMessage !== message) {
-                                                                chatNode.textContent = newMessage;
-                                                            }
-                                                        }
-                                                        oldMessageAll += message;
-                                                        newMessageAll += newMessage;
-                                                        chatNode = chatNode.nextSibling;
-                                                    }
-                                                    if (oldMessageAll && oldMessageAll !== newMessageAll) {
-                                                        mutation.target.setAttribute("name", oldMessageAll);
-                                                    }
-                                                }
-                                                if (!newMessageAll && mutation.target.style) {
-                                                    mutation.target.style.display = "none";
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    }
-                                });
-                            });
-                            chatObserver.observe(chat, {
-                                attributeFilter: ["aria-hidden"],
-                                subtree: true
-                            });
-                        }
+                        that.registerObserver();
                     }
                 });
                 Log.ret(Log.l.trace);
