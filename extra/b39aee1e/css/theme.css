@@ -115,13 +115,12 @@
     visibility: hidden;
     position: absolute;
     opacity: 0;
-    min-width: 200px;
-    width: fit-content;
+    width: 200px;
     text-align: center;
     right: -50px;
     top: 20px;
     color: #fff;
-    text-transform: none;
+    text-transform: none !important;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
     border-radius: 15px;
@@ -131,6 +130,7 @@
     -webkit-transition: opacity 0.3s;
     -moz-transition: opacity 0.3s;
     z-index: 99;
+    word-wrap: break-word;
 }
 
 .event .share-block .win-tooltip {
