@@ -906,7 +906,7 @@
                           that.binding.showTeaser = false;
                     }*/ else {
                         if (AppData._persistentStates.registerData.resultCode === 0 || AppData._persistentStates.registerData.resultCode === 13) {
-                        that.binding.showRegister = true;
+                            that.binding.showRegister = !!that.binding.dataEvent.ShowReg;
                         that.binding.showTeaser = true;
                         that.binding.showLogOffEventMail = false;
                             that.binding.showMaintenance = false;
