@@ -309,3 +309,49 @@ section.elementor-inner-section > div {
     padding: 12px 0 !important;
 }
 /******** Ende Fonts for LiveBridge*********/
+
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1299px 
+    @media (max-width:1299px) {
+    }
+
+    use: .view-size-biggest
+*/
+
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1099px 
+    @media (max-width:1099px) {
+    }
+
+    use: .view-size-bigger
+*/
+
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 899px 
+    @media (max-width:899px) {
+    }
+
+    use: .view-size-medium
+*/
+
+
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 699px 
+
+    use: .view-size-medium-small
+*/
+
+
+
+/*margins/paddings for small screens and orientation vertical
+        @media (max-width:499px) {
+        }
+    use: .view-size-small
+*/
+.view-size-small .home .content-header {
+    width: calc(100% - 20px);
+}
