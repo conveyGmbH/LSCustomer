@@ -247,7 +247,8 @@
                 clickCreateIcs: function (event) {
                     Log.call(Log.l.trace, "Event.Controller.");
                     var cal = ics();
-                    cal.addEvent(that.binding.dataEvent.Name, that.binding.dataEvent.LiveTyp, "", that.binding.dataEvent.dateStartDatum, that.binding.dataEvent.dateEndDatum);
+                    var urlToShare = that.binding.conferenceLink || that.binding.recordedLink || window.location.href || "";
+                    cal.addEvent(" " + that.binding.dataEvent.LiveTyp + ": " + that.binding.dataEvent.Name, urlToShare, "", that.binding.dataEvent.dateStartDatum, that.binding.dataEvent.dateEndDatum);
                     cal.calendar();
                     cal.download(that.binding.dataEvent.Name);
                     Log.ret(Log.l.trace);
