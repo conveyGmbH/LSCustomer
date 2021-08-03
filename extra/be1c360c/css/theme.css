@@ -140,6 +140,12 @@
     line-height: 25px !important;
 }
 
+.home .content-header-line > span, .events .content-header-line > span,
+.event .content-header-line > span {
+    font-size: 15px !important;
+    line-height: 25px !important;
+}
+
 .home .win-type-subtitle, .events .win-type-subtitle,
 .events .win-h2, .events .win-h3,
 .event .win-h2, .event .win-h3 {
@@ -442,6 +448,11 @@ section.elementor-inner-section > div {
     margin: 0 !important;
 }
 
+.view-size-biggest .home .content-header, .events .content-header, .event .content-header {
+    max-width: calc(1300px - 50px - 50px) !important;
+    margin: 0 auto !important;
+}
+
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
 .view-size-biggest .events .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
@@ -467,6 +478,11 @@ section.elementor-inner-section > div {
     use: .view-size-bigger
 */
 
+.view-size-bigger .home .content-header, .events .content-header, .event .content-header {
+    max-width: calc(100% - 50px - 50px) !important;
+    margin: 0 auto !important;
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
@@ -475,10 +491,14 @@ section.elementor-inner-section > div {
     use: .view-size-medium
 */
 
-.view-size-medium .home .content-header-line,
-.view-size-medium .events .content-header-line,
+.view-size-medium .home .content-header-line, .view-size-medium .events .content-header-line,
 .view-size-medium .event .content-header-line {
-    
+    width: 100%;
+}
+
+.view-size-medium .home .content-header, .events .content-header, .event .content-header {
+    max-width: calc(100% - 50px - 50px) !important;
+    margin: 0 auto !important;
 }
 
 .view-size-medium .events button#homeButton,
@@ -495,6 +515,11 @@ section.elementor-inner-section > div {
     use: .view-size-medium-small
 */
 
+.view-size-medium-small .home .content-header, .events .content-header, .event .content-header {
+    max-width: calc(100% - 20px - 20px) !important;
+    margin: 0 auto !important;
+}
+
 
 
 /*margins/paddings for small screens and orientation vertical
@@ -502,8 +527,9 @@ section.elementor-inner-section > div {
         }
     use: .view-size-small
 */
-.view-size-small .home .content-header {
-    
+.view-size-small .home .content-header, .events .content-header, .event .content-header {
+    max-width: calc(100% - 20px - 20px) !important;
+    margin: 0 auto !important;
 }
 
 .view-size-small .events button#homeButton,
