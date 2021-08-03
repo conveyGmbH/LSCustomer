@@ -3206,7 +3206,7 @@ var __meteor_runtime_config__;
                         that.sendResize(50);
                     });
                 });
-                Log.ret(Log.L.trace);
+                Log.ret(Log.l.trace);
                 return handleCommandPromise;
             }
             that.handleCommandWithParam = handleCommandWithParam;
