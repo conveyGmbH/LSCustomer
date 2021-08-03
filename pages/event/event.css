@@ -297,7 +297,7 @@
      width: auto; display: block; padding-right: 10px; margin-right: 10px;
 }
 
-.event p {
+p.ev-text {
     white-space: pre-wrap;
     font-weight: 400;
 }
