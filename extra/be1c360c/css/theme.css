@@ -23,8 +23,8 @@
     --max-content-width: 1410px;
     --max-content-width-surface: 1460px !important;
     --font-family-default: 'Raleway';
-    --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2),  0 3px 10px 0 rgba(0, 0, 0, 0.2);
-    --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4),  0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
     --outline-focus: none;
 }
@@ -81,7 +81,7 @@
     --the7-breadcrumbs-bg-color: rgba(255,255,255,0.2);
     --the7-breadcrumbs-border-color: rgba(130,36,227,0.2);
 }
-
+/****************img und #main von MP entfernen*******************/
 .home #fancy-header, .events #fancy-header, .event #fancy-header {
     display: none !important;
 }
@@ -90,7 +90,7 @@
     padding-top: 20px !important;
     display: none !important;
 }
-
+/********************ENDE #main von MP entfernen************************/
 .home .win-type-title,
 .home .win-type-subtitle,
 .home .win-type-body,
@@ -135,6 +135,18 @@
     font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
 }
 
+.home .win-type-body, .events .win-type-body, .event .win-type-body {
+    font-size: 15px !important;
+    line-height: 25px !important;
+}
+
+.home .win-type-subtitle, .events .win-type-subtitle,
+.events .win-h2, .events .win-h3,
+.event .win-h2, .event .win-h3 {
+    font-size: 18px;
+    line-height: 30px;
+}
+
 .home .win-listview .win-vertical .win-footercontainer,
 .home .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
@@ -142,18 +154,25 @@
     padding: 0 !important;
 }
 
-.home .content-header-line,
-.events .content-header-line {
-    margin: 0 30px !important;
+.home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
+.events .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
+    max-width: calc(1300px - 50px - 50px) !important;
+    margin: 0 auto !important;
 }
 
 .home .content-header-line > h1,
-.events .content-header-line > h1 {
-    text-align: center !important;
+.events .content-header-line > h1,
+.event .content-header-line > h1 {
+    font-size: 30px;
 }
 
 .event .content-header-line {
-    margin: 10px 30px 0 30px !important;
+    margin: 0;
+}
+
+.event .content-container {
+    width: calc(1300px - 50px - 50px) !important;
+    margin: 0 auto !important;
 }
 
 .home .list-footer {
@@ -198,14 +217,18 @@
 }
 
 .events button#homeButton {
-    margin-left: 35px;
+    position: relative;
+    left: 5%;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
     padding: 14px 26px;
     color: #ffffff;
     background-color: #006b8a;
 }
 
 .event button#homeButton {
-    margin-left: 30px;
+    margin-top: 20px !important;
+    margin-left: 0;
     padding: 14px 26px;
     background-color: #006b8a;
 }
@@ -416,6 +439,10 @@ section.elementor-inner-section > div {
     width: 100% !important;
 }
 
+.view-size-biggest .events .content-header-line {
+    width: calc(100% - 52px);
+}
+
 .view-size-biggest .event .hero-header {
     margin-left: 0 !important;
     width: 100% !important;
@@ -442,12 +469,13 @@ section.elementor-inner-section > div {
 .view-size-medium .home .content-header-line,
 .view-size-medium .events .content-header-line,
 .view-size-medium .event .content-header-line {
-    margin: 0 15px !important;
+    
 }
 
 .view-size-medium .events button#homeButton,
 .view-size-medium .event button#homeButton {
-    margin-left: 15px !important;
+    margin-left: 0 !important;
+    left: 3% !important;
 }
 
 
@@ -466,16 +494,16 @@ section.elementor-inner-section > div {
     use: .view-size-small
 */
 .view-size-small .home .content-header {
-    width: calc(100% - 20px);
+    
 }
 
 .view-size-small .events button#homeButton,
 .view-size-small .event button#homeButton {
-    margin-left: 10px !important;
+    
 }
 
 .view-size-small .home .content-header-line,
 .view-size-small .events .content-header-line,
 .view-size-small .event .content-header-line{
-    margin: 0 10px !important;
+    
 }
