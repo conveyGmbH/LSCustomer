@@ -82,6 +82,15 @@
     --the7-breadcrumbs-border-color: rgba(130,36,227,0.2);
 }
 
+.home #fancy-header, .events #fancy-header, .event #fancy-header {
+    display: none !important;
+}
+
+.home #main, .events #main, .event #main {
+    padding-top: 20px !important;
+    display: none !important;
+}
+
 .home .win-type-title,
 .home .win-type-subtitle,
 .home .win-type-body,
