@@ -125,6 +125,8 @@
 .register .checkbox {
     font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
     font-weight: 500;
+    font-size: 15px !important;
+    line-height: 25px !important;
 }
 
 .countdown .win-type-body,
@@ -138,6 +140,7 @@
 .home .win-type-body, .events .win-type-body, .event .win-type-body {
     font-size: 15px !important;
     line-height: 25px !important;
+    color: #333333 !important;
 }
 
 .home .content-header-line > span, .events .content-header-line > span,
@@ -146,11 +149,51 @@
     line-height: 25px !important;
 }
 
+.home .content-header-line > h1,
+.events .content-header-line > h1,
+.event .content-header-line > h1 {
+    font-size: 30px !important;
+    line-height: 36px !important;
+    font-weight: 600 !important;
+}
+
 .home .win-type-subtitle, .events .win-type-subtitle,
 .events .win-h2, .events .win-h3,
 .event .win-h2, .event .win-h3 {
     font-size: 18px !important;
     line-height: 30px !important;
+}
+
+.home .content-header-line > h2,
+.events .content-header-line > h2 {
+    font-size: 24px !important;
+    line-height: 48px !important;
+}
+
+.home .event-item .event-title,
+.events .event-item .event-title {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    color: #006b8a !important;
+}
+
+.home .event-item .event-subtitle,
+.events .event-item .event-subtitle {
+    font-size: 15px !important;
+    line-height: 20px !important;
+    color: #006b8a !important;
+    padding-bottom: 5px !important;
+}
+
+.home .event-item .event-comment,
+.events .event-item .event-comment {
+    font-size: 15px !important;
+}
+
+.event .ev-text {
+    font-size: 15px !important;
+    line-height: 25px !important;
+    font-weight: 500 !important;
 }
 
 .home .win-listview .win-vertical .win-footercontainer,
@@ -167,16 +210,14 @@
     margin: 0 auto !important;
 }
 
+.home .hero-image-container {
+    margin-bottom: 25px !important;
+}
+
 .home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
 .events .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
     max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
-}
-
-.home .content-header-line > h1,
-.events .content-header-line > h1,
-.event .content-header-line > h1 {
-    font-size: 30px !important;
 }
 
 .event .content-header-line {
@@ -293,6 +334,8 @@
 
 .event .caption-field {
     color: #006b8a;
+    line-height: 20px !important;
+    font-size: 16px !important;
 }
 
 .event .section-4 .caption-field {
@@ -468,8 +511,14 @@ section.elementor-inner-section > div {
     width: 100% !important;
     padding: 0 !important;
 }
+.view-size-biggest .event .hero-header,
+.view-size-biggest .event .content-container,
+.view-size-biggest .event .speakerblock {
+    margin-left: 20px;
+    width: calc(100% - 70px);
+    padding: 15px;
 
-
+}
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1099px 
     @media (max-width:1099px) {
@@ -477,7 +526,6 @@ section.elementor-inner-section > div {
 
     use: .view-size-bigger
 */
-
 .view-size-bigger .home .content-header, .events .content-header, .event .content-header {
     max-width: calc(100% - 50px - 50px) !important;
     margin: 0 auto !important;
@@ -507,14 +555,18 @@ section.elementor-inner-section > div {
     left: 3% !important;
 }
 
-
-
+.view-size-medium .event .hero-header,
+.view-size-medium .event .content-container,
+.view-size-medium .event .speakerblock {
+    margin-left: 5px;
+    width: calc(100% - 30px);
+    padding: 10px;
+}
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
 
     use: .view-size-medium-small
 */
-
 .view-size-medium-small .home .content-header, .events .content-header, .event .content-header {
     max-width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
@@ -530,6 +582,13 @@ section.elementor-inner-section > div {
 .view-size-small .home .content-header, .events .content-header, .event .content-header {
     max-width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
+}
+
+.view-size-small .event .hero-header,
+.view-size-small .event .content-container,
+.view-size-small .event .speakerblock {
+    margin-left: 0px;
+    width: calc(100% - 20px);
 }
 
 .view-size-small .events button#homeButton,
