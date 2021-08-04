@@ -188,6 +188,7 @@
 .home .event-item .event-comment,
 .events .event-item .event-comment {
     font-size: 15px !important;
+    line-height: 1.3 !important;
 }
 
 .event .ev-text {
@@ -206,10 +207,22 @@
 .home .content-header,
 .events .content-header,
 .event .content-header {
-    width: calc(1300px - 50px - 50px) !important;
+    width: calc(100% - 70px - 70px) !important;
     max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }
+
+.event .content-container,
+.event .speakerblock {
+    width: calc(100% - 70px - 70px) !important;
+    margin: 0 auto !important;
+}
+
+.event .section-1 > .content-header {
+    width: auto !important;
+    height: auto;
+}
+
 
 .home .hero-image-container {
     margin-bottom: 25px !important;
@@ -223,12 +236,6 @@
 
 .event .content-header-line {
     margin: 0 !important;
-}
-
-.event .content-container,
-.event .speakerblock {
-    width: calc(1300px - 50px - 50px) !important;
-    margin: 0 auto !important;
 }
 
 .home .list-footer {
@@ -274,7 +281,7 @@
 
 .events button#homeButton {
     position: relative !important;
-    left: 5% !important;
+    left: 5.5% !important;
     margin-top: 20px !important;
     margin-bottom: 20px !important;
     padding: 14px 26px;
@@ -284,7 +291,7 @@
 
 .event button#homeButton {
     position: relative !important;
-    left: 5% !important;
+    left: 5.5% !important;
     margin-top: 20px !important;
     margin-left: 0 !important;
     padding: 14px 26px;
@@ -520,7 +527,7 @@ section.elementor-inner-section > div {
 .view-size-biggest .event .content-container,
 .view-size-biggest .event .speakerblock {
     margin-left: 20px;
-    width: calc(100% - 70px) !important;
+    width: calc(100% - 70px -70px) !important;
     padding: 15px !important;
 
 }
@@ -531,7 +538,9 @@ section.elementor-inner-section > div {
 
     use: .view-size-bigger
 */
-.view-size-bigger .home .content-header, .events .content-header, .event .content-header {
+.view-size-bigger .home .content-header,
+.view-size-bigger .events .content-header,
+.view-size-bigger .event .content-header {
     width: calc(100% - 50px - 50px) !important;
     margin: 0 auto !important;
 }
@@ -544,12 +553,15 @@ section.elementor-inner-section > div {
     use: .view-size-medium
 */
 
-.view-size-medium .home .content-header-line, .view-size-medium .events .content-header-line,
+.view-size-medium .home .content-header-line,
+.view-size-medium .events .content-header-line,
 .view-size-medium .event .content-header-line {
     width: 100%;
 }
 
-.view-size-medium .home .content-header, .events .content-header, .event .content-header {
+.view-size-medium .home .content-header,
+.view-size-medium .events .content-header,
+.view-size-medium .event .content-header {
     width: calc(100% - 50px - 50px) !important;
     margin: 0 auto !important;
 }
@@ -571,7 +583,9 @@ section.elementor-inner-section > div {
 
     use: .view-size-medium-small
 */
-.view-size-medium-small .home .content-header, .events .content-header, .event .content-header {
+.view-size-medium-small .home .content-header,
+.view-size-medium-small .events .content-header,
+.view-size-medium-small .event .content-header {
     width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
 }
@@ -583,24 +597,16 @@ section.elementor-inner-section > div {
         }
     use: .view-size-small
 */
-.view-size-small .home .content-header, .events .content-header, .event .content-header {
+.view-size-small .home .content-header,
+.view-size-small .events .content-header,
+.view-size-small .event .content-header {
     width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
 }
 
 .view-size-small .event .content-container,
 .view-size-small .event .speakerblock {
-    margin-left: 0px;
+    margin-left: 0;
     width: calc(100% - 20px);
 }
 
-.view-size-small .events button#homeButton,
-.view-size-small .event button#homeButton {
-    
-}
-
-.view-size-small .home .content-header-line,
-.view-size-small .events .content-header-line,
-.view-size-small .event .content-header-line{
-    
-}
