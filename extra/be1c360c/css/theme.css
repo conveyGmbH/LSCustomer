@@ -206,6 +206,7 @@
 .home .content-header,
 .events .content-header,
 .event .content-header {
+    width: calc(1300px - 50px - 50px) !important;
     max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }
@@ -224,7 +225,9 @@
     margin: 0 !important;
 }
 
-.event .content-container {
+.event .hero-header,
+.event .content-container,
+.event .speakerblock {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }
@@ -491,9 +494,12 @@ section.elementor-inner-section > div {
     margin: 0 !important;
 }
 
-.view-size-biggest .home .content-header, .events .content-header, .event .content-header {
+.view-size-biggest .home .content-header,
+.events .content-header,
+.event .content-header {
     max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
+    width: calc(1300px - 50px - 50px) !important;
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
@@ -515,8 +521,8 @@ section.elementor-inner-section > div {
 .view-size-biggest .event .content-container,
 .view-size-biggest .event .speakerblock {
     margin-left: 20px;
-    width: calc(100% - 70px);
-    padding: 15px;
+    width: calc(100% - 70px) !important;
+    padding: 15px !important;
 
 }
 /*margins/paddings for medium size screens or orientation landscape
@@ -527,7 +533,7 @@ section.elementor-inner-section > div {
     use: .view-size-bigger
 */
 .view-size-bigger .home .content-header, .events .content-header, .event .content-header {
-    max-width: calc(100% - 50px - 50px) !important;
+    width: calc(100% - 50px - 50px) !important;
     margin: 0 auto !important;
 }
 
@@ -545,7 +551,7 @@ section.elementor-inner-section > div {
 }
 
 .view-size-medium .home .content-header, .events .content-header, .event .content-header {
-    max-width: calc(100% - 50px - 50px) !important;
+    width: calc(100% - 50px - 50px) !important;
     margin: 0 auto !important;
 }
 
@@ -558,9 +564,9 @@ section.elementor-inner-section > div {
 .view-size-medium .event .hero-header,
 .view-size-medium .event .content-container,
 .view-size-medium .event .speakerblock {
-    margin-left: 5px;
-    width: calc(100% - 30px);
-    padding: 10px;
+    margin-left: 5px !important;
+    width: calc(100% - 30px) !important;
+    padding: 10px !important;
 }
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
@@ -568,7 +574,7 @@ section.elementor-inner-section > div {
     use: .view-size-medium-small
 */
 .view-size-medium-small .home .content-header, .events .content-header, .event .content-header {
-    max-width: calc(100% - 20px - 20px) !important;
+    width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
 }
 
@@ -580,7 +586,7 @@ section.elementor-inner-section > div {
     use: .view-size-small
 */
 .view-size-small .home .content-header, .events .content-header, .event .content-header {
-    max-width: calc(100% - 20px - 20px) !important;
+    width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
 }
 
