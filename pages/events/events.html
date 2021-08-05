@@ -14,16 +14,21 @@
                 <div class="contentarea win-type-body">
                     <div class="headerFooterPlaceholder">
                         <div class="list-header">
-                            <button id="homeButton" class="win-button" 
-                                    onclick="AppBar.handleEvent('click', 'clickHome', event)">
-                                <div class="button-tip">
-                                    <div class="action-image" id="home"></div>
-                                    <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
-                                    <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
-                                </div>
-                            </button>
+
+                            <div class="homeButton">
+
+                                <button id="homeButton" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickHome', event)">
+                                    <div class="button-tip">
+                                        <div class="action-image" id="home"></div>
+                                        <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
+                                        <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
+                                    </div>
+                                </button>
+                            </div>
+                            
                             <div class="hero-image-container" data-win-bind="style.display: dataDoc.ser_doc Binding.Converter.toDisplay">
-                                <img data-win-bind="src: dataDoc.ser_doc; alt: dataDocText.ser_doc_alt; title: dataDocText.ser_doc_title; longdesc: dataDocText.ser_doc_descr" />
+                                <img data-win-bind="src: dataDoc.ser_doc; alt: dataDocText.ser_doc_alt; title: dataDocText.ser_doc_title; longdesc: dataDocText.ser_doc_descr"/>
                             </div>
                             <div class="content-header">
                                 <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ser_text_name_h1 Binding.Converter.toDisplay">
