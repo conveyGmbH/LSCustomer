@@ -176,6 +176,8 @@
     opacity: 0;
     width: fit-content;
     max-width: fit-content;
+    max-width: -moz-fit-content;
+    width: -moz-fit-content;
     text-align: center;
     right: -50px;
     top: 20px;

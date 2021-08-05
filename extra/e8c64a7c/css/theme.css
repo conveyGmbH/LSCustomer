@@ -214,6 +214,8 @@
     opacity: 0;
     max-width: fit-content !important;
     width: fit-content !important;
+    max-width: -moz-fit-content !important;
+    width: -moz-fit-content !important;
     text-align: center;
     left: 90px;
     top: 0;
@@ -225,6 +227,7 @@
     -webkit-transition: opacity 0.3s;
     -moz-transition: opacity 0.3s;
     z-index: 99;
+    word-wrap: break-word;
 }
 
 .event .share-block .win-tooltip {
