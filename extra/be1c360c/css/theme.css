@@ -223,6 +223,10 @@
     height: auto;
 }
 
+.event .speakerblock > .content-header {
+    width: calc(100% - 70px - 70px) !important;
+}
+
 
 .home .hero-image-container {
     margin-bottom: 25px !important;
