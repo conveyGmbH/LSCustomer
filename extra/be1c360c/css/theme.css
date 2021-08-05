@@ -619,6 +619,10 @@ section.elementor-inner-section > div {
     margin: 0 auto !important;
 }
 
+.view-size-medium .home .group-header {
+    width: 100% !important;
+}
+
 .view-size-medium .events button#homeButton,
 .view-size-medium .event button#homeButton {
     margin-left: 0 !important;
