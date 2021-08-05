@@ -237,7 +237,7 @@
     width: 100% !important;
 }
 .event .content-header {
-    width: calc(100% - 70px - 70px) !important;
+    width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }
 
@@ -248,8 +248,9 @@
 
 .event .content-container,
 .event .speakerblock {
-    width: calc(100% - 70px - 70px) !important;
+    width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
+    display: block !important;
 }
 
 .event .section-1 > .content-header {
@@ -258,7 +259,7 @@
 }
 
 .event .speakerblock > .content-header {
-    width: calc(100% - 70px - 70px) !important;
+    width: calc(1300px - 50px - 50px) !important;
 }
 
 
@@ -585,7 +586,7 @@ section.elementor-inner-section > div {
 .view-size-biggest .event .content-container,
 .view-size-biggest .event .speakerblock {
     margin-left: 20px;
-    width: calc(100% - 70px -70px) !important;
+    width: calc(100% - 50px -50px) !important;
     padding: 15px !important;
 
 }
@@ -596,10 +597,21 @@ section.elementor-inner-section > div {
 
     use: .view-size-bigger
 */
+
+.view-size-bigger .event .homeButton {
+    width: calc(100% - 20px - 20px) !important;
+    margin: 0 auto !important;
+}
 .view-size-bigger .home .content-header,
 .view-size-bigger .events .content-header,
 .view-size-bigger .event .content-header {
-    width: calc(100% - 50px - 50px) !important;
+    width: calc(100% - 20px - 20px) !important;
+    margin: 0 auto !important;
+}
+
+.view-size-bigger .event .content-container,
+.view-size-bigger .event .speakerblock {
+    width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
 }
 
@@ -620,7 +632,7 @@ section.elementor-inner-section > div {
 .view-size-medium .home .content-header,
 .view-size-medium .events .content-header,
 .view-size-medium .event .content-header {
-    width: calc(100% - 50px - 50px) !important;
+    width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
 }
 
@@ -637,7 +649,7 @@ section.elementor-inner-section > div {
 .view-size-medium .event .content-container,
 .view-size-medium .event .speakerblock {
     margin-left: 5px !important;
-    width: calc(100% - 30px) !important;
+    width: calc(100% - 20px - 20px) !important;
     padding: 10px !important;
 }
 /*margins/paddings for medium size screens or orientation landscape
