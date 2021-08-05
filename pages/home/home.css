@@ -22,7 +22,7 @@
 .home .win-listview .win-vertical .win-gridlayout.win-surface {
     -ms-grid-rows: auto !important;
     margin-left: var(--max-content-margin-left);
-    width: var(--max-content-width-surface) !important;
+    width: var(--max-content-width-surface);
 }
 
 .home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
