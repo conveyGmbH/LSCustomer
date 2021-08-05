@@ -228,6 +228,7 @@
     -moz-transition: opacity 0.3s;
     z-index: 99;
     word-wrap: break-word;
+    white-space: normal !important;
 }
 
 .event .share-block .win-tooltip {
