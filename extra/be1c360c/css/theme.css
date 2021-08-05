@@ -204,11 +204,12 @@
     padding: 0 !important;
 }
 
-.home .win-headercontainer > .content-header {
+.home .win-headercontainer .content-header {
     width: 60% !important;
     margin: 0 30% 0 10% !important;
 }
 
+.home .content-header,
 .event .content-header {
     width: calc(100% - 70px - 70px) !important;
     margin: 0 auto !important;
