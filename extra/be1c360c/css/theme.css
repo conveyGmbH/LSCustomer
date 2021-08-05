@@ -20,8 +20,8 @@
 
 :root {
     --max-content-margin-left: 0 !important;
-    --max-content-width: 1410px;
-    /*--max-content-width-surface: 1460px !important;*/
+    /*--max-content-width: 1410px;
+    --max-content-width-surface: 1460px !important;*/
     --font-family-default: 'Raleway';
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
