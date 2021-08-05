@@ -174,7 +174,8 @@
     visibility: hidden;
     position: absolute;
     opacity: 0;
-    width: 200px;
+    width: fit-content;
+    max-width: fit-content;
     text-align: center;
     right: -50px;
     top: 20px;

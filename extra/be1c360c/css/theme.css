@@ -322,8 +322,8 @@
     visibility: hidden;
     position: absolute;
     opacity: 0;
-    min-width: 200px;
-    width: fit-content;
+    width: fit-content !important;
+    max-width: fit-content !important;
     text-align: center;
     left: 90px;
     top: 0;
