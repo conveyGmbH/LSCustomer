@@ -208,7 +208,11 @@
     padding: 15px;*/
 }
 
-.home .win-gridlayout .win-surface {
+.home .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin: 0 auto !important;
+}
+
+.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
     margin: 0 auto !important;
 }
 
