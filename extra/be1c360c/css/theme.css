@@ -208,7 +208,6 @@
 .events .content-header,
 .event .content-header {
     width: calc(100% - 70px - 70px) !important;
-    max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }
 
@@ -510,9 +509,15 @@ section.elementor-inner-section > div {
     margin: 0 !important;
 }
 
+.view-size-biggest .home .win-headercontainer > .content-header {
+    width: 60% !important;
+    margin: 0 30% 0 10% !important;
+}
+
+
 .view-size-biggest .home .content-header,
-.events .content-header,
-.event .content-header {
+.view-size-biggest .events .content-header,
+.view-size-biggest .event .content-header {
     max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
     width: calc(1300px - 50px - 50px) !important;
