@@ -202,6 +202,9 @@
     margin-left: 0 !important;
     width: 100% !important;
     padding: 0 !important;
+    /*margin-left: var(--max-content-margin-left) !important;
+    width: var(--max-content-width) !important;
+    padding: 15px;*/
 }
 
 .home .win-headercontainer .content-header {
