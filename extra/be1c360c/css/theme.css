@@ -404,8 +404,14 @@
     background-color: #ffffff;
 }
 
-.countdown .win-h3, .countdown .win-h5 {
+.countdown .win-h3 {
     color: var(--the7-additional-menu-elements-color, #006b8a);
+    font-size: 24px;
+}
+
+.countdown .win-h5 {
+    color: #333333;
+    font-size: 16px;
 }
 
 .body-content-bottom {
