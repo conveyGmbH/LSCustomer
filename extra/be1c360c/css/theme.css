@@ -91,6 +91,7 @@
     display: none !important;
 }
 /********************ENDE #main von MP entfernen************************/
+/***********FONT for MP***********/
 .home .win-type-title,
 .home .win-type-subtitle,
 .home .win-type-body,
@@ -207,12 +208,28 @@
     padding: 15px;*/
 }
 
-.home .win-headercontainer .content-header {
-    width: 60% !important;
-    margin: 0 30% 0 3% !important;
+.home .win-gridlayout .win-surface {
+    margin: 0 auto !important;
 }
 
-.home .content-header,
+.home .win-headercontainer .content-header {
+    width: calc(1300px - 50px - 50px) !important;
+    margin: 0 auto !important;
+}
+
+.home .group-header {
+    width: calc(1300px - 50px - 50px) !important;
+    margin: 0 auto !important;
+}
+
+.home .win-itemscontainer .win-uniformgridlayout .win-laidout {
+    width: calc(1300px - 50px - 50px) !important;
+    margin: 0 auto !important;
+}
+
+.home .content-header {
+    width: 100% !important;
+}
 .event .content-header {
     width: calc(100% - 70px - 70px) !important;
     margin: 0 auto !important;
