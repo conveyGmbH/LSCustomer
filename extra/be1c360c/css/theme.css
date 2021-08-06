@@ -238,7 +238,7 @@
     width: 100% !important;
 }
 
-.home .event-item {
+.home .event-item, .events .event-item {
     width: 320px !important;
 }
 .event .content-header {
@@ -270,6 +270,11 @@
 
 .home .hero-image-container {
     margin-bottom: 25px !important;
+    width: calc(1300px - 50px - 50px) !important;
+}
+
+.events .hero-image-container {
+    width: calc(1300px - 50px - 50px) !important;
 }
 
 .home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
@@ -622,6 +627,11 @@ section.elementor-inner-section > div {
     margin-left: 0 !important;
     width: 100% !important;
     padding: 0 !important;
+}
+
+.view-size-biggest .home .hero-image-container,
+.view-size-biggest .events .hero-image-container {
+    width: calc(100% - 50px - 50px) !important;
 }
 
 .view-size-biggest .event .content-container,
