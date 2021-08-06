@@ -237,6 +237,10 @@
 .home .content-header {
     width: 100% !important;
 }
+
+.home .event-item {
+    width: 320px !important;
+}
 .event .content-header {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
@@ -437,7 +441,7 @@
     margin: 0 auto !important;
 }
 
-.event #logOffbutton {
+.event #logOffbutton .win-link {
     float: right !important;
 }
 
