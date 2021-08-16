@@ -1035,7 +1035,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 /* hide logoff menu-item in options menu */
 #conference.mediaview .right--Z4dKWq .scrollable--4fyj li.separator--Z1vmd5H,
 #conference.mediaview .right--Z4dKWq .scrollable--4fyj li.separator--Z1vmd5H ~ li {
-    display: none;
+    display: inline;
 }
 
 /* speaking labels on top area */
