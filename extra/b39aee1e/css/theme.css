@@ -106,6 +106,10 @@
     color: #ffffff;
 }
 
+.event button#homeButton {
+    border-radius: 40px !important;
+}
+
 .event button.win-type-title {
     color: #ffffff !important;
 }
@@ -182,9 +186,10 @@
     -moz-border-radius: 30px;
     border-style: solid;
     border-width: 2px;
-    border-color: var(--e-global-color-accent, #c2d63e);
+    border-color: #c2d63e !important;
     background-color: #ffffff !important;
     cursor: pointer;
+    color: #c2d63e !important;
 }
 
 .register #loginButton:hover, .register #re-registerEvent:hover {
@@ -193,7 +198,7 @@
 
 .register #loginButton > div > span, .register #re_registerEvent > span {
     font-weight: 400;
-    color: var(--e-global-color-accent, #c2d63e);
+    color: #c2d63e !important;
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
