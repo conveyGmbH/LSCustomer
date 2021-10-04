@@ -123,6 +123,11 @@
                             if (json && json.d && json.d.results) {
                                 // Now, we call WinJS.Binding.List to get the bindable list
                                 var results = json.d.results.filter(function (item, index) {
+                                if (AppData._persistentStates.registerData.AnredeID === item.INITAnredeID) {
+                                    item.AnredeChecked = true;
+                                } else {
+                                    item.AnredeChecked = false;
+                                }
                                     return (item && (item.INITAnredeID !== 0 && item.INITAnredeID !== 3));
                                 });
                             that.anrede = new WinJS.Binding.List(results);

@@ -37,7 +37,7 @@
                                  data-win-control="WinJS.UI.Repeater">
                                 <div class="list-anredecon-item">
                                     <label class="list-anredecon-field">
-                                        <input type="radio" class="anrede win-checkbox" value="1" data-win-bind="textContent: INITAnredeID" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" />
+                                        <input type="radio" class="anrede win-checkbox" data-win-bind="textContent: INITAnredeID; checked: AnredeChecked" onclick="AppBar.handleEvent('click', 'selectOnlyThis', event)" />
                                         <span class="checkbox" data-win-bind="textContent: TITLE"></span>
                                     </label>
                                     </div>
