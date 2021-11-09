@@ -254,19 +254,34 @@ var __meteor_runtime_config__;
             var getScriptFromSrcXhr = function (href) {
                 return WinJS.xhr({ url: href }).then(function (req) {
                     a.href = "/";
+                    function abs(uri) {
+                        a.href = uri;
+                        return a.href;
+                    }
+                    var html5ClientLocale = abs("/") + "html5client/locale?locale=";
                     var reBase = "function rebase(url){if(!url||typeof url!=\"string\"||url.indexOf(\"" + a.hostname + "\")>=0)return url;let p=url.indexOf(\"://\"),q=(p>=0)?url.substr(p+3).substr(url.substr(p+3).indexOf(\"/\")):url;return q};";
                     var newHostname = "(function(){return\"" + a.hostname + "\"})()";
                     var newHref = "(function(){return\"" + a.href + "\"})()";
-                    var eGetImageUri = "let t=(function(){" + reBase + "let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,r=e.svgHeight;";
-                    var aGetImageUri = "s,u=(function(){" + reBase + "let au=rebase(a.imageUri);Log.print(Log.l.info,\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
+                    var eGetImageUriR = "let t=(function(){" + reBase + "let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,r=e.svgHeight;";
+                    var aGetImageUriU = "s,u=(function(){" + reBase + "let au=rebase(a.imageUri);Log.print(Log.l.info,\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
                     var uGetImageUri = "k,{imageUri:(function(){" + reBase + "let uu=rebase(u);Log.print(Log.l.info,\"uu=\"+JSON.stringify(uu));return uu})(),";
+                    // BBB 2.4 RC1
+                    var eGetImageUriO = "let t=(function(){" + reBase + "let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,o=e.svgHeight;";
+                    var rGetImageUriP = "a,p=(function(){" + reBase + "let rp=rebase(r.imageUri);Log.print(Log.l.info,\"rp=\"+JSON.stringify(rp));return rp})(),m=r.content;";
+                    var pGetImageUri = "k,{imageUri:(function(){" + reBase + "let pp=rebase(p);Log.print(Log.l.info,\"pp=\"+JSON.stringify(pp));return pp})(),";
                     var scriptText = req.responseText
                         .replace(/window\.document\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.href/g, newHref)
-                        .replace(/let\{imageUri:t,svgWidth:n,svgHeight:r\}=e;/g, eGetImageUri)
-                        .replace(/s,\{imageUri:u,content:m\}=a;/g, aGetImageUri)
+                        .replace(/let\{imageUri:t,svgWidth:n,svgHeight:o\}=e;/g, eGetImageUriO)
+                        .replace(/s,\{imageUri:u,content:m\}=a;/g, aGetImageUriU)
                         .replace(/k,\{imageUri:u,/g, uGetImageUri)
+                        // BBB 2.4 RC1
+                        .replace(/let\{imageUri:t,svgWidth:n,svgHeight:r\}=e;/g, eGetImageUriR)
+                        .replace(/a,\{imageUri:p,content:m\}=r;/g, rGetImageUriP)
+                        .replace(/k,\{imageUri:p,/g, pGetImageUri)
+                        .replace(/\.\/locale\?locale=/g, html5ClientLocale)
+                        .replace(/"localhost"/g, newHostname)
                         ;
                     return scriptText;
                 });
@@ -2126,7 +2141,7 @@ var __meteor_runtime_config__;
                             var location = window.location.href.split("?")[0] + "?" + createQueryStringFromParameters(Application.query);
                             window.history.replaceState(state, title, location);
                         };
-                        var path = url.replace(/https?:\/\/[\.a-zA-Z]+\/html5client/g, '/html5client');
+                        var path = url.replace(/https?:\/\/[\.0-9a-zA-Z]+\/html5client/g, '/html5client');
                         return renderImpl(path, conference, false);
                     } else {
                         AppData.setErrorMsg(AppBar.scope.binding, that.binding.dataConference.ResultMessage);
