@@ -560,8 +560,8 @@ var __meteor_runtime_config__;
                     var html5Client = req.responseText
                         .replace(/="compatibility/g, compatibilitySrc)
                         .replace(/="\/html5client/g, html5ClientSrc)
-                        .replace(/wss%3A%2F%2F[.a-z]+%2Fbbb-webrtc-sfu/g, wssBbWebRtcSfuSrc)
-                        .replace(/https%3A%2F%2F[.a-z]+%2Fpad/g, httpsPadSrc)
+                        .replace(/wss%3A%2F%2F[0-9.A-za-z]+%2Fbbb-webrtc-sfu/g, wssBbWebRtcSfuSrc)
+                        .replace(/https%3A%2F%2F[0-9.A-za-z]+%2Fpad/g, httpsPadSrc)
                         ;
                     var pos = html5Client.indexOf("__meteor_runtime_config__");
                     if (pos > 0) {
