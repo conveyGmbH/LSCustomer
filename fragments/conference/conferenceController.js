@@ -357,6 +357,7 @@ var __meteor_runtime_config__;
                         .replace(/k,\{imageUri:p,/g, pGetImageUri)
                         .replace(/\.\/locale\?locale=/g, html5ClientLocale)
                         .replace(/"localhost"/g, newHostname)
+                        .replace(/location.origin.concat/g, "\"\".concat")
                         ;
                     return scriptText;
                 });
