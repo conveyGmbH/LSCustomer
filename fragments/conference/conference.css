@@ -966,12 +966,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border: 1px solid var(--color-gray-lightest);
 }
 
-#conference.mediaview button[aria-describedby="closeDesc"] {
+#conference.mediaview button[aria-describedby="closeDesc"],
+#conference.mediaview button[data-test="hidePresentationButton"] {
     margin-right: 42px;
 }
 
-#conference.mediaview button[aria-describedby="closeDesc"]/*,
-#conference.mediaview button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF*/ {
+#conference.mediaview button[aria-describedby="closeDesc"],
+#conference.mediaview button[data-test="hidePresentationButton"] /*,
+#conference.mediaview button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF,
+#conference.mediaview button[data-test="restorePresentationButton"]
+*/ {
     background-color: rgba(0, 0, 0, 0.3) !important;
     border: none !important;
     box-shadow: none !important;
@@ -992,7 +996,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 /* hide button: hide-presentation  */
 #conference.mediaview button[aria-describedby="closeDesc"],
-#conference.mediaview .right--DUFDc button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF {
+#conference.mediaview .right--DUFDc button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF,
+#conference.mediaview button[data-test="hidePresentationButton"],
+#conference.mediaview button[data-test="restorePresentationButton"] {
     display: none;
 }
 /* set fullscreen button to the top */
@@ -1129,7 +1135,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 #conference.mediaview .video-overlay-is-hidden .video-overlay-left,
 #conference.mediaview .video-overlay-is-hidden .video-overlay-right,
-#conference.mediaview .video-overlay-is-hidden .overlay--nP1TK {
+#conference.mediaview .video-overlay-is-hidden .overlay--nP1TK,
+#conference.mediaview .video-overlay-is-hidden .react-draggable {
     display: none !important;
     height: 0 !important;
 }

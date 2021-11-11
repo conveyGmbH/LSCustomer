@@ -11,11 +11,88 @@ var __meteor_runtime_config__;
     "use strict";
 
     var nav = WinJS.Navigation;
+    var bbbClass, elementSelectors;
 
-    var elementSelectors = {
+    
+    bbbClass = {
+        actionsbar: "actionsbar--Z1mcyA0",
+        autoWidth: "autoWidth--24e2xI",
+        avatar: "avatar--Z2lyL8K",
+        btn: "btn--Z25OApd",
+        button1: "button--Z1ops0C",
+        button2: "button--Z2dosza",
+        center1: "center--ZyfFaC",
+        center2: "center--2pV1iJ",
+        chat: "chat--Z1w8gP7",
+        chat1: "chat--111wNM",
+        container: "container--ZmRztk",
+        container1: "container--1hUthh",
+        content: "content--Z2gO9GE",
+        customBtn: "customBtn--Z8fMMN",
+        customInputWrapper: "customInputWrapper--Z2wG4AP",
+        dark: "dark--Z1Y80Wt",
+        default: "default--Z19H5du",
+        dropdownTrigger: "dropdownTrigger--Z1Fp5dg",
+        floatingOverlay: "floatingOverlay--ZU51zt",
+        form: "form--1S2xdc",
+        fullScreenButton: "fullScreenButton--Z1bf0vj",
+        fullWidth: "fullWidth--Z1RRil3",
+        hideLabel: "hideLabel--2vEtaU",
+        hideOverlay: "hideOverlay--Z13uLxg",
+        icon: "icon--2q1XXw",
+        item: "item--ZDfG6l",
+        list: "list--Z2pj65C",
+        label: "label--Z12LMR3",
+        logout: "logout--21XEjn",
+        message: "message--Z2n2nXu",
+        messageList: "messageList--hsNac",
+        messages: "messages--Z2vq9Jh",
+        meta: "meta--ZDfdOI",
+        moderator: "moderator--24bqCT",
+        muted: "muted--quAxq",
+        name: "name--ZDf6TQ",
+        navbar: "navbar--Z2lHYbG",
+        overlay: "overlay--nP1TK",
+        overlayA: "overlay--Arkp5",
+        overlayToTop: "overlayToTop--1PLUSN",
+        participantsList: "participantsList--1MvMwF",
+        poll: "poll--Z1w6wQt",
+        pollingAnswers: "pollingAnswers--2tjBC8",
+        pollingContainer: "pollingContainer--1xRnAH",
+        pollingTitle: "pollingTitle--2ryYAdpollingTitle--2ryYAd",
+        primary: "primary--1IbqAO",
+        right: "right--DUFDc",
+        screenshareContainer: "screenshareContainer--1GSmqo",
+        sm: "sm--Q7ujg",
+        status: "status--1gjKnt",
+        svgContainer: "svgContainer--Z1z3wO0",
+        talking: "talking--26lGzY",
+        time: "time--ZDehNy",
+        top1: "top--1p9eDv",
+        top2: "top--Z25OvN9",
+        userList: "userList--11btR3",
+        userListColumn: "userListColumn--6vKQL",
+        userName: "userName--ZsKYfV",
+        userNameMain: "userNameMain--2fo2zM",
+        videoList: "videoList--1OC49P",
+        videoPlayer: "videoPlayer--1MGUuy",
+        wrapper1: "wrapper--Z17x8k2",
+        layout: "wrapper--Z20hQYP"
+    }
+    bbbClass.actionsbar = "actionsbar--Z1ant6U";
+    bbbClass.navbar = "navbar--Z2hKYyK";
+    bbbClass.layout = "layout--Z2pPMwf";
+    bbbClass.container = "";
+    bbbClass.overlay = "react-draggable";
+    bbbClass.userList = "userList--Z2q1D0p";
+
+
+    elementSelectors = {
         closeDesc: "#conference.mediaview button[aria-describedby=\"closeDesc\"]",
-        restoreDesc: "#conference.mediaview .right--DUFDc button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF"
+        restoreDesc: "#conference.mediaview ." + bbbClass.right + " button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF"
     };
+    elementSelectors.closeDesc = "#conference.mediaview button[data-test=\"hidePresentationButton\"]";
+    elementSelectors.restoreDesc = "#conference.mediaview button[data-test=\"restorePresentationButton\"]";
 
     var floatingEmojisSymbols = [
         "\u2764",       //"❤️"
@@ -44,8 +121,6 @@ var __meteor_runtime_config__;
     var regExprMagicStop =  new RegExp(magicStop, "g");
     var regExprMagicStart2 =  new RegExp(magicStart2, "g");
     var regExprMagicStop2 =  new RegExp(magicStop2, "g");
-
-
 
     function triggerReactOnChange(inputElement) {
         var key = "__reactEventHandlers";
@@ -674,7 +749,7 @@ var __meteor_runtime_config__;
                     Log.ret(Log.l.trace, "no conference URL!");
                     return;
                 }
-                var userList = fragmentElement.querySelector(".userList--11btR3");
+                var userList = fragmentElement.querySelector("."+bbbClass.userList);
                 if (userList) {
                     if (userListDefaults.onlyModerators) {
                         if (!WinJS.Utilities.hasClass(userList, "only-moderators")) {
@@ -686,9 +761,9 @@ var __meteor_runtime_config__;
                         }
                     }
                     var moderatorCount = 0;
-                    var userListColumn = userList.querySelector(".userListColumn--6vKQL");
+                    var userListColumn = userList.querySelector("." + bbbClass.userListColumn);
                     if (userListColumn) {
-                        var participantsList = userListColumn.querySelectorAll(".participantsList--1MvMwF");
+                        var participantsList = userListColumn.querySelectorAll("." + bbbClass.participantsList);
                         if (participantsList) {
                             var i = 0, participantsListEntry = null, userNameMainSelfLabel = null, userName = null, avatar = null, style = null, rgbColor = null;
                             if (userListDefaults.onlyModerators) {
@@ -697,14 +772,14 @@ var __meteor_runtime_config__;
                                     if (participantsListEntry) {
                                         var userIsMyself = false;
                                         if (!userListDefaults.selfName) {
-                                            userNameMainSelfLabel = participantsListEntry.querySelector(".userNameMain--2fo2zM > i");
+                                            userNameMainSelfLabel = participantsListEntry.querySelector("." + bbbClass.userNameMain + " > i");
                                             if (userNameMainSelfLabel && typeof userNameMainSelfLabel.textContent === "string" &&
                                                 userListDefaults.selfLabels.indexOf(userNameMainSelfLabel.textContent) >= 0 &&
                                                 userNameMainSelfLabel.previousElementSibling) {
                                                 userName = userNameMainSelfLabel.previousElementSibling.textContent;
                                                 if (typeof userName === "string") {
                                                     userListDefaults.selfName = userName.replace(/&nbsp;/g, " ").trim();
-                                                    avatar = participantsListEntry.querySelector(".avatar--Z2lyL8K");
+                                                    avatar = participantsListEntry.querySelector("." + bbbClass.avatar);
                                                     if (avatar) {
                                                         style = window.getComputedStyle(avatar);
                                                         if (style) {
@@ -712,7 +787,7 @@ var __meteor_runtime_config__;
                                                             if (userListDefaults.selfColor && userListDefaults.selfColor.substr(0, 4) === "rgb(") {
                                                                 rgbColor = Colors.rgbStr2rgb(userListDefaults.selfColor);
                                                                 userListDefaults.selfChatColor = "rgba(" + rgbColor.r + ", " + rgbColor.g + ", " + rgbColor.b + ", 0.2) !important";
-                                                                Colors.changeCSS(".from-myself .messages--Z2vq9Jh p", "background-color", userListDefaults.selfChatColor);
+                                                                Colors.changeCSS(".from-myself ." + bbbClass.messages + " p", "background-color", userListDefaults.selfChatColor);
                                                             }
                                                         }
                                                     }
@@ -720,7 +795,7 @@ var __meteor_runtime_config__;
                                                 }
                                             }
                                         }
-                                        if (!participantsListEntry.querySelector(".moderator--24bqCT")) {
+                                        if (!participantsListEntry.querySelector("." + bbbClass.moderator)) {
                                             if (!userIsMyself) {
                                                 try {
                                                     while (participantsListEntry.firstElementChild) {
@@ -743,14 +818,14 @@ var __meteor_runtime_config__;
                                 for (i = 0; i < participantsList.length; i++ ) {
                                     participantsListEntry = participantsList[i];
                                     if (participantsListEntry) {
-                                        userNameMainSelfLabel = participantsListEntry.querySelector(".userNameMain--2fo2zM > i");
+                                        userNameMainSelfLabel = participantsListEntry.querySelector("." + bbbClass.userNameMain + " > i");
                                         if (userNameMainSelfLabel && typeof userNameMainSelfLabel.textContent === "string" &&
                                             userListDefaults.selfLabels.indexOf(userNameMainSelfLabel.textContent) >= 0 &&
                                             userNameMainSelfLabel.previousElementSibling) {
                                             userName = userNameMainSelfLabel.previousElementSibling.textContent;
                                             if (typeof userName === "string") {
                                                 userListDefaults.selfName = userName.replace(/&nbsp;/g, " ").trim();
-                                                avatar = participantsListEntry.querySelector(".avatar--Z2lyL8K");
+                                                avatar = participantsListEntry.querySelector("." + bbbClass.avatar);
                                                 if (avatar) {
                                                     style = window.getComputedStyle(avatar);
                                                     if (style) {
@@ -758,7 +833,7 @@ var __meteor_runtime_config__;
                                                         if (userListDefaults.selfColor && userListDefaults.selfColor.substr(0, 4) === "rgb(") {
                                                             rgbColor = Colors.rgbStr2rgb(userListDefaults.selfColor);
                                                             userListDefaults.selfChatColor = "rgba(" + rgbColor.r + ", " + rgbColor.g + ", " + rgbColor.b + ", 0.2) !important";
-                                                            Colors.changeCSS(".from-myself .messages--Z2vq9Jh p", "background-color", userListDefaults.selfChatColor);
+                                                            Colors.changeCSS(".from-myself ." + bbbClass.messages + " p", "background-color", userListDefaults.selfChatColor);
                                                         }
                                                     }
                                                 }
@@ -769,7 +844,7 @@ var __meteor_runtime_config__;
                                 }
                             }
                         }
-                        var participantsListParent = userListColumn.querySelector(".list--Z2pj65C");
+                        var participantsListParent = userListColumn.querySelector("." + bbbClass.list);
                         if (participantsListParent && participantsListParent.firstElementChild &&
                             !userListDefaults.userListObserver) {
                             userListDefaults.userListObserver = new MutationObserver(function (mutationList, observer) {
@@ -825,9 +900,9 @@ var __meteor_runtime_config__;
                     showUserListPromise.cancel();
                     showUserListPromise = null;
                 }
-                var btnToggleUserList = fragmentElement.querySelector(".btn--Z25OApd");
+                var btnToggleUserList = fragmentElement.querySelector("." + bbbClass.btn);
                 if (btnToggleUserList) {
-                    var userList = fragmentElement.querySelector(".userList--11btR3");
+                    var userList = fragmentElement.querySelector("."+bbbClass.userList);
                     if (userList) {
                         ret = true;
                         if (!show) {
@@ -860,14 +935,14 @@ var __meteor_runtime_config__;
                     observePollPromise.cancel();
                     observePollPromise = null;
                 }
-                var pollSection = fragmentElement.querySelector(".poll--Z1w6wQt");
+                var pollSection = fragmentElement.querySelector("." + bbbClass.poll);
                 if (pollSection &&
                     pollSection.parentElement &&
                     pollQuestion &&
                     pollQuestion.winControl &&
                     pollQuestion.winControl.data &&
                     pollQuestion.winControl.data.length > 1) {
-                    var publishButton = pollSection.querySelector(".status--1gjKnt ~ .primary--1IbqAO");
+                    var publishButton = pollSection.querySelector("." + bbbClass.status + " ~ ." + bbbClass.primary);
                     if (publishButton) {
                         if (!WinJS.Utilities.hasClass(pollSection, "poll-results")) {
                             WinJS.Utilities.addClass(pollSection, "poll-results");
@@ -875,7 +950,7 @@ var __meteor_runtime_config__;
                         pollQuestion.selectedIndex = 0;
                         that.binding.dataQuestionnaire = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
                     } else {
-                        var customBtn = pollSection.querySelector(".customBtn--Z8fMMN");
+                        var customBtn = pollSection.querySelector(".c" + bbbClass.customBtn);
                         if (customBtn) {
                             if (WinJS.Utilities.hasClass(pollSection, "poll-results")) {
                                 WinJS.Utilities.removeClass(pollSection, "poll-results");
@@ -888,7 +963,7 @@ var __meteor_runtime_config__;
                             if (ariaExpanded === "false") {
                                 customBtn.click();
                             }
-                            var startCustomPollBtn = pollSection.querySelector(".customInputWrapper--Z2wG4AP .primary--1IbqAO");
+                            var startCustomPollBtn = pollSection.querySelector("." + bbbClass.customInputWrapper + " ." + bbbClass.primary);
                             if (startCustomPollBtn) {
                                 var ariaDisabled = startCustomPollBtn.getAttribute("aria-disabled");
                                 if (ariaDisabled === "true") {
@@ -909,7 +984,7 @@ var __meteor_runtime_config__;
 
             var createQuestionSelection = function() {
                 Log.call(Log.l.trace, "Conference.Controller.");
-                var pollSection = fragmentElement.querySelector(".poll--Z1w6wQt");
+                var pollSection = fragmentElement.querySelector("." + bbbClass.poll);
                 if (pollSection && pollSection.parentElement &&
                     pollQuestion && pollQuestion.winControl &&
                     pollQuestion.winControl.data &&
@@ -965,11 +1040,11 @@ var __meteor_runtime_config__;
                 var i;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 if (addedNodes && addedNodes.length > 0) {
-                    var panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
+                    var panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                     for (i = 0; i < addedNodes.length; i++) {
                         var addedNode = addedNodes[i];
                         if (addedNode && addedNode.firstElementChild) {
-                            if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "userList--11btR3")) {
+                            if (WinJS.Utilities.hasClass(addedNode.firstElementChild, bbbClass.userList)) {
                                 Log.print(Log.l.trace, "userList panel opened" );
                                 if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
                                     if (!filterUserListPromise) {
@@ -979,7 +1054,7 @@ var __meteor_runtime_config__;
                                         });
                                     }
                                 }
-                            } else if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "chat--Z1w8gP7")) {
+                            } else if (WinJS.Utilities.hasClass(addedNode.firstElementChild, bbbClass.chat)) {
                                 Log.print(Log.l.trace, "chat panel opened" );
                                 if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
                                     if (!observeChatMessageListPromise) {
@@ -988,7 +1063,7 @@ var __meteor_runtime_config__;
                                         });
                                     }
                                 }
-                            } else if (WinJS.Utilities.hasClass(addedNode.firstElementChild, "poll--Z1w6wQt")) {
+                            } else if (WinJS.Utilities.hasClass(addedNode.firstElementChild, bbbClass.poll)) {
                                 Log.print(Log.l.trace, "poll panel opened" );
                                 that.createQuestionSelection();
                             } else {
@@ -1018,7 +1093,7 @@ var __meteor_runtime_config__;
                     for (i = 0; i < removedNodes.length; i++) {
                         var removedNode = removedNodes[i];
                         if (removedNode && removedNode.firstElementChild) {
-                            if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "userList--11btR3")) {
+                            if (WinJS.Utilities.hasClass(removedNode.firstElementChild, bbbClass.userList)) {
                                 Log.print(Log.l.trace, "userList panel closed");
                                 if (userListDefaults.userListObserver) {
                                     userListDefaults.userListObserver.disconnect();
@@ -1028,13 +1103,13 @@ var __meteor_runtime_config__;
                                     filterUserListPromise.cancel();
                                     filterUserListPromise = null;
                                 }
-                            } else if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "chat--Z1w8gP7")) {
+                            } else if (WinJS.Utilities.hasClass(removedNode.firstElementChild, bbbClass.chat)) {
                                 Log.print(Log.l.trace, "chat panel closed");
                                 if (observeChatMessageListPromise) {
                                     observeChatMessageListPromise.cancel();
                                     observeChatMessageListPromise = null;
                                 }
-                            } else if (WinJS.Utilities.hasClass(removedNode.firstElementChild, "poll--Z1w6wQt")) {
+                            } else if (WinJS.Utilities.hasClass(removedNode.firstElementChild, bbbClass.poll)) {
                                 Log.print(Log.l.trace, "poll panel closed");
                                 that.removeQuestionSelection();
                             } else {
@@ -1059,23 +1134,23 @@ var __meteor_runtime_config__;
             that.handlePanelsClosed = handlePanelsClosed;
             
             var markupLockedMessages = function (addedNodes) {
-                var messageList = fragmentElement.querySelector("#chat-messages.messageList--hsNac");
+                var messageList = fragmentElement.querySelector("#chat-messages." + bbbClass.messageList);
                 if (messageList) {
                     var counter = 0, i, messageElement;
                     var elementCount = addedNodes ? addedNodes.length : messageList.childElementCount;
                     var item = addedNodes ? addedNodes[0] : messageList.firstElementChild;
                     while (counter < elementCount && item) {
                         if (item.parentElement === messageList &&
-                            WinJS.Utilities.hasClass(item, "item--ZDfG6l")) {
+                            WinJS.Utilities.hasClass(item, bbbClass.item)) {
                             var nameElement = null;
                             if (userListDefaults.selfName) {
-                                nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
+                                nameElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.name + " span, ." + bbbClass.meta + " ." + bbbClass.logout + " > span");
                                 if (nameElement && nameElement.textContent === userListDefaults.selfName) {
                                     if (!WinJS.Utilities.hasClass(item, "from-myself")) {
                                         WinJS.Utilities.addClass(item, "from-myself");
                                     }
                                     /*if (userListDefaults.selfChatColor) {
-                                        var chatMessageParagraphs = item.querySelectorAll(".messages--Z2vq9Jh > p");
+                                        var chatMessageParagraphs = item.querySelectorAll("." + bbbClass.messages + " > p");
                                         if (chatMessageParagraphs) {
                                             for (var j = 0; j < chatMessageParagraphs.length; j++) {
                                                 var chatMessageParagraph = chatMessageParagraphs[j];
@@ -1089,13 +1164,13 @@ var __meteor_runtime_config__;
                             }
                             var messageElements = null;
                             var isLocked = false;
-                            var timeElement = item.querySelector(".meta--ZDfdOI .time--ZDehNy");
+                            var timeElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.time);
                             if (timeElement && timeElement.dateTime) {
                                 var date = new Date(timeElement.dateTime);
                                 var chatTs = date.getTime();
                                 if (lockedChatMessages[chatTs]) {
                                     if (!nameElement) {
-                                        nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
+                                        nameElement = item.querySelector("." + bbbClass.meta + " ." + + " span, ." + bbbClass.meta + " ." + bbbClass.logout + " > span");
                                     }
                                     if (nameElement) {
                                         var message = {
@@ -1108,7 +1183,7 @@ var __meteor_runtime_config__;
                                             if (item._lockedContent) {
                                                 lineCount = item._lockedContent.length;
                                             } else {
-                                                messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                                messageElements = item.querySelectorAll("." + bbbClass.message);
                                                 lineCount = messageElements && messageElements.length;
                                             }
                                             for (i = 0; i < lineCount; i++) {
@@ -1129,7 +1204,7 @@ var __meteor_runtime_config__;
                                 WinJS.Utilities.addClass(item, "chat-message-locked");
                                 if (!item._lockedContent) {
                                     if (!messageElements) {
-                                        messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                        messageElements = item.querySelectorAll("." + bbbClass.message);
                                     }
                                     if (messageElements) {
                                         item._lockedContent = [];
@@ -1150,7 +1225,7 @@ var __meteor_runtime_config__;
                                 WinJS.Utilities.removeClass(item, "chat-message-locked");
                                 if (item._lockedContent) {
                                     if (!messageElements) {
-                                        messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                        messageElements = item.querySelectorAll("." + bbbClass.message);
                                     }
                                     if (messageElements) {
                                         for (i = 0; i < messageElements.length && i < item._lockedContent.length; i++) {
@@ -1177,7 +1252,7 @@ var __meteor_runtime_config__;
                     observeChatMessageListPromise.cancel();
                     observeChatMessageListPromise = null;
                 }
-                var messageList = fragmentElement.querySelector("#chat-messages.messageList--hsNac");
+                var messageList = fragmentElement.querySelector("#chat-messages." + bbbClass.messageList);
                 if (messageList) {
                     if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController" &&
                         !messageList._onClickHandler) {
@@ -1194,9 +1269,9 @@ var __meteor_runtime_config__;
                                             item = target;
                                         }
                                         var locked = WinJS.Utilities.hasClass(item, "chat-message-locked");
-                                        var nameElement = item.querySelector(".meta--ZDfdOI .name--ZDf6TQ span, .meta--ZDfdOI .logout--21XEjn > span");
-                                        var timeElement = item.querySelector(".meta--ZDfdOI .time--ZDehNy");
-                                        var messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                        var nameElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.name + " span, ." + bbbClass.meta + " ." + bbbClass.logout + " > span");
+                                        var timeElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.time);
+                                        var messageElements = item.querySelectorAll("." + bbbClass.message);
                                         if (nameElement && timeElement && messageElements) {
                                             var date = null;
                                             try {
@@ -1217,7 +1292,7 @@ var __meteor_runtime_config__;
                                             if (item._lockedContent) {
                                                 lineCount = item._lockedContent.length;
                                             } else {
-                                                messageElements = item.querySelectorAll(".message--Z2n2nXu");
+                                                messageElements = item.querySelectorAll("." + bbbClass.message);
                                                 lineCount = messageElements && messageElements.length;
                                             }
                                             for (var i = 0; i < lineCount; i++) {
@@ -1303,7 +1378,7 @@ var __meteor_runtime_config__;
                         }
                     }
                     if (WinJS.Utilities.hasClass(videoListItem, "selfie-video")) {
-                        var userName = videoListItem.querySelector(".userName--ZsKYfV, .dropdownTrigger--Z1Fp5dg");
+                        var userName = videoListItem.querySelector("." + bbbClass.userName + ", ." + bbbClass.dropdownTrigger);
                         if (userName) {
                             if (!userName.firstElementChild) {
                                 var iLabel = document.createElement("i");
@@ -1384,7 +1459,7 @@ var __meteor_runtime_config__;
                     var videoPLayerOpened = false;
                     var screenShareOpened = false;
                     var presentationOpened = false;
-                    var videoPlayer = fragmentElement.querySelector(".videoPlayer--1MGUuy");
+                    var videoPlayer = fragmentElement.querySelector("." + bbbClass.videoPlayer);
                     if (videoPlayer && videoPlayer.firstElementChild) {
                         videoPLayerOpened = true;
                         var videoElement = videoPlayer.firstElementChild;
@@ -1395,17 +1470,17 @@ var __meteor_runtime_config__;
                                 videoElement.controls = false;
                             }
                             // add fullscreen button on event page!
-                            fullScreenButton = videoPlayer.querySelector(".fullScreenButton--Z1bf0vj");
+                            fullScreenButton = videoPlayer.querySelector("." + bbbClass.fullScreenButton);
                             if (!fullScreenButton) {
                                 var fullScreenButtonIcon = document.createElement("i");
-                                fullScreenButtonIcon.setAttribute("class", "icon--2q1XXw icon-bbb-fullscreen");
+                                fullScreenButtonIcon.setAttribute("class", bbbClass.icon + " icon-bbb-fullscreen");
                                 fullScreenButtonIcon.content = "before";
                                 var fullScreenButtonTooltip = document.createElement("span");
-                                fullScreenButtonTooltip.setAttribute("class", "label--Z12LMR3 hideLabel--2vEtaU");
+                                fullScreenButtonTooltip.setAttribute("class", bbbClass.label + " " + bbbClass.hideLabel);
                                 fullScreenButtonTooltip.textContent = getResourceText("tooltip.fullscreen");
                                 fullScreenButtonIcon.appendChild(fullScreenButtonTooltip);
                                 fullScreenButton = document.createElement("button");
-                                fullScreenButton.setAttribute("class", "button--Z2dosza sm--Q7ujg default--Z19H5du button--Z1ops0C fullScreenButton--Z1bf0vj");
+                                fullScreenButton.setAttribute("class", bbbClass.button2 + " " + bbbClass.sm + " " + bbbClass.default + " " + bbbClass.button1 + " " + bbbClass.fullScreenButton);
                                 fullScreenButton.onclick = function (event) {
                                     if (videoPlayer && document.fullscreenEnabled) {
                                         // detect fullscreen state
@@ -1438,7 +1513,7 @@ var __meteor_runtime_config__;
                                 });
                                 fullScreenButton.appendChild(fullScreenButtonIcon);
                                 var fullScreenButtonWrapper = document.createElement("div");
-                                fullScreenButtonWrapper.setAttribute("class", "wrapper--Z17x8k2 dark--Z1Y80Wt top--1p9eDv");
+                                fullScreenButtonWrapper.setAttribute("class", bbbClass.wrapper1 + " " + bbbClass.dark + " " + bbbClass.top1);
                                 fullScreenButtonWrapper.appendChild(fullScreenButton);
                                 videoPlayer.appendChild(fullScreenButtonWrapper);
                             }
@@ -1479,11 +1554,11 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                    var screenshareContainer = fragmentElement.querySelector(".screenshareContainer--1GSmqo");
+                    var screenshareContainer = fragmentElement.querySelector("." + bbbClass.screenshareContainer);
                     if (screenshareContainer) {
                         screenShareOpened = true;
                     }
-                    var svgContainer = fragmentElement.querySelector(".svgContainer--Z1z3wO0");
+                    var svgContainer = fragmentElement.querySelector("." + bbbClass.svgContainer);
                     if (svgContainer && svgContainer.firstElementChild) {
                         presentationOpened = true;
                         // prevent scrolling on zoom per mouse wheel!
@@ -1493,14 +1568,14 @@ var __meteor_runtime_config__;
                                 that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
                             }
                             if (presenterButtonContainer && presenterButtonContainer.style) {
-                                var navBarTopCenter = fragmentElement.querySelector(".navbar--Z2lHYbG .top--Z25OvN9 .center--2pV1iJ");
+                                var navBarTopCenter = fragmentElement.querySelector("." + bbbClass.navbar + " ." + bbbClass.top2 + " ." + bbbClass.center2);
                                 if (navBarTopCenter && navBarTopCenter.firstElementChild !== presenterButtonContainer) {
                                     navBarTopCenter.insertBefore(presenterButtonContainer, navBarTopCenter.firstElementChild);
                                     presenterButtonContainer.style.display = "inline-block";
                                 }
                             }
                             if (showPresentationToggleContainer && showPresentationToggleContainer.style) {
-                                actionsBarRight = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .right--DUFDc");
+                                actionsBarRight = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
                                 if (actionsBarRight && actionsBarRight.firstElementChild !== showPresentationToggleContainer) {
                                     actionsBarRight.insertBefore(showPresentationToggleContainer, actionsBarRight.firstElementChild);
                                     showPresentationToggleContainer.style.display = "inline-block";
@@ -1508,7 +1583,7 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                    var panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
+                    var panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                     if (panelWrapper) {
                         if (!userListDefaults.panelWrapperObserver) {
                             userListDefaults.panelWrapperObserver = new MutationObserver(function (mutationList, observer) {
@@ -1530,28 +1605,47 @@ var __meteor_runtime_config__;
                                 childList: true
                             });
                         }
-                        var mediaContainer = panelWrapper.querySelector(".container--ZmRztk");
-                        if (mediaContainer) {
-                            if (!videoListDefaults.mediaContainerObserver) {
-                                videoListDefaults.mediaContainerObserver = new MutationObserver(function (mutationList, observer) {
-                                    Log.print(Log.l.trace, "mediaContainer childList/class changed!");
-                                    WinJS.Promise.as().then(function () {
-                                        if (!adjustContentPositionsPromise) {
-                                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                                that.adjustContentPositions();
-                                            });
-                                        }
-                                        return WinJS.Promise.timeout(50);
-                                    }).then(function () {
-                                        that.sendResize(20);
+                        var mediaContainer;
+                        if (bbbClass.container) {
+                            mediaContainer = panelWrapper.querySelector("." + bbbClass.container);
+                            if (mediaContainer) {
+                                if (!videoListDefaults.mediaContainerObserver) {
+                                    videoListDefaults.mediaContainerObserver = new MutationObserver(function (mutationList, observer) {
+                                        Log.print(Log.l.trace, "mediaContainer childList/class changed!");
+                                        WinJS.Promise.as().then(function () {
+                                            if (!adjustContentPositionsPromise) {
+                                                adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                                    that.adjustContentPositions();
+                                                });
+                                            }
+                                            return WinJS.Promise.timeout(50);
+                                        }).then(function () {
+                                            that.sendResize(20);
+                                        });
                                     });
-                                });
-                                videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
-                                    childList: true,
-                                    attributeFilter: ["class"]
-                                });
+                                    videoListDefaults.mediaContainerObserver.observe(mediaContainer, {
+                                        childList: true,
+                                        attributeFilter: ["class"]
+                                    });
+                                }
+                            } else {
+                                if (videoListDefaults.mediaContainerObserver) {
+                                    videoListDefaults.mediaContainerObserver.disconnect();
+                                    videoListDefaults.mediaContainerObserver = null;
+                                }
+                                adjustContentPositionsFailedCount++;
+                                Log.print(Log.l.trace, "mediaContainer not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
+                                if (!adjustContentPositionsPromise) {
+                                    adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount * 10, 5000)).then(function() {
+                                        that.adjustContentPositions();
+                                    });
+                                }
                             }
-                            var content = mediaContainer.querySelector(".content--Z2gO9GE");
+                        } else {
+                            mediaContainer = panelWrapper;
+                        }
+                        if (mediaContainer) {
+                            var content = mediaContainer.querySelector("." + bbbClass.content);
                             if (!videoListDefaults.contentObserver) {
                                 videoListDefaults.contentObserver = new MutationObserver(function (mutationList, observer) {
                                     Log.print(Log.l.trace, "content childList changed!");
@@ -1565,14 +1659,14 @@ var __meteor_runtime_config__;
                                     childList: true
                                 });
                             }
-                            var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                             if (overlayElement) {
-                                var overlayIsHidden = WinJS.Utilities.hasClass(overlayElement, "hideOverlay--Z13uLxg");
-                                var videoList = mediaContainer.querySelector(".videoList--1OC49P");
+                                var overlayIsHidden = WinJS.Utilities.hasClass(overlayElement, bbbClass.hideOverlay);
+                                var videoList = mediaContainer.querySelector("." + bbbClass.videoList);
                                 if (videoList && videoList.style && overlayElement.style) {
                                     if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
                                         if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
-                                            actionsBarRight = panelWrapper.querySelector(".actionsbar--Z1mcyA0 .right--DUFDc");
+                                            actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
                                             if (actionsBarRight && actionsBarRight.lastElementChild !== showVideoListToggleContainer) {
                                                 actionsBarRight.appendChild(showVideoListToggleContainer);
                                                 showVideoListToggleContainer.style.display = "inline-block";
@@ -1641,32 +1735,32 @@ var __meteor_runtime_config__;
                                             WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
                                         }
                                         if (!overlayIsHidden) {
-                                            if (!WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
-                                                WinJS.Utilities.addClass(overlayElement, "overlay--nP1TK");
+                                            if (!WinJS.Utilities.hasClass(overlayElement,  bbbClass.overlay)) {
+                                                WinJS.Utilities.addClass(overlayElement, bbbClass.overlay);
                                             }
                                             if (numVideos > 1) {
                                                 //if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
                                                 //    WinJS.Utilities.addClass(overlayElement, "video-overlay-fullwidth");
                                                 //}
-                                                if (WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
-                                                    WinJS.Utilities.removeClass(overlayElement, "autoWidth--24e2xI");
+                                                if (WinJS.Utilities.hasClass(overlayElement, bbbClass.autoWidth)) {
+                                                    WinJS.Utilities.removeClass(overlayElement, bbbClass.autoWidth);
                                                 }
-                                                if (!WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                                                    WinJS.Utilities.addClass(overlayElement, "fullWidth--Z1RRil3");
+                                                if (!WinJS.Utilities.hasClass(overlayElement, bbbClass.fullWidth)) {
+                                                    WinJS.Utilities.addClass(overlayElement, bbbClass.fullWidth);
                                                 }
                                             } else {
                                                 //if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
                                                 //    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
                                                 //}
-                                                if (!WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
-                                                    WinJS.Utilities.addClass(overlayElement, "autoWidth--24e2xI");
+                                                if (!WinJS.Utilities.hasClass(overlayElement, bbbClass.autoWidth)) {
+                                                    WinJS.Utilities.addClass(overlayElement, bbbClass.autoWidth);
                                                 }
-                                                if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                                                    WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
+                                                if (WinJS.Utilities.hasClass(overlayElement, bbbClass.fullWidth)) {
+                                                    WinJS.Utilities.removeClass(overlayElement, bbbClass.fullWidth);
                                                 }
                                             }
-                                            if (!WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
-                                                WinJS.Utilities.addClass(overlayElement, "overlayToTop--1PLUSN");
+                                            if (!WinJS.Utilities.hasClass(overlayElement, bbbClass.overlayToTop)) {
+                                                WinJS.Utilities.addClass(overlayElement, bbbClass.overlayToTop);
                                             }
                                         }
                                         if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
@@ -1689,20 +1783,20 @@ var __meteor_runtime_config__;
                                         //if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
                                         //    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
                                         //}
-                                        if (WinJS.Utilities.hasClass(overlayElement, "fullWidth--Z1RRil3")) {
-                                            WinJS.Utilities.removeClass(overlayElement, "fullWidth--Z1RRil3");
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.fullWidth)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.fullWidth);
                                         }
-                                        if (WinJS.Utilities.hasClass(overlayElement, "autoWidth--24e2xI")) {
-                                            WinJS.Utilities.removeClass(overlayElement, "autoWidth--24e2xI");
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.autoWidth)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.autoWidth);
                                         }
-                                        if (WinJS.Utilities.hasClass(overlayElement, "overlayToTop--1PLUSN")) {
-                                            WinJS.Utilities.removeClass(overlayElement, "overlayToTop--1PLUSN");
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.overlayToTop)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.overlayToTop);
                                         }
-                                        if (WinJS.Utilities.hasClass(overlayElement, "overlay--nP1TK")) {
-                                            WinJS.Utilities.removeClass(overlayElement, "overlay--nP1TK");
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.overlay)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.overlay);
                                         }
-                                        if (WinJS.Utilities.hasClass(overlayElement, "floatingOverlay--ZU51zt")) {
-                                            WinJS.Utilities.removeClass(overlayElement, "floatingOverlay--ZU51zt");
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.floatingOverlay)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.floatingOverlay);
                                         }
                                         if (direction === videoListDefaults.right) {
                                             if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
@@ -1797,18 +1891,6 @@ var __meteor_runtime_config__;
                                     WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
                                 }
                             }
-                        } else {
-                            if (videoListDefaults.mediaContainerObserver) {
-                                videoListDefaults.mediaContainerObserver.disconnect();
-                                videoListDefaults.mediaContainerObserver = null;
-                            }
-                            adjustContentPositionsFailedCount++;
-                            Log.print(Log.l.trace, "mediaContainer not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
-                            if (!adjustContentPositionsPromise) {
-                                adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount * 10, 5000)).then(function () {
-                                    that.adjustContentPositions();
-                                });
-                            }
                         }
                         var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
                         if (closeDescButton) {
@@ -1829,10 +1911,10 @@ var __meteor_runtime_config__;
                             videoListDefaults.restoreDesc = null;
                         }
                         if (pageControllerName === "eventController") {
-                            var actionsBarCenter = fragmentElement.querySelector(".actionsbar--Z1mcyA0 .center--ZyfFaC");
+                            var actionsBarCenter = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.center1);
                             if (actionsBarCenter && emojiButtonContainer && emojiToolbar &&
                                 actionsBarCenter.lastElementChild !== emojiToolbar) {
-                                var audioControlsContainer = actionsBarCenter.querySelector(".container--1hUthh");
+                                var audioControlsContainer = actionsBarCenter.querySelector("." + bbbClass.container1);
                                 if (audioControlsContainer) {
                                     emojiToolbarPositionObserver = new MutationObserver(function (mutationList, observer) {
                                         if (audioControlsContainer.childElementCount === 2) {
@@ -1865,11 +1947,11 @@ var __meteor_runtime_config__;
                     }
                     return WinJS.Promise.timeout(20);
                 }).then(function () {
-                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                     if (mediaContainer) {
-                        var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                        var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                         if (overlayElement) {
-                            var videoList = mediaContainer.querySelector(".videoList--1OC49P");
+                            var videoList = mediaContainer.querySelector("." + bbbClass.videoList);
                             if (videoList) {
                                 var videoListItem = videoList.firstElementChild;
                                 while (videoListItem) {
@@ -1899,11 +1981,11 @@ var __meteor_runtime_config__;
                     return WinJS.Promise.as();
                 }
                 var ret = new WinJS.Promise.as().then(function () {
-                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                     if (mediaContainer) {
-                        var overlayElement = mediaContainer.querySelector(".overlay--nP1TK, .hideOverlay--Z13uLxg, .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                        var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                         if (overlayElement) {
-                            videoList = overlayElement.querySelector(".videoList--1OC49P");
+                            videoList = overlayElement.querySelector("." + bbbClass.videoList);
                             if (videoList) {
                                 var i = 0;
                                 var numVideos = 0;
@@ -1919,13 +2001,13 @@ var __meteor_runtime_config__;
                                     var content = videoListItem.firstElementChild;
                                     if (content) {
                                         var muted = null;
-                                        if (WinJS.Utilities.hasClass(content, "talking--26lGzY")) {
+                                        if (WinJS.Utilities.hasClass(content, bbbClass.talking)) {
                                             videoListDefaults.contentActivity[mediaStreamId] = now;
                                         } else {
                                             if (typeof videoListDefaults.contentActivity[mediaStreamId] === "undefined") {
                                                 videoListDefaults.contentActivity[mediaStreamId] = 0;
                                             }
-                                            muted = content.querySelector(".muted--quAxq") || content.querySelector(".icon-bbb-listen");
+                                            muted = content.querySelector("." + bbbClass.muted) || content.querySelector(".icon-bbb-listen");
                                         }
                                         var inactivity = now - videoListDefaults.contentActivity[mediaStreamId];
                                         if ((hideInactive || hideMuted) && muted ||
@@ -2163,7 +2245,7 @@ var __meteor_runtime_config__;
 
             var setPresenterModeState = function (state) {
                 Log.call(Log.l.info, "Conference.Controller.", "state=" + state);
-                var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                 if (mediaContainer) {
                     switch (state) {
                         case "tiled": {
@@ -2461,13 +2543,13 @@ var __meteor_runtime_config__;
                         setPollingPromise.cancel();
                         setPollingPromise = null;
                     }
-                    var pollingContainer = document.querySelector(".overlay--Arkp5 .pollingContainer--1xRnAH");
+                    var pollingContainer = document.querySelector("." + bbbClass.overlayA + " ." + bbbClass.pollingContainer);
                     if (pollingContainer) {
-                        var pollingTitle = pollingContainer.querySelector(".pollingTitle--2ryYAd");
+                        var pollingTitle = pollingContainer.querySelector("." + bbbClass.pollingTitle);
                         if (pollingTitle) {
                             pollingTitle.textContent = that.binding.dataQuestionnaire.QuestionText;
                         }
-                        var pollingAnswers = pollingContainer.querySelector(".pollingAnswers--2tjBC8");
+                        var pollingAnswers = pollingContainer.querySelector("." + bbbClass.pollingAnswers);
                         if (pollingAnswers) {
                             var i = 1;
                             var pollingAnswer = pollingAnswers.firstElementChild;
@@ -2481,7 +2563,7 @@ var __meteor_runtime_config__;
                                         button._defaultOnClick = button.onclick;
                                         button.onclick = that.eventHandlers.clickPollingButton;
                                     }
-                                    var label = button.querySelector(".label--Z12LMR3");
+                                    var label = button.querySelector("." + bbbClass.label);
                                     if (label && that.binding.dataQuestionnaire[keyAnswerText]) {
                                         label.textContent = that.binding.dataQuestionnaire[keyAnswerText];
                                     }
@@ -2510,9 +2592,9 @@ var __meteor_runtime_config__;
                     that.binding.showPresentation = true;
                     if (videoListDefaults.direction === videoListDefaults.default) {
                         WinJS.Promise.timeout(50).then(function () {
-                            var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                            var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                             if (mediaContainer) {
-                                var overlayElement = mediaContainer.querySelector(".overlay--nP1TK");
+                                var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay);
                                 if (overlayElement && overlayElement.style) {
                                     overlayElement.style.height = videoListDefaults.height;
                                 }
@@ -2533,7 +2615,7 @@ var __meteor_runtime_config__;
                 },
                 showVideoList: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                     if (mediaContainer) {
                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-hidden");
@@ -2544,7 +2626,7 @@ var __meteor_runtime_config__;
                 },
                 hideVideoList: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                    var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                     if (mediaContainer) {
                         if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
                             WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-hidden");
@@ -2558,9 +2640,9 @@ var __meteor_runtime_config__;
                     videoListDefaults.direction = videoListDefaults.default;
                     that.setPresenterModeState("off");
                     WinJS.Promise.timeout(250).then(function () {
-                        var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                        var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                         if (mediaContainer) {
-                            var overlayElement = mediaContainer.querySelector(".overlay--nP1TK:not(.hideOverlay--Z13uLxg)");
+                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ":not(." + bbbClass.hideOverlay + ")");
                             if (overlayElement && overlayElement.style) {
                                 overlayElement.style.height = videoListDefaults.height;
                             }
@@ -2646,7 +2728,7 @@ var __meteor_runtime_config__;
                     if (hideNotificationPromise) {
                         that.eventHandlers.clickNotification();
                     } else {
-                        mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                        mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                     }
                     if (mediaContainer) {
                         if (notificationPopup &&
@@ -2832,9 +2914,9 @@ var __meteor_runtime_config__;
                     } else {
                         that.binding.dataQuestionnaire = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
                     }
-                    var pollSection = fragmentElement.querySelector(".poll--Z1w6wQt");
+                    var pollSection = fragmentElement.querySelector("." + bbbClass.poll);
                     if (pollSection) {
-                        var customInputWrapper = pollSection.querySelector(".customInputWrapper--Z2wG4AP");
+                        var customInputWrapper = pollSection.querySelector("." + bbbClass.customInputWrapper);
                         if (customInputWrapper) {
                             var inputElements = customInputWrapper.querySelectorAll("input");
                             if (inputElements && inputElements.length > 0) {
@@ -3032,7 +3114,7 @@ var __meteor_runtime_config__;
                     submitCommandMessagePromise.cancel();
                     submitCommandMessagePromise = null;
                 }
-                var messageInput = fragmentElement.querySelector("#conference.mediaview .chat--111wNM .form--1S2xdc textarea#message-input");
+                var messageInput = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat1 + " ." + bbbClass.form + " textarea#message-input");
                 if (messageInput) {
                     //messageInput.focus();
                     if (messageInput.form && typeof messageInput.form.reset === "function") {
@@ -3042,7 +3124,7 @@ var __meteor_runtime_config__;
                     var inputEvent = document.createEvent('event');
                     inputEvent.initEvent('input', true, true);
                     messageInput.dispatchEvent(inputEvent);
-                    var submitButton = fragmentElement.querySelector("#conference.mediaview .chat--111wNM .form--1S2xdc button[type=\"submit\"]");
+                    var submitButton = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat1 + " ." + bbbClass.form + " button[type=\"submit\"]");
                     if (submitButton) {
                         submitButton.click();
                     }
@@ -3056,7 +3138,7 @@ var __meteor_runtime_config__;
                         }
                     }
                     if (openedUserList) {
-                        btnToggleUserList = fragmentElement.querySelector("button[accesskey=\"U\"].btn--Z25OApd");
+                        btnToggleUserList = fragmentElement.querySelector("button[accesskey=\"U\"]." + bbbClass.btn);
                         if (btnToggleUserList && 
                             !(btnToggleUserList.nextElementSibling &&
                               WinJS.Utilities.hasClass(btnToggleUserList.nextElementSibling, "icon-bbb-right_arrow"))) {
@@ -3064,7 +3146,7 @@ var __meteor_runtime_config__;
                         }
                     }
                     if (openedChat || openedUserList) {
-                        panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
+                        panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                         if (panelWrapper) {
                             if (WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
                                 WinJS.Promise.timeout(50).then(function() {
@@ -3081,7 +3163,7 @@ var __meteor_runtime_config__;
                 } else {
                     btnToggleChat = fragmentElement.querySelector("div[role=\"button\"][aria-expanded=\"false\"]#chat-toggle-button");
                     if (btnToggleChat) {
-                        panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
+                        panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                         if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
                             WinJS.Utilities.addClass(panelWrapper, "hide-chat-section");
                         } else {
@@ -3089,11 +3171,11 @@ var __meteor_runtime_config__;
                             openedChat = true;
                         }
                     } else {
-                        panelWrapper = fragmentElement.querySelector(".wrapper--Z20hQYP");
+                        panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                         if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
                             WinJS.Utilities.addClass(panelWrapper, "hide-panel-section");
                         } else {
-                            btnToggleUserList = fragmentElement.querySelector("button[accesskey=\"U\"].btn--Z25OApd");
+                            btnToggleUserList = fragmentElement.querySelector("button[accesskey=\"U\"]." + bbbClass.btn);
                             if (btnToggleUserList && 
                                 (btnToggleUserList.nextElementSibling &&
                                  WinJS.Utilities.hasClass(btnToggleUserList.nextElementSibling, "icon-bbb-right_arrow"))) {
@@ -3235,7 +3317,7 @@ var __meteor_runtime_config__;
                 }
                 WinJS.Promise.timeout(750).then(function() {
                     if (typeof window.floating === "function") {
-                        var mediaContainer = fragmentElement.querySelector(".container--ZmRztk");
+                        var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
                         if (mediaContainer) {
                             for (var prop in emojiCount) {
                                 if (emojiCount.hasOwnProperty(prop)) {
