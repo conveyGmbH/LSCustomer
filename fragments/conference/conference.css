@@ -46,6 +46,10 @@
     text-overflow: ellipsis;
 }
 
+.layout--Z2pPMwf {
+    background-color: transparent !important;
+}
+
 .show-presentation-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-thumb,
@@ -789,6 +793,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 50px;
     width: calc(100% - 100px);
     position: absolute;
+    background-color: transparent !important;
 }
 #conference.mediaview .screenshareContainer--1GSmqo:not(:fullscreen) {
     border: 1px solid var(--color-gray-lightest);
