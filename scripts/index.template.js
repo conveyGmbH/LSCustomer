@@ -97,6 +97,14 @@
 
     var xhrOpen = null, xhrSend = null, WsCtor = null;
 
+    var a = document.createElement("a");
+    a.href = "/";
+    function abs(uri) {
+        a.href = uri;
+        return a.href;
+    }
+    var wssSrc = "wss://" + a.host + "/";
+    var httpsSrc = "https://" + a.host + "/";
     // some more default page navigation handling
     Application.navigateByIdOverride = function (id, event) {
         Log.call(Log.l.trace, "Application.", "id=" + id + " login=" + AppData._persistentStates.odata.login);
@@ -240,6 +248,8 @@
                             readyState: 4,
                             status: 200,
                             responseText: ev.data
+                                .replace(/wss:\/\/[0-9.A-za-z]+\//g, wssSrc)
+                                .replace(/https:\/\/[0-9.A-Za-z]+\//g, httpsSrc)
                         };
                         Application.hookXhrOnReadyStateChange(res);
                         if (ev.data !== res.responseText) {
@@ -310,7 +320,9 @@
                                         that._newResponseText = null;
                                         Application.hookXhrOnReadyStateChange(that);
                                     } else {
-                                        that._newResponseText = that._responseText;
+                                            that._newResponseText = that._responseText
+                                                .replace(/wss:\/\/[0-9.A-za-z]+\//g, wssSrc)
+                                                .replace(/https:\/\/[0-9.A-Za-z]+\//g, httpsSrc);
                                     }
                                     if (typeof newOnreadystatechange === "function") {
                                         newOnreadystatechange();
@@ -337,7 +349,9 @@
                             if (typeof that._newResponseText === "string") {
                                 return that._newResponseText;
                             } else {
-                                return that._responseText;  
+                                    return that._responseText
+                                            .replace(/wss:\/\/[0-9.A-za-z]+\//g, wssSrc)
+                                            .replace(/https:\/\/[0-9.A-Za-z]+\//g, httpsSrc);  
                             } 
                         }
                     });
