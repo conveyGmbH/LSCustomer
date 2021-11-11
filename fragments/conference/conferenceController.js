@@ -568,7 +568,7 @@ var __meteor_runtime_config__;
                         pos = html5Client.indexOf("</script>", pos);
                         if (pos > 0) {
                             html5Client = html5Client.substr(0, pos) +
-                                ";__meteor_runtime_config__.ROOT_URL = \"" + abs("/") + "\"" +
+                                ";__meteor_runtime_config__.ROOT_URL = \"" + abs("/html5client") + "\"" +
                                 //";__meteor_runtime_config__.ROOT_URL_PATH_PREFIX = \"" + abs("/html5client") + "\"" +
                                 ";__meteor_runtime_config__.ROOT_URL_PATH_PREFIX = \"/html5client\"" +
                                 html5Client.substr(pos);
