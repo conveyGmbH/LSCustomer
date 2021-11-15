@@ -82,10 +82,27 @@ var __meteor_runtime_config__;
     bbbClass.actionsbar = "actionsbar--Z1ant6U";
     bbbClass.navbar = "navbar--Z2hKYyK";
     bbbClass.layout = "layout--Z2pPMwf";
-    bbbClass.container = "";
+    bbbClass.container = null;
+    bbbClass.content = null;
     bbbClass.overlay = "react-draggable";
     bbbClass.userList = "userList--Z2q1D0p";
 
+    function getMediaContainerClass() {
+        return bbbClass.container ? bbbClass.container : bbbClass.layout;
+    }
+
+    function isChildElement(parent, element) {
+        if (parent && element) {
+            var childElement = parent.firstElementChild;
+            while (childElement) {
+                if (childElement === element) {
+                    return true;
+                }
+                childElement = childElement.nextElementSibling;
+            }
+        }
+        return false;
+    }
 
     elementSelectors = {
         closeDesc: "#conference.mediaview button[aria-describedby=\"closeDesc\"]",
@@ -1577,8 +1594,8 @@ var __meteor_runtime_config__;
                             }
                             if (showPresentationToggleContainer && showPresentationToggleContainer.style) {
                                 actionsBarRight = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
-                                if (actionsBarRight && actionsBarRight.firstElementChild !== showPresentationToggleContainer) {
-                                    actionsBarRight.insertBefore(showPresentationToggleContainer, actionsBarRight.firstElementChild);
+                                if (actionsBarRight && !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
+                                    actionsBarRight.appendChild(showPresentationToggleContainer);
                                     showPresentationToggleContainer.style.display = "inline-block";
                                 }
                             }
@@ -1646,19 +1663,21 @@ var __meteor_runtime_config__;
                             mediaContainer = panelWrapper;
                         }
                         if (mediaContainer) {
-                            var content = mediaContainer.querySelector("." + bbbClass.content);
-                            if (!videoListDefaults.contentObserver) {
-                                videoListDefaults.contentObserver = new MutationObserver(function (mutationList, observer) {
-                                    Log.print(Log.l.trace, "content childList changed!");
-                                    if (!adjustContentPositionsPromise) {
-                                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                            that.adjustContentPositions();
-                                        });
-                                    }
-                                });
-                                videoListDefaults.contentObserver.observe(content, {
-                                    childList: true
-                                });
+                            if (bbbClass.content) {
+                                var content = mediaContainer.querySelector("." + bbbClass.content);
+                                if (content && !videoListDefaults.contentObserver) {
+                                    videoListDefaults.contentObserver = new MutationObserver(function (mutationList, observer) {
+                                        Log.print(Log.l.trace, "content childList changed!");
+                                        if (!adjustContentPositionsPromise) {
+                                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                                that.adjustContentPositions();
+                                            });
+                                        }
+                                    });
+                                    videoListDefaults.contentObserver.observe(content, {
+                                        childList: true
+                                    });
+                                }
                             }
                             var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                             if (overlayElement) {
@@ -1668,7 +1687,7 @@ var __meteor_runtime_config__;
                                     if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
                                         if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
                                             actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
-                                            if (actionsBarRight && actionsBarRight.lastElementChild !== showVideoListToggleContainer) {
+                                            if (actionsBarRight &&  !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
                                                 actionsBarRight.appendChild(showVideoListToggleContainer);
                                                 showVideoListToggleContainer.style.display = "inline-block";
                                             }
@@ -1719,7 +1738,7 @@ var __meteor_runtime_config__;
                                         }
                                     }
                                     var videoListItem = videoList.firstElementChild;
-                                    if (!content ||
+                                    if (!that.binding.showPresentation ||
                                         direction === videoListDefaults.default ||
                                         WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
                                         !(videoPLayerOpened || screenShareOpened || presentationOpened && !overlayIsHidden)) {
@@ -1948,7 +1967,7 @@ var __meteor_runtime_config__;
                     }
                     return WinJS.Promise.timeout(20);
                 }).then(function () {
-                    var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                     if (mediaContainer) {
                         var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                         if (overlayElement) {
@@ -1982,7 +2001,7 @@ var __meteor_runtime_config__;
                     return WinJS.Promise.as();
                 }
                 var ret = new WinJS.Promise.as().then(function () {
-                    var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                     if (mediaContainer) {
                         var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                         if (overlayElement) {
@@ -2246,7 +2265,7 @@ var __meteor_runtime_config__;
 
             var setPresenterModeState = function (state) {
                 Log.call(Log.l.info, "Conference.Controller.", "state=" + state);
-                var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                 if (mediaContainer) {
                     switch (state) {
                         case "tiled": {
@@ -2593,7 +2612,7 @@ var __meteor_runtime_config__;
                     that.binding.showPresentation = true;
                     if (videoListDefaults.direction === videoListDefaults.default) {
                         WinJS.Promise.timeout(50).then(function () {
-                            var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                            var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                             if (mediaContainer) {
                                 var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay);
                                 if (overlayElement && overlayElement.style) {
@@ -2616,7 +2635,7 @@ var __meteor_runtime_config__;
                 },
                 showVideoList: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                     if (mediaContainer) {
                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-hidden");
@@ -2627,7 +2646,7 @@ var __meteor_runtime_config__;
                 },
                 hideVideoList: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                     if (mediaContainer) {
                         if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-hidden")) {
                             WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-hidden");
@@ -2641,7 +2660,7 @@ var __meteor_runtime_config__;
                     videoListDefaults.direction = videoListDefaults.default;
                     that.setPresenterModeState("off");
                     WinJS.Promise.timeout(250).then(function () {
-                        var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                        var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                         if (mediaContainer) {
                             var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ":not(." + bbbClass.hideOverlay + ")");
                             if (overlayElement && overlayElement.style) {
@@ -2729,7 +2748,7 @@ var __meteor_runtime_config__;
                     if (hideNotificationPromise) {
                         that.eventHandlers.clickNotification();
                     } else {
-                        mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                        mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                     }
                     if (mediaContainer) {
                         if (notificationPopup &&
@@ -3318,7 +3337,7 @@ var __meteor_runtime_config__;
                 }
                 WinJS.Promise.timeout(750).then(function() {
                     if (typeof window.floating === "function") {
-                        var mediaContainer = fragmentElement.querySelector("." + (bbbClass.container ? bbbClass.container : bbbClass.layout));
+                        var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                         if (mediaContainer) {
                             for (var prop in emojiCount) {
                                 if (emojiCount.hasOwnProperty(prop)) {
