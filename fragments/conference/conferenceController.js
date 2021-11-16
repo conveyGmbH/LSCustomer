@@ -108,8 +108,8 @@ var __meteor_runtime_config__;
         closeDesc: "#conference.mediaview button[aria-describedby=\"closeDesc\"]",
         restoreDesc: "#conference.mediaview ." + bbbClass.right + " button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF"
     };
-    elementSelectors.closeDesc = "#conference.mediaview button[data-test=\"hidePresentationButton\"]";
-    elementSelectors.restoreDesc = "#conference.mediaview button[data-test=\"restorePresentationButton\"]";
+    elementSelectors.closeDesc = "#conference.mediaview button[data-test=\"restorePresentationButton\"]";
+    elementSelectors.restoreDesc = "#conference.mediaview button[data-test=\"hidePresentationButton\"]";
 
     var floatingEmojisSymbols = [
         "\u2764",       //"❤️"
@@ -170,8 +170,6 @@ var __meteor_runtime_config__;
                 direction: null,
                 videoListWidth: 0,
                 videoListHeight: 0,
-                closeDesc: null,
-                restoreDesc: null,
                 hideInactive: false,
                 hideMuted: false,
                 contentActivity: [],
@@ -1955,24 +1953,6 @@ var __meteor_runtime_config__;
                                 }
                             }
                         }
-                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
-                        if (closeDescButton) {
-                            if (!videoListDefaults.closeDesc) {
-                                videoListDefaults.closeDesc = closeDescButton.onclick;
-                                closeDescButton.onclick = that.eventHandlers.clickCloseDesc;
-                            }
-                        } else {
-                            videoListDefaults.closeDesc = null;
-                        }
-                        var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc);
-                        if (restoreDescButton) {
-                            if (!videoListDefaults.restoreDesc) {
-                                videoListDefaults.restoreDesc = restoreDescButton.onclick;
-                                restoreDescButton.onclick = that.eventHandlers.clickRestoreDesc;
-                            }
-                        } else {
-                            videoListDefaults.restoreDesc = null;
-                        }
                         if (pageControllerName === "eventController") {
                             var actionsBarCenter = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.center1);
                             if (actionsBarCenter && emojiButtonContainer && emojiToolbar &&
@@ -2940,20 +2920,6 @@ var __meteor_runtime_config__;
                         });
                     }
                     Log.ret(Log.l.info);
-                },
-                clickCloseDesc: function (event) {
-                    Log.call(Log.l.trace, "Conference.Controller.");
-                    if (typeof videoListDefaults.closeDesc === "function") {
-                        videoListDefaults.closeDesc(event);
-                    }
-                    Log.ret(Log.l.trace);
-                },
-                clickRestoreDesc: function (event) {
-                    Log.call(Log.l.trace, "Conference.Controller.");
-                    if (typeof videoListDefaults.restoreDesc === "function") {
-                        videoListDefaults.restoreDesc(event);
-                    }
-                    Log.ret(Log.l.trace);
                 },
                 clickToggleUserList: function (event) {
                     Log.call(Log.l.trace, "Conference.Controller.");

@@ -1008,17 +1008,22 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
             z-index: 10;
         }
 
-            #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:-webkit-full-screen),
-            #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:-webkit-full-screen) .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX),
-            #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:-webkit-full-screen) .svgContainer--Z1z3wO0 .toolbarContainer--ZqATLX > div {
-                box-shadow: var(--box-shadow-popup) !important;
-            }
+        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:-webkit-full-screen),
+        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:-webkit-full-screen) .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX),
+        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:-webkit-full-screen) .svgContainer--Z1z3wO0 .toolbarContainer--ZqATLX > div {
+            box-shadow: var(--box-shadow-popup) !important;
+        }
     }
+}
+
+#conference.mediaview .svgContainer--Z1z3wO0 > div:not(.presentationToolbar--Z7DDdn) {
+    height: 100% !important;
 }
 
 
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX) {
     border: 1px solid var(--color-gray-lightest);
+    width: 100% !important;
 }
 
 #conference.mediaview button[aria-describedby="closeDesc"],
@@ -1054,7 +1059,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .right--DUFDc button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF,
 #conference.mediaview button[data-test="hidePresentationButton"],
 #conference.mediaview button[data-test="restorePresentationButton"] {
-    display: none;
+    width: 0;
+    visibility: hidden
 }
 /* set fullscreen button to the top */
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .wrapper--Z17x8k2.dark--Z1Y80Wt.bottom--Z1oNR9L {
