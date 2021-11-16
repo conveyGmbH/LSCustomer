@@ -817,15 +817,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .screenshareContainer--1GSmqo:not(:fullscreen) {
+#conference.mediaview .layout--Z2pPMwf > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
     background-color: transparent !important;
 }
 
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen),
+#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy:not(:fullscreen),
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen),
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy:not(:fullscreen) {
     top: 30px !important;
     left: 50px !important;
@@ -835,7 +835,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute;
     max-height: 100%;
 }
-#conference.mediaview .screenshareContainer--1GSmqo:not(:fullscreen) {
+#conference.mediaview .screenshareContainer--1GSmqo:not(:-webkit-full-screen) {
     border: 1px solid var(--color-gray-lightest);
     background-color: var(--color-off-white);
 }
@@ -858,13 +858,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
+#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
     left: 400px !important;
     width: calc(100% - 450px) !important;
 }
 
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
-.view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode) .screenshareContainer--1GSmqo:not(:fullscreen) {
+.view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
     left: 200px !important;
     width: calc(100% - 250px) !important;
 }
@@ -876,11 +876,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
       (any version and any device)
      */
         #conference.mediaview .presentationContainer--1wqUYG:not(:-webkit-full-screen),
-        #conference.mediaview .screenshareContainer--1GSmqo:not(:-webkit-full-screen) {
+        #conference.mediaview .layout--Z2pPMwf > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
             left: 50px !important;
             right: 50px;
             width: calc(100% - 100px) !important;
             position: absolute;
+            border: 1px solid var(--color-gray-lightest);
+            background-color: var(--color-off-white);
         }
 
         #conference.mediaview .screenshareContainer--1GSmqo:not(:-webkit-full-screen) {
@@ -889,13 +891,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
         }
 
         #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
-        #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:-webkit-full-screen) {
+        #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
             left: 400px !important;
             width: calc(100% - 450px) !important;
         }
 
         .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
-        .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode) .screenshareContainer--1GSmqo:not(:-webkit-full-screen) {
+        .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
             left: 200px !important;
             width: calc(100% - 250px) !important;
         }
@@ -919,29 +921,29 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     width: calc(calc(100% - 100px) * 0.54) !important;
 }
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
     right: 400px;
     width: calc(100% - 450px) !important;
 }
 .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
-.view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode) .screenshareContainer--1GSmqo:not(:fullscreen) {
+.view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
     right: 200px;
     width: calc(100% - 250px) !important;
 }
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen) {
+#conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
     width: calc(calc(100% - 30px) * 0.62) !important;
     right: calc(100% - 30px) !important;
 }
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy:not(:fullscreen),
-#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen),
+#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen) {
     width: calc(calc(100% - 100px) * 0.54) !important;
     height: calc(100% - 150px) !important;
     left: 50px !important;
 }
 
-#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen),
+#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy > video:not(:fullscreen),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen) {
     top: 50px !important;
@@ -953,15 +955,15 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy > video:not(:fullscreen) {
     box-shadow: var(--box-shadow-popup) !important;
 }
-#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen),
+#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 > div {
     z-index: 10;
 }
-#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen),
-#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX),
-#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 .toolbarContainer--ZqATLX > div {
-    box-shadow: var(--box-shadow-popup) !important;
-}
+    #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
+    #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX),
+    #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:fullscreen) .svgContainer--Z1z3wO0 .toolbarContainer--ZqATLX > div {
+        box-shadow: var(--box-shadow-popup) !important;
+    }
 
 @media not all and (min-resolution:.001dpcm) {
     @supports (-webkit-appearance:none) {
@@ -970,32 +972,32 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
       (any version and any device)
      */
         #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
-        #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:-webkit-full-screen) {
+        #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
             right: 400px;
             width: calc(100% - 450px) !important;
         }
 
         .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
-        .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode) .screenshareContainer--1GSmqo:not(:-webkit-full-screen) {
+        .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
             right: 200px;
             width: calc(100% - 250px) !important;
         }
 
         #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
-        #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:-webkit-full-screen) {
+        #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify) {
             width: calc(calc(100% - 30px) * 0.62) !important;
             height: calc(100% - 30px) !important;
         }
 
         #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy:not(:-webkit-full-screen),
-        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:-webkit-full-screen),
+        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
         #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:-webkit-full-screen) {
             width: calc(calc(100% - 100px) * 0.54) !important;
             height: calc(100% - 150px) !important;
             left: 50px !important;
         }
 
-        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:-webkit-full-screen),
+        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
         #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy > video:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:-webkit-full-screen) {
             top: 50px !important;
@@ -1009,17 +1011,17 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
             box-shadow: var(--box-shadow-popup) !important;
         }
 
-        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:-webkit-full-screen),
+        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
         #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:-webkit-full-screen) .svgContainer--Z1z3wO0 > div {
             z-index: 10;
         }
 
-        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:-webkit-full-screen),
+        #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.videoPlayer--1MGUuy):not(.Toastify),
         #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:-webkit-full-screen) .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX),
         #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden) .presentationArea--1VFCwU:not(:-webkit-full-screen) .svgContainer--Z1z3wO0 .toolbarContainer--ZqATLX > div {
             box-shadow: var(--box-shadow-popup) !important;
         }
-    }
+}
 }
 
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.presentationToolbar--Z7DDdn) {
@@ -1293,7 +1295,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .presenter-mode-full:not(.video-overlay-is-empty) .video-overlay-left,
 #conference.mediaview .presenter-mode-full:not(.video-overlay-is-empty) .video-overlay-right {
     box-shadow: var(--box-shadow-popup) !important;
-    z-index: 10;
+    z-index: 10 !important;
 }
 
 #conference.mediaview .video-overlay-left button,
