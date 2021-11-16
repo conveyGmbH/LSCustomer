@@ -822,13 +822,21 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 #conference.mediaview .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .screenshareContainer--1GSmqo:not(:fullscreen) {
+    background-color: transparent !important;
+}
+
+#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
+#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen),
+#conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy:not(:fullscreen),
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen),
+#conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.presenter-mode-full) .videoPlayer--1MGUuy:not(:fullscreen) {
     top: 30px !important;
     left: 50px !important;
     right: 50px;
-    width: calc(100% - 100px) !important;
     height: calc(100% - 90px) !important;
+    width: calc(100% - 100px) !important;
     position: absolute;
-    background-color: transparent !important;
     max-height: 100%;
 }
 #conference.mediaview .screenshareContainer--1GSmqo:not(:fullscreen) {
@@ -836,27 +844,31 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--color-off-white);
 }
 
-#conference.mediaview .video-overlay-is-top .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .video-overlay-is-top .videoPlayer--1MGUuy:not(:fullscreen),
-#conference.mediaview .video-overlay-is-top .screenshareContainer--1GSmqo:not(:fullscreen) {
-    left: 0 !important;
-    width: 100% !important;
-    top: 330px !important;
-    height: calc(100% - 450px) !important;
+@media only screen and (max-width: 1177px) {
+    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen),
+    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy:not(:fullscreen),
+    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen) {
+        left: 50px !important;
+        width: calc(100% - 100px) !important;
+        position: absolute;
+    }
 }
-.view-size-biggest #conference.mediaview .video-overlay-is-top .presentationContainer--1wqUYG:not(:fullscreen),
-.view-size-biggest #conference.mediaview .video-overlay-is-top .videoPlayer--1MGUuy:not(:fullscreen),
-.view-size-biggest #conference.mediaview .video-overlay-is-top .screenshareContainer--1GSmqo:not(:fullscreen) {
-    top: 180px !important;
-    height: calc(100% - 300px) !important;
+@media only screen and (min-width: 1178px) {
+    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen),
+    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy:not(:fullscreen),
+    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen) {
+        top: 30px !important;
+        height: calc(100% - 90px) !important;
+        position: absolute;
+    }
 }
-
 
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
     left: 400px !important;
     width: calc(100% - 450px) !important;
 }
+
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode) .screenshareContainer--1GSmqo:not(:fullscreen) {
     left: 200px !important;
