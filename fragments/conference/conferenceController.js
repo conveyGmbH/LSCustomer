@@ -1571,6 +1571,7 @@ var __meteor_runtime_config__;
                                 });
                             }
                         }
+                        existsPresentationArea = true;
                     }
                     var screenshareContainer = fragmentElement.querySelector("." + bbbClass.screenshareContainer);
                     if (screenshareContainer) {
@@ -1580,26 +1581,11 @@ var __meteor_runtime_config__;
                     if (svgContainer && svgContainer.firstElementChild) {
                         presentationOpened = true;
                         // prevent scrolling on zoom per mouse wheel!
-                        if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
-                            if (!that.onWheelSvg) {
-                                that.onWheelSvg = onWheelSvg;
-                                that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
-                            }
-                            if (presenterButtonContainer && presenterButtonContainer.style) {
-                                var navBarTopCenter = fragmentElement.querySelector("." + bbbClass.navbar + " ." + bbbClass.top2 + " ." + bbbClass.center2);
-                                if (navBarTopCenter && navBarTopCenter.firstElementChild !== presenterButtonContainer) {
-                                    navBarTopCenter.insertBefore(presenterButtonContainer, navBarTopCenter.firstElementChild);
-                                    presenterButtonContainer.style.display = "inline-block";
-                                }
-                            }
-                            if (showPresentationToggleContainer && showPresentationToggleContainer.style) {
-                                actionsBarRight = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
-                                if (actionsBarRight && !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
-                                    actionsBarRight.appendChild(showPresentationToggleContainer);
-                                    showPresentationToggleContainer.style.display = "inline-block";
-                                }
-                            }
+                        if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController" && !that.onWheelSvg) {
+                            that.onWheelSvg = onWheelSvg;
+                            that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
                         }
+
                     }
                     var panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                     if (panelWrapper) {
@@ -1680,6 +1666,20 @@ var __meteor_runtime_config__;
                                 }
                             }
                             if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                                if (presenterButtonContainer && presenterButtonContainer.style) {
+                                    var navBarTopCenter = fragmentElement.querySelector("." + bbbClass.navbar + " ." + bbbClass.top2 + " ." + bbbClass.center2);
+                                    if (navBarTopCenter && navBarTopCenter.firstElementChild !== presenterButtonContainer) {
+                                        navBarTopCenter.insertBefore(presenterButtonContainer, navBarTopCenter.firstElementChild);
+                                        presenterButtonContainer.style.display = "inline-block";
+                                    }
+                                }
+                                if (showPresentationToggleContainer && showPresentationToggleContainer.style) {
+                                    actionsBarRight = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
+                                    if (actionsBarRight && !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
+                                        actionsBarRight.appendChild(showPresentationToggleContainer);
+                                        showPresentationToggleContainer.style.display = "inline-block";
+                                    }
+                                }
                                 if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
                                     actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
                                     if (actionsBarRight &&  !isChildElement(actionsBarRight, showVideoListToggleContainer)) {
@@ -1911,6 +1911,47 @@ var __meteor_runtime_config__;
                                 }
                                 if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
                                     WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
+                                }
+                            }
+                            if (videoPLayerOpened) {
+                                if (WinJS.Utilities.hasClass(mediaContainer, "deskshare-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "deskshare-open");
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "presentation-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "presentation-open");
+                                }
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "videoplayer-open")) {
+                                    WinJS.Utilities.addClass(mediaContainer, "videoplayer-open");
+                                }
+                            } else if (screenShareOpened) {
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "deskshare-open")) {
+                                    WinJS.Utilities.addClass(mediaContainer, "deskshare-open");
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "presentation-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "presentation-open");
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "videoplayer-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "videoplayer-open");
+                                }
+                            } else if (presentationOpened) {
+                                if (WinJS.Utilities.hasClass(mediaContainer, "deskshare-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "deskshare-open");
+                                }
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-open")) {
+                                    WinJS.Utilities.addClass(mediaContainer, "presentation-open");
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "videoplayer-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "videoplayer-open");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(mediaContainer, "deskshare-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "deskshare-open");
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "presentation-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "presentation-open");
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "videoplayer-open")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "videoplayer-open");
                                 }
                             }
                         }
@@ -2611,8 +2652,14 @@ var __meteor_runtime_config__;
                     if (restoreDescButton) {
                         restoreDescButton.click();
                     }
-                    that.binding.showPresentation = true;
-                    if (videoListDefaults.direction === videoListDefaults.default) {
+                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
+                    if (mediaContainer) {
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "presentation-is-hidden");
+                        }
+                        that.binding.showPresentation = true;
+                    }
+                    /*if (videoListDefaults.direction === videoListDefaults.default) {
                         WinJS.Promise.timeout(50).then(function () {
                             var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                             if (mediaContainer) {
@@ -2622,7 +2669,7 @@ var __meteor_runtime_config__;
                                 }
                             }
                         });
-                    }
+                    }*/
                     Log.ret(Log.l.info);
                 },
                 hidePresentation: function () {
@@ -2631,7 +2678,13 @@ var __meteor_runtime_config__;
                     if (closeDescButton) {
                         closeDescButton.click();
                     }
-                    that.binding.showPresentation = false;
+                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
+                    if (mediaContainer) {
+                        if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
+                            WinJS.Utilities.addClass(mediaContainer, "presentation-is-hidden");
+                        }
+                        that.binding.showPresentation = false;
+                    }
                     that.setPresenterModeState("off");
                     Log.ret(Log.l.info);
                 },
@@ -2661,7 +2714,7 @@ var __meteor_runtime_config__;
                     Log.call(Log.l.info, "Conference.Controller.");
                     videoListDefaults.direction = videoListDefaults.default;
                     that.setPresenterModeState("off");
-                    WinJS.Promise.timeout(250).then(function () {
+                    /*WinJS.Promise.timeout(250).then(function () {
                         var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                         if (mediaContainer) {
                             var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ":not(." + bbbClass.hideOverlay + ")");
@@ -2669,7 +2722,7 @@ var __meteor_runtime_config__;
                                 overlayElement.style.height = videoListDefaults.height;
                             }
                         }
-                    });
+                    });*/
                     Log.ret(Log.l.info);
                 },
                 videoListLeft: function () {
