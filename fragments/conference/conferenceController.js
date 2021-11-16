@@ -2628,7 +2628,7 @@ var __meteor_runtime_config__;
             this.eventHandlers = {
                 showPresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc);
+                    var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc + ", " + elementSelectors.closeDesc);
                     if (restoreDescButton) {
                         restoreDescButton.click();
                     }
@@ -2654,7 +2654,7 @@ var __meteor_runtime_config__;
                 },
                 hidePresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc);
+                    var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc + ", " + elementSelectors.restoreDesc);
                     if (closeDescButton) {
                         closeDescButton.click();
                     }
