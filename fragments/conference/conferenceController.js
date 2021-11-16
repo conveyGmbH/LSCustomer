@@ -1689,7 +1689,6 @@ var __meteor_runtime_config__;
                                             actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
                                             if (actionsBarRight &&  !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
                                                 actionsBarRight.appendChild(showVideoListToggleContainer);
-                                                showVideoListToggleContainer.style.display = "inline-block";
                                             }
                                         }
                                     }
@@ -1754,6 +1753,9 @@ var __meteor_runtime_config__;
                                         if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
                                             WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
                                         }
+                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-top")) {
+                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-top");
+                                        }
                                         if (!overlayIsHidden) {
                                             if (!WinJS.Utilities.hasClass(overlayElement,  bbbClass.overlay)) {
                                                 WinJS.Utilities.addClass(overlayElement, bbbClass.overlay);
@@ -1817,6 +1819,9 @@ var __meteor_runtime_config__;
                                         }
                                         if (WinJS.Utilities.hasClass(overlayElement, bbbClass.floatingOverlay)) {
                                             WinJS.Utilities.removeClass(overlayElement, bbbClass.floatingOverlay);
+                                        }
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-top")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-top");
                                         }
                                         if (direction === videoListDefaults.right) {
                                             if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {

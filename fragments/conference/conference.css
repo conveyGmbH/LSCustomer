@@ -51,6 +51,12 @@
     margin: 0 10px;
 }
 
+.modSession #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-empty) .show-videolist-toggle-container,
+.modSession #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-empty) .show-videolist-toggle-container,
+.modSession #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-empty) .show-videolist-toggle-container {
+    display: inline-block;
+}
+
 .show-presentation-toggle-container .win-toggleswitch .win-toggleswitch-header,
 .show-videolist-toggle-container .win-toggleswitch .win-toggleswitch-header {
     margin-bottom: 0;
