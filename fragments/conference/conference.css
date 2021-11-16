@@ -27,10 +27,6 @@
     height: 100% !important;
 }
 
-#conference.mediaview .layout--Z2pPMwf > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.screenshareContainer--1GSmqo):not(.videoPlayer--1MGUuy):not(.Toastify) {
-    height: 100% !important;
-}
-
 #conference.mediaview .navbar--Z2hKYyK {
     top: 0 !important;
 }
