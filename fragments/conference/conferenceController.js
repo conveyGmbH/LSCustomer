@@ -1679,19 +1679,19 @@ var __meteor_runtime_config__;
                                     });
                                 }
                             }
+                            if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                                if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
+                                    actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
+                                    if (actionsBarRight &&  !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
+                                        actionsBarRight.appendChild(showVideoListToggleContainer);
+                                    }
+                                }
+                            }
                             var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                             if (overlayElement) {
                                 var overlayIsHidden = WinJS.Utilities.hasClass(overlayElement, bbbClass.hideOverlay);
                                 var videoList = mediaContainer.querySelector("." + bbbClass.videoList);
                                 if (videoList && videoList.style && overlayElement.style) {
-                                    if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
-                                        if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
-                                            actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
-                                            if (actionsBarRight &&  !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
-                                                actionsBarRight.appendChild(showVideoListToggleContainer);
-                                            }
-                                        }
-                                    }
                                     if (!videoListDefaults.videoListObserver) {
                                         videoListDefaults.videoListObserver = new MutationObserver(function (mutationList, observer) {
                                             mutationList.forEach(function (mutation) {
