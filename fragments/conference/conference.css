@@ -846,8 +846,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 @media only screen and (max-width: 1177px) {
     #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen),
-    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy:not(:fullscreen),
-    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen) {
+    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy:not(:fullscreen) {
         left: 50px !important;
         width: calc(100% - 100px) !important;
         position: absolute;
@@ -855,8 +854,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 @media only screen and (min-width: 1178px) {
     #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .presentationContainer--1wqUYG:not(:fullscreen),
-    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy:not(:fullscreen),
-    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .screenshareContainer--1GSmqo:not(:fullscreen) {
+    #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden) .videoPlayer--1MGUuy:not(:fullscreen) {
         top: 30px !important;
         height: calc(100% - 90px) !important;
         position: absolute;
