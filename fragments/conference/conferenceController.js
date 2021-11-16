@@ -1682,7 +1682,7 @@ var __meteor_runtime_config__;
                             if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
                                 if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
                                     actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
-                                    if (actionsBarRight &&  !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
+                                    if (actionsBarRight &&  !isChildElement(actionsBarRight, showVideoListToggleContainer)) {
                                         actionsBarRight.appendChild(showVideoListToggleContainer);
                                     }
                                 }
