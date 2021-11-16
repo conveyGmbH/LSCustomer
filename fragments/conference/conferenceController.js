@@ -1753,6 +1753,9 @@ var __meteor_runtime_config__;
                                         if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
                                             WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
                                         }
+                                        if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-top")) {
+                                            WinJS.Utilities.addClass(overlayElement, "video-overlay-top");
+                                        }
                                         if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-top")) {
                                             WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-top");
                                         }
@@ -1761,9 +1764,6 @@ var __meteor_runtime_config__;
                                                 WinJS.Utilities.addClass(overlayElement, bbbClass.overlay);
                                             }
                                             if (numVideos > 1) {
-                                                //if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                                                //    WinJS.Utilities.addClass(overlayElement, "video-overlay-fullwidth");
-                                                //}
                                                 if (WinJS.Utilities.hasClass(overlayElement, bbbClass.autoWidth)) {
                                                     WinJS.Utilities.removeClass(overlayElement, bbbClass.autoWidth);
                                                 }
@@ -1771,9 +1771,6 @@ var __meteor_runtime_config__;
                                                     WinJS.Utilities.addClass(overlayElement, bbbClass.fullWidth);
                                                 }
                                             } else {
-                                                //if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                                                //    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
-                                                //}
                                                 if (!WinJS.Utilities.hasClass(overlayElement, bbbClass.autoWidth)) {
                                                     WinJS.Utilities.addClass(overlayElement, bbbClass.autoWidth);
                                                 }
@@ -1802,9 +1799,9 @@ var __meteor_runtime_config__;
                                         if (!WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                                             WinJS.Utilities.addClass(videoList, "video-list-vertical");
                                         }
-                                        //if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-fullwidth")) {
-                                        //    WinJS.Utilities.removeClass(overlayElement, "video-overlay-fullwidth");
-                                        //}
+                                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-top")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-top");
+                                        }
                                         if (WinJS.Utilities.hasClass(overlayElement, bbbClass.fullWidth)) {
                                             WinJS.Utilities.removeClass(overlayElement, bbbClass.fullWidth);
                                         }

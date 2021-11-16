@@ -27,7 +27,7 @@
     height: 100% !important;
 }
 
-#conference.mediaview .layout--Z2pPMwf > div:not(.video-overlay-left):not(.video-overlay-right):not(presentationContainer--1wqUYG):not(.screenshareContainer--1GSmqo):not(.videoPlayer--1MGUuy):not(.Toastify) {
+#conference.mediaview .layout--Z2pPMwf > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.presentationContainer--1wqUYG):not(.screenshareContainer--1GSmqo):not(.videoPlayer--1MGUuy):not(.Toastify) {
     height: 100% !important;
 }
 
@@ -836,6 +836,22 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--color-off-white);
 }
 
+#conference.mediaview .video-overlay-is-top .presentationContainer--1wqUYG:not(:fullscreen),
+#conference.mediaview .video-overlay-is-top .videoPlayer--1MGUuy:not(:fullscreen),
+#conference.mediaview .video-overlay-is-top .screenshareContainer--1GSmqo:not(:fullscreen) {
+    left: 0 !important;
+    width: 100% !important;
+    top: 330px !important;
+    height: calc(100% - 450px) !important;
+}
+.view-size-biggest #conference.mediaview .video-overlay-is-top .presentationContainer--1wqUYG:not(:fullscreen),
+.view-size-biggest #conference.mediaview .video-overlay-is-top .videoPlayer--1MGUuy:not(:fullscreen),
+.view-size-biggest #conference.mediaview .video-overlay-is-top .screenshareContainer--1GSmqo:not(:fullscreen) {
+    top: 180px !important;
+    height: calc(100% - 300px) !important;
+}
+
+
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .video-overlay-is-left:not(.video-overlay-is-hidden):not(.presenter-mode-full) .screenshareContainer--1GSmqo:not(:fullscreen) {
     left: 400px !important;
@@ -1166,11 +1182,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     /* default style */
 }
 
-#conference.mediaview .video-overlay-fullwidth {
-    width: calc(100% - 100px) !important;
-    min-width: calc(100% - 100px) !important;
-    max-width: calc(100% - 100px);
-}
 
 #conference.mediaview .video-overlay-is-hidden .video-overlay-left,
 #conference.mediaview .video-overlay-is-hidden .video-overlay-right,
@@ -1188,10 +1199,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 0;
 }
 #conference.mediaview .video-overlay-left,
-#conference.mediaview .video-overlay-right {
+#conference.mediaview .video-overlay-right,
+.view-size-biggest #conference.mediaview .video-overlay-top {
     display: block !important;
     position: absolute !important;
-    top: 85px;
+    top: 85px !important;
     width: 384px !important;
     min-width: 384px !important;
     max-width: 384px !important;
@@ -1201,11 +1213,21 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     pointer-events: none;
     transform: none !important;
 }
+
 .view-size-biggest #conference.mediaview .video-overlay-left,
 .view-size-biggest #conference.mediaview .video-overlay-right {
     width: 192px !important;
     min-width: 192px !important;
     max-width: 192px !important;
+}
+.view-size-biggest #conference.mediaview .video-overlay-top {
+    top: 30px !important;
+    width: calc(100% - 100px) !important;
+    min-width: calc(100% - 100px) !important;
+    max-width: calc(100% - 100px) !important;
+    height: 144px !important;
+    min-height: 144px !important;
+    max-height: 144px !important;
 }
 
 #conference.mediaview .video-overlay-is-left:not(.presenter-mode) .video-overlay-left,
