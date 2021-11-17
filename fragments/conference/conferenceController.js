@@ -1434,8 +1434,8 @@ var __meteor_runtime_config__;
                                     }
                                 }
                                 if (j === deviceList.length) {
-                                    if (settings.deviceId.length === 88 && settings.deviceId.indexOf("==") === 86) {
-                                        Log.print(Log.l.trace, "guess local with background filter deviceId=" + settings.deviceId);
+                                    if (videoTrack.canvas) {
+                                        Log.print(Log.l.trace, "guess local with background filter deviceId=" + settings.deviceId + " object=" + videoTrack.toString());
                                         WinJS.Utilities.addClass(videoListItem, "selfie-video");
                                     }
                                 }
