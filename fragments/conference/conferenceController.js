@@ -1425,12 +1425,18 @@ var __meteor_runtime_config__;
                         if (mediaStream && typeof mediaStream.getVideoTracks === "function") {
                             var videoTrack = mediaStream.getVideoTracks() ? mediaStream.getVideoTracks()[0] : null;
                             if (videoTrack && typeof videoTrack.getSettings === "function") {
-                                var settings = videoTrack.getSettings();
-                                for (var j = 0; j < deviceList.length; j++) {
+                                var settings = videoTrack.getSettings(), j;
+                                for (j = 0; j < deviceList.length; j++) {
                                     if (deviceList[j].deviceId === settings.deviceId) {
                                         Log.print(Log.l.trace, "found local " + deviceList[j].kind + ":" + deviceList[j].label + " with deviceId=" + deviceList[j].deviceId);
                                         WinJS.Utilities.addClass(videoListItem, "selfie-video");
                                         break;
+                                    }
+                                }
+                                if (j === deviceList.length) {
+                                    if (settings.deviceId.length === 88 && settings.deviceId.indexOf("==") === 86) {
+                                        Log.print(Log.l.trace, "guess local with background filter deviceId=" + settings.deviceId);
+                                        WinJS.Utilities.addClass(videoListItem, "selfie-video");
                                     }
                                 }
                             }
@@ -1441,7 +1447,7 @@ var __meteor_runtime_config__;
                         if (userName) {
                             if (!userName.firstElementChild) {
                                 var iLabel = document.createElement("i");
-                                iLabel.innerHTML = "&nbsp;(" + getResourceText("label.you") + ")";
+                                iLabel.innerHTML = "&nbsp;(" + getResourceText("label.me") + ")";
                                 userName.appendChild(iLabel);
                             }
                         }
@@ -1775,6 +1781,7 @@ var __meteor_runtime_config__;
                                                         break;
                                                     case "childList":
                                                         Log.print(Log.l.trace, "videoList childList changed!");
+                                                        lastDeviceListTime = 0;
                                                         if (!adjustContentPositionsPromise) {
                                                             adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
                                                                 that.adjustContentPositions();
