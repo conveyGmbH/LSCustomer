@@ -1279,7 +1279,7 @@ var __meteor_runtime_config__;
                             }
                         }
                         counter++;
-                        item = addedNodes ? addedNodes[counter] : item.nextElementSibling;
+                        itemElement = addedNodes ? addedNodes[counter] : itemElement.nextElementSibling;
                     }
                 }
             }
