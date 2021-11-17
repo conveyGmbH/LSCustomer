@@ -33,11 +33,13 @@
     left: 0 !important;
     top: 0 !important;
     z-index: 10 !important;
+    max-width: 100%;
 }
 
 #conference.mediaview section.actionsbar--Z1ant6U {
     left: 0 !important;
     top: calc(100% - 64px) !important;
+    max-width: 100%;
 }
 
 .modSession #conference.mediaview :not(section.actionsbar--Z1ant6U) .left--18SBXP,
@@ -1143,6 +1145,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* hide logoff menu-item in options menu */
+#default-dropdown-menu li[data-test="list-item-shortcuts"] + hr,
+#default-dropdown-menu li[data-test="logout"],
 #conference.mediaview .right--Z4dKWq .scrollable--4fyj li.separator--Z1vmd5H,
 #conference.mediaview .right--Z4dKWq .scrollable--4fyj li.separator--Z1vmd5H ~ li {
     display: none;
