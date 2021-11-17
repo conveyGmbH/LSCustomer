@@ -3483,7 +3483,9 @@ var __meteor_runtime_config__;
                         }
                         if (!blockCount) {
                             if (text[i + 1] === "\"" || text[i + 1] === ",") {
-                                return i + 2 ;
+                                return i + 2;
+                            } else if (text[i + 1] === "]") {
+                                return i + 1;
                             } else {
                                 return 0;
                             }
