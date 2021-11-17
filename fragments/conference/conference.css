@@ -1,5 +1,6 @@
 ﻿#conferenceController .contentarea {
     position: absolute;
+    background-color: transparent;
 }
 
 #conferenceController .doc-container {
@@ -25,6 +26,8 @@
     background-color: transparent !important;
     width: 100% !important;
     height: 100% !important;
+    overflow: clip !important;
+    top: 0 !important;
 }
 
 #conference.mediaview .navbar--Z2hKYyK {
@@ -1582,8 +1585,10 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 
 .event #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip {
     top: -55px;
-    left: -86px;
+    left: -106px;
     min-height: 40px;
+    width: 240px;
+    max-width: 240px;
     transition-duration: 500ms;
     transition-property: top, opacity;
     opacity: 0;
@@ -1619,6 +1624,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border-radius: 5px;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
+    color: var(--btn-primary-color) !important;
     padding: 4px 7px 6px;
     position: absolute;
     top: -4px;
@@ -1628,7 +1634,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .tool-box {
     display: none;
     bottom: 2px;
-    left: 185px;
+    left: 142px;
     width: auto;
     height: 46px;
     opacity: 0.9;

@@ -3370,7 +3370,8 @@ var __meteor_runtime_config__;
                                             size: [5,15],
                                             element: mediaContainer,
                                             width: 30 + 20 * Math.random(),
-                                            left: "calc(50% + 50px)",
+                                            left: "50%",
+                                            top: "calc(100% - 365px)",
                                             max: 20
                                         });
                                         emojiCount[prop] = 0;
