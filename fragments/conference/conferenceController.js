@@ -1569,7 +1569,6 @@ var __meteor_runtime_config__;
                                 });
                             }
                         }
-                        existsPresentationArea = true;
                     }
                     var screenshareContainer = fragmentElement.querySelector("." + bbbClass.screenshareContainer);
                     if (screenshareContainer) {
