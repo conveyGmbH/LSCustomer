@@ -1196,7 +1196,7 @@ var __meteor_runtime_config__;
                             }
                             var messageElements = null;
                             var isLocked = false;
-                            var timeElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.time);
+                            var timeElement = item.querySelector("." + bbbClass.time);
                             var date = null;
                             if (timeElement && timeElement.dateTime) {
                                 try {
@@ -1314,7 +1314,7 @@ var __meteor_runtime_config__;
                                     if (item) {
                                         var locked = WinJS.Utilities.hasClass(item, "chat-message-locked");
                                         var nameElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.name + " span, ." + bbbClass.meta + " ." + bbbClass.logout + " > span");
-                                        var timeElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.time);
+                                        var timeElement = item.querySelector("." + bbbClass.time);
                                         var date = null;
                                         if (timeElement && timeElement.dateTime) {
                                             try {
