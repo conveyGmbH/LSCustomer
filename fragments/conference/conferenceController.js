@@ -1197,8 +1197,15 @@ var __meteor_runtime_config__;
                             var messageElements = null;
                             var isLocked = false;
                             var timeElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.time);
+                            var date = null;
                             if (timeElement && timeElement.dateTime) {
-                                var date = new Date(timeElement.dateTime);
+                                try {
+                                    date = new Date(timeElement.dateTime);
+                                } catch (ex) {
+                                    Log.print(Log.l.error, "Exception in message handling dateTime=" + timeElement.dateTime);
+                                }
+                            }
+                            if (date) {
                                 var chatTs = date.getTime();
                                 if (lockedChatMessages[chatTs]) {
                                     if (!nameElement) {
@@ -1292,25 +1299,32 @@ var __meteor_runtime_config__;
                             if (event && event.currentTarget === messageList) {
                                 var target = event.target;
                                 if (target && event.currentTarget !== target) {
-                                    if (target.parentElement === messageList ||
-                                        target.parentElement.parentElement === messageList) {
-                                        var item;
+                                    var item = null;
+                                    if (target.parentElement === messageList) {
+                                        item = target;
+                                    } else if (target.parentElement && target.parentElement.parentElement) {
                                         if (target.parentElement.parentElement === messageList) {
                                             item = target.parentElement;
-                                        } else {
-                                            item = target;
+                                        } else if(target.parentElement.parentElement.parentElement &&
+                                            target.parentElement.parentElement.parentElement.parentElement &&
+                                            target.parentElement.parentElement.parentElement.parentElement.parentElement === messageList) {
+                                            item = target.parentElement.parentElement;
                                         }
+                                    }
+                                    if (item) {
                                         var locked = WinJS.Utilities.hasClass(item, "chat-message-locked");
                                         var nameElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.name + " span, ." + bbbClass.meta + " ." + bbbClass.logout + " > span");
                                         var timeElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.time);
-                                        var messageElements = item.querySelectorAll("." + bbbClass.message);
-                                        if (nameElement && timeElement && messageElements) {
-                                            var date = null;
+                                        var date = null;
+                                        if (timeElement && timeElement.dateTime) {
                                             try {
                                                 date = new Date(timeElement.dateTime);
                                             } catch (ex) {
                                                 Log.print(Log.l.error, "Exception in message handling dateTime=" + timeElement.dateTime);
                                             }
+                                        }
+                                        var messageElements = item.querySelectorAll("." + bbbClass.message);
+                                        if (date && nameElement && timeElement && messageElements) {
                                             var message = {
                                                 event: event,
                                                 name: nameElement.textContent,
