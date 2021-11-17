@@ -1360,17 +1360,30 @@ var __meteor_runtime_config__;
                     }
                     if (!messageList._chatMessagesObserver) {
                         messageList._chatMessagesObserver = new MutationObserver(function (mutationList, observer) {
-                            for (var i = 0; i < mutationList.length; i++) {
-                                var mutation = mutationList[i];
-                                if (mutation && mutation.type === "childList" &&
-                                    mutation.addedNodes && mutation.addedNodes.length > 0) {
-                                    Log.print(Log.l.trace, "chat messageList changed!");
-                                    that.markupLockedMessages(mutation.addedNodes);
+                            mutationList.forEach(function (mutation) {
+                                if (mutation) {
+                                    switch (mutation.type) {
+                                    case "attributes":
+                                        Log.print(Log.l.trace, "chat messageList style changed!");
+                                        if (!adjustContentPositionsPromise) {
+                                            adjustContentPositionsPromise = WinJS.Promise.timeout(20).then(function () {
+                                                that.adjustContentPositions();
+                                            });
+                                        }
+                                        break;
+                                    case "childList":
+                                        if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+                                            Log.print(Log.l.trace, "chat messageList changed!");
+                                            that.markupLockedMessages(mutation.addedNodes);
+                                        }
+                                        break;
+                                    }
                                 }
-                            }
+                            });
                         });
                         messageList._chatMessagesObserver.observe(messageList.firstElementChild, {
-                            childList: true
+                            childList: true,
+                            attributeFilter: ["style"]
                         });
                     }
                     WinJS.Promise.timeout(0).then(function() {
