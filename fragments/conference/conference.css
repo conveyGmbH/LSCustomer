@@ -1146,6 +1146,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 /* hide logoff menu-item in options menu */
 #default-dropdown-menu li[data-test="list-item-shortcuts"] + hr,
+#default-dropdown-menu li[data-test="list-item-end-meeting"],
 #default-dropdown-menu li[data-test="logout"],
 #conference.mediaview .right--Z4dKWq .scrollable--4fyj li.separator--Z1vmd5H,
 #conference.mediaview .right--Z4dKWq .scrollable--4fyj li.separator--Z1vmd5H ~ li {
