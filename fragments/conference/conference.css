@@ -1275,7 +1275,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     height: calc(100% - 150px) !important;
     min-height: calc(100% - 150px) !important;
     max-height: calc(100% - 150px) !important;
-    pointer-events: none;
     transform: none !important;
 }
 
