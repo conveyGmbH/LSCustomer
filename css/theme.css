@@ -461,4 +461,11 @@ section.elementor-inner-section > div {
     background-color: var(--e-global-color-d4faeed, #F3FBFC);
 }
 
+.item--ZfUxvS.from-myself .messages--ZTkmon > p {
+    background-color: var(--color-gray-lighter);
+}
+.item--ZDfG6l.from-myself .messages--Z2vq9Jh > p {
+    background-color: var(--color-gray-lighter);
+}
+
 /******** Ende Fonts for LiveBridge*********/

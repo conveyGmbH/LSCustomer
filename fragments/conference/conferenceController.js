@@ -24,7 +24,6 @@ var __meteor_runtime_config__;
         center1: "center--ZyfFaC",
         center2: "center--2pV1iJ",
         chat: "chat--Z1w8gP7",
-        chat1: "chat--111wNM",
         container: "container--ZmRztk",
         container1: "container--1hUthh",
         content: "content--Z2gO9GE",
@@ -86,7 +85,17 @@ var __meteor_runtime_config__;
     bbbClass.content = null;
     bbbClass.overlay = "react-draggable";
     bbbClass.userList = "userList--Z2q1D0p";
-
+    bbbClass.list = "userList--Z2q1D0p .userListColumn--6vKQL .scrollStyle--Ckr4w";
+    bbbClass.participantsList = "userListItem--Z1qtuLG";
+    bbbClass.chat = "chat--111wNM";
+    bbbClass.messageList = "messageList--2kDQeQ";
+    bbbClass.item = "item--ZfUxvS";
+    bbbClass.meta = "meta--ZfU5fg";
+    bbbClass.name = "name--ZfTXko";
+    bbbClass.time = "time--ZfT9e6";
+    bbbClass.logout = "logout--Z1DfGNI";
+    bbbClass.messages = "messages--ZTkmon";
+    bbbClass.message = "message--CeFIW";
     function getMediaContainerClass() {
         return bbbClass.container ? bbbClass.container : bbbClass.layout;
     }
@@ -187,7 +196,7 @@ var __meteor_runtime_config__;
                 toggleUserList: null,
                 panelWrapperObserver: null,
                 pollContentObserver: null,
-                selfLabels: ["(Sie)", "(You)"],
+                selfLabels: ["(Sie)", "(You)", "(Ich)", "(Me)", "(I)"],
                 selfName: null
             };
 
@@ -803,7 +812,7 @@ var __meteor_runtime_config__;
                                                             if (userListDefaults.selfColor && userListDefaults.selfColor.substr(0, 4) === "rgb(") {
                                                                 rgbColor = Colors.rgbStr2rgb(userListDefaults.selfColor);
                                                                 userListDefaults.selfChatColor = "rgba(" + rgbColor.r + ", " + rgbColor.g + ", " + rgbColor.b + ", 0.2) !important";
-                                                                Colors.changeCSS(".from-myself ." + bbbClass.messages + " p", "background-color", userListDefaults.selfChatColor);
+                                                                Colors.changeCSS(".item--ZfUxvS.from-myself .messages--ZTkmon > p", "background-color", userListDefaults.selfChatColor);
                                                             }
                                                         }
                                                     }
@@ -849,7 +858,7 @@ var __meteor_runtime_config__;
                                                         if (userListDefaults.selfColor && userListDefaults.selfColor.substr(0, 4) === "rgb(") {
                                                             rgbColor = Colors.rgbStr2rgb(userListDefaults.selfColor);
                                                             userListDefaults.selfChatColor = "rgba(" + rgbColor.r + ", " + rgbColor.g + ", " + rgbColor.b + ", 0.2) !important";
-                                                            Colors.changeCSS(".from-myself ." + bbbClass.messages + " p", "background-color", userListDefaults.selfChatColor);
+                                                            Colors.changeCSS(".item--ZfUxvS.from-myself .messages--ZTkmon > p", "background-color", userListDefaults.selfChatColor);
                                                         }
                                                     }
                                                 }
@@ -1150,14 +1159,21 @@ var __meteor_runtime_config__;
             that.handlePanelsClosed = handlePanelsClosed;
             
             var markupLockedMessages = function (addedNodes) {
-                var messageList = fragmentElement.querySelector("#chat-messages." + bbbClass.messageList);
-                if (messageList) {
+                var messageList = fragmentElement.querySelector("." + bbbClass.messageList);
+                if (messageList && messageList.firstElementChild) {
                     var counter = 0, i, messageElement;
-                    var elementCount = addedNodes ? addedNodes.length : messageList.childElementCount;
-                    var item = addedNodes ? addedNodes[0] : messageList.firstElementChild;
-                    while (counter < elementCount && item) {
-                        if (item.parentElement === messageList &&
-                            WinJS.Utilities.hasClass(item, bbbClass.item)) {
+                    var elementCount = addedNodes ? addedNodes.length : messageList.firstElementChild.childElementCount;
+                    var itemElement = addedNodes ? addedNodes[0] : messageList.firstElementChild.firstElementChild;
+                    while (counter < elementCount && itemElement) {
+                        var item = null;
+                        if (itemElement.parentElement === messageList && 
+                            WinJS.Utilities.hasClass(itemElement, bbbClass.item)) {
+                            item = itemElement;
+                        } else if (itemElement.parentElement.parentElement === messageList &&
+                            itemElement.firstElementChild && WinJS.Utilities.hasClass(itemElement.firstElementChild, bbbClass.item)) {
+                            item = itemElement.firstElementChild;
+                        }
+                        if (item) {
                             var nameElement = null;
                             if (userListDefaults.selfName) {
                                 nameElement = item.querySelector("." + bbbClass.meta + " ." + bbbClass.name + " span, ." + bbbClass.meta + " ." + bbbClass.logout + " > span");
@@ -1268,7 +1284,7 @@ var __meteor_runtime_config__;
                     observeChatMessageListPromise.cancel();
                     observeChatMessageListPromise = null;
                 }
-                var messageList = fragmentElement.querySelector("#chat-messages." + bbbClass.messageList);
+                var messageList = fragmentElement.querySelector("." + bbbClass.messageList);
                 if (messageList) {
                     if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController" &&
                         !messageList._onClickHandler) {
@@ -1339,7 +1355,7 @@ var __meteor_runtime_config__;
                                 }
                             }
                         });
-                        messageList._chatMessagesObserver.observe(messageList, {
+                        messageList._chatMessagesObserver.observe(messageList.firstElementChild, {
                             childList: true
                         });
                     }
@@ -1661,6 +1677,35 @@ var __meteor_runtime_config__;
                                         childList: true
                                     });
                                 }
+                            } else {
+                                WinJS.Promise.timeout(20).then(function() {
+                                    var paneWidth = 0;
+                                    var currentPane = panelWrapper.firstElementChild;
+                                    while (currentPane &&
+                                        typeof currentPane.tagName === "string" &&
+                                        currentPane.tagName.toLowerCase() !== "header") {
+                                        paneWidth += currentPane.clientWidth;
+                                        currentPane = currentPane.nextElementSibling;
+                                    }
+                                    if (paneWidth > 0 &&
+                                        !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section") &&
+                                        !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                        Log.print(Log.l.trace, "paneWidth=" + paneWidth);
+                                        panelWrapper.style.width = "calc(100% - " + paneWidth.toString() + "px)";
+                                        panelWrapper.style.left = paneWidth.toString() + "px";
+                                        currentPane = panelWrapper.firstElementChild;
+                                        while (currentPane &&
+                                            typeof currentPane.tagName === "string" &&
+                                            currentPane.tagName.toLowerCase() !== "header") {
+                                            currentPane.style.left = "-" + paneWidth.toString() + "px";
+                                            paneWidth -= currentPane.clientWidth;
+                                            currentPane = currentPane.nextElementSibling;
+                                        }
+                                    } else {
+                                        panelWrapper.style.width = "100%";
+                                        panelWrapper.style.left = "0";
+                                    }
+                                });
                             }
                             if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
                                 if (presenterButtonContainer && presenterButtonContainer.style) {
@@ -3154,7 +3199,7 @@ var __meteor_runtime_config__;
                     submitCommandMessagePromise.cancel();
                     submitCommandMessagePromise = null;
                 }
-                var messageInput = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat1 + " ." + bbbClass.form + " textarea#message-input");
+                var messageInput = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat + " ." + bbbClass.form + " textarea#message-input");
                 if (messageInput) {
                     //messageInput.focus();
                     if (messageInput.form && typeof messageInput.form.reset === "function") {
@@ -3164,7 +3209,7 @@ var __meteor_runtime_config__;
                     var inputEvent = document.createEvent('event');
                     inputEvent.initEvent('input', true, true);
                     messageInput.dispatchEvent(inputEvent);
-                    var submitButton = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat1 + " ." + bbbClass.form + " button[type=\"submit\"]");
+                    var submitButton = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat + " ." + bbbClass.form + " button[type=\"submit\"]");
                     if (submitButton) {
                         submitButton.click();
                     }
@@ -3417,12 +3462,15 @@ var __meteor_runtime_config__;
                 }
                 return null;
             }
-            var findEndOfStruct = function(text, fromIndex) {
+            var findEndOfStruct = function(text, fromIndex, startChar) {
                 fromIndex = (fromIndex > 0) ? fromIndex : 0;
-                if (text && text[fromIndex] === "\"") {
+                if (text && text[fromIndex] === startChar) {
                     var quoted = false;
                     var blockCount = 0;
-                    for (var i = fromIndex + 1; i < text.length; i++) {
+                    if (startChar === "\"") {
+                        fromIndex++;
+                    }
+                    for (var i = fromIndex; i < text.length; i++) {
                         if (text[i] === "\\" && text[i + 1] === "\"") {
                             quoted = !quoted;
                             i++;
@@ -3434,7 +3482,7 @@ var __meteor_runtime_config__;
                             }
                         }
                         if (!blockCount) {
-                            if (text[i + 1] === "\"") {
+                            if (text[i + 1] === "\"" || text[i + 1] === ",") {
                                 return i + 2 ;
                             } else {
                                 return 0;
@@ -3484,13 +3532,21 @@ var __meteor_runtime_config__;
             var fieldStop = msgQuote;
             var parseXhrResponse = function(res, msg, collection, fieldStart, magicStart, magicStop) {
                 var responseReplaced = false;
-                var msgStart = "\"{" + msgQuote + "msg" + msgQuote + ":" + msgQuote + msg + msgQuote + "," + msgQuote + "collection" + msgQuote + ":" + msgQuote + collection + msgQuote;
+                var resultStart, msgStart;
+                if (collection) {
+                    resultStart = null;
+                    msgStart = "\"{" + msgQuote + "msg" + msgQuote + ":" + msgQuote + msg + msgQuote + "," + msgQuote + "collection" + msgQuote + ":" + msgQuote + collection + msgQuote;
+                } else {
+                    resultStart = "\"{" + msgQuote + "msg" + msgQuote + ":" + msgQuote + msg + msgQuote;
+                    msgStart = "{" + msgQuote + "_id" + msgQuote + ":";
+                }
                 var msgTimestamp = "timestamp";
                 var timeStampStart = msgQuote + msgTimestamp + msgQuote + ":";
                 var now = Date.now();
                 //var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var responseText = res && res.responseText;
-                if (typeof responseText === "string") {
+                if (typeof responseText === "string" && 
+                    (!resultStart || responseText.indexOf(resultStart) >= 0)) {
                     var newResponseText = "";
                     var prevStartPos = 0;
                     var prevStopPos = 0;
@@ -3499,7 +3555,7 @@ var __meteor_runtime_config__;
                         if (posMsgStart >= 0 && 
                            (responseText.indexOf(magicStart, posMsgStart + msgStart.length) >= 0 ||
                             textContainsEmoji(responseText, posMsgStart) === true)) {
-                            var posMsgStop = findEndOfStruct(responseText, posMsgStart);
+                            var posMsgStop = findEndOfStruct(responseText, posMsgStart, msgStart[0]);
                             if (posMsgStop > posMsgStart + msgStart.length) {
                                 var posFieldStart = responseText.indexOf(fieldStart, posMsgStart + msgStart.length);
                                 if (posFieldStart >= posMsgStart + msgStart.length &&
@@ -3559,8 +3615,13 @@ var __meteor_runtime_config__;
                                                             //}
                                                             if (res.readyState === 4 && res.status === 200) {
                                                                 Log.print(Log.l.info, "received command=" + commandWithParam.command);
-                                                                commandWithParam.msg = msg;
-                                                                commandWithParam.collection = collection;
+                                                                if (collection) {
+                                                                    commandWithParam.msg =  msg;
+                                                                    commandWithParam.collection = collection;
+                                                                } else {
+                                                                    commandWithParam.msg = "added";
+                                                                    commandWithParam.collection = "group-chat-msg";
+                                                                }
                                                                 that.handleCommandWithParam(commandWithParam);
                                                             }
                                                         }
@@ -3608,6 +3669,7 @@ var __meteor_runtime_config__;
                             var responseTextAdd = responseText.substr(prevStopPos);
                             newResponseText += responseTextAdd;
                         }
+                        Log.print(Log.l.trace, "newResponseText=" + (typeof newResponseText === "string" ? newResponseText.substr(0, 8192) : ""));
                         res.responseText = newResponseText;
                     }
                 }
@@ -3618,26 +3680,17 @@ var __meteor_runtime_config__;
                 var collection = "group-chat-msg";
                 var msgField = "message";
                 var fieldStart = msgQuote + msgField + msgQuote + ":" + msgQuote;
-                //var responseReplaced = 
-                    parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
-                //if (!responseReplaced) {
-                //    parseXhrResponse(res, "added", collection, fieldStart, magicStart2, magicStop2);
-                //}
+                parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
+
+                fieldStart = msgQuote + msgField + msgQuote + ":" + msgQuote;
+                parseXhrResponse(res, "result", null, fieldStart, magicStart, magicStop);
 
                 collection = "polls";
                 msgField = "answers";
                 fieldStart = msgQuote + msgField + msgQuote + ":" + "[{" + msgQuote + "id" + msgQuote + ":0," + msgQuote + "key" + msgQuote + ":" + msgQuote;
-                //responseReplaced = 
-                    parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
-                //if (!responseReplaced) {
-                //    parseXhrResponse(res, "added", collection, fieldStart, magicStart2, magicStop2);
-                //}
-                
-                //responseReplaced = 
-                    deleteMagicFromXhrResponse(res, magicStart, magicStop);
-                //if (!responseReplaced) {
-                //    deleteMagicFromXhrResponse(res, magicStart2, magicStop2);
-                //}
+                parseXhrResponse(res, "added", collection, fieldStart, magicStart, magicStop);
+
+                deleteMagicFromXhrResponse(res, magicStart, magicStop);
             };
 
             var replaceXhrSendBody = function(body, magicStart, magicStop) {
@@ -3662,7 +3715,7 @@ var __meteor_runtime_config__;
                     while (prevStartPos >= 0 && prevStartPos < body.length) {
                         var posMsgStart = body.indexOf(msgStart, prevStartPos);
                         if (posMsgStart >= prevStartPos && ((msgMethod === "startPoll") || body.indexOf(magicStart, posMsgStart + msgStart.length) >= 0)) {
-                            var posMsgStop = findEndOfStruct(body, posMsgStart);
+                            var posMsgStop = findEndOfStruct(body, posMsgStart, msgStart[0]);
                             if (posMsgStop > posMsgStart + msgStart.length) {
                                 var posFieldStart = body.indexOf(fieldStart, posMsgStart + msgStart.length);
                                 if (posFieldStart >= posMsgStart + msgStart.length &&

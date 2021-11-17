@@ -24,18 +24,19 @@
     display: block !important;
     position: absolute !important;
     background-color: transparent !important;
-    width: 100% !important;
-    height: 100% !important;
-    overflow: clip !important;
+    overflow-x: visible !important;
+    overflow-y: clip !important;
     top: 0 !important;
 }
 
 #conference.mediaview .navbar--Z2hKYyK {
+    left: 0 !important;
     top: 0 !important;
     z-index: 10 !important;
 }
 
 #conference.mediaview section.actionsbar--Z1ant6U {
+    left: 0 !important;
     top: calc(100% - 64px) !important;
 }
 
@@ -664,23 +665,25 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .userList--Z2q1D0p {
     color: var(--user-list-text) !important;
 }
+#conference.mediaview .userList--Z2q1D0p + .resizeSidebarNavWrapper {
+    display: none;
+}
 
-#conference.mediaview .wrapper--Z20hQYP > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) {
+
+#conference.mediaview .layout--Z2pPMwf > div:first-child,
+#conference.mediaview .layout--Z2pPMwf > div:first-child + div {
     border-top: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
-}
-#conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.userlistPad--o5KDX) {
     min-width: 180px !important;
     max-width: 480px !important;
+    height: 100% !important;
 }
-#conference.mediaview .wrapper--Z20hQYP > div:last-child:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.userlistPad--o5KDX) > section {
-    min-width: 180px !important;
-    max-width: 480px !important;
-}
-#conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX),
-#conference.mediaview .hide-chat-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI):not(.content--2jo8b8 + div):not(.userlistPad--o5KDX) *,
-#conference.mediaview .hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI),
-#conference.mediaview .hide-panel-section > div:not(.content--2jo8b8):not(.noPanelContent--25e0OI) * {
+#conference.mediaview .hide-chat-section > div:first-child + div,
+#conference.mediaview .hide-chat-section > div:first-child + div *,
+#conference.mediaview .hide-panel-section > div:first-child,
+#conference.mediaview .hide-panel-section > div:first-child *,
+#conference.mediaview .hide-panel-section > div:first-child + div,
+#conference.mediaview .hide-panel-section > div:first-child + div * {
     display: none !important;
 }
 
@@ -760,7 +763,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .actionsbar--Z1ant6U .center--ZyfFaC {
     justify-content: center;
     flex: 2;
-}
+}z
 #conference.mediaview .actionsbar--Z1ant6U .right--DUFDc {
     position: relative;
     bottom: 0;
@@ -1428,24 +1431,27 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     margin: var(--line-height-computed) 0 !important;
 }
 
+#conference.mediaview .messageList--2kDQeQ,
 #conference.mediaview .messageList--hsNac {
     padding-right: var(--sm-padding-x);
 }
-
+#conference.mediaview .messageList--2kDQeQ .content--BYIui,
 #conference.mediaview .messageList--hsNac .content--Z2nhld9 {
     margin-top: -2px;
 }
-
+#conference.mediaview .messageList--2kDQeQ .meta--ZfU5fg,
 #conference.mediaview .messageList--hsNac .meta--ZDfdOI {
     line-height: 1.33 !important;
 }
+#conference.mediaview .messageList--2kDQeQ .offline--Z2kz2gi,
 #conference.mediaview .messageList--hsNac .offline--ZfDX9N {
     display: none !important;
 }
+#conference.mediaview .messageList--2kDQeQ .logout--Z1DfGNI,
 #conference.mediaview .messageList--hsNac .logout--21XEjn {
     font-style: normal !important;
 }
-
+#conference.mediaview .messageList--2kDQeQ .message--CeFIW,
 #conference.mediaview .messageList--hsNac .message--Z2n2nXu {
     font-family: var(--font-family-default), color-emoji !important;
     width: fit-content !important;
@@ -1453,26 +1459,28 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     word-break: break-word;
     overflow-wrap: break-word;
 }
-
+#conference.mediaview .messageList--2kDQeQ .wrapper--1nuR8g,
 #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb {
     margin: 0;
     padding: 4px;
     border-radius: 5px;
 }
-
-
+.modSession #conference.mediaview .messageList--2kDQeQ .wrapper--1nuR8g:hover,
+.modSession #conference.mediaview .messageList--2kDQeQ .wrapper--1nuR8g:active,
 .modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb:hover,
 .modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb:active {
     background-color: var(--list-item-bg-hover);
     box-shadow: inset 0 0 0 var(--border-size) var(--item-focus-border), inset 1px 0 0 1px var(--item-focus-border);
 }
-
+.modSession #conference.mediaview .messageList--2kDQeQ .wrapper--1nuR8g *,
 .modSession #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb * {
     pointer-events: none;
 }
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS,
 #conference.mediaview .messageList--hsNac .item--ZDfG6l {
     margin-bottom: 0 !important;
 }
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS .messages--ZTkmon,
 #conference.mediaview .messageList--hsNac .item--ZDfG6l .messages--Z2vq9Jh {
     padding: 0;
     width: fit-content !important;
@@ -1482,6 +1490,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     display: grid;
     justify-items: left;
 }
+
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS .messages--ZTkmon > p,
 #conference.mediaview .messageList--hsNac .item--ZDfG6l .messages--Z2vq9Jh > p {
     border-radius: 0 10px 10px 0;
     background-color: var(--user-list-bg);
@@ -1489,38 +1499,48 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     margin-block-start: 2px;
 }
 
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .logout--Z1DfGNI,
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .name--ZfTXko,
 #conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .logout--21XEjn,
 #conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .name--ZDf6TQ {
     display: none;
 }
-
-#conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .messages--Z2vq9Jh {
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .messages--ZTkmon,
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .messages--Z2vq9Jh {
     margin-left: 80px;
     justify-items: right;
 }
-
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS .messages--ZTkmon > p:last-child {
+    border-bottom-left-radius: 10px;
+}
 #conference.mediaview .messageList--hsNac .item--ZDfG6l .messages--Z2vq9Jh > p:last-child {
     border-bottom-left-radius: 10px;
 }
-
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .messages--ZTkmon > p {
+    border-radius: 10px 0 0 10px;
+}
 #conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .messages--Z2vq9Jh > p {
     border-radius: 10px 0 0 10px;
+}
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .messages--ZTkmon > p:first-child {
+    border-top-right-radius: 10px;
 }
 #conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .messages--Z2vq9Jh > p:first-child {
     border-top-right-radius: 10px;
 }
-
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .meta--ZfU5fg,
 #conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .meta--ZDfdOI {
     justify-content: flex-end;
 }
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .time--ZfT9e6,
 #conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .time--ZDehNy {
     flex-basis: auto;
 }
+#conference.mediaview .messageList--2kDQeQ .item--ZfUxvS.from-myself .avatarWrapper--22Egh5,
 #conference.mediaview .messageList--hsNac .item--ZDfG6l.from-myself .avatarWrapper--1HtY4z {
     display: none;
 }
-
-
+#conference.mediaview .messageList--2kDQeQ .chat-message-locked .message--CeFIW,
 #conference.mediaview .messageList--hsNac .chat-message-locked .message--Z2n2nXu {
     font-style: italic;
 }
