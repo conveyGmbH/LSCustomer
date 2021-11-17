@@ -663,6 +663,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding: 0 var(--sm-padding-x) !important;
     margin: 0 0 var(--lg-padding-x)/2 0 !important;
     color: var(--color-gray) !important;
+    max-width: calc(100% - 24px);
 }
 #conference.mediaview .userList--Z2q1D0p {
     color: var(--user-list-text) !important;
