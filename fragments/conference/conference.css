@@ -1681,17 +1681,13 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     height: 46px;
     opacity: 0.9;
     border-radius: 23px;
-    position: absolute;
-    margin-left: calc(50% - 140px);
-    margin-bottom: 5px;
+    position: relative;
+    margin-left: -196px;
+    margin-top: 2px;
     padding: 1px 1px 1px 50px;
     width: auto;
     overflow: hidden;
     transition: width 0.3s ease-in-out;
-}
-
-#conferenceController .wide-audio-container .tool-box {
-    left: 210px;
 }
 
 .view-size-medium #conferenceController .tool-box {
