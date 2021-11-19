@@ -33,12 +33,14 @@
     left: 0 !important;
     top: 0 !important;
     z-index: 10 !important;
+    width: 100% !important;
     max-width: 100%;
 }
 
 #conference.mediaview section.actionsbar--Z1ant6U {
     left: 0 !important;
     top: calc(100% - 64px) !important;
+    width: 100% !important;
     max-width: 100%;
 }
 
