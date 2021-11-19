@@ -2026,8 +2026,8 @@ c
 /* transition effects */
 
 
-#conference.mediaview .layout--Z2pPMwf > div,
-#conference.mediaview .layout--Z2pPMwf > span {
+#conference.mediaview .layout--Z2pPMwf > header ~ div,
+#conference.mediaview .layout--Z2pPMwf > header ~ span {
     transition-property: left, top, right, width, min-width, max-width, height, min-height, max-height;
     transition-duration: 300ms;
 }
