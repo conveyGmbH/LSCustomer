@@ -481,7 +481,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 /* buttons in top nav area */
 #conference.mediaview .left--18SBXP,
 #conference.mediaview .right--Z4dKWq {
-    z-index: 1;
+    z-index: 11;
 }
 
 #conference.mediaview .buttonWrapper--x8uow .button--Z2dosza,
@@ -493,6 +493,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     opacity: 0.8;
 }
 /* Toolbar Buttons */
+#conference.mediaview .toolbarContainer--ZqATLX {
+    z-index: 100 !important;
+}
 #conference.mediaview .toolbarWrapper--1qMMEo .buttonWrapper--2kvywT:first-child > .toolbarButton--Zak4uG {
     border-top-left-radius: var(--toolbar-button-border-radius) !important;
     border-top-right-radius: var(--toolbar-button-border-radius) !important;
@@ -725,7 +728,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute;
     width: calc(100% - 120px);
     left: 60px;
-    z-index: 10;
+    z-index: 11;
     pointer-events: none;
     margin-top: 0 !important;
     top: -7px;
@@ -763,7 +766,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview .actionsbar--Z1ant6U {
-    z-index: 10;
+    z-index: 11;
 }
 
 #conference.mediaview .actionsbar--Z1ant6U .left--Z1rLKlO {
@@ -1062,8 +1065,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) {
-    height: 100% !important;
-    width: fit-content !important;
+    width: 100% !important;
+    height: fit-content !important;
 }
 
 
@@ -1091,14 +1094,21 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 /* presentation toolbar buttons */
+#conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn {
+    width: 100% !important;
+}
+#conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn .presentationToolbarWrapper--Z2d8py5 {
+    width: 100% !important;
+}
+
 #conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button {
     background-color: transparent;
     border-radius: 0 !important;
 }
-    #conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button:not([aria-disabled="true"]):hover,
-    #conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button:not([aria-disabled="true"]):active {
-        background-color: var(--color-white);
-    }
+#conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button:not([aria-disabled="true"]):hover,
+#conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button:not([aria-disabled="true"]):active {
+    background-color: var(--color-white);
+}
 
 /* hide button: hide-presentation  */
 #conference.mediaview button[aria-describedby="closeDesc"],
@@ -1112,7 +1122,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) > .wrapper--Z17x8k2.dark--Z1Y80Wt.bottom--Z1oNR9L {
     top: 0 !important;
     bottom: inherit !important;
-    z-index: 100;
+    z-index: 10;
 }
 
 #conference.mediaview .videoPlayer--1MGUuy .wrapper--Z17x8k2.dark--Z1Y80Wt {
@@ -1122,7 +1132,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 #conference.mediaview .fullScreenButton--Z1bf0vj,
 #conference.mediaview .videoPlayer--1MGUuy .wrapper--Z17x8k2.dark--Z1Y80Wt > button {
-    z-index: 100;
+    z-index: 11;
     padding: 5px;
     font-size: var(--btn-sm-font-size);
     line-height: 1;
@@ -1786,7 +1796,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     position: absolute;
     right: 20px;
     bottom: 20px;
-    z-index: 10;
+    z-index: 100;
     max-width: 70%;
 }
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden) .notification-popup {

@@ -63,6 +63,7 @@ var __meteor_runtime_config__;
         right: "right--DUFDc",
         screenshareContainer: "screenshareContainer--1GSmqo",
         sm: "sm--Q7ujg",
+        startPollBtn: "startPollBtn--Z1qKPy4",
         status: "status--1gjKnt",
         svgContainer: "svgContainer--Z1z3wO0",
         talking: "talking--26lGzY",
@@ -967,7 +968,8 @@ var __meteor_runtime_config__;
                     pollQuestion.winControl &&
                     pollQuestion.winControl.data &&
                     pollQuestion.winControl.data.length > 1) {
-                    var publishButton = pollSection.querySelector("." + bbbClass.status + " ~ ." + bbbClass.primary);
+                    //var publishButton = pollSection.querySelector("." + bbbClass.status + " ~ ." + bbbClass.primary);
+                    var publishButton = pollSection.querySelector("." + bbbClass.startPollBtn);
                     if (publishButton) {
                         if (!WinJS.Utilities.hasClass(pollSection, "poll-results")) {
                             WinJS.Utilities.addClass(pollSection, "poll-results");
@@ -975,7 +977,7 @@ var __meteor_runtime_config__;
                         pollQuestion.selectedIndex = 0;
                         that.binding.dataQuestionnaire = getEmptyDefaultValue(Conference.questionnaireView.defaultValue);
                     } else {
-                        var customBtn = pollSection.querySelector(".c" + bbbClass.customBtn);
+                        var customBtn = pollSection.querySelector("." + bbbClass.customBtn);
                         if (customBtn) {
                             if (WinJS.Utilities.hasClass(pollSection, "poll-results")) {
                                 WinJS.Utilities.removeClass(pollSection, "poll-results");
