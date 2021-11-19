@@ -3416,6 +3416,22 @@ var __meteor_runtime_config__;
                     });
                     AppBar.notifyModified = prevNotifyModified;
                     WinJS.Promise.as().then(function () {
+                        var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
+                        if (mediaContainer) {
+                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                            if (overlayElement) {
+                                overlayElement.ontransitionend = function () {
+                                    if (!adjustContentPositionsPromise) {
+                                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                            that.adjustContentPositions();
+                                        });
+                                    }
+                                };
+                            }
+                        }
+                        if (adjustContentPositionsPromise) {
+                            adjustContentPositionsPromise.cancel();
+                        }
                         adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
                             that.adjustContentPositions();
                         });
