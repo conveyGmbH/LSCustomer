@@ -1759,17 +1759,26 @@ var __meteor_runtime_config__;
                                 });
                             }
                             if (!sessionStatusIsSet && that.binding.dataSessionStatus) {
-                                sessionStatusIsSet = true;
                                 that.setPresenterModeState(that.binding.dataSessionStatus.PresenterMode);
-                                if (that.binding.dataSessionStatus.ShowPresentation) {
-                                    that.eventHandlers.showPresentation()
-                                } else {
-                                    that.eventHandlers.hidePresentation()
-                                }
                                 if (that.binding.dataSessionStatus.ShowVideoList) {
-                                    that.eventHandlers.showVideoList()
+                                    that.eventHandlers.showVideoList();
                                 } else {
-                                    that.eventHandlers.hideVideoList()
+                                    that.eventHandlers.hideVideoList();
+                                }
+                                if (videoPLayerOpened || screenShareOpened || presentationOpened) {
+                                    if (that.binding.dataSessionStatus.ShowPresentation) {
+                                        var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc + ", " + elementSelectors.closeDesc);
+                                        if (restoreDescButton) {
+                                            that.eventHandlers.showPresentation();
+                                            sessionStatusIsSet = true;
+                                        }
+                                    } else {
+                                        var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc + ", " + elementSelectors.restoreDesc);
+                                        if (closeDescButton) {
+                                            that.eventHandlers.hidePresentation();
+                                            sessionStatusIsSet = true;
+                                        }
+                                    }
                                 }
                             }
                             if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
@@ -1848,7 +1857,7 @@ var __meteor_runtime_config__;
                                     if (!that.binding.dataSessionStatus.ShowPresentation ||
                                         that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.default ||
                                         WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
-                                        !(videoPLayerOpened || screenShareOpened || presentationOpened && !overlayIsHidden)) {
+                                        !(videoPLayerOpened || screenShareOpened || presentationOpened) || overlayIsHidden) {
                                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
                                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
                                         }
@@ -2390,6 +2399,8 @@ var __meteor_runtime_config__;
                         Log.print(Log.l.trace, "Prc_GetBBBSessionStatus success!");
                         if (json && json.d && json.d.results && json.d.results.length > 0) {
                             that.binding.dataSessionStatus = json.d.results[0];
+                            that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
+                            that.binding.showVideoList = !!that.binding.dataSessionStatus.ShowVideoList;
                         }
                         sessionStatusIsSet = false;
                         if (!adjustContentPositionsPromise) {
@@ -2791,13 +2802,13 @@ var __meteor_runtime_config__;
                     var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc + ", " + elementSelectors.closeDesc);
                     if (restoreDescButton) {
                         restoreDescButton.click();
-                    }
-                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
-                    if (mediaContainer) {
-                        if (WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
-                            WinJS.Utilities.removeClass(mediaContainer, "presentation-is-hidden");
+                        var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
+                        if (mediaContainer) {
+                            if (WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
+                                WinJS.Utilities.removeClass(mediaContainer, "presentation-is-hidden");
+                            }
+                            that.binding.dataSessionStatus.ShowPresentation = 1;
                         }
-                        that.binding.dataSessionStatus.ShowPresentation = 1;
                     }
                     Log.ret(Log.l.info);
                 },
@@ -2806,15 +2817,15 @@ var __meteor_runtime_config__;
                     var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc + ", " + elementSelectors.restoreDesc);
                     if (closeDescButton) {
                         closeDescButton.click();
-                    }
-                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
-                    if (mediaContainer) {
-                        if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
-                            WinJS.Utilities.addClass(mediaContainer, "presentation-is-hidden");
+                        var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
+                        if (mediaContainer) {
+                            if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
+                                WinJS.Utilities.addClass(mediaContainer, "presentation-is-hidden");
+                            }
+                            that.binding.dataSessionStatus.ShowPresentation = 0;
+                            that.setPresenterModeState(presenterModeDefaults.off);
                         }
-                        that.binding.dataSessionStatus.ShowPresentation = 0;
                     }
-                    that.setPresenterModeState(presenterModeDefaults.off);
                     Log.ret(Log.l.info);
                 },
                 showVideoList: function () {
@@ -2908,39 +2919,41 @@ var __meteor_runtime_config__;
                 },
                 clickPresenterMode: function (event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var command = event && event.currentTarget && event.currentTarget.id;
-                    if (command) {
-                        Log.print(Log.l.info, "command=" + command);
-                        that.submitCommandMessage(magicStart + command + magicStop, event);
-                        var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
-                        if (dataSessionStatus) {
-                            switch (command) {
-                                case "presenterModeTiled":
-                                    dataSessionStatus.PresenterMode = presenterModeDefaults.tiled;
-                                    dataSessionStatus.VideoListPosition = videoListDefaults.right;
-                                    break;
-                                case "presenterModeFull":
-                                    dataSessionStatus.PresenterMode = presenterModeDefaults.full;
-                                    dataSessionStatus.VideoListPosition = videoListDefaults.right;
-                                    break;
-                                case "presenterModeSmall":
-                                    dataSessionStatus.PresenterMode = presenterModeDefaults.small;
-                                    dataSessionStatus.VideoListPosition = videoListDefaults.right;
-                                    break;
-                                case "videoListLeft":
-                                    dataSessionStatus.PresenterMode = presenterModeDefaults.off;
-                                    dataSessionStatus.VideoListPosition = videoListDefaults.left;
-                                    break;
-                                case "videoListRight":
-                                    dataSessionStatus.PresenterMode = presenterModeDefaults.off;
-                                    dataSessionStatus.VideoListPosition = videoListDefaults.right;
-                                    break;
-                                case "videoListDefault":
-                                    dataSessionStatus.PresenterMode = presenterModeDefaults.off;
-                                    dataSessionStatus.VideoListPosition = videoListDefaults.default;
-                                    break;
+                    if (AppBar.notifyModified && event && event.currentTarget) {
+                        var command = event.currentTarget.id;
+                        if (command) {
+                            Log.print(Log.l.info, "command=" + command);
+                            that.submitCommandMessage(magicStart + command + magicStop, event);
+                            var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                            if (dataSessionStatus) {
+                                switch (command) {
+                                    case "presenterModeTiled":
+                                        dataSessionStatus.PresenterMode = presenterModeDefaults.tiled;
+                                        dataSessionStatus.VideoListPosition = videoListDefaults.right;
+                                        break;
+                                    case "presenterModeFull":
+                                        dataSessionStatus.PresenterMode = presenterModeDefaults.full;
+                                        dataSessionStatus.VideoListPosition = videoListDefaults.right;
+                                        break;
+                                    case "presenterModeSmall":
+                                        dataSessionStatus.PresenterMode = presenterModeDefaults.small;
+                                        dataSessionStatus.VideoListPosition = videoListDefaults.right;
+                                        break;
+                                    case "videoListLeft":
+                                        dataSessionStatus.PresenterMode = presenterModeDefaults.off;
+                                        dataSessionStatus.VideoListPosition = videoListDefaults.left;
+                                        break;
+                                    case "videoListRight":
+                                        dataSessionStatus.PresenterMode = presenterModeDefaults.off;
+                                        dataSessionStatus.VideoListPosition = videoListDefaults.right;
+                                        break;
+                                    case "videoListDefault":
+                                        dataSessionStatus.PresenterMode = presenterModeDefaults.off;
+                                        dataSessionStatus.VideoListPosition = videoListDefaults.default;
+                                        break;
+                                }
+                                that.saveSessionStatus(dataSessionStatus);
                             }
-                            that.saveSessionStatus(dataSessionStatus);
                         }
                     }
                     Log.ret(Log.l.info);
@@ -3198,7 +3211,7 @@ var __meteor_runtime_config__;
                 },
                 clickToggleSwitch: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    if (event.currentTarget) {
+                    if (AppBar.notifyModified && event && event.currentTarget) {
                         var command = event.currentTarget.id;
                         var toggle = event.currentTarget.winControl;
                         if (toggle && command) {
