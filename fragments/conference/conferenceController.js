@@ -2384,7 +2384,7 @@ var __meteor_runtime_config__;
                         pUserToken: AppData._persistentStates.registerData.userToken
                     }, function (json) {
                         if (json && json.d && json.d.results) {
-                            that.binding.dataSessionStatus = json.d.results[0];
+                            that.binding.dataSessionStatus = copyByValue(json.d.results[0]);
                             sessionStatusIsSet = false;
                             if (!adjustContentPositionsPromise) {
                                 adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
