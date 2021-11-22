@@ -220,6 +220,8 @@ var __meteor_runtime_config__;
                     VideoListPosition: videoListDefaults.right,
                     PresenterMode: presenterModeDefaults.off
                 },
+                showPresentation: true,
+                showVideoList: true,
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
@@ -3200,31 +3202,30 @@ var __meteor_runtime_config__;
                         var command = event.currentTarget.id;
                         var toggle = event.currentTarget.winControl;
                         if (toggle && command) {
-                            var key = command.substr(0,1).toUpperCase() + command.substr(1);
-                            var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
-                            var value = dataSessionStatus && dataSessionStatus[key];
-                            if (!!value !== toggle.checked) {
+                            var value = that.binding[command];
+                            if (typeof value === "boolean" && value !== toggle.checked) {
                                 if (!toggle.checked) {
                                     command = command.replace(/show/, "hide");
                                 }
                                 that.submitCommandMessage(magicStart + command + magicStop, event);
-                            }
-                            if (dataSessionStatus) {
-                                switch (command) {
-                                    case "showPresentation":
-                                        dataSessionStatus.ShowPresentation = 1;
-                                        break;
-                                    case "hidePresentation":
-                                        dataSessionStatus.ShowPresentation = 0;
-                                        break;
-                                    case "showVideoList":
-                                        dataSessionStatus.ShowVideoList = 1;
-                                        break;
-                                    case "hideVideoList":
-                                        dataSessionStatus.ShowVideoList = 0;
-                                        break;
+                                var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                                if (dataSessionStatus) {
+                                    switch (command) {
+                                        case "showPresentation":
+                                            dataSessionStatus.ShowPresentation = 1;
+                                            break;
+                                        case "hidePresentation":
+                                            dataSessionStatus.ShowPresentation = 0;
+                                            break;
+                                        case "showVideoList":
+                                            dataSessionStatus.ShowVideoList = 1;
+                                            break;
+                                        case "hideVideoList":
+                                            dataSessionStatus.ShowVideoList = 0;
+                                            break;
+                                    }
+                                    that.saveSessionStatus(dataSessionStatus);
                                 }
-                                that.saveSessionStatus(dataSessionStatus);
                             }
                         }
                     }
