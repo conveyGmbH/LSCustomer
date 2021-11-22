@@ -283,7 +283,13 @@ var __meteor_runtime_config__;
             var lockedChatMessages = {};
 
             var sessionStatusIsSet = true;
-
+            var userToken = null;
+            var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
+            if (pageControllerName === "eventController") {
+                userToken = AppData._persistentStates.registerData.userToken;
+            } else if (pageControllerName === "modSessionController") {
+                userToken = Application.query.UserToken; //aus startlink 
+            }
             var that = this;
 
             that.dispose = function () {
@@ -1500,7 +1506,6 @@ var __meteor_runtime_config__;
 
             var lastDeviceListTime = 0;
             var adjustContentPositions = function () {
-                var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var actionsBarRight = null;
                 Log.call(Log.l.trace, "Conference.Controller.", "videoListPosition=" + (that.binding.dataSessionStatus && that.binding.dataSessionStatus.VideoListPosition));
                 if (adjustContentPositionsPromise) {
@@ -2249,13 +2254,12 @@ var __meteor_runtime_config__;
             that.checkForInactiveVideo = checkForInactiveVideo;
 
             var savePollingAnswer = function(answerCode) {
-                var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function() {
                     if (pageControllerName === "eventController") {
                         return AppData.call("PRC_StoreContactAnswer", {
-                            pUserToken: AppData._persistentStates.registerData.userToken,
+                            pUserToken: userToken,
                             pAnswerCode: answerCode
                         },
                         function(json) {
@@ -2275,13 +2279,12 @@ var __meteor_runtime_config__;
             that.savePollingAnswer = savePollingAnswer;
 
             var saveSessionStatus = function(dataSessionStatus) {
-                var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function() {
                     if (dataSessionStatus && pageControllerName === "modSessionController") {
                         return AppData.call("Prc_SetBBBSessionStatus", {
-                            pUserToken: AppData._persistentStates.registerData.userToken,
+                            pUserToken: userToken,
                             pShowPresentation: dataSessionStatus.ShowPresentation,
                             pShowVideoList: dataSessionStatus.ShowVideoList,
                             pVideoListPosition: dataSessionStatus.VideoListPosition,
@@ -2303,7 +2306,6 @@ var __meteor_runtime_config__;
             that.saveSessionStatus = saveSessionStatus
 
             var loadData = function () {
-                var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 AppBar.scope.binding.registerEmail = AppData._persistentStates.registerData.Email;
                 Log.call(Log.l.trace, "Conference.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
@@ -2333,7 +2335,7 @@ var __meteor_runtime_config__;
                 }).then(function () {
                     if (pageControllerName === "eventController") {
                         return AppData.call("PRC_BBBConferenceLink", {
-                            pUserToken: AppData._persistentStates.registerData.userToken
+                            pUserToken: userToken
                         }, function (json) {
                             if (json && json.d && json.d.results) {
                                 that.binding.dataConference = json.d.results[0];
@@ -2360,7 +2362,7 @@ var __meteor_runtime_config__;
                         return AppData.call("PRC_BBBModeratorLink", {
                             pVeranstaltungID: 0,
                             pAlias: null,
-                            pUserToken: Application.query.UserToken //aus startlink 
+                            pUserToken: userToken
                         }, function (json) {
                             if (json && json.d && json.d.results) {
                                 that.binding.dataConference = json.d.results[0];
@@ -2381,18 +2383,18 @@ var __meteor_runtime_config__;
                     }
                 }).then(function () {
                     return AppData.call("Prc_GetBBBSessionStatus", {
-                        pUserToken: AppData._persistentStates.registerData.userToken
+                        pUserToken: userToken
                     }, function (json) {
-                        if (json && json.d && json.d.results) {
-                            that.binding.dataSessionStatus = copyByValue(json.d.results[0]);
-                            sessionStatusIsSet = false;
-                            if (!adjustContentPositionsPromise) {
-                                adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                    that.adjustContentPositions();
-                                });
-                            }
-                        }
                         Log.print(Log.l.trace, "Prc_GetBBBSessionStatus success!");
+                        if (json && json.d && json.d.results && json.d.results.length > 0) {
+                            that.binding.dataSessionStatus = json.d.results[0];
+                        }
+                        sessionStatusIsSet = false;
+                        if (!adjustContentPositionsPromise) {
+                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                that.adjustContentPositions();
+                            });
+                        }
                     }, function (error) {
                         Log.print(Log.l.error, "Prc_GetBBBSessionStatus error! ");
                     });
@@ -3708,7 +3710,6 @@ var __meteor_runtime_config__;
                 var msgTimestamp = "timestamp";
                 var timeStampStart = msgQuote + msgTimestamp + msgQuote + ":";
                 var now = Date.now();
-                //var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
                 var responseText = res && res.responseText;
                 if (typeof responseText === "string" && 
                     (!resultStart || responseText.indexOf(resultStart) >= 0)) {
