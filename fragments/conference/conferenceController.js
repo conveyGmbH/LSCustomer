@@ -3199,14 +3199,14 @@ var __meteor_runtime_config__;
                         var toggle = event.currentTarget.winControl;
                         if (toggle && command) {
                             var key = command.substr(0,1).toUpperCase() + command.substr(1);
-                            var value = that.binding.dataSessionStatus[key];
+                            var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                            var value = dataSessionStatus && dataSessionStatus[key];
                             if (!!value !== toggle.checked) {
                                 if (!toggle.checked) {
                                     command = command.replace(/show/, "hide");
                                 }
                                 that.submitCommandMessage(magicStart + command + magicStop, event);
                             }
-                            var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
                             if (dataSessionStatus) {
                                 switch (command) {
                                     case "showPresentation":
