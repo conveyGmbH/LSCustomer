@@ -1701,10 +1701,10 @@ var __meteor_runtime_config__;
                                     videoListDefaults.mediaContainerObserver.disconnect();
                                     videoListDefaults.mediaContainerObserver = null;
                                 }
-                                adjustContentPositionsFailedCount++;
-                                Log.print(Log.l.trace, "mediaContainer not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
                                 if (!adjustContentPositionsPromise) {
-                                    adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount * 10, 5000)).then(function() {
+                                    adjustContentPositionsFailedCount++;
+                                    Log.print(Log.l.trace, "mediaContainer not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
+                                    adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(adjustContentPositionsFailedCount * 10, 5000)).then(function() {
                                         that.adjustContentPositions();
                                     });
                                 }
@@ -2010,9 +2010,9 @@ var __meteor_runtime_config__;
                                         videoListDefaults.videoListObserver.disconnect();
                                         videoListDefaults.videoListObserver = null;
                                     }
-                                    adjustContentPositionsFailedCount++;
-                                    Log.print(Log.l.trace, "videoList not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
                                     if (!adjustContentPositionsPromise) {
+                                        adjustContentPositionsFailedCount++;
+                                        Log.print(Log.l.trace, "videoList not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
                                         adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(adjustContentPositionsFailedCount * 10, 5000)).then(function () {
                                             that.adjustContentPositions();
                                         });
@@ -2099,10 +2099,10 @@ var __meteor_runtime_config__;
                             }
                         }
                     } else {
-                        adjustContentPositionsFailedCount++;
-                        Log.print(Log.l.trace, "panelWrapper not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
                         if (!adjustContentPositionsPromise) {
-                            adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(that.adjustContentPositionsFailedCount * 10, 5000)).then(function () {
+                            adjustContentPositionsFailedCount++;
+                            Log.print(Log.l.trace, "panelWrapper not yet created - try later again! adjustContentPositionsFailedCount=" + adjustContentPositionsFailedCount);
+                            adjustContentPositionsPromise = WinJS.Promise.timeout(Math.min(adjustContentPositionsFailedCount * 10, 5000)).then(function () {
                                 that.adjustContentPositions();
                             });
                         }
@@ -2247,17 +2247,9 @@ var __meteor_runtime_config__;
                                     videoListItem = videoListItem.nextElementSibling;
                                 }
                                 videoListDefaults.activeVideoCount = numVideos;
-                                //if (!adjustContentPositionsPromise) {
-                                //    adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
-                                //        that.adjustContentPositions();
-                                //    });
-                                //}
                             }
                         }
                     }
-                    //checkForInactiveVideoPromise = WinJS.Promise.timeout(videoList && videoList.childElementCount > 0 ? 500 : 2000).then(function() {
-                    //    that.checkForInactiveVideo();
-                    //});
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -2359,12 +2351,19 @@ var __meteor_runtime_config__;
                             }
                             Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
                             that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
+                            if (!checkForInactiveVideoPromise) {
+                                checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
+                                    that.checkForInactiveVideo();
+                                });
+                            }
                             checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
                                 that.checkForInactiveVideo();
                             });
-                            adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
-                                that.adjustContentPositions();
-                            });
+                            if (!adjustContentPositionsPromise) {
+                                adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
+                                    that.adjustContentPositions();
+                                });
+                            }
                         }, function (error) {
                             Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
                             AppData.setErrorMsg(AppBar.scope.binding, error);
@@ -2799,32 +2798,34 @@ var __meteor_runtime_config__;
             this.eventHandlers = {
                 showPresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc + ", " + elementSelectors.closeDesc);
-                    if (restoreDescButton) {
-                        restoreDescButton.click();
-                        var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
-                        if (mediaContainer) {
-                            if (WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
-                                WinJS.Utilities.removeClass(mediaContainer, "presentation-is-hidden");
+                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
+                    if (mediaContainer) {
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
+                            WinJS.Utilities.removeClass(mediaContainer, "presentation-is-hidden");
+                            var restoreDescButton = fragmentElement.querySelector(elementSelectors.restoreDesc + ", " + elementSelectors.closeDesc);
+                            if (restoreDescButton) {
+                                Log.ret(Log.l.trace, "click restoreDescButton");
+                                restoreDescButton.click();
                             }
-                            that.binding.dataSessionStatus.ShowPresentation = 1;
                         }
+                        that.binding.dataSessionStatus.ShowPresentation = 1;
                     }
                     Log.ret(Log.l.info);
                 },
                 hidePresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc + ", " + elementSelectors.restoreDesc);
-                    if (closeDescButton) {
-                        closeDescButton.click();
-                        var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
-                        if (mediaContainer) {
-                            if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
-                                WinJS.Utilities.addClass(mediaContainer, "presentation-is-hidden");
+                    var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
+                    if (mediaContainer) {
+                        if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
+                            WinJS.Utilities.addClass(mediaContainer, "presentation-is-hidden");
+                            var closeDescButton = fragmentElement.querySelector(elementSelectors.closeDesc + ", " + elementSelectors.restoreDesc);
+                            if (closeDescButton) {
+                                Log.ret(Log.l.trace, "click closeDescButton");
+                                closeDescButton.click();
                             }
-                            that.binding.dataSessionStatus.ShowPresentation = 0;
-                            that.setPresenterModeState(presenterModeDefaults.off);
                         }
+                        that.binding.dataSessionStatus.ShowPresentation = 0;
+                        that.setPresenterModeState(presenterModeDefaults.off);
                     }
                     Log.ret(Log.l.info);
                 },
@@ -3556,12 +3557,11 @@ var __meteor_runtime_config__;
                                 };
                             }
                         }
-                        if (adjustContentPositionsPromise) {
-                            adjustContentPositionsPromise.cancel();
+                        if (!adjustContentPositionsPromise) {
+                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                that.adjustContentPositions();
+                            });
                         }
-                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                            that.adjustContentPositions();
-                        });
                         return WinJS.Promise.timeout(50);
                     }).then(function () {
                         that.sendResize(50);
@@ -4050,12 +4050,16 @@ var __meteor_runtime_config__;
                 Log.print(Log.l.trace, "Data loaded");
                 AppBar.notifyModified = true;
                 that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
-                checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
-                    that.checkForInactiveVideo();
-                });
-                adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
-                    that.adjustContentPositions();
-                });
+                if (!checkForInactiveVideoPromise) {
+                    checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.checkForInactiveVideo();
+                    });
+                }
+                if (!adjustContentPositionsPromise) {
+                    adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.adjustContentPositions();
+                    });
+                }
                 return WinJS.Promise.timeout(250);;
             }).then(function () {
                 return that.sendResize(2000);
