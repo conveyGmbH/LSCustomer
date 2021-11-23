@@ -166,6 +166,15 @@ var __meteor_runtime_config__;
         }
     }
 
+    function getInternalInstanceKey(element) {
+        for (var prop in element) {
+            if (prop.startsWith ("__reactInternalInstance$")) {
+                return element[prop] && element[prop].key;
+            }
+        }
+        return null;
+    }
+
     WinJS.Namespace.define("Conference", {
         Controller: WinJS.Class.derive(Fragments.Controller, function Controller(fragmentElement, options, commandList) {
             Log.call(Log.l.trace, "Conference.Controller.", "eventId=" + (options && options.eventId));
@@ -2117,6 +2126,8 @@ var __meteor_runtime_config__;
                             if (videoList) {
                                 var videoListItem = videoList.firstElementChild;
                                 while (videoListItem) {
+                                    var key = getInternalInstanceKey(videoListItem);
+                                    Log.print(Log.l.trace, "videoListItem: key=" + key);
                                     that.adjustVideoPosition(mediaContainer, overlayElement, videoListItem);
                                     videoListItem = videoListItem.nextSibling;
                                 }
