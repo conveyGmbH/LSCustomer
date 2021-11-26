@@ -2452,7 +2452,40 @@ var __meteor_runtime_config__;
                 Log.ret(Log.l.trace);
                 return ret;
             }
-            that.saveSessionStatus = saveSessionStatus
+            that.saveSessionStatus = saveSessionStatus;
+
+            var loadSessionStatus = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                var ret = AppData.call("Prc_GetBBBSessionStatus", {
+                    pUserToken: userToken
+                }, function (json) {
+                    Log.print(Log.l.trace, "Prc_GetBBBSessionStatus success!");
+                    if (json && json.d && json.d.results && json.d.results.length > 0) {
+                        that.binding.dataSessionStatus = json.d.results[0];
+                        that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
+                        that.binding.showVideoList = !!that.binding.dataSessionStatus.ShowVideoList;
+                        try {
+                            that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus.PinnedVideos);
+                        } catch (ex) {
+                            Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
+                        }
+                        if ( !that.binding.pinnedVideos ) {
+                            that.binding.pinnedVideos = {};
+                        }
+                    }
+                    sessionStatusIsSet = false;
+                    if (!adjustContentPositionsPromise) {
+                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                            that.adjustContentPositions();
+                        });
+                    }
+                }, function (error) {
+                    Log.print(Log.l.error, "Prc_GetBBBSessionStatus error! ");
+                });
+                Log.ret(Log.l.trace);
+                return ret;
+            }
+            that.loadSessionStatus = loadSessionStatus;
 
             var loadData = function () {
                 AppBar.scope.binding.registerEmail = AppData._persistentStates.registerData.Email;
@@ -2530,32 +2563,7 @@ var __meteor_runtime_config__;
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
-                    return AppData.call("Prc_GetBBBSessionStatus", {
-                        pUserToken: userToken
-                    }, function (json) {
-                        Log.print(Log.l.trace, "Prc_GetBBBSessionStatus success!");
-                        if (json && json.d && json.d.results && json.d.results.length > 0) {
-                            that.binding.dataSessionStatus = json.d.results[0];
-                            that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
-                            that.binding.showVideoList = !!that.binding.dataSessionStatus.ShowVideoList;
-                            try {
-                                that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus.PinnedVideos);
-                            } catch (ex) {
-                                Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
-                            }
-                            if ( !that.binding.pinnedVideos ) {
-                                that.binding.pinnedVideos = {};
-                            }
-                        }
-                        sessionStatusIsSet = false;
-                        if (!adjustContentPositionsPromise) {
-                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                that.adjustContentPositions();
-                            });
-                        }
-                    }, function (error) {
-                        Log.print(Log.l.error, "Prc_GetBBBSessionStatus error! ");
-                    });
+                    return that.loadSessionStatus();
                 }).then(function () {
                     var url = that.binding.dataConference && that.binding.dataConference.URL;
                     if (url) {
@@ -2673,11 +2681,6 @@ var __meteor_runtime_config__;
                     }
                     if (that.binding.dataSessionStatus) {
                         that.binding.dataSessionStatus.PresenterMode = state;
-                    }
-                    if (!checkForInactiveVideoPromise) {
-                        checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
-                            that.checkForInactiveVideo();
-                        });
                     }
                 }
                 Log.ret(Log.l.trace);
@@ -2989,11 +2992,7 @@ var __meteor_runtime_config__;
                         }
                         that.binding.dataSessionStatus.ShowVideoList = 1;
                     }
-                    if (!checkForInactiveVideoPromise) {
-                        checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
-                            that.checkForInactiveVideo();
-                        });
-                    }
+                    that.loadSessionStatus();
                     Log.ret(Log.l.info);
                 },
                 hideVideoList: function () {
