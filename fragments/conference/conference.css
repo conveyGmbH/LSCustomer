@@ -1432,7 +1432,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     display: none !important;
 }
 
-#conference.mediaview .selfie-video .videoContainer--rssHk > video {
+#conference.mediaview .selfie-video .videoContainer--rssHk > video,
+#conferenceController #unpinnedVideos.listview .selfie-video > video {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
@@ -2033,3 +2034,92 @@ c
     transition-property: left, top, right, width, min-width, max-width, height, min-height, max-height;
     transition-duration: 300ms;
 }
+
+#conferenceController .unpinned-video-list-container {
+    width: 202px;
+    height: 170px;
+    z-index: 1;
+    position: absolute;
+    bottom: 62px;
+    background-color: rgba(128,128,128,0.1);
+}
+.modSession #conferenceController .unpinned-video-list-container {
+    width: 100%;
+}
+#conferenceController #unpinnedVideos.listview {
+    width: 100%;
+    height: 100%;
+}
+#conferenceController #unpinnedVideos.listview .win-surface {
+    overflow-y: hidden;
+}
+.modSession #conferenceController #unpinnedVideos.listview .win-itemsblock {
+    width: 808px;
+}
+#conferenceController #unpinnedVideos.listview .win-container {
+    width: 192px;
+    height: 144px;
+}
+#conferenceController #unpinnedVideos.listview .win-itembox {
+    background-color: var(--btn-dark-bg);
+}
+#conferenceController #unpinnedVideos.listview .win-itembox:hover::before {
+    display: none;
+}
+#conferenceController #unpinnedVideos.listview .video-list-item {
+    width: 192px;
+    height: 144px;
+}
+#conferenceController #unpinnedVideos.listview .video-item {
+    position: absolute;
+    width: 100%;
+    height: auto;
+}
+#conferenceController #unpinnedVideos.listview .video-label {
+    position: absolute;
+    height: 15px;
+    left: 2px;
+    top: 124px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 1px;
+    color: var(--color-off-white);
+    padding: 0 1rem 0 .5rem !important;
+    font-size: 80%;
+}
+#conferenceController .videoContainer--rssHk .video-item-button,
+#conferenceController #unpinnedVideos.listview .video-item-button {
+    position: absolute;
+    top: 2px;
+    min-width: 24px;
+    min-height: 24px;
+    padding: 4px 0 0 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--color-off-white);
+    border-radius: 0;
+    border: none;
+}
+#conferenceController .videoContainer--rssHk .video-item-button {
+    right: 28px;
+}
+#conferenceController #unpinnedVideos.listview .video-item-button {
+    right: 2px;
+}
+.event #conferenceController .videoContainer--rssHk .video-item-button,
+.event #conferenceController #unpinnedVideos.listview .video-item-button {
+    display: none;
+}
+
+#conferenceController #unpinnedVideos.listview .video-item-button .pin::before {
+    font-size: 14px;
+    font-family: "Segoe MDL2 Assets", "Symbols";
+    font-weight: normal;
+    content: "\E718"
+}
+#conferenceController .videoContainer--rssHk .video-item-button .unpin::before {
+    font-size: 14px;
+    font-family: "Segoe MDL2 Assets", "Symbols";
+    font-weight: normal;
+    content: "\E77A";
+}
+
+

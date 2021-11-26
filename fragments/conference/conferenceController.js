@@ -74,6 +74,7 @@ var __meteor_runtime_config__;
         userListColumn: "userListColumn--6vKQL",
         userName: "userName--ZsKYfV",
         userNameMain: "userNameMain--2fo2zM",
+        videoContainer: "videoContainer--rssHk",
         videoList: "videoList--1OC49P",
         videoPlayer: "videoPlayer--1MGUuy",
         wrapper1: "wrapper--Z17x8k2",
@@ -168,8 +169,10 @@ var __meteor_runtime_config__;
 
     function getInternalInstanceKey(element) {
         for (var prop in element) {
-            if (prop.startsWith ("__reactInternalInstance$")) {
-                return element[prop] && element[prop].key;
+            if (element.hasOwnProperty(prop)) {
+                if (prop.startsWith("__reactInternalInstance$")) {
+                    return element[prop] && element[prop].key;
+                }
             }
         }
         return null;
@@ -195,7 +198,8 @@ var __meteor_runtime_config__;
                 activeVideoCount: 0,
                 mediaContainerObserver: null,
                 videoListObserver: null,
-                contentObserver: null
+                contentObserver: null,
+                usePinned: false
             };
             var userListDefaults = {
                 show: true,
@@ -214,6 +218,7 @@ var __meteor_runtime_config__;
                 full: "full",
                 small: "small"
             }
+            var myselfLabel = "&nbsp;(" + getResourceText("label.me") + ")";
 
             var emojiToolbarPositionObserver = null;
 
@@ -227,10 +232,13 @@ var __meteor_runtime_config__;
                     ShowPresentation: 1,
                     ShowVideoList: 1,
                     VideoListPosition: videoListDefaults.right,
-                    PresenterMode: presenterModeDefaults.off
+                    PresenterMode: presenterModeDefaults.off,
+                    PinnedVideos: "{}"
                 },
                 showPresentation: true,
                 showVideoList: true,
+                pinnedVideos: {},
+                unpinnedVideoListLength: 0,
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
@@ -268,6 +276,7 @@ var __meteor_runtime_config__;
             var notificationPopup = fragmentElement.querySelector("#notificationPopup");
             var chatMenu = fragmentElement.querySelector("#chatMenu");
             var pollQuestion = fragmentElement.querySelector("#pollQuestion");
+            var listView = fragmentElement.querySelector("#unpinnedVideos.listview");
 
             var handleCommandPromise = null;
             var sendResizePromise = null;
@@ -301,6 +310,8 @@ var __meteor_runtime_config__;
             } else if (pageControllerName === "modSessionController") {
                 userToken = Application.query.UserToken; //aus startlink 
             }
+
+            var unpinnedVideoList = new WinJS.Binding.List([]);
             var that = this;
 
             that.dispose = function () {
@@ -1476,7 +1487,7 @@ var __meteor_runtime_config__;
                         if (userName) {
                             if (!userName.firstElementChild) {
                                 var iLabel = document.createElement("i");
-                                iLabel.innerHTML = "&nbsp;(" + getResourceText("label.me") + ")";
+                                iLabel.innerHTML = myselfLabel;
                                 userName.appendChild(iLabel);
                             }
                         }
@@ -1837,6 +1848,11 @@ var __meteor_runtime_config__;
                                                                 that.adjustContentPositions();
                                                             });
                                                         }
+                                                        if (!checkForInactiveVideoPromise) {
+                                                            checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
+                                                                that.checkForInactiveVideo();
+                                                            });
+                                                        }
                                                         break;
                                                 }
                                             });
@@ -1848,7 +1864,7 @@ var __meteor_runtime_config__;
                                         });
                                     }
                                     var numVideos;
-                                    if (videoListDefaults.hideInactive || videoListDefaults.hideMuted) {
+                                    if (videoListDefaults.usePinned || videoListDefaults.hideInactive || videoListDefaults.hideMuted) {
                                         numVideos = videoListDefaults.activeVideoCount;
                                     } else {
                                         numVideos = videoList.childElementCount;
@@ -1860,6 +1876,15 @@ var __meteor_runtime_config__;
                                     } else {
                                         if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
                                             WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-empty");
+                                        }
+                                    }
+                                    if ( videoListDefaults.usePinned ) {
+                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-use-pinned")) {
+                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-use-pinned");
+                                        }
+                                    } else {
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-use-pinned")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-use-pinned");
                                         }
                                     }
                                     var videoListItem = videoList.firstElementChild;
@@ -2141,10 +2166,12 @@ var __meteor_runtime_config__;
             this.adjustContentPositions = adjustContentPositions;
 
             var checkForInactiveVideo = function () {
+                var checkLaterAgain = false;
                 var videoList = null;
                 var hideInactive = videoListDefaults.hideInactive;
                 var hideMuted = videoListDefaults.hideMuted;
-                Log.call(Log.l.trace, "Conference.Controller.", "hideInactive=" + hideInactive + " hideMuted=" + hideMuted);
+                var usePinned = videoListDefaults.usePinned;
+                Log.call(Log.l.trace, "Conference.Controller.", "usePinned=" + usePinned + " hideInactive=" + hideInactive + " hideMuted=" + hideMuted);
                 if (checkForInactiveVideoPromise) {
                     checkForInactiveVideoPromise.cancel();
                     checkForInactiveVideoPromise = null;
@@ -2167,31 +2194,72 @@ var __meteor_runtime_config__;
                                 var prevActiveItem = null;
                                 var prevInactiveItem = null;
                                 var prevMutedItem = null;
+                                var newUnpinnedVideoLists = [];
                                 while (videoListItem) {
-                                    var video = videoListItem.querySelector("video");
-                                    var mediaStream = video && video.srcObject;
-                                    var mediaStreamId = mediaStream && mediaStream.id || "0";
+                                    var pinned = null;
+                                    var key = getInternalInstanceKey(videoListItem) || "0";
+                                    Log.print(Log.l.trace, "key=" + key);
+                                    if (usePinned) {
+                                        if (key) {
+                                            pinned = that.binding.pinnedVideos[key];
+                                        }
+                                        if (pinned) {
+                                            if (!WinJS.Utilities.hasClass(videoListItem, "pinned-video")) {
+                                                WinJS.Utilities.addClass(videoListItem, "pinned-video");
+                                            }
+                                        } else {
+                                            if (WinJS.Utilities.hasClass(videoListItem, "pinned-video")) {
+                                                WinJS.Utilities.removeClass(videoListItem, "pinned-video");
+                                            }
+                                        }
+                                    }
                                     var content = videoListItem.firstElementChild;
                                     if (content) {
+                                        var video = content.querySelector("video");
+                                        var mediaStream = video && video.srcObject;
+                                        if (!mediaStream) {
+                                            checkLaterAgain = true;
+                                        }
                                         var muted = null;
                                         if (WinJS.Utilities.hasClass(content, bbbClass.talking)) {
-                                            videoListDefaults.contentActivity[mediaStreamId] = now;
+                                            videoListDefaults.contentActivity[key] = now;
                                         } else {
-                                            if (typeof videoListDefaults.contentActivity[mediaStreamId] === "undefined") {
-                                                videoListDefaults.contentActivity[mediaStreamId] = 0;
+                                            if (typeof videoListDefaults.contentActivity[key] === "undefined") {
+                                                videoListDefaults.contentActivity[key] = 0;
                                             }
                                             muted = content.querySelector("." + bbbClass.muted) || content.querySelector(".icon-bbb-listen");
                                         }
-                                        var inactivity = now - videoListDefaults.contentActivity[mediaStreamId];
+                                        var inactivity = now - videoListDefaults.contentActivity[key];
+                                        if (usePinned && !pinned && key) {
+                                            var userName = null;
+                                            var isMyself = false;
+                                            var userNameElement = videoListItem.querySelector("." + bbbClass.userName + ", ." + bbbClass.dropdownTrigger);
+                                            if (userNameElement && userNameElement.firstChild) {
+                                                userName = userNameElement.firstChild.textContent;
+                                                if (userNameElement.firstElementChild) {
+                                                    isMyself = true;
+                                                }
+                                            }
+                                            if (pageControllerName === "modSessionController" || isMyself) {
+                                                newUnpinnedVideoLists.push({
+                                                    key: key,
+                                                    userName: userName,
+                                                    isMyself: (isMyself ? myselfLabel : ""),
+                                                    mediaStream: mediaStream,
+                                                    videoListItemClassName: "video-list-item" + (isMyself ? " selfie-video" : "")
+                                                });
+                                            }
+                                        }
                                         if ((hideInactive || hideMuted) && muted ||
-                                            hideInactive && inactivity > videoListDefaults.inactivityDelay) {
+                                            hideInactive && inactivity > videoListDefaults.inactivityDelay ||
+                                            usePinned && !pinned) {
                                             if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
                                                 WinJS.Utilities.addClass(videoListItem, "inactive-video-hidden");
                                             }
                                         } else {
-                                            if (hideInactive || hideMuted) {
+                                            if (hideInactive || hideMuted || usePinned) {
                                                 if (prevActiveItem) {
-                                                    if (videoListItem !== prevActiveItem.nextSibling) {
+                                                    if (prevActiveItem.nextSibling && videoListItem !== prevActiveItem.nextSibling) {
                                                         videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
                                                     }
                                                 } else {
@@ -2203,15 +2271,15 @@ var __meteor_runtime_config__;
                                             } else {
                                                 if (muted) {
                                                     if (prevMutedItem) {
-                                                        if (videoListItem !== prevMutedItem.nextSibling) {
+                                                        if (prevMutedItem.nextSibling && videoListItem !== prevMutedItem.nextSibling) {
                                                             videoList.insertBefore(videoListItem, prevMutedItem.nextSibling);
                                                         }
                                                     } else if (prevInactiveItem) {
-                                                        if (videoListItem !== prevInactiveItem.nextSibling) {
+                                                        if (prevInactiveItem.nextSibling && videoListItem !== prevInactiveItem.nextSibling) {
                                                             videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
                                                         }
                                                     } else if (prevActiveItem) {
-                                                        if (videoListItem !== prevActiveItem.nextSibling) {
+                                                        if (prevActiveItem.nextSibling && videoListItem !== prevActiveItem.nextSibling) {
                                                             videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
                                                         }
                                                     } else {
@@ -2222,11 +2290,11 @@ var __meteor_runtime_config__;
                                                     prevMutedItem = videoListItem;
                                                 } else if (inactivity > videoListDefaults.inactivityDelay) {
                                                     if (prevInactiveItem) {
-                                                        if (videoListItem !== prevInactiveItem.nextSibling) {
+                                                        if (prevInactiveItem.nextSibling && videoListItem !== prevInactiveItem.nextSibling) {
                                                             videoList.insertBefore(videoListItem, prevInactiveItem.nextSibling);
                                                         }
                                                     } else if (prevActiveItem) {
-                                                        if (videoListItem !== prevActiveItem.nextSibling) {
+                                                        if (prevActiveItem.nextSibling && videoListItem !== prevActiveItem.nextSibling) {
                                                             videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
                                                         }
                                                     } else {
@@ -2237,7 +2305,7 @@ var __meteor_runtime_config__;
                                                     prevInactiveItem = videoListItem;
                                                 } else {
                                                     if (prevActiveItem) {
-                                                        if (videoListItem !== prevActiveItem.nextSibling) {
+                                                        if (prevActiveItem.nextSibling && videoListItem !== prevActiveItem.nextSibling) {
                                                             videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
                                                         }
                                                     } else {
@@ -2251,6 +2319,22 @@ var __meteor_runtime_config__;
                                             if (WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
                                                 WinJS.Utilities.removeClass(videoListItem, "inactive-video-hidden");
                                             }
+                                            var videoContainer = videoListItem.querySelector("." + bbbClass.videoContainer);
+                                            if (videoContainer) {
+                                                var unpinButton = videoContainer.querySelector(".video-item-button");
+                                                if (!unpinButton) {
+                                                    unpinButton = document.createElement("button");
+                                                    WinJS.Utilities.addClass(unpinButton, "win-button");
+                                                    WinJS.Utilities.addClass(unpinButton, "video-item-button");
+                                                    unpinButton.onclick = function(event) {
+                                                        AppBar.handleEvent('click', 'clickUnpinVideoButton', event);
+                                                    }
+                                                    var span = document.createElement("span");
+                                                    WinJS.Utilities.addClass(span, "unpin");
+                                                    unpinButton.appendChild(span);
+                                                    videoContainer.appendChild(unpinButton);
+                                                }
+                                            }
                                             numVideos++;
                                         }
                                         i++;
@@ -2258,10 +2342,60 @@ var __meteor_runtime_config__;
                                     videoListItem = videoListItem.nextElementSibling;
                                 }
                                 videoListDefaults.activeVideoCount = numVideos;
+                                if (unpinnedVideoList && listView && listView.parentElement && listView.winControl) {
+                                    if (listView.parentElement.parentElement !== mediaContainer) {
+                                        var actionsBar = fragmentElement.querySelector("." + bbbClass.actionsbar);
+                                        if (actionsBar) {
+                                            mediaContainer.insertBefore(listView.parentElement, actionsBar);
+                                            listView.winControl.itemDataSource = unpinnedVideoList.dataSource;
+                                        }
+                                    }
+                                    if (newUnpinnedVideoLists.length > 0) {
+                                        var oldIndex, oldItem, newIndexesFound = [], oldIndexesFound = [];
+                                        newUnpinnedVideoLists.forEach(function(item, index) {
+                                            for (oldIndex = 0; oldIndex < unpinnedVideoList.length; oldIndex++) {
+                                                if (oldIndexesFound.indexOf(oldIndex) < 0) {
+                                                    oldItem = unpinnedVideoList.getAt(oldIndex);
+                                                    if (item && oldItem && item.key === oldItem.key) {
+                                                        if (item.userName !== oldItem.userName ||
+                                                            item.isMyself !== oldItem.isMyself ||
+                                                            item.mediaStream !== oldItem.mediaStream) {
+                                                            Log.print(Log.l.trace, "changed unpinnedVideoList[" + oldIndex + "].key=" + item.key);
+                                                            unpinnedVideoList.setAt(oldIndex, item);
+                                                        }
+                                                        oldIndexesFound.push(oldIndex);
+                                                        newIndexesFound.push(index);
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        });
+                                        for (oldIndex = unpinnedVideoList.length - 1; oldIndex >= 0; oldIndex--) {
+                                            if (oldIndexesFound.indexOf(oldIndex) < 0) {
+                                                Log.print(Log.l.trace, "deleted unpinnedVideoList[" + oldIndex + "]");
+                                                unpinnedVideoList.splice(oldIndex, 1);
+                                            }
+                                        }
+                                        newUnpinnedVideoLists.forEach(function(item, index) {
+                                            if (newIndexesFound.indexOf(index) < 0) {
+                                                Log.print(Log.l.trace, "added unpinnedVideoList[" + index + "].key=" + item.key);
+                                                unpinnedVideoList.push(item);
+                                            }
+                                        });
+                                    } else {
+                                        unpinnedVideoList.length = 0;
+                                    }
+                                    that.binding.unpinnedVideoListLength = unpinnedVideoList.length;
+                                }
                             }
                         }
                     }
                 });
+                if (!checkForInactiveVideoPromise && checkLaterAgain) {
+                    checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
+                        that.checkForInactiveVideo();
+                    });
+                }
                 Log.ret(Log.l.trace);
                 return ret;
             }
@@ -2302,7 +2436,8 @@ var __meteor_runtime_config__;
                             pShowPresentation: dataSessionStatus.ShowPresentation,
                             pShowVideoList: dataSessionStatus.ShowVideoList,
                             pVideoListPosition: dataSessionStatus.VideoListPosition,
-                            pPresenterMode: dataSessionStatus.PresenterMode
+                            pPresenterMode: dataSessionStatus.PresenterMode,
+                            pPinnedVideos: dataSessionStatus.PinnedVideos
                         }, function(json) {
                             Log.print(Log.l.trace, "Prc_SetBBBSessionStatus success!");
                         },
@@ -2362,14 +2497,6 @@ var __meteor_runtime_config__;
                             }
                             Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
                             that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
-                            if (!checkForInactiveVideoPromise) {
-                                checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
-                                    that.checkForInactiveVideo();
-                                });
-                            }
-                            checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
-                                that.checkForInactiveVideo();
-                            });
                             if (!adjustContentPositionsPromise) {
                                 adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
                                     that.adjustContentPositions();
@@ -2411,6 +2538,14 @@ var __meteor_runtime_config__;
                             that.binding.dataSessionStatus = json.d.results[0];
                             that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
                             that.binding.showVideoList = !!that.binding.dataSessionStatus.ShowVideoList;
+                            try {
+                                that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus.PinnedVideos);
+                            } catch (ex) {
+                                Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
+                            }
+                            if ( !that.binding.pinnedVideos ) {
+                                that.binding.pinnedVideos = {};
+                            }
                         }
                         sessionStatusIsSet = false;
                         if (!adjustContentPositionsPromise) {
@@ -2538,6 +2673,11 @@ var __meteor_runtime_config__;
                     }
                     if (that.binding.dataSessionStatus) {
                         that.binding.dataSessionStatus.PresenterMode = state;
+                    }
+                    if (!checkForInactiveVideoPromise) {
+                        checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
+                            that.checkForInactiveVideo();
+                        });
                     }
                 }
                 Log.ret(Log.l.trace);
@@ -2849,6 +2989,11 @@ var __meteor_runtime_config__;
                         }
                         that.binding.dataSessionStatus.ShowVideoList = 1;
                     }
+                    if (!checkForInactiveVideoPromise) {
+                        checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
+                            that.checkForInactiveVideo();
+                        });
+                    }
                     Log.ret(Log.l.info);
                 },
                 hideVideoList: function () {
@@ -2965,6 +3110,59 @@ var __meteor_runtime_config__;
                                         break;
                                 }
                                 that.saveSessionStatus(dataSessionStatus);
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickPinVideoButton: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (AppBar.notifyModified && event && event.currentTarget) {
+                        var targetParent = event.currentTarget.parentElement;
+                        if (targetParent) {
+                            var key = targetParent.name;
+                            if (key) {
+                                if ( !that.binding.pinnedVideos ) {
+                                    that.binding.pinnedVideos = {};
+                                }
+                                that.binding.pinnedVideos[key] = {
+                                    index: that.binding.unpinnedVideoListLength
+                                };
+                                var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                                dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                                that.saveSessionStatus(dataSessionStatus);
+                                if (!checkForInactiveVideoPromise) {
+                                    checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
+                                        that.checkForInactiveVideo();
+                                    });
+                                }
+                                if (that.binding.dataSessionStatus.ShowVideoList) {
+                                    that.submitCommandMessage(magicStart + "showVideoList" + magicStop, event);
+                                }
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickUnpinVideoButton: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (AppBar.notifyModified && event && event.currentTarget && 
+                        event.currentTarget.parentElement &&
+                        event.currentTarget.parentElement.parentElement) {
+                        var videoListItem = event.currentTarget.parentElement.parentElement.parentElement;
+                        if (videoListItem) {
+                            var key = getInternalInstanceKey(videoListItem) || "0";
+                            delete that.binding.pinnedVideos[key];
+                            var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                            dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                            that.saveSessionStatus(dataSessionStatus);
+                            if (!checkForInactiveVideoPromise) {
+                                checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
+                                    that.checkForInactiveVideo();
+                                });
+                            }
+                            if (that.binding.dataSessionStatus.ShowVideoList) {
+                                that.submitCommandMessage(magicStart + "showVideoList" + magicStop, event);
                             }
                         }
                     }
@@ -3272,6 +3470,7 @@ var __meteor_runtime_config__;
                     Log.ret(Log.l.info);
                 },
                 hideToolbox: function(id) {
+                    Log.call(Log.l.info, "Conference.Controller.");
                     var curToolbox = fragmentElement.querySelector('#' + id);
                     if (curToolbox && curToolbox.style) {
                         WinJS.Utilities.addClass(curToolbox, "box-is-minimized");
@@ -3279,8 +3478,10 @@ var __meteor_runtime_config__;
                             curToolbox.style.display = "none";
                         });
                     }
+                    Log.ret(Log.l.info);
                 },
                 toggleToolbox: function (id) {
+                    Log.call(Log.l.info, "Conference.Controller.");
                     WinJS.Promise.timeout(0).then(function () {
                         var curToolbox = fragmentElement.querySelector('#' + id);
                         if (curToolbox && curToolbox.style) {
@@ -3301,6 +3502,25 @@ var __meteor_runtime_config__;
                             }
                         }
                     });
+                    Log.ret(Log.l.info);
+                },
+                onVideoListLoadingStateChanged: function (eventInfo) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (listView && listView.winControl) {
+                        Log.print(Log.l.trace, "loadingState=" + listView.winControl.loadingState);
+                        // single list selection
+                        if (listView.winControl.selectionMode !== WinJS.UI.SelectionMode.none) {
+                            listView.winControl.selectionMode = WinJS.UI.SelectionMode.none;
+                        }
+                        // direct selection on each tap
+                        if (listView.winControl.tapBehavior !== WinJS.UI.TapBehavior.none) {
+                            listView.winControl.tapBehavior = WinJS.UI.TapBehavior.none;
+                        }
+                        if (listView.winControl.loadingState === "itemsLoaded") {
+                        } else if (listView.winControl.loadingState === "complete") {
+                        }
+                    }
+                    Log.ret(Log.l.trace);
                 }
             }
 
@@ -4003,6 +4223,7 @@ var __meteor_runtime_config__;
             }
             videoListDefaults.direction = videoListDefaults.right;
             videoListDefaults.hideInactive = !!that.binding.dataEvent.HideSilentVideos;
+            videoListDefaults.usePinned = !!that.binding.dataEvent.SpeakerVideosPinned;
             if (!that.binding.dataEvent.SharedNotes) {
                 WinJS.Utilities.addClass(conference, "hide-shared-notes");
             }
@@ -4049,6 +4270,9 @@ var __meteor_runtime_config__;
                         postNotificationContainer.appendChild(postNotificationPopup);
                     }
                 });
+            }
+            if (listView) {
+                this.addRemovableEventListener(listView, "loadingstatechanged", this.eventHandlers.onVideoListLoadingStateChanged.bind(this));
             }
 
             that.processAll().then(function () {

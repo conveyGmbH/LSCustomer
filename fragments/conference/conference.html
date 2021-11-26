@@ -124,8 +124,35 @@
                             </div>
                         </button>
                     </div>
+                    <div class="video-list-template"
+                         data-win-control="WinJS.Binding.Template" style="display: none">
+                        <div data-win-bind="className: videoListItemClassName; name: key">
+                            <video class="video-item" data-win-bind="srcObject: mediaStream" autoplay playsinline></video>
+                            <div class="video-label">
+                                <span data-win-bind="textContent: userName"></span>
+                                <i data-win-bind="innerHTML: isMyself; style.display: isMyself Binding.Converter.toDisplay"></i>
+                            </div>
+                            <button class="win-button video-item-button"
+                                    onclick="AppBar.handleEvent('click', 'clickPinVideoButton', event)">
+                                <span class="pin"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="unpinned-video-list-container"
+                         data-win-bind="style.display: unpinnedVideoListLength Binding.Converter.toDisplay">
+                        <div id="unpinnedVideos"
+                             class="listview"
+                             data-win-control="WinJS.UI.ListView"
+                             data-win-options="{
+                            selectionMode: 'none',
+                            tapBehavior: 'none',
+                            layout : {type: WinJS.UI.GridLayout},
+                            itemTemplate: select('.video-list-template')
+                         }">
+                        </div>
+                    </div>
                     <div id="emojiToolbar" class="tool-box box-bkg box-is-minimized"
-                         data-win-control="WinJS.UI.Repeater">
+                     data-win-control="WinJS.UI.Repeater">
                         <div class="win-button emoji"
                              onclick="AppBar.handleEvent('click', 'clickEmoji', event)"
                              data-win-bind="name: text">
