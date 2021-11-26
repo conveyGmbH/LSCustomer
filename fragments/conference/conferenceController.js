@@ -2194,16 +2194,23 @@ var __meteor_runtime_config__;
                                 var prevActiveItem = null;
                                 var prevInactiveItem = null;
                                 var prevMutedItem = null;
+                                var key = null;
+                                for (key in that.binding.pinnedVideos) {
+                                    if (that.binding.pinnedVideos.hasOwnProperty(key)) {
+                                        that.binding.pinnedVideos[key].active = false;
+                                    }
+                                }
                                 var newUnpinnedVideoLists = [];
                                 while (videoListItem) {
                                     var pinned = null;
-                                    var key = getInternalInstanceKey(videoListItem) || "0";
+                                    key = getInternalInstanceKey(videoListItem) || "0";
                                     Log.print(Log.l.trace, "key=" + key);
                                     if (usePinned) {
                                         if (key) {
                                             pinned = that.binding.pinnedVideos[key];
                                         }
                                         if (pinned) {
+                                            pinned.active = true;
                                             if (!WinJS.Utilities.hasClass(videoListItem, "pinned-video")) {
                                                 WinJS.Utilities.addClass(videoListItem, "pinned-video");
                                             }
@@ -2341,6 +2348,14 @@ var __meteor_runtime_config__;
                                     }
                                     videoListItem = videoListItem.nextElementSibling;
                                 }
+                                for (key in that.binding.pinnedVideos) {
+                                    if (that.binding.pinnedVideos.hasOwnProperty(key)) {
+                                        if (!that.binding.pinnedVideos[key].active) {
+                                            delete that.binding.pinnedVideos[key];
+                                        }
+                                    }
+                                }
+
                                 videoListDefaults.activeVideoCount = numVideos;
                                 if (unpinnedVideoList && listView && listView.parentElement && listView.winControl) {
                                     if (listView.parentElement.parentElement !== mediaContainer) {
@@ -2465,7 +2480,13 @@ var __meteor_runtime_config__;
                         that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
                         that.binding.showVideoList = !!that.binding.dataSessionStatus.ShowVideoList;
                         try {
-                            that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus.PinnedVideos);
+                            var pinnedVideos = JSON.parse(that.binding.dataSessionStatus.PinnedVideos);
+                            that.binding.pinnedVideos = {};
+                            for (var key in pinnedVideos) {
+                                if (pinnedVideos.hasOwnProperty(key) && key !== "_backingData" && key !== "backingData") {
+                                    that.binding.pinnedVideos[key] = pinnedVideos[key];
+                                }
+                            }
                         } catch (ex) {
                             Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
                         }
@@ -3137,7 +3158,7 @@ var __meteor_runtime_config__;
                                     index: that.binding.unpinnedVideoListLength
                                 };
                                 var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
-                                dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                                dataSessionStatus.PinnedVideos = JSON.stringify(copyByValue(that.binding.pinnedVideos));
                                 that.saveSessionStatus(dataSessionStatus);
                                 if (!checkForInactiveVideoPromise) {
                                     checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
