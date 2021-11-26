@@ -2479,6 +2479,11 @@ var __meteor_runtime_config__;
                             that.adjustContentPositions();
                         });
                     }
+                    if (!checkForInactiveVideoPromise) {
+                        checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
+                            that.checkForInactiveVideo();
+                        });
+                    }
                 }, function (error) {
                     Log.print(Log.l.error, "Prc_GetBBBSessionStatus error! ");
                 });
