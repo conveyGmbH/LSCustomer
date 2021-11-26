@@ -2950,6 +2950,11 @@ var __meteor_runtime_config__;
             that.setPolling = setPolling;
 
             this.eventHandlers = {
+                loadSessionStatus: function() {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    that.loadSessionStatus();
+                    Log.ret(Log.l.info);
+                },
                 showPresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
@@ -2992,7 +2997,6 @@ var __meteor_runtime_config__;
                         }
                         that.binding.dataSessionStatus.ShowVideoList = 1;
                     }
-                    that.loadSessionStatus();
                     Log.ret(Log.l.info);
                 },
                 hideVideoList: function () {
@@ -3161,7 +3165,7 @@ var __meteor_runtime_config__;
                                 });
                             }
                             if (that.binding.dataSessionStatus.ShowVideoList) {
-                                that.submitCommandMessage(magicStart + "showVideoList" + magicStop, event);
+                                that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
                             }
                         }
                     }
@@ -3672,6 +3676,9 @@ var __meteor_runtime_config__;
             that.submitCommandMessage = submitCommandMessage;
 
             that.allCommandInfos = {
+                loadSessionStatus: {
+                    collection: "group-chat-msg", msg: "added", redundantList: null, type: "layout"
+                },
                 showPresentation: {
                     collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"], type: "layout"
                 },
