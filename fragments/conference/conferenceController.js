@@ -3147,6 +3147,9 @@ var __meteor_runtime_config__;
                                 if (that.binding.dataSessionStatus.ShowVideoList) {
                                     that.submitCommandMessage(magicStart + "showVideoList" + magicStop, event);
                                 }
+                                if (that.binding.dataSessionStatus.ShowVideoList) {
+                                    that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
+                                }
                             }
                         }
                     }
