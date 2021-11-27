@@ -35,6 +35,11 @@
     z-index: 10 !important;
     width: 100% !important;
     max-width: 100%;
+    height: 50px !important;
+}
+
+#conference.mediaview .navbar--Z2hKYyK .top--Z25OvN9 {
+    height: 40px !important;
 }
 
 #conference.mediaview section.actionsbar--Z1ant6U {
@@ -2125,5 +2130,3 @@ c
     font-weight: normal;
     content: "\E77A";
 }
-
-
