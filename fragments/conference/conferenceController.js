@@ -3584,6 +3584,17 @@ var __meteor_runtime_config__;
                         }
                         if (listView.winControl.loadingState === "itemsLoaded") {
                         } else if (listView.winControl.loadingState === "complete") {
+                            for (var i = listView.winControl.indexOfFirstVisible;
+                                i <= listView.winControl.indexOfLastVisible;
+                                i++) {
+                                var element = listView.winControl.elementFromIndex(i);
+                                if (element) {
+                                    var video = element.querySelector(".video-item");
+                                    if (video && typeof video.play === "function") {
+                                        video.play();
+                                    }
+                                }
+                            }
                         }
                     }
                     Log.ret(Log.l.trace);
