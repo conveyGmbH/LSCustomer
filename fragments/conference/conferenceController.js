@@ -1835,7 +1835,7 @@ var __meteor_runtime_config__;
                                                     case "attributes":
                                                         Log.print(Log.l.trace, "videoList attributes changed!");
                                                         if (!checkForInactiveVideoPromise) {
-                                                            checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
+                                                            checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function () {
                                                                 that.checkForInactiveVideo();
                                                             });
                                                         }
@@ -1843,14 +1843,14 @@ var __meteor_runtime_config__;
                                                     case "childList":
                                                         Log.print(Log.l.trace, "videoList childList changed!");
                                                         lastDeviceListTime = 0;
+                                                        if (!checkForInactiveVideoPromise) {
+                                                            checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function () {
+                                                                that.checkForInactiveVideo();
+                                                            });
+                                                        }
                                                         if (!adjustContentPositionsPromise) {
                                                             adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
                                                                 that.adjustContentPositions();
-                                                            });
-                                                        }
-                                                        if (!checkForInactiveVideoPromise) {
-                                                            checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
-                                                                that.checkForInactiveVideo();
                                                             });
                                                         }
                                                         break;
@@ -2518,14 +2518,14 @@ var __meteor_runtime_config__;
                         }
                     }
                     sessionStatusIsSet = false;
+                    if (!checkForInactiveVideoPromise) {
+                        checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function () {
+                            that.checkForInactiveVideo();
+                        });
+                    }
                     if (!adjustContentPositionsPromise) {
                         adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
                             that.adjustContentPositions();
-                        });
-                    }
-                    if (!checkForInactiveVideoPromise) {
-                        checkForInactiveVideoPromise = WinJS.Promise.timeout(50).then(function () {
-                            that.checkForInactiveVideo();
                         });
                     }
                 }, function (error) {
