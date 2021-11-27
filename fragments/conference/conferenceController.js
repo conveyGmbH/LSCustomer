@@ -2244,7 +2244,7 @@ var __meteor_runtime_config__;
                                         }
                                         var inactivity = now - videoListDefaults.contentActivity[key];
                                         if (usePinned && !pinned && key) {
-                                            var userName = null;
+                                            var userName = "";
                                             var isMyself = WinJS.Utilities.hasClass(videoListItem, "selfie-video");
                                             var userNameElement = videoListItem.querySelector("." + bbbClass.userName + ", ." + bbbClass.dropdownTrigger);
                                             if (userNameElement && userNameElement.firstChild) {
