@@ -1723,6 +1723,7 @@ var __meteor_runtime_config__;
                             mediaContainer = panelWrapper;
                         }
                         if (mediaContainer) {
+                            var numVideos = 0;
                             if (bbbClass.content) {
                                 var content = mediaContainer.querySelector("." + bbbClass.content);
                                 if (content && !videoListDefaults.contentObserver) {
@@ -1810,6 +1811,7 @@ var __meteor_runtime_config__;
                                     actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
                                     if (actionsBarRight &&  !isChildElement(actionsBarRight, showVideoListToggleContainer)) {
                                         actionsBarRight.appendChild(showVideoListToggleContainer);
+                                        showVideoListToggleContainer.style.display = "inline-block";
                                     }
                                 }
                             }
@@ -1853,20 +1855,10 @@ var __meteor_runtime_config__;
                                             subtree: true
                                         });
                                     }
-                                    var numVideos;
                                     if (videoListDefaults.usePinned || videoListDefaults.hideInactive || videoListDefaults.hideMuted) {
                                         numVideos = videoListDefaults.activeVideoCount;
                                     } else {
                                         numVideos = videoList.childElementCount;
-                                    }
-                                    if (numVideos > 0) {
-                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
-                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-empty");
-                                        }
-                                    } else {
-                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
-                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-empty");
-                                        }
                                     }
                                     if ( videoListDefaults.usePinned ) {
                                         if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-use-pinned")) {
@@ -2052,6 +2044,15 @@ var __meteor_runtime_config__;
                                 }
                                 if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
                                     WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
+                                }
+                            }
+                            if (numVideos > 0) {
+                                if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-empty");
+                                }
+                            } else {
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-empty")) {
+                                    WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-empty");
                                 }
                             }
                             if (videoPLayerOpened) {
@@ -3535,6 +3536,7 @@ var __meteor_runtime_config__;
                         if (toggle && command) {
                             var value = that.binding[command];
                             if (typeof value === "boolean" && value !== toggle.checked) {
+                                that.binding[command] = toggle.checked;
                                 if (!toggle.checked) {
                                     command = command.replace(/show/, "hide");
                                 }
@@ -3793,7 +3795,7 @@ var __meteor_runtime_config__;
 
             that.allCommandInfos = {
                 loadSessionStatus: {
-                    collection: "group-chat-msg", msg: "added", redundantList: null, type: "layout"
+                    collection: "group-chat-msg", msg: "added", redundantList: ["loadSessionStatus"], type: "layout"
                 },
                 showPresentation: {
                     collection: "group-chat-msg", msg: "added", redundantList: ["hidePresentation", "showPresentation"], type: "layout"
