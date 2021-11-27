@@ -2372,14 +2372,14 @@ var __meteor_runtime_config__;
                                                 if (oldIndexesFound.indexOf(oldIndex) < 0) {
                                                     oldItem = unpinnedVideoList.getAt(oldIndex);
                                                     if (item && oldItem && item.key === oldItem.key) {
-                                                        if (item.userName !== oldItem.userName ||
-                                                            item.myselfLabel !== oldItem.myselfLabel ||
-                                                            item.mediaStream !== oldItem.mediaStream ||
-                                                            item.videoListItemClassName !== oldItem.videoListItemClassName ||
-                                                            item.enabled !== oldItem.enabled) {
+                                                        //if (item.userName !== oldItem.userName ||
+                                                        //    item.myselfLabel !== oldItem.myselfLabel ||
+                                                        //    item.mediaStream !== oldItem.mediaStream ||
+                                                        //    item.videoListItemClassName !== oldItem.videoListItemClassName ||
+                                                        //    item.enabled !== oldItem.enabled) {
                                                             Log.print(Log.l.trace, "changed unpinnedVideoList[" + oldIndex + "].key=" + item.key + " userName=" + item.userName + " myselfLabel=" + item.myselfLabel);
                                                             unpinnedVideoList.setAt(oldIndex, item);
-                                                        }
+                                                        //}
                                                         oldIndexesFound.push(oldIndex);
                                                         newIndexesFound.push(index);
                                                         break;
@@ -2411,9 +2411,8 @@ var __meteor_runtime_config__;
                                     } else {
                                         unpinnedVideoList.length = 0;
                                     }
-                                    if (pageControllerName === "modSessionController") {
-                                        that.binding.unpinnedVideoListLength = unpinnedVideoList.length;
-                                    } else if (myselfIsUnpinned && unpinnedVideoList.length > 0) {
+                                    if ((pageControllerName === "modSessionController" || myselfIsUnpinned) && 
+                                        unpinnedVideoList.length > 0) {
                                         if (!that.binding.unpinnedVideoListLength) {
                                             WinJS.Promise.timeout(100).then(function() {
                                                 if (listView && listView.winControl) {
