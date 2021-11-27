@@ -2524,7 +2524,7 @@ var __meteor_runtime_config__;
                         });
                     }
                     if (!checkForInactiveVideoPromise) {
-                        checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
+                        checkForInactiveVideoPromise = WinJS.Promise.timeout(50).then(function () {
                             that.checkForInactiveVideo();
                         });
                     }
@@ -3184,7 +3184,7 @@ var __meteor_runtime_config__;
                                 dataSessionStatus.PinnedVideos = JSON.stringify(copyByValue(that.binding.pinnedVideos));
                                 that.saveSessionStatus(dataSessionStatus);
                                 if (!checkForInactiveVideoPromise) {
-                                    checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
+                                    checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
                                         that.checkForInactiveVideo();
                                     });
                                 }
@@ -3212,7 +3212,7 @@ var __meteor_runtime_config__;
                             dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
                             that.saveSessionStatus(dataSessionStatus);
                             if (!checkForInactiveVideoPromise) {
-                                checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function() {
+                                checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
                                     that.checkForInactiveVideo();
                                 });
                             }
