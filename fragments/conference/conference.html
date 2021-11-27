@@ -126,11 +126,11 @@
                     </div>
                     <div class="video-list-template"
                          data-win-control="WinJS.Binding.Template" style="display: none">
-                        <div data-win-bind="className: videoListItemClassName; name: key">
+                        <div data-win-bind="className: videoListItemClassName; name: key; style.display: enabled Binding.Converter.toDisplay">
                             <video class="video-item" data-win-bind="srcObject: mediaStream" autoplay playsinline></video>
                             <div class="video-label">
                                 <span data-win-bind="textContent: userName"></span>
-                                <i data-win-bind="innerHTML: isMyself; style.display: isMyself Binding.Converter.toDisplay"></i>
+                                <i data-win-bind="innerHTML: myselfLabel; style.display: myselfLabel Binding.Converter.toDisplay"></i>
                             </div>
                             <button class="win-button video-item-button"
                                     onclick="AppBar.handleEvent('click', 'clickPinVideoButton', event)">

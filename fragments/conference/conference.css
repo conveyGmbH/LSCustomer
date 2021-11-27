@@ -2053,6 +2053,9 @@ c
 #conferenceController #unpinnedVideos.listview .win-surface {
     overflow-y: hidden;
 }
+.event #conferenceController #unpinnedVideos.listview .win-viewport {
+    overflow-x: hidden;
+}
 .modSession #conferenceController #unpinnedVideos.listview .win-itemsblock {
     width: 808px;
 }
@@ -2069,17 +2072,18 @@ c
 #conferenceController #unpinnedVideos.listview .video-list-item {
     width: 192px;
     height: 144px;
+    display: flex;
+    justify-content: center;
 }
 #conferenceController #unpinnedVideos.listview .video-item {
-    position: absolute;
     width: 100%;
-    height: auto;
+    max-height: 144px;
 }
 #conferenceController #unpinnedVideos.listview .video-label {
     position: absolute;
     height: 15px;
     left: 2px;
-    top: 124px;
+    top: 120px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 1px;
     color: var(--color-off-white);
