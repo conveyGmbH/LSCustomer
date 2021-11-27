@@ -1449,21 +1449,10 @@ var __meteor_runtime_config__;
             }
             that.onWheelSvg = null;
 
-            var adjustVideoPosition = function (mediaContainer, overlayElement, videoListItem) {
+            var adjustVideoPosition = function (mediaContainer, overlayElement, videoListItem, options) {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 var video = videoListItem.querySelector("video");
                 if (video && video.style) {
-                    var presenterModeTiledIsSet = false;
-                    var presenterModeSmallIsSet = false;
-                    var videoOverlayIsRightIsSet = false;
-                    if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
-                        videoOverlayIsRightIsSet = true;
-                    }
-                    if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
-                        presenterModeTiledIsSet = true;
-                    } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-small")) {
-                        presenterModeSmallIsSet = true;
-                    }
                     if (!WinJS.Utilities.hasClass(videoListItem, "selfie-video") &&
                         deviceList && deviceList.length > 0) {
                         var mediaStream = video.srcObject;
@@ -1497,11 +1486,7 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                    var isHidden = false;
-                    if (WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
-                        isHidden = true;
-                    }
-                    if ((presenterModeTiledIsSet || presenterModeSmallIsSet) && !isHidden) {
+                    if ((options.presenterModeTiledIsSet || options.presenterModeSmallIsSet) && !options.isHidden) {
                         var left = (overlayElement.clientWidth - (overlayElement.clientHeight * video.videoWidth / video.videoHeight)) / 2;
                         var width;
                         if (left < 0) {
@@ -1513,7 +1498,7 @@ var __meteor_runtime_config__;
                             video.style.left = "0";
                             video.style.right = "";
                             width = overlayElement.clientWidth - 2 * left;
-                            if (videoOverlayIsRightIsSet) {
+                            if (options.videoOverlayIsRightIsSet) {
                                 videoListItem.style.marginLeft = Math.abs(left).toString() + "px";;
                             } else {
                                 videoListItem.style.marginLeft = "";
@@ -2154,12 +2139,69 @@ var __meteor_runtime_config__;
                         if (overlayElement) {
                             var videoList = mediaContainer.querySelector("." + bbbClass.videoList);
                             if (videoList) {
+                                var options = {
+                                    presentationIsHidden: false,
+                                    presenterModeTiledIsSet: false,
+                                    presenterModeSmallIsSet: false,
+                                    videoOverlayIsRightIsSet: false,
+                                    isHidden: false
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                    options.videoOverlayIsRightIsSet = true;
+                                }
+                                if (WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
+                                    options.presentationIsHidden = true;
+                                } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
+                                    options.presenterModeTiledIsSet = true;
+                                } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-small")) {
+                                    options.presenterModeSmallIsSet = true;
+                                }
+                                var numVideos = 0;
                                 var videoListItem = videoList.firstElementChild;
                                 while (videoListItem) {
                                     var key = getInternalInstanceKey(videoListItem);
-                                    Log.print(Log.l.trace, "videoListItem: key=" + key);
-                                    that.adjustVideoPosition(mediaContainer, overlayElement, videoListItem);
+                                    if (WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
+                                        options.isHidden = true;
+                                    } else {
+                                        options.isHidden = false;
+                                        numVideos++;
+                                    }
+                                    Log.print(Log.l.trace, "videoListItem: key=" + key + " isHidden=" + options.isHidden);
+                                    that.adjustVideoPosition(mediaContainer, overlayElement, videoListItem, options);
                                     videoListItem = videoListItem.nextSibling;
+                                }
+                                if (options.presentationIsHidden) {
+                                    var gridSize = Math.ceil(Math.sqrt(numVideos));
+                                    var columnCount = gridSize;
+                                    switch (numVideos) {
+                                        case 3:
+                                            columnCount = 3;
+                                            break;
+                                    }
+                                    var rowCount = Math.ceil(numVideos / columnCount);
+                                    Log.print(Log.l.trace, "numVideos="+ numVideos + " columnCount=" + columnCount + " rowCount=" + rowCount);
+                                    for (var i = 0; i <= 8; i++) {
+                                        var columnsClass = "column-count-" + i;
+                                        var rowsClass = "row-count-" + i;
+                                        if (i === columnCount) {
+                                            if (!WinJS.Utilities.hasClass(videoList, columnsClass)) {
+                                                WinJS.Utilities.addClass(videoList, columnsClass);
+                                            }
+                                        } else {
+                                            if (WinJS.Utilities.hasClass(videoList, columnsClass)) {
+                                                WinJS.Utilities.removeClass(videoList, columnsClass);
+                                            }
+                                        }
+                                        if (i === rowCount) {
+                                            if (!WinJS.Utilities.hasClass(videoList, rowsClass)) {
+                                                WinJS.Utilities.addClass(videoList, rowsClass);
+                                            }
+                                        } else {
+                                            if (WinJS.Utilities.hasClass(videoList, rowsClass)) {
+                                                WinJS.Utilities.removeClass(videoList, rowsClass);
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
