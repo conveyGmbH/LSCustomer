@@ -2383,14 +2383,17 @@ var __meteor_runtime_config__;
                                     if (oldIndexesFound.indexOf(oldIndex) < 0) {
                                         oldItem = unpinnedVideoList.getAt(oldIndex);
                                         if (item && oldItem && item.key === oldItem.key) {
-                                            //if (item.userName !== oldItem.userName ||
-                                            //    item.myselfLabel !== oldItem.myselfLabel ||
-                                            //    item.mediaStream !== oldItem.mediaStream ||
-                                            //    item.videoListItemClassName !== oldItem.videoListItemClassName ||
-                                            //    item.enabled !== oldItem.enabled) {
+                                            var videoTrack = item.mediaStream && item.mediaStream.getVideoTracks() && item.mediaStream.getVideoTracks()[0];
+                                            var oldVideoTrack = oldItem.mediaStream && oldItem.mediaStream.getVideoTracks() && oldItem.mediaStream.getVideoTracks()[0];
+                                            if (item.userName !== oldItem.userName ||
+                                                item.myselfLabel !== oldItem.myselfLabel ||
+                                                item.mediaStream !== oldItem.mediaStream ||
+                                                videoTrack !== oldVideoTrack ||
+                                                item.videoListItemClassName !== oldItem.videoListItemClassName ||
+                                                item.enabled !== oldItem.enabled) {
                                                 Log.print(Log.l.trace, "changed unpinnedVideoList[" + oldIndex + "].key=" + item.key + " userName=" + item.userName + " myselfLabel=" + item.myselfLabel);
                                                 unpinnedVideoList.setAt(oldIndex, item);
-                                            //}
+                                            }
                                             oldIndexesFound.push(oldIndex);
                                             newIndexesFound.push(index);
                                             break;
