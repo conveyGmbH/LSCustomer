@@ -1184,6 +1184,11 @@ var __meteor_runtime_config__;
                         }
                     }
                     WinJS.Promise.as().then(function () {
+                        if (!checkForInactiveVideoPromise) {
+                            checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function () {
+                                that.checkForInactiveVideo();
+                            });
+                        }
                         if (!adjustContentPositionsPromise) {
                             adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
                                 that.adjustContentPositions();
@@ -2167,6 +2172,10 @@ var __meteor_runtime_config__;
 
             var checkForInactiveVideo = function () {
                 var checkLaterAgain = false;
+                var myselfIsUnpinned = false;
+                var newUnpinnedVideoLists = [];
+                var numVideos = 0;
+                var key = null;
                 var videoList = null;
                 var hideInactive = videoListDefaults.hideInactive;
                 var hideMuted = videoListDefaults.hideMuted;
@@ -2188,20 +2197,16 @@ var __meteor_runtime_config__;
                             videoList = overlayElement.querySelector("." + bbbClass.videoList);
                             if (videoList) {
                                 var i = 0;
-                                var numVideos = 0;
                                 var now = Date.now();
                                 var videoListItem = videoList.firstElementChild;
                                 var prevActiveItem = null;
                                 var prevInactiveItem = null;
                                 var prevMutedItem = null;
-                                var key = null;
                                 for (key in that.binding.pinnedVideos) {
                                     if (that.binding.pinnedVideos.hasOwnProperty(key)) {
                                         that.binding.pinnedVideos[key].active = false;
                                     }
                                 }
-                                var newUnpinnedVideoLists = [];
-                                var myselfIsUnpinned = false;
                                 while (videoListItem) {
                                     var pinned = null;
                                     key = getInternalInstanceKey(videoListItem) || "0";
@@ -2244,6 +2249,9 @@ var __meteor_runtime_config__;
                                             var userNameElement = videoListItem.querySelector("." + bbbClass.userName + ", ." + bbbClass.dropdownTrigger);
                                             if (userNameElement && userNameElement.firstChild) {
                                                 userName = userNameElement.firstChild.textContent;
+                                            }
+                                            if (!userName) {
+                                                checkLaterAgain = true;
                                             }
                                             if (!myselfIsUnpinned && isMyself) {
                                                 myselfIsUnpinned = true;
@@ -2349,91 +2357,91 @@ var __meteor_runtime_config__;
                                     }
                                     videoListItem = videoListItem.nextElementSibling;
                                 }
-                                for (key in that.binding.pinnedVideos) {
-                                    if (that.binding.pinnedVideos.hasOwnProperty(key)) {
-                                        if (!that.binding.pinnedVideos[key].active) {
-                                            delete that.binding.pinnedVideos[key];
-                                        }
-                                    }
-                                }
-                                videoListDefaults.activeVideoCount = numVideos;
-                                if (unpinnedVideoList && listView && listView.parentElement && listView.winControl) {
-                                    if (listView.parentElement.parentElement !== mediaContainer) {
-                                        var actionsBar = fragmentElement.querySelector("." + bbbClass.actionsbar);
-                                        if (actionsBar) {
-                                            mediaContainer.insertBefore(listView.parentElement, actionsBar);
-                                            listView.winControl.itemDataSource = unpinnedVideoList.dataSource;
-                                        }
-                                    }
-                                    if (newUnpinnedVideoLists.length > 0) {
-                                        var oldIndex, oldItem, newIndexesFound = [], oldIndexesFound = [];
-                                        newUnpinnedVideoLists.forEach(function(item, index) {
-                                            for (oldIndex = 0; oldIndex < unpinnedVideoList.length; oldIndex++) {
-                                                if (oldIndexesFound.indexOf(oldIndex) < 0) {
-                                                    oldItem = unpinnedVideoList.getAt(oldIndex);
-                                                    if (item && oldItem && item.key === oldItem.key) {
-                                                        //if (item.userName !== oldItem.userName ||
-                                                        //    item.myselfLabel !== oldItem.myselfLabel ||
-                                                        //    item.mediaStream !== oldItem.mediaStream ||
-                                                        //    item.videoListItemClassName !== oldItem.videoListItemClassName ||
-                                                        //    item.enabled !== oldItem.enabled) {
-                                                            Log.print(Log.l.trace, "changed unpinnedVideoList[" + oldIndex + "].key=" + item.key + " userName=" + item.userName + " myselfLabel=" + item.myselfLabel);
-                                                            unpinnedVideoList.setAt(oldIndex, item);
-                                                        //}
-                                                        oldIndexesFound.push(oldIndex);
-                                                        newIndexesFound.push(index);
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        });
-                                        for (oldIndex = unpinnedVideoList.length - 1; oldIndex >= 0; oldIndex--) {
-                                            if (oldIndexesFound.indexOf(oldIndex) < 0) {
-                                                Log.print(Log.l.trace, "deleted unpinnedVideoList[" + oldIndex + "]");
-                                                unpinnedVideoList.splice(oldIndex, 1);
-                                            }
-                                        }
-                                        newUnpinnedVideoLists.forEach(function(item, index) {
-                                            if (newIndexesFound.indexOf(index) < 0) {
-                                                Log.print(Log.l.trace, "added unpinnedVideoList.key=" + item.key + " userName=" + item.userName + " myselfLabel=" + item.myselfLabel);
-                                                unpinnedVideoList.push(item);
-                                            }
-                                        });
-                                        if (pageControllerName !== "modSessionController" && myselfIsUnpinned) {
-                                            for (oldIndex = unpinnedVideoList.length - 1; oldIndex >= 0; oldIndex--) {
-                                                oldItem = unpinnedVideoList.getAt(oldIndex);
-                                                if (!oldItem.myselfLabel) {
-                                                    Log.print(Log.l.trace, "deleted unpinnedVideoList[" + oldIndex + "]");
-                                                    unpinnedVideoList.splice(oldIndex, 1);
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        unpinnedVideoList.length = 0;
-                                    }
-                                    if ((pageControllerName === "modSessionController" || myselfIsUnpinned) && 
-                                        unpinnedVideoList.length > 0) {
-                                        if (!that.binding.unpinnedVideoListLength) {
-                                            WinJS.Promise.timeout(100).then(function() {
-                                                if (listView && listView.winControl) {
-                                                    listView.winControl.forceLayout();
-                                                }
-                                            });
-                                        }
-                                        that.binding.unpinnedVideoListLength = unpinnedVideoList.length;
-                                    } else {
-                                        that.binding.unpinnedVideoListLength = 0;
-                                    }
-                                }
                             }
                         }
                     }
+                    for (key in that.binding.pinnedVideos) {
+                        if (that.binding.pinnedVideos.hasOwnProperty(key)) {
+                            if (!that.binding.pinnedVideos[key].active) {
+                                delete that.binding.pinnedVideos[key];
+                            }
+                        }
+                    }
+                    videoListDefaults.activeVideoCount = numVideos;
+                    if (unpinnedVideoList && listView && listView.parentElement && listView.winControl) {
+                        if (listView.parentElement.parentElement !== mediaContainer) {
+                            var actionsBar = fragmentElement.querySelector("." + bbbClass.actionsbar);
+                            if (actionsBar) {
+                                mediaContainer.insertBefore(listView.parentElement, actionsBar);
+                                listView.winControl.itemDataSource = unpinnedVideoList.dataSource;
+                            }
+                        }
+                        if (newUnpinnedVideoLists.length > 0) {
+                            var oldIndex, oldItem, newIndexesFound = [], oldIndexesFound = [];
+                            newUnpinnedVideoLists.forEach(function(item, index) {
+                                for (oldIndex = 0; oldIndex < unpinnedVideoList.length; oldIndex++) {
+                                    if (oldIndexesFound.indexOf(oldIndex) < 0) {
+                                        oldItem = unpinnedVideoList.getAt(oldIndex);
+                                        if (item && oldItem && item.key === oldItem.key) {
+                                            //if (item.userName !== oldItem.userName ||
+                                            //    item.myselfLabel !== oldItem.myselfLabel ||
+                                            //    item.mediaStream !== oldItem.mediaStream ||
+                                            //    item.videoListItemClassName !== oldItem.videoListItemClassName ||
+                                            //    item.enabled !== oldItem.enabled) {
+                                                Log.print(Log.l.trace, "changed unpinnedVideoList[" + oldIndex + "].key=" + item.key + " userName=" + item.userName + " myselfLabel=" + item.myselfLabel);
+                                                unpinnedVideoList.setAt(oldIndex, item);
+                                            //}
+                                            oldIndexesFound.push(oldIndex);
+                                            newIndexesFound.push(index);
+                                            break;
+                                        }
+                                    }
+                                }
+                            });
+                            for (oldIndex = unpinnedVideoList.length - 1; oldIndex >= 0; oldIndex--) {
+                                if (oldIndexesFound.indexOf(oldIndex) < 0) {
+                                    Log.print(Log.l.trace, "deleted unpinnedVideoList[" + oldIndex + "]");
+                                    unpinnedVideoList.splice(oldIndex, 1);
+                                }
+                            }
+                            newUnpinnedVideoLists.forEach(function(item, index) {
+                                if (newIndexesFound.indexOf(index) < 0) {
+                                    Log.print(Log.l.trace, "added unpinnedVideoList.key=" + item.key + " userName=" + item.userName + " myselfLabel=" + item.myselfLabel);
+                                    unpinnedVideoList.push(item);
+                                }
+                            });
+                            if (pageControllerName !== "modSessionController" && myselfIsUnpinned) {
+                                for (oldIndex = unpinnedVideoList.length - 1; oldIndex >= 0; oldIndex--) {
+                                    oldItem = unpinnedVideoList.getAt(oldIndex);
+                                    if (!oldItem.myselfLabel) {
+                                        Log.print(Log.l.trace, "deleted unpinnedVideoList[" + oldIndex + "]");
+                                        unpinnedVideoList.splice(oldIndex, 1);
+                                    }
+                                }
+                            }
+                        } else {
+                            unpinnedVideoList.length = 0;
+                        }
+                    }
+                    if ((pageControllerName === "modSessionController" || myselfIsUnpinned) && 
+                        unpinnedVideoList.length > 0) {
+                        if (!that.binding.unpinnedVideoListLength) {
+                            WinJS.Promise.timeout(100).then(function() {
+                                if (listView && listView.winControl) {
+                                    listView.winControl.forceLayout();
+                                }
+                            });
+                        }
+                        that.binding.unpinnedVideoListLength = unpinnedVideoList.length;
+                    } else {
+                        that.binding.unpinnedVideoListLength = 0;
+                    }
+                    if (!checkForInactiveVideoPromise && checkLaterAgain) {
+                        checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
+                            that.checkForInactiveVideo();
+                        });
+                    }
                 });
-                if (!checkForInactiveVideoPromise && checkLaterAgain) {
-                    checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
-                        that.checkForInactiveVideo();
-                    });
-                }
                 Log.ret(Log.l.trace);
                 return ret;
             }
