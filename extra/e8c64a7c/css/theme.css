@@ -10,18 +10,14 @@
 
 @font-face {
     font-family: "Montserrat";
-    src: url(../fonts/BarlowSemiCondensed-SemiBold.woff2) format("woff2"), 
-         url(../fonts/BarlowSemiCondensed-SemiBold.woff) format("woff"), 
-         url(../fonts/Montserrat-Regular.ttf) format("truetype");
+    src: url(../fonts/Montserrat-Regular.ttf) format("truetype");
     font-style: normal;
     font-weight: 400;
 }
 
 @font-face {
     font-family: "Open Sans Condensed";
-    src: url(../fonts/BarlowSemiCondensed-SemiBold.woff2) format("woff2"),
-         url(../fonts/BarlowSemiCondensed-SemiBold.woff) format("woff"),
-         url(../fonts/OpenSansCondensed-Light.ttf) format("truetype");
+    src: url(../fonts/OpenSansCondensed-Light.ttf) format("truetype");
     font-style: normal;
     font-weight: 400;
 }

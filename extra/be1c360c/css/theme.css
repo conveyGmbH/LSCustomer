@@ -10,9 +10,7 @@
 
 @font-face {
     font-family: "Raleway";
-    src: url(../fonts/BarlowSemiCondensed-SemiBold.woff2) format("woff2"), 
-         url(../fonts/BarlowSemiCondensed-SemiBold.woff) format("woff"), 
-         url(../fonts/Raleway-Medium.ttf) format("truetype");
+    src: url(../fonts/Raleway-Medium.ttf) format("truetype");
     font-style: normal;
     font-weight: 500;
 }
