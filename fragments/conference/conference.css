@@ -2120,13 +2120,13 @@ c
 
 #conferenceController #unpinnedVideos.listview .video-item-button .pin::before {
     font-size: 14px;
-    font-family: "Segoe MDL2 Assets", "Symbols" !important;
+    font-family: "Symbols";
     font-weight: normal;
     content: "\E718"
 }
 #conferenceController .videoContainer--rssHk .video-item-button .unpin::before {
     font-size: 14px;
-    font-family: "Segoe MDL2 Assets", "Symbols" !important;
+    font-family: "Symbols";
     font-weight: normal;
     content: "\E77A";
 }
