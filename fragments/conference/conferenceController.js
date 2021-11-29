@@ -2172,12 +2172,15 @@ var __meteor_runtime_config__;
                                     videoListItem = videoListItem.nextSibling;
                                 }
                                 if (options.presentationIsHidden) {
-                                    var gridSize = Math.ceil(Math.sqrt(numVideos));
-                                    var columnCount = gridSize;
-                                    switch (numVideos) {
-                                        case 3:
-                                            columnCount = 3;
-                                            break;
+                                    var sqrtNumVideos = Math.sqrt(numVideos);
+                                    var columnCount = Math.ceil(sqrtNumVideos);
+                                    var aspectRatio = overlayElement.clientWidth / overlayElement.clientHeight;
+                                    if (aspectRatio >= 16 / 9) {
+                                        if (columnCount > sqrtNumVideos && columnCount / numVideos <= 2 / 3) {
+                                            columnCount++;
+                                        }
+                                    } else if (aspectRatio <= 3 / 4) {
+                                        columnCount = Math.floor(sqrtNumVideos);
                                     }
                                     var rowCount = Math.ceil(numVideos / columnCount);
                                     Log.print(Log.l.trace, "numVideos="+ numVideos + " columnCount=" + columnCount + " rowCount=" + rowCount);
