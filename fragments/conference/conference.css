@@ -1136,6 +1136,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     z-index: 10;
 }
 
+#conference.mediaview .videoPlayerWrapper--Z2uHacT .hoverToolbar--1orL8h .fullScreenButton--Z1bf0vj {
+    display: none !important;
+}
+
 #conference.mediaview .videoPlayer--1MGUuy .wrapper--Z17x8k2.dark--Z1Y80Wt {
     left: 0 !important;
     top: 0 !important;

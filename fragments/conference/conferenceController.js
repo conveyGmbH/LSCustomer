@@ -1601,25 +1601,28 @@ var __meteor_runtime_config__;
                             if (videoElement.controls) {
                                 videoElement.controls = false;
                             }
-                            // add fullscreen button on event page!
-                            fullScreenButton = videoPlayer.querySelector("." + bbbClass.fullScreenButton);
-                            if (!fullScreenButton) {
-                                var fullScreenButtonIcon = document.createElement("i");
-                                fullScreenButtonIcon.setAttribute("class", bbbClass.icon + " icon-bbb-fullscreen");
-                                fullScreenButtonIcon.content = "before";
-                                var fullScreenButtonTooltip = document.createElement("span");
-                                fullScreenButtonTooltip.setAttribute("class", bbbClass.label + " " + bbbClass.hideLabel);
-                                fullScreenButtonTooltip.textContent = getResourceText("tooltip.fullscreen");
-                                fullScreenButtonIcon.appendChild(fullScreenButtonTooltip);
-                                fullScreenButton = document.createElement("button");
-                                fullScreenButton.setAttribute("class", bbbClass.button2 + " " + bbbClass.sm + " " + bbbClass.default + " " + bbbClass.button1 + " " + bbbClass.fullScreenButton);
-                                that.registerFullscreenHandlers(videoPlayer, fullScreenButton);
-                                fullScreenButton.appendChild(fullScreenButtonIcon);
-                                var fullScreenButtonWrapper = document.createElement("div");
-                                fullScreenButtonWrapper.setAttribute("class", bbbClass.wrapper1 + " " + bbbClass.dark + " " + bbbClass.top1);
-                                fullScreenButtonWrapper.appendChild(fullScreenButton);
-                                videoPlayer.appendChild(fullScreenButtonWrapper);
-                            }
+                        }
+                        // add fullscreen button
+                        fullScreenButton = videoPlayer.querySelector("." + bbbClass.fullScreenButton);
+                        if (!fullScreenButton) {
+                            var fullScreenButtonIcon = document.createElement("i");
+                            fullScreenButtonIcon.setAttribute("class", bbbClass.icon + " icon-bbb-fullscreen");
+                            fullScreenButtonIcon.content = "before";
+                            var fullScreenButtonTooltip = document.createElement("span");
+                            fullScreenButtonTooltip.setAttribute("class", bbbClass.label + " " + bbbClass.hideLabel);
+                            fullScreenButtonTooltip.textContent = getResourceText("tooltip.fullscreen");
+                            fullScreenButtonIcon.appendChild(fullScreenButtonTooltip);
+                            fullScreenButton = document.createElement("button");
+                            fullScreenButton.setAttribute("class", bbbClass.button2 + " " + bbbClass.sm + " " + bbbClass.default + " " + bbbClass.button1 + " " + bbbClass.fullScreenButton);
+                            fullScreenButton.appendChild(fullScreenButtonIcon);
+                            var fullScreenButtonWrapper = document.createElement("div");
+                            fullScreenButtonWrapper.setAttribute("class", bbbClass.wrapper1 + " " + bbbClass.dark + " " + bbbClass.top1);
+                            fullScreenButtonWrapper.appendChild(fullScreenButton);
+                            videoPlayer.appendChild(fullScreenButtonWrapper);
+                        }
+                        if (fullScreenButton && !fullScreenButton._handlerRegistered) {
+                            that.registerFullscreenHandlers(videoPlayer, fullScreenButton);
+                            fullScreenButton._handlerRegistered = true;
                         }
                         if (videoElement.videoWidth && videoElement.videoHeight) {
                             var aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
@@ -1645,8 +1648,8 @@ var __meteor_runtime_config__;
                                 fullScreenButton.parentElement &&
                                 fullScreenButton.parentElement.style) {
                                 var fullScreenButtonLeft = newLeft + newWidth - fullScreenButton.parentElement.clientWidth;
-                                fullScreenButton.parentElement.style.marginLeft = fullScreenButtonLeft.toString() + "px";
-                                fullScreenButton.parentElement.style.marginTop = newTop.toString() + "px";
+                                fullScreenButton.parentElement.style.marginLeft = (fullScreenButtonLeft + 1).toString() + "px";
+                                fullScreenButton.parentElement.style.marginTop = (newTop + 1).toString() + "px";
                             }
                         } else {
                             Log.print(Log.l.trace, "videoPlayer not ready yet!");
