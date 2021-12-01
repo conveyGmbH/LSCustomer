@@ -33,6 +33,7 @@
     "event.lockPostLabel" : "Beitrag sperren",
     "event.unlockPostLabel" : "Beitrag entsperren",
     "event.lockedMessage"   : "Gesperrter Beitrag",
+	"event.speaker"         : "Speaker",
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 

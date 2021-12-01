@@ -32,6 +32,7 @@
     "event.lockPostLabel" : "Lock message",
     "event.unlockPostLabel" : "Unlock message",
     "event.lockedMessage"   : "Locked message",
+    "event.speaker"         : "Speaker",
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
 

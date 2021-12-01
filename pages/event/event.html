@@ -168,11 +168,11 @@
                        
                         </div>
                     </div>
-                    <div class="color_container4">
+                    <div class="color_container4" data-win-bind="style.display: emptySpeakerList Binding.Converter.toDisplayNone">
                         <div class="content-container speakerblock" data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                             <div class="content-header">
                                 <div class="caption-field">
-                                    <span data-win-bind="">Speaker</span>
+                                    <span data-win-res="{textContent: 'event.speaker'}"></span>
                                 </div>
                             </div>
                             <div id="speakerLines"

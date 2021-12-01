@@ -42,7 +42,8 @@
                 dataDocText: {},
                 link: window.location.href,
                 registerEmail: null,
-                conferenceLink: null
+                conferenceLink: null,
+                emptySpeakerList: false
             }, commandList]);
 
             var onScrollResizePromise = null;
@@ -555,9 +556,12 @@
                         return Event.speakerView.select(function (json) {
                             AppData.setErrorMsg(that.binding);
                             Log.print(Log.l.trace, "speakerView: success!");
-                            if (json && json.d) {
+                            if (json && json.d && json.d.results.length > 0) {
                                 // now always edit!
+                                that.binding.emptySpeakerList = false;
                                 that.setDataSpeaker(json.d.results);
+                            } else {
+                                that.binding.emptySpeakerList = true;
                             }
                         }, function (errorResponse) {
                             AppData.setErrorMsg(that.binding, errorResponse);
@@ -863,7 +867,13 @@
                             if (recordedContentFragment &&
                                 recordedContentFragment.controller &&
                                 recordedContentFragment.controller.binding) {
+                                // option set in portal - eventgensettings
+                                if (that.binding.dataEvent.RecordSession) {
                                 recordedContentFragment.controller.binding.showDelayContent = true;
+                                } else {
+                                    recordedContentFragment.controller.binding.showDelayContent = false;
+                                }
+
                             }
                         });;
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
@@ -877,7 +887,12 @@
                             if (recordedContentFragment &&
                                 recordedContentFragment.controller &&
                                 recordedContentFragment.controller.binding) {
+                                // option set in portal - eventgensettings
+                                if (that.binding.dataEvent.RecordSession) {
+                                    recordedContentFragment.controller.binding.showDelayContent = true;
+                                } else {
                                 recordedContentFragment.controller.binding.showDelayContent = false;
+                            }
                             }
                         });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {

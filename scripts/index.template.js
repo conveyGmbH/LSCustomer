@@ -65,7 +65,8 @@
             Position: "",
             Firmenname: "",
             UserTZ: moment.tz.guess(),
-            privacyPolicyFlag: false
+            privacyPolicyFlag: false,
+            LanguageId: null
         }
     };
 
@@ -80,7 +81,8 @@
         { id: "home", group: -1, disabled: false },
         { id: "events", group: -2, disabled: false },
         { id: "event", group: -2, disabled: false },
-        { id: "modSession", group: -3, disabled: false }
+        { id: "modSession", group: -3, disabled: false },
+	    { id: "speakerSession", group: -4, disabled: false }
     ];
 
 

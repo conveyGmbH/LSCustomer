@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="speakerSession.css" rel="stylesheet" />
+    <script type="text/javascript" src="speakerSessionService.js"></script>
+    <script type="text/javascript" src="speakerSessionController.js"></script>
+    <script type="text/javascript" src="speakerSession.js"></script>
+</head>
+<body class="win-type-body" style="background-color: #ffffff;">
+    <div class="speakerSession fragment">
+        <div id="modSessionController" class="data-container">
+            <div aria-label="Main content" role="main" class="animationElement">
+                <div class="contentarea win-type-body">
+                    <div class="hero-header">
+                        <button id="homeButton" class="win-button"
+                                onclick="AppBar.handleEvent('click', 'clickHome', event)">
+                            <div class="button-tip">
+                                <div class="action-image" id="home"></div>
+                                <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
+                                <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
+                            </div>
+                        </button>
+                        <div class="logOff-container">
+                            <div class="field_line_full">
+                                <div id="logOffButton"
+                                     class="win-link"
+                                     data-win-bind="title: registerEmail"
+                                     onclick="AppBar.handleEvent('click', 'clickLogOffEvent', event)">
+                                    <span data-win-res="{textContent: 'modSession.logOffEvent'}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--sessionID?-->
+                        <div class="closeSession-container">
+                            <div class="field_line_full">
+                                <div id="closeSessionButton"
+                                     class="win-link"
+                                     data-win-bind="title: registerEmail"
+                                     onclick="AppBar.handleEvent('click', 'clickCloseSessionEvent', event)">
+                                    <span data-win-res="{textContent: 'modSession.closeSessionEvent'}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-header">
+                            <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
+                                <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>
+                            </div>
+                            <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ev_text_detail_time_h2 Binding.Converter.toDisplay">
+                                <h2 class="win-h2" data-win-bind="textContent: dataText.ev_text_detail_time_h2"></h2>
+                            </div>
+                            <div class="content-header-line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
+                                <div class="button-element">
+                                    <button id="calenderButton" class="win-button" data-win-bind="style.display: showICS Binding.Converter.toDisplay" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
+                                        <div class="button-tip">
+                                            <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
+                                            <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
+                    <div class="hero-footer">
+
+                    </div>
+                </div>
+                <div class="error-message"
+                     data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
