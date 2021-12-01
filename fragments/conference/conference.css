@@ -2208,3 +2208,36 @@ c
     font-weight: normal;
     content: "\E196";
 }
+#conference.mediaview .videoList--1OC49P.win-dragover .videoListItem--ZP5lQT {
+    transform: scale(0.86);
+    -webkit-transform: scale(0.86);
+}
+#conference.mediaview .videoList--1OC49P .videoListItem--ZP5lQT.win-dragsource,
+#conference.mediaview .videoList--1OC49P .videoListItem--ZP5lQT.win-dragsource {
+    opacity: 0.5;
+    transition: opacity cubic-bezier(0.1, 0.9, 0.2, 1) 167ms, transform cubic-bezier(0.1, 0.9, 0.2, 1) 220ms;
+    -webkit-transition: opacity cubic-bezier(0.1, 0.9, 0.2, 1) 167ms, transform cubic-bezier(0.1, 0.9, 0.2, 1) 220ms;
+}
+#conference.mediaview .videoList--1OC49P.win-dragover .videoListItem--ZP5lQT.win-dragsource {
+    opacity: 0;
+    transition: none;
+    -webkit-transition: none;
+}
+#conference.mediaview .videoList--1OC49P.win-dragover videoListItem--ZP5lQT:hover {
+    outline: none;
+}
+
+#conference.mediaview .videoList--1OC49P.win-dragover .videoListItem--ZP5lQT {
+    transition: translate cubic-bezier(0.1, 0.9, 0.2, 1) 167ms;
+    -webkit-transition: translate cubic-bezier(0.1, 0.9, 0.2, 1) 167ms;
+}
+#conference.mediaview .videoList--1OC49P.win-dragover .win-dragtarget.win-dragbefore {
+    transform: scale(0.86) translate(10%, 0);
+    -webkit-transform: scale(0.86) translate(10%, 0);
+}
+#conference.mediaview .videoList--1OC49P.win-dragover .win-dragtarget.win-dragafter {
+    transform: scale(0.86) translate(-10%, 0);
+    -webkit-transform: scale(0.86) translate(-10%, 0);
+}
+
+

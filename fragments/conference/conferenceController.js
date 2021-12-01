@@ -233,11 +233,11 @@ var __meteor_runtime_config__;
                     ShowVideoList: 1,
                     VideoListPosition: videoListDefaults.right,
                     PresenterMode: presenterModeDefaults.off,
-                    PinnedVideos: "{}"
+                    PinnedVideos: "[]"
                 },
                 showPresentation: true,
                 showVideoList: true,
-                pinnedVideos: {},
+                pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
@@ -312,6 +312,7 @@ var __meteor_runtime_config__;
             }
 
             var unpinnedVideoList = new WinJS.Binding.List([]);
+
             var that = this;
 
             that.dispose = function () {
@@ -2226,6 +2227,7 @@ var __meteor_runtime_config__;
                 var hideInactive = videoListDefaults.hideInactive;
                 var hideMuted = videoListDefaults.hideMuted;
                 var usePinned = videoListDefaults.usePinned;
+                var validPinnedIndexes = [];
                 Log.call(Log.l.trace, "Conference.Controller.", "usePinned=" + usePinned + " hideInactive=" + hideInactive + " hideMuted=" + hideMuted);
                 if (checkForInactiveVideoPromise) {
                     checkForInactiveVideoPromise.cancel();
@@ -2242,33 +2244,51 @@ var __meteor_runtime_config__;
                         if (overlayElement) {
                             videoList = overlayElement.querySelector("." + bbbClass.videoList);
                             if (videoList) {
-                                var i = 0;
                                 var now = Date.now();
                                 var videoListItem = videoList.firstElementChild;
                                 var prevActiveItem = null;
                                 var prevInactiveItem = null;
                                 var prevMutedItem = null;
-                                for (key in that.binding.pinnedVideos) {
-                                    if (that.binding.pinnedVideos.hasOwnProperty(key)) {
-                                        that.binding.pinnedVideos[key].active = false;
+                                if (pageControllerName === "modSessionController") {
+                                    if (!WinJS.Utilities.hasClass(videoList, "win-dragtarget")) {
+                                        WinJS.Utilities.addClass(videoList, "win-dragtarget");
+                                        videoList.ondragenter = that.eventHandlers.onVideoListItemDragEnter.bind(that);
+                                        videoList.ondragleave = that.eventHandlers.onVideoListItemDragLeave.bind(that);
+                                        videoList.ondragover = that.eventHandlers.onVideoListItemDragOver.bind(that);
+                                        videoList.ondrop = that.eventHandlers.onVideoListItemDrop.bind(that);
                                     }
                                 }
+                                var prevPinnedIndex = -1;
                                 while (videoListItem) {
-                                    var pinned = null;
+                                    var pinnedIndex = -1;
                                     key = getInternalInstanceKey(videoListItem) || "0";
-                                    Log.print(Log.l.trace, "key=" + key);
+                                    var validPinnedIndex = that.binding.pinnedVideos.indexOf(key);
+                                    if (validPinnedIndex >= 0) {
+                                        validPinnedIndexes.push(validPinnedIndex);
+                                    }
                                     if (usePinned) {
                                         if (key) {
-                                            pinned = that.binding.pinnedVideos[key];
+                                            pinnedIndex = validPinnedIndex;
                                         }
-                                        if (pinned) {
-                                            pinned.active = true;
+                                        Log.print(Log.l.trace, "key=" + key + " pinnedIndex=" + pinnedIndex);
+                                        if (pinnedIndex >= 0) {
                                             if (!WinJS.Utilities.hasClass(videoListItem, "pinned-video")) {
                                                 WinJS.Utilities.addClass(videoListItem, "pinned-video");
+                                                if (pageControllerName === "modSessionController") {
+                                                    videoListItem.ondragstart = that.eventHandlers.onVideoListItemDragStart.bind(that);
+                                                    videoListItem.draggable = true;
+                                                    videoListItem.droppable = true; 
+                                                }
                                             }
                                         } else {
                                             if (WinJS.Utilities.hasClass(videoListItem, "pinned-video")) {
                                                 WinJS.Utilities.removeClass(videoListItem, "pinned-video");
+                                                if (videoListItem.draggable) {
+                                                    videoListItem.draggable = false;
+                                                }
+                                                if (videoListItem.droppable) {
+                                                    videoListItem.droppable = false;
+                                                }
                                             }
                                         }
                                     }
@@ -2289,7 +2309,7 @@ var __meteor_runtime_config__;
                                             muted = content.querySelector("." + bbbClass.muted) || content.querySelector(".icon-bbb-listen");
                                         }
                                         var inactivity = now - videoListDefaults.contentActivity[key];
-                                        if (usePinned && !pinned && key) {
+                                        if (usePinned && pinnedIndex < 0 && key) {
                                             var userName = "";
                                             var isMyself = WinJS.Utilities.hasClass(videoListItem, "selfie-video");
                                             var userNameElement = videoListItem.querySelector("." + bbbClass.userName + ", ." + bbbClass.dropdownTrigger);
@@ -2314,15 +2334,19 @@ var __meteor_runtime_config__;
                                         }
                                         if ((hideInactive || hideMuted) && muted ||
                                             hideInactive && inactivity > videoListDefaults.inactivityDelay ||
-                                            usePinned && !pinned) {
+                                            usePinned && pinnedIndex < 0) {
                                             if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
                                                 WinJS.Utilities.addClass(videoListItem, "inactive-video-hidden");
                                             }
                                         } else {
                                             if (hideInactive || hideMuted || usePinned) {
                                                 if (prevActiveItem) {
-                                                    if (prevActiveItem.nextSibling && videoListItem !== prevActiveItem.nextSibling) {
-                                                        videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                    if (prevPinnedIndex < 0 || pinnedIndex < 0 || prevPinnedIndex <= pinnedIndex) {
+                                                        if (prevActiveItem.nextSibling && videoListItem !== prevActiveItem.nextSibling) {
+                                                            videoList.insertBefore(videoListItem, prevActiveItem.nextSibling);
+                                                        }
+                                                    } else {
+                                                        videoList.insertBefore(videoListItem, prevActiveItem);
                                                     }
                                                 } else {
                                                     if (videoListItem !== videoList.firstElementChild) {
@@ -2330,6 +2354,7 @@ var __meteor_runtime_config__;
                                                     }
                                                 }
                                                 prevActiveItem = videoListItem;
+                                                prevPinnedIndex = pinnedIndex;
                                             } else {
                                                 if (muted) {
                                                     if (prevMutedItem) {
@@ -2381,35 +2406,36 @@ var __meteor_runtime_config__;
                                             if (WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
                                                 WinJS.Utilities.removeClass(videoListItem, "inactive-video-hidden");
                                             }
-                                            var videoContainer = videoListItem.querySelector("." + bbbClass.videoContainer);
-                                            if (videoContainer) {
-                                                var unpinButton = videoContainer.querySelector(".video-item-button");
-                                                if (!unpinButton) {
-                                                    unpinButton = document.createElement("button");
-                                                    WinJS.Utilities.addClass(unpinButton, "win-button");
-                                                    WinJS.Utilities.addClass(unpinButton, "video-item-button");
-                                                    unpinButton.onclick = function(event) {
-                                                        AppBar.handleEvent('click', 'clickUnpinVideoButton', event);
+                                            if (videoListDefaults.usePinned) {
+                                                var videoContainer = videoListItem.querySelector("." + bbbClass.videoContainer);
+                                                if (videoContainer) {
+                                                    var unpinButton = videoContainer.querySelector(".video-item-button");
+                                                    if (!unpinButton) {
+                                                        unpinButton = document.createElement("button");
+                                                        WinJS.Utilities.addClass(unpinButton, "win-button");
+                                                        WinJS.Utilities.addClass(unpinButton, "video-item-button");
+                                                        unpinButton.onclick = function(event) {
+                                                            AppBar.handleEvent('click', 'clickUnpinVideoButton', event);
+                                                        }
+                                                        var span = document.createElement("span");
+                                                        WinJS.Utilities.addClass(span, "unpin");
+                                                        unpinButton.appendChild(span);
+                                                        videoContainer.appendChild(unpinButton);
                                                     }
-                                                    var span = document.createElement("span");
-                                                    WinJS.Utilities.addClass(span, "unpin");
-                                                    unpinButton.appendChild(span);
-                                                    videoContainer.appendChild(unpinButton);
                                                 }
                                             }
                                             numVideos++;
                                         }
-                                        i++;
                                     }
                                     videoListItem = videoListItem.nextElementSibling;
                                 }
                             }
                         }
                     }
-                    for (key in that.binding.pinnedVideos) {
-                        if (that.binding.pinnedVideos.hasOwnProperty(key)) {
-                            if (!that.binding.pinnedVideos[key].active) {
-                                delete that.binding.pinnedVideos[key];
+                    if (that.binding.pinnedVideos && that.binding.pinnedVideos.length > 0) {
+                        for (var i = that.binding.pinnedVideos.length - 1; i >= 0; i--) {
+                            if (validPinnedIndexes.indexOf(i) < 0) {
+                                that.binding.pinnedVideos.splice(i, 1);
                             }
                         }
                     }
@@ -2560,18 +2586,12 @@ var __meteor_runtime_config__;
                         that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
                         that.binding.showVideoList = !!that.binding.dataSessionStatus.ShowVideoList;
                         try {
-                            var pinnedVideos = JSON.parse(that.binding.dataSessionStatus.PinnedVideos);
-                            that.binding.pinnedVideos = {};
-                            for (var key in pinnedVideos) {
-                                if (pinnedVideos.hasOwnProperty(key) && key !== "_backingData" && key !== "backingData") {
-                                    that.binding.pinnedVideos[key] = pinnedVideos[key];
-                                }
-                            }
+                            that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus.PinnedVideos);
                         } catch (ex) {
                             Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
                         }
                         if ( !that.binding.pinnedVideos ) {
-                            that.binding.pinnedVideos = {};
+                            that.binding.pinnedVideos = [];
                         }
                     }
                     sessionStatusIsSet = false;
@@ -3055,6 +3075,150 @@ var __meteor_runtime_config__;
             }
             that.setPolling = setPolling;
 
+            var indexFromPinnedVideosItem = function(videoListItem) {
+                var index = -1;
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (videoListItem) {
+                    var key = getInternalInstanceKey(videoListItem) || "0";
+                    Log.print(Log.l.trace, "key=" + key);
+                    index = that.binding.pinnedVideos.indexOf(key);
+                }
+                Log.ret(Log.l.trace, index);
+                return index;
+            }
+            that.indexFromPinnedVideosItem = indexFromPinnedVideosItem;
+
+            videoListDefaults._clearDragBetween = function(insertPoint) {
+                if (insertPoint && insertPoint.index >= 0) {
+                    if (insertPoint.insertAfterItem) {
+                        if (insertPoint.insertAfterItem.nextElementSibling &&
+                            WinJS.Utilities.hasClass(insertPoint.insertAfterItem.nextElementSibling, "win-dragtarget")) {
+                            WinJS.Utilities.removeClass(insertPoint.insertAfterItem.nextElementSibling, "win-dragbefore");
+                        }
+                        if (WinJS.Utilities.hasClass(insertPoint.insertAfterItem, "win-dragtarget")) {
+                            WinJS.Utilities.removeClass(insertPoint.insertAfterItem, "win-dragafter");
+                        }
+                    } else if (videoListDefaults._element &&
+                        videoListDefaults._element.firstElementChild &&
+                        WinJS.Utilities.hasClass(videoListDefaults._element.firstElementChild, "win-dragtarget")) {
+                        WinJS.Utilities.removeClass(videoListDefaults._element.firstElementChild, "win-dragbefore");
+                    }
+                }
+            }
+
+            videoListDefaults._clearDragProperties = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                videoListDefaults._clearDragBetween(videoListDefaults._lastInsertPoint);
+                if (videoListDefaults._addedDragOverClass) {
+                    videoListDefaults._addedDragOverClass = false;
+                    if (videoListDefaults._element) {
+                        WinJS.Utilities.removeClass(videoListDefaults._element, "win-dragover");
+                    }
+                }
+                var dragSourceElement = videoListDefaults._dragSourceElement;
+                if (dragSourceElement) {
+                    WinJS.Utilities.removeClass(dragSourceElement, "win-dragsource");
+                    dragSourceElement.ondragend = null;
+                }
+                var videoListItem = videoListDefaults._element &&
+                    videoListDefaults._element.firstElementChild;
+                while (videoListItem) {
+                    if (WinJS.Utilities.hasClass(videoListItem, "win-dragtarget")) {
+                        WinJS.Utilities.removeClass(videoListItem, "win-dragtarget");
+                    }
+                    videoListItem = videoListItem.nextElementSibling;
+                }
+                videoListDefaults._pressedEntity = { type: WinJS.UI.ObjectType.item, index: -1 };
+                videoListDefaults._dragging = false;
+                videoListDefaults._dragDataTransfer = null;
+                videoListDefaults._lastInsertPoint = null;
+                videoListDefaults._lastEnteredElement = null;
+                videoListDefaults._dragBetweenDisabled = false;
+                videoListDefaults._dragSourceElement = null;
+                videoListDefaults._element = null;
+                Log.ret(Log.l.trace);
+            }
+
+            videoListDefaults._handleExitEvent = function () {
+                if (videoListDefaults._exitEventTimer) {
+                    window.clearTimeout(videoListDefaults._exitEventTimer);
+                    videoListDefaults._exitEventTimer = 0;
+                }
+                videoListDefaults._exitEventTimer = window.setTimeout(function () {
+                    if (that._disposed) { return; }
+                    if (videoListDefaults._pointerLeftRegion) {
+                        videoListDefaults._clearDragBetween(videoListDefaults._lastInsertPoint);
+                        if (videoListDefaults._addedDragOverClass) {
+                            videoListDefaults._addedDragOverClass = false;
+                            if (videoListDefaults._element) {
+                                WinJS.Utilities.removeClass(videoListDefaults._element, "win-dragover");
+                            }
+                        }
+                        videoListDefaults._pointerLeftRegion = false;
+                        videoListDefaults._lastInsertPoint = null;
+                        videoListDefaults._dragBetweenDisabled = false;
+                        videoListDefaults._exitEventTimer = 0;
+                    }
+                }, 40);
+            }
+
+            videoListDefaults._getEventPositionInElementSpace = function (element, eventObject) {
+                var elementRect = { left: 0, top: 0 };
+                try {
+                    elementRect = element.getBoundingClientRect();
+                }
+                catch (err) { }
+
+                var computedStyle = WinJS.Utilities._getComputedStyle(element, null),
+                    paddingLeft = parseInt(computedStyle["paddingLeft"]),
+                    paddingTop = parseInt(computedStyle["paddingTop"]),
+                    borderLeft = parseInt(computedStyle["borderLeftWidth"]),
+                    borderTop = parseInt(computedStyle["borderTopWidth"]),
+                    clientX = eventObject.clientX,
+                    clientY = eventObject.clientY;
+
+                var position = {
+                    x: +clientX === clientX ? (clientX - elementRect.left - paddingLeft - borderLeft) : 0,
+                    y: +clientY === clientY ? (clientY - elementRect.top - paddingTop - borderTop) : 0
+                };
+
+                return position;
+            }
+
+            videoListDefaults.hitTest = function (x, y) {
+                if (videoListDefaults._element) {
+                    var videoListItem = videoListDefaults._element.firstElementChild;
+                    while (videoListItem) {
+                        if (WinJS.Utilities.hasClass(videoListItem, "win-dragtarget")) {
+                            var rect = videoListItem.getBoundingClientRect();
+                            if (x >= rect.left && x < rect.right &&
+                                y >= rect.top && y < rect.bottom) {
+                                var index = indexFromPinnedVideosItem(videoListItem);
+                                var insertAfterIndex, insertAfterItem;
+                                if (x >= (rect.right - rect.left) / 2) {
+                                    insertAfterIndex = index;
+                                    insertAfterItem = videoListItem;
+                                } else if (videoListItem.previousElementSibling) {
+                                    insertAfterIndex = indexFromPinnedVideosItem(videoListItem.previousElementSibling);
+                                    insertAfterItem = videoListItem.previousElementSibling;
+                                } else {
+                                    insertAfterIndex = -1;
+                                    insertAfterItem = null;
+                                }
+                                return {
+                                    index: index,
+                                    insertAfterIndex: insertAfterIndex,
+                                    item: videoListItem,
+                                    insertAfterItem: insertAfterItem
+                                }
+                            }
+                        }
+                        videoListItem = videoListItem.nextElementSibling;
+                    }
+                }
+                return null;
+            }
+
             this.eventHandlers = {
                 loadSessionStatus: function() {
                     Log.call(Log.l.info, "Conference.Controller.");
@@ -3170,7 +3334,7 @@ var __meteor_runtime_config__;
                                 }
                             }
                         } else {
-                            WinJS.Utilities.addClass(presenterButtonContainer, "container-collapsed")
+                            WinJS.Utilities.addClass(presenterButtonContainer, "container-collapsed");
                             if (containerCloseIcon) {
                                 if (WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-close")) {
                                     WinJS.Utilities.removeClass(containerCloseIcon, "icon-bbb-close");
@@ -3232,25 +3396,20 @@ var __meteor_runtime_config__;
                             var key = targetParent.name;
                             if (key) {
                                 if ( !that.binding.pinnedVideos ) {
-                                    that.binding.pinnedVideos = {};
+                                    that.binding.pinnedVideos = [];
                                 }
-                                that.binding.pinnedVideos[key] = {
-                                    index: that.binding.unpinnedVideoListLength
-                                };
+                                if (that.binding.pinnedVideos.indexOf(key) < 0) {
+                                    that.binding.pinnedVideos.push(key);
+                                }
                                 var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
-                                dataSessionStatus.PinnedVideos = JSON.stringify(copyByValue(that.binding.pinnedVideos));
+                                dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
                                 that.saveSessionStatus(dataSessionStatus);
                                 if (!checkForInactiveVideoPromise) {
                                     checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
                                         that.checkForInactiveVideo();
                                     });
                                 }
-                                if (that.binding.dataSessionStatus.ShowVideoList) {
-                                    that.submitCommandMessage(magicStart + "showVideoList" + magicStop, event);
-                                }
-                                if (that.binding.dataSessionStatus.ShowVideoList) {
-                                    that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
-                                }
+                                that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
                             }
                         }
                     }
@@ -3264,7 +3423,10 @@ var __meteor_runtime_config__;
                         var videoListItem = event.currentTarget.parentElement.parentElement.parentElement;
                         if (videoListItem) {
                             var key = getInternalInstanceKey(videoListItem) || "0";
-                            delete that.binding.pinnedVideos[key];
+                            var index = that.binding.pinnedVideos.indexOf(key);
+                            if (index >= 0) {
+                                that.binding.pinnedVideos.splice(index, 1);
+                            }
                             var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
                             dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
                             that.saveSessionStatus(dataSessionStatus);
@@ -3273,9 +3435,7 @@ var __meteor_runtime_config__;
                                     that.checkForInactiveVideo();
                                 });
                             }
-                            if (that.binding.dataSessionStatus.ShowVideoList) {
-                                that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
-                            }
+                            that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
                         }
                     }
                     Log.ret(Log.l.info);
@@ -3617,8 +3777,8 @@ var __meteor_runtime_config__;
                     });
                     Log.ret(Log.l.info);
                 },
-                onVideoListLoadingStateChanged: function (eventInfo) {
-                    Log.call(Log.l.info, "Conference.Controller.");
+                onListViewLoadingStateChanged: function (eventInfo) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
                     if (listView && listView.winControl) {
                         Log.print(Log.l.trace, "loadingState=" + listView.winControl.loadingState);
                         // single list selection
@@ -3644,6 +3804,177 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
+                    Log.ret(Log.l.trace);
+                },
+                onVideoListItemDragStart: function(eventObject) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (eventObject) {
+                        var sourceElement = eventObject.target;
+                        if (sourceElement && sourceElement.parentElement) {
+                            videoListDefaults._pressedEntity = { type: WinJS.UI.ObjectType.item, index: indexFromPinnedVideosItem(eventObject.target) };
+                            if (videoListDefaults._pressedEntity.index !== -1) {
+                                videoListDefaults._dragging = true;
+                                videoListDefaults._dragSourceElement = sourceElement;
+                                videoListDefaults._dragDataTransfer = eventObject.dataTransfer;
+                                videoListDefaults._pressedPosition = WinJS.Utilities._getCursorPos(eventObject);
+                                videoListDefaults._lastEnteredElement = sourceElement;
+                                videoListDefaults._element = sourceElement.parentElement;
+
+                                // Firefox requires setData to be called on the dataTransfer object in order for DnD to continue.
+                                // Firefox also has an issue rendering the item's itemBox+element, so we need to use setDragImage, using the item's container, to get it to render.
+                                eventObject.dataTransfer.setData("text", "");
+                                if (eventObject.dataTransfer.setDragImage) {
+                                    var rect = sourceElement.getBoundingClientRect();
+                                    eventObject.dataTransfer.setDragImage(sourceElement, eventObject.clientX - rect.left, eventObject.clientY - rect.top);
+
+                                    sourceElement.ondragend = that.eventHandlers.onVideoListItemDragEnd.bind(that);
+
+                                    WinJS.Promise.timeout(0).then(function() {
+                                        if (videoListDefaults._dragging && 
+                                            videoListDefaults._element && 
+                                            videoListDefaults._dragSourceElement) {
+                                            videoListDefaults._addedDragOverClass = true;
+                                            WinJS.Utilities.addClass(videoListDefaults._element, "win-dragover");
+                                            WinJS.Utilities.addClass(videoListDefaults._dragSourceElement, "win-dragsource");
+                                            var videoListItem = videoListDefaults._element.firstElementChild;
+                                            while (videoListItem) {
+                                                if (videoListItem.draggable && 
+                                                    videoListItem !== videoListDefaults._dragSourceElement) {
+                                                    WinJS.Utilities.addClass(videoListItem, "win-dragtarget");
+                                                }
+                                                videoListItem = videoListItem.nextElementSibling;
+                                            }
+                                        }
+                                    });
+                                }
+                            } else {
+                                eventObject.preventDefault();
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.trace);
+                },
+                onVideoListItemDragEnter: function(eventObject) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    videoListDefaults._lastEnteredElement = eventObject.target;
+                    if (videoListDefaults._exitEventTimer) {
+                        window.clearTimeout(videoListDefaults._exitEventTimer);
+                        videoListDefaults._exitEventTimer = 0;
+                    }
+                    if (videoListDefaults._dragging) {
+                        eventObject.preventDefault();
+                        if (!videoListDefaults._addedDragOverClass) {
+                            videoListDefaults._addedDragOverClass = true;
+                            WinJS.Utilities.addClass(videoListDefaults._element, "win-dragover");
+                        }
+                    }
+                    videoListDefaults._pointerLeftRegion = false;
+                    Log.ret(Log.l.trace);
+                },
+                onVideoListItemDragOver: function (eventObject) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    videoListDefaults._pointerLeftRegion = false;
+
+                    var insertPoint = videoListDefaults.hitTest(eventObject.clientX, eventObject.clientY);
+                    if (insertPoint && insertPoint.index >= 0) {
+                        if (!videoListDefaults._lastInsertPoint ||
+                            videoListDefaults._lastInsertPoint.insertAfterIndex !== insertPoint.insertAfterIndex ||
+                            videoListDefaults._lastInsertPoint.index !== insertPoint.index) {
+                            videoListDefaults._clearDragBetween(videoListDefaults._lastInsertPoint);
+                            Log.print(Log.l.trace, "insertAfterIndex=" + insertPoint.insertAfterIndex + " index=" + insertPoint.index);
+                            if (insertPoint.insertAfterItem) {
+                                if (insertPoint.insertAfterItem.nextElementSibling &&
+                                    WinJS.Utilities.hasClass(insertPoint.insertAfterItem.nextElementSibling, "win-dragtarget")) {
+                                    WinJS.Utilities.addClass(insertPoint.insertAfterItem.nextElementSibling, "win-dragbefore");
+                                }
+                                if (WinJS.Utilities.hasClass(insertPoint.insertAfterItem, "win-dragtarget")) {
+                                    WinJS.Utilities.addClass(insertPoint.insertAfterItem, "win-dragafter");
+                                }
+                            } else if (videoListDefaults._element &&
+                                videoListDefaults._element.firstElementChild &&
+                                WinJS.Utilities.hasClass(videoListDefaults._element.firstElementChild, "win-dragtarget")) {
+                                WinJS.Utilities.addClass(videoListDefaults._element.firstElementChild, "win-dragbefore");
+                            }
+                            videoListDefaults._lastInsertPoint = insertPoint;
+                        }
+                    }
+                    Log.ret(Log.l.trace);
+                },
+                onVideoListItemDragLeave: function(eventObject) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (eventObject.target === videoListDefaults._lastEnteredElement) {
+                        videoListDefaults._pointerLeftRegion = true;
+                        videoListDefaults._handleExitEvent();
+                    }
+                    Log.ret(Log.l.trace);
+                },
+                onVideoListItemDragEnd: function() {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    videoListDefaults._clearDragProperties();
+                    Log.ret(Log.l.trace);
+                },
+                onVideoListItemDrop: function(eventObject) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (videoListDefaults._lastInsertPoint &&
+                        videoListDefaults._pressedEntity &&
+                        videoListDefaults._pressedEntity.index >= 0) {
+                        /*if (videoListDefaults._dragSourceElement &&
+                            videoListDefaults._element) {
+                            if (videoListDefaults._lastInsertPoint.insertAfterItem) {
+                                if (videoListDefaults._lastInsertPoint.insertAfterItem.nextElementSibling) {
+                                    if (videoListDefaults._dragSourceElement.nextElementSibling !==
+                                        videoListDefaults._lastInsertPoint.insertAfterItem.nextElementSibling) {
+                                        videoListDefaults._element.insertBefore(videoListDefaults._dragSourceElement,
+                                            videoListDefaults._lastInsertPoint.insertAfterItem.nextElementSibling);
+                                    }
+                                } else {
+                                    if (videoListDefaults._dragSourceElement.previousElementSibling !==
+                                        videoListDefaults._lastInsertPoint.insertAfterItem) {
+                                        videoListDefaults._element.appendChild(videoListDefaults._dragSourceElement);
+                                    }
+                                }
+                            } else {
+                                if (videoListDefaults._dragSourceElement !== videoListDefaults._element.firstElementChild) {
+                                    videoListDefaults._element.insertBefore(videoListDefaults._dragSourceElement,
+                                        videoListDefaults._element.firstElementChild);
+                                }
+                            }
+                        }*/
+                        var index = videoListDefaults._pressedEntity.index;
+                        var insertAfterIndex = videoListDefaults._lastInsertPoint.insertAfterIndex;
+                        if (index >= 0 && index !== insertAfterIndex) {
+                            var pinnedVideos;
+                            if (insertAfterIndex >= 0) {
+                                if (index < insertAfterIndex) {
+                                    pinnedVideos = that.binding.pinnedVideos.slice(0, index)
+                                        .concat(that.binding.pinnedVideos.slice(index + 1, insertAfterIndex + 1))
+                                        .concat([that.binding.pinnedVideos[index]])
+                                        .concat(that.binding.pinnedVideos.slice(insertAfterIndex + 1));
+                                } else {
+                                    pinnedVideos = that.binding.pinnedVideos.slice(0, insertAfterIndex + 1)
+                                        .concat([that.binding.pinnedVideos[index]])
+                                        .concat(that.binding.pinnedVideos.slice(insertAfterIndex + 1, index))
+                                        .concat(that.binding.pinnedVideos.slice(index + 1));
+                                }
+                            } else {
+                                pinnedVideos = [that.binding.pinnedVideos[index]]
+                                    .concat(that.binding.pinnedVideos.slice(0, index))
+                                    .concat(that.binding.pinnedVideos.slice(index + 1));
+                            }
+                            that.binding.pinnedVideos = pinnedVideos;
+                            var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                            dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                            that.saveSessionStatus(dataSessionStatus);
+                            if (!checkForInactiveVideoPromise) {
+                                checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
+                                    that.checkForInactiveVideo();
+                                });
+                            }
+                            that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
+                        }
+                    }
+                    videoListDefaults._clearDragProperties();
+                    eventObject.preventDefault();
                     Log.ret(Log.l.trace);
                 }
             }
@@ -4399,7 +4730,7 @@ var __meteor_runtime_config__;
                 });
             }
             if (listView) {
-                this.addRemovableEventListener(listView, "loadingstatechanged", this.eventHandlers.onVideoListLoadingStateChanged.bind(this));
+                this.addRemovableEventListener(listView, "loadingstatechanged", this.eventHandlers.onListViewLoadingStateChanged.bind(this));
             }
 
             that.processAll().then(function () {
@@ -4417,7 +4748,7 @@ var __meteor_runtime_config__;
                         that.adjustContentPositions();
                     });
                 }
-                return WinJS.Promise.timeout(250);;
+                return WinJS.Promise.timeout(250);
             }).then(function () {
                 return that.sendResize(2000);
             });
