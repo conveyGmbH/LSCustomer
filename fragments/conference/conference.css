@@ -1502,7 +1502,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     grid-template-rows: repeat(8, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-top .row-count-1 video {
+#conference.mediaview .presentation-is-hidden .video-overlay-top .row-count-1 .content--Z1CkMQ:not(.fullscreen--Z2dWit1) video {
     object-fit: cover;
 }
 

@@ -59,6 +59,7 @@ var __meteor_runtime_config__;
         pollingAnswers: "pollingAnswers--2tjBC8",
         pollingContainer: "pollingContainer--1xRnAH",
         pollingTitle: "pollingTitle--2ryYAdpollingTitle--2ryYAd",
+        presentationFullscreen: "presentationFullscreen--1FlFqJ",
         primary: "primary--1IbqAO",
         right: "right--DUFDc",
         screenshareContainer: "screenshareContainer--1GSmqo",
@@ -1517,6 +1518,43 @@ var __meteor_runtime_config__;
             }
             that.adjustVideoPosition = adjustVideoPosition;
 
+            var registerFullscreenHandlers = function(element, fullScreenButton) {
+                if (element && fullScreenButton) {
+                    fullScreenButton.onclick = function (event) {
+                        if (element && document.fullscreenEnabled) {
+                            // detect fullscreen state
+                            if (element.parentElement.querySelector(':fullscreen') === element) {
+                                document.exitFullscreen();
+                            } else {
+                                element.requestFullscreen();
+                            }
+                        }
+                    }
+                    that.addRemovableEventListener(document, "fullscreenchange", function () {
+                        var fullScreenButtonIcon = fullScreenButton.querySelector("i");
+                        if (element && element.firstElementChild &&
+                            fullScreenButtonIcon && fullScreenButtonIcon.firstElementChild) {
+                            if (document.fullscreenElement === element) {
+                                if (WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-fullscreen")) {
+                                    WinJS.Utilities.removeClass(fullScreenButtonIcon, "icon-bbb-fullscreen");
+                                }
+                                if (!WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen")) {
+                                    WinJS.Utilities.addClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen")) {
+                                    WinJS.Utilities.removeClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen");
+                                }
+                                if (!WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-fullscreen")) {
+                                    WinJS.Utilities.addClass(fullScreenButtonIcon, "icon-bbb-fullscreen");
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+            that.registerFullscreenHandlers = registerFullscreenHandlers;
+
             var lastDeviceListTime = 0;
             var adjustContentPositions = function () {
                 var actionsBarRight = null;
@@ -1575,36 +1613,7 @@ var __meteor_runtime_config__;
                                 fullScreenButtonIcon.appendChild(fullScreenButtonTooltip);
                                 fullScreenButton = document.createElement("button");
                                 fullScreenButton.setAttribute("class", bbbClass.button2 + " " + bbbClass.sm + " " + bbbClass.default + " " + bbbClass.button1 + " " + bbbClass.fullScreenButton);
-                                fullScreenButton.onclick = function (event) {
-                                    if (videoPlayer && document.fullscreenEnabled) {
-                                        // detect fullscreen state
-                                        if (videoPlayer.parentElement.querySelector(':fullscreen') === videoPlayer) {
-                                            document.exitFullscreen();
-                                        } else {
-                                            videoPlayer.requestFullscreen();
-                                        }
-                                    }
-                                }
-                                that.addRemovableEventListener(document, "fullscreenchange", function () {
-                                    if (videoPlayer && videoPlayer.firstElementChild &&
-                                        fullScreenButtonIcon && fullScreenButtonIcon.firstElementChild) {
-                                        if (document.fullscreenElement === videoPlayer) {
-                                            if (WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-fullscreen")) {
-                                                WinJS.Utilities.removeClass(fullScreenButtonIcon, "icon-bbb-fullscreen");
-                                            }
-                                            if (!WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen")) {
-                                                WinJS.Utilities.addClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen");
-                                            }
-                                        } else {
-                                            if (WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen")) {
-                                                WinJS.Utilities.removeClass(fullScreenButtonIcon, "icon-bbb-exit_fullscreen");
-                                            }
-                                            if (!WinJS.Utilities.hasClass(fullScreenButtonIcon, "icon-bbb-fullscreen")) {
-                                                WinJS.Utilities.addClass(fullScreenButtonIcon, "icon-bbb-fullscreen");
-                                            }
-                                        }
-                                    }
-                                });
+                                that.registerFullscreenHandlers(videoPlayer, fullScreenButton);
                                 fullScreenButton.appendChild(fullScreenButtonIcon);
                                 var fullScreenButtonWrapper = document.createElement("div");
                                 fullScreenButtonWrapper.setAttribute("class", bbbClass.wrapper1 + " " + bbbClass.dark + " " + bbbClass.top1);
@@ -1660,7 +1669,11 @@ var __meteor_runtime_config__;
                             that.onWheelSvg = onWheelSvg;
                             that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
                         }
-
+                        var presentationFullscreen = svgContainer.querySelector("." + bbbClass.presentationFullscreen);
+                        if (presentationFullscreen && !presentationFullscreen._handlerRegistered) {
+                            that.registerFullscreenHandlers(svgContainer, presentationFullscreen);
+                            presentationFullscreen._handlerRegistered = true;
+                        }
                     }
                     var panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                     if (panelWrapper) {
@@ -2423,6 +2436,11 @@ var __meteor_runtime_config__;
                                                         videoContainer.appendChild(unpinButton);
                                                     }
                                                 }
+                                            }
+                                            var fullScreenButton = videoListItem.querySelector("." + bbbClass.fullScreenButton);
+                                            if (fullScreenButton && !fullScreenButton._handlerRegistered) {
+                                                that.registerFullscreenHandlers(videoListItem.firstElementChild, fullScreenButton);
+                                                fullScreenButton._handlerRegistered = true;
                                             }
                                             numVideos++;
                                         }
