@@ -2184,11 +2184,16 @@ c
     min-width: 24px;
     min-height: 24px;
     padding: 4px 0 0 0;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
     color: var(--color-off-white);
     border-radius: 0;
     border: none;
 }
+
+.dark--Z1Y80Wt {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
 #conferenceController .videoContainer--rssHk .video-item-button {
     right: 28px;
 }
