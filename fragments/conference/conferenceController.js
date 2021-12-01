@@ -1660,6 +1660,11 @@ var __meteor_runtime_config__;
                     var screenshareContainer = fragmentElement.querySelector("." + bbbClass.screenshareContainer);
                     if (screenshareContainer) {
                         screenShareOpened = true;
+                        var screenShareFullscreen = screenshareContainer.querySelector("." + bbbClass.fullScreenButton);
+                        if (screenShareFullscreen && !screenShareFullscreen._handlerRegistered) {
+                            that.registerFullscreenHandlers(screenshareContainer, screenShareFullscreen);
+                            screenShareFullscreen._handlerRegistered = true;
+                        }
                     }
                     var svgContainer = fragmentElement.querySelector("." + bbbClass.svgContainer);
                     if (svgContainer && svgContainer.firstElementChild) {
