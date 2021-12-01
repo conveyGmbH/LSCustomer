@@ -1648,7 +1648,7 @@ var __meteor_runtime_config__;
                                 fullScreenButton.parentElement &&
                                 fullScreenButton.parentElement.style) {
                                 var fullScreenButtonLeft = newLeft + newWidth - fullScreenButton.parentElement.clientWidth;
-                                fullScreenButton.parentElement.style.marginLeft = (fullScreenButtonLeft + 1).toString() + "px";
+                                fullScreenButton.parentElement.style.marginLeft = (fullScreenButtonLeft - 1).toString() + "px";
                                 fullScreenButton.parentElement.style.marginTop = (newTop + 1).toString() + "px";
                             }
                         } else {
