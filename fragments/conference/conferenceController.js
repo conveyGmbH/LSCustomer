@@ -2445,6 +2445,9 @@ var __meteor_runtime_config__;
                             var actionsBar = fragmentElement.querySelector("." + bbbClass.actionsbar);
                             if (actionsBar) {
                                 mediaContainer.insertBefore(listView.parentElement, actionsBar);
+                                if (pageControllerName === "modSessionController") {
+                                    listView.winControl.itemsReorderable = true;
+                                }
                                 listView.winControl.itemDataSource = unpinnedVideoList.dataSource;
                             }
                         }
