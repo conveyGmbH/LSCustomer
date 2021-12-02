@@ -747,6 +747,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     max-height: calc(100% - 100px);
     margin: 40px 10px 60px 10px !important;
 }
+.speakerSession #conference.mediaview .media--Z1xJW08,
 .event #conference.mediaview .media--Z1xJW08 {
     max-height: calc(100% - 55px);
     margin: 20px 10px 35px 10px !important;
@@ -791,6 +792,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     align-items: center;
     flex: 1
 }
+.speakerSession #conference.mediaview .actionsbar--Z1ant6U .left--Z1rLKlO,
+.speakerSession #conference.mediaview .actionsbar--Z1ant6U .right--DUFDc,
 .event #conference.mediaview .actionsbar--Z1ant6U .left--Z1rLKlO,
 .event #conference.mediaview .actionsbar--Z1ant6U .right--DUFDc {
     flex: 0
@@ -1681,7 +1684,6 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     margin: 0 10px;
     z-index: 10;
 }
-
 .event #conferenceController .emoji-button-container > .win-button {
     background-color: var(--btn-primary-bg);
     border-color: transparent;
@@ -2140,6 +2142,7 @@ c
 #conferenceController #unpinnedVideos.listview .win-surface {
     overflow-y: hidden;
 }
+.speakerSession #conferenceController #unpinnedVideos.listview .win-viewport,
 .event #conferenceController #unpinnedVideos.listview .win-viewport {
     overflow-x: hidden;
 }
@@ -2200,6 +2203,8 @@ c
 #conferenceController #unpinnedVideos.listview .video-item-button {
     right: 2px;
 }
+.speakerSession #conferenceController .videoContainer--rssHk .video-item-button,
+.speakerSession #conferenceController #unpinnedVideos.listview .video-item-button,
 .event #conferenceController .videoContainer--rssHk .video-item-button,
 .event #conferenceController #unpinnedVideos.listview .video-item-button {
     display: none;

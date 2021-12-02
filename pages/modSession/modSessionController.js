@@ -23,7 +23,6 @@
 
             Application.Controller.apply(this, [pageElement, {
                 showConference: false,
-                modSessionLink: null,
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
@@ -191,13 +190,6 @@
                     }, function (errorResponse) {
                         // called asynchronously on error
                     });
-                    Log.ret(Log.l.trace);
-                },
-                clickSessionInNewWindow: function(event) {
-                    Log.call(Log.l.trace, "ModSession.Controller.");
-                    if (that.binding.modSessionLink) {
-                        window.open(that.binding.modSessionLink);
-                    }
                     Log.ret(Log.l.trace);
                 },
                 onScroll: function (event) {
@@ -458,24 +450,6 @@
                     } else {
                         return WinJS.Promise.as();
                     }
-                /*}).then(function () {
-                    return WinJS.Promise.as();AppData.call("PRC_BBBModeratorLink", {
-                        pVeranstaltungID: 0,
-                        pAlias: null,
-                        pUserToken: modToken //aus startlink 
-                    }, function (json) {
-                        if (json && json.d && json.d.results) {
-                            that.binding.dataConference = json.d.results[0];
-                            var modSessionLink = that.binding.dataConference.URL;
-                            if (modSessionLink) {
-                                window.open(modSessionLink);
-                            }
-                            AppBar.scope.binding.showConference = true;
-                        }
-                        Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
-                    }, function (error) {
-                        Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
-                    });*/
                 }).then(function () {
                     return that.updateFragment();
                 }).then(function(conferenceFragment) {

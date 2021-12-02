@@ -73,6 +73,8 @@
     "countdown.waitMessage": "Votre événement en ligne est sur le point d'avoir lieu. Veuillez patienter",
     "countdown.countDownOverMessage": "Votre événement en ligne a déjà lieu ou est déjà terminé. Veuillez consulter votre médiathèque",
 
+    "speakerSession.logOffEvent"   : "Se déconnecter",
+
     "modSession.logOffEvent"   : "Se déconnecter",
     "modSession.closeSessionEvent"   : "Terminer la session",
     "modSession.labelCloseSession": "Voulez-vous terminer la session?"

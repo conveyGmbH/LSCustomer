@@ -73,6 +73,8 @@
 	"countdown.waitMessage": "Il tuo evento online sta per svolgersi. Sii paziente",
 	"countdown.countDownOverMessage": "Il tuo evento online è già in corso o è già terminato. Dai un'occhiata alla tua libreria multimediale",
 
+    "speakerSession.logOffEvent"   : "Disconnetti",
+
     "modSession.logOffEvent"   : "Disconnetti",
     "modSession.closeSessionEvent"   : "Termina sessione",
     "modSession.labelCloseSession": "Vuoi terminare la sessione?"

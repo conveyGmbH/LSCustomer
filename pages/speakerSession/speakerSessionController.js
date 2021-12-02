@@ -23,7 +23,6 @@
 
             Application.Controller.apply(this, [pageElement, {
                 showConference: false,
-                modSessionLink: null,
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
@@ -193,13 +192,6 @@
                     });
                     Log.ret(Log.l.trace);
                 },
-                clickSessionInNewWindow: function (event) {
-                    Log.call(Log.l.trace, "SpeakerSession.Controller.");
-                    if (that.binding.modSessionLink) {
-                        window.open(that.binding.modSessionLink);
-                    }
-                    Log.ret(Log.l.trace);
-                },
                 onScroll: function (event) {
                     Log.call(Log.l.u1, "SpeakerSession.Controller.");
                     if (contentArea) {
@@ -298,47 +290,6 @@
                         }
                     }, logOffButton);
                     Log.ret(Log.l.trace);
-                },
-                clickCloseSessionEvent: function (event) {
-                    Log.call(Log.l.trace, "SpeakerSession.Controller.");
-                    var closeSessionButton = pageElement.querySelector("#closeSessionButton");
-                    var modToken = null;
-                    if (Application.query.UserToken) {
-                        modToken = Application.query.UserToken;
-                    }
-                    Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
-                    var confirmTitle = getResourceText("modSession.labelCloseSession") + " ";
-                    confirm(confirmTitle, function (result) {
-                        if (result) {
-                            AppBar.busy = true;
-                            Log.print(Log.l.trace, "clickCloseSessionEvent: user choice OK");
-                            return AppData.call("PRC_RequestSessionEnd",
-                                {
-                                    pVeranstaltungID: that.binding.eventId,
-                                    pUserToken: modToken
-                                },
-                                function (json) {
-                                    AppBar.busy = false;
-                                    Log.print(Log.l.trace, "PRC_RequestSessionEnd success!");
-                                    if (json && json.d && json.d.results) {
-                                        var result = json.d.results[0];
-                                    }
-                                    that.updateFragment().then(function (conferenceFragment) {
-                                        // call sendCommandMessage 
-                                        if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
-                                            conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
-                                        }
-                                    });
-                                    Application.navigateById("home");
-                                    Log.ret(Log.l.trace);
-                                },
-                                function (error) {
-                                    Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");
-                                });
-                        } else {
-                            Log.print(Log.l.trace, "clickDelete: user choice CANCEL");
-                        }
-                    }, closeSessionButton);
                 }
             };
 
@@ -458,24 +409,6 @@
                     } else {
                         return WinJS.Promise.as();
                     }
-                    /*}).then(function () {
-                        return WinJS.Promise.as();AppData.call("PRC_BBBModeratorLink", {
-                            pVeranstaltungID: 0,
-                            pAlias: null,
-                            pUserToken: modToken //aus startlink 
-                        }, function (json) {
-                            if (json && json.d && json.d.results) {
-                                that.binding.dataConference = json.d.results[0];
-                                var modSessionLink = that.binding.dataConference.URL;
-                                if (modSessionLink) {
-                                    window.open(modSessionLink);
-                                }
-                                AppBar.scope.binding.showConference = true;
-                            }
-                            Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
-                        }, function (error) {
-                            Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
-                        });*/
                 }).then(function () {
                     return that.updateFragment();
                 }).then(function (conferenceFragment) {

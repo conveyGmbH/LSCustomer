@@ -308,7 +308,7 @@ var __meteor_runtime_config__;
             var pageControllerName = AppBar.scope.element && AppBar.scope.element.id;
             if (pageControllerName === "eventController") {
                 userToken = AppData._persistentStates.registerData.userToken;
-            } else if (pageControllerName === "modSessionController") {
+            } else if (pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController") {
                 userToken = Application.query.UserToken; //aus startlink 
             }
 
@@ -1673,7 +1673,9 @@ var __meteor_runtime_config__;
                     if (svgContainer && svgContainer.firstElementChild) {
                         presentationOpened = true;
                         // prevent scrolling on zoom per mouse wheel!
-                        if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController" && !that.onWheelSvg) {
+                        if (AppBar.scope.element && 
+                            (AppBar.scope.element.id === "modSessionController" || pageControllerName === "speakerSessionController") && 
+                            !that.onWheelSvg) {
                             that.onWheelSvg = onWheelSvg;
                             that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
                         }
@@ -2694,7 +2696,7 @@ var __meteor_runtime_config__;
                             Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
                             AppData.setErrorMsg(AppBar.scope.binding, error);
                         });
-                    } else if (pageControllerName === "modSessionController") {
+                    } else if (pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController") {
                         return AppData.call("PRC_BBBModeratorLink", {
                             pVeranstaltungID: 0,
                             pAlias: null,

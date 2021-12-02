@@ -71,7 +71,9 @@
 	"countdown.waitMessage" : "Ihre Onlineveranstaltung findet bald statt. Bitte haben Sie etwas geduld",
 	"countdown.countDownOverMessage" : "Ihre Onlineveranstaltung findet bereits statt oder ist bereits zu Ende. Bitte schauen Sie in Ihrer Mediathek rein",
 
-    "modSession.logOffEvent"   : "Abmelden",
+    "speakerSession.logOffEvent"   : "Abmelden",
+        
+	"modSession.logOffEvent"   : "Abmelden",
     "modSession.closeSessionEvent"   : "Session beenden",
     "modSession.labelCloseSession"  : "Möchten Sie die Session beenden?"
 }			
