@@ -2250,7 +2250,6 @@ var __meteor_runtime_config__;
                 var hideInactive = videoListDefaults.hideInactive;
                 var hideMuted = videoListDefaults.hideMuted;
                 var usePinned = videoListDefaults.usePinned;
-                var validPinnedIndexes = [];
                 Log.call(Log.l.trace, "Conference.Controller.", "usePinned=" + usePinned + " hideInactive=" + hideInactive + " hideMuted=" + hideMuted);
                 if (checkForInactiveVideoPromise) {
                     checkForInactiveVideoPromise.cancel();
@@ -2267,6 +2266,7 @@ var __meteor_runtime_config__;
                         if (overlayElement) {
                             videoList = overlayElement.querySelector("." + bbbClass.videoList);
                             if (videoList) {
+                                var validPinnedIndexes = null;
                                 var now = Date.now();
                                 var videoListItem = videoList.firstElementChild;
                                 var prevActiveItem = null;
@@ -2287,6 +2287,9 @@ var __meteor_runtime_config__;
                                     key = getInternalInstanceKey(videoListItem) || "0";
                                     var validPinnedIndex = that.binding.pinnedVideos.indexOf(key);
                                     if (validPinnedIndex >= 0) {
+                                        if (!validPinnedIndexes) {
+                                            validPinnedIndexes = [];
+                                        }
                                         validPinnedIndexes.push(validPinnedIndex);
                                     }
                                     if (usePinned) {
@@ -2457,13 +2460,14 @@ var __meteor_runtime_config__;
                                     }
                                     videoListItem = videoListItem.nextElementSibling;
                                 }
-                            }
-                        }
-                    }
-                    if (that.binding.pinnedVideos && that.binding.pinnedVideos.length > 0) {
-                        for (var i = that.binding.pinnedVideos.length - 1; i >= 0; i--) {
-                            if (validPinnedIndexes.indexOf(i) < 0) {
-                                that.binding.pinnedVideos.splice(i, 1);
+                                if (validPinnedIndexes &&
+                                    that.binding.pinnedVideos && that.binding.pinnedVideos.length > 0) {
+                                    for (var i = that.binding.pinnedVideos.length - 1; i >= 0; i--) {
+                                        if (validPinnedIndexes.indexOf(i) < 0) {
+                                            that.binding.pinnedVideos.splice(i, 1);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
