@@ -1747,6 +1747,7 @@ var __meteor_runtime_config__;
                             mediaContainer = panelWrapper;
                         }
                         if (mediaContainer) {
+                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                             var numVideos = 0;
                             if (bbbClass.content) {
                                 var content = mediaContainer.querySelector("." + bbbClass.content);
@@ -1779,6 +1780,15 @@ var __meteor_runtime_config__;
                                         Log.print(Log.l.trace, "paneWidth=" + paneWidth);
                                         panelWrapper.style.width = "calc(100% - " + paneWidth.toString() + "px)";
                                         panelWrapper.style.left = paneWidth.toString() + "px";
+                                        if (overlayElement) {
+                                            if (videoPLayerOpened || screenShareOpened || presentationOpened) {
+                                                overlayElement.style.left = "";
+                                                overlayElement.style.width = "";
+                                            } else {
+                                                overlayElement.style.left = "-" + paneWidth.toString() + "px";
+                                                overlayElement.style.width = "100%";
+                                            }
+                                        } 
                                         currentPane = panelWrapper.firstElementChild;
                                         while (currentPane &&
                                             typeof currentPane.tagName === "string" &&
@@ -1790,6 +1800,10 @@ var __meteor_runtime_config__;
                                     } else {
                                         panelWrapper.style.width = "100%";
                                         panelWrapper.style.left = "0";
+                                        if (overlayElement) {
+                                            overlayElement.style.left = "";
+                                            overlayElement.style.width = "";
+                                        } 
                                     }
                                 });
                             }
@@ -1839,7 +1853,6 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             }
-                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
                             if (overlayElement) {
                                 var overlayIsHidden = WinJS.Utilities.hasClass(overlayElement, bbbClass.hideOverlay);
                                 var videoList = mediaContainer.querySelector("." + bbbClass.videoList);
