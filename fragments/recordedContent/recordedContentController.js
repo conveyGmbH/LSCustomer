@@ -1037,7 +1037,7 @@ var __meteor_runtime_config__;
                         url = AppBar.scope.binding.recordedLink;
                     }
                     if (url) {
-                        options.url = url.replace(/https?:\/\/[\.a-zA-Z]+\/playback/g, '/playback');
+                        options.url = url.replace(/https?:\/\/[\.a-zA-Z0-9]+\/playback/g, '/playback');
                         return renderImpl(options.url, recordedContent, false);
                     } else {
                         // wenn keine recordedContent vorhanden dann zeige meldung -> recordedContent läuft noch nicht -> zurück button auf events
