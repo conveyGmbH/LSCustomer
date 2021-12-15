@@ -1032,7 +1032,8 @@ var __meteor_runtime_config__;
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
                     Application.query = getQueryStringParameters();
-                    if (Application.query && Application.query.meetingId && AppBar.scope.binding.recordedLink) {
+                    // Application.query && Application.query.meetingId -> not necessary
+                    if (AppBar.scope.binding.recordedLink) {
                         url = AppBar.scope.binding.recordedLink;
                     }
                     if (url) {
