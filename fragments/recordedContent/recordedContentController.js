@@ -210,6 +210,11 @@ var __meteor_runtime_config__;
                 var b = cd.body;
                 var sp = [];
 
+                //var rootDiv = b.querySelector("div#root");
+                //if (rootDiv) {
+                //    document.body.insertBefore(rootDiv, document.body.firstElementChild);
+                //}
+
                 forEach(cd.querySelectorAll('link[rel="stylesheet"], link[type="text/css"]'), addLink);
                 forEach(cd.getElementsByTagName('style'), function (e, i) { addStyle(e, href, i); });
 
