@@ -191,6 +191,7 @@
                 if (data) {
                     AppData.customer = data.customer;
                     AppData.customerId = data.customerid;
+                    AppData.onlinePath = data.onlinepath;
                     if (data.language) {
                         Application.language = data.language;
                     }

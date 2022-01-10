@@ -174,7 +174,7 @@
             },
             set: function(newCustomer) {
                 AppData._customer = newCustomer;
-                Log.print(Log.l.trace, "set new lsCustomer=" + AppData._customer);
+                Log.print(Log.l.trace, "set new customer=" + AppData._customer);
             }
         },
         _customerId: "",
@@ -185,7 +185,18 @@
             },
             set: function(newCustomerId) {
                 AppData._customerId = newCustomerId;
-                Log.print(Log.l.trace, "set new lsCustomer=" + AppData._customerId);
+                Log.print(Log.l.trace, "set new customerId=" + AppData._customerId);
+            }
+        },
+        _onlinePath: "",
+        onlinePath:{
+            get: function() {
+                Log.print(Log.l.trace, "onlinePath=" + AppData._onlinePath);
+                return AppData._onlinePath;
+            },
+            set: function(newOnlinePath) {
+                AppData._onlinePath = newOnlinePath;
+                Log.print(Log.l.trace, "set new onlinePath=" + AppData._onlinePath);
             }
         },
         getPropertyFromInitoptionTypeID: function (item) {
