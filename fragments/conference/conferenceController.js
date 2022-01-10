@@ -3243,7 +3243,7 @@ var __meteor_runtime_config__;
                                 y >= rect.top && y < rect.bottom) {
                                 var index = indexFromPinnedVideosItem(videoListItem);
                                 var insertAfterIndex, insertAfterItem;
-                                if (x >= (rect.right - rect.left) / 2) {
+                                if (x >= (rect.right + rect.left) / 2) {
                                     insertAfterIndex = index;
                                     insertAfterItem = videoListItem;
                                 } else if (videoListItem.previousElementSibling) {
@@ -3926,7 +3926,7 @@ var __meteor_runtime_config__;
                     var insertPoint = videoListDefaults.hitTest(eventObject.clientX, eventObject.clientY);
                     if (insertPoint && insertPoint.index >= 0) {
                         if (!videoListDefaults._lastInsertPoint ||
-                            videoListDefaults._lastInsertPoint.insertAfterIndex !== insertPoint.insertAfterIndex ||
+                            videoListDefaults._lastInsertPoint.insertAfterIndex !== insertPoint.insertPoint ||
                             videoListDefaults._lastInsertPoint.index !== insertPoint.index) {
                             videoListDefaults._clearDragBetween(videoListDefaults._lastInsertPoint);
                             Log.print(Log.l.trace, "insertAfterIndex=" + insertPoint.insertAfterIndex + " index=" + insertPoint.index);
@@ -3946,7 +3946,9 @@ var __meteor_runtime_config__;
                             videoListDefaults._lastInsertPoint = insertPoint;
                         }
                     }
-                    Log.ret(Log.l.trace);
+                    Log.ret(Log.l.trace, "clientX=" + eventObject.clientX + " clientY=" + eventObject.clientY + 
+                        " index=" + (insertPoint ? insertPoint.index : -1) + 
+                        " insertAfterIndex=" + (insertPoint ? insertPoint.insertAfterIndex : -1));
                 },
                 onVideoListItemDragLeave: function(eventObject) {
                     Log.call(Log.l.trace, "Conference.Controller.");
