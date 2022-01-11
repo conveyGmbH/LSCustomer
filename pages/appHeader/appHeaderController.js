@@ -20,11 +20,16 @@
             // ensure login 
             if (AppData &&
                 AppData._persistentStates &&
-                AppData._persistentStates.odata &&
-                (!AppData._persistentStates.odata.login ||
-                    !AppData._persistentStates.odata.password)) {
+                AppData._persistentStates.odata) {
+                if (!AppData._persistentStates.odata.login ||
+                    !AppData._persistentStates.odata.password) {
                 AppData._persistentStates.odata.login = AppData.customer;
                 AppData._persistentStates.odata.password = AppData.customerId;
+            }
+                if (AppData.onlinePath &&
+                    AppData.onlinePath !== AppData._persistentStates.odata.onlinePath) {
+                    AppData._persistentStates.odata.onlinePath = AppData.onlinePath;
+                }
             }
             this.element = pageElement.querySelector("#appHeaderController.data-container");
             if (this.element) {
