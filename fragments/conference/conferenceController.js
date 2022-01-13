@@ -63,6 +63,7 @@ var __meteor_runtime_config__;
         primary: "primary--1IbqAO",
         right: "right--DUFDc",
         screenshareContainer: "screenshareContainer--1GSmqo",
+        screenshareContainerPresenter: "screenshareContainerPresenter--2q16l3",
         sm: "sm--Q7ujg",
         startPollBtn: "startPollBtn--Z1qKPy4",
         status: "status--1gjKnt",
@@ -1660,7 +1661,7 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                    var screenshareContainer = fragmentElement.querySelector("." + bbbClass.screenshareContainer);
+                    var screenshareContainer = fragmentElement.querySelector("." + bbbClass.screenshareContainer + ", ." + bbbClass.screenshareContainerPresenter);
                     if (screenshareContainer) {
                         screenShareOpened = true;
                         var screenShareFullscreen = screenshareContainer.querySelector("." + bbbClass.fullScreenButton);
