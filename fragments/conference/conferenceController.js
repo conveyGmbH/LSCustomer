@@ -3431,7 +3431,21 @@ var __meteor_runtime_config__;
                                         dataSessionStatus.VideoListPosition = videoListDefaults.default;
                                         break;
                                 }
-                                that.saveSessionStatus(dataSessionStatus);
+                                if (videoListDefaults.usePinned &&
+                                    dataSessionStatus.PresenterMode !== presenterModeDefaults.off &&
+                                    that.binding.pinnedVideos && that.binding.pinnedVideos.length > 1) {
+                                    that.binding.pinnedVideos.splice(1);
+                                    dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                                    that.saveSessionStatus(dataSessionStatus);
+                                    if (!checkForInactiveVideoPromise) {
+                                        checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
+                                            that.checkForInactiveVideo();
+                                        });
+                                    }
+                                    that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
+                                } else {
+                                    that.saveSessionStatus(dataSessionStatus);
+                                }
                             }
                         }
                     }
