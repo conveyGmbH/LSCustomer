@@ -190,6 +190,7 @@ var __meteor_runtime_config__;
                 height: 288,
                 left: "left",
                 right: "right",
+                top: "top",
                 default: "default",
                 videoListWidth: 0,
                 videoListHeight: 0,
@@ -1748,7 +1749,7 @@ var __meteor_runtime_config__;
                             mediaContainer = panelWrapper;
                         }
                         if (mediaContainer) {
-                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top, .video-overlay-default");
                             var numVideos = 0;
                             if (bbbClass.content) {
                                 var content = mediaContainer.querySelector("." + bbbClass.content);
@@ -1912,11 +1913,20 @@ var __meteor_runtime_config__;
                                         that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.default ||
                                         WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
                                         !(videoPLayerOpened || screenShareOpened || presentationOpened) || overlayIsHidden) {
+                                        if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
+                                            WinJS.Utilities.removeClass(videoList, "video-list-vertical");
+                                        }
+                                        if (WinJS.Utilities.hasClass(videoList, "video-list-horizontal")) {
+                                            WinJS.Utilities.removeClass(videoList, "video-list-horizontal");
+                                        }
                                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
                                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
                                         }
                                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
                                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
+                                        }
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-top");
                                         }
                                         if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
                                             WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
@@ -1924,14 +1934,17 @@ var __meteor_runtime_config__;
                                         if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
                                             WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
                                         }
-                                        if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-top")) {
-                                            WinJS.Utilities.addClass(overlayElement, "video-overlay-top");
+                                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-top")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-top");
                                         }
-                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-top")) {
-                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-top");
+                                        if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-default")) {
+                                            WinJS.Utilities.addClass(overlayElement, "video-overlay-default");
+                                        }
+                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-default")) {
+                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-default");
                                         }
                                         if (!overlayIsHidden) {
-                                            if (!WinJS.Utilities.hasClass(overlayElement,  bbbClass.overlay)) {
+                                            if (!WinJS.Utilities.hasClass(overlayElement, bbbClass.overlay)) {
                                                 WinJS.Utilities.addClass(overlayElement, bbbClass.overlay);
                                             }
                                             if (numVideos > 1) {
@@ -1963,15 +1976,64 @@ var __meteor_runtime_config__;
                                             }
                                             videoListItem = videoListItem.nextSibling;
                                         }
+                                    } else if (that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.top) {
                                         if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                                             WinJS.Utilities.removeClass(videoList, "video-list-vertical");
                                         }
+                                        if (!WinJS.Utilities.hasClass(videoList, "video-list-horizontal")) {
+                                            WinJS.Utilities.addClass(videoList, "video-list-horizontal");
+                                        }
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
+                                        }
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
+                                        }
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-default")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-default");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-left");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-right")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-right");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-default")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-default");
+                                        }
+                                        if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-top")) {
+                                            WinJS.Utilities.addClass(overlayElement, "video-overlay-top");
+                                        }
+                                        if (!WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-top")) {
+                                            WinJS.Utilities.addClass(mediaContainer, "video-overlay-is-top");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.fullWidth)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.fullWidth);
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.autoWidth)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.autoWidth);
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.overlayToTop)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.overlayToTop);
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.overlay)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.overlay);
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, bbbClass.floatingOverlay)) {
+                                            WinJS.Utilities.removeClass(overlayElement, bbbClass.floatingOverlay);
+                                        }
                                     } else {
+                                        if (WinJS.Utilities.hasClass(videoList, "video-list-horizontal")) {
+                                            WinJS.Utilities.removeClass(videoList, "video-list-horizontal");
+                                        }
                                         if (!WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                                             WinJS.Utilities.addClass(videoList, "video-list-vertical");
                                         }
                                         if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-top")) {
                                             WinJS.Utilities.removeClass(overlayElement, "video-overlay-top");
+                                        }
+                                        if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-default")) {
+                                            WinJS.Utilities.removeClass(overlayElement, "video-overlay-default");
                                         }
                                         if (WinJS.Utilities.hasClass(overlayElement, bbbClass.fullWidth)) {
                                             WinJS.Utilities.removeClass(overlayElement, bbbClass.fullWidth);
@@ -1990,6 +2052,9 @@ var __meteor_runtime_config__;
                                         }
                                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-top")) {
                                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-top");
+                                        }
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-default")) {
+                                            WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-default");
                                         }
                                         if (that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.right) {
                                             if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
@@ -2174,7 +2239,7 @@ var __meteor_runtime_config__;
                 }).then(function () {
                     var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                     if (mediaContainer) {
-                        var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                        var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top, .video-overlay-default");
                         if (overlayElement) {
                             var videoList = mediaContainer.querySelector("." + bbbClass.videoList);
                             if (videoList) {
@@ -2276,7 +2341,7 @@ var __meteor_runtime_config__;
                 var ret = new WinJS.Promise.as().then(function () {
                     var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                     if (mediaContainer) {
-                        var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                        var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top, .video-overlay-default");
                         if (overlayElement) {
                             videoList = overlayElement.querySelector("." + bbbClass.videoList);
                             if (videoList) {
@@ -3332,7 +3397,7 @@ var __meteor_runtime_config__;
                 videoListDefault: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (that.binding.dataSessionStatus) {
-                        that.binding.dataSessionStatus.VideoListPosition = videoListDefaults.default;
+                        that.binding.dataSessionStatus.VideoListPosition = videoListDefaults.top;
                     }
                     that.setPresenterModeState(presenterModeDefaults.off);
                     Log.ret(Log.l.info);
@@ -3428,7 +3493,7 @@ var __meteor_runtime_config__;
                                         break;
                                     case "videoListDefault":
                                         dataSessionStatus.PresenterMode = presenterModeDefaults.off;
-                                        dataSessionStatus.VideoListPosition = videoListDefaults.default;
+                                        dataSessionStatus.VideoListPosition = videoListDefaults.top;
                                         break;
                                 }
                                 if (videoListDefaults.usePinned &&
@@ -4300,7 +4365,7 @@ var __meteor_runtime_config__;
                     WinJS.Promise.as().then(function () {
                         var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                         if (mediaContainer) {
-                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top");
+                            var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-default");
                             if (overlayElement) {
                                 overlayElement.ontransitionend = function () {
                                     if (!adjustContentPositionsPromise) {
