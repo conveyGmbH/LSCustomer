@@ -2022,6 +2022,16 @@ var __meteor_runtime_config__;
                                         if (WinJS.Utilities.hasClass(overlayElement, bbbClass.floatingOverlay)) {
                                             WinJS.Utilities.removeClass(overlayElement, bbbClass.floatingOverlay);
                                         }
+                                        while (videoListItem) {
+                                            if (videoListItem.style) {
+                                                videoListItem.style.gridColumn = "";
+                                                videoListItem.style.gridRow = "";
+                                            }
+                                            videoListItem = videoListItem.nextSibling;
+                                        }
+                                        if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
+                                            WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
+                                        }
                                     } else {
                                         if (WinJS.Utilities.hasClass(videoList, "video-list-horizontal")) {
                                             WinJS.Utilities.removeClass(videoList, "video-list-horizontal");
