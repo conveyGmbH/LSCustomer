@@ -1909,6 +1909,7 @@ var __meteor_runtime_config__;
                                         }
                                     }
                                     var videoListItem = videoList.firstElementChild;
+                                    var resCount = 0, imageScale = 1, curCount = 0;
                                     if (!that.binding.dataSessionStatus.ShowPresentation ||
                                         that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.default ||
                                         WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
@@ -2022,15 +2023,43 @@ var __meteor_runtime_config__;
                                         if (WinJS.Utilities.hasClass(overlayElement, bbbClass.floatingOverlay)) {
                                             WinJS.Utilities.removeClass(overlayElement, bbbClass.floatingOverlay);
                                         }
-                                        while (videoListItem) {
-                                            if (videoListItem.style) {
-                                                videoListItem.style.gridColumn = "";
-                                                videoListItem.style.gridRow = "";
-                                            }
-                                            videoListItem = videoListItem.nextSibling;
-                                        }
                                         if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
                                             WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
+                                        }
+                                        imageScale = 0.5;
+                                        var videoWidth = videoListDefaults.width * imageScale;
+                                        var widthFullSize = numVideos * videoWidth;
+                                        if (!WinJS.Utilities.hasClass(mediaContainer, "presenter-mode") && widthFullSize > videoList.clientWidth) {
+                                            if (!WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
+                                                WinJS.Utilities.addClass(videoList, "video-list-double-columns");
+                                            }
+                                            var widthHalfSize = Math.floor(numVideos / 2.0 + 0.5) * videoWidth / 2;
+                                            resCount = Math.floor((videoList.clientWidth - widthHalfSize) / videoWidth);
+                                            while (videoListItem) {
+                                                if (videoListItem.style) {
+                                                    if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden") &&
+                                                        curCount < resCount) {
+                                                        videoListItem.style.gridColumn = "span 2";
+                                                        videoListItem.style.gridRow = "span 2";
+                                                        curCount++;
+                                                    } else {
+                                                        videoListItem.style.gridColumn = "";
+                                                        videoListItem.style.gridRow = "";
+                                                    }
+                                                }
+                                                videoListItem = videoListItem.nextSibling;
+                                            }
+                                        } else {
+                                            while (videoListItem) {
+                                                if (videoListItem.style) {
+                                                    videoListItem.style.gridColumn = "";
+                                                    videoListItem.style.gridRow = "";
+                                                }
+                                                videoListItem = videoListItem.nextSibling;
+                                            }
+                                            if (WinJS.Utilities.hasClass(videoList, "video-list-double-columns")) {
+                                                WinJS.Utilities.removeClass(videoList, "video-list-double-columns");
+                                            }
                                         }
                                     } else {
                                         if (WinJS.Utilities.hasClass(videoList, "video-list-horizontal")) {
@@ -2093,7 +2122,6 @@ var __meteor_runtime_config__;
                                                 WinJS.Utilities.addClass(overlayElement, "video-overlay-left");
                                             }
                                         }
-                                        var imageScale = 1;
                                         if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-biggest")) {
                                             imageScale = 0.5;
                                         }
@@ -2104,8 +2132,7 @@ var __meteor_runtime_config__;
                                                 WinJS.Utilities.addClass(videoList, "video-list-double-columns");
                                             }
                                             var heightHalfSize = Math.floor(numVideos / 2.0 + 0.5) * videoHeight / 2;
-                                            var resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoHeight);
-                                            var curCount = 0;
+                                            resCount = Math.floor((videoList.clientHeight - heightHalfSize) / videoHeight);
                                             while (videoListItem) {
                                                 if (videoListItem.style) {
                                                     if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden") &&

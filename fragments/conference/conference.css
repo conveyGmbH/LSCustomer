@@ -761,9 +761,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .content--Z2gO9GE {
     max-height: calc(100% - 164px) !important;
 }
+/*
 .view-size-bigger #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .content--Z2gO9GE {
     max-height: calc(100% - 92px) !important;
 }
+*/
 
 
 #conference.mediaview .actionsbar--Z1ant6U {
@@ -922,10 +924,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .deskshare-open.video-overlay-is-top:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.video-overlay-default):not(.presentationContainer--1wqUYG):not(.Toastify):not(.unpinned-video-list-container),
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .videoplayer-open.video-overlay-is-top:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) > span {
-    top: 140px !important;
     left: 150px !important;
     width: calc(100% - 300px) !important;
+    /*
+    top: 140px !important;
     height: calc(100% - 140px) !important;
+    */
 }
 
 
@@ -1359,11 +1363,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     max-width: 192px !important;
 }
 
+/*
 .view-size-bigger #conference.mediaview .video-overlay-top {
     height: 72px !important;
     min-height: 72px !important;
     max-height: 72px !important;
 }
+*/
 
 #conference.mediaview .video-overlay-is-left:not(.presenter-mode) .video-overlay-left,
 #conference.mediaview .video-overlay-is-right:not(.presenter-mode) .video-overlay-right,
@@ -1433,8 +1439,14 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     width: 100% !important;
     height: 100% !important;
 }
-.view-size-bigger #conference.mediaview .video-list-horizontal {
+#conference.mediaview .video-list-horizontal.video-list-double-columns {
     grid-template-columns: repeat(auto-fill, 96px) !important;
+    grid-template-rows: 50% 50% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
 }
 #conference.mediaview .video-list-vertical {
     grid-template-columns: 100% !important;
