@@ -372,6 +372,14 @@ var __meteor_runtime_config__;
                     setPollingPromise.cancel();
                     setPollingPromise = null;
                 }
+                if (typeof Meteor === "object" &&
+                    typeof Meteor.disconnect === "function") {
+                    Meteor.disconnect();
+                }
+                if (typeof Session === "object" &&
+                    typeof Session.destroy === "function") {
+                    Session.destroy();
+                }
                 conference = null;
                 videoListDefaults = {};
                 userListDefaults = {};
