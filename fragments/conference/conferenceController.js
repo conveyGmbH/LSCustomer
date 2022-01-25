@@ -119,10 +119,12 @@ var __meteor_runtime_config__;
 
     elementSelectors = {
         closeDesc: "#conference.mediaview button[aria-describedby=\"closeDesc\"]",
-        restoreDesc: "#conference.mediaview ." + bbbClass.right + " button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF"
+        restoreDesc: "#conference.mediaview ." + bbbClass.right + " button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF",
+        leaveAudio: "#conference.mediaview button[aria-describedby=\"leaveAudio\"]"
     };
     elementSelectors.closeDesc = "#conference.mediaview button[data-test=\"restorePresentationButton\"]";
     elementSelectors.restoreDesc = "#conference.mediaview button[data-test=\"hidePresentationButton\"]";
+    elementSelectors.leaveAudio = "#conference.mediaview button[data-test=\"leaveAudio\"]";
 
     var floatingEmojisSymbols = [
         "\u2764",       //"❤️"
@@ -371,6 +373,10 @@ var __meteor_runtime_config__;
                 if (setPollingPromise) {
                     setPollingPromise.cancel();
                     setPollingPromise = null;
+                }
+                var leaveAudioButton = fragmentElement.querySelector(elementSelectors.leaveAudio);
+                if (leaveAudioButton) {
+                    leaveAudioButton.click();
                 }
                 if (typeof Meteor === "object" &&
                     typeof Meteor.disconnect === "function") {
