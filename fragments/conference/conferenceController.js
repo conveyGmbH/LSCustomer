@@ -833,7 +833,7 @@ var __meteor_runtime_config__;
                 }
                 var userList = fragmentElement.querySelector("."+bbbClass.userList);
                 if (userList) {
-                    if (userListDefaults.onlyModerators) {
+                    if (pageControllerName === "eventController" && userListDefaults.onlyModerators) {
                         if (!WinJS.Utilities.hasClass(userList, "only-moderators")) {
                             WinJS.Utilities.addClass(userList, "only-moderators");
                         }
@@ -848,7 +848,7 @@ var __meteor_runtime_config__;
                         var participantsList = userListColumn.querySelectorAll("." + bbbClass.participantsList);
                         if (participantsList) {
                             var i = 0, participantsListEntry = null, userNameMainSelfLabel = null, userName = null, avatar = null, style = null, rgbColor = null;
-                            if (userListDefaults.onlyModerators) {
+                            if (pageControllerName === "eventController" && userListDefaults.onlyModerators) {
                                 for (i = participantsList.length - 1; i >= 0; i--) {
                                     participantsListEntry = participantsList[i];
                                     if (participantsListEntry) {
@@ -1356,7 +1356,7 @@ var __meteor_runtime_config__;
                 }
                 var messageList = fragmentElement.querySelector("." + bbbClass.messageList);
                 if (messageList) {
-                    if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController" &&
+                    if (pageControllerName === "modSessionController" &&
                         !messageList._onClickHandler) {
                         messageList._onClickHandler = function (event) {
                             if (event && event.currentTarget === messageList) {
@@ -1689,8 +1689,7 @@ var __meteor_runtime_config__;
                     if (svgContainer && svgContainer.firstElementChild) {
                         presentationOpened = true;
                         // prevent scrolling on zoom per mouse wheel!
-                        if (AppBar.scope.element && 
-                            (AppBar.scope.element.id === "modSessionController" || pageControllerName === "speakerSessionController") && 
+                        if ((pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController") && 
                             !that.onWheelSvg) {
                             that.onWheelSvg = onWheelSvg;
                             that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
@@ -3196,7 +3195,7 @@ var __meteor_runtime_config__;
 
             var setPolling = function() {
                 Log.call(Log.l.info, "Conference.Controller.");
-                if (AppBar.scope.element && AppBar.scope.element.id === "eventController") {
+                if (pageControllerName === "eventController") {
                     if (setPollingPromise) {
                         setPollingPromise.cancel();
                         setPollingPromise = null;
@@ -4222,7 +4221,7 @@ var __meteor_runtime_config__;
                     return;
                 }
                 if (command.indexOf(magicStart) >= 0 &&
-                    !(AppBar.scope.element && AppBar.scope.element.id === "modSessionController")) {
+                    !(pageControllerName === "modSessionController")) {
                     Log.ret(Log.l.error, "access denied if not modSessionController");
                     return;
                 }
@@ -4747,7 +4746,7 @@ var __meteor_runtime_config__;
                 var msgMethod;
                 var msgField;
                 var fieldStart;
-                if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                if (pageControllerName === "modSessionController") {
                     msgMethod = "startPoll";
                     msgField = "custom"; 
                     fieldStart = "\\\"" + msgField + "\\\",";
