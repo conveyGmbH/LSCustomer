@@ -1789,6 +1789,9 @@ var __meteor_runtime_config__;
                                     while (currentPane &&
                                         typeof currentPane.tagName === "string" &&
                                         currentPane.tagName.toLowerCase() !== "header") {
+                                        if (!WinJS.Utilities.hasClass(currentPane, "opened-pane")) {
+                                            WinJS.Utilities.addClass(currentPane, "opened-pane");
+                                        }
                                         paneWidth += currentPane.clientWidth;
                                         currentPane = currentPane.nextElementSibling;
                                     }
