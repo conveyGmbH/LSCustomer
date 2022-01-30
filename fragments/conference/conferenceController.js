@@ -41,6 +41,7 @@ var __meteor_runtime_config__;
         hideOverlay: "hideOverlay--Z13uLxg",
         icon: "icon--2q1XXw",
         item: "item--ZDfG6l",
+        left: "left--Z1rLKlO",
         list: "list--Z2pj65C",
         label: "label--Z12LMR3",
         logout: "logout--21XEjn",
@@ -241,14 +242,17 @@ var __meteor_runtime_config__;
                     PresenterMode: presenterModeDefaults.off,
                     PinnedVideos: "[]"
                 },
+                showSelfie: true,
                 showPresentation: true,
                 showVideoList: true,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
+                showUnpinnedVideoList: false,
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
                 showConference: false,
+                labelShowSelfie: getResourceText("event.showSelfie"),
                 labelShowPresentation: getResourceText("event.showPresentation"),
                 labelShowVideoList: getResourceText("event.showVideoList"),
                 labelOn: getResourceText("label.on"),
@@ -273,6 +277,7 @@ var __meteor_runtime_config__;
 
             var conference = fragmentElement.querySelector("#conference");
             var presenterButtonContainer = fragmentElement.querySelector(".modSession .presenter-button-container");
+            var showSelfieToggleContainer = fragmentElement.querySelector(".show-selfie-toggle-container");
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var pollQuestionContainer = fragmentElement.querySelector("poll-question-container");
@@ -318,6 +323,7 @@ var __meteor_runtime_config__;
             }
 
             var unpinnedVideoList = new WinJS.Binding.List([]);
+            var myselfIsUnpinned = false;
 
             var that = this;
 
@@ -1865,7 +1871,7 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             }
-                            if (AppBar.scope.element && AppBar.scope.element.id === "modSessionController") {
+                            if (pageControllerName === "modSessionController") {
                                 if (presenterButtonContainer && presenterButtonContainer.style) {
                                     var navBarTopCenter = fragmentElement.querySelector("." + bbbClass.navbar + " ." + bbbClass.top2 + " ." + bbbClass.center2);
                                     if (navBarTopCenter && navBarTopCenter.firstElementChild !== presenterButtonContainer) {
@@ -2391,7 +2397,6 @@ var __meteor_runtime_config__;
 
             var checkForInactiveVideo = function () {
                 var checkLaterAgain = false;
-                var myselfIsUnpinned = false;
                 var newUnpinnedVideoLists = [];
                 var numVideos = 0;
                 var key = null;
@@ -2677,9 +2682,23 @@ var __meteor_runtime_config__;
                                         unpinnedVideoList.splice(oldIndex, 1);
                                     }
                                 }
+                                if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
+                                    var actionsBarLeft = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.left);
+                                    if (actionsBarLeft && !isChildElement(actionsBarLeft, showSelfieToggleContainer)) {
+                                        actionsBarLeft.appendChild(showSelfieToggleContainer);
+                                    }
+                                    showSelfieToggleContainer.style.display = "inline-block";
+                                }
+                            } else {
+                                if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
+                                    showSelfieToggleContainer.style.display = "none";
+                                }
                             }
                         } else {
                             unpinnedVideoList.length = 0;
+                            if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
+                                showSelfieToggleContainer.style.display = "none";
+                            }
                         }
                     }
                     if ((pageControllerName === "modSessionController" || myselfIsUnpinned) && 
@@ -2695,6 +2714,8 @@ var __meteor_runtime_config__;
                     } else {
                         that.binding.unpinnedVideoListLength = 0;
                     }
+                    that.binding.showUnpinnedVideoList = that.binding.unpinnedVideoListLength > 0 &&
+                        !(that.binding.unpinnedVideoListLength === 1 && myselfIsUnpinned && !that.binding.showSelfie);
                     if (!checkForInactiveVideoPromise && checkLaterAgain) {
                         checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
                             that.checkForInactiveVideo();
@@ -3901,10 +3922,11 @@ var __meteor_runtime_config__;
                                 if (!toggle.checked) {
                                     command = command.replace(/show/, "hide");
                                 }
-                                that.submitCommandMessage(magicStart + command + magicStop, event);
-                                var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
-                                if (dataSessionStatus) {
-                                    switch (command) {
+                                if (pageControllerName === "modSessionController") {
+                                    that.submitCommandMessage(magicStart + command + magicStop, event);
+                                    var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                                    if (dataSessionStatus) {
+                                        switch (command) {
                                         case "showPresentation":
                                             dataSessionStatus.ShowPresentation = 1;
                                             break;
@@ -3917,8 +3939,17 @@ var __meteor_runtime_config__;
                                         case "hideVideoList":
                                             dataSessionStatus.ShowVideoList = 0;
                                             break;
+                                        }
+                                        that.saveSessionStatus(dataSessionStatus);
                                     }
-                                    that.saveSessionStatus(dataSessionStatus);
+                                } else {
+                                    switch (command) {
+                                    case "showSelfie":
+                                    case "hideSelfie":
+                                        that.binding.showUnpinnedVideoList = that.binding.unpinnedVideoListLength > 0 &&
+                                            !(that.binding.unpinnedVideoListLength === 1 && myselfIsUnpinned && !that.binding.showSelfie);
+                                        break;
+                                    }
                                 }
                             }
                         }

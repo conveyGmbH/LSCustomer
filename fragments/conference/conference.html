@@ -100,6 +100,11 @@
                             <i class="container-close-icon icon-bbb-close"></i>
                         </button>
                     </div>
+                    <div class="show-selfie-toggle-container">
+                        <div id="showSelfie" data-win-control="WinJS.UI.ToggleSwitch"
+                             data-win-bind="winControl.checked: showSelfie; winControl.title: labelShowSelfie; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
+                             onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
+                    </div>
                     <div class="show-presentation-toggle-container">
                         <div id="showPresentation" data-win-control="WinJS.UI.ToggleSwitch"
                              data-win-bind="winControl.checked: showPresentation; winControl.title: labelShowPresentation; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
@@ -139,7 +144,7 @@
                         </div>
                     </div>
                     <div class="unpinned-video-list-container"
-                         data-win-bind="style.display: unpinnedVideoListLength Binding.Converter.toDisplay">
+                         data-win-bind="style.display: showUnpinnedVideoList Binding.Converter.toDisplay">
                         <div id="unpinnedVideos"
                              class="listview"
                              data-win-control="WinJS.UI.ListView"

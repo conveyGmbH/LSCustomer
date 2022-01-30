@@ -26,6 +26,7 @@
     "event.title"           : "Event",
     "event.moderators"      : "Moderators",
     "event.labelLogOff"     : "Would you like to log out?",
+    "event.showSelfie"      : "Show Capture",
     "event.showPresentation" : "Show presentation",
     "event.showVideoList"    : "Show videos",
     "event.sendNotification" : "Send this message to all participants:",

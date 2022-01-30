@@ -25,6 +25,7 @@
     "event.title"           : "Événement",
     "event.moderators"      : "Modérateurs",
     "event.labelLogOff": "Voulez-vous vous déconnecter ?",
+    "event.showSelfie"      : "Montrer la capture",
     "event.showPresentation" : "Montrer la présentation",
     "event.showVideoList"    : "Montrer les vidéos",
     "event.sendNotification" : "Envoyez ce message à tous les participants:",

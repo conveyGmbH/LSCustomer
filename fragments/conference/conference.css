@@ -55,6 +55,7 @@
     align-items: flex-start;
 }
 
+.show-selfie-toggle-container,
 .show-presentation-toggle-container,
 .show-videolist-toggle-container {
     display: none;
@@ -68,6 +69,7 @@
     display: inline-block;
 }
 
+.show-selfie-toggle-container .win-toggleswitch .win-toggleswitch-header,
 .show-presentation-toggle-container .win-toggleswitch .win-toggleswitch-header,
 .show-videolist-toggle-container .win-toggleswitch .win-toggleswitch-header {
     margin-bottom: 0;
@@ -79,6 +81,7 @@
     line-height: 1;
 }
 
+.show-selfie-toggle-container .win-toggleswitch .win-toggleswitch-value,
 .show-presentation-toggle-container .win-toggleswitch .win-toggleswitch-value,
 .show-videolist-toggle-container .win-toggleswitch .win-toggleswitch-value {
     margin-left: 10px;
@@ -94,29 +97,36 @@
     text-overflow: ellipsis;
 }
 
+.show-selfie-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
+.show-selfie-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-thumb,
 .show-presentation-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-thumb,
 .show-videolist-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-thumb {
     background-color: var(--btn-primary-bg);
 }
+.show-selfie-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track {
     opacity: 0.8;
 }
+.show-selfie-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-track {
     border-color: var(--btn-primary-bg);
     opacity: 0.8;
 }
 
+.show-selfie-toggle-container .win-toggleswitch-on:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-on:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-on:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
+.show-selfie-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-thumb,
 .show-presentation-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-thumb,
-.show-videolist-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-thumb { 
+.show-videolist-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-thumb {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
 }
+.show-selfie-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track {
     border-color: var(--btn-primary-bg) !important;

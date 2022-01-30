@@ -25,6 +25,7 @@
     "event.title"           : "Veranstaltung",
     "event.moderators"      : "Moderators",
     "event.labelLogOff"     : "Möchten Sie sich abmelden?",
+    "event.showSelfie"      : "Show Capture",
     "event.showPresentation" : "Show presentation",
     "event.showVideoList"    : "Show videos",
     "event.sendNotification" : "Send this message to all participants:",
