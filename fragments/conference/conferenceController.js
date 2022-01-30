@@ -90,7 +90,7 @@ var __meteor_runtime_config__;
     bbbClass.overlay = "react-draggable";
     bbbClass.userList = "userList--Z2q1D0p";
     bbbClass.list = "userList--Z2q1D0p .userListColumn--6vKQL .scrollStyle--Ckr4w";
-    bbbClass.participantsList = "userListItem--Z1qtuLG";
+    bbbClass.participantsList = "ReactVirtualized__Grid__innerScrollContainer > span";
     bbbClass.chat = "chat--111wNM";
     bbbClass.messageList = "messageList--2kDQeQ";
     bbbClass.item = "item--ZfUxvS";
@@ -882,6 +882,9 @@ var __meteor_runtime_config__;
                                                 try {
                                                     while (participantsListEntry.firstElementChild) {
                                                         participantsListEntry.removeChild(participantsListEntry.firstElementChild);
+                                                    }
+                                                    if (participantsListEntry.style) {
+                                                        participantsListEntry.style.display = "none";
                                                     }
                                                 } catch (ex) {
                                                     Log.print(Log.l.trace, "participantsList[" + i + "] is not a child entry of userList");
