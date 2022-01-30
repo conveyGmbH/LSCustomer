@@ -2644,8 +2644,12 @@ var __meteor_runtime_config__;
                                     if (oldIndexesFound.indexOf(oldIndex) < 0) {
                                         oldItem = unpinnedVideoList.getAt(oldIndex);
                                         if (item && oldItem && item.key === oldItem.key) {
-                                            var videoTrack = item.mediaStream && item.mediaStream.getVideoTracks() && item.mediaStream.getVideoTracks()[0];
-                                            var oldVideoTrack = oldItem.mediaStream && oldItem.mediaStream.getVideoTracks() && oldItem.mediaStream.getVideoTracks()[0];
+                                            var videoTrack = item.mediaStream &&
+                                                item.mediaStream.getVideoTracks() &&
+                                                item.mediaStream.getVideoTracks()[0];
+                                            var oldVideoTrack = oldItem.mediaStream &&
+                                                oldItem.mediaStream.getVideoTracks() &&
+                                                oldItem.mediaStream.getVideoTracks()[0];
                                             if (item.userName !== oldItem.userName ||
                                                 item.myselfLabel !== oldItem.myselfLabel ||
                                                 item.mediaStream !== oldItem.mediaStream ||
@@ -2683,7 +2687,8 @@ var __meteor_runtime_config__;
                                     }
                                 }
                                 if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
-                                    var actionsBarLeft = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.left);
+                                    var actionsBarLeft =
+                                        fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.left);
                                     if (actionsBarLeft && !isChildElement(actionsBarLeft, showSelfieToggleContainer)) {
                                         actionsBarLeft.appendChild(showSelfieToggleContainer);
                                     }
@@ -2699,6 +2704,10 @@ var __meteor_runtime_config__;
                             if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
                                 showSelfieToggleContainer.style.display = "none";
                             }
+                        }
+                    } else {
+                        if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
+                            showSelfieToggleContainer.style.display = "none";
                         }
                     }
                     if ((pageControllerName === "modSessionController" || myselfIsUnpinned) && 
