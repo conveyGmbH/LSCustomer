@@ -34,6 +34,7 @@ var __meteor_runtime_config__;
         dropdownTrigger: "dropdownTrigger--Z1Fp5dg",
         floatingOverlay: "floatingOverlay--ZU51zt",
         form: "form--1S2xdc",
+        fullscreen: "fullscreen--Z2dWit1",
         fullScreenButton: "fullScreenButton--Z1bf0vj",
         fullWidth: "fullWidth--Z1RRil3",
         hideLabel: "hideLabel--2vEtaU",
@@ -1542,10 +1543,23 @@ var __meteor_runtime_config__;
                     fullScreenButton.onclick = function (event) {
                         if (element && document.fullscreenEnabled) {
                             // detect fullscreen state
-                            if (element.parentElement.querySelector(':fullscreen') === element) {
-                                document.exitFullscreen();
-                            } else {
-                                element.requestFullscreen();
+                            try {
+                                if (element.parentElement.querySelector(':fullscreen') === element) {
+                                    if (typeof document.exitFullscreen === "function") {
+                                        document.exitFullscreen();
+                                    } else if (document.webkitExitFullscreen === "function") {
+                                        document.webkitExitFullscreen();
+                                    }
+                                } else {
+                                    if (typeof element.requestFullscreen === "function") {
+                                        element.requestFullscreen();
+                                    } else if (element.webkitRequestFullscreen === "function") {
+                                        element.webkitRequestFullscreen();
+                                    }
+                                }
+                                event.stopPropagation();
+                            } catch (ex) {
+                                // ignore that...
                             }
                         }
                     }
