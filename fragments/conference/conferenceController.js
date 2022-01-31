@@ -201,7 +201,6 @@ var __meteor_runtime_config__;
                 videoListWidth: 0,
                 videoListHeight: 0,
                 hideInactive: false,
-                hideMuted: false,
                 contentActivity: [],
                 inactivityDelay: 7000,
                 activeVideoCount: 0,
@@ -1935,7 +1934,7 @@ var __meteor_runtime_config__;
                                             subtree: true
                                         });
                                     }
-                                    if (videoListDefaults.usePinned || videoListDefaults.hideInactive || videoListDefaults.hideMuted) {
+                                    if (videoListDefaults.usePinned || videoListDefaults.hideInactive) {
                                         numVideos = videoListDefaults.activeVideoCount;
                                     } else {
                                         numVideos = videoList.childElementCount;
@@ -2404,9 +2403,8 @@ var __meteor_runtime_config__;
                 var key = null;
                 var videoList = null;
                 var hideInactive = videoListDefaults.hideInactive;
-                var hideMuted = videoListDefaults.hideMuted;
                 var usePinned = videoListDefaults.usePinned;
-                Log.call(Log.l.trace, "Conference.Controller.", "usePinned=" + usePinned + " hideInactive=" + hideInactive + " hideMuted=" + hideMuted);
+                Log.call(Log.l.trace, "Conference.Controller.", "usePinned=" + usePinned + " hideInactive=" + hideInactive);
                 if (checkForInactiveVideoPromise) {
                     checkForInactiveVideoPromise.cancel();
                     checkForInactiveVideoPromise = null;
@@ -2418,6 +2416,7 @@ var __meteor_runtime_config__;
                 var ret = new WinJS.Promise.as().then(function () {
                     var mediaContainer = fragmentElement.querySelector("." + getMediaContainerClass());
                     if (mediaContainer) {
+                        var presenterModeActive = WinJS.Utilities.hasClass(mediaContainer, "presenter-mode");
                         var overlayElement = mediaContainer.querySelector("." + bbbClass.overlay + ", ." + bbbClass.hideOverlay + ", .video-overlay-left, .video-overlay-right, .video-overlay-top, .video-overlay-default");
                         if (overlayElement) {
                             videoList = overlayElement.querySelector("." + bbbClass.videoList);
@@ -2514,14 +2513,13 @@ var __meteor_runtime_config__;
                                                 enabled: (isMyself || pageControllerName === "modSessionController")
                                             });
                                         }
-                                        if ((hideInactive || hideMuted) && muted ||
-                                            hideInactive && inactivity > videoListDefaults.inactivityDelay ||
+                                        if (!presenterModeActive && hideInactive && (muted || inactivity > videoListDefaults.inactivityDelay) ||
                                             usePinned && pinnedIndex < 0) {
                                             if (!WinJS.Utilities.hasClass(videoListItem, "inactive-video-hidden")) {
                                                 WinJS.Utilities.addClass(videoListItem, "inactive-video-hidden");
                                             }
                                         } else {
-                                            if (hideInactive || hideMuted || usePinned) {
+                                            if (hideInactive || usePinned) {
                                                 if (prevActiveItem) {
                                                     if (prevPinnedIndex < 0 || pinnedIndex < 0 || prevPinnedIndex <= pinnedIndex) {
                                                         if (prevActiveItem.nextSibling && videoListItem !== prevActiveItem.nextSibling) {
@@ -2964,7 +2962,6 @@ var __meteor_runtime_config__;
                             if (that.binding.dataSessionStatus) {
                                 that.binding.dataSessionStatus.VideoListPosition = videoListDefaults.right;
                             }
-                            videoListDefaults.hideMuted = true;
                         }
                         break;
                         case presenterModeDefaults.full: {
@@ -2983,7 +2980,6 @@ var __meteor_runtime_config__;
                             if (that.binding.dataSessionStatus) {
                                 that.binding.dataSessionStatus.VideoListPosition = videoListDefaults.right;
                             }
-                            videoListDefaults.hideMuted = true;
                         }
                         break;
                         case presenterModeDefaults.small: {
@@ -3002,7 +2998,6 @@ var __meteor_runtime_config__;
                             if (that.binding.dataSessionStatus) {
                                 that.binding.dataSessionStatus.VideoListPosition = videoListDefaults.right;
                             }
-                            videoListDefaults.hideMuted = true;
                         }
                         break;
                         default: {
@@ -3018,7 +3013,6 @@ var __meteor_runtime_config__;
                             if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-full")) {
                                 WinJS.Utilities.removeClass(mediaContainer, "presenter-mode-full");
                             }
-                            videoListDefaults.hideMuted = false;
                         }
                     }
                     if (that.binding.dataSessionStatus) {
