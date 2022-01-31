@@ -24,6 +24,7 @@ var __meteor_runtime_config__;
         center1: "center--ZyfFaC",
         center2: "center--2pV1iJ",
         chat: "chat--Z1w8gP7",
+        chatToggleButton: "div[role=\"button\"]#chat-toggle-button",
         container: "container--ZmRztk",
         container1: "container--1hUthh",
         content: "content--Z2gO9GE",
@@ -76,6 +77,7 @@ var __meteor_runtime_config__;
         top2: "top--Z25OvN9",
         userList: "userList--11btR3",
         userListColumn: "userListColumn--6vKQL",
+        userListToggleButton: "button[accesskey=\"U\"]",
         userName: "userName--ZsKYfV",
         userNameMain: "userNameMain--2fo2zM",
         videoContainer: "videoContainer--rssHk",
@@ -4274,7 +4276,7 @@ var __meteor_runtime_config__;
             that.setCommandMessageHandler = setCommandMessageHandler;
 
             var submitCommandMessage = function(command, event, openedUserList, openedChat) {
-                var btnToggleChat, btnToggleUserList, panelWrapper;
+                var btnToggleChat, btnToggleUserList;
                 Log.call(Log.l.info, "Conference.Controller.", "command=" + command);
                 if (typeof command !== "string") {
                     Log.ret(Log.l.error, "invalid param");
@@ -4289,6 +4291,7 @@ var __meteor_runtime_config__;
                     submitCommandMessagePromise.cancel();
                     submitCommandMessagePromise = null;
                 }
+                var panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                 var messageInput = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat + " ." + bbbClass.form + " textarea#message-input");
                 if (messageInput) {
                     //messageInput.focus();
@@ -4307,13 +4310,13 @@ var __meteor_runtime_config__;
                         messageInput.form.reset();
                     }
                     if (openedChat) {
-                        btnToggleChat = fragmentElement.querySelector("div[role=\"button\"][aria-expanded=\"true\"]#chat-toggle-button");
+                        btnToggleChat = fragmentElement.querySelector(bbbClass.chatToggleButton);
                         if (btnToggleChat) {
                             btnToggleChat.click();
                         }
                     }
                     if (openedUserList) {
-                        btnToggleUserList = fragmentElement.querySelector("button[accesskey=\"U\"]." + bbbClass.btn);
+                        btnToggleUserList = fragmentElement.querySelector(bbbClass.userListToggleButton + "." + bbbClass.btn);
                         if (btnToggleUserList && 
                             !(btnToggleUserList.nextElementSibling &&
                               WinJS.Utilities.hasClass(btnToggleUserList.nextElementSibling, "icon-bbb-right_arrow"))) {
@@ -4321,7 +4324,6 @@ var __meteor_runtime_config__;
                         }
                     }
                     if (openedChat || openedUserList) {
-                        panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
                         if (panelWrapper) {
                             if (WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
                                 WinJS.Promise.timeout(50).then(function() {
@@ -4336,28 +4338,31 @@ var __meteor_runtime_config__;
                         }
                     }
                 } else {
-                    btnToggleChat = fragmentElement.querySelector("div[role=\"button\"][aria-expanded=\"false\"]#chat-toggle-button");
-                    if (btnToggleChat) {
-                        panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
-                        if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
-                            WinJS.Utilities.addClass(panelWrapper, "hide-chat-section");
-                        } else {
-                            btnToggleChat.click();
-                            openedChat = true;
-                        }
-                    } else {
-                        panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
+                    var userListPane = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.userList);
+                    if (!userListPane) {
                         if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
                             WinJS.Utilities.addClass(panelWrapper, "hide-panel-section");
                         } else {
-                            btnToggleUserList = fragmentElement.querySelector("button[accesskey=\"U\"]." + bbbClass.btn);
-                            if (btnToggleUserList && 
-                                (btnToggleUserList.nextElementSibling &&
-                                 WinJS.Utilities.hasClass(btnToggleUserList.nextElementSibling, "icon-bbb-right_arrow"))) {
+                            btnToggleUserList =
+                                fragmentElement.querySelector(bbbClass.userListToggleButton + "." + bbbClass.btn);
+                            if (btnToggleUserList) {
                                 btnToggleUserList.click();
                                 openedUserList = true;
                             }
                         }
+                    } else {
+                        var chatPane = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat);
+                        if (!chatPane) {
+                            if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
+                                WinJS.Utilities.addClass(panelWrapper, "hide-chat-section");
+                            } else {
+                                btnToggleChat = fragmentElement.querySelector(bbbClass.chatToggleButton);
+                                if (btnToggleChat) {
+                                    btnToggleChat.click();
+                                    openedChat = true;
+                                }
+                            }
+                        } 
                     }
                     submitCommandMessagePromise = WinJS.Promise.timeout(20).then(function() {
                         that.submitCommandMessage(command, event, openedUserList, openedChat);
