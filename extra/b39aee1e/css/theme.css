@@ -173,7 +173,7 @@
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
-    border-color: var(--e-global-color-accent, #c2d63e);
+    border-color: var(--e-global-color-accent, #c2d63e) !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {

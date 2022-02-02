@@ -446,6 +446,12 @@ section.elementor-inner-section > div {
 
 .text-lightcolor.win-button {
     background-color: Window;
+    color: #000000 !important;
+    border-color: #c2d63e !important;
+}
+
+.text-lightcolor.win-button:hover {
+    background-color: #dcdce4;
 }
 
 .text-lightcolor.win-button:disabled {
