@@ -2277,7 +2277,7 @@ var __meteor_runtime_config__;
                                 }
                             }
                         }
-                        if (pageControllerName === "eventController") {
+                        if (pageControllerName === "eventController" || pageControllerName === "speakerSessionController") {
                             var actionsBarCenter = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.center1);
                             if (actionsBarCenter && emojiButtonContainer && emojiToolbar &&
                                 actionsBarCenter.lastElementChild !== emojiToolbar) {
