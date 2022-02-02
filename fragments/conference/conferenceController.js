@@ -2795,6 +2795,7 @@ var __meteor_runtime_config__;
                     pUserToken: userToken
                 }, function (json) {
                     Log.print(Log.l.trace, "Prc_GetBBBSessionStatus success!");
+                    var prevPresenterMode = that.binding.dataSessionStatus.PresenterMode;
                     if (json && json.d && json.d.results && json.d.results.length > 0) {
                         that.binding.dataSessionStatus = json.d.results[0];
                         that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
@@ -3599,7 +3600,7 @@ var __meteor_runtime_config__;
                                     dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
                                     that.saveSessionStatus(dataSessionStatus);
                                     if (!checkForInactiveVideoPromise) {
-                                        checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
+                                        checkForInactiveVideoPromise = WinJS.Promise.timeout(0).then(function() {
                                             that.checkForInactiveVideo();
                                         });
                                     }
@@ -3619,13 +3620,26 @@ var __meteor_runtime_config__;
                         if (targetParent) {
                             var key = targetParent.name;
                             if (key) {
+                                var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
                                 if ( !that.binding.pinnedVideos ) {
                                     that.binding.pinnedVideos = [];
                                 }
                                 if (that.binding.pinnedVideos.indexOf(key) < 0) {
-                                    that.binding.pinnedVideos.push(key);
+                                    if (unpinnedVideoList) {
+                                        for (var oldIndex = 0; oldIndex < unpinnedVideoList.length; oldIndex++) {
+                                            var oldItem = unpinnedVideoList.getAt(oldIndex);
+                                            if (oldItem && key === oldItem.key) {
+                                                unpinnedVideoList.splice(oldIndex, 1);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (dataSessionStatus.PresenterMode !== presenterModeDefaults.off) {
+                                        that.binding.pinnedVideos = [key];
+                                    } else {
+                                        that.binding.pinnedVideos.push(key);
+                                    }
                                 }
-                                var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
                                 dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
                                 that.saveSessionStatus(dataSessionStatus);
                                 if (!checkForInactiveVideoPromise) {
