@@ -19,6 +19,7 @@
     "tooltip.videoListRight" : "Modalità conferenza: le immagini video dei partecipanti sono visualizzate a destra della presentazione in elenco verticale",
     "tooltip.videoListDefault" : "Modalità conferenza: le immagini video dei partecipanti sono in elenco orizzontale e possono essere spostate sopra o sotto la presentazione",
     "tooltip.emojiChooserc" : "Seleziona un emoji per dare un feedback spontaneo a tutti i partecipanti",
+    "tooltip.openChat"      : "Chat pubblica",
 
     "events.title"          : "Series",
 

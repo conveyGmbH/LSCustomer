@@ -115,6 +115,22 @@
                              data-win-bind="winControl.checked: showVideoList; winControl.title: labelShowVideoList; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
                              onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
                     </div>
+                    <div class="show-chat-button-container">
+                        <button id="toggleChatButtonContainer" class="lg--Q7ufB buttonWrapper--x8uow"
+                                onclick="AppBar.handleEvent('click', 'clickShowChat', event)">
+                            <div class="button-tip">
+                                <span class="button--Z2dosza lg--Q7ufB primary--1IbqAO circle--Z2c8umk">
+                                    <i class="show-button-image" id="message"></i>
+                                </span>
+                                <div class="win-tooltip">
+                                    <div class="bubble-arrow"></div>
+                                    <div class="bubble-body">
+                                        <span data-win-res="{textContent: 'tooltip.openChat'}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
                     <div class="emoji-button-container">
                         <button id="toggleEmojiChooser" class="win-button"
                                 onclick="AppBar.handleEvent('click', 'clickToggleEmojiButton', event)">

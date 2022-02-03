@@ -215,6 +215,7 @@ var __meteor_runtime_config__;
                 userListObserver: null,
                 toggleBtnObserver: null,
                 toggleUserList: null,
+                inSubmitCommand: false,
                 panelWrapperObserver: null,
                 pollContentObserver: null,
                 selfLabels: ["(Sie)", "(You)", "(Ich)", "(Me)", "(I)"],
@@ -281,6 +282,7 @@ var __meteor_runtime_config__;
             var showSelfieToggleContainer = fragmentElement.querySelector(".show-selfie-toggle-container");
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
+            var showChatButtonContainer = fragmentElement.querySelector(".show-chat-button-container");
             var pollQuestionContainer = fragmentElement.querySelector("poll-question-container");
             var emojiButtonContainer = fragmentElement.querySelector(".emoji-button-container");
             var emojiToolbar = fragmentElement.querySelector("#emojiToolbar");
@@ -299,6 +301,7 @@ var __meteor_runtime_config__;
             var observeChatMessageListPromise = null;
             var observePollPromise = null;
             var submitCommandMessagePromise = null;
+            var openChatPanePromise = null;
             var showNotificationPromise = null;
             var hideNotificationPromise = null;
             var setPollingPromise = null;
@@ -995,7 +998,25 @@ var __meteor_runtime_config__;
                 }
                 var btnToggleUserList = fragmentElement.querySelector("." + bbbClass.btn);
                 if (btnToggleUserList) {
-                    var userList = fragmentElement.querySelector("."+bbbClass.userList);
+                    userListDefaults.toggleUserList = btnToggleUserList.onclick;
+                    btnToggleUserList.onclick = function(event) {
+                        if (!userListDefaults.inSubmitCommand) {
+                            var panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
+                            if (panelWrapper) {
+                                if (WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                    WinJS.Utilities.removeClass(panelWrapper, "hide-user-list-section");
+                                    var target = event.currentTarget || event.target;
+                                    WinJS.Promise.timeout(50).then(function() {
+                                        if (target && typeof target.click === "function") {
+                                            target.click();
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                        userListDefaults.toggleUserList(event);
+                    }
+                    var userList = fragmentElement.querySelector("." + bbbClass.userList);
                     if (userList) {
                         ret = true;
                         if (!show) {
@@ -1140,7 +1161,9 @@ var __meteor_runtime_config__;
                         if (addedNode && addedNode.firstElementChild) {
                             if (WinJS.Utilities.hasClass(addedNode.firstElementChild, bbbClass.userList)) {
                                 Log.print(Log.l.trace, "userList panel opened" );
-                                if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                if (panelWrapper && 
+                                    !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section") &&
+                                    !WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
                                     if (!filterUserListPromise) {
                                         filterUserListFailedCount = 0;
                                         filterUserListPromise = WinJS.Promise.timeout(0).then(function () {
@@ -1597,7 +1620,7 @@ var __meteor_runtime_config__;
 
             var lastDeviceListTime = 0;
             var adjustContentPositions = function () {
-                var actionsBarRight = null;
+                var actionsBarRight = null, actionsBarLeft = null;
                 Log.call(Log.l.trace, "Conference.Controller.", "videoListPosition=" + (that.binding.dataSessionStatus && that.binding.dataSessionStatus.VideoListPosition));
                 if (adjustContentPositionsPromise) {
                     adjustContentPositionsPromise.cancel();
@@ -1819,6 +1842,9 @@ var __meteor_runtime_config__;
                                     if (paneWidth > 0 &&
                                         !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section") &&
                                         !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                        if (!WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
+                                            WinJS.Utilities.addClass(panelWrapper, "pane-expanded");
+                                        }
                                         Log.print(Log.l.trace, "paneWidth=" + paneWidth);
                                         panelWrapper.style.width = "calc(100% - " + paneWidth.toString() + "px)";
                                         panelWrapper.style.left = paneWidth.toString() + "px";
@@ -1840,6 +1866,9 @@ var __meteor_runtime_config__;
                                             currentPane = currentPane.nextElementSibling;
                                         }
                                     } else {
+                                        if (WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
+                                            WinJS.Utilities.removeClass(panelWrapper, "pane-expanded");
+                                        }
                                         panelWrapper.style.width = "100%";
                                         panelWrapper.style.left = "0";
                                         if (overlayElement) {
@@ -1875,23 +1904,37 @@ var __meteor_runtime_config__;
                             if (pageControllerName === "modSessionController") {
                                 if (presenterButtonContainer && presenterButtonContainer.style) {
                                     var navBarTopCenter = fragmentElement.querySelector("." + bbbClass.navbar + " ." + bbbClass.top2 + " ." + bbbClass.center2);
-                                    if (navBarTopCenter && navBarTopCenter.firstElementChild !== presenterButtonContainer) {
-                                        navBarTopCenter.insertBefore(presenterButtonContainer, navBarTopCenter.firstElementChild);
+                                    if (navBarTopCenter &&
+                                        navBarTopCenter.firstElementChild !== presenterButtonContainer) {
+                                        navBarTopCenter.insertBefore(presenterButtonContainer,
+                                            navBarTopCenter.firstElementChild);
                                         presenterButtonContainer.style.display = "inline-block";
                                     }
                                 }
                                 if (showPresentationToggleContainer && showPresentationToggleContainer.style) {
                                     actionsBarRight = fragmentElement.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
-                                    if (actionsBarRight && !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
+                                    if (actionsBarRight &&
+                                        !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
                                         actionsBarRight.appendChild(showPresentationToggleContainer);
                                         showPresentationToggleContainer.style.display = "inline-block";
                                     }
                                 }
                                 if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
                                     actionsBarRight = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.right);
-                                    if (actionsBarRight &&  !isChildElement(actionsBarRight, showVideoListToggleContainer)) {
+                                    if (actionsBarRight &&
+                                        !isChildElement(actionsBarRight, showVideoListToggleContainer)) {
                                         actionsBarRight.appendChild(showVideoListToggleContainer);
                                         showVideoListToggleContainer.style.display = "inline-block";
+                                    }
+                                }
+                            } else {
+                                if (showChatButtonContainer && showChatButtonContainer.style) {
+                                    actionsBarLeft = panelWrapper.querySelector("." + bbbClass.actionsbar + " ." + bbbClass.left);
+                                    if (actionsBarLeft &&
+                                        !isChildElement(actionsBarLeft, showChatButtonContainer)) {
+                                        actionsBarLeft.appendChild(showChatButtonContainer);
+                                        showChatButtonContainer.style.display = "inline-block";
+                                        showChatButtonContainer.style.position = "bottom";
                                     }
                                 }
                             }
@@ -3975,7 +4018,12 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
-                clickToggleEmojiButton: function() {
+                clickShowChat: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    that.openChatPane(event);
+                    Log.ret(Log.l.info);
+                },
+                clickToggleEmojiButton: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     that.eventHandlers.toggleToolbox("emojiToolbar");
                     Log.ret(Log.l.info);
@@ -4283,6 +4331,45 @@ var __meteor_runtime_config__;
             }
             that.setCommandMessageHandler = setCommandMessageHandler;
 
+            var openChatPane = function(event) {
+                var btnToggleChat, btnToggleUserList;
+                Log.call(Log.l.info, "Conference.Controller.");
+                if (openChatPanePromise) {
+                    openChatPanePromise.cancel();
+                    openChatPanePromise = null;
+                }
+                var panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
+                var messageInput = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat + " ." + bbbClass.form + " textarea#message-input");
+                if (!messageInput) {
+                    var userListPane = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.userList);
+                    if (!userListPane) {
+                        if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                            WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                        } else {
+                            btnToggleUserList = fragmentElement.querySelector(bbbClass.userListToggleButton + "." + bbbClass.btn);
+                            if (btnToggleUserList) {
+                                userListDefaults.inSubmitCommand = true;
+                                btnToggleUserList.click();
+                            }
+                        }
+                    } else {
+                        userListDefaults.inSubmitCommand = false;
+                        var chatPane = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat);
+                        if (!chatPane) {
+                            btnToggleChat = fragmentElement.querySelector(bbbClass.chatToggleButton);
+                            if (btnToggleChat) {
+                                btnToggleChat.click();
+                            }
+                        } 
+                    }
+                    openChatPanePromise = WinJS.Promise.timeout(20).then(function() {
+                        that.openChatPane();
+                    });
+                }
+                Log.ret(Log.l.info);
+            }
+            that.openChatPane = openChatPane;
+
             var submitCommandMessage = function(command, event, openedUserList, openedChat) {
                 var btnToggleChat, btnToggleUserList;
                 Log.call(Log.l.info, "Conference.Controller.", "command=" + command);
@@ -4300,6 +4387,7 @@ var __meteor_runtime_config__;
                     submitCommandMessagePromise = null;
                 }
                 var panelWrapper = fragmentElement.querySelector("." + bbbClass.layout);
+                var userListPane = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.userList);
                 var messageInput = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.chat + " ." + bbbClass.form + " textarea#message-input");
                 if (messageInput) {
                     //messageInput.focus();
@@ -4323,11 +4411,9 @@ var __meteor_runtime_config__;
                             btnToggleChat.click();
                         }
                     }
-                    if (openedUserList) {
+                    if (openedUserList && userListPane) {
                         btnToggleUserList = fragmentElement.querySelector(bbbClass.userListToggleButton + "." + bbbClass.btn);
-                        if (btnToggleUserList && 
-                            !(btnToggleUserList.nextElementSibling &&
-                              WinJS.Utilities.hasClass(btnToggleUserList.nextElementSibling, "icon-bbb-right_arrow"))) {
+                        if (btnToggleUserList) {
                             btnToggleUserList.click();
                         }
                     }
@@ -4340,20 +4426,20 @@ var __meteor_runtime_config__;
                             }
                             if (WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
                                 WinJS.Promise.timeout(50).then(function() {
+                                    userListDefaults.inSubmitCommand = false;
                                     WinJS.Utilities.removeClass(panelWrapper, "hide-panel-section");
                                 });
                             }
                         }
                     }
                 } else {
-                    var userListPane = fragmentElement.querySelector("#conference.mediaview ." + bbbClass.userList);
                     if (!userListPane) {
                         if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
                             WinJS.Utilities.addClass(panelWrapper, "hide-panel-section");
                         } else {
-                            btnToggleUserList =
-                                fragmentElement.querySelector(bbbClass.userListToggleButton + "." + bbbClass.btn);
+                            btnToggleUserList = fragmentElement.querySelector(bbbClass.userListToggleButton + "." + bbbClass.btn);
                             if (btnToggleUserList) {
+                                userListDefaults.inSubmitCommand = true;
                                 btnToggleUserList.click();
                                 openedUserList = true;
                             }
