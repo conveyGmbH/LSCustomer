@@ -446,7 +446,7 @@ section.elementor-inner-section > div {
 
 .text-lightcolor.win-button {
     background-color: Window;
-    color: #000000 !important;
+    color: WindowText !important;
     border-color: #c2d63e !important;
 }
 
@@ -456,6 +456,7 @@ section.elementor-inner-section > div {
 
 .text-lightcolor.win-button:disabled {
     background-color: #dcdcE4;
+    color: #7B7B7F !important;
     cursor: default;
 }
 
