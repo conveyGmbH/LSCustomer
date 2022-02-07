@@ -354,6 +354,11 @@
     outline: var(--outline-focus) !important;
 }
 
+#conferenceController .show-chat-button-container .button-tip > span {
+    width: 44px;
+    height: 44px;
+}
+
 #conferenceController .show-chat-button-container .show-button-image > svg {
     width: 20px;
     height: 20px;
@@ -1830,7 +1835,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 .speakerSession #conferenceController .show-chat-button-container > button .button-tip .win-tooltip,
 .event #conferenceController .show-chat-button-container > button .button-tip .win-tooltip {
     top: -15px;
-    left: -33px;
+    left: -18px;
     min-height: 40px;
     min-width: 100px;
     width: 110px;
@@ -1886,7 +1891,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 .event #conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
-    margin-left: calc(50% - 10px);
+    margin-left: calc(50% - 25px);
     transform: rotate(45deg);
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
