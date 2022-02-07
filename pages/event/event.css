@@ -5,6 +5,19 @@
     scroll-snap-type: y proximity;
 }
 */
+.event .win-type-title,
+.event .win-type-subtitle,
+.event .win-type-body,
+.event .win-h1,
+.event .win-h2,
+.event .win-h3,
+.event .win-h5,
+.event .win-tooltip,
+.event .win-type-caption,
+.event .caption-field,
+.event .content-header {
+    font-family: "Barlow";
+}
 
 .event .bold {
     font-weight: 600;
