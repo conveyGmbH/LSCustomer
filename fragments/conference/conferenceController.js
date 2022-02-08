@@ -1830,66 +1830,102 @@ var __meteor_runtime_config__;
                                 WinJS.Promise.timeout(20).then(function() {
                                     var paneWidth = 0;
                                     var currentPane = panelWrapper.firstElementChild;
-                                    while (currentPane &&
-                                        typeof currentPane.tagName === "string" &&
-                                        currentPane.tagName.toLowerCase() !== "header") {
-                                        if (!WinJS.Utilities.hasClass(currentPane, "opened-pane")) {
-                                            WinJS.Utilities.addClass(currentPane, "opened-pane");
+                                    if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium")) {
+                                        panelWrapper.style.left = "0";
+                                        panelWrapper.style.width = "100%";
+                                        if (overlayElement) {
+                                            overlayElement.style.left = "";
                                         }
-                                        paneWidth += currentPane.clientWidth;
-                                        currentPane = currentPane.nextElementSibling;
-                                    }
-                                    if (paneWidth > 0 &&
-                                        !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section") &&
-                                        !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
-                                        if (!WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
-                                            WinJS.Utilities.addClass(panelWrapper, "pane-expanded");
-                                        }
-                                        Log.print(Log.l.trace, "paneWidth=" + paneWidth);
-                                        panelWrapper.style.width = "calc(100% - " + paneWidth.toString() + "px)";
-                                        panelWrapper.style.left = paneWidth.toString() + "px";
-                                        currentPane = panelWrapper.firstElementChild;
                                         while (currentPane &&
                                             typeof currentPane.tagName === "string" &&
                                             currentPane.tagName.toLowerCase() !== "header") {
-                                            currentPane.style.left = "-" + paneWidth.toString() + "px";
-                                            paneWidth -= currentPane.clientWidth;
+                                            if (!WinJS.Utilities.hasClass(currentPane, "opened-pane")) {
+                                                WinJS.Utilities.addClass(currentPane, "opened-pane");
+                                            }
+                                            if (currentPane.style) {
+                                                if (paneWidth < panelWrapper.clientWidth) {
+                                                    currentPane.style.left = paneWidth + "px";
+                                                } else {
+                                                    currentPane.style.left = "0";
+                                                }
+                                            }
+                                            paneWidth += currentPane.clientWidth;
                                             currentPane = currentPane.nextElementSibling;
                                         }
-                                    } else {
-                                        if (WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
-                                            WinJS.Utilities.removeClass(panelWrapper, "pane-expanded");
+                                        if (paneWidth > 0 &&
+                                            !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section") &&
+                                            !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                            if (!WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
+                                                WinJS.Utilities.addClass(panelWrapper, "pane-expanded");
+                                            }
+                                            Log.print(Log.l.trace, "paneWidth=" + paneWidth);
+                                        } else {
+                                            if (WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
+                                                WinJS.Utilities.removeClass(panelWrapper, "pane-expanded");
+                                            }
                                         }
-                                        panelWrapper.style.width = "100%";
-                                        panelWrapper.style.left = "0";
-                                    }
-                                    if (overlayElement) {
-                                        var overlayStyle = window.getComputedStyle(overlayElement);
-                                        if (overlayStyle) {
-                                            var transform = overlayStyle.getPropertyValue("transform");
-                                            if (typeof transform === "string") {
-                                                if (transform.substr(0, 10) === "translate(" ||
-                                                    transform.substr(0, 7) === "matrix(") {
-                                                    var stop = transform.lastIndexOf(",");
-                                                    if (stop > 0) {
-                                                        var start = stop-1;
-                                                        while (start > 0 && transform[start] !== "," && transform[start] !== "(") {
-                                                            start--;
+                                    } else {
+                                        while (currentPane &&
+                                            typeof currentPane.tagName === "string" &&
+                                            currentPane.tagName.toLowerCase() !== "header") {
+                                            if (!WinJS.Utilities.hasClass(currentPane, "opened-pane")) {
+                                                WinJS.Utilities.addClass(currentPane, "opened-pane");
+                                            }
+                                            paneWidth += currentPane.clientWidth;
+                                            currentPane = currentPane.nextElementSibling;
+                                        }
+                                        if (paneWidth > 0 &&
+                                            !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section") &&
+                                            !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                            if (!WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
+                                                WinJS.Utilities.addClass(panelWrapper, "pane-expanded");
+                                            }
+                                            Log.print(Log.l.trace, "paneWidth=" + paneWidth);
+                                            panelWrapper.style.width = "calc(100% - " + paneWidth.toString() + "px)";
+                                            panelWrapper.style.left = paneWidth.toString() + "px";
+                                            currentPane = panelWrapper.firstElementChild;
+                                            while (currentPane &&
+                                                typeof currentPane.tagName === "string" &&
+                                                currentPane.tagName.toLowerCase() !== "header") {
+                                                currentPane.style.left = "-" + paneWidth.toString() + "px";
+                                                paneWidth -= currentPane.clientWidth;
+                                                currentPane = currentPane.nextElementSibling;
+                                            }
+                                        } else {
+                                            if (WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
+                                                WinJS.Utilities.removeClass(panelWrapper, "pane-expanded");
+                                            }
+                                            panelWrapper.style.width = "100%";
+                                            panelWrapper.style.left = "0";
+                                        }
+                                        if (overlayElement) {
+                                            var overlayStyle = window.getComputedStyle(overlayElement);
+                                            if (overlayStyle) {
+                                                var transform = overlayStyle.getPropertyValue("transform");
+                                                if (typeof transform === "string") {
+                                                    if (transform.substr(0, 10) === "translate(" ||
+                                                        transform.substr(0, 7) === "matrix(") {
+                                                        var stop = transform.lastIndexOf(",");
+                                                        if (stop > 0) {
+                                                            var start = stop-1;
+                                                            while (start > 0 && transform[start] !== "," && transform[start] !== "(") {
+                                                                start--;
+                                                            }
+                                                            var newTransform = transform.substr(0, start + 1) + " 0" + transform.substr(stop);
+                                                            overlayElement.style.transform = newTransform;
                                                         }
-                                                        var newTransform = transform.substr(0, start + 1) + " 0" + transform.substr(stop);
-                                                        overlayElement.style.transform = newTransform;
                                                     }
                                                 }
                                             }
-                                        }
-                                        if (videoPLayerOpened || screenShareOpened || presentationOpened) {
-                                            overlayElement.style.left = "";
-                                            overlayElement.style.width = "";
-                                        } else {
-                                            overlayElement.style.left = "0";
-                                            overlayElement.style.width = "100%";
-                                        }
-                                    } 
+                                            if (videoPLayerOpened || screenShareOpened || presentationOpened) {
+                                                overlayElement.style.left = "";
+                                                overlayElement.style.width = "";
+                                            } else {
+                                                overlayElement.style.left = "0";
+                                                overlayElement.style.width = "100%";
+                                            }
+                                        } 
+                                    }
                                 });
                             }
                             if (!sessionStatusIsSet && that.binding.dataSessionStatus) {

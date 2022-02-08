@@ -139,6 +139,7 @@
 .show-chat-button-container {
     display: none;
 }
+.view-size-medium .show-chat-button-container,
 .pane-expanded .show-chat-button-container {
     display: none !important;
 }
@@ -719,24 +720,32 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-top: 1px solid var(--color-gray-lightest);
     border-right: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
+}
+.view-size-medium #conference.mediaview .layout--Z2pPMwf > div:first-child,
+.view-size-medium #conference.mediaview .layout--Z2pPMwf > div:first-child + div {
+    top: 85px !important;
+    height: calc(100% - 150px) !important;
+}
+.pagecontrol:not(.view-size-medium) #conference.mediaview .layout--Z2pPMwf > div:first-child,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .layout--Z2pPMwf > div:first-child + div {
     width: 240px;
     min-width: 240px !important;
     max-width: 240px !important;
     height: 100% !important;
 }
-#conference.mediaview .layout--Z2pPMwf > div:first-child + div {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .layout--Z2pPMwf > div:first-child + div {
     width: 240px;
     min-width: 180px !important;
     max-width: 400px !important;
 }
-#conference.mediaview .hide-user-list-section > div:first-child,
-#conference.mediaview .hide-user-list-section > div:first-child *,
-#conference.mediaview .hide-chat-section > div:first-child + div,
-#conference.mediaview .hide-chat-section > div:first-child + div *,
-#conference.mediaview .hide-panel-section > div:first-child,
-#conference.mediaview .hide-panel-section > div:first-child *,
-#conference.mediaview .hide-panel-section > div:first-child + div,
-#conference.mediaview .hide-panel-section > div:first-child + div * {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .hide-user-list-section > div:first-child,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .hide-user-list-section > div:first-child *,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .hide-chat-section > div:first-child + div,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .hide-chat-section > div:first-child + div *,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .hide-panel-section > div:first-child,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .hide-panel-section > div:first-child *,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .hide-panel-section > div:first-child + div,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .hide-panel-section > div:first-child + div * {
     display: none !important;
     width: 0 !important;
 }
@@ -890,9 +899,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 @media only screen and (max-width: 1177px) {
-    #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
-    #conference.mediaview .deskshare-open.video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.video-overlay-default):not(.presentationContainer--1wqUYG):not(.Toastify):not(.unpinned-video-list-container):not(.opened-pane),
-    #conference.mediaview .videoplayer-open.video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
+    .pagecontrol:not(.view-size-medium) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
+    .pagecontrol:not(.view-size-medium) #conference.mediaview .deskshare-open.video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.video-overlay-default):not(.presentationContainer--1wqUYG):not(.Toastify):not(.unpinned-video-list-container):not(.opened-pane),
+    .pagecontrol:not(.view-size-medium) #conference.mediaview .videoplayer-open.video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
         left: 50px !important;
         width: calc(100% - 100px) !important;
         position: absolute;
@@ -908,12 +917,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     }
 }
 
-#conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .deskshare-open.video-overlay-is-hidden > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.video-overlay-default):not(.presentationContainer--1wqUYG):not(.Toastify):not(.unpinned-video-list-container):not(.opened-pane),
-#conference.mediaview .videoplayer-open.video-overlay-is-hidden > span,
-#conference.mediaview .presentation-open.video-overlay-is-empty .presentationContainer--1wqUYG:not(:fullscreen),
-#conference.mediaview .deskshare-open.video-overlay-is-empty > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.video-overlay-default):not(.presentationContainer--1wqUYG):not(.Toastify):not(.unpinned-video-list-container):not(.opened-pane),
-#conference.mediaview .videoplayer-open.video-overlay-is-empty > span {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
+.pagecontrol:not(.view-size-medium) #conference.mediaview .deskshare-open.video-overlay-is-hidden > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.video-overlay-default):not(.presentationContainer--1wqUYG):not(.Toastify):not(.unpinned-video-list-container):not(.opened-pane),
+.pagecontrol:not(.view-size-medium) #conference.mediaview .videoplayer-open.video-overlay-is-hidden > span,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-empty .presentationContainer--1wqUYG:not(:fullscreen),
+.pagecontrol:not(.view-size-medium) #conference.mediaview .deskshare-open.video-overlay-is-empty > div:not(.video-overlay-left):not(.video-overlay-right):not(.video-overlay-top):not(.video-overlay-default):not(.presentationContainer--1wqUYG):not(.Toastify):not(.unpinned-video-list-container):not(.opened-pane),
+.pagecontrol:not(.view-size-medium) #conference.mediaview .videoplayer-open.video-overlay-is-empty > span {
     left: 50px !important;
     width: calc(100% - 100px) !important;
 }
@@ -1352,13 +1361,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     right: 0;
 }
 
-#conference.mediaview .video-overlay-default {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .video-overlay-default {
     top: -35px;
     max-width: 100% !important;
     min-width: 192px !important;
 }
 
-#conference.mediaview .video-overlay-default .videoCanvas--Z1giNVE {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .video-overlay-default .videoCanvas--Z1giNVE {
     align-items: flex-start !important;
 }
 
@@ -1558,71 +1567,71 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     position: absolute;
 }
 
-#conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-1 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-1 {
     grid-template-columns: repeat(1, 1fr) !important;
     width: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-2 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-2 {
     grid-template-columns: repeat(2, 1fr) !important;
     width: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-3 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-3 {
     grid-template-columns: repeat(3, 1fr) !important;
     width: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-4 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-4 {
     grid-template-columns: repeat(4, 1fr) !important;
     width: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-5 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-5 {
     grid-template-columns: repeat(5, 1fr) !important;
     width: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-6 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-6 {
     grid-template-columns: repeat(6, 1fr) !important;
     width: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-7 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-7 {
     grid-template-columns: repeat(7, 1fr) !important;
     width: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-8 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-8 {
     grid-template-columns: repeat(8, 1fr) !important;
     width: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-1 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-1 {
     grid-template-rows: repeat(1, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-2 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-2 {
     grid-template-rows: repeat(2, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-3 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-3 {
     grid-template-rows: repeat(3, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-4 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-4 {
     grid-template-rows: repeat(4, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-5 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-5 {
     grid-template-rows: repeat(5, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-6 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-6 {
     grid-template-rows: repeat(6, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-7 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-7 {
     grid-template-rows: repeat(7, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-8 {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-8 {
     grid-template-rows: repeat(8, 1fr) !important;
     height: 100% !important;
 }
-#conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-1 .content--Z1CkMQ:not(.fullscreen--Z2dWit1) video {
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-1 .content--Z1CkMQ:not(.fullscreen--Z2dWit1) video {
     object-fit: cover;
 }
 
