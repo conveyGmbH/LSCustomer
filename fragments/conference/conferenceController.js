@@ -1848,15 +1848,6 @@ var __meteor_runtime_config__;
                                         Log.print(Log.l.trace, "paneWidth=" + paneWidth);
                                         panelWrapper.style.width = "calc(100% - " + paneWidth.toString() + "px)";
                                         panelWrapper.style.left = paneWidth.toString() + "px";
-                                        if (overlayElement) {
-                                            if (videoPLayerOpened || screenShareOpened || presentationOpened) {
-                                                overlayElement.style.left = "";
-                                                overlayElement.style.width = "";
-                                            } else {
-                                                overlayElement.style.left = "-" + paneWidth.toString() + "px";
-                                                overlayElement.style.width = "100%";
-                                            }
-                                        } 
                                         currentPane = panelWrapper.firstElementChild;
                                         while (currentPane &&
                                             typeof currentPane.tagName === "string" &&
@@ -1871,11 +1862,34 @@ var __meteor_runtime_config__;
                                         }
                                         panelWrapper.style.width = "100%";
                                         panelWrapper.style.left = "0";
-                                        if (overlayElement) {
+                                    }
+                                    if (overlayElement) {
+                                        var overlayStyle = window.getComputedStyle(overlayElement);
+                                        if (overlayStyle) {
+                                            var transform = overlayStyle.getPropertyValue("transform");
+                                            if (typeof transform === "string") {
+                                                if (transform.substr(0, 10) === "translate(" ||
+                                                    transform.substr(0, 7) === "matrix(") {
+                                                    var stop = transform.lastIndexOf(",");
+                                                    if (stop > 0) {
+                                                        var start = stop-1;
+                                                        while (start > 0 && transform[start] !== "," && transform[start] !== "(") {
+                                                            start--;
+                                                        }
+                                                        var newTransform = transform.substr(0, start + 1) + " 0" + transform.substr(stop);
+                                                        overlayElement.style.transform = newTransform;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (videoPLayerOpened || screenShareOpened || presentationOpened) {
                                             overlayElement.style.left = "";
                                             overlayElement.style.width = "";
-                                        } 
-                                    }
+                                        } else {
+                                            overlayElement.style.left = "0";
+                                            overlayElement.style.width = "100%";
+                                        }
+                                    } 
                                 });
                             }
                             if (!sessionStatusIsSet && that.binding.dataSessionStatus) {
