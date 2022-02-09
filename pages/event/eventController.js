@@ -876,13 +876,12 @@
                             if (recordedContentFragment &&
                                 recordedContentFragment.controller &&
                                 recordedContentFragment.controller.binding) {
-                                // option set in portal - eventgensettings
-                                if (that.binding.dataEvent.RecordSession) {
+                                // option set in portal - eventgensettings RecordSession und PublishRecording
+                                if (that.binding.dataEvent.RecordSession && that.binding.dataEvent.PublishRecording) {
                                 recordedContentFragment.controller.binding.showDelayContent = true;
                                 } else {
                                     recordedContentFragment.controller.binding.showDelayContent = false;
                                 }
-
                             }
                         });;
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
