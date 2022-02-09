@@ -302,14 +302,14 @@
                     }
                     break;
                 case 18:
-                    if (AppData._persistentStates.individualColors) {
+                    //if (AppData._persistentStates.individualColors) {
                         if (item.LocalValue === "1") {
                             AppData._persistentStates.isDarkTheme = true;
                         } else {
                             AppData._persistentStates.isDarkTheme = false;
                         }
                         Colors.isDarkTheme = AppData._persistentStates.isDarkTheme;
-                    }
+                    //}
                     break;
                 case 19:
                     if (item.LocalValue === "1") {

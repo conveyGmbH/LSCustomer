@@ -441,8 +441,14 @@
                     if (result.ConferenceLink && result.ConferenceLink !== that.binding.conferenceLink) {
                         that.binding.conferenceLink = result.ConferenceLink;
                     }
-
+                    // Status 15 -> session beendet und warten auf recordedContent
+                    if (result.ConfirmStatusID === 15) {
+                        // set conferenceLink to null -> refresh condition
+                        that.binding.conferenceLink = null;
+                    }
+                    // Status 20 -> session beendet und recordedContent da
                     if (result.ConfirmStatusID === 20) {
+                        that.binding.conferenceLink = null;
                         that.binding.recordedLink = result.ConferenceLink;
                         if (that.binding.recordedLink) {
                             var url = that.binding.recordedLink;
@@ -626,7 +632,9 @@
                     return that.adjustContainerSize();
                 }).then(function () {
                     that.inLoadData = false;
-                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 && (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11 || AppData._persistentStates.registerData.confirmStatusID === 15)) {
+                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 &&
+                        (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11 ||
+                            AppData._persistentStates.registerData.confirmStatusID === 15)) {
                         that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
                             that.loadData();
                         });
