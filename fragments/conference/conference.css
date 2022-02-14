@@ -144,7 +144,7 @@
 .virtualBackgroundRowThumbnail--1VW7fQ .virtualBackgroundItem--ZjHabK {
     background-color: transparent !important;
 }
-.virtualBackgroundRowThumbnail--1VW7fQ .default--Z19H5du {
+.virtualBackgroundRowThumbnail--1VW7fQ .default--Z19H5du:not(.virtualBackgroundItem--ZjHabK) {
     background-color: var(--btn-default-bg) !important;
 }
 .button--Z2dosza.presentationFullscreen--1FlFqJ {
