@@ -137,32 +137,23 @@
 }
 
 .emojiButton--1AbD1O {
-    border-radius: 50%;
-    background-color: var(--btn-default-bg);
-    padding: 1px 6px;
+    border-radius: 50% !important;
+    background-color: var(--btn-default-bg) !important;
+    padding: 1px 6px !important;
 }
-.muted--Z12F1Tn {
+.virtualBackgroundRowThumbnail--1VW7fQ .virtualBackgroundItem--ZjHabK {
+    background-color: transparent !important;
+}
+.virtualBackgroundRowThumbnail--1VW7fQ .default--Z19H5du {
+    background-color: var(--btn-default-bg) !important;
+}
+.button--Z2dosza.presentationFullscreen--1FlFqJ {
     color: var(--btn-muted-color) !important;
-    background-color: var(--btn-muted-bg);
-}
-.sm--Q7ujg {
-    font-size: var(--btn-sm-font-size);
-    padding: .55em;
-}
-.presentationFullscreen--1FlFqJ {
-    cursor: pointer;
-    padding: .7em;
-}
-.default--Z19H5du {
-    color: var(--btn-default-color);
-    background-color: var(--btn-default-bg);
-}
-.default--Z19H5du:hover, .buttonWrapper--x8uow:hover .default--Z19H5du {
-    color: var(--btn-default-color);
-}
-.virtualBackgroundItem--ZjHabK {
-    border-radius: var(--border-size-large);
-    background-color: transparent;
+    background-color: var(--btn-muted-bg) !important;
+    border-radius: var(--border-size) !important;
+    font-weight: var(--btn-font-weight) !important;
+    font-size: var(--btn-sm-font-size) !important;
+    padding: var(--btn-sm-padding) !important;
 }
 .show-chat-button-container {
     display: none;
