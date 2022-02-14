@@ -155,6 +155,9 @@
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
 }
+.screenshareContainerPresenter--2q16l3 .button--Z2dosza.switchButton--Z1vyiF8 {
+    padding: var(--btn-sm-padding) !important;
+}
 .show-chat-button-container {
     display: none;
 }
