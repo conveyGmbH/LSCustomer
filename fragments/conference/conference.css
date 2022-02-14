@@ -137,33 +137,32 @@
 }
 
 .emojiButton--1AbD1O {
-    border-radius: 50% !important;
-    background-color: var(--btn-default-bg) !important;
-    color: inherit !important;
-    padding: 1px 6px !important;
+    border-radius: 50%;
+    background-color: var(--btn-default-bg);
+    padding: 1px 6px;
 }
 .muted--Z12F1Tn {
     color: var(--btn-muted-color) !important;
-    background-color: var(--btn-muted-bg) !important;
+    background-color: var(--btn-muted-bg);
 }
 .sm--Q7ujg {
-    font-size: var(--btn-sm-font-size) !important;
-    padding: .55em !important;
+    font-size: var(--btn-sm-font-size);
+    padding: .55em;
 }
 .presentationFullscreen--1FlFqJ {
-    cursor: pointer !important;
-    padding: .7em !important;
+    cursor: pointer;
+    padding: .7em;
 }
 .default--Z19H5du {
-    color: var(--btn-default-color) !important;
-    background-color: var(--btn-default-bg) !important;
+    color: var(--btn-default-color);
+    background-color: var(--btn-default-bg);
 }
 .default--Z19H5du:hover, .buttonWrapper--x8uow:hover .default--Z19H5du {
-    color: var(--btn-default-color) !important;
+    color: var(--btn-default-color);
 }
 .virtualBackgroundItem--ZjHabK {
-    border-radius: var(--border-size-large) !important;
-    background-color: transparent !important;
+    border-radius: var(--border-size-large);
+    background-color: transparent;
 }
 .show-chat-button-container {
     display: none;
@@ -173,8 +172,8 @@
     display: none !important;
 }
 .button--Z2dosza {
-    border-radius: var(--border-size) !important;
-    font-weight: var(--btn-font-weight) !important;
+    border-radius: var(--border-size);
+    font-weight: var(--btn-font-weight);
 }
 
 .recordingIndicator--Z1hMjfp {
