@@ -6,8 +6,9 @@
     padding: 7px 0;
 }
 
-.register .checkbox .privacy {
+.register .privacy {
     font-size: small;
+    line-height: 1.5;
 }
 
 #registerController .doc-container {
