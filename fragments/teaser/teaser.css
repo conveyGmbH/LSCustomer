@@ -6,6 +6,10 @@
 /****Start Changes****/
 .teaser .centerarea {
     background-color: inherit !important;
+    border: none;
+    box-shadow: none;
+    margin-left: 0;
+    width: 100%;
 }
 
 .teaser .ITbackground {

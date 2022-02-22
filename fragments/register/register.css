@@ -6,6 +6,10 @@
     padding: 7px 0;
 }
 
+.register .checkbox .privacy {
+    font-size: small;
+}
+
 #registerController .doc-container {
     float: left;
     margin-top: 20px;
