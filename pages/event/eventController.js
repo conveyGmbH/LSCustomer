@@ -577,6 +577,10 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
+                    if (that.binding.dataEvent.RequireReg === null && that.binding.dataEvent.ShowReg === null) {
+                        //return AppData.call("PRC_BBBConferenceLink",
+                        return WinJS.Promise.as();
+                    }
                     if (Application.query.eventId) {
                         if (Application.query.UserToken && Application.query.UserToken !== AppData._persistentStates.registerData.userToken) {
                             AppData._persistentStates.registerData.userToken = Application.query.UserToken;
@@ -820,7 +824,7 @@
                         }
                         return WinJS.Promise.as();
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 11) {
+                        AppData._persistentStates.registerData.confirmStatusID === 11 || (that.binding.dataEvent.RequireReg === null && that.binding.dataEvent.ShowReg === null)) {
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {

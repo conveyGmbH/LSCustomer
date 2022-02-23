@@ -182,3 +182,9 @@ input[disabled] {
 label .list-anredecon-field {
     line-height: normal;
 }
+
+.register .label.register_title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
