@@ -189,7 +189,16 @@
             this.eventHandlers = {
                 clickOk: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    AppData._persistentStates.registerData = copyByValue(that.binding.dataRegister); //backingdata
+                    //AppData._persistentStates.registerData = copyByValue(that.binding.dataRegister); //backingdata
+                    AppData._persistentStates.registerData.AnredeID = that.binding.dataRegister.AnredeID;
+                    AppData._persistentStates.registerData.Email = that.binding.dataRegister.Email;
+                    AppData._persistentStates.registerData.Name = that.binding.dataRegister.Name;
+                    AppData._persistentStates.registerData.Vorname = that.binding.dataRegister.Vorname;
+                    AppData._persistentStates.registerData.Position = that.binding.dataRegister.Position;
+                    AppData._persistentStates.registerData.Firmenname = that.binding.dataRegister.Firmenname;
+                    AppData._persistentStates.registerData.privacyPolicyFlag = that.binding.dataRegister.privacyPolicyFlag;
+                    AppData._persistentStates.registerData.UserTZ = that.binding.dataRegister.UserTZ;
+                    AppData._persistentStates.registerData.LanguageId = that.binding.dataRegister.LanguageId;
                     Application.pageframe.savePersistentStates();
                     that.binding.editDisabled = false;
                     that.binding.resendDisabled = false;
