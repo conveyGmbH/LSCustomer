@@ -41,7 +41,7 @@
 
             var that = this;
 
-            this.dispose = function() {
+            this.dispose = function () {
                 if (listView && listView.winControl) {
                     listView.winControl.itemDataSource = null;
                 }
@@ -109,7 +109,7 @@
             }
             this.allScopesFromSeriesId = allScopesFromSeriesId;
 
-            var resultConverter = function(item, index) {
+            var resultConverter = function (item, index) {
                 Log.call(Log.l.trace, "Home.Controller.");
                 item.dataText = getEmptyDefaultValue(Home.textView.defaultValue);
                 item.dataText.ev_text_detail_name_h1 = item.Name;
@@ -125,6 +125,20 @@
                 item.dataDocText.done = false;
                 item.dataGroupDocText = getEmptyDefaultValue(Home.textDocView.defaultGroupValue);
                 item.dataGroupDocText.done = false;
+                /**
+                 * TODO: itemgroupheader
+                 * neue untergruppierung für bestimmte anzeige flags
+                 */
+                //item.itemGroupHeader = getEmptyDefaultValue(Home.eventView.defaultGroupValue);
+                // wenn MandantSerieID noch nicht in item.GroupHeader
+                /*if (!item.itemGroupHeader) {
+                    item.itemGroupHeader = [];
+                }
+                if (item.itemGroupHeader.indexOf(item.MandantSerieID) < 0) {
+                    item.itemGroupHeader["MandantSerieID"] = item.MandantSerieID;
+                }
+                item.itemGroupHeader["MandantSerieID"][index]["MoreEventFlag"] = item.moreEventFlag;
+                console.log(item.itemGroupHeader);*/
                 Log.ret(Log.l.trace);
             }
             this.resultConverter = resultConverter;
@@ -387,7 +401,7 @@
                     return WinJS.Promise.as();
                 }
                 AppData.setErrorMsg(that.binding);
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
                     for (i = 0; i < seriesIds.length; i++) {
                         seriesId = seriesIds[i];
                         curScopes = that.allScopesFromSeriesId(seriesId);
@@ -401,7 +415,7 @@
                     }
                     //load of format relation record data
                     Log.print(Log.l.trace, "calling select textView...");
-                    return Home.textView.select(function(json) {
+                    return Home.textView.select(function (json) {
                         AppData.setErrorMsg(that.binding);
                         Log.print(Log.l.trace, "textView: success!");
                         if (json && json.d && json.d.results) {
@@ -474,7 +488,7 @@
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost) {
-                            var winHeaderContainer = listView.querySelector(".win-headercontainer");
+                        var winHeaderContainer = listView.querySelector(".win-headercontainer");
                             var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
                             if (stickyHeader && winHeaderContainer && winHeaderContainer.style) {
                                 winHeaderContainer.style.marginTop = stickyHeader.clientHeight.toString() + "px";
@@ -490,20 +504,20 @@
                                     if (winGroupHeaderContainer && winGroupHeaderContainer.style) {
                                         winGroupHeaderContainer.style.width = clientWidth.toString() + "px";
                                         var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
-                                        if (winGroupHeader) {
+                                    if (winGroupHeader) {
                                             var heightGroupHeader = winGroupHeader.clientHeight + 60;
                                             winGroupHeaderContainer.style.height = heightGroupHeader.toString() + "px";
-                                        }
                                     }
                                 }
                             }
+                        }
                             var winItemsContainers = listView.querySelectorAll(".win-itemscontainer");
                             if (winItemsContainers) {
                                 for (i = 0; i < winItemsContainers.length; i++) {
                                     var winItemsContainer = winItemsContainers[i];
                                     if (winItemsContainer && winItemsContainer.style) {
                                         winItemsContainer.style.width = clientWidth.toString() + "px";
-                                    }
+                    }
                                 }
                             }
                             var eventItems = listView.querySelectorAll(".event-item");
@@ -538,24 +552,24 @@
                     return WinJS.Promise.timeout(50);
                 }).then(function () {
                     if (listView) {
-                        var headerHost = document.querySelector("#headerhost");
-                        var viewPort = listView.querySelector(".win-viewport");
-                        if (viewPort && headerHost) {
-                            var firstElementChild = headerHost.firstElementChild;
-                            while (firstElementChild) {
-                                var styles = getComputedStyle(firstElementChild);
-                                if (styles && styles.getPropertyValue("position") === "fixed") {
-                                    if (firstElementChild.style) {
-                                        var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
-                                        var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
-                                        firstElementChild.style.maxWidth = maxWidth;
+                            var headerHost = document.querySelector("#headerhost");
+                            var viewPort = listView.querySelector(".win-viewport");
+                            if (viewPort && headerHost) {
+                                var firstElementChild = headerHost.firstElementChild;
+                                while (firstElementChild) {
+                                    var styles = getComputedStyle(firstElementChild);
+                                    if (styles && styles.getPropertyValue("position") === "fixed") {
+                                        if (firstElementChild.style) {
+                                            var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
+                                            var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
+                                            firstElementChild.style.maxWidth = maxWidth;
+                                        }
+                                        break;
                                     }
-                                    break;
+                                    firstElementChild = firstElementChild.firstElementChild;
                                 }
-                                firstElementChild = firstElementChild.firstElementChild;
                             }
                         }
-                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -625,9 +639,9 @@
                                                 curScope = curScopes[j];
                                                 if (curScope && curScope.item && curScope.item.dataDoc) {
                                                     if (!dataDoc) {
-                                                        that.setDataDoc(results, curScope.item);
-                                                        curScope.item.dataDoc.done = true;
-                                                        that.records.setAt(curScope.index, curScope.item);
+                                                    that.setDataDoc(results, curScope.item);
+                                                    curScope.item.dataDoc.done = true;
+                                                    that.records.setAt(curScope.index, curScope.item);
                                                         dataDoc = curScope.item.dataDoc;
                                                     } else {
                                                         curScope.item.dataDoc = dataDoc;
@@ -648,9 +662,9 @@
                                     curScope = curScopes[j];
                                     if (curScope && curScope.item && curScope.item.dataDoc) {
                                         if (!dataDoc) {
-                                            that.setDataDoc(results, curScope.item);
-                                            curScope.item.dataDoc.done = true;
-                                            that.records.setAt(curScope.index, curScope.item);
+                                        that.setDataDoc(results, curScope.item);
+                                        curScope.item.dataDoc.done = true;
+                                        that.records.setAt(curScope.index, curScope.item);
                                             dataDoc = curScope.item.dataDoc;
                                         } else {
                                             curScope.item.dataDoc = dataDoc;
@@ -971,21 +985,29 @@
                     }
                     Log.ret(Log.l.trace);
                 },
-                onGroupHeaderInvoked: function(eventInfo) {
+                //behandelt den Header 
+                onGroupHeaderInvoked: function (eventInfo) {
                     Log.call(Log.l.trace, "Home.Controller.");
-                    if (eventInfo && eventInfo.detail && 
+                    var target = eventInfo.currentTarget || eventInfo.target;
+                    var mandantSerieID = parseInt(target.name);
+                    if (eventInfo && eventInfo.detail &&
                         that.recordsGrouped && that.recordsGrouped.groups) {
                         Log.print(Log.l.trace, "groupHeaderIndex=" + eventInfo.detail.groupHeaderIndex);
-                        var item = that.recordsGrouped.groups.getItem(eventInfo.detail.groupHeaderIndex);
-                        if (item && item.data && item.data.MandantSerieID) {
+                        var item = that.recordsGrouped.groups.getItem(eventInfo.detail);
+                        if (mandantSerieID) {
                             if (Application.query) {
-                                Application.query.eventSeriesId = item.data.MandantSerieID;
+                                Application.query.eventSeriesId = mandantSerieID;
                             } else {
-                                AppData.setRecordId("MandantSerie", item.data.MandantSerieID);
+                                AppData.setRecordId("MandantSerie", mandantSerieID);
                             }
                             Application.navigateById("events", eventInfo);
                         }
                     }
+                    Log.ret(Log.l.trace);
+                },
+                onExpandCollapsInvoked: function(eventInfo) {
+                    Log.call(Log.l.trace, "Home.Controller.");
+
                     Log.ret(Log.l.trace);
                 },
                 onLoadingStateChanged: function (eventInfo) {
@@ -1010,7 +1032,7 @@
                             listView.winControl.maxTrailingPages = maxTrailingPages;
                         }
                         if (listView.winControl.loadingState === "itemsLoaded") {
-                            that.adjustContainerSize();
+                            that.adjustContainerSize(); // anpassen der Höhe und Breite der Container
                         } else if (listView.winControl.loadingState === "complete") {
                             if (that.loading) {
                                 progress = listView.querySelector(".list-footer .progress");
@@ -1090,7 +1112,7 @@
                                 if (WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
                                     WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
                                 }
-                            }
+                }
                         }
                     }
                     Log.ret(Log.l.u1);
@@ -1100,7 +1122,7 @@
 
             // page command disable handler
             this.disableHandlers = {
-                clickBack: function() {
+                clickBack: function () {
                     if (WinJS.Navigation.canGoBack === true) {
                         return false;
                     } else {
@@ -1138,7 +1160,7 @@
             };
 
             var groupData = function (item) {
-                if (item.dataGroupText && 
+                if (item.dataGroupText &&
                     !item.dataGroupText.ser_text_name_h1 &&
                     item.SerieTitel) {
                     item.dataGroupText.ser_text_name_h1 = item.SerieTitel;
@@ -1233,7 +1255,11 @@
             }
 
             // finally, load the data
-            that.processAll().then(function() {
+            that.processAll().then(function () {
+                Log.print(Log.l.trace, "Binding wireup page complete");
+                var expandCollaps_container = pageElement.querySelector(".expandCollaps_container");
+                return Colors.loadSVGImageElements(expandCollaps_container, "expandCollaps", 47, "#c2d63e");
+            }).then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 that.loading = true;
                 that.loadText();

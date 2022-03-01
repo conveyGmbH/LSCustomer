@@ -97,6 +97,9 @@
                     }
                 }
                 return ret;
+            },
+            defaultGroupValue: {
+                //moreEventsFlag: false
             }
         },
         textView: {

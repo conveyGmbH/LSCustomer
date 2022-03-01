@@ -42,8 +42,20 @@
                                 <div class="content-header-line win-type-body bold" data-win-bind="style.display: dataGroupText.ser_text_subtitle_h2 Binding.Converter.toDisplay">
                                     <h2 data-win-bind="textContent: dataGroupText.ser_text_subtitle_h2"></h2>
                                 </div>
+                                <div class="expandCollaps_container">
+                                    <div  id="navigate_down" class="expandCollaps"
+                                         onclick="AppBar.handleEvent('click', 'onExpandCollapsInvoked', event)">
+                                    </div>
+                                </div>
                                 <div class="content-header-line win-type-body" data-win-bind="style.display: dataGroupText.ser_text_free_body Binding.Converter.toDisplay">
                                     <span data-win-bind="textContent: dataGroupText.ser_text_free_body"></span>
+                                </div>
+                                <div class="more_Button" data-win-bind="style.display MoreSerieFlag Binding.Converter.toDisplay">
+                                    <button id="more_Button" class="win-button"
+                                            data-win-res="{textContent: 'home.moreEvents'}"
+                                            data-win-bind="name: MandantSerieID"
+                                            onclick="AppBar.handleEvent('click', 'onGroupHeaderInvoked', event)">
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +86,8 @@
                                 header: select('.list-header'),
                                 footer: select('.list-footer'),
                                 itemTemplate: select('.event-list-template'),
-                                groupHeaderTemplate: select('.home-group-header-template')
+                                groupHeaderTemplate: select('.home-group-header-template'),
+                                groupHeaderTapBehavior: 'none'
                             }">
 
                     </div>

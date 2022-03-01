@@ -79,7 +79,7 @@
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
 }
 
-.home .win-listview .win-groupheadercontainer:hover,
+/*.home .win-listview .win-groupheadercontainer:hover,
 .home .win-listview .win-groupheadercontainer:focus {
     background-color: rgba(128,128,128,0.1);
     transform: translate3d(0,-2px,0);
@@ -87,7 +87,7 @@
     transition-property: box-shadow,transform;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
-}
+}*/
 
 .home .win-listview .win-groupheader {
     width: calc(100% - 30px);
@@ -125,17 +125,37 @@
 .home .group-header .content-header {
     width: 100%;
     height: auto;
-    cursor: pointer;
+    /*cursor: pointer;*/
+}
+
+.home #more_Button {
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    background-color: #c2d63e;
+    border-radius: 40px;
 }
 
 .home .content-header-line {
     height: auto;
-    width: 100%;
+    width: 80%;
     vertical-align: baseline;
     margin: 0;
     padding: 0;
 }
 
+.home .expandCollaps_container {
+    float: right;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #c2d63e;
+    border-radius: 50px;
+}
+
+.home .expandCollaps {
+    display: flex;
+    justify-content: center;
+}
 .home .content-header-line > h1 {
     font-size: 46px;
     font-weight: 600;
@@ -261,7 +281,7 @@
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1299px 
     @media (max-width:1299px) {
-    }
+}
 
     use: .view-size-biggest
 */
@@ -289,7 +309,7 @@
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
-    @media (max-width:899px) {
+@media (max-width:899px) {
     }
 
     use: .view-size-medium
@@ -346,8 +366,8 @@
 
     use: .view-size-medium-small
 */
-    /*margins/paddings for small screens and orientation vertical
-        @media (max-width:499px) {
+/*margins/paddings for small screens and orientation vertical
+@media (max-width:499px) {
         }
     use: .view-size-small
 */
@@ -371,7 +391,7 @@
     min-height: 70px;
     margin: 15px 0 0 20px;
 }
-
+    
 .view-size-small .home .hero-image-container {
     height: auto;
 }
@@ -380,9 +400,9 @@
     font-size: 22px;
 }
 
-.view-size-small .home .content-header-line > h2 {
-    font-size: 16px;
-}
+    .view-size-small .home .content-header-line > h2 {
+        font-size: 16px;
+    }
 
 .view-size-small .home .caption-sort {
     width: 100%;
