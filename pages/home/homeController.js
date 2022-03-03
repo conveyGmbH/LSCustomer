@@ -20,6 +20,7 @@
 
             // ListView control
             var listView = pageElement.querySelector("#events.listview");
+            var itemGroupHeader = null;
 
             Application.RecordsetController.apply(this, [pageElement, {
                 dataText: {
@@ -125,20 +126,28 @@
                 item.dataDocText.done = false;
                 item.dataGroupDocText = getEmptyDefaultValue(Home.textDocView.defaultGroupValue);
                 item.dataGroupDocText.done = false;
-                /**
-                 * TODO: itemgroupheader
-                 * neue untergruppierung für bestimmte anzeige flags
-                 */
-                //item.itemGroupHeader = getEmptyDefaultValue(Home.eventView.defaultGroupValue);
-                // wenn MandantSerieID noch nicht in item.GroupHeader
-                /*if (!item.itemGroupHeader) {
-                    item.itemGroupHeader = [];
+                item.itemGroupHeader = getEmptyDefaultValue(Home.eventView.defaultGroupValue);
+                item.itemGroupHeader.done = false;
+                var itemGroupHeader_object = {
+                    MandantSerieID: item.MandantSerieID,
+                    expandFlag: false
+                };
+                if (!itemGroupHeader) {
+                    itemGroupHeader = [];
                 }
-                if (item.itemGroupHeader.indexOf(item.MandantSerieID) < 0) {
-                    item.itemGroupHeader["MandantSerieID"] = item.MandantSerieID;
+                var itemfound = false;
+                itemGroupHeader.forEach(function (item, index) {
+                    if (item.hasOwnProperty("MandantSerieID") &&
+                        item.MandantSerieID === itemGroupHeader_object.MandantSerieID) {
+                        itemfound = true;
+                        return;
                 }
-                item.itemGroupHeader["MandantSerieID"][index]["MoreEventFlag"] = item.moreEventFlag;
-                console.log(item.itemGroupHeader);*/
+                });
+                if (!itemfound) {
+                    itemGroupHeader.push(itemGroupHeader_object);
+                }
+                // für jedes item das expandFlag setzen
+                item.expandFlag = false;
                 Log.ret(Log.l.trace);
             }
             this.resultConverter = resultConverter;
@@ -498,6 +507,7 @@
                         if (winSurface) {
                             var clientWidth = winSurface.clientWidth - 20;
                             var winGroupHeaderContainers = listView.querySelectorAll(".win-groupheadercontainer");
+                            // suche nach dem button Element mit queryselctor 
                             if (winGroupHeaderContainers) {
                                 for (i = 0; i < winGroupHeaderContainers.length; i++) {
                                     var winGroupHeaderContainer = winGroupHeaderContainers[i];
@@ -1007,7 +1017,31 @@
                 },
                 onExpandCollapsInvoked: function(eventInfo) {
                     Log.call(Log.l.trace, "Home.Controller.");
-
+                    // merke Scrollposition (listView.winControl.scrollPosition) in einer Variable und setze zum schluss wieder setzen.
+                    var scrollPosition = listView.winControl.scrollPosition;
+                    var target = eventInfo.currentTarget || eventInfo.target;
+                    var mandantSerieID = parseInt(target.title);
+                    AppData._persistentStates.itemGroupHeader = itemGroupHeader;
+                    Application.pageframe.savePersistentStates();
+                    // das gemerkte array da umsetzen das flag
+                    for (var i = 0; i < itemGroupHeader.length; i++) {
+                        if (itemGroupHeader[i].MandantSerieID === mandantSerieID) {
+                            itemGroupHeader[i].expandFlag = !itemGroupHeader[i].expandFlag;
+                            break;
+                        }
+                    }
+                    //oder durch iterien bis die MandantSerie gefunden wurde und dann mit getat/setat den WErt umsetzen. (sollte weniger flackern)
+                    for (var i = 0; i < that.records.length; i++) {
+                        var record = that.records.getAt(i);
+                        if (record.MandantSerieID === mandantSerieID) {
+                            record.expandFlag = !record.expandFlag;
+                            that.records.setAt(i, record);
+                            break;
+                        }
+                    }
+                    // funktioniert nicht..
+                    // that.records._notifyReload();
+                    listView.winControl.scrollPosition = scrollPosition;
                     Log.ret(Log.l.trace);
                 },
                 onLoadingStateChanged: function (eventInfo) {
@@ -1165,6 +1199,14 @@
                     item.SerieTitel) {
                     item.dataGroupText.ser_text_name_h1 = item.SerieTitel;
                 }
+                // array itemGroupHeader
+                for (var i = 0; i < itemGroupHeader.length; i++) {
+                    if (itemGroupHeader[i].MandantSerieID === item.MandantSerieID) {
+                        item.itemGroupHeader.MandantSerieID = itemGroupHeader[i].MandantSerieID;
+                        item.itemGroupHeader.expandFlag = item.expandFlag;
+                        break;
+                    }
+                }
                 return item;
             };
 
@@ -1257,8 +1299,26 @@
             // finally, load the data
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
-                var expandCollaps_container = pageElement.querySelector(".expandCollaps_container");
-                return Colors.loadSVGImageElements(expandCollaps_container, "expandCollaps", 47, "#c2d63e");
+                var expand = document.querySelector(".expand");
+                //Colors.loadSVGImageElements(expandCollaps_container, "expandCollaps", 47, "#c2d63e");
+                var options = {
+                    fileName: "navigate_down",
+                    color: "#c2d63e",
+                    size: 47,
+                    element: expand,
+                    complete: null
+                }
+                Colors.loadSVGImage(options);
+                var collaps = document.querySelector(".collaps");
+                //Colors.loadSVGImageElements(expandCollaps_container, "expandCollaps", 47, "#c2d63e");
+                var options = {
+                    fileName: "navigate_up",
+                    color: "#c2d63e",
+                    size: 47,
+                    element: collaps,
+                    complete: null
+                }
+                Colors.loadSVGImage(options);
             }).then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 that.loading = true;
@@ -1266,6 +1326,12 @@
                 that.loadDoc();
                 that.loadDocText();
                 return that.loadData();
+            }).then(function () {
+                // nur wenn sich was geändert hat
+                if (itemGroupHeader) {
+                    AppData._persistentStates.itemGroupHeader = itemGroupHeader;
+                }
+                Application.pageframe.savePersistentStates();
             }).then(function () {
                 Application.showBodyContentBottom(pageElement, true);
                 Log.print(Log.l.trace, "Data loaded");

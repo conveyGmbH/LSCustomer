@@ -99,7 +99,7 @@
                 return ret;
             },
             defaultGroupValue: {
-                //moreEventsFlag: false
+                expandFlag: 0
             }
         },
         textView: {
