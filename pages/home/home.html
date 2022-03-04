@@ -42,23 +42,19 @@
                                 <div class="content-header-line win-type-body bold" data-win-bind="style.display: dataGroupText.ser_text_subtitle_h2 Binding.Converter.toDisplay">
                                     <h2 data-win-bind="textContent: dataGroupText.ser_text_subtitle_h2"></h2>
                                 </div>
-                                <div class="expand_container" data-win-bind="style.display: itemGroupHeader.expandFlag Binding.Converter.toDisplay">
-                                    <div class="expand" id="navigate_down"
-                                         data-win-bind="title: itemGroupHeader.MandantSerieID"
-                                         onclick="AppBar.handleEvent('click', 'onExpandCollapsInvoked', event)">
-                                    </div>
-                                    <!--<button class="expand" name="navigate_down"
+                                <div class="expander-container">
+                                    <button class="expander-button" name="navigate_down"
+                                            data-win-bind="seriesId: MandantSerieID"
                                             onclick="AppBar.handleEvent('click', 'onExpandCollapsInvoked', event)">
-                                    </button>-->
-                                </div>
-                                <div class="collaps_container" data-win-bind="style.display: itemGroupHeader.expandFlag Binding.Converter.toDisplayNone">
-                                    <div class="collaps" id="navigate_up"
-                                         data-win-bind="title: itemGroupHeader.MandantSerieID"
-                                         onclick="AppBar.handleEvent('click', 'onExpandCollapsInvoked', event)">
-                                    </div>
-                                    <!--<button class="collaps" name="navigate_up"
-                                            onclick="AppBar.handleEvent('click', 'onExpandCollapsInvoked', event)">
-                                    </button>-->
+                                        <div class="expander-icon-container"
+                                             data-win-bind="style.display: expandFlag Binding.Converter.toDisplayNone">
+                                            <div class="expander-icon" id="navigate_down"></div>
+                                        </div>
+                                        <div class="expander-icon-container"
+                                             data-win-bind="style.display: expandFlag Binding.Converter.toDisplay">
+                                            <div class="expander-icon" id="navigate_up"></div>
+                                        </div>
+                                    </button>
                                 </div>
                                 <div class="content-header-line win-type-body" data-win-bind="style.display: dataGroupText.ser_text_free_body Binding.Converter.toDisplay">
                                     <span data-win-bind="textContent: dataGroupText.ser_text_free_body"></span>

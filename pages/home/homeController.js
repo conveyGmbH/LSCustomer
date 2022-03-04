@@ -20,7 +20,6 @@
 
             // ListView control
             var listView = pageElement.querySelector("#events.listview");
-            var itemGroupHeader = null;
 
             Application.RecordsetController.apply(this, [pageElement, {
                 dataText: {
@@ -38,6 +37,11 @@
                 count: 0
             }, commandList, false, Home.eventView, null, listView]);
 
+            if (typeof AppData._persistentStates.itemGroupHeaderState === "object") {
+                this.itemGroupHeaderState = copyByValue(AppData._persistentStates.itemGroupHeaderState);
+            } else {
+                this.itemGroupHeaderState = {};
+            }
             this.recordsGrouped = null;
 
             var that = this;
@@ -128,26 +132,13 @@
                 item.dataGroupDocText.done = false;
                 item.itemGroupHeader = getEmptyDefaultValue(Home.eventView.defaultGroupValue);
                 item.itemGroupHeader.done = false;
-                var itemGroupHeader_object = {
-                    MandantSerieID: item.MandantSerieID,
-                    expandFlag: false
-                };
-                if (!itemGroupHeader) {
-                    itemGroupHeader = [];
-                }
-                var itemfound = false;
-                itemGroupHeader.forEach(function (item, index) {
-                    if (item.hasOwnProperty("MandantSerieID") &&
-                        item.MandantSerieID === itemGroupHeader_object.MandantSerieID) {
-                        itemfound = true;
-                        return;
-                }
-                });
-                if (!itemfound) {
-                    itemGroupHeader.push(itemGroupHeader_object);
+                if (!that.itemGroupHeaderState[item.MandantSerieID]) {
+                    that.itemGroupHeaderState[item.MandantSerieID] = {
+                        expandFlag: true
+                    }
                 }
                 // für jedes item das expandFlag setzen
-                item.expandFlag = false;
+                item.expandFlag = that.itemGroupHeaderState[item.MandantSerieID].expandFlag;
                 Log.ret(Log.l.trace);
             }
             this.resultConverter = resultConverter;
@@ -497,7 +488,7 @@
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost) {
-                        var winHeaderContainer = listView.querySelector(".win-headercontainer");
+                            var winHeaderContainer = listView.querySelector(".win-headercontainer");
                             var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
                             if (stickyHeader && winHeaderContainer && winHeaderContainer.style) {
                                 winHeaderContainer.style.marginTop = stickyHeader.clientHeight.toString() + "px";
@@ -506,49 +497,56 @@
                         var winSurface = listView.querySelector(".win-surface");
                         if (winSurface) {
                             var clientWidth = winSurface.clientWidth - 20;
-                            var winGroupHeaderContainers = listView.querySelectorAll(".win-groupheadercontainer");
-                            // suche nach dem button Element mit queryselctor 
-                            if (winGroupHeaderContainers) {
-                                for (i = 0; i < winGroupHeaderContainers.length; i++) {
-                                    var winGroupHeaderContainer = winGroupHeaderContainers[i];
+                            var tilesPerRow = 4;
+                            var margin = 15;
+                            if (WinJS.Utilities.hasClass(pageElement, "view-size-biggest")) {
+                                tilesPerRow = 3;
+                            }
+                            if (WinJS.Utilities.hasClass(pageElement, "view-size-bigger")) {
+                                tilesPerRow = 2;
+                            }
+                            if (WinJS.Utilities.hasClass(pageElement, "view-size-medium")) {
+                                margin = 10;
+                            }
+                            if (WinJS.Utilities.hasClass(pageElement, "view-size-medium-small")) {
+                                tilesPerRow = 1;
+                            }
+                            var tileWidth = clientWidth / tilesPerRow - 2*margin;
+
+                            var winElements = listView.querySelectorAll(".win-groupheadercontainer, .win-itemscontainer, .event-item");
+                            var expandFlag = null;
+                            for (i = 0; i < winElements.length; i++) {
+                                var winElement = winElements[i];
+                                if (WinJS.Utilities.hasClass(winElement, "win-groupheadercontainer")) {
+                                    expandFlag = null;
+                                    var winGroupHeaderContainer = winElement;
                                     if (winGroupHeaderContainer && winGroupHeaderContainer.style) {
                                         winGroupHeaderContainer.style.width = clientWidth.toString() + "px";
                                         var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
-                                    if (winGroupHeader) {
+                                        if (winGroupHeader) {
                                             var heightGroupHeader = winGroupHeader.clientHeight + 60;
                                             winGroupHeaderContainer.style.height = heightGroupHeader.toString() + "px";
+                                        }
+                                        var expanderButton = winGroupHeaderContainer.querySelector(".expander-button");
+                                        if (expanderButton) {
+                                            var seriesId = parseInt(expanderButton.seriesId);
+                                            if (that.itemGroupHeaderState[seriesId]) {
+                                                expandFlag = that.itemGroupHeaderState[seriesId].expandFlag;
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                        }
-                            var winItemsContainers = listView.querySelectorAll(".win-itemscontainer");
-                            if (winItemsContainers) {
-                                for (i = 0; i < winItemsContainers.length; i++) {
-                                    var winItemsContainer = winItemsContainers[i];
+                                } else if (WinJS.Utilities.hasClass(winElement, "win-itemscontainer")) {
+                                    var winItemsContainer = winElement;
                                     if (winItemsContainer && winItemsContainer.style) {
-                                        winItemsContainer.style.width = clientWidth.toString() + "px";
-                    }
-                                }
-                            }
-                            var eventItems = listView.querySelectorAll(".event-item");
-                            if (eventItems) {
-                                var tilesPerRow = 4;
-                                var margin = 15;
-                                if (WinJS.Utilities.hasClass(pageElement, "view-size-biggest")) {
-                                    tilesPerRow = 3;
-                                }
-                                if (WinJS.Utilities.hasClass(pageElement, "view-size-bigger")) {
-                                    tilesPerRow = 2;
-                                }
-                                if (WinJS.Utilities.hasClass(pageElement, "view-size-medium")) {
-                                    margin = 10;
-                                }
-                                if (WinJS.Utilities.hasClass(pageElement, "view-size-medium-small")) {
-                                    tilesPerRow = 1;
-                                }
-                                var tileWidth = clientWidth / tilesPerRow - 2*margin;
-                                for (i = 0; i < eventItems.length; i++) {
-                                    var eventItem = eventItems[i];
+                                        if (expandFlag === false) {
+                                            winItemsContainer.style.display = "none";
+                                        } else {
+                                            winItemsContainer.style.display = "";
+                                            winItemsContainer.style.width = clientWidth.toString() + "px";
+                                        }
+                                    }
+                                } else { // event-item
+                                    var eventItem = winElement;
                                     if (eventItem && eventItem.style) {
                                         eventItem.style.width = tileWidth.toString() + "px";
                                     }
@@ -1017,31 +1015,27 @@
                 },
                 onExpandCollapsInvoked: function(eventInfo) {
                     Log.call(Log.l.trace, "Home.Controller.");
-                    // merke Scrollposition (listView.winControl.scrollPosition) in einer Variable und setze zum schluss wieder setzen.
-                    var scrollPosition = listView.winControl.scrollPosition;
                     var target = eventInfo.currentTarget || eventInfo.target;
-                    var mandantSerieID = parseInt(target.title);
-                    AppData._persistentStates.itemGroupHeader = itemGroupHeader;
-                    Application.pageframe.savePersistentStates();
-                    // das gemerkte array da umsetzen das flag
-                    for (var i = 0; i < itemGroupHeader.length; i++) {
-                        if (itemGroupHeader[i].MandantSerieID === mandantSerieID) {
-                            itemGroupHeader[i].expandFlag = !itemGroupHeader[i].expandFlag;
-                            break;
+                    if (target) {
+                        // merke Scrollposition (listView.winControl.scrollPosition) in einer Variable und setze zum schluss wieder setzen.
+                        var scrollPosition = listView.winControl.scrollPosition;
+                        var seriesId = parseInt(target.seriesId);
+                        if (that.itemGroupHeaderState[seriesId]) {
+                            that.itemGroupHeaderState[seriesId].expandFlag = !that.itemGroupHeaderState[seriesId].expandFlag;
+                            //oder durch iterien bis die MandantSerie gefunden wurde und dann mit getat/setat den WErt umsetzen. (sollte weniger flackern)
+                            for (var i = 0; i < that.records.length; i++) {
+                                var record = that.records.getAt(i);
+                                if (record.MandantSerieID === seriesId) {
+                                    record.expandFlag = that.itemGroupHeaderState[seriesId].expandFlag;
+                                    that.records.setAt(i, record);
+                                    break;
+                                }
+                            }
+                            AppData._persistentStates.itemGroupHeaderState = copyByValue(that.itemGroupHeaderState);
+                            Application.pageframe.savePersistentStates();
                         }
+                        listView.winControl.scrollPosition = scrollPosition;
                     }
-                    //oder durch iterien bis die MandantSerie gefunden wurde und dann mit getat/setat den WErt umsetzen. (sollte weniger flackern)
-                    for (var i = 0; i < that.records.length; i++) {
-                        var record = that.records.getAt(i);
-                        if (record.MandantSerieID === mandantSerieID) {
-                            record.expandFlag = !record.expandFlag;
-                            that.records.setAt(i, record);
-                            break;
-                        }
-                    }
-                    // funktioniert nicht..
-                    // that.records._notifyReload();
-                    listView.winControl.scrollPosition = scrollPosition;
                     Log.ret(Log.l.trace);
                 },
                 onLoadingStateChanged: function (eventInfo) {
@@ -1199,14 +1193,6 @@
                     item.SerieTitel) {
                     item.dataGroupText.ser_text_name_h1 = item.SerieTitel;
                 }
-                // array itemGroupHeader
-                for (var i = 0; i < itemGroupHeader.length; i++) {
-                    if (itemGroupHeader[i].MandantSerieID === item.MandantSerieID) {
-                        item.itemGroupHeader.MandantSerieID = itemGroupHeader[i].MandantSerieID;
-                        item.itemGroupHeader.expandFlag = item.expandFlag;
-                        break;
-                    }
-                }
                 return item;
             };
 
@@ -1298,40 +1284,12 @@
 
             // finally, load the data
             that.processAll().then(function () {
-                Log.print(Log.l.trace, "Binding wireup page complete");
-                var expand = document.querySelector(".expand");
-                //Colors.loadSVGImageElements(expandCollaps_container, "expandCollaps", 47, "#c2d63e");
-                var options = {
-                    fileName: "navigate_down",
-                    color: "#c2d63e",
-                    size: 47,
-                    element: expand,
-                    complete: null
-                }
-                Colors.loadSVGImage(options);
-                var collaps = document.querySelector(".collaps");
-                //Colors.loadSVGImageElements(expandCollaps_container, "expandCollaps", 47, "#c2d63e");
-                var options = {
-                    fileName: "navigate_up",
-                    color: "#c2d63e",
-                    size: 47,
-                    element: collaps,
-                    complete: null
-                }
-                Colors.loadSVGImage(options);
-            }).then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 that.loading = true;
                 that.loadText();
                 that.loadDoc();
                 that.loadDocText();
                 return that.loadData();
-            }).then(function () {
-                // nur wenn sich was geändert hat
-                if (itemGroupHeader) {
-                    AppData._persistentStates.itemGroupHeader = itemGroupHeader;
-                }
-                Application.pageframe.savePersistentStates();
             }).then(function () {
                 Application.showBodyContentBottom(pageElement, true);
                 Log.print(Log.l.trace, "Data loaded");
