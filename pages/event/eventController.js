@@ -638,7 +638,8 @@
                     that.inLoadData = false;
                     if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 &&
                         (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11 ||
-                            AppData._persistentStates.registerData.confirmStatusID === 15)) {
+                            AppData._persistentStates.registerData.confirmStatusID === 15) ||
+                        (that.binding.dataEvent.RequireReg === null && that.binding.dataEvent.ShowReg === null)) {
                         that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
                             that.loadData();
                         });
