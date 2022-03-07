@@ -146,6 +146,8 @@
 
 .home .expander-container {
     float: right;
+    padding-top: 10px;
+    padding-right: 10px;
 }
 .home .expander-button {
     width: 50px;
@@ -343,6 +345,14 @@
     margin: 10px;
 }
 
+.view-size-medium .home .expander-container {
+    padding-top: 0;
+}
+
+.view-size-medium .home .content-header-line {
+    width: calc(100% - 90px);
+}
+
 .view-size-medium .home .content-header-line > h1 {
     font-size: 26px;
     line-height: 32px;
@@ -402,6 +412,15 @@
     
 .view-size-small .home .hero-image-container {
     height: auto;
+}
+
+.view-size-small .home .expander-container {
+    padding-top: 0;
+    padding-right: 0;
+}
+
+.view-size-small .home .content-header-line {
+    width: calc(100% - 70px);
 }
 
 .view-size-small .home .content-header-line > h1 {
