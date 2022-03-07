@@ -1,6 +1,13 @@
 /*
     margins/paddings for all screens
 */
+
+:root {
+    --e-global-color-accent: #c2d63e;
+    --e-global-color-primary: #2a2f3d;
+    --e-global-color-buttontext: #ffffff;
+    --background-item: #7f7f7f;
+}
 .home .bold {
     font-weight: 600;
 }
@@ -130,10 +137,12 @@
 
 .home #more_Button {
     height: 40px;
-    color: white;
     font-weight: bold;
-    background-color: #c2d63e;
     border-radius: 40px;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    background-color: var(--e-global-color-accent);
+    color: var(--e-global-color-buttontext);
 }
 
 .home .content-header-line {
@@ -152,14 +161,17 @@
 .home .expander-button {
     width: 50px;
     height: 50px;
-    border: 2px solid #c2d63e;
+    border: 2px solid var(--e-global-color-accent);
     border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 .home .expander-button:hover {
-    border-color: rgba(0,0,0,.4);
+    border-color: var(--e-global-color-primary);
 }
 .home .expander-icon {
     width: 40px;
@@ -214,6 +226,10 @@
     transition-property: box-shadow,transform;
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
+    border: 1px transparent;
+    border-radius: 12px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
 }
 .home .win-listview .win-gridlayout .win-container:hover,
 .home .win-listview .win-gridlayout .win-container:focus {
@@ -237,7 +253,7 @@
     width: 100%;
     height: 200px;
     padding: 0;
-    background-color: rgba(128,128,128,0.1);
+    background-color: var(--background-item);
     overflow: hidden;
 }
 
