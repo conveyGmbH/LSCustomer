@@ -2,7 +2,7 @@
     "flyout.ok"             : "OK",
     "flyout.cancel"         : "Abbrechen",
 
-    "label.home"            : "Start",
+    "label.home"            : "< Übersicht",
     "label.events"          : "Serie",
     "label.event"           : "Veranstaltung",
 	"label.overview"	    : "Überblick",
