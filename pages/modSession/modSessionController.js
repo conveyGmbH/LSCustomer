@@ -532,6 +532,11 @@
             }).then(function () {
                 Application.showBodyContentBottom(pageElement, true);
                 Log.print(Log.l.trace, "Data loaded");
+            }).then(function () {
+                var conferencehost = pageElement.querySelector("#conferencehost");
+                if (conferencehost) {
+                    conferencehost.scrollIntoView();
+                }
             });
             Log.ret(Log.l.trace);
         })
