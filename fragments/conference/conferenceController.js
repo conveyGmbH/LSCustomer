@@ -5142,7 +5142,7 @@ var __meteor_runtime_config__;
                 return that.sendResize(2000);
             }).then(function() {
                 var conference = fragmentElement.querySelector("#conference");
-                if (that.binding.showConference && conference) {
+                if (AppBar.scope.binding.showConference && conference) {
                     conference.scrollIntoView();
                 }
             });
