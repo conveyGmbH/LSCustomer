@@ -79,7 +79,7 @@
 }
 
 .register #resendButton, .register #editButton, .register #reRegisterButton {
-    display: inline-block;
+    display: block;
     font-size: 12px;
     text-align: left;
 }

@@ -215,6 +215,7 @@
 
 .register #loginButton:hover, .register #re-registerEvent:hover {
     background-color: var(--e-global-color-accent) !important;
+    color: var(--e-global-color-buttontext) !important;
 }
 
 .register #loginButton > div > span, .register #re_registerEvent > span {
