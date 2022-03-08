@@ -87,10 +87,6 @@ var __meteor_runtime_config__;
 
             var recordedContent = fragmentElement.querySelector("#recordedContent");
 
-            if (!that.binding.showDelayContent && recordedContent) {
-                recordedContent.scrollIntoView();
-            }
-
             var forEach = function (arrayLikeValue, action) {
                 for (var i = 0, l = arrayLikeValue.length; i < l; i++) {
                     action(arrayLikeValue[i], i);
@@ -1085,6 +1081,9 @@ var __meteor_runtime_config__;
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 if (AppData._persistentStates.registerData.confirmStatusID === 20) {
+                    if (!that.binding.showDelayContent && recordedContent) {
+                        recordedContent.scrollIntoView();
+                    }
                 return that.loadData();
                 } else {
                     return WinJS.Promise.as();
