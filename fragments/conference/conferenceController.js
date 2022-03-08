@@ -329,10 +329,6 @@ var __meteor_runtime_config__;
             var unpinnedVideoList = new WinJS.Binding.List([]);
             var myselfIsUnpinned = false;
 
-            if (conference) {
-                conference.scrollIntoView();
-            }
-
             var that = this;
 
             that.dispose = function () {
@@ -5144,6 +5140,11 @@ var __meteor_runtime_config__;
                 return WinJS.Promise.timeout(250);
             }).then(function () {
                 return that.sendResize(2000);
+            }).then(function() {
+                var conference = fragmentElement.querySelector("#conference");
+                if (that.binding.showConference && conference) {
+                    conference.scrollIntoView();
+                }
             });
             Log.ret(Log.l.trace);
         })
