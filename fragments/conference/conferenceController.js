@@ -329,6 +329,10 @@ var __meteor_runtime_config__;
             var unpinnedVideoList = new WinJS.Binding.List([]);
             var myselfIsUnpinned = false;
 
+            if (conference) {
+                conference.scrollIntoView();
+            }
+
             var that = this;
 
             that.dispose = function () {

@@ -87,6 +87,10 @@ var __meteor_runtime_config__;
 
             var recordedContent = fragmentElement.querySelector("#recordedContent");
 
+            if (!that.binding.showDelayContent && recordedContent) {
+                recordedContent.scrollIntoView();
+            }
+
             var forEach = function (arrayLikeValue, action) {
                 for (var i = 0, l = arrayLikeValue.length; i < l; i++) {
                     action(arrayLikeValue[i], i);
