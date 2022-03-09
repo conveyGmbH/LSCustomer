@@ -1657,7 +1657,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     grid-template-rows: repeat(8, 1fr) !important;
     height: 100% !important;
 }
-.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden .video-overlay-default .content--Z1CkMQ:not(.fullscreen--Z2dWit1) video {
+#conference.mediaview .presentation-is-hidden .video-overlay-default .content--Z1CkMQ:not(.fullscreen--Z2dWit1) video,
+#conference.mediaview .presentation-open:not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .content--Z1CkMQ:not(.fullscreen--Z2dWit1) video,
+#conference.mediaview .deskshare-open:not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .content--Z1CkMQ:not(.fullscreen--Z2dWit1) video,
+#conference.mediaview .videoplayer-open:not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .content--Z1CkMQ:not(.fullscreen--Z2dWit1) video {
     object-fit: cover;
 }
 
