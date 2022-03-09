@@ -1678,6 +1678,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+#conferenceController #unpinnedVideos.listview video {
+    object-fit: cover;
+}
 
 #conference.mediaview .selfie-video .dropdown--ZEHEeO,
 #conference.mediaview .selfie-video .dropdownFireFox--Z1qd5Ve {
