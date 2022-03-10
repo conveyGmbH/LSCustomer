@@ -90,7 +90,7 @@
     transition-property: box-shadow,transform;
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
-    border-color: var(--e-global-color-accent);
+    border-color: var(--border-color);
     border-width: 1px 1px 0 1px;
     border-style: solid solid none solid;
     border-top-left-radius: 20px;
