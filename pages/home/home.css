@@ -38,6 +38,11 @@
 
 .home .win-listview .win-vertical .win-itemscontainer {
     height: auto !important;
+    border-color: var(--e-global-color-accent);
+    border-width: 0 1px 1px 1px;
+    border-style: none solid solid solid;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .home .win-listview .win-itembox {
@@ -84,6 +89,11 @@
     transition-property: box-shadow,transform;
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
+    border-color: var(--e-global-color-accent);
+    border-width: 1px 1px 0 1px;
+    border-style: solid solid none solid;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 /*.home .win-listview .win-groupheadercontainer:hover,
