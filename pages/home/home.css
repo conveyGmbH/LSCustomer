@@ -7,6 +7,7 @@
     --e-global-color-primary: #2a2f3d;
     --e-global-color-buttontext: #ffffff;
     --background-item: #7f7f7f;
+    --border-color: #b5b5b5;
 }
 .home .bold {
     font-weight: 600;
@@ -38,7 +39,7 @@
 
 .home .win-listview .win-vertical .win-itemscontainer {
     height: auto !important;
-    border-color: var(--e-global-color-accent);
+    border-color: var(--border-color);
     border-width: 0 1px 1px 1px;
     border-style: none solid solid solid;
     border-bottom-left-radius: 20px;
@@ -152,7 +153,12 @@
     -moz-border-radius: 40px;
     -webkit-border-radius: 40px;
     background-color: var(--e-global-color-accent);
+    border-color: var(--e-global-color-accent);
     color: var(--e-global-color-buttontext);
+}
+
+.home #more_Button:hover {
+    border-color: var(--e-global-color-primary);
 }
 
 .home .content-header-line {
@@ -172,6 +178,7 @@
     width: 50px;
     height: 50px;
     border: 2px solid var(--e-global-color-accent);
+    background-color: inherit;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;

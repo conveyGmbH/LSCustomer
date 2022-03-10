@@ -119,12 +119,12 @@
     border-color: var(--e-global-color-accent, #a4b726) !important;
 }
 /****Beginning Changes****/
-.event .button-tip .action-image {
+.events .button-tip .action-image, .event .button-tip .action-image {
     display: none !important;
 }
 
 .events button#homeButton {
-    padding: 14px 0px !important;
+    padding: 14px 0 !important;
     color: inherit;
     border: none !important;
     background: none !important;
