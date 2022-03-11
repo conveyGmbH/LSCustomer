@@ -50,8 +50,13 @@
     display: none;
 }
 
+.home .contentarea {
+    background-color: var(--e-global-color-buttontext);
+}
+
 .home .win-listview .win-itembox {
     background-color: Window;
+    cursor: pointer;
 }
 
 .home .win-listview .win-vertical .win-itemsblock {
@@ -256,6 +261,7 @@
     border-radius: 12px;
     -moz-border-radius: 12px;
     -webkit-border-radius: 12px;
+    background-color: var(--e-global-color-buttontext) !important;
 }
 .home .win-listview .win-gridlayout .win-container:hover,
 .home .win-listview .win-gridlayout .win-container:focus {
@@ -264,6 +270,10 @@
     transition-property: box-shadow,transform;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
+}
+
+html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
+    background-color: var(--e-global-color-buttontext) !important;
 }
 
 .home .event-item {
