@@ -534,15 +534,40 @@
                                                 expandFlag = that.itemGroupHeaderState[seriesId].expandFlag;
                                             }
                                         }
+                                        if (expandFlag) {
+                                            if (!WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-expanded")) {
+                                                WinJS.Utilities.addClass(winGroupHeaderContainer, "group-expanded");
+                                            }
+                                            if (WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-collapsed")) {
+                                                WinJS.Utilities.removeClass(winGroupHeaderContainer, "group-collapsed");
+                                            }
+                                        } else {
+                                            if (!WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-collapsed")) {
+                                                WinJS.Utilities.addClass(winGroupHeaderContainer, "group-collapsed");
+                                            }
+                                            if (WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-expanded")) {
+                                                WinJS.Utilities.removeClass(winGroupHeaderContainer, "group-expanded");
+                                            }
+                                        }
                                     }
                                 } else if (WinJS.Utilities.hasClass(winElement, "win-itemscontainer")) {
                                     var winItemsContainer = winElement;
                                     if (winItemsContainer && winItemsContainer.style) {
-                                        if (expandFlag === false) {
-                                            winItemsContainer.style.display = "none";
-                                        } else {
-                                            winItemsContainer.style.display = "";
-                                            winItemsContainer.style.width = clientWidth.toString() + "px";
+                                        winItemsContainer.style.width = clientWidth.toString() + "px";
+                                    }
+                                    if (expandFlag) {
+                                        if (!WinJS.Utilities.hasClass(winItemsContainer, "group-expanded")) {
+                                            WinJS.Utilities.addClass(winItemsContainer, "group-expanded");
+                                        }
+                                        if (WinJS.Utilities.hasClass(winItemsContainer, "group-collapsed")) {
+                                            WinJS.Utilities.removeClass(winItemsContainer, "group-collapsed");
+                                        }
+                                    } else {
+                                        if (!WinJS.Utilities.hasClass(winItemsContainer, "group-collapsed")) {
+                                            WinJS.Utilities.addClass(winItemsContainer, "group-collapsed");
+                                        }
+                                        if (WinJS.Utilities.hasClass(winItemsContainer, "group-expanded")) {
+                                            WinJS.Utilities.removeClass(winItemsContainer, "group-expanded");
                                         }
                                     }
                                 } else { // event-item
