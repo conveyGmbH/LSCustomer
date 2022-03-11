@@ -1048,35 +1048,37 @@
                         if (that.itemGroupHeaderState[seriesId]) {
                             that.itemGroupHeaderState[seriesId].expandFlag = !that.itemGroupHeaderState[seriesId].expandFlag;
                             var doExpandCollapseAnimation = function(element, affected, index, record) {
-                                var elementChildren = [];
-                                var curChild = element.firstElementChild;
-                                while (curChild) {
-                                    elementChildren.push(curChild);
-                                    curChild = curChild.nextElementSibling;
-                                }
-                                if (record.expandFlag) {
-                                    var expandAnimation = WinJS.UI.Animation.createExpandAnimation(elementChildren, affected);
-                                    that.records.setAt(index, record);
-                                    elementChildren.forEach(function(elementChild) {
-                                        if (elementChild.style) {
-                                            elementChild.style.opacity = "0";
+                                WinJS.Promise.timeout(0).then(function() {
+                                    var elementChildren = [];
+                                    var curChild = element.firstElementChild;
+                                    while (curChild) {
+                                        elementChildren.push(curChild);
+                                        curChild = curChild.nextElementSibling;
+                                    }
+                                    if (record.expandFlag) {
+                                        var expandAnimation = WinJS.UI.Animation.createAddToListAnimation(elementChildren, affected);
+                                        that.records.setAt(index, record);
+                                        var expandFinished = function() {
                                         }
-                                    });
-                                    var expandFinished = function() {
+                                        expandAnimation.execute().then(expandFinished, expandFinished);
+                                    } else {
+                                        var collapseAnimation = WinJS.UI.Animation.createDeleteFromListAnimation(elementChildren, affected);
                                         elementChildren.forEach(function(elementChild) {
                                             if (elementChild.style) {
-                                                elementChild.style.opacity = "";
+                                                elementChild.style.opacity = "0";
                                             }
                                         });
+                                        var collapseFinished = function() {
+                                            that.records.setAt(index, record);
+                                            elementChildren.forEach(function(elementChild) {
+                                                if (elementChild.style) {
+                                                    elementChild.style.opacity = "";
+                                                }
+                                            });
+                                        }
+                                        collapseAnimation.execute().then(collapseFinished,collapseFinished);
                                     }
-                                    expandAnimation.execute().then(expandFinished, expandFinished);
-                                } else {
-                                    var collapseAnimation = WinJS.UI.Animation.createCollapseAnimation(elementChildren, affected);
-                                    var collapseFinished = function() {
-                                        that.records.setAt(index, record);
-                                    }
-                                    collapseAnimation.execute().then(collapseFinished,collapseFinished);
-                                }
+                                });
                             }
                             //oder durch iterien bis die MandantSerie gefunden wurde und dann mit getat/setat den WErt umsetzen. (sollte weniger flackern)
                             for (var i = 0; i < that.records.length; i++) {
