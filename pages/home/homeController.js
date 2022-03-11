@@ -1043,23 +1043,76 @@
                     var target = eventInfo.currentTarget || eventInfo.target;
                     if (target) {
                         // merke Scrollposition (listView.winControl.scrollPosition) in einer Variable und setze zum schluss wieder setzen.
-                        var scrollPosition = listView.winControl.scrollPosition;
+                        //var scrollPosition = listView.winControl.scrollPosition;
                         var seriesId = parseInt(target.seriesId);
                         if (that.itemGroupHeaderState[seriesId]) {
                             that.itemGroupHeaderState[seriesId].expandFlag = !that.itemGroupHeaderState[seriesId].expandFlag;
+                            var doExpandCollapseAnimation = function(element, affected, index, record) {
+                                var elementChildren = [];
+                                var curChild = element.firstElementChild;
+                                while (curChild) {
+                                    elementChildren.push(curChild);
+                                    curChild = curChild.nextElementSibling;
+                                }
+                                if (record.expandFlag) {
+                                    var expandAnimation = WinJS.UI.Animation.createExpandAnimation(elementChildren, affected);
+                                    that.records.setAt(index, record);
+                                    elementChildren.forEach(function(elementChild) {
+                                        if (elementChild.style) {
+                                            elementChild.style.opacity = "0";
+                                        }
+                                    });
+                                    var expandFinished = function() {
+                                        elementChildren.forEach(function(elementChild) {
+                                            if (elementChild.style) {
+                                                elementChild.style.opacity = "";
+                                            }
+                                        });
+                                    }
+                                    expandAnimation.execute().then(expandFinished, expandFinished);
+                                } else {
+                                    var collapseAnimation = WinJS.UI.Animation.createCollapseAnimation(elementChildren, affected);
+                                    var collapseFinished = function() {
+                                        that.records.setAt(index, record);
+                                    }
+                                    collapseAnimation.execute().then(collapseFinished,collapseFinished);
+                                }
+                            }
                             //oder durch iterien bis die MandantSerie gefunden wurde und dann mit getat/setat den WErt umsetzen. (sollte weniger flackern)
                             for (var i = 0; i < that.records.length; i++) {
                                 var record = that.records.getAt(i);
                                 if (record.MandantSerieID === seriesId) {
                                     record.expandFlag = that.itemGroupHeaderState[seriesId].expandFlag;
-                                    that.records.setAt(i, record);
+                                    var winElements = null;
+                                    var affected = [];
+                                    var element = null;
+                                    if (listView) {
+                                        winElements = listView.querySelectorAll(".win-groupheadercontainer, .win-itemscontainer");
+                                        element = null;
+                                        for (var j = 0; j < winElements.length; j++) {
+                                            var winElement = winElements[j];
+                                            if (element) {
+                                                affected.push(winElement);
+                                            } else if (WinJS.Utilities.hasClass(winElement, "win-groupheadercontainer")) {
+                                                if (winElement.contains(target) && winElements[j+1]) {
+                                                    j++;
+                                                    element = winElements[j];
+                                                }
+                                            } 
+                                        }
+                                    }
+                                    if (element) {
+                                        doExpandCollapseAnimation(element, affected, i, record);
+                                    } else {
+                                        that.records.setAt(i, record);
+                                    }
                                     break;
                                 }
                             }
                             AppData._persistentStates.itemGroupHeaderState = copyByValue(that.itemGroupHeaderState);
                             Application.pageframe.savePersistentStates();
                         }
-                        listView.winControl.scrollPosition = scrollPosition;
+                        //listView.winControl.scrollPosition = scrollPosition;
                     }
                     Log.ret(Log.l.trace);
                 },
