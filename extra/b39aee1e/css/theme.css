@@ -301,8 +301,8 @@ section.elementor-inner-section > div {
     margin-right: 0 !important;
 }
 
-.contentarea {
-    background-color: var(--e-global-color-d4faeed, #F3FBFC) !important;
+.home .contentarea {
+    background-color: transparent !important;
 }
 
 .win-type-body {
