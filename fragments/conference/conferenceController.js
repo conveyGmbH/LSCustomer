@@ -1497,7 +1497,9 @@ var __meteor_runtime_config__;
             var onWheelSvg = function (event) {
                 if (event) {
                     event.preventDefault();
+                    event.stopPropagation();
                 }
+                return false;
             }
             that.onWheelSvg = null;
 
@@ -1735,11 +1737,11 @@ var __meteor_runtime_config__;
                     var svgContainer = fragmentElement.querySelector("." + bbbClass.svgContainer);
                     if (svgContainer && svgContainer.firstElementChild) {
                         presentationOpened = true;
-                        // prevent scrolling on zoom per mouse wheel!
-                        if ((pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController") && 
+                        // prevent scrolling on zoom per mouse wheel! Now always!
+                        if (/*(pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController") && */
                             !that.onWheelSvg) {
                             that.onWheelSvg = onWheelSvg;
-                            that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that));
+                            that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that), true);
                         }
                         var presentationFullscreen = svgContainer.querySelector("." + bbbClass.presentationFullscreen);
                         if (presentationFullscreen && !presentationFullscreen._handlerRegistered) {
