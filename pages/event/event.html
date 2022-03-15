@@ -19,110 +19,113 @@
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea win-type-body">
                     <div class="color_container2">
-                        <div class="hero-header">
-                            <div class="homeButton">
-                                <button id="homeButton" class="win-button"
-                                        onclick="AppBar.handleEvent('click', 'clickHome', event)">
-                                    <div class="button-tip">
-                                        <div class="action-image" id="home"></div>
-                                        <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
-                                        <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
-                                    </div>
-                                </button>
-                                </div>
-                                <div class="logOff-container">
-                                    <!--<div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
+                        
+                            <div class="content-grid">
+                                <div class="section-1">
+                                    <div class="hero-header">
+                                        <div class="homeButton">
+                                            <button id="homeButton" class="win-button"
+                                                    onclick="AppBar.handleEvent('click', 'clickHome', event)">
+                                                <div class="button-tip">
+                                                    <div class="action-image" id="home"></div>
+                                                    <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
+                                                    <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="logOff-container">
+                                            <!--<div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
             <span class="large_field"
                   data-win-bind="textContent: email; style.fontWeight: email Binding.Converter.toBold"></span><!--registerMessage
             </div>-->
-                                    <div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
-                                        <div id="logOffButton"
-                                             class="win-link"
-                                             data-win-bind="title: registerEmail"
-                                             onclick="AppBar.handleEvent('click', 'clickLogOffEvent', event)">
-                                            <span data-win-res="{textContent: 'register.logOffEvent'}"></span>
-                                        </div>
-                                        <!--<span class="large_field"
+                                            <div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
+                                                <div id="logOffButton"
+                                                     class="win-link"
+                                                     data-win-bind="title: registerEmail"
+                                                     onclick="AppBar.handleEvent('click', 'clickLogOffEvent', event)">
+                                                    <span data-win-res="{textContent: 'register.logOffEvent'}"></span>
+                                                </div>
+                                                <!--<span class="large_field"
                           data-win-bind="textContent: registerEmail"></span>-->
-                                    </div>
-                                </div>
-                                <div class="content-header">
-                                    <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
-                                        <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
-                                            <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>
+                                            </div>
                                         </div>
-                                        <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ev_text_detail_time_h2 Binding.Converter.toDisplay">
-                                            <h2 class="win-h2" data-win-bind="textContent: dataText.ev_text_detail_time_h2"></h2>
-                                        </div>
-                                        <div class="content-header-line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
-                                            <div class="button-element">
-                                                <button id="calenderButton" class="win-button" data-win-bind="style.display: showICS Binding.Converter.toDisplay" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
-                                                    <div class="button-tip">
-                                                        <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
-                                                        <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+                                        <div class="content-header">
+                                            <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
+                                                <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ev_text_detail_name_h1 Binding.Converter.toDisplay">
+                                                    <h1 class="win-h1" data-win-bind="textContent: dataText.ev_text_detail_name_h1"></h1>
+                                                </div>
+                                                <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ev_text_detail_time_h2 Binding.Converter.toDisplay">
+                                                    <h2 class="win-h2" data-win-bind="textContent: dataText.ev_text_detail_time_h2"></h2>
+                                                </div>
+                                                <div class="content-header-line" data-win-bind="style.display: dataText.ev_text_calender_text Binding.Converter.toDisplay">
+                                                    <div class="button-element">
+                                                        <button id="calenderButton" class="win-button" data-win-bind="style.display: showICS Binding.Converter.toDisplay" onclick="AppBar.handleEvent('click', 'clickCreateIcs', event)">
+                                                            <div class="button-tip">
+                                                                <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_calender_text"></span>
+                                                                <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_calender_tooltip"></span>
+                                                            </div>
+                                                        </button>
                                                     </div>
-                                                </button>
+                                                </div>
+                                            </div>
+                                            <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                                <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.off_text_detail_name_h1 Binding.Converter.toDisplay">
+                                                    <h1 class="win-h1" data-win-bind="textContent: dataText.off_text_detail_name_h1"></h1>
+                                                </div>
+                                                <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.off_text_detail_time_h2 Binding.Converter.toDisplay">
+                                                    <h2 class="win-h2" data-win-bind="textContent: dataText.off_text_detail_time_h2"></h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
-                                        <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.off_text_detail_name_h1 Binding.Converter.toDisplay">
-                                            <h1 class="win-h1" data-win-bind="textContent: dataText.off_text_detail_name_h1"></h1>
+                                    <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
+                                    <div id="maintenancehost" class="maintenance-fragmenthost" data-win-bind="style.display: showMaintenance Binding.Converter.toDisplay"></div>
+                                    <div class="content-header">
+                                        <!-- Add font awesome icons -->
+                                        <div class="caption-field" data-win-bind="style.visibility: showShare Binding.Converter.toVisibility">
+                                            <span data-win-bind="textContent: dataText.ev_text_share_text"></span>
                                         </div>
-                                        <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.off_text_detail_time_h2 Binding.Converter.toDisplay">
-                                            <h2 class="win-h2" data-win-bind="textContent: dataText.off_text_detail_time_h2"></h2>
+                                        <div class="share-block" data-win-bind="style.visibility: showShare Binding.Converter.toVisibility">
+                                            <div class="circle facebook" onclick="AppBar.handleEvent('click', 'clickFacebookShare', event)">
+                                                <i class="fab fa-facebook-square"></i>
+                                            </div>
+                                            <div class="circle linkedin" onclick="AppBar.handleEvent('click', 'clickLinkedInShare', event)">
+                                                <i class="fab fa-linkedin"></i>
+                                            </div>
+                                            <div class="circle xing" onclick="AppBar.handleEvent('click', 'clickXingShare', event)">
+                                                <i class="fab fa-xing-square"></i>
+                                            </div>
+                                            <!--<div class="circle google" onclick="AppBar.handleEvent('click', 'clickGooglePlusShare', event)">
+            <!--<i class="fab fa-google"></i>
+                <i class="fab fa-google-plus-g"></i>
+            </div>-->
+                                            <div class="circle twitter" onclick="AppBar.handleEvent('click', 'clickTwitterShare', event)">
+                                                <i class="fab fa-twitter"></i>
+                                            </div>
+                                            <!--<i class="far fa-envelope"></i>-->
+                                            <div class="circle mail" onclick="AppBar.handleEvent('click', 'clickEmailShare', event)">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                            <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
+                                        </div>
+                                        <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
+                                            <div class="caption-field" data-win-bind="style.display: dataText.ev_text_other_name_h1 Binding.Converter.toDisplay">
+                                                <span data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="recordedContenthost" class="recordedContent-fragmenthost" data-win-bind="style.display: showRecordedContent Binding.Converter.toDisplay"></div>
-                            </div>
+                            
                             <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
-                            <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
-                        </div>
+                            
+                        
                     <div class="content-container">
-                        <div class="content-grid">
-                            <div class="section-1">
-                                <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
-                                <div id="maintenancehost" class="maintenance-fragmenthost" data-win-bind="style.display: showMaintenance Binding.Converter.toDisplay"></div>
-                                <div class="content-header">
-                                    <!-- Add font awesome icons -->
-                                    <div class="caption-field" data-win-bind="style.visibility: showShare Binding.Converter.toVisibility">
-                                        <span data-win-bind="textContent: dataText.ev_text_share_text"></span>
-                                    </div>
-                                    <div class="share-block" data-win-bind="style.visibility: showShare Binding.Converter.toVisibility">
-                                        <div class="circle facebook" onclick="AppBar.handleEvent('click', 'clickFacebookShare', event)">
-                                            <i class="fab fa-facebook-square"></i>
-                                        </div>
-                                        <div class="circle linkedin" onclick="AppBar.handleEvent('click', 'clickLinkedInShare', event)">
-                                            <i class="fab fa-linkedin"></i>
-                                        </div>
-                                        <div class="circle xing" onclick="AppBar.handleEvent('click', 'clickXingShare', event)">
-                                            <i class="fab fa-xing-square"></i>
-                                        </div>
-                                        <!--<div class="circle google" onclick="AppBar.handleEvent('click', 'clickGooglePlusShare', event)">
-                                        <!--<i class="fab fa-google"></i>
-                                            <i class="fab fa-google-plus-g"></i>
-                                        </div>-->
-                                        <div class="circle twitter" onclick="AppBar.handleEvent('click', 'clickTwitterShare', event)">
-                                            <i class="fab fa-twitter"></i>
-                                        </div>
-                                        <!--<i class="far fa-envelope"></i>-->
-                                        <div class="circle mail" onclick="AppBar.handleEvent('click', 'clickEmailShare', event)">
-                                            <i class="fas fa-envelope"></i>
-                                        </div>
-                                        <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_share_tooltip"></span>
-                                    </div>
-                                    <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
-                                    <div class="caption-field" data-win-bind="style.display: dataText.ev_text_other_name_h1 Binding.Converter.toDisplay">
-                                        <span data-win-bind="textContent: dataText.ev_text_other_name_h1"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
+                        
+                        <div class="section-2">
                             <div id="countdownhost" class="countdown-fragmenthost" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay"></div>
-                            <div class="section-2">
-                                <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
-                            </div>
+                            <div id="registerhost" class="register-fragmenthost" data-win-bind="style.display: showRegister Binding.Converter.toDisplay"></div>
+                        </div>
                             <div class="section-3">
                                 <!--evText-->
                                 <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
