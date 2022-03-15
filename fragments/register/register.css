@@ -1,9 +1,12 @@
 ﻿.register .label {
     width: 130px;
+    font-size: smaller;
 }
 
 .register .checkbox {
     padding: 7px 0;
+    font-size: smaller;
+    color: rgb(84, 84, 84);
 }
 
 .register .privacy {
@@ -27,6 +30,7 @@
 
 .register .contentarea {
     background-color: Window;
+    margin-top: 20%;
 }
 
 .centerarea.registerEmail {
@@ -51,14 +55,20 @@
 .register .input_field {
     float: left;
     width: 100%;
+    height: 40px;
     margin-top: 8px;
     background-color: Window;
-    border: 1px solid #d2d2d2;
+    border: 1px solid rgb(84, 84, 84);
     border-radius: 5px;
 }
 
 .register .field_line_full {
     width: calc(100% - 38px);
+}
+
+.register .mandatory {
+    color: rgb(84, 84, 84);
+    font-size: smaller;
 }
 
 .win-listview .win-gridlayout .win-container {
