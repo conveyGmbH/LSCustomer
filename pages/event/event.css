@@ -35,7 +35,8 @@
     width: auto;
     height: 400px;
     margin: 0;
-/*    scroll-snap-align: end;
+    grid-column: 1 / span 6;
+    /*    scroll-snap-align: end;
 }
 .event .content-container {
     scroll-snap-align: start;*/
