@@ -381,26 +381,35 @@ p.ev-text {
     padding-left: 0;
 }
 
+.view-size-medium .event .speaker-lines-container {
+    display: block;
+}
+
+.view-size-medium .event .speaker-line {
+    display: inline-block;
+    width: 95%;
+}
+
+.view-size-medium .event .speakerblock {
+    margin-left: 5px;
+    width: calc(100% - 30px);
+    padding: 10px;
+}
+
+.view-size-medium .event .speaker-cv {
+    font-size: small;
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
 
     use: .view-size-medium-small
 */
 .view-size-medium-small .event .hero-header,
-.view-size-medium-small .event .content-container,
-.view-size-medium-small .event .speakerblock {
+.view-size-medium-small .event .content-container {
     margin-left: 5px;
     width: calc(100% - 30px);
     padding: 10px;
-}
-
-.view-size-medium-small .event .speaker-lines-container {
-    flex-direction: column;
-}
-
-.view-size-medium-small .event .speaker-line {
-    width: 100%;
-    flex: 100%;
 }
 
 .view-size-medium-small .event .win-h1 {
