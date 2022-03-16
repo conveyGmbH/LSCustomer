@@ -56,12 +56,37 @@
     float: left;
     width: 100%;
     height: 40px;
+    padding-left: 15px;
     margin-top: 8px;
     background-color: Window;
     border: 1px solid rgb(84, 84, 84);
     border-radius: 5px;
 }
 
+.register input.win-checkbox {
+    width: 25px;
+    height: 25px;
+    /*-webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;*/
+    border: 1.5px solid;
+}
+
+.register input.win-checkbox:checked {
+    border: 1.5px solid;
+    /*background-color: black;
+    color: #41B883;*/
+    background: url(../../images/check.svg)
+}
+
+.checkbox > input:active {
+    border: 2px solid #34495E;
+}
+
+.register .field_line_full {
+    width: calc(100% - 38px);
+}
 .register .field_line_full {
     width: calc(100% - 38px);
 }
@@ -113,14 +138,14 @@ input[disabled] {
 .circle {
     display: inline-block;
     min-width: 20px;
-    padding: 10px;
+    padding: 8px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     text-align: center;
     text-decoration: none;
     margin: 5px 2px;
-    font-size: 16px;
+    font-size: 35px;
     line-height: normal;
     box-sizing: content-box;
 }
@@ -130,33 +155,33 @@ input[disabled] {
 }
 
 .facebook {
-    background: #3B5998;
-    color: white;
+    background: transparent; /*#3B5998*/
+    color: #2a2f3d;
 }
 
 .google {
-    background: #dd4b39;
-    color: white;
+    background: transparent; /*#dd4b39*/
+    color: #2a2f3d;
 }
 
 .linkedin {
-    background: #007bb5;
-    color: white;
+    background: transparent; /*#007bb5*/
+    color: #2a2f3d;
 }
 
 .xing {
-    background: #15aabf;
-    color: white;
+    background: transparent; /*#15aabf*/
+    color: #2a2f3d;
 }
 
 .twitter {
-    background: #00acee;
-    color: white;
+    background: transparent; /*#00acee*/
+    color: #2a2f3d;
 }
 
 .mail {
-    background: #8EE5EE;
-    color: white;
+    background: transparent; /*#8EE5EE*/
+    color: #2a2f3d;
 }
 
 #anredeRepeater {
@@ -171,10 +196,13 @@ input[disabled] {
     padding-right: 0;
     padding-top: 2px;
     padding-bottom: 2px;
-    width: 25%;
+    width: 30%;
     min-width: 76px;
-    height: 36px;
+    height: 56px;
     overflow: hidden;
+}
+.register .checkbox {
+    width: calc(100% - 68px);
 }
 
 .list-privacy-item {
