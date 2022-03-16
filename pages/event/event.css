@@ -293,9 +293,9 @@
     position: absolute;
     float: right;
     right: 0;
-    width: 30%;
+    width: auto;
     margin-right: 5%;
-    margin-top: 20%;
+    margin-top: 10%;
 }
 .event .maintenance-fragmenthost {
     height: auto;
@@ -422,19 +422,20 @@ p.ev-text {
 
 .view-size-medium .event .color_container2 { height: auto;}
 .view-size-medium .event .section-1 {
-            grid-row: 1/span 1;
-            grid-column: 1/span 6;
-        }
+    grid-row: 1/span 1;
+    grid-column: 1/span 6;
+}
 
 .view-size-medium .event .section-2 {
-            grid-row: 2/span 1;
-            grid-column: 1/span 6;
-        }
+    grid-row: 2/span 1;
+    grid-column: 1/span 6;
+}
 
 .view-size-medium .event .section-3 {
-            grid-row: 3/span 1;
-            grid-column: 1/span 6;
-        }
+    grid-row: 3/span 1;
+    grid-column: 1/span 6;
+    padding: 10px;
+}
 
 .view-size-medium .event .section-4 {
     grid-row: 4/span 1;
@@ -470,6 +471,16 @@ p.ev-text {
 
 .view-size-small .event .content-header-line > h2 {
     font-size: 16px;
+}
+
+.view-size-small .event .teaser-fragmenthost {
+    margin-left: 0;
+    padding: 10px;
+}
+
+.view-size-small .event .intersection {
+    margin-left: 0;
+    padding: 10px;
 }
 
 .view-size-small .event .countdown-fragmenthost {

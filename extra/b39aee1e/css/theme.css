@@ -332,7 +332,7 @@ section.elementor-inner-section > div {
     background-color: #ffffff !important;
 }
 
-.event .color_container2, .event .color_container4 {
+.event .color_container4 {
     background-color: var(--e-global-color-d4faeed, #F3FBFC) !important;
 }
 

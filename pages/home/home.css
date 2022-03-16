@@ -191,7 +191,7 @@
 
 .home .expander-container {
     float: right;
-    padding-top: 10px;
+    padding-top: 0;
     padding-right: 10px;
 }
 .home .expander-button {
