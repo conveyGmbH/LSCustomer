@@ -1179,8 +1179,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn) {
     max-width: 100% !important;
-    height: fit-content !important;
-    max-height: 100% !important;}
+    /*height: fit-content !important;*/
+    max-height: 100% !important;
+}
 
 
 #conference.mediaview .presentation-open:not(.presenter-mode-small) .svgContainer--Z1z3wO0 > div:not(.toolbarContainer--ZqATLX):not(.presentationToolbar--Z7DDdn),
