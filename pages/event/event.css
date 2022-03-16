@@ -376,44 +376,54 @@ p.ev-text {
 
     use: .view-size-medium
 */
-.view-size-medium .event .hero-header,
-.view-size-medium .event .content-container,
-.view-size-medium .event .speakerblock {
+
+.view-size-medium .event .content-header-line {
+    padding-left: 0;
+}
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 699px 
+
+    use: .view-size-medium-small
+*/
+.view-size-medium-small .event .hero-header,
+.view-size-medium-small .event .content-container,
+.view-size-medium-small .event .speakerblock {
     margin-left: 5px;
     width: calc(100% - 30px);
     padding: 10px;
 }
 
-.view-size-medium .event .speaker-lines-container {
+.view-size-medium-small .event .speaker-lines-container {
     flex-direction: column;
 }
 
-.view-size-medium .event .speaker-line {
+.view-size-medium-small .event .speaker-line {
     width: 100%;
     flex: 100%;
 }
 
-.view-size-medium .event .win-h1 {
+.view-size-medium-small .event .win-h1 {
     font-size: 26px;
     line-height: 32px;
 }
 
-.view-size-medium .event .win-h2 {
+.view-size-medium-small .event .win-h2 {
     font-size: 22px;
     line-height: 26px;
 }
 
-.view-size-medium .event .win-type-body {
+.view-size-medium-small .event .win-type-body {
     font-size: 16px;
     line-height: 24px;
 }
 
-.view-size-medium .event .win-h3, 
-.view-size-medium .event .win-h5 {
+.view-size-medium-small .event .win-h3,
+.view-size-medium-small .event .win-h5 {
     font-size: 1.3em;
 }
 
-.view-size-medium .event .countdown-fragmenthost {
+.view-size-medium-small .event .countdown-fragmenthost {
     position: relative;
     float: right;
     right: 0;
@@ -421,38 +431,33 @@ p.ev-text {
     margin-right: 10px;
 }
 
-.view-size-medium .event .color_container2 { height: auto;}
-.view-size-medium .event .section-1 {
+.view-size-medium-small .event .color_container2 {
+    height: auto;
+}
+.view-size-medium-small .event .section-1 {
     grid-row: 1/span 1;
     grid-column: 1/span 6;
 }
 
-.view-size-medium .event .section-2 {
+.view-size-medium-small .event .section-2 {
     grid-row: 2/span 1;
     grid-column: 1/span 6;
 }
 
-.view-size-medium .event .section-3 {
+.view-size-medium-small .event .section-3 {
     grid-row: 3/span 1;
     grid-column: 1/span 6;
     padding: 10px;
 }
 
-.view-size-medium .event .section-4 {
+.view-size-medium-small .event .section-4 {
     grid-row: 4/span 1;
     grid-column: 1/span 6;
 }
 
-.view-size-medium .event .speaker-text {
+.view-size-medium-small .event .speaker-text {
     width: 65%;
 }
-
-
-/*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 699px 
-
-    use: .view-size-medium-small
-*/
 
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
