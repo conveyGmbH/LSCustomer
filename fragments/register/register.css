@@ -226,7 +226,7 @@ label .list-anredecon-field {
     font-weight: bold;
 }
 
-.view-size-medium .register .contentarea {
-    margin-top: 25%;
+.view-size-medium-small .register .contentarea {
+    margin-top: 0;
 }
 

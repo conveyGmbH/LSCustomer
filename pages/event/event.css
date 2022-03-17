@@ -279,7 +279,7 @@
     font-weight: 400;
     display: block;
 }
-.event .teaser-fragmenthost {
+.event .teaser-fragmenthost, .event .maintenance-fragmenthost {
     height: auto;
     margin-top: 20px;
     margin-left: 20px;
@@ -291,16 +291,12 @@
     margin-top: 20px;
 }
 .event .countdown-fragmenthost {
-    position: absolute;
+    position: fixed;
     float: right;
     right: 0;
-    width: auto;
+    width: 30%;
     margin-right: 5%;
-    margin-top: 10%;
-}
-.event .maintenance-fragmenthost {
-    height: auto;
-    margin-top: 20px;
+    margin-top: 8%;
 }
 
 .event .share-block {
@@ -331,6 +327,7 @@
     text-align: left;
     top: 20px;
     font-size: 16px;
+    white-space: normal;
 }
 .event .caption-block {
      width: auto; display: block; padding-right: 10px; margin-right: 10px;
@@ -488,7 +485,7 @@ p.ev-text {
     font-size: 16px;
 }
 
-.view-size-small .event .teaser-fragmenthost {
+.view-size-small .event .teaser-fragmenthost, .view-size-small .event .maintenance-fragmenthost {
     margin-left: 0;
     padding: 10px;
 }
