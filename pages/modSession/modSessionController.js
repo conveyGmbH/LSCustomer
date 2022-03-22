@@ -304,7 +304,7 @@
                     var now = new Date().getTime();
                     var timeleft = dateBegin - now;
                     //var timeleft2 = dateEnd - now;
-                    var warning = getResourceText("modSession.beginnEventInFuture");
+                    var warning = getResourceText("modSession.closeSession");
                     if (timeleft > 0) {
                         // dateBegin in future
                         confirm(warning, function (result) {
