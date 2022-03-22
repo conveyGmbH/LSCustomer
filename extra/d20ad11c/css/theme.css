@@ -1,6 +1,6 @@
 ﻿/* styles theme for customizations */
 
-/********Start Fonts for LB*********/
+/********Start Fonts for LStest Jourfix*********/
 @font-face {
     font-family: "Symbols";
     src: url(../../../lib/WinJS/fonts/Symbols.woff2) format("woff2"), 
@@ -310,12 +310,13 @@ section.elementor-inner-section > div {
     background-color: #ffffff;
 }
 
-.event .color_container2, .event .color_container4 {
-    background-color: var(--e-global-color-d4faeed, #F3FBFC);
+.register .label {
+    font-size: small !important;
 }
 
 .register .checkbox {
     padding: 12px 0 !important;
+    font-size: small !important;
 }
 /******** Ende Fonts for LiveBridge*********/
 
