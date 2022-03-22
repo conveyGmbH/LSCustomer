@@ -117,7 +117,14 @@
 
 .event button.win-button,
 .event button.win-button:focus {
-    border-color: var(--e-global-color-accent, #a4b726) !important;
+    border-color: var(--e-global-color-accent) !important;
+    color: var(--e-global-color-accent) !important;
+    background-color: var(--e-global-color-background) !important;
+}
+
+.event button.win-button: hover {
+    color: var(--e-global-color-buttontext) !important;
+    background-color: var(--e-global-color-accent) !important;
 }
 /****Beginning Changes****/
 .events .button-tip .action-image, .event .button-tip .action-image {
@@ -198,11 +205,11 @@
     border-color: var(--e-global-color-accent, #c2d63e) !important;
 }
 
-.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
+.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-button {
     color: var(--e-global-color-accent, #c2d63e) !important;
 }
 
-.event button#calenderButton:hover {
+.event button#calenderButton:hover .win-button{
     color: var(--e-global-color-buttontext) !important;
     background-color: var(--e-global-color-accent) !important;
 }
@@ -237,7 +244,7 @@
     letter-spacing: 1px;
 }
 
-.register #loginButton:hover > div >span, .register #re_registerEvent:hover > span {
+.register #loginButton:hover > div > span, .register #re_registerEvent:hover > span {
     color: var(--e-global-color-buttontext) !important;
 }
 

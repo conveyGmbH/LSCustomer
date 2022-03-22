@@ -122,6 +122,10 @@
 .register #loginButton {
     width: calc(50% - 100px);
     margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .register #resendButton, .register #editButton, .register #reRegisterButton {
@@ -232,8 +236,8 @@ label .list-anredecon-field {
     line-height: normal;
 }
 
-.register .label.register_title {
-    font-size: 30px;
+.register .register_title {
+    font-size: 28px;
     font-weight: bold;
 }
 
