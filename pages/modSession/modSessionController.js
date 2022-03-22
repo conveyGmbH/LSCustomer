@@ -64,7 +64,7 @@
             };
             this.setDataEvent = setDataEvent;
 
-            var setDataText = function(results) {
+            var setDataText = function (results) {
                 Log.call(Log.l.trace, "ModSession.Controller.");
                 var newDataText = {};
                 for (var i = 0; i < results.length; i++) {
@@ -93,7 +93,7 @@
             }
             this.setDataText = setDataText;
 
-            var setDataDoc = function(results) {
+            var setDataDoc = function (results) {
                 Log.call(Log.l.trace, "ModSession.Controller.");
                 var newDataDoc = getEmptyDefaultValue(ModSession.medienView.defaultValue);
                 for (var i = 0; i < results.length; i++) {
@@ -160,7 +160,7 @@
                     }
                     Log.ret(Log.l.trace);
                 },
-                clickHome: function(event) {
+                clickHome: function (event) {
                     Log.call(Log.l.trace, "ModSession.Controller.");
                     Application.navigateById("home", event);
                     Log.ret(Log.l.trace);
@@ -203,11 +203,11 @@
                                 headerHeight = stickyHeader.clientHeight;
                             }
                             if (contentArea.scrollTop > 0) {
-                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild, "sticky-scrolled")) {
                                     WinJS.Utilities.addClass(headerHost.firstElementChild, "sticky-scrolled");
                                 }
                             } else {
-                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild, "sticky-scrolled")) {
                                     WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
                                 }
                             }
@@ -225,10 +225,10 @@
                                 if (Math.abs(offsetTop) < (content.offsetTop - headerHeight) / 2) {
                                     if (!that.inSnap) {
                                         that.inSnap = true;
-                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000)/2 + content.offsetTop - headerHeight;
-                                        Log.print(Log.l.trace, "scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop );
+                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000) / 2 + content.offsetTop - headerHeight;
+                                        Log.print(Log.l.trace, "scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop);
                                         that.noMomentumScroll = true;
-                                        WinJS.Promise.timeout(5).then(function() {
+                                        WinJS.Promise.timeout(5).then(function () {
                                             that.inSnap = false;
                                         });
                                     }
@@ -245,29 +245,29 @@
                     if (onScrollResizePromise) {
                         onScrollResizePromise.cancel();
                     }
-                    onScrollResizePromise = WinJS.Promise.timeout(20).then(function() {
+                    onScrollResizePromise = WinJS.Promise.timeout(20).then(function () {
                         var resizeEvent = document.createEvent('uievent');
                         resizeEvent.initEvent('resize', true, true);
                         window.dispatchEvent(resizeEvent);
                     });
                     Log.ret(Log.l.u1);
                 },
-                onTouchMove: function(event) {
+                onTouchMove: function (event) {
                     Log.call(Log.l.u1, "Event.Controller.");
                     if (event && that.noMomentumScroll) {
                         event.preventDefault();
-                        WinJS.Promise.timeout(20).then(function() {
+                        WinJS.Promise.timeout(20).then(function () {
                             that.noMomentumScroll = false;
                         });
                     }
                     Log.ret(Log.l.u1);
                 },
-                onWheel: function(event) {
+                onWheel: function (event) {
                     Log.call(Log.l.u1, "Event.Controller.");
                     Log.print(Log.l.trace, "deltaMode=" + (event && event.deltaMode) + " deltaX=" + (event && event.deltaX) + " deltaY=" + (event && event.deltaY));
                     if (event && that.noMomentumScroll) {
                         event.preventDefault();
-                        WinJS.Promise.timeout(20).then(function() {
+                        WinJS.Promise.timeout(20).then(function () {
                             that.noMomentumScroll = false;
                         });
                     }
@@ -276,7 +276,7 @@
                 clickLogOffEvent: function (event) {
                     Log.call(Log.l.trace, "ModSession.Controller.");
                     var logOffButton = pageElement.querySelector("#logOffButton");
-                   // that.binding.registerEmail = AppData._persistentStates.registerData.Email;
+                    // that.binding.registerEmail = AppData._persistentStates.registerData.Email;
                     // Email vom Moderator?!
                     var confirmTitle = getResourceText("event.labelLogOff") + " ";
                     confirm(confirmTitle, function (result) {
@@ -291,52 +291,68 @@
                     }, logOffButton);
                     Log.ret(Log.l.trace);
                 },
-                clickCloseSessionEvent: function(event) {
+                clickCloseSessionEvent: function (event) {
                     Log.call(Log.l.trace, "ModSession.Controller.");
                     var closeSessionButton = pageElement.querySelector("#closeSessionButton");
                     var modToken = null;
                     if (Application.query.UserToken) {
                         modToken = Application.query.UserToken;
                     }
-                    Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
-                    var confirmTitle = getResourceText("modSession.labelCloseSession") + " ";
-                    confirm(confirmTitle, function (result) {
-                        if (result) {
-                            AppBar.busy = true;
-                            Log.print(Log.l.trace, "clickCloseSessionEvent: user choice OK");
-                    return AppData.call("PRC_RequestSessionEnd",
-                        {
-                            pVeranstaltungID: that.binding.eventId,
-                            pUserToken: modToken
-                        },
-                        function (json) {
-                            AppBar.busy = false;
-                            Log.print(Log.l.trace, "PRC_RequestSessionEnd success!");
-                            if (json && json.d && json.d.results) {
-                                var result = json.d.results[0];
+                    // binding von event für startdatum und diesen mit dem heutigen Datum vergleichen
+                    var dateBegin = that.binding.dataEvent.dateBegin;
+                    var dateEnd = that.binding.dataEvent.dateEndDatum;
+                    var now = new Date().getTime();
+                    var timeleft = dateBegin - now;
+                    //var timeleft2 = dateEnd - now;
+                    var warning = getResourceText("modSession.beginnEventInFuture");
+                    if (timeleft > 0) {
+                        // dateBegin in future
+                        confirm(warning, function (result) {
+                            if (result) {
+                                Application.navigateById("home");
+                            } else {
+                                Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
                             }
+                        });
+                    } else {
+                        Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
+                        var confirmTitle = getResourceText("modSession.closeSession") + " ";
+                        confirm(confirmTitle, function (result) {
+                            if (result) {
+                                AppBar.busy = true;
+                                Log.print(Log.l.trace, "clickCloseSessionEvent: user choice OK");
+                                return AppData.call("PRC_RequestSessionEnd", {
+                                    pVeranstaltungID: that.binding.eventId,
+                                    pUserToken: modToken
+                                }, function (json) {
+                                    AppBar.busy = false;
+                                    Log.print(Log.l.trace, "PRC_RequestSessionEnd success!");
+                                    if (json && json.d && json.d.results) {
+                                        var result = json.d.results[0];
+                                    }
                                     that.updateFragment().then(function (conferenceFragment) {
-                                    // call sendCommandMessage 
-                                    if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
-                                        conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
-                            }
+                                        // call sendCommandMessage 
+                                        // Abfrage nach Enddatum ob kleiner als heutige datum 
+                                        if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
+                                            conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
+                                        }
                                     });
                                     Application.navigateById("home");
-                    Log.ret(Log.l.trace);
-                        },
-                        function (error) {
-                            Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");
-                        });
-                        } else {
-                            Log.print(Log.l.trace, "clickDelete: user choice CANCEL");
-                        }
-                    }, closeSessionButton);
+                                    Log.ret(Log.l.trace);
+                                }, function (error) {
+                                    Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");
+                                });
+                            } else {
+                                Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
+                            }
+                        }, closeSessionButton);
+                    }
                 }
             };
 
             // page command disable handler
             this.disableHandlers = {
-                clickBack: function() {
+                clickBack: function () {
                     if (WinJS.Navigation.canGoBack === true) {
                         return false;
                     } else {
@@ -345,12 +361,12 @@
                 }
             };
 
-            var getFragmentByName = function(fragmentName) {
+            var getFragmentByName = function (fragmentName) {
                 var fragmentController;
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
                     fragmentController = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath(fragmentName));
                     if (!fragmentController) {
-                        var parentElement = pageElement.querySelector("#"+fragmentName+"host");
+                        var parentElement = pageElement.querySelector("#" + fragmentName + "host");
                         if (parentElement && that.binding.eventId) {
                             return Application.loadFragmentById(parentElement, fragmentName, { eventId: that.binding.eventId, dataEvent: that.binding.dataEvent });
                         } else {
@@ -452,7 +468,7 @@
                     }
                 }).then(function () {
                     return that.updateFragment();
-                }).then(function(conferenceFragment) {
+                }).then(function (conferenceFragment) {
                     conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
                         //alert("sessionEndRequested received: " + (param ? param : ""));
                         // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
@@ -488,9 +504,9 @@
                 }
             }
 
-            var adjustContainerSize = function() {
+            var adjustContainerSize = function () {
                 Log.call(Log.l.trace, "ModSession.Controller.");
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
                     var headerHost = document.querySelector("#headerhost");
                     if (contentArea && headerHost) {
                         var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
@@ -526,7 +542,7 @@
             this.updateFragment = updateFragment;
 
             // finally, load the data
-            that.processAll().then(function() {
+            that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
             }).then(function () {
