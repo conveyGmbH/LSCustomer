@@ -310,8 +310,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     opacity: 0.8;
 }
 
-.events .win-listview .win-gridlayout .win-container:hover .event-detail.box-bkg {
-    background-color: transparent;
+.home .win-listview .win-gridlayout .win-container:hover .event-detail.box-bkg {
+    background-color: var(--e-global-color-buttontext) !important;
 }
 
 .home .event-detail {

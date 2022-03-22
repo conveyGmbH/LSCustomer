@@ -31,6 +31,7 @@
     --max-content-width: 1410px;
     --max-content-width-surface: 1460px !important;
     --e-global-color-buttontext: #FFFFFF;
+    --e-global-color-background: #FFFFFF;
     
     --e-global-color-primary: #2A2F3D;
     --e-global-color-secondary: #07B9CB;
@@ -147,7 +148,7 @@
     text-align: center;
     right: -50px;
     top: 20px;
-    color: #fff;
+    color: var(--e-global-color-buttontext, #FFFFFF);
     text-transform: none !important;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
@@ -201,16 +202,24 @@
     color: var(--e-global-color-accent, #c2d63e) !important;
 }
 
+.event button#calenderButton:hover {
+    color: var(--e-global-color-buttontext) !important;
+    background-color: var(--e-global-color-accent) !important;
+}
+
 .register #loginButton, .register #re_registerEvent {
-    border-radius: 30px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
     border-style: solid;
     border-width: 2px;
     border-color: var(--e-global-color-accent) !important;
     background-color: var(--e-global-color-buttontext) !important;
     cursor: pointer;
     color: var(--e-global-color-accent) !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .register #loginButton:hover, .register #re-registerEvent:hover {
@@ -228,17 +237,17 @@
     letter-spacing: 1px;
 }
 
-.register #loginButton > div >span:hover, .register #re_registerEvent > span:hover {
+.register #loginButton:hover > div >span, .register #re_registerEvent:hover > span {
     color: var(--e-global-color-buttontext) !important;
 }
 
 .text-lightcolor.win-button {
-    background-color: #ffffff !important;
+    background-color: var(--e-global-color-background) !important;
     cursor: pointer;
 }
 
 .text-lightcolor.win-button:disabled {
-    background-color: #ffffff !important;
+    background-color: var(--e-global-color-background) !important;
     cursor: default;
 }
 
@@ -246,7 +255,7 @@
     margin: 0;
     width: 100%;
     text-align: center;
-    background-color: #ffffff !important;
+    background-color: var(--e-global-color-background) !important;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -257,7 +266,7 @@
 }
 
 .countdown .count-block {
-    background-color: #ffffff !important;
+    background-color: var(--e-global-color-background) !important;
 }
 
 .countdown .win-h3, .countdown .win-h5 {
@@ -329,7 +338,7 @@ section.elementor-inner-section > div {
 }
 
 .event .contentarea {
-    background-color: #ffffff !important;
+    background-color: var(--e-global-color-background) !important;
 }
 
 .event .color_container4 {

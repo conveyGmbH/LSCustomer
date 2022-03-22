@@ -1,4 +1,11 @@
-﻿.register .label {
+﻿:root {
+    --e-global-color-primary: #2a2f3d;
+    --input-border-color: #545454;
+    --input-border-active: #34495E;
+    --input-disabled: #DCDAD1;
+}
+
+.register .label {
     width: 130px;
     font-size: smaller;
 }
@@ -6,7 +13,7 @@
 .register .checkbox {
     padding: 7px 0;
     font-size: smaller;
-    color: rgb(84, 84, 84);
+    color: var(--input-border-color);
 }
 
 .register .privacy {
@@ -59,7 +66,7 @@
     padding-left: 15px;
     margin-top: 8px;
     background-color: Window;
-    border: 1px solid rgb(84, 84, 84);
+    border: 1px solid var(--input-border-color);
     border-radius: 5px;
 }
 
@@ -81,7 +88,7 @@
 }
 
 .checkbox > input:active {
-    border: 2px solid #34495E;
+    border: 2px solid var(--input-border-active);
 }
 
 .register .field_line_full {
@@ -92,7 +99,7 @@
 }
 
 .register .mandatory {
-    color: rgb(84, 84, 84);
+    color: var(--input-border-color);
     font-size: smaller;
 }
 
@@ -108,8 +115,12 @@
     margin-left: 10px;
 }
 
+.register .button_line {
+    text-align: left;
+}
+
 .register #loginButton {
-    width: 100%;
+    width: calc(50% - 100px);
     margin: 20px 0;
 }
 
@@ -132,7 +143,7 @@
 }
 
 input[disabled] {
-    color: #DCDAD1;
+    color: var(--input-disabled);
 }
 
 .circle {
@@ -156,32 +167,32 @@ input[disabled] {
 
 .facebook {
     background: transparent; /*#3B5998*/
-    color: #2a2f3d;
+    color: var(--e-global-color-primary);
 }
 
 .google {
     background: transparent; /*#dd4b39*/
-    color: #2a2f3d;
+    color: var(--e-global-color-primary);
 }
 
 .linkedin {
     background: transparent; /*#007bb5*/
-    color: #2a2f3d;
+    color: var(--e-global-color-primary);
 }
 
 .xing {
     background: transparent; /*#15aabf*/
-    color: #2a2f3d;
+    color: var(--e-global-color-primary);
 }
 
 .twitter {
     background: transparent; /*#00acee*/
-    color: #2a2f3d;
+    color: var(--e-global-color-primary);
 }
 
 .mail {
     background: transparent; /*#8EE5EE*/
-    color: #2a2f3d;
+    color: var(--e-global-color-primary);
 }
 
 #anredeRepeater {
