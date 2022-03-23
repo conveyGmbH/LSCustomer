@@ -100,11 +100,36 @@
 .event button.win-button:focus {
     border-color: #a4b726;
 }
+/****Beginning Changes****/
+.event .button-tip .action-image {
+    display: none !important;
+}
 
 .events button#homeButton {
-    padding: 14px 26px;
-    color: #ffffff;
+    padding: 14px 0px !important;
+    color: inherit;
+    border: none !important;
+    background: none !important;
+    text-align: left !important;
 }
+
+.teaser .centerarea {
+    background-color: inherit !important;
+}
+
+.teaser .ITbackground {
+    box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, .1), 0px 0px 15px 0 rgba(0, 0, 0, .1) !important;
+    padding: 20px !important;
+    margin: 15px !important;
+    border-radius: 12px !important;
+    border: 1px solid #fff !important;
+}
+
+.teaser .ipadImg {
+    border-radius: 12px !important;
+}
+
+/***End Changes**/
 
 .event button#homeButton {
     border-radius: 40px !important;
@@ -283,9 +308,9 @@ section.elementor-inner-section > div {
     background-color: var(--e-global-color-d4faeed, #F3FBFC);
 }
 
-.win-type-body {
+/*.win-type-body {
     color: var(--e-global-color-text, #2A2F3D);
-}
+}*/
 .caption-field {
     color: var(--e-global-color-secondary, #07B9CB);
 }
@@ -319,6 +344,56 @@ section.elementor-inner-section > div {
     font-size: small !important;
 }
 /******** Ende Fonts for LiveBridge*********/
+
+/***Changes for LSTest 4.02.22***/
+.win-type-body {
+    color: #333333 !important;
+}
+
+.event button#calenderButton:not(:hover):not(:active):not(:focus) {
+    background-color: Window;
+    color: #ff416c !important;
+}
+
+.event .register-fragmenthost {
+    border: #000 1px solid !important;
+}
+
+.register #loginButton {
+    border: 2px solid #ff416c !important;
+    background-color: #fff !important;
+    padding: 20px !important;
+    cursor: pointer !important;
+}
+
+.register #loginButton:disabled {
+    cursor: default !important;
+    border: 2px solid #ff416c !important;
+    background-color: #fff !important;
+    padding: 20px !important;
+}
+
+.register #loginButton span {
+    color: #ff416c !important;
+}
+/*.event button.win-type-title {
+    color: #ff416c !important;
+}*/
+
+.event .caption-field {
+    color: #333333;
+}
+
+.event .color-container4 {
+    background: linear-gradient(160deg, #00b4db 55%, #2ebf91 85%);
+}
+
+.event .speaker-line {
+    background-color: #fff !important;
+    border: solid 1px #000 !important;
+}
+
+/****End of Changes****/
 
 
 /*margins/paddings for medium size screens or orientation landscape
