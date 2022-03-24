@@ -2261,8 +2261,8 @@ c
 }
 
 /* end of conference message box */
-#conferenceController .parent--ZQqoCg .modal--MalHB .text--10B0Vs,
-#conferenceController .parent--ZQqoCg .modal--MalHB .button--Z2dosza .md--Q7ug4 .primary--1IbqAO .button--Z1j2w3P {
+#conferenceController .parent--ZQqoCg .modal--MalHB .content--PAEoo
+/*#conferenceController .parent--ZQqoCg .modal--MalHB .button--Z2dosza .md--Q7ug4 .primary--1IbqAO .button--Z1j2w3P*/ {
     display: none;
 }
 
