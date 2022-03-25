@@ -33,9 +33,10 @@
 .event .recordedContent-fragmenthost,
 .event .conference-fragmenthost {
     width: auto;
-    height: 400px;
+    height: auto;
     margin: 0;
     grid-column: 1 / span 6;
+    grid-row: 2 / span 4;
     /*    scroll-snap-align: end;
 }
 .event .content-container {

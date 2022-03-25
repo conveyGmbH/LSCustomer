@@ -64,7 +64,7 @@
                             }
                             if (height > 0 && height !== that.prevHeight) {
                                 that.prevHeight = height;
-                                fragment.style.height = height.toString() + "px";
+                                //fragment.style.height = height.toString() + "px";
                                 docContainer.style.height = height.toString() + "px";
                                 doResizeContent = true;
                             }
