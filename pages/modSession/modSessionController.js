@@ -304,7 +304,7 @@
                     var now = new Date().getTime();
                     var timeleft = dateBegin - now;
                     //var timeleft2 = dateEnd - now;
-                    var warning = getResourceText("modSession.closeSession");
+                    var warning = getResourceText("modSession.labelCloseSession");
                     if (timeleft > 0) {
                         // dateBegin in future
                         confirm(warning, function (result) {
