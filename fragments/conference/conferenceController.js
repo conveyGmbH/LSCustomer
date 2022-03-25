@@ -1495,11 +1495,15 @@ var __meteor_runtime_config__;
             that.observeChatMessageList = observeChatMessageList;
 
             var onWheelSvg = function (event) {
-                if (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
+                if (pageControllerName === "modSessionController" ||
+                    pageControllerName === "speakerSessionController") {
+                    if (event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    return false;
                 }
-                return false;
+                return true;
             }
             that.onWheelSvg = null;
 
