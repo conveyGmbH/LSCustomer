@@ -316,7 +316,7 @@
                         });
                     } else {
                         Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
-                        var confirmTitle = getResourceText("modSession.closeSession") + " ";
+                        var confirmTitle = getResourceText("modSession.labelCloseSession") + " ";
                         confirm(confirmTitle, function (result) {
                             if (result) {
                                 AppBar.busy = true;
