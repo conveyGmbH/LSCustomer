@@ -30,16 +30,18 @@
     --max-content-margin-left: calc(50% - 720px);
     --max-content-width: 1410px;
     --max-content-width-surface: 1460px !important;
-    /*
+    
     --e-global-color-primary: #2A2F3D;
     --e-global-color-secondary: #07B9CB;
     --e-global-color-text: #2A2F3D;
     --e-global-color-accent: #C2D63E;
     --e-global-color-d4faeed: #F3FBFC;
+    --e-global-color-buttontext: #FFFFFF;
 
     --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
-    --outline-focus: 1px solid var(--color-gray-lighter)
-    */
+    --outline-focus: 1px solid var(--color-gray-lighter);
+
+
     --font-family-default: 'Barlow';
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
@@ -98,7 +100,7 @@
 
 .event button.win-button,
 .event button.win-button:focus {
-    border-color: #a4b726;
+    border-color: var(--e-global-color-accent) !important;
 }
 /****Beginning Changes****/
 .event .button-tip .action-image {
@@ -137,7 +139,7 @@
 }
 
 .event button.win-type-title {
-    color: #ffffff !important;
+    color: var(--e-global-color-buttontext) !important;
 }
 
 .events .button-tip .win-tooltip,
@@ -152,7 +154,7 @@
     text-align: center;
     right: -50px;
     top: 20px;
-    color: #fff;
+    color: var(--e-global-color-buttontext);
     text-transform: none !important;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
@@ -175,9 +177,9 @@
     text-align: center;
     left: 0;
     top: 100%;
-    color: #fff;
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
+    color: var(--e-global-color-buttontext);
+    background: var(--e-global-color-text);
+    border-color: var(--e-global-color-text);
     border-radius: 15px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -187,11 +189,11 @@
 }
 
 .event .caption-field {
-    color: #2a2f3d;
+    color: var(--e-global-color-text);
 }
 
 .event .section-4 .caption-field {
-    color: #c2d63e;
+    color: var(--e-global-color-accent);
 }
 
 .event .speakerblock {
@@ -199,11 +201,11 @@
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
-    border-color: var(--e-global-color-accent, #c2d63e) !important;
+    border-color: var(--e-global-color-accent) !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
-    color: var(--e-global-color-accent, #c2d63e);
+    color: var(--e-global-color-accent);
 }
 
 .register #loginButton, .register #re_registerEvent {
@@ -212,19 +214,19 @@
     -moz-border-radius: 30px;
     border-style: solid;
     border-width: 2px;
-    border-color: #c2d63e !important;
-    background-color: #ffffff !important;
+    border-color: var(--e-global-color-accent) !important;
+    background-color: var(--e-global-color-buttontext) !important;
     cursor: pointer;
-    color: #c2d63e !important;
+    color: var(--e-global-color-accent) !important;
 }
 
 .register #loginButton:hover, .register #re-registerEvent:hover {
-    background-color: #c2d63e !important;
+    background-color: var(--e-global-color-accent) !important;
 }
 
 .register #loginButton > div > span, .register #re_registerEvent > span {
     font-weight: 400;
-    color: #c2d63e !important;
+    color: var(--e-global-color-accent) !important;
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
@@ -233,16 +235,16 @@
 }
 
 .register #loginButton:hover > div > span, .register #re_registerEvent:hover > span {
-    color: #ffffff !important;
+    color: var(--e-global-color-buttontext) !important;
 }
 
 .text-lightcolor.win-button {
-    background-color: #ffffff;
+    background-color: var(--e-global-color-buttontext);
     cursor: pointer;
 }
 
 .text-lightcolor.win-button:disabled {
-    background-color: #ffffff;
+    background-color: var(--e-global-color-buttontext);
     cursor: default;
 }
 
@@ -250,7 +252,7 @@
     margin: 0;
     width: 100%;
     text-align: center;
-    background-color: #ffffff;
+    background-color: var(--e-global-color-buttontext);
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -261,11 +263,11 @@
 }
 
 .countdown .count-block {
-    background-color: #ffffff;
+    background-color: var(--e-global-color-buttontext);
 }
 
 .countdown .win-h3, .countdown .win-h5 {
-    color: #2a2f3d;
+    color: var(--e-global-color-text);
 }
 
 .body-content-bottom {
@@ -306,7 +308,7 @@ section.elementor-inner-section > div {
 }
 
 .contentarea {
-    background-color: var(--e-global-color-d4faeed, #F3FBFC);
+    background-color: var(--e-global-color-d4faeed);
 }
 
 /*.win-type-body {
@@ -333,7 +335,7 @@ section.elementor-inner-section > div {
 }
 
 .event .contentarea {
-    background-color: #ffffff;
+    background-color: var(--e-global-color-buttontext);
 }
 
 .register .label {
@@ -348,7 +350,7 @@ section.elementor-inner-section > div {
 
 /***Changes for LSTest 4.02.22***/
 .win-type-body {
-    color: #333333 !important;
+    color: var(--e-global-color-text) !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
@@ -358,33 +360,23 @@ section.elementor-inner-section > div {
 
 .register #loginButton {
     
-    background-color: #fff !important;
+    background-color: var(--e-global-color-buttontext) !important;
     padding: 20px !important;
     cursor: pointer !important;
 }
 
 .register #loginButton:disabled {
     cursor: default !important;
-    background-color: #fff !important;
+    background-color: var(--e-global-color-buttontext) !important;
     padding: 20px !important;
 }
 
-
-/*.event button.win-type-title {
-    color: #ff416c !important;
-}*/
-
 .event .caption-field {
-    color: #333333;
-}
-
-.event .color-container4 {
-    background: linear-gradient(160deg, #00b4db 55%, #2ebf91 85%);
+    color: var(--e-global-color-text);
 }
 
 .event .speaker-line {
-    background-color: #fff !important;
-    border: solid 1px #000 !important;
+    background-color: var(--e-global-color-buttontext) !important;
 }
 
 /****End of Changes****/

@@ -339,7 +339,6 @@ p.ev-text {
 
 .event .logOff-container,
 .event.closeSession-container {
-    
     height: auto;
     width: auto;
 }
