@@ -118,11 +118,12 @@
 }
 
 .teaser .ITbackground {
-    box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, .1), 0px 0px 15px 0 rgba(0, 0, 0, .1) !important;
+    /*box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, .1), 0px 0px 15px 0 rgba(0, 0, 0, .1) !important;
     padding: 20px !important;
+    border: 1px solid #fff !important;*/
     margin: 15px !important;
     border-radius: 12px !important;
-    border: 1px solid #fff !important;
+    
 }
 
 .teaser .ipadImg {
@@ -231,7 +232,7 @@
     letter-spacing: 1px;
 }
 
-.register #loginButton > div >span:hover, .register #re_registerEvent > span:hover {
+.register #loginButton:hover > div > span, .register #re_registerEvent:hover > span {
     color: #ffffff !important;
 }
 
@@ -352,15 +353,11 @@ section.elementor-inner-section > div {
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
     background-color: Window;
-    color: #ff416c !important;
-}
-
-.event .register-fragmenthost {
-    border: #000 1px solid !important;
+    
 }
 
 .register #loginButton {
-    border: 2px solid #ff416c !important;
+    
     background-color: #fff !important;
     padding: 20px !important;
     cursor: pointer !important;
@@ -368,14 +365,11 @@ section.elementor-inner-section > div {
 
 .register #loginButton:disabled {
     cursor: default !important;
-    border: 2px solid #ff416c !important;
     background-color: #fff !important;
     padding: 20px !important;
 }
 
-.register #loginButton span {
-    color: #ff416c !important;
-}
+
 /*.event button.win-type-title {
     color: #ff416c !important;
 }*/
