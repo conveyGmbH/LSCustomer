@@ -203,6 +203,11 @@
                     that.binding.editDisabled = false;
                     that.binding.resendDisabled = false;
                     that.binding.showResendEditableMail = true;
+                    if (AppBar.scope &&
+                        AppBar.scope.binding &&
+                        typeof AppBar.scope.binding.showRegisterMail !== "undefined") {
+                        AppBar.scope.binding.showRegisterMail = false;
+                    }
                     if (typeof AppBar.scope.saveData === "function") {
                         AppBar.scope.saveData(function (response) {
                             // called asynchronously if ok
@@ -216,7 +221,6 @@
                             }
                         });
                     }
-
                     AppBar.modified = true;
                     AppBar.triggerDisableHandlers();
                     Log.ret(Log.l.trace);
