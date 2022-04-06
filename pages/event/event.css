@@ -164,19 +164,11 @@
     outline-style: none;
 }
 
-.event button.win-button:hover {
-    background-color: var(--e-global-color-accent);
-}
-
 .event button .win-type-title {
     font-size: 16px;
     font-weight: 600;
     line-height: 20px;
     letter-spacing: 1px;
-}
-
-.event button .win-type-title:hover {
-    color: var(--e-global-color-buttontext);
 }
 
 .event button#homeButton {

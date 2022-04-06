@@ -147,10 +147,6 @@
     color: var(--e-global-color-accent) !important;
 }
 
-.event button .win-type-title:hover {
-    color: var(--e-global-color-buttontext) !important;
-}
-
 .events .button-tip .win-tooltip,
 .event .button-tip .win-tooltip {
     visibility: hidden;
