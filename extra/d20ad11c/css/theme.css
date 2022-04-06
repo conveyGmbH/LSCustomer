@@ -96,11 +96,11 @@
 .events button.win-button:focus {
     border-radius: 40px 40px 40px 40px;
     outline-style: none;
+    border-color: var(--e-global-color-accent) !important;
 }
 
-.event button.win-button,
-.event button.win-button:focus {
-    border-color: var(--e-global-color-accent) !important;
+.event button.win-button:hover {
+    background-color: var(--e-global-color-accent) !important;
 }
 /****Beginning Changes****/
 .event .button-tip .action-image {
@@ -138,7 +138,16 @@
     border-radius: 40px !important;
 }
 
-.event button.win-type-title {
+.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
+    color: var(--e-global-color-accent) !important;
+    border-color: var(--e-global-color-accent) !important;
+}
+
+.event button .win-type-title {
+    color: var(--e-global-color-accent) !important;
+}
+
+.event button .win-type-title:hover {
     color: var(--e-global-color-buttontext) !important;
 }
 
@@ -200,15 +209,7 @@
     background-color: inherit;
 }
 
-.event button#calenderButton:not(:hover):not(:active):not(:focus) {
-    border-color: var(--e-global-color-accent) !important;
-}
-
-.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
-    color: var(--e-global-color-accent);
-}
-
-.register #loginButton, .register #re_registerEvent {
+.register #loginButton, .register #re_registerEvent, .text-lightcolor.win-button {
     border-radius: 30px;
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
@@ -216,17 +217,24 @@
     border-width: 2px;
     border-color: var(--e-global-color-accent) !important;
     background-color: var(--e-global-color-buttontext) !important;
-    cursor: pointer;
+    cursor: pointer !important;
     color: var(--e-global-color-accent) !important;
+    padding: 20px !important;
 }
 
-.register #loginButton:hover, .register #re-registerEvent:hover {
-    background-color: var(--e-global-color-accent) !important;
+.register #loginButton:disabled, .register #re_registerEvent:disabled, .text-lightcolor.win-button:disabled {
+    cursor: default !important;
+    background-color: var(--e-global-color-buttontext) !important;
+    color: var(--e-global-color-accent) !important;
+    padding: 20px !important;
 }
+
+/*.register #loginButton:hover, .register #re-registerEvent:hover {
+    background-color: var(--e-global-color-accent) !important;
+}*/
 
 .register #loginButton > div > span, .register #re_registerEvent > span {
     font-weight: 400;
-    color: var(--e-global-color-accent) !important;
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
@@ -234,19 +242,9 @@
     letter-spacing: 1px;
 }
 
-.register #loginButton:hover > div > span, .register #re_registerEvent:hover > span {
-    color: var(--e-global-color-buttontext) !important;
-}
-
-.text-lightcolor.win-button {
-    background-color: var(--e-global-color-buttontext);
-    cursor: pointer;
-}
-
-.text-lightcolor.win-button:disabled {
-    background-color: var(--e-global-color-buttontext);
-    cursor: default;
-}
+/*.register #loginButton:hover > div > span, .register #re_registerEvent:hover > span {
+    color: var(--e-global-color-buttontext);
+}*/
 
 .countdown .countdown-line {
     margin: 0;
@@ -325,15 +323,6 @@ section.elementor-inner-section > div {
     cursor: pointer;
 }
 
-.text-lightcolor.win-button {
-    background-color: Window;
-}
-
-.text-lightcolor.win-button:disabled {
-    background-color: #dcdcE4;
-    cursor: default;
-}
-
 .event .contentarea {
     background-color: var(--e-global-color-buttontext);
 }
@@ -351,24 +340,6 @@ section.elementor-inner-section > div {
 /***Changes for LSTest 4.02.22***/
 .win-type-body {
     color: var(--e-global-color-text) !important;
-}
-
-.event button#calenderButton:not(:hover):not(:active):not(:focus) {
-    background-color: Window;
-    
-}
-
-.register #loginButton {
-    
-    background-color: var(--e-global-color-buttontext) !important;
-    padding: 20px !important;
-    cursor: pointer !important;
-}
-
-.register #loginButton:disabled {
-    cursor: default !important;
-    background-color: var(--e-global-color-buttontext) !important;
-    padding: 20px !important;
 }
 
 .event .caption-field {
