@@ -254,6 +254,10 @@
     height: auto;
 }
 
+.home ::selection {
+    background-color: var(--e-global-color-buttontext);
+}
+
 .home .win-listview .win-gridlayout .win-container {
     margin: 15px 0 15px 35px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
