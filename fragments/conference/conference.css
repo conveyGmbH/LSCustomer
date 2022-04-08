@@ -921,6 +921,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 .pagecontrol:not(.view-size-medium) #conference.mediaview .layout--Z2pPMwf:not(.presentation-open):not(.deskshare-open):not(.videoplayer-open):not(.video-overlay-is-hidden) > .video-overlay-default,
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-is-hidden:not(.video-overlay-is-hidden) > .video-overlay-default {
+    width: 100%;
     height: calc(100% - 120px) !important;
 }
 
