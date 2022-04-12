@@ -97,12 +97,19 @@
     border-radius: 40px 40px 40px 40px;
     outline-style: none;
     border-color: var(--e-global-color-accent) !important;
+    background-color: var(--e-global-color-buttontext) !important;
 }
 
-.event button.win-button:hover {
-    background-color: var(--e-global-color-accent) !important;
+.event button.win-button, .event button.win-button:hover {
+    background-color: var(--e-global-color-buttontext) !important;
+    border-color: var(--e-global-color-accent) !important;
 }
-/****Beginning Changes****/
+
+.event button#calenderButton:not(:hover):not(:active):not(:focus) {
+    background-color: var(--e-global-color-buttontext) !important;
+    border-color: var(--e-global-color-buttontext) !important;
+}
+
 .event .button-tip .action-image {
     display: none !important;
 }
