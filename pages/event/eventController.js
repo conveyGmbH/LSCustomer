@@ -593,10 +593,13 @@
                             AppData._persistentStates.registerData.eventId = Application.query.eventId;
                         }
                         Application.pageframe.savePersistentStates();
-                        Log.print(Log.l.trace, "calling PRC_RegisterContact...");
+                        var eventId = typeof AppData._persistentStates.registerData.eventId === "string"
+                            ? parseInt(AppData._persistentStates.registerData.eventId)
+                            : AppData._persistentStates.registerData.eventId;
+                        Log.print(Log.l.trace, "calling PRC_RegisterContact... eventId=" + eventId);
                         return AppData.call("PRC_RegisterContact",
                             {
-                                pVeranstaltungID: AppData._persistentStates.registerData.eventId,
+                                pVeranstaltungID: eventId,
                                 pUserToken: AppData._persistentStates.registerData.userToken,
                                 pEMail: null, //wenn über Link bestätigt, dann übergebe Email null 
                                 pAddressData: null,
