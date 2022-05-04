@@ -107,7 +107,7 @@
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
     background-color: var(--e-global-color-buttontext) !important;
-    border-color: var(--e-global-color-buttontext) !important;
+    border-color: var(--e-global-color-accent) !important;
 }
 
 .event .button-tip .action-image {
