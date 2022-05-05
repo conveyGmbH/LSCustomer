@@ -168,7 +168,7 @@
 }
 
 .home #more_Button {
-    height: 40px;
+    height: auto;/*40px*/
     font-weight: bold;
     border-radius: 40px;
     -moz-border-radius: 40px;
@@ -178,9 +178,9 @@
     color: var(--e-global-color-buttontext);
 }
 
-.home #more_Button:hover {
+/*.home #more_Button:hover {
     border-color: var(--e-global-color-primary);
-}
+}*/
 
 .home .content-header-line {
     height: auto;
@@ -207,9 +207,9 @@
     justify-content: center;
     
 }
-.home .expander-button:hover {
+/*.home .expander-button:hover {
     border-color: var(--e-global-color-primary);
-}
+}*/
 .home .expander-icon {
     width: 40px;
     height: 40px;
