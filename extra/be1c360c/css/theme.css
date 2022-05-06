@@ -17,67 +17,37 @@
 
 
 :root {
-    --max-content-margin-left: 0 !important;
-    /*--max-content-width: 1410px;
-    --max-content-width-surface: 1460px !important;*/
+    /***new vars***/
+    --max-content-margin-left: calc(50% - 720px);
+    --max-content-width: 1410px;
+    --max-content-width-surface: 1460px !important;
     --font-family-default: 'Raleway';
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
     --outline-focus: none;
+    /*    
+    --e-global-color-primary: #2A2F3D;
+    --e-global-color-secondary: #07B9CB;
+    --e-global-color-text: #2A2F3D;
+    --e-global-color-accent: #C2D63E;
+    --e-global-color-d4faeed: #F3FBFC;
+    --e-global-color-buttontext: #FFFFFF;
+
+    --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
+    --outline-focus: 1px solid var(--color-gray-lighter);
+    */
 }
 
-:root{
+:root {
     --the7-accent-bg-color: #dcdc3e;
     --the7-accent-color: #dcdc3e;
-    --the7-additional-logo-elements-font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
-    --the7-additional-logo-elements-font-size: 20px;
-    --the7-additional-logo-elements-icon-size: 0px;
+    --e-global-color-accent: #006b8a;
+    --e-global-color-buttontext: #ffffff;
     --the7-additional-menu-elements-color: #006b8a;
     --the7-additional-menu-elements-font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
-    --the7-additional-menu-elements-font-size: 20px;
-    --the7-additional-menu-elements-font-weight: 500;
-    --the7-additional-menu-elements-icon-color: #006b8a;
-    --the7-additional-menu-elements-icon-size: 16px;
-    --the7-base-border-radius: 1px;
     --the7-base-color: #333333;
     --the7-base-font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
-    --the7-base-font-size: 14px;
-    --the7-base-font-weight: 500;
-    --the7-base-line-height: 20px;
-    --the7-beautiful-loading-bg: #ffffff;
-    --the7-beautiful-spinner-color: rgba(51,51,51,0.3);
-    --the7-big-button-border-radius: 1px;
-    --the7-body-bg-color: #006b8a;
-    --the7-body-bg-image: none;
-    --the7-body-bg-position-x: left;
-    --the7-body-bg-position-y: top;
-    --the7-body-bg-repeat: repeat;
-    --the7-body-bg-size: auto;
-    --the7-border-radius-size: 1px;
-    --the7-bottom-bar-bottom-padding: 10px;
-    --the7-bottom-bar-height: 40px;
-    --the7-bottom-bar-line-size: 1px;
-    --the7-bottom-bar-menu-switch: 778px;
-    --the7-bottom-bar-switch: 990px;
-    --the7-bottom-bar-top-padding: 10px;
-    --the7-bottom-bg-color: #006b8a;
-    --the7-bottom-bg-image: none;
-    --the7-bottom-bg-position-x: center;
-    --the7-bottom-bg-position-y: top;
-    --the7-bottom-bg-repeat: repeat;
-    --the7-bottom-color: #ffffff;
-    --the7-bottom-content-padding: 0px;
-    --the7-bottom-input-border-width: 1px;
-    --the7-bottom-input-padding: 5px;
-    --the7-bottom-logo-bottom-padding: 10px;
-    --the7-bottom-logo-left-padding: 0px;
-    --the7-bottom-logo-right-padding: 15px;
-    --the7-bottom-logo-top-padding: 10px;
-    --the7-bottom-overlay-content-padding: 0px;
-    --the7-box-width: 1340px;
-    --the7-breadcrumbs-bg-color: rgba(255,255,255,0.2);
-    --the7-breadcrumbs-border-color: rgba(130,36,227,0.2);
 }
 /****************img und #main von MP entfernen*******************/
 .home #fancy-header, .events #fancy-header, .event #fancy-header {
@@ -140,7 +110,7 @@
 .home .win-type-body, .events .win-type-body, .event .win-type-body {
     font-size: 15px !important;
     line-height: 25px !important;
-    color: #333333 !important;
+    color: var(--the7-base-color) !important;
 }
 
 .home .content-header-line > span, .events .content-header-line > span,
@@ -175,14 +145,14 @@
 .events .event-item .event-title {
     font-size: 16px !important;
     line-height: 20px !important;
-    color: #006b8a !important;
+    color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
 .home .event-item .event-subtitle,
 .events .event-item .event-subtitle {
     font-size: 15px !important;
     line-height: 20px !important;
-    color: #006b8a !important;
+    color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     padding-bottom: 5px !important;
 }
 
@@ -197,50 +167,51 @@
     line-height: 25px !important;
     font-weight: 500 !important;
 }
-
+/*****Changes******/
+.home #more_Button {
+    background-color: var(--e-global-color-accent);
+    border-color: var(--e-global-color-accent);
+    color: var(--e-global-color-buttontext);
+}
 .home .win-listview .win-vertical .win-footercontainer,
 .home .win-listview .win-vertical .win-headercontainer {
-    margin-left: 0 !important;
+     /*margin-left: 0 !important;
     width: 100% !important;
     padding: 0 !important;
-    /*margin-left: var(--max-content-margin-left) !important;
+   margin-left: var(--max-content-margin-left) !important;
     width: var(--max-content-width) !important;
     padding: 15px;*/
 }
 
-.home .win-listview .win-vertical .win-gridlayout.win-surface,
+/*.home .win-listview .win-vertical .win-gridlayout.win-surface,
 .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin: 0 auto !important;
     width: 100% !important;
-}
+}*/
 
-.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
+/*.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
     margin: 0 auto !important;
-}
+    max-width: var(--max-content-width) !important;
+}*/
 
-.home .win-headercontainer .content-header {
+/*.home .win-headercontainer .content-header {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
-}
+}*/
 
-.home .group-header {
+/*.home .group-header {
+    margin: 0 auto !important;
+}*/
+
+/*.home .win-itemscontainer .win-uniformgridlayout .win-laidout {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
-}
+}*/
 
-.home .win-itemscontainer .win-uniformgridlayout .win-laidout {
-    width: calc(1300px - 50px - 50px) !important;
-    margin: 0 auto !important;
-}
-
-.home .content-header {
-    width: 100% !important;
-}
-
-.home .event-item, .events .event-item {
+/*.home .event-item, .events .event-item {
     width: 320px !important;
-}
-.event .content-header {
+}*/
+/*.event .content-header {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }
@@ -248,51 +219,48 @@
 .events .content-header {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
-}
+}*/
 
-.event .content-container,
+/*.event .content-container,
 .event .speakerblock {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
     display: block !important;
-}
+}*/
 
-.event .section-1 > .content-header {
+
+/*.event .section-1 > .content-header {
     width: auto !important;
     height: auto;
-}
+}*/
 
-.event .speakerblock > .content-header {
+/*.event .speakerblock > .content-header {
     width: calc(1300px - 50px - 50px) !important;
-}
+}*/
 
 
-.home .hero-image-container {
+/*.home .hero-image-container {
     margin-bottom: 25px !important;
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
-}
+}*/
 
-.events .hero-image-container {
+/*.events .hero-image-container {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
-}
+}*/
 
-.home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
+/*.home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
 .events .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
     max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
-}
+}*/
 
-.event .content-header-line {
-    margin: 0 !important;
-}
-
-.home .list-footer {
+/*.home .list-footer {
     margin-top: 65px;
     padding: 0;
     margin-bottom: 0;
-}
+}*/
 
 .events .list-footer {
     margin-top: 65px;
@@ -302,22 +270,15 @@
     margin-top: 65px;
 }
 
-.events .win-listview .win-vertical .win-footercontainer,
-.events .win-listview .win-vertical .win-headercontainer {
+/*.event .hero-header {
     margin-left: 0 !important;
     width: 100% !important;
     padding: 0 !important;
-}
+}*/
 
-.event .hero-header {
-    margin-left: 0 !important;
-    width: 100% !important;
-    padding: 0 !important;
-}
-
-.event .content-header {
+/*.event .content-header {
     margin: 15px 0;
-}
+}*/
 
 .events button.win-button,
 .events button.win-button:focus,
@@ -329,19 +290,13 @@
     outline-style: none;
 }
 
-.events .homeButton,
-.event .homeButton {
-    width: calc(1300px - 50px - 50px) !important;
-    margin: 0 auto !important;
-}
-
 .events button#homeButton {
     position: sticky !important;
     margin-top: 20px !important;
     margin-bottom: 20px !important;
     padding: 14px 26px;
     color: #ffffff;
-    background-color: #006b8a;
+    background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
 .event button#homeButton {
@@ -349,7 +304,7 @@
     margin-top: 20px !important;
     margin-left: 0 !important;
     padding: 14px 26px;
-    background-color: #006b8a;
+    background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
 .event button .win-type-title {
@@ -368,7 +323,7 @@
     text-align: center;
     left: 90px;
     top: 0;
-    color: #006b8a;
+    color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     background-color: #f2f2f2;
     border-color: var(--the7-additional-menu-elements-color, #006b8a);
     border-radius: 0 !important;
@@ -400,18 +355,18 @@
 }
 
 .event .caption-field {
-    color: #006b8a;
+    color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     line-height: 20px !important;
     font-size: 16px !important;
 }
 
 .event .section-4 .caption-field {
-    color: #006b8a;
+    color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
     border-color: var(--the7-additional-menu-elements-color, #006b8a);
-    background-color: #006b8a !important;
+    background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     border-radius: 0 !important;
 }
 
@@ -428,7 +383,7 @@
 }
 
 .register #loginButton > div > span, .register #re_registerEvent > span {
-    color: #ffffff;
+    color: var(--e-global-color-buttontext);
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
@@ -459,39 +414,18 @@
     margin: 0 auto !important;
 }
 
-.countdown .field_line_full {
-    width: 60% !important;
-}
-
-.countdown .countdown-line {
-    width: 60% !important;
-}
-
-
 .text-lightcolor.win-button {
-    background-color: #ffffff;
+    background-color: var(--e-global-color-buttontext);
     cursor: pointer;
 }
 
 .text-lightcolor.win-button:disabled {
-    background-color: #ffffff;
+    background-color: var(--e-global-color-buttontext);
     cursor: default;
 }
 
-.countdown .countdown-line {
-    margin: 0;
-    width: 100%;
-    text-align: center;
-    background-color: #ffffff;
-    border-radius: none;
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
-    transition: background 0.3s, border 0.3s, box-shadow 0.3s;
-    -webkit-transition: background 0.3s, border 0.3s, box-shadow 0.3s;
-    -moz-transition: background 0.3s, border 0.3s, box-shadow 0.3s;
-}
-
 .countdown .count-block {
-    background-color: #ffffff;
+    background-color: var(--e-global-color-buttontext);
 }
 
 .countdown .win-h3 {
@@ -500,7 +434,7 @@
 }
 
 .countdown .win-h5 {
-    color: #333333 !important;
+    color: var(--the7-base-color) !important;
     font-size: 12px !important;
 }
 
@@ -552,10 +486,10 @@ section.elementor-inner-section > div {
 }
 
 .win-type-body {
-    color: var(--e-global-color-text, #333333);
+    color: var(--the7-base-color) !important;
 }
 .caption-field {
-    color: var(--the7-accent-color, #dcdc3e);
+    color: var(--the7-accent-color, #dcdc3e) !important;
 }
 .sticky-scrolled .sticky-header-pinned-fixed {
     background-color: Window;
@@ -570,20 +504,8 @@ section.elementor-inner-section > div {
 }
 
 .text-lightcolor.win-button:disabled {
-    color: var(--the7-additional-menu-elements-color, #006b8a);
+    color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     cursor: default;
-}
-
-.event .contentarea {
-    background-color: #f2f2f2 !important;
-}
-
-.event .color_container2{
-    background-color: transparent !important;
-}
-
-.event .color_container4 {
-    background-color: #ffffff;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -593,20 +515,17 @@ section.elementor-inner-section > div {
 
     use: .view-size-biggest
 */
-.view-size-biggest .home .win-listview .win-vertical .win-headercontainer {
-    margin-left: 0 !important;
-    width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
 
-.view-size-biggest .home .win-headercontainer > .content-header {
+/*.view-size-biggest .home .win-headercontainer > .content-header {
     width: 60% !important;
     margin: 0 30% 0 10% !important;
 }
 
+.view-size-biggest .home .content-header {
+    max-width: calc(1300px - 50px - 50px) !important;
+    margin: 0 auto !important;
+}
 
-.view-size-biggest .home .content-header,
 .view-size-biggest .events .content-header,
 .view-size-biggest .event .content-header {
     max-width: calc(1300px - 50px - 50px) !important;
@@ -641,7 +560,7 @@ section.elementor-inner-section > div {
     width: calc(100% - 50px -50px) !important;
     padding: 15px !important;
 
-}
+}*/
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1099px 
     @media (max-width:1099px) {
@@ -741,11 +660,6 @@ section.elementor-inner-section > div {
 .view-size-medium .countdown .field_line_full {
     width: 100% !important;
 }
-
-.view-size-medium .countdown .countdown-line {
-    width: 100% !important;
-}
-
 
 
 /*margins/paddings for small screens and orientation vertical
