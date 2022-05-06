@@ -168,7 +168,7 @@
 }
 
 .home #more_Button {
-    height: 40px;
+    height: auto;/*40px*/
     font-weight: bold;
     border-radius: 40px;
     -moz-border-radius: 40px;
@@ -178,9 +178,9 @@
     color: var(--e-global-color-buttontext);
 }
 
-.home #more_Button:hover {
+/*.home #more_Button:hover {
     border-color: var(--e-global-color-primary);
-}
+}*/
 
 .home .content-header-line {
     height: auto;
@@ -207,9 +207,9 @@
     justify-content: center;
     
 }
-.home .expander-button:hover {
+/*.home .expander-button:hover {
     border-color: var(--e-global-color-primary);
-}
+}*/
 .home .expander-icon {
     width: 40px;
     height: 40px;
@@ -258,8 +258,12 @@
     background-color: var(--e-global-color-buttontext);
 }
 
+.home .win-itemsblock {
+    margin-left: 3%;
+}
+
 .home .win-listview .win-gridlayout .win-container {
-    margin: 15px 0 15px 35px;
+    margin: 0 15px 15px 0;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
     z-index: 2;
     height: 380px;
@@ -402,7 +406,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .view-size-medium .home .win-listview .win-groupheader { }
 
 .view-size-medium .home .win-listview .win-gridlayout .win-container {
-    margin: 10px 0 10px 30px;
+    margin: 0 10px 10px 0;
 }
 
 .view-size-medium .home .expander-container {
