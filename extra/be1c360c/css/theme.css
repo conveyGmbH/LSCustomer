@@ -170,6 +170,10 @@
 
 /*****Changes******/
 
+.home .hero-image-container > img {
+    height: auto !important;
+}
+
 .event .hero-header {
     margin-left: 0 !important;
     padding: 15px 0 !important
