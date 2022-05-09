@@ -167,7 +167,33 @@
     line-height: 25px !important;
     font-weight: 500 !important;
 }
+
 /*****Changes******/
+
+.event .hero-header {
+    margin-left: 0 !important;
+    padding: 15px 0 !important
+}
+
+.event .content-header {
+    margin: 15px 0 0 20px !important;
+    padding: 5px 15px !important;
+}
+
+.event .homeButton {
+    margin-left: 20px !important;
+    padding: 15px !important; 
+}
+
+.event .logOff-container {
+    margin-left: 20px !important;
+    padding: 15px !important;
+}
+
+.event .body-content-top {
+    width: 170%;
+}
+
 .home #more_Button {
     background-color: var(--e-global-color-accent);
     border-color: var(--e-global-color-accent);
@@ -295,7 +321,7 @@
     margin-top: 20px !important;
     margin-bottom: 20px !important;
     padding: 14px 26px;
-    color: #ffffff;
+    color: var(--e-global-color-buttontext, #ffffff) !important;
     background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
@@ -304,11 +330,12 @@
     margin-top: 20px !important;
     margin-left: 0 !important;
     padding: 14px 26px;
+    color: var(--e-global-color-buttontext, #ffffff) !important;
     background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
 .event button .win-type-title {
-    color: #ffffff;
+    color: var(--the7-accent-color, #dcdc3e);
 }
 
 .events .button-tip .win-tooltip,
@@ -508,6 +535,14 @@ section.elementor-inner-section > div {
     cursor: default;
 }
 
+/**contentarea is more than 1460px**/
+
+@media (min-width:1820px) {
+    .body-content-top {
+        width: 190%;
+    }
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1299px 
     @media (max-width:1299px) {
@@ -655,6 +690,10 @@ section.elementor-inner-section > div {
 .view-size-medium-small .event .content-header {
     width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
+}
+
+.view-size-medium-small .body-content-top {
+    width: auto;
 }
 
 .view-size-medium .countdown .field_line_full {
