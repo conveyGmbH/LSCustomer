@@ -339,7 +339,7 @@
 }
 
 .event button .win-type-title {
-    color: var(--the7-accent-color, #dcdc3e);
+    color: var(--e-global-color-buttontext) !important;
 }
 
 .events .button-tip .win-tooltip,
@@ -402,7 +402,13 @@
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
-    color: #ffffff;
+    color: var(--e-global-color-buttontext) !important;
+}
+
+.event button#calenderButton:hover {
+    border-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
+    background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
+    cursor: pointer;
 }
 
 .register #loginButton, .register #re_registerEvent {
