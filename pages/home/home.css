@@ -24,7 +24,7 @@
 .home .win-listview .win-vertical .win-headercontainer {
     margin-left: var(--max-content-margin-left);
     width: var(--max-content-width);
-    padding: 15px;
+    padding: 15px 10px 40px 10px;
 }
 
 .home .win-listview .win-vertical .win-gridlayout.win-surface {
@@ -40,7 +40,7 @@
 
 .home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
     width: var(--max-content-width) !important;
-
+    padding: 30px 0;
 }
 
 .home .win-listview .win-vertical .win-itemscontainer.group-expanded {
@@ -130,7 +130,7 @@
 
 .home .win-listview .win-groupheader {
     width: calc(100% - 70px);
-    padding: 15px 35px;
+    padding: 30px 0 30px 35px;
 }
 
 .home .group-header {
