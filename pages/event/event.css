@@ -415,7 +415,8 @@ p.ev-text {
     padding-left: 0;
 }
 
-.view-size-medium .event .countdown-fragmenthost {
+.view-size-medium .event .caption-field {
+    top: 0;
 
 }
 

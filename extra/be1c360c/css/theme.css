@@ -18,9 +18,9 @@
 
 :root {
     /***new vars***/
-    --max-content-margin-left: calc(50% - 720px);
-    --max-content-width: 1410px;
-    --max-content-width-surface: 1460px !important;
+    --max-content-margin-left: calc(50% - 600px) !important;
+    --max-content-width: calc(1300px - 50px - 50px) !important;
+    --max-content-width-surface: calc(1300px - 50px - 50px) !important;
     --font-family-default: 'Raleway';
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
@@ -111,6 +111,12 @@
     font-size: 15px !important;
     line-height: 25px !important;
     color: var(--the7-base-color) !important;
+}
+
+.home .content-header {
+    margin: 0 auto !important;
+    max-width: calc(1300px - 50px - 50px) !important;
+    padding-bottom: 20px !important;
 }
 
 .home .content-header-line > span, .events .content-header-line > span,
@@ -205,43 +211,37 @@
 }
 .home .win-listview .win-vertical .win-footercontainer,
 .home .win-listview .win-vertical .win-headercontainer {
-     /*margin-left: 0 !important;
+    margin-left: 0 !important;
     width: 100% !important;
     padding: 0 !important;
-   margin-left: var(--max-content-margin-left) !important;
-    width: var(--max-content-width) !important;
-    padding: 15px;*/
 }
 
-/*.home .win-listview .win-vertical .win-gridlayout.win-surface,
+.home .win-listview .win-vertical .win-gridlayout.win-surface,
 .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin: 0 auto !important;
-    width: 100% !important;
-}*/
+    margin-left: var(--max-content-margin-left) !important;
+    max-width: var(--max-content-width-surface) !important;
+}
 
-/*.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
+.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
     margin: 0 auto !important;
-    max-width: var(--max-content-width) !important;
-}*/
+    max-width: var(--max-content-width-surface) !important;
+}
 
-/*.home .win-headercontainer .content-header {
+    /*.home .win-headercontainer .content-header {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }*/
-
-/*.home .group-header {
+    /*.home .group-header {
     margin: 0 auto !important;
 }*/
-
-/*.home .win-itemscontainer .win-uniformgridlayout .win-laidout {
+    /*.home .win-itemscontainer .win-uniformgridlayout .win-laidout {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }*/
-
-/*.home .event-item, .events .event-item {
+    /*.home .event-item, .events .event-item {
     width: 320px !important;
 }*/
-/*.event .content-header {
+    /*.event .content-header {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }
@@ -250,49 +250,39 @@
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }*/
-
-/*.event .content-container,
+    /*.event .content-container,
 .event .speakerblock {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
     display: block !important;
 }*/
-
-
-/*.event .section-1 > .content-header {
+    /*.event .section-1 > .content-header {
     width: auto !important;
     height: auto;
 }*/
-
-/*.event .speakerblock > .content-header {
+    /*.event .speakerblock > .content-header {
     width: calc(1300px - 50px - 50px) !important;
 }*/
-
-
-/*.home .hero-image-container {
+    /*.home .hero-image-container {
     margin-bottom: 25px !important;
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }*/
-
-/*.events .hero-image-container {
+    /*.events .hero-image-container {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }*/
-
-/*.home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
+    /*.home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
 .events .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
     max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }*/
-
-/*.home .list-footer {
+    /*.home .list-footer {
     margin-top: 65px;
     padding: 0;
     margin-bottom: 0;
 }*/
-
-.events .list-footer {
+    .events .list-footer {
     margin-top: 65px;
 }
 
@@ -561,6 +551,11 @@ section.elementor-inner-section > div {
     use: .view-size-biggest
 */
 
+
+.view-size-biggest  .home .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 20px !important;
+    max-width: var(--max-content-width-surface) !important;
+}
 /*.view-size-biggest .home .win-headercontainer > .content-header {
     width: 60% !important;
     margin: 0 30% 0 10% !important;
@@ -613,7 +608,6 @@ section.elementor-inner-section > div {
 
     use: .view-size-bigger
 */
-
 .view-size-bigger .event .homeButton {
     width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
