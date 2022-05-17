@@ -18,8 +18,8 @@
         <div id="eventController" class="data-container">
             <section aria-label="Main content" role="main" class="animationElement">
                 <div class="contentarea win-type-body">
+                    <div class="customer-top-header"></div>
                     <div class="color_container2">
-                        
                         <div class="content-grid">
                             <div class="section-1">
                                 <div class="hero-header">
@@ -35,9 +35,9 @@
                                     </div>
                                     <div class="logOff-container">
                                         <!--<div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
-                <span class="large_field"
-                      data-win-bind="textContent: email; style.fontWeight: email Binding.Converter.toBold"></span><!--registerMessage
-                </div>-->
+                                        <span class="large_field"
+                                              data-win-bind="textContent: email; style.fontWeight: email Binding.Converter.toBold"></span><!--registerMessage
+                                        </div>-->
                                         <div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
                                             <div id="logOffButton"
                                                  class="win-link"
@@ -46,7 +46,7 @@
                                                 <span data-win-res="{textContent: 'register.logOffEvent'}"></span>
                                             </div>
                                             <!--<span class="large_field"
-                              data-win-bind="textContent: registerEmail"></span>-->
+                                                      data-win-bind="textContent: registerEmail"></span>-->
                                         </div>
                                     </div>
                                     <div class="content-header">
@@ -96,9 +96,9 @@
                                             <i class="fab fa-xing-square"></i>
                                         </div>
                                         <!--<div class="circle google" onclick="AppBar.handleEvent('click', 'clickGooglePlusShare', event)">
-                <!--<i class="fab fa-google"></i>
-                <i class="fab fa-google-plus-g"></i>
-                </div>-->
+                                        <!--<i class="fab fa-google"></i>
+                                        <i class="fab fa-google-plus-g"></i>
+                                        </div>-->
                                         <div class="circle twitter" onclick="AppBar.handleEvent('click', 'clickTwitterShare', event)">
                                             <i class="fab fa-twitter"></i>
                                         </div>
@@ -172,35 +172,35 @@
 
 
                         </div>
-                    <div class="color_container4" data-win-bind="style.display: emptySpeakerList Binding.Converter.toDisplayNone">
-                        <div class="content-container speakerblock" data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
-                            <div class="content-header">
-                                <div class="caption-field">
-                                    <span data-win-res="{textContent: 'event.speaker'}"></span>
-                                </div>
-                            </div>
-                            <div id="speakerLines"
-                                class="speaker-lines-container"
-                                data-win-control="WinJS.UI.Repeater">
-                                <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod_name Binding.Converter.toDisplay">
-                                    <div class="speaker-image-container" data-win-bind="style.display: dataEvent.SpeakerImage Binding.Converter.toDisplay">
-                                        <img data-win-bind="src: dataDoc.ev_doc_mod; alt: dataDocText.ev_doc_mod_alt; title: dataDocText.ev_doc_mod_title; longdesc: dataDocText.ev_doc_mod_descr" />
+                        <div class="color_container4" data-win-bind="style.display: emptySpeakerList Binding.Converter.toDisplayNone">
+                            <div class="content-container speakerblock" data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
+                                <div class="content-header">
+                                    <div class="caption-field">
+                                        <span data-win-res="{textContent: 'event.speaker'}"></span>
                                     </div>
-                                    <div class="speaker-text">
-                                        <span class="speaker-vorname win-h3" data-win-bind="style.display: dataEvent.SpeakerFN Binding.Converter.toDisplay"></span>
-                                        <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod_name; style.display: dataEvent.SpeakerName Binding.Converter.toDisplay"></span>
-                                        <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod_expertise; style.display: dataEvent.SpeakerTitle Binding.Converter.toDisplay"></span>
-                                        <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod_homepage; style.display: dataText.ev_text_mod_homepage Binding.Converter.toDisplay"></span>
-                                        <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod_cv; style.display: dataEvent.SpeakerCV Binding.Converter.toDisplay"></span>
+                                </div>
+                                <div id="speakerLines"
+                                     class="speaker-lines-container"
+                                     data-win-control="WinJS.UI.Repeater">
+                                    <div class="speaker-line" data-win-bind="style.display: dataText.ev_text_mod_name Binding.Converter.toDisplay">
+                                        <div class="speaker-image-container" data-win-bind="style.display: dataEvent.SpeakerImage Binding.Converter.toDisplay">
+                                            <img data-win-bind="src: dataDoc.ev_doc_mod; alt: dataDocText.ev_doc_mod_alt; title: dataDocText.ev_doc_mod_title; longdesc: dataDocText.ev_doc_mod_descr"/>
+                                        </div>
+                                        <div class="speaker-text">
+                                            <span class="speaker-vorname win-h3" data-win-bind="style.display: dataEvent.SpeakerFN Binding.Converter.toDisplay"></span>
+                                            <span class="speaker-name win-h3" data-win-bind="textContent: dataText.ev_text_mod_name; style.display: dataEvent.SpeakerName Binding.Converter.toDisplay"></span>
+                                            <span class="speaker-title win-type-caption" data-win-bind="textContent: dataText.ev_text_mod_expertise; style.display: dataEvent.SpeakerTitle Binding.Converter.toDisplay"></span>
+                                            <span class="speaker-link win-type-caption" data-win-bind="textContent: dataText.ev_text_mod_homepage; style.display: dataText.ev_text_mod_homepage Binding.Converter.toDisplay"></span>
+                                            <span class="speaker-cv win-type-caption" data-win-bind="textContent: dataText.ev_text_mod_cv; style.display: dataEvent.SpeakerCV Binding.Converter.toDisplay"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="hero-footer">
+                        <div class="hero-footer">
 
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div class="error-message"
                      data-win-bind="style.display: error.displayErrorMsg; textContent: error.errorMsg"></div>

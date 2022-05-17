@@ -5,6 +5,9 @@
     scroll-snap-type: y proximity;
 }
 */
+.event .customer-top-header {
+    width: 100%;
+}
 .event .win-type-title,
 .event .win-type-subtitle,
 .event .win-type-body,
