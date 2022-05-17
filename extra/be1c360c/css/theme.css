@@ -220,11 +220,18 @@
 .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: var(--max-content-margin-left) !important;
     max-width: var(--max-content-width-surface) !important;
+    margin-top: 10px !important;
 }
 
 .home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
     margin: 0 auto !important;
     max-width: var(--max-content-width-surface) !important;
+}
+
+.home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
+.events .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
+    max-width: var(--max-content-width-surface) !important;
+    margin-bottom: 40px !important;
 }
 
     /*.home .win-headercontainer .content-header {
@@ -272,11 +279,7 @@
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }*/
-    /*.home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
-.events .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
-    max-width: calc(1300px - 50px - 50px) !important;
-    margin: 0 auto !important;
-}*/
+
     /*.home .list-footer {
     margin-top: 65px;
     padding: 0;
@@ -552,10 +555,17 @@ section.elementor-inner-section > div {
 */
 
 
-.view-size-biggest  .home .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 20px !important;
+.view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface, .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     max-width: var(--max-content-width-surface) !important;
+    margin-left: 10px !important;
 }
+
+.view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
+.view-size-biggest .events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
 /*.view-size-biggest .home .win-headercontainer > .content-header {
     width: 60% !important;
     margin: 0 30% 0 10% !important;
@@ -571,12 +581,6 @@ section.elementor-inner-section > div {
     max-width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
     width: calc(1300px - 50px - 50px) !important;
-}
-
-.view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
-.view-size-biggest .events .win-listview .win-vertical .win-headercontainer {
-    margin-left: 0 !important;
-    width: 100% !important;
 }
 
 .view-size-biggest .events .content-header-line {
@@ -640,6 +644,11 @@ section.elementor-inner-section > div {
 
     use: .view-size-medium
 */
+
+.view-size-medium .home .win-listview .win-vertical .win-gridlayout .win-surface, view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surface {
+    margin: 0 5px !important;
+    width: calc(100% - 10px) !important;
+}
 
 .view-size-medium .home .hero-image-container,
 .view-size-medium .events .hero-image-container {

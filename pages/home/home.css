@@ -130,7 +130,7 @@
 
 .home .win-listview .win-groupheader {
     width: calc(100% - 70px);
-    padding: 30px 0 30px 35px;
+    padding: 5px 0 20px 35px;
 }
 
 .home .group-header {
