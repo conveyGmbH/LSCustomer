@@ -41,10 +41,10 @@
 
 :root {
     --the7-accent-bg-color: #dcdc3e;
-    --the7-accent-color: #dcdc3e;
-    --e-global-color-accent: #006b8a;
+    --the7-accent-color: #dcdc3e !important;
+    --e-global-color-accent: #006b8a !important;
     --e-global-color-buttontext: #ffffff;
-    --the7-additional-menu-elements-color: #006b8a;
+    --the7-additional-menu-elements-color: #006b8a !important;
     --the7-additional-menu-elements-font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
     --the7-base-color: #333333;
     --the7-base-font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
@@ -303,6 +303,10 @@
     margin: 15px 0;
 }*/
 
+.event .register-fragmenthost {
+    margin-top: 30% !important;
+}
+
 .events button.win-button,
 .events button.win-button:focus,
 .event button.win-button,
@@ -332,7 +336,7 @@
 }
 
 .event button .win-type-title {
-    color: var(--e-global-color-buttontext) !important;
+    color: var(--the7-accent-color) !important;
 }
 
 .events .button-tip .win-tooltip,
@@ -557,7 +561,7 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface, .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     max-width: var(--max-content-width-surface) !important;
-    margin-left: 10px !important;
+    margin-left: var(--max-content-margin-left) !important;
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
@@ -612,6 +616,10 @@ section.elementor-inner-section > div {
 
     use: .view-size-bigger
 */
+.view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
+.view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 10px !important;
+}
 .view-size-bigger .event .homeButton {
     width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;

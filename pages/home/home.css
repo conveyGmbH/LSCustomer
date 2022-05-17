@@ -372,7 +372,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 20px;
-    width: calc(100% - 20px) !important;
+    width: calc(100% - 20px);
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -394,13 +394,13 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .view-size-medium .home .win-listview .win-vertical .win-footercontainer,
 .view-size-medium .home .win-listview .win-vertical .win-headercontainer {
     margin-left: 5px;
-    width: calc(100% - 30px) !important;
+    width: calc(100% - 30px);
     padding: 10px;
 }
 
-.view-size-medium .home .win-listview .win-vertical .win-gridlayout.win-surface {
+.view-size-medium .home .win-listview .win-vertical .win-gridlayout .win-surface {
     margin: 0 5px;
-    width: calc(100% - 10px) !important;
+    width: calc(100% - 10px);
 }
 
 .view-size-medium .home .win-listview .win-groupheader { }
@@ -456,7 +456,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .view-size-small .home .win-listview .win-vertical .win-footercontainer,
 .view-size-small .home .win-listview .win-vertical .win-headercontainer {
     margin-left: 0;
-    width: calc(100% - 20px) !important;
+    width: calc(100% - 20px);
 }
 
 .view-size-small .home .win-listview .win-vertical .win-gridlayout.win-surface {
