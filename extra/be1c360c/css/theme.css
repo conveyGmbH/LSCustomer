@@ -200,10 +200,6 @@
     padding: 15px !important;
 }
 
-.event .body-content-top {
-    width: 170%;
-}
-
 .home #more_Button {
     background-color: var(--e-global-color-accent);
     border-color: var(--e-global-color-accent);
