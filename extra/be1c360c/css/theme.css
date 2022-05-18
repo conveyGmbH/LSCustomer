@@ -116,7 +116,7 @@
 .home .content-header {
     margin: 0 auto !important;
     max-width: calc(1300px - 50px - 50px) !important;
-    padding-bottom: 20px !important;
+    padding-bottom: 0 !important;
 }
 
 .home .content-header-line > span, .events .content-header-line > span,
@@ -200,11 +200,17 @@
     padding: 15px !important;
 }
 
+
 .home #more_Button {
     background-color: var(--e-global-color-accent);
     border-color: var(--e-global-color-accent);
     color: var(--e-global-color-buttontext);
 }
+
+.home .expander-button {
+    border: 2px solid var(--the7-accent-color) !important;
+}
+
 .home .win-listview .win-vertical .win-footercontainer,
 .home .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
@@ -228,15 +234,18 @@
 .events .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
     max-width: var(--max-content-width-surface) !important;
     margin-bottom: 40px !important;
+    padding: 0 0 30px 0 !important;
+}
+
+.home .win-listview .win-groupheader {
+    padding: 5px 0 0 35px !important;
 }
 
     /*.home .win-headercontainer .content-header {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
 }*/
-    /*.home .group-header {
-    margin: 0 auto !important;
-}*/
+    
     /*.home .win-itemscontainer .win-uniformgridlayout .win-laidout {
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
@@ -300,7 +309,7 @@
 }*/
 
 .event .register-fragmenthost {
-    margin-top: 30% !important;
+    margin-top: 10% !important;
 }
 
 .events button.win-button,
@@ -711,6 +720,10 @@ section.elementor-inner-section > div {
 
 .view-size-medium-small .body-content-top {
     width: auto;
+}
+
+.view-size-medium-small .event .register-fragmenthost {
+    margin-top: 10px !important;
 }
 
 .view-size-medium .countdown .field_line_full {
