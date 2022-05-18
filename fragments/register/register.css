@@ -238,7 +238,10 @@ label .list-anredecon-field {
 
 .register .register_title {
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: 0;
+    text-align: left;
 }
 
 .view-size-medium-small .register .contentarea {

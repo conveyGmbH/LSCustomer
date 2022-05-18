@@ -21,7 +21,7 @@
     --max-content-margin-left: calc(50% - 600px) !important;
     --max-content-width: calc(1300px - 50px - 50px) !important;
     --max-content-width-surface: calc(1300px - 50px - 50px) !important;
-    --font-family-default: 'Raleway';
+    --font-family-default: "Raleway",  Helvetica,  Arial,  Verdana,  sans-serif;
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
@@ -45,8 +45,8 @@
     --e-global-color-accent: #006b8a !important;
     --e-global-color-buttontext: #ffffff;
     --the7-additional-menu-elements-color: #006b8a !important;
+    --e-global-color-text: #333333;
     --the7-additional-menu-elements-font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
-    --the7-base-color: #333333;
     --the7-base-font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
 }
 /****************img und #main von MP entfernen*******************/
@@ -79,7 +79,7 @@
 .event .win-type-caption,
 .event .caption-field,
 .event .content-header {
-    font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
+    font-family: var(--font-family-default) !important;
 }
 
 .register .win-type-body,
@@ -92,7 +92,7 @@
 .register .field_line_full,
 .register .label,
 .register .checkbox {
-    font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
+    font-family: var(--font-family-default) !important;
     font-weight: 500;
     font-size: 15px !important;
     line-height: 25px !important;
@@ -103,14 +103,14 @@
 .countdown .win-h3,
 .countdown .win-h4,
 .countdown .win-h5 {
-    font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif !important;
+    font-family: var(--font-family-default) !important;
     font-weight: 500 !important;
 }
 
 .home .win-type-body, .events .win-type-body, .event .win-type-body {
     font-size: 15px !important;
     line-height: 25px !important;
-    color: var(--the7-base-color) !important;
+    color: var(--e-global-color-text) !important;
 }
 
 .home .content-header {
@@ -128,8 +128,8 @@
 .home .content-header-line > h1,
 .events .content-header-line > h1,
 .event .content-header-line > h1 {
-    font-size: 30px !important;
-    line-height: 36px !important;
+    font-size: 46px !important;
+    line-height: 56px !important;
     font-weight: 600 !important;
     margin-top: 20px !important;
 }
@@ -145,6 +145,12 @@
 .events .content-header-line > h2 {
     font-size: 24px !important;
     line-height: 48px !important;
+}
+
+.event .content-header-line > .win-h2 {
+    font-size: 14px !important;
+    line-height: 14px !important;
+    font-weight: 700 !important;
 }
 
 .home .event-item .event-title,
@@ -473,7 +479,7 @@
 }
 
 .countdown .win-h5 {
-    color: var(--the7-base-color) !important;
+    color: var(--e-global-color-text) !important;
     font-size: 12px !important;
 }
 
@@ -525,7 +531,7 @@ section.elementor-inner-section > div {
 }
 
 .win-type-body {
-    color: var(--the7-base-color) !important;
+    color: var(--e-global-color-text) !important;
 }
 .caption-field {
     color: var(--the7-accent-color, #dcdc3e) !important;

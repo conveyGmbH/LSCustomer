@@ -5,6 +5,10 @@
     scroll-snap-type: y proximity;
 }
 */
+
+:root {
+    --font-family-default: "Barlow";
+}
 .event .customer-top-header {
     width: 100%;
 }
@@ -19,7 +23,7 @@
 .event .win-type-caption,
 .event .caption-field,
 .event .content-header {
-    font-family: "Barlow";
+    font-family: var(--font-family-default);
 }
 
 .event .bold {
@@ -100,13 +104,19 @@
 .event .win-h1 {
     font-size: 46px;
     font-weight: 600;
-    line-height: 62px;
+    line-height: 56px;
+    letter-spacing: 0;
+    text-align: left;
+
 }
 
 .event .win-h2 {
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 28px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    text-align: left;
+
 }
 
 .event .win-type-body {
@@ -178,23 +188,32 @@
 }
 
 .event button .win-type-title {
-    font-size: 16px;
     font-weight: 600;
-    line-height: 20px;
     letter-spacing: 1px;
+    text-transform: none;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.04em;
+    text-align: left;
 }
 
 .event button#homeButton {
     /*padding: 14px 26px;*/
-    padding: 14px 0px !important;
+    padding: 14px 0 !important;
     color: inherit;
     border: none !important;
     background: none !important;
     text-align: left !important;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    text-transform: none;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
     background-color: Window;
+    text-transform: none;
 }
 
 .event .button-tip {
@@ -274,12 +293,14 @@
 .event .speaker-text { /*display: block; position: relative;*/ width: 60%; float: right; padding: 0 5px; }
 
 .event .speaker-name, .event .speaker-vorname {
-    font-size: 28px;
-    line-height: 32px;
-    font-weight: 600;
     display: block;
     margin: 0;
     padding: 5px 0;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 50px;
+    letter-spacing: 0;
+    text-align: left;
 }
 .event .speaker-title, .event .speaker-link {
     font-size: 18px;
@@ -289,9 +310,12 @@
 }
 
 .event .speaker-cv {
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 16px;
     font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0;
+    text-align: left;
+
     display: block;
 }
 
@@ -311,7 +335,7 @@
 
 .event .register-fragmenthost {
     height: auto;
-    margin-top: 20px;
+    margin-top: 0;
 }
 .event .countdown-fragmenthost {
     position: relative;
@@ -356,7 +380,11 @@
 
 p.ev-text {
     white-space: pre-wrap;
+    font-size: 16px;
     font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0;
+    text-align: left;
 }
 
 .event .logOff-container,

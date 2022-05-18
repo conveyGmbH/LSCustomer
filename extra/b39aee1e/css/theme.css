@@ -67,7 +67,7 @@
 .event .win-type-caption,
 .event .caption-field,
 .event .content-header {
-    font-family: "Barlow";
+    font-family: var(--font-family-default);
 }
 
 .register .win-type-body,
@@ -80,7 +80,7 @@
 .register .field_line_full,
 .register .label,
 .register .checkbox {
-    font-family: "Barlow";
+    font-family: var(--font-family-default);
     font-weight: 400;
 }
 
@@ -89,7 +89,7 @@
 .countdown .win-h3,
 .countdown .win-h4,
 .countdown .win-h5 {
-    font-family: "Barlow";
+    font-family: var(--font-family-default);
 }
 
 .home .hero-image-container, .events .hero-image-container {
