@@ -233,7 +233,7 @@
     padding: 0;
 }
 
-.home .content-header-line .more_Button {
+.home .more_Button {
     padding-left: 30px;
     margin-top: 10px;
     width: auto;
@@ -492,7 +492,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin: 0 10px 10px 0;
 }
 
-.view-size-medium .home .content-header-line .more_Button {
+.view-size-medium .home .more_Button {
     margin-top: 0;
     padding-left: 20px;
 }

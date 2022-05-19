@@ -197,7 +197,7 @@
     color: var(--e-global-color-text);
 }
 
-.event button .calenderButton .win-type-title {
+.event .calenderButton {
     text-transform: none;
     font-weight: 600;
     font-size: 14px;
