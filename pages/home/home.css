@@ -8,6 +8,7 @@
     --e-global-color-buttontext: #ffffff;
     --background-item: #7f7f7f;
     --border-color: #b5b5b5;
+    --font-family-default: "Barlow";
 }
 .home .bold {
     font-weight: 600;
@@ -40,7 +41,7 @@
 
 .home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
     width: var(--max-content-width) !important;
-    padding: 30px 0;
+    padding: 0 0 30px 0;
 }
 
 .home .win-listview .win-vertical .win-itemscontainer.group-expanded {
@@ -159,6 +160,43 @@
 .home .content-header {
     height: auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 20px;
+}
+
+.home .content-header1 {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 20px;
+    height: auto;
+    width: 100%;
+}
+
+.home .content-header2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 5px;
+    height: auto;
+    width: 100%;
+}
+
+.home .content-header3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 20px 10px;
+    gap: 10px;
+    width: 127px;
+    height: 39px;
 }
 
 .home .group-header .content-header {
@@ -168,14 +206,20 @@
 }
 
 .home #more_Button {
+    font-family: var(--font-family-default);
     height: auto;/*40px*/
-    font-weight: bold;
     border-radius: 40px;
     -moz-border-radius: 40px;
     -webkit-border-radius: 40px;
     background-color: var(--e-global-color-accent);
     border-color: var(--e-global-color-accent);
     color: var(--e-global-color-buttontext);
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    text-transform: uppercase;
 }
 
 /*.home #more_Button:hover {
@@ -191,8 +235,15 @@
 
 .home .expander-container {
     float: right;
-    padding-top: 0;
-    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 16px 20px 5px;
+    gap: 10px;
+
+    width: 48px;
+    height: 48px;
 }
 .home .expander-button {
     width: 50px;
@@ -216,20 +267,41 @@
 }
 
 .home .content-header-line > h1 {
+    font-family: var(--font-family-default);
     font-size: 46px;
     font-weight: 600;
-    line-height: 62px;
+    line-height: 56px;
 }
 
 .home .content-header-line > h2 {
+    font-family: var(--font-family-default);
     font-size: 25px;
     line-height: 28px;
     text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-align: left;
+    font-style: normal;
+}
+
+.home .content-header-line > h3 {
+    font-family: var(--font-family-default);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    letter-spacing: 0;
+    text-align: left;
+    font-style: normal;
 }
 
 .home .content-header-line > span {
+    font-family: var(--font-family-default);
     font-size: 18px;
+    font-weight: 400;
     line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+
 }
 
 .home .event-title {
