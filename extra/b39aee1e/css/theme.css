@@ -145,6 +145,7 @@
 
 .event .calenderButton {
     color: var(--e-global-color-accent) !important;
+    font-family: var(--font-family-default);
 }
 
 .events .button-tip .win-tooltip,

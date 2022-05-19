@@ -266,6 +266,7 @@
 
 .event .section-1 {
     grid-column: 1/span 4;
+    margin-right: 30px;
 }
 .event .section-2 { grid-column: 5/span 2; grid-row: 1/6;}
 .event .section-3 { grid-area: 2/1/span 3/span 4; padding: 15px; margin-left: 20px;}
@@ -431,6 +432,10 @@ p.ev-text {
     padding: 0;
 }
 
+.view-size-biggest .event .section-1 {
+    margin-right: 10px;
+}
+
 .view-size-biggest .event .content-container, .view-size-biggest .event .speakerblock {
     margin-left: 20px;
     width: calc(100% - 70px);
@@ -444,6 +449,10 @@ p.ev-text {
 
     use: .view-size-bigger
 */
+
+.view-size-bigger .event .section-1 {
+    margin-right: 0;
+}
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
@@ -451,7 +460,6 @@ p.ev-text {
 
     use: .view-size-medium
 */
-
 .view-size-medium .event .content-header-line {
     padding-left: 0;
 }

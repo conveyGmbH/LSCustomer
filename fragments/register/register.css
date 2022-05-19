@@ -93,9 +93,7 @@
 
 .register .field_line_full {
     width: calc(100% - 38px);
-}
-.register .field_line_full {
-    width: calc(100% - 38px);
+    overflow: hidden;
 }
 
 .register .mandatory {
