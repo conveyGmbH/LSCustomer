@@ -139,8 +139,12 @@
     text-align: left !important;
 }
 
-.event button.win-type-title {
-    color: var(--e-global-color-buttontext) !important;
+.event button .win-type-title {
+    color: var(--e-global-color-text) !important;
+}
+
+.event button .calenderButton .win-type-title {
+    color: var(--e-global-color-accent) !important;
 }
 
 .events .button-tip .win-tooltip,

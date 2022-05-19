@@ -106,10 +106,12 @@
 }
 
 .events button .win-type-title {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+color: var(--e-global-color-text);
 }
 
 .events .button-tip {

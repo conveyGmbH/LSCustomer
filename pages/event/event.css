@@ -188,13 +188,23 @@
 }
 
 .event button .win-type-title {
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-weight: 400;
     text-transform: none;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    color: var(--e-global-color-text);
+}
+
+.event button .calenderButton .win-type-title {
+    text-transform: none;
+    font-weight: 600;
+    font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.04em;
     text-align: left;
+    color: var(--e-global-color-accent);
 }
 
 .event button#homeButton {

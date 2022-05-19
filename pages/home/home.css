@@ -28,10 +28,10 @@
     padding: 15px 10px 40px 10px;
 }
 
-.home .win-listview .win-vertical .win-gridlayout.win-surface {
+.home .win-listview .win-vertical .win-gridlayout .win-surface {
     -ms-grid-rows: auto !important;
     margin-left: var(--max-content-margin-left);
-    width: var(--max-content-width-surface);
+    width: var(--max-content-width) !important;
 }
 
 .home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
@@ -233,6 +233,12 @@
     padding: 0;
 }
 
+.home .content-header-line .more_Button {
+    padding-left: 30px;
+    margin-top: 10px;
+    width: auto;
+}
+
 .home .expander-container {
     float: right;
     display: flex;
@@ -407,24 +413,29 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .home .event-item .event-title {
     width: calc(100% - 20px);
     height: auto;
-    font-size: 20px;
     font-weight: 600;
-    line-height: 1.167;
-    padding: 10px 0 5px 0;
+    padding: 10px 0;
+    font-size: 22px;
+    line-height: 28px;
 }
 
 .home .event-item .event-subtitle {
     width: calc(100% - 20px);
     height: auto;
-    padding: 0 0 5px 0;
-    font-size: 16px;
+    padding: 10px 0;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
 }
 
 .home .event-item .event-comment {
     width: calc(100% - 32px);
     min-height: 40px;
-    font-size: 16px;
     padding-bottom: 15px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 25px;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -481,6 +492,15 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin: 0 10px 10px 0;
 }
 
+.view-size-medium .home .content-header-line .more_Button {
+    margin-top: 0;
+    padding-left: 20px;
+}
+
+.view-size-medium .home .content-header1 {
+    margin-top: 10px;
+}
+
 .view-size-medium .home .expander-container {
     padding-top: 0;
 }
@@ -520,6 +540,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
     use: .view-size-medium-small
 */
+
 /*margins/paddings for small screens and orientation vertical
 @media (max-width:499px) {
         }
@@ -561,16 +582,16 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .view-size-small .home .content-header-line {
-    width: calc(100% - 70px);
+    width: 100%;
 }
 
 .view-size-small .home .content-header-line > h1 {
     font-size: 22px;
 }
 
-    .view-size-small .home .content-header-line > h2 {
-        font-size: 16px;
-    }
+.view-size-small .home .content-header-line > h2 {
+    font-size: 16px;
+}
 
 .view-size-small .home .caption-sort {
     width: 100%;
