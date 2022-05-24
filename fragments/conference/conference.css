@@ -1767,6 +1767,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     min-width: 40px !important;
     word-break: break-word;
     overflow-wrap: break-word;
+    user-select: text;
 }
 #conference.mediaview .messageList--2kDQeQ .wrapper--1nuR8g,
 #conference.mediaview .messageList--hsNac .wrapper--Z1BLczb {
