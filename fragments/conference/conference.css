@@ -1880,7 +1880,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 }
 .speakerSession #conferenceController .emoji-button-container > .win-button,
 .event #conferenceController .emoji-button-container > .win-button {
-    background-color: var(--btn-primary-bg);
+    background-color: var(--btn-primary-bg) !important;
     border-color: transparent;
     width: 42px;
     height: 42px;
@@ -1919,15 +1919,15 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     left: -18px;
     min-height: 40px;
     min-width: 100px;
-    width: 110px;
-    max-width: 110px;
+    width: 110px !important;
+    max-width: 110px !important;
     transition-duration: 500ms;
     transition-property: top, opacity;
     opacity: 0;
-    text-transform: none;
+    text-transform: none !important;
     letter-spacing: normal;
     font-size: 13px !important;
-    white-space: normal;
+    white-space: normal !important;
     background: transparent;
     border: none;
     padding: 0;
@@ -1937,15 +1937,15 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     top: -55px;
     left: -106px;
     min-height: 40px;
-    width: 240px;
-    max-width: 240px;
+    width: 240px !important;
+    max-width: 240px !important;
     transition-duration: 500ms;
     transition-property: top, opacity;
     opacity: 0;
-    text-transform: none;
+    text-transform: none !important;
     letter-spacing: normal;
     font-size: 13px !important;
-    white-space: normal;
+    white-space: normal !important;
     background: transparent;
     border: none;
     padding: 0;
