@@ -37,6 +37,10 @@
         unload: function () {
             Log.call(Log.l.trace, fragmentName + ".");
             // TODO: Respond to navigations away from this page.
+            var contentGrid = document.querySelector(".event .content-grid");
+            if (contentGrid && WinJS.Utilities.hasClass(contentGrid, "content-grid-full-width")) {
+                WinJS.Utilities.removeClass(contentGrid, "content-grid-full-width")
+            }
             this.controller = null;
             Log.ret(Log.l.trace);
         },

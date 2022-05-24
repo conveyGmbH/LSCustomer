@@ -3008,6 +3008,10 @@ var __meteor_runtime_config__;
                                 }
                             }
                             Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
+                            var contentGrid = document.querySelector(".event .content-grid");
+                            if (contentGrid && !WinJS.Utilities.hasClass(contentGrid, "content-grid-full-width")) {
+                                WinJS.Utilities.addClass(contentGrid, "content-grid-full-width")
+                            }
                             that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
                             if (!adjustContentPositionsPromise) {
                                 adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
