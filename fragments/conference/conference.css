@@ -1906,7 +1906,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 }
 .speakerSession #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon,
 .event #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon {
-    font-family: emoji-color;
+    font-family: color-emoji;
     font-size: 130%;
 }
 .speakerSession #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before,
@@ -2099,7 +2099,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 }
 
 #conferenceController .tool-box > button.win-button .button-tip .emoji-button-icon {
-    font-family: emoji-color;
+    font-family: color-emoji;
     font-size: 180%;
 }
 
