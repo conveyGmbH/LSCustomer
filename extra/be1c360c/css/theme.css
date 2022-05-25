@@ -119,6 +119,24 @@
     padding-bottom: 0 !important;
 }
 
+.event .content-header {
+    margin: 15px 20px 0 0 !important;
+    padding: 5px 15px 0 0 !important;
+}
+
+.event .calenderButton {
+    color: var(--e-global-color-buttontext) !important;
+}
+
+.event button .win-type-title {
+    color: var(--e-global-color-text) !important;
+}
+
+.event .teaser-fragmenthost {
+    margin-right: 20px !important;
+    padding: 15px 15px 0 0 !important;
+}
+
 .home .content-header-line > span, .events .content-header-line > span,
 .event .content-header-line > span {
     font-size: 15px !important;
@@ -191,19 +209,19 @@
     padding: 15px 0 !important
 }
 
-.event .content-header {
-    margin: 15px 0 0 20px !important;
-    padding: 5px 15px !important;
-}
-
 .event .homeButton {
-    margin-left: 20px !important;
-    padding: 15px !important; 
+    margin-left: 0 !important;
+    padding: 15px 0 !important; 
 }
 
 .event .logOff-container {
-    margin-left: 20px !important;
-    padding: 15px !important;
+    margin-left: 0 !important;
+    padding: 15px 0 !important;
+}
+
+.event .intersection {
+    margin-left: 0 !important;
+    padding: 15px 15px 0 0 !important;
 }
 
 
@@ -346,10 +364,6 @@
     background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
-.event button .win-type-title {
-    color: var(--the7-accent-color) !important;
-}
-
 .events .button-tip .win-tooltip,
 .event .button-tip .win-tooltip {
     visibility: hidden;
@@ -397,6 +411,11 @@
     color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     line-height: 20px !important;
     font-size: 16px !important;
+}
+
+.event .section-3 {
+    padding: 15px 15px 0 0 !important;
+    margin-left: 0 !important;
 }
 
 .event .section-4 .caption-field {
@@ -581,6 +600,18 @@ section.elementor-inner-section > div {
     width: 100% !important;
 }
 
+.view-size-biggest .event .content-grid {
+    margin-left: var(--max-content-margin-left) !important;
+    width: var(--max-content-width) !important;
+}
+
+.view-size-biggest .event .content-container,
+.view-size-biggest .event .speakerblock {
+    margin-left: var(--max-content-margin-left) !important;
+    width: var(--max-content-width) !important;
+    padding: 15px 0 !important;
+}
+
 /*.view-size-biggest .home .win-headercontainer > .content-header {
     width: 60% !important;
     margin: 0 30% 0 10% !important;
@@ -612,14 +643,8 @@ section.elementor-inner-section > div {
 .view-size-biggest .events .hero-image-container {
     width: calc(100% - 50px - 50px) !important;
 }
+*/
 
-.view-size-biggest .event .content-container,
-.view-size-biggest .event .speakerblock {
-    margin-left: 20px;
-    width: calc(100% - 50px -50px) !important;
-    padding: 15px !important;
-
-}*/
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1099px 
     @media (max-width:1099px) {

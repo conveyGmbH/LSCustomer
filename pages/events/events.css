@@ -148,7 +148,7 @@ color: var(--e-global-color-text);
     -moz-border-radius: 12px;
     -webkit-border-radius: 12px;
     z-index: 2;
-    height: 400px;
+    height: 506px;
     width: auto;
     transform: translate3d(0,0,0);
     transition-property: box-shadow,transform;
@@ -167,7 +167,7 @@ color: var(--e-global-color-text);
 
 .events .event-item {
     width: 285px;
-    height: 400px;
+    height: 506px;
 }
 
 .events .event-image-container {
@@ -243,6 +243,7 @@ color: var(--e-global-color-text);
 
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 20px;
+    margin-top: 20px;
     width: calc(100% - 20px) !important;
 }
 

@@ -42,7 +42,7 @@
     --outline-focus: 1px solid var(--color-gray-lighter);
 
 
-    --font-family-default: 'Barlow';
+    --font-family-default: 'Barlow' !important;
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
@@ -52,6 +52,7 @@
 .home .win-type-subtitle,
 .home .win-type-body,
 .home .win-type-caption,
+.home .content-header-line > h2,
 .events .win-type-title,
 .events .win-type-subtitle,
 .events .win-type-body,
@@ -67,7 +68,7 @@
 .event .win-type-caption,
 .event .caption-field,
 .event .content-header {
-    font-family: "Barlow";
+    font-family: var(--font-family-default);
 }
 
 .register .win-type-body,
@@ -150,8 +151,9 @@
     border-color: var(--e-global-color-accent) !important;
 }
 
-.event button .win-type-title {
-    color: var(--e-global-color-accent) !important;
+
+.event #logOffButton {
+    color: var(--e-global-color-text) !important;
 }
 
 .events .button-tip .win-tooltip,
