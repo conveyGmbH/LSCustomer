@@ -752,6 +752,14 @@
                     } else {
                         that.binding.showICS = false;
                     }
+                    if (remainderTime <= 0) {
+                        if (!that.binding.conferenceLink) {
+                            that.refreshMaintenanceTimeMs = 5000;
+                        } else {
+                            that.refreshMaintenanceTimeMs = 10000 + (Math.random() * 20 * 1000);
+                        }
+                    }
+
                     remainderTime = dateEnd - now;
                     if (remainderTime > 0) {
                         that.binding.showEvText = true;
