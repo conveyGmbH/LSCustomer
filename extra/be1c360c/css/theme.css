@@ -185,6 +185,7 @@
     font-size: 16px !important;
     line-height: 20px !important;
     color: var(--the7-additional-menu-elements-color, #006b8a) !important;
+    padding: 20px 0 10px 0 !important;
 }
 
 .home .event-item .event-subtitle,
@@ -194,6 +195,8 @@
     line-height: 20px !important;
     color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     padding-bottom: 5px !important;
+    letter-spacing: -0.01em !important;
+    padding: 5px 0 20px 0 !important;
 }
 
 .home .event-item .event-comment,
