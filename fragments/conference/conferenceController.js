@@ -655,8 +655,39 @@ var __meteor_runtime_config__;
                     }
                     var compatibilitySrc = '="' + abs("lib/compatibility/scripts");
                     var html5ClientSrc = '="' + abs("/html5client");
-                    var wssBbWebRtcSfuSrc = "wss%3A%2F%2F" + a.host + "%2Fbbb-webrtc-sfu";
-                    var httpsPadSrc = "https%3A%2F%2F" + a.host + "%2Fpad";
+                    var wssStartPattern = "wss%3A%2F%2F";
+                    var wssStopPattern = "%2Fbbb-webrtc-sfu";
+                    var wssBbWebRtcSfuSrc = wssStartPattern + a.host + wssStopPattern;
+                    var httpsStartPattern = "https%3A%2F%2F";
+                    var httpsStopPattern = "%2Fpad";
+                    var httpsPadSrc = httpsStartPattern + a.host + httpsStopPattern;
+                    var startPos = req.responseText.indexOf(wssStartPattern), stopPos = -1, nextStartPos;
+                    while (startPos >= 0 && stopPos < 0) {
+                        startPos += wssStartPattern.length;
+                        nextStartPos = req.responseText.indexOf(wssStartPattern, startPos);
+                        stopPos = req.responseText.indexOf(wssStopPattern, startPos);
+                        if (stopPos >= startPos && (nextStartPos < 0 || stopPos < nextStartPos)) {
+                            Application.wssUrl =
+                                req.responseText.substr(startPos, stopPos - startPos);
+                        } else {
+                            stopPos = -1;
+                        }
+                        startPos = nextStartPos;
+                    }
+                    startPos = req.responseText.indexOf(httpsStartPattern);
+                    stopPos = -1;
+                    while (startPos >= 0 && stopPos < 0) {
+                        startPos += httpsStartPattern.length;
+                        nextStartPos = req.responseText.indexOf(httpsStartPattern, startPos);
+                        stopPos = req.responseText.indexOf(httpsStopPattern, startPos);
+                        if (stopPos >= startPos && (nextStartPos < 0 || stopPos < nextStartPos)) {
+                            Application.httpsUrl =
+                                req.responseText.substr(startPos, stopPos - startPos);
+                        } else {
+                            stopPos = -1;
+                        }
+                        startPos = nextStartPos;
+                    } 
                     var html5Client = req.responseText
                         .replace(/="compatibility/g, compatibilitySrc)
                         .replace(/="\/html5client/g, html5ClientSrc)

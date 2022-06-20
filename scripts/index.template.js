@@ -105,6 +105,8 @@
         a.href = uri;
         return a.href;
     }
+    Application.wssUrl = "";
+    Application.httpsUrl = "";
     var wssSrc = "wss://" + a.host + "/";
     var httpsSrc = "https://" + a.host + "/";
     // some more default page navigation handling
@@ -246,12 +248,21 @@
                     if (typeof Application.hookXhrOnReadyStateChange === "function" &&
                         typeof ev.data === "string") {
                         Log.print(Log.l.trace, "onmessage url="+ this.url + " data=" + ev.data.substr(0, 8192));
+                        var responseText;
+                        if (Application.wssUrl) {
+                            var regExprWssSrc = new RegExp("wss://" + Application.wssUrl + "/", "g");
+                            responseText = ev.data.replace(regExprWssSrc, wssSrc);
+                        } else {
+                            responseText = ev.data;
+                        }
+                        if (Application.httpsUrl) {
+                            var regExprHttpsSrc = new RegExp("https://" + Application.httpsUrl + "/", "g");
+                            responseText = responseText.replace(regExprHttpsSrc, httpsSrc);
+                        }
                         var res = {
                             readyState: 4,
                             status: 200,
-                            responseText: ev.data
-                                .replace(/wss:\/\/[0-9.A-za-z]+\//g, wssSrc)
-                                .replace(/https:\/\/[0-9.A-Za-z]+\//g, httpsSrc)
+                            responseText: responseText
                         };
                         Application.hookXhrOnReadyStateChange(res);
                         if (ev.data !== res.responseText) {
@@ -322,9 +333,18 @@
                                         that._newResponseText = null;
                                         Application.hookXhrOnReadyStateChange(that);
                                     } else {
-                                            that._newResponseText = that._responseText
-                                                .replace(/wss:\/\/[0-9.A-za-z]+\//g, wssSrc)
-                                                .replace(/https:\/\/[0-9.A-Za-z]+\//g, httpsSrc);
+                                            var responseText;
+                                            if (Application.wssUrl) {
+                                                var regExprWssSrc = new RegExp("wss://" + Application.wssUrl + "/", "g");
+                                                responseText = that._responseText.replace(regExprWssSrc, wssSrc);
+                                            } else {
+                                                responseText = that._responseText;
+                                            }
+                                            if (Application.httpsUrl) {
+                                                var regExprHttpsSrc = new RegExp("https://" + Application.httpsUrl + "/", "g");
+                                                responseText = responseText.replace(regExprHttpsSrc, httpsSrc);
+                                            }
+                                            that._newResponseText = responseText;
                                     }
                                     if (typeof newOnreadystatechange === "function") {
                                         newOnreadystatechange();
@@ -351,9 +371,18 @@
                             if (typeof that._newResponseText === "string") {
                                 return that._newResponseText;
                             } else {
-                                    return that._responseText
-                                            .replace(/wss:\/\/[0-9.A-za-z]+\//g, wssSrc)
-                                            .replace(/https:\/\/[0-9.A-Za-z]+\//g, httpsSrc);  
+                                    var responseText;
+                                    if (Application.wssUrl) {
+                                        var regExprWssSrc = new RegExp("wss://" + Application.wssUrl + "/", "g");
+                                        responseText = that._responseText.replace(regExprWssSrc, wssSrc);
+                                    } else {
+                                        responseText = that._responseText;
+                                    }
+                                    if (Application.httpsUrl) {
+                                        var regExprHttpsSrc = new RegExp("https://" + Application.httpsUrl + "/", "g");
+                                        responseText = responseText.replace(regExprHttpsSrc, httpsSrc);
+                                    }
+                                    return responseText;  
                             } 
                         }
                     });
