@@ -191,6 +191,8 @@
     font-family: var(--font-family-default) !important;
     color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     padding: 20px 0 10px 0 !important;
+    font-size: 22px !important;
+    line-height: 28px !important;
 }
 
 .home .event-item .event-subtitle,
