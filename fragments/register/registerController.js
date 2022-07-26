@@ -199,6 +199,14 @@
                     AppData._persistentStates.registerData.privacyPolicyFlag = that.binding.dataRegister.privacyPolicyFlag;
                     AppData._persistentStates.registerData.UserTZ = that.binding.dataRegister.UserTZ;
                     AppData._persistentStates.registerData.LanguageId = that.binding.dataRegister.LanguageId;
+                    if (AppBar.scope.binding &&
+                        AppBar.scope.binding.dataEvent &&
+                        (AppBar.scope.binding.dataEvent.RequireReg === 0 || AppBar.scope.binding.dataEvent.RequireReg === null)) {
+                        var randomNumber = Math.floor(1000000 + Math.random() * 9000000);
+                        if (AppData._persistentStates.registerData.Email === "" || AppData._persistentStates.registerData.Email === null) {
+                            AppData._persistentStates.registerData.Email = "null+" + randomNumber + "@convey.de";
+                        }
+                    }
                     Application.pageframe.savePersistentStates();
                     that.binding.editDisabled = false;
                     that.binding.resendDisabled = false;
@@ -371,6 +379,13 @@
                         typeof that.binding.dataRegister.Email === "string" &&
                         !that.binding.dataRegister.Email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) || 
                         !that.binding.dataRegister.privacyPolicyFlag;
+                    // Wenn Registrierungspflicht deaktiviert dann return immer false
+                    // auch null Abfragen?
+                    if (AppBar.scope.binding &&
+                        AppBar.scope.binding.dataEvent &&
+                        (AppBar.scope.binding.dataEvent.RequireReg === 0 || AppBar.scope.binding.dataEvent.RequireReg === null)) {
+                        that.binding.loginDisabled = false;
+                    }
                     var loginButton = fragmentElement.querySelector("#loginButton");
                     if (loginButton) {
                         loginButton.disabled = that.binding.loginDisabled;

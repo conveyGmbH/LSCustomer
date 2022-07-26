@@ -577,10 +577,10 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
-                    if (that.binding.dataEvent.RequireReg === null && that.binding.dataEvent.ShowReg === null) {
+                    /*if (that.binding.dataEvent.RequireReg === null && that.binding.dataEvent.ShowReg === null) {
                         //return AppData.call("PRC_BBBConferenceLink",
                         return WinJS.Promise.as();
-                    }
+                    }*/
                     if (Application.query.eventId) {
                         if (Application.query.UserToken && Application.query.UserToken !== AppData._persistentStates.registerData.userToken) {
                             AppData._persistentStates.registerData.userToken = Application.query.UserToken;
@@ -639,10 +639,10 @@
                     return that.adjustContainerSize();
                 }).then(function () {
                     that.inLoadData = false;
-                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 &&
+                    /*&& AppData._persistentStates.registerData.resultCode !== 13*/
+                    if (!that.binding.conferenceLink &&
                         (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11 ||
-                            AppData._persistentStates.registerData.confirmStatusID === 15) ||
-                        (that.binding.dataEvent.RequireReg === null && that.binding.dataEvent.ShowReg === null)) {
+                            AppData._persistentStates.registerData.confirmStatusID === 15)) {
                         that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
                             that.loadData();
                         });
@@ -660,7 +660,6 @@
                 var location = window.location.href;
                 var userToken = AppData._persistentStates.registerData.userToken;
                 var copyToken = null;
-
                 if (AppData._persistentStates.registerData.resultCode === 21) {
                     copyToken = AppData._persistentStates.registerData.userToken;
                     userToken = null;
@@ -689,6 +688,9 @@
                                 AppData._persistentStates.registerData.resultCode = result.ResultCode;
                             }
                         }
+                        // Wenn Token zurückgeliefert wird weil Registrierungspflicht deaktiviert ist dann merke token in persistentstates
+                        // Man könnte zur Sicherheit hier das Flag für Registrierungsplicht abfragen!
+                        AppData._persistentStates.registerData.userToken = result.UserToken;
                         Application.pageframe.savePersistentStates();
                     }
                     complete({});
