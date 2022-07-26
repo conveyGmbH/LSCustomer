@@ -4385,7 +4385,7 @@ var __meteor_runtime_config__;
                 var messageInput = fragmentElement.querySelector(elementSelectors.publicChat + " form textarea#message-input");
                 if (!messageInput) {
                     var userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
-                    if (userListContent) {
+                    if (!userListContent) {
                         if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
                             WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
                         } else {
@@ -4403,11 +4403,15 @@ var __meteor_runtime_config__;
                             if (btnToggleChat) {
                                 btnToggleChat.click();
                             }
-                        } 
+                        }
                     }
                     openChatPanePromise = WinJS.Promise.timeout(20).then(function() {
                         that.openChatPane();
                     });
+                } else {
+                    if (panelWrapper && WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
+                        WinJS.Utilities.removeClass(panelWrapper, "hide-chat-section");
+                    }
                 }
                 Log.ret(Log.l.info);
             }

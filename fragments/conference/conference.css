@@ -418,20 +418,6 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
     outline: var(--outline-focus) !important;
 }
 
-#conferenceController .show-chat-button-container .button-tip > span {
-    width: 44px;
-    height: 44px;
-}
-
-#conferenceController .show-chat-button-container .show-button-image > svg {
-    width: 20px;
-    height: 20px;
-}
-#conferenceController .show-chat-button-container > button:hover .show-button-image,
-#conferenceController .show-chat-button-container > button:active .show-button-image {
-    opacity: 0.8;
-}
-
 /* protect input, select, textarea */
 input[type=date], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=url], select, textarea {
     padding: inherit !important;
@@ -446,9 +432,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     line-height: 1 !important;
     font-weight: var(--btn-font-weight) !important;
 }
-#conference.mediaview #layout > header:first-of-type > div:first-child div:not(.presenter-button-container) > button,
-#conference.mediaview #layout > section[aria-label="Actions bar"] button:not(.gjwodI),
-#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not(.gjwodI),
+#conference.mediaview #layout > header:first-of-type > div:first-child div:not(.presenter-button-container) > button:not(.win-button),
+#conference.mediaview #layout > section[aria-label="Actions bar"] button:not(.gjwodI):not(.win-button),
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not(.gjwodI):not(.win-button),
 #conference.mediaview div[data-test="publicChat"] form button,
 .portal--27FHYi .buttonWrapper--x8uow,
 .ReactModalPortal header > button {
@@ -836,16 +822,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 
 /* buttons in bottom actionsbar area */
-#conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-disabled="true"],
-#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button[aria-disabled="true"] {
-    opacity: 0.65;
+#conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-disabled="true"]:not(.win-button),
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button[aria-disabled="true"]:not(.win-button) {
+    opacity: 0.64;
 }
-#conference.mediaview #layout > section[aria-label="Actions bar"] button:not([aria-disabled="true"]),
-#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not([aria-disabled="true"]) {
+#conference.mediaview #layout > section[aria-label="Actions bar"] button:not([aria-disabled="true"]):not(.win-button),
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not([aria-disabled="true"]):not(.win-button) {
     opacity: 0.8;
 }
-#conference.mediaview #layout > section[aria-label="Actions bar"] button:not([aria-disabled="true"]):hover,
-#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not([aria-disabled="true"]):hover {
+#conference.mediaview #layout > section[aria-label="Actions bar"] button:not([aria-disabled="true"]):not(.win-button):hover,
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not([aria-disabled="true"]):not(.win-button):hover {
     opacity: 1;
 }
 
@@ -2063,43 +2049,56 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     margin: 0 10px;
     z-index: 10;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button,
-.event #conferenceController .emoji-button-container > .win-button {
+#conferenceController .show-chat-button-container > .win-button,
+#conferenceController .emoji-button-container > .win-button {
     background-color: var(--btn-primary-bg) !important;
     border-color: transparent;
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
     box-shadow: var(--box-shadow-button) !important;
-    opacity: 0.8;
+    opacity: 0.64;
     padding: 0;
     border: none;
     margin-top: 2px;
+    border-radius: 50%;
+    outline-style: none;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button:hover,
-.speakerSession #conferenceController .emoji-button-container > .win-button:active,
-.event #conferenceController .emoji-button-container > .win-button:hover,
-.event #conferenceController .emoji-button-container > .win-button:active {
+#conferenceController .show-chat-button-container > .win-button:hover,
+#conferenceController .show-chat-button-container > .win-button:active,
+#conferenceController .emoji-button-container > .win-button:hover,
+#conferenceController .emoji-button-container > .win-button:active {
     background-color: var(--btn-primary-bg) !important;
-    opacity: 1;
+    opacity: 0.8;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button .button-tip,
-.event #conferenceController .emoji-button-container > .win-button .button-tip {
+
+#conferenceController .show-chat-button-container > .win-button .button-tip,
+#conferenceController .emoji-button-container > .win-button .button-tip {
     text-align: center;
     vertical-align: middle;
     margin: 0;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon,
-.event #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon {
+
+#conferenceController .show-chat-button-container .show-button-image > svg {
+    margin-top: 4px;
+    width: 20px;
+    height: 20px;
+}
+
+#conferenceController .show-chat-button-container > button:hover .show-button-image,
+#conferenceController .show-chat-button-container > button:active .show-button-image {
+    opacity: 0.8;
+}
+
+
+#conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon {
     font-family: color-emoji;
     font-size: 130%;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before,
-.event #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
+#conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
     content: "\1f642";
 }
-.speakerSession #conferenceController .show-chat-button-container > button .button-tip .win-tooltip,
-.event #conferenceController .show-chat-button-container > button .button-tip .win-tooltip {
+#conferenceController .show-chat-button-container > button .button-tip .win-tooltip {
     top: -15px;
     left: -18px;
     min-height: 40px;
@@ -2117,8 +2116,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border: none;
     padding: 0;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip,
-.event #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip {
+#conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip {
     top: -55px;
     left: -106px;
     min-height: 40px;
@@ -2135,37 +2133,31 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border: none;
     padding: 0;
 }
-.speakerSession #conferenceController .show-chat-button-container > button:hover .button-tip .win-tooltip,
-.speakerSession #conferenceController .show-chat-button-container > button:active .button-tip .win-tooltip,
-.event #conferenceController .show-chat-button-container > button:hover .button-tip .win-tooltip,
-.event #conferenceController .show-chat-button-container > button:active .button-tip .win-tooltip {
-    top: -30px;
+#conferenceController .show-chat-button-container > button:hover .button-tip .win-tooltip,
+#conferenceController .show-chat-button-container > button:active .button-tip .win-tooltip {
+    top: -36px;
     opacity: 1;
     text-align: center;
     vertical-align: middle;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button:hover .button-tip .win-tooltip,
-.speakerSession #conferenceController .emoji-button-container > .win-button:active .button-tip .win-tooltip,
-.event #conferenceController .emoji-button-container > .win-button:hover .button-tip .win-tooltip,
-.event #conferenceController .emoji-button-container > .win-button:active .button-tip .win-tooltip {
+#conferenceController .emoji-button-container > .win-button:hover .button-tip .win-tooltip,
+#conferenceController .emoji-button-container > .win-button:active .button-tip .win-tooltip {
     top: -70px;
     opacity: 1;
     text-align: center;
     vertical-align: middle;
 }
-.speakerSession #conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-arrow,
-.event #conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-arrow {
+#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
-    margin-left: calc(50% - 25px);
+    margin-left: calc(50% - 36px);
     transform: rotate(45deg);
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
     position: absolute;
     top: 3px;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-arrow,
-.event #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
+#conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
     margin-left: calc(50% - 10px);
@@ -2175,8 +2167,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     position: absolute;
     top: 34px;
 }
-.speakerSession #conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body,
-.event #conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body {
+#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body {
     border-radius: 5px;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
@@ -2185,8 +2176,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     position: absolute;
     top: -4px;
 }
-.speakerSession #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body,
-.event #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
+#conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 5px;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
