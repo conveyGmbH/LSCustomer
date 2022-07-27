@@ -226,12 +226,12 @@ div[data-test="recordingIndicator"] > div {
     padding: 2px;
 }
 
-.recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):hover,
-.recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):active,
-.recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):focus,
-div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):hover,
-div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):active,
-div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):focus {
+.modSession .recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):hover,
+.modSession .recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):active,
+.modSession .recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):focus,
+.modSession div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):hover,
+.modSession div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):active,
+.modSession div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):focus {
     outline: none !important;
     border: none !important;
     opacity: 1;
@@ -242,8 +242,10 @@ div[data-test="recordingIndicator"] #recording-description + span {
     margin-right: 6px;
 }
 
-.recordingIndicator--Z1hMjfp > div.recordingControlON--ZTT4Mq,
-div[data-test="recordingIndicator"] > div {
+.event div[data-test="recordingIndicator"] > div,
+.speakerSession div[data-test="recordingIndicator"] > div {
+    opacitiy: 0.64;
+    border-radius: 1.5rem;
 }
 
 .recordingIndicator--Z1hMjfp > div.recordingControlOFF--26cqft {
