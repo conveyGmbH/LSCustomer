@@ -226,6 +226,11 @@ div[data-test="recordingIndicator"] > div {
     padding: 2px;
 }
 
+.event div[data-test="recordingIndicator"] > div[aria-label="Diese Konferenz wird nicht aufgezeichnet"],
+.speakerSession div[data-test="recordingIndicator"] > div[aria-label="This session is not being recorded"] {
+    display: none !important;
+}
+
 .modSession .recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):hover,
 .modSession .recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):active,
 .modSession .recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):focus,
@@ -1529,6 +1534,13 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     box-shadow: none !important;
 }
 */
+
+/* hide connection status */
+.event button[data-test="connectionStatusButton"],
+.speakerSession button[data-test="connectionStatusButton"] {
+    display: none;
+}
+
 
 /* hide logoff menu-item in options menu */
 #default-dropdown-menu li[data-test="list-item-shortcuts"] + hr,
