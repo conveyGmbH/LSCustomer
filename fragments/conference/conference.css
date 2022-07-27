@@ -443,7 +443,6 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: var(--border-radius) !important;
     line-height: 1 !important;
     font-weight: var(--btn-font-weight) !important;
-    margin: 0 1.5rem !important;
 }
 #conference.mediaview #layout > header:first-of-type > div:first-child div:not(.presenter-button-container) > button:not(.win-button),
 #conference.mediaview #layout > section[aria-label="Actions bar"] button:not(.gjwodI):not(.win-button),
@@ -462,6 +461,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     outline: var(--outline-focus) !important;
 }
 
+.ReactModalPortal button[aria-describedby="mic-description"],
+.ReactModalPortal button[aria-describedby="listenOnly-description"],
+.ReactModalPortal button[aria-label="Echo is audible"],
+.ReactModalPortal button[aria-label="Echo is inaudible"],
+.ReactModalPortal button[aria-label="Echo ist hörbar"],
+.ReactModalPortal button[aria-label="Echo ist nicht hörbar"],
+.ReactModalPortal button[aria-label="Audio wiedergeben"],
+.ReactModalPortal div[aria-label="Play audio"] {
+    margin: 0 1.5rem !important;
+}
 .portal--27FHYi .circle--Z2c8umk,
 .portal--27FHYi .jumbo--Z12Rgj4,
 .ReactModalPortal button[aria-describedby="mic-description"] > span:first-child,
