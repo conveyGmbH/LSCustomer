@@ -1535,9 +1535,10 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 */
 
-/* hide connection status */
+/* hide connection status and options button */
 .event button[data-test="connectionStatusButton"],
-.speakerSession button[data-test="connectionStatusButton"] {
+.speakerSession button[data-test="connectionStatusButton"],
+button[data-test="optionsButton"] {
     display: none;
 }
 
