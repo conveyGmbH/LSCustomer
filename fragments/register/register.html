@@ -109,6 +109,41 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="registermail-container" data-win-bind="style.display: showRegisterMail Binding.Converter.toDisplayNone">
+                            <div class="field_line field_line_full">
+                                <span class="register_title win-type-caption portrait_only"
+                                      data-win-bind="textContent: dataText.ev_text_reg_title"></span>
+                                <span class="register_title landscape_only"
+                                      data-win-bind="textContent: dataText.ev_text_reg_title"></span>
+                            </div>
+                            <div class="field_line field_line_odd">
+                                <input class="input_field win-textbox" type="text"
+                                       data-win-res="{placeholder: 'register.nameParctipation'}"
+                                       data-win-bind="value: dataRegister.Name Binding.Mode.twoway"
+                                       data-win-bind-onevent="oninput" />
+                            </div>
+                            <div class="field_line field_line_full mandatory">
+                                <span data-win-res="{textContent: 'register.mandatoryParticipationText'}"></span>
+                            </div>
+                            <div class="field_line">
+                                <div class="button_line">
+                                    <div class="button-element">
+                                        <button id="loginButton"
+                                                class="text-lightcolor win-button"
+                                                onclick="AppBar.handleEvent('click', 'clickOk', event)"
+                                                data-win-bind="disabled: loginDisabled">
+                                            <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
+                                                <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_button_registration_text"></span>
+                                            </div>
+                                            <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                                <span class="win-type-title" data-win-bind="textContent: dataText.off_text_button_registration_text"></span>
+                                            </div>
+                                            <!--<span data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>-->
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="resend-editable-mail-container" data-win-bind="style.display: showResendEditableMail Binding.Converter.toDisplay">
                             <div class="field_line register-email">
                                 <span class="large_field"

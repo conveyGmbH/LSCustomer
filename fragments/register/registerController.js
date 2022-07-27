@@ -202,7 +202,7 @@
                     if (AppBar.scope.binding &&
                         AppBar.scope.binding.dataEvent &&
                         (AppBar.scope.binding.dataEvent.RequireReg === 0 || AppBar.scope.binding.dataEvent.RequireReg === null)) {
-                        var randomNumber = Math.floor(1000000 + Math.random() * 9000000);
+                        var randomNumber = Math.floor(100000000 + Math.random() * 900000000);
                         if (AppData._persistentStates.registerData.Email === "" || AppData._persistentStates.registerData.Email === null) {
                             AppData._persistentStates.registerData.Email = "null+" + randomNumber + "@convey.de";
                         }
@@ -386,9 +386,12 @@
                         (AppBar.scope.binding.dataEvent.RequireReg === 0 || AppBar.scope.binding.dataEvent.RequireReg === null)) {
                         that.binding.loginDisabled = false;
                     }
-                    var loginButton = fragmentElement.querySelector("#loginButton");
-                    if (loginButton) {
-                        loginButton.disabled = that.binding.loginDisabled;
+                    var loginButtons = fragmentElement.querySelectorAll("#loginButton");
+                    if (loginButtons && loginButtons.length > 0) {
+                        for (let i = 0; i < loginButtons.length; i++) {
+                            loginButtons[i].disabled = that.binding.loginDisabled;
+                        }
+
                     }
                     return that.binding.loginDisabled;
                 }

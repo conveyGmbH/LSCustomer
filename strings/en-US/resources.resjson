@@ -43,6 +43,7 @@
     "register.salutation"   : "Salutation *",
     "register.firstName"    : "First name *",
     "register.name"         : "Surname *",
+    "register.nameParctipation"          : "Surname",
     "register.position"     : "Position",
     "register.formOf"       : "Salutation",
     "register.company"      : "Company name",
@@ -66,6 +67,7 @@
     "register.eventNotStartedYet": "There is no conference for the event yet, please be patient or go back to the event list and select another event.",
     "register.facebookRegister"     : "Login with Facebook",
     "register.mandatoryText"  : "* These fields must be completed",
+    "register.mandatoryParticipationText" : "Enter a name. It will be displayed in the participant list", 
 
 	"registerConfirm.waitMessage": "Thank you for your registration. You will shortly receive a confirmation email.",
 
