@@ -443,6 +443,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: var(--border-radius) !important;
     line-height: 1 !important;
     font-weight: var(--btn-font-weight) !important;
+    margin: 0 1.5rem !important;
 }
 #conference.mediaview #layout > header:first-of-type > div:first-child div:not(.presenter-button-container) > button:not(.win-button),
 #conference.mediaview #layout > section[aria-label="Actions bar"] button:not(.gjwodI):not(.win-button),
@@ -453,6 +454,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background: none !important;
     padding: 0 !important;
     outline: none !important;
+    margin: 0 !important;
 }
 #conference.mediaview #layout > header:first-of-type > div:first-child button:focus,
 #conference.mediaview #layout > #layout > section[aria-label="Actions bar"] button:focus,
@@ -467,7 +469,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .ReactModalPortal button[aria-label="Echo is audible"] > span:first-child,
 .ReactModalPortal button[aria-label="Echo is inaudible"] > span:first-child,
 .ReactModalPortal button[aria-label="Echo ist hörbar"] > span:first-child,
-.ReactModalPortal button[aria-label="Echo ist nicht hörbar"] > span:first-child {
+.ReactModalPortal button[aria-label="Echo ist nicht hörbar"] > span:first-child,
+.ReactModalPortal button[aria-label="Audio wiedergeben"] > span:first-child,
+.ReactModalPortal div[aria-label="Play audio"] > span:first-child {
     --btn-sm-padding-x: calc(var(--sm-padding-x) / 2);
     --btn-md-padding-x: calc(var(--md-padding-x) / 2);
     --btn-lg-padding-x: calc(var(--lg-padding-x) / 2);
@@ -475,6 +479,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: 50% !important;
     font-size: var(--btn-jumbo-font-size) !important;
     padding: var(--btn-jumbo-padding-x) !important;
+    margin-bottom: 5px;
 }
 #conference.mediaview #layout .primary--1IbqAO,
 .portal--27FHYi .primary--1IbqAO,
@@ -555,13 +560,21 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 /* Audio selection dialog buttons */
 .portal--27FHYi .modal--Z1mfLi .audioBtn--1H6rCK span:first-child,
-.ReactModalPortal button[aria-describedby="mic-description"] > span:first-child,
-.ReactModalPortal button[aria-describedby="listenOnly-description"] > span:first-child {
+.ReactModalPortal div[data-test="audioModal"] button[aria-describedby="mic-description"] > span:first-child,
+.ReactModalPortal div[data-test="audioModal"] button[aria-describedby="listenOnly-description"] > span:first-child {
     color: #1b3c4b !important;
     background-color: #f1f8ff !important;
     box-shadow: none !important;
     border: 5px solid #f1f8ff !important;
     font-size: 3.5rem !important;
+}
+.ReactModalPortal div[data-test="audioModal"] button[aria-label="Audio wiedergeben"]:last-child,
+.ReactModalPortal div[data-test="audioModal"] button[aria-label="Play audio"]:last-child {
+    margin: 0;
+}
+.ReactModalPortal div[data-test="audioModal"] button[aria-label="Audio wiedergeben"] > span:first-child,
+.ReactModalPortal div[data-test="audioModal"] button[aria-label="Play audio"] > span:first-child {
+    display: inline-block !important;
 }
 
 /* camera selection popup */
