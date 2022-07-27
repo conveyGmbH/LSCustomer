@@ -43,6 +43,7 @@
 	"register.salutation"   : "Anrede *",
     "register.firstName"     : "Vorname *",
     "register.name"          : "Nachname *",
+    "register.nameParctipation"          : "Nachname",
     "register.position"      : "Position",
     "register.formOf"        : "Anrede",
     "register.company"       : "Firmenname",
@@ -66,6 +67,7 @@
 	"register.eventNotStartedYet" : "Für die Veranstaltung gibt es noch keine Konferenz, bitte haben Sie etwas Geduld oder gehen zurück zur Eventliste und wählen eine andere Veranstaltung aus.",
 	"register.facebookRegister"     : "Login mit Facebook",
 	"register.mandatoryText"  : "* Diese Felder müssen ausgefüllt werden",
+    "register.mandatoryParticipationText" : "Geben Sie einen Namen ein. Dieser wird in der Teilnehmerliste angezeigt", 
 
     "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
 

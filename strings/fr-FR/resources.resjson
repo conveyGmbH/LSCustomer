@@ -42,6 +42,7 @@
     "register.salutation"   : "Anrede *",
     "register.firstName"    : "Prénom *",
     "register.name"         : "Nom de famille *",
+    "register.nameParctipation"          : "Nom de famille",
     "register.position"     : "Position",
     "register.formOf"       : "Salutation",
     "register.company"      : "nom de l'entreprise",
@@ -65,6 +66,7 @@
     "register.eventNotStartedYet": "Il n'y a pas encore de conférence pour l'événement, soyez patient ou revenez à la liste des événements et sélectionnez un autre événement.",
     "register.facebookRegister": "Connectez-vous avec Facebook",
     "register.mandatoryText"  : "* Ces champs doivent être remplis",
+    "register.mandatoryParticipationText": "Entrez un nom. Il sera affiché dans la liste des participants",
 
     "registerConfirm.waitMessage": "Merci pour votre inscription. Vous allez bientôt recevoir un e-mail de confirmation.",
 
