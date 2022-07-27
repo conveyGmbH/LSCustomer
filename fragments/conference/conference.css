@@ -249,7 +249,7 @@ div[data-test="recordingIndicator"] #recording-description + span {
 
 .event div[data-test="recordingIndicator"] > div,
 .speakerSession div[data-test="recordingIndicator"] > div {
-    opacitiy: 0.64;
+    opacity: 0.64;
     border-radius: 1.5rem;
 }
 
