@@ -577,10 +577,6 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
-                    /*if (that.binding.dataEvent.RequireReg === null && that.binding.dataEvent.ShowReg === null) {
-                        //return AppData.call("PRC_BBBConferenceLink",
-                        return WinJS.Promise.as();
-                    }*/
                     if (Application.query.eventId) {
                         if (Application.query.UserToken && Application.query.UserToken !== AppData._persistentStates.registerData.userToken) {
                             AppData._persistentStates.registerData.userToken = Application.query.UserToken;
@@ -628,44 +624,6 @@
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
-                    if (that.binding.dataEvent.ShowReg === 0 || that.binding.dataEvent.ShowReg === null) {
-                        /*AppData._persistentStates.registerData.AnredeID = that.binding.dataRegister.AnredeID;
-                        AppData._persistentStates.registerData.Email = that.binding.dataRegister.Email;
-                        AppData._persistentStates.registerData.Name = that.binding.dataRegister.Name;
-                        AppData._persistentStates.registerData.Vorname = that.binding.dataRegister.Vorname;
-                        AppData._persistentStates.registerData.Position = that.binding.dataRegister.Position;
-                        AppData._persistentStates.registerData.Firmenname = that.binding.dataRegister.Firmenname;
-                        AppData._persistentStates.registerData.privacyPolicyFlag = that.binding.dataRegister.privacyPolicyFlag;
-                        AppData._persistentStates.registerData.UserTZ = that.binding.dataRegister.UserTZ;
-                        AppData._persistentStates.registerData.LanguageId = that.binding.dataRegister.LanguageId;*/
-                        if (AppBar.scope.binding &&
-                            AppBar.scope.binding.dataEvent &&
-                            (AppBar.scope.binding.dataEvent.RequireReg === 0 || AppBar.scope.binding.dataEvent.RequireReg === null)) {
-                            var randomNumber = Math.floor(1000000 + Math.random() * 9000000);
-                            if (AppData._persistentStates.registerData.Email === "" || AppData._persistentStates.registerData.Email === null) {
-                                AppData._persistentStates.registerData.Email = "null+" + randomNumber + "@convey.de";
-                            }
-                        }
-                        Application.pageframe.savePersistentStates();
-                        that.binding.editDisabled = false;
-                        that.binding.resendDisabled = false;
-                        that.binding.showResendEditableMail = true;
-                        if (AppBar.scope &&
-                            AppBar.scope.binding &&
-                            typeof AppBar.scope.binding.showRegisterMail !== "undefined") {
-                            AppBar.scope.binding.showRegisterMail = false;
-                        }
-                        that.saveData(function (response) {
-                            // called asynchronously if ok
-                            that.binding.registerMessage = AppBar.scope.binding.registerMessage;
-                            return WinJS.Promise.as();
-                        }, function (errorResponse) {
-                            // called asynchronously on error
-                        });
-                        AppBar.modified = true;
-                        AppBar.triggerDisableHandlers();
-                    }
-                }).then(function () {
                     return that.updateFragment();
                 }).then(function () {
                     AppBar.notifyModified = true;
@@ -677,8 +635,7 @@
                     return that.adjustContainerSize();
                 }).then(function () {
                     that.inLoadData = false;
-                    /*&& AppData._persistentStates.registerData.resultCode !== 13*/
-                    if (!that.binding.conferenceLink &&
+                    if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 &&
                         (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11 ||
                             AppData._persistentStates.registerData.confirmStatusID === 15)) {
                         that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
@@ -876,7 +833,7 @@
                         }
                         return WinJS.Promise.as();
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 10 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 11 || (that.binding.dataEvent.RequireReg === null && that.binding.dataEvent.ShowReg === null)) {
+                        AppData._persistentStates.registerData.confirmStatusID === 11) {
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
@@ -987,7 +944,7 @@
                           that.binding.showTeaser = false;
                     }*/ else {
                         if (AppData._persistentStates.registerData.resultCode === 0 || AppData._persistentStates.registerData.resultCode === 13) {
-                            that.binding.showRegister = !!that.binding.dataEvent.ShowReg;
+                            that.binding.showRegister = true; /*!!that.binding.dataEvent.ShowReg*/
                         that.binding.showTeaser = true;
                         that.binding.showLogOffEventMail = false;
                             that.binding.showMaintenance = false;
@@ -1005,7 +962,8 @@
                         if (registerFragment &&
                             registerFragment.controller &&
                             registerFragment.controller.binding) {
-                            registerFragment.controller.binding.showRegisterMail = true;
+                            // Show full registration or only field Name
+                            registerFragment.controller.binding.showRegisterMail = !!that.binding.dataEvent.RequireReg;
                             registerFragment.controller.binding.showResendEditableMail = false;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
                         }
