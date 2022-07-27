@@ -1064,7 +1064,9 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview #layout:not(.presentation-open) > div[data-test="presentationPlaceholder"]:not(:fullscreen),
 #conference.mediaview .presentation-is-hidden > div[data-test="presentationPlaceholder"]:not(:fullscreen),
 #conference.mediaview #layout:not(.presentation-open) > div[data-test="presentationContainer"]:not(:fullscreen),
-#conference.mediaview .presentation-is-hidden > div[data-test="presentationContainer"]:not(:fullscreen) {
+#conference.mediaview .presentation-is-hidden > div[data-test="presentationContainer"]:not(:fullscreen),
+#conference.mediaview .presentation-is-hidden button[data-test="actionsButton"],
+#conference.mediaview .presentation-is-hidden button[data-test="startScreenShare"] {
     display: none !important;
 }
 
@@ -1431,15 +1433,12 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     background-color: white;
 }
 
-#conference.mediaview button[aria-describedby="closeDesc"],
-#conference.mediaview button[data-test="hidePresentationButton"] {
+#conference.mediaview button[aria-describedby="closeDesc"] {
     margin-right: 42px;
 }
 
-#conference.mediaview button[aria-describedby="closeDesc"],
-#conference.mediaview button[data-test="hidePresentationButton"] /*,
-#conference.mediaview button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF,
-#conference.mediaview button[data-test="restorePresentationButton"]
+#conference.mediaview button[aria-describedby="closeDesc"] /*,
+#conference.mediaview button.lg--Q7ufB.buttonWrapper--x8uow.button--ZzeTUF
 */ {
     background-color: rgba(0, 0, 0, 0.3) !important;
     border: none !important;
@@ -1474,6 +1473,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 /* hide button: hide-presentation  */
 #conference.mediaview button[data-test="hidePresentationButton"],
 #conference.mediaview button[data-test="restorePresentationButton"],
+#conference.mediaview button[data-test="restorePresentation"],
 #conference.mediaview button[data-test="minimizePresentation"] {
     width: 0;
     visibility: hidden
