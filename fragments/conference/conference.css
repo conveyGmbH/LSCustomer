@@ -207,31 +207,43 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
     font-weight: var(--btn-font-weight);
 }
 
-.recordingIndicator--Z1hMjfp {
+/*#conference.mediaview .presentationTitleSeparator--ZNzwGW, */
+#conference.mediaview h1[data-test="presentationTitle"] + span {
+    visibility: hidden;
+}
+
+.recordingIndicator--Z1hMjfp,
+div[data-test="recordingIndicator"] {
     z-index: 11;
 }
-.recordingIndicator--Z1hMjfp > div {
-    background-color: var(--btn-primary-bg);
-    /*box-shadow: var(--box-shadow-popup);*/
+.recordingIndicator--Z1hMjfp > div,
+div[data-test="recordingIndicator"] > div {
+    background-color: var(--btn-primary-bg) !important;
     font-size: var(--font-size-small) !important;
     opacity: 0.8;
+    min-width: 75px !important;
+    border: none;
+    padding: 2px;
 }
 
 .recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):hover,
-.recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):focus {
+.recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):active,
+.recordingIndicator--Z1hMjfp > div:not(.recordingStatusViewOnly--Z9UOXT):focus,
+div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):hover,
+div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):active,
+div[data-test="recordingIndicator"] > div:not(.recordingStatusViewOnly--Z9UOXT):focus {
+    outline: none !important;
+    border: none !important;
     opacity: 1;
 }
 
-.recordingIndicator--Z1hMjfp > div.recordingStatusViewOnly--Z9UOXT {
-    padding: 2px;
-}
-.recordingIndicator--Z1hMjfp > div.recordingStatusViewOnly--Z9UOXT .presentationTitle--Z1JrxcV {
+.recordingIndicator--Z1hMjfp > div.recordingStatusViewOnly--Z9UOXT .presentationTitle--Z1JrxcV,
+div[data-test="recordingIndicator"] #recording-description + span {
     margin-right: 6px;
 }
 
-.recordingIndicator--Z1hMjfp > div.recordingControlON--ZTT4Mq {
-    padding: 0 !important;
-    min-width: 75px !important;
+.recordingIndicator--Z1hMjfp > div.recordingControlON--ZTT4Mq,
+div[data-test="recordingIndicator"] > div {
 }
 
 .recordingIndicator--Z1hMjfp > div.recordingControlOFF--26cqft {
@@ -1040,9 +1052,6 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview .presentationTitle--1LT79g,
 #conference.mediaview h1[data-test="presentationTitle"] {
     display: none;
-}
-#conference.mediaview .presentationTitleSeparator--ZNzwGW {
-    visibility: hidden;
 }
 
 /* width of presentation container */
