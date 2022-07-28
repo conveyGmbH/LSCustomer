@@ -19,7 +19,7 @@
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataRegister: {
-                    AnredeID: null, /* INITAnredeID: 0,*/
+                    AnredeID: null,
                     Email: "",
                     Name: "",
                     Vorname: "",
@@ -46,11 +46,11 @@
                 showOffText: AppBar.scope.binding.showOffText
             }, commandList]);
 
-            var that = this;
 
             this.anrede = null;
-            //var register = fragmentElement.querySelector("#register");
-            // now do anything...
+
+            var that = this;
+
             var anredeRepeater = fragmentElement.querySelector("#anredeRepeater");
 
             var fetchMail = function (response) {
@@ -143,16 +143,6 @@
                         AppData.setErrorMsg(that.binding, errorResponse);
                     });
                 }).then(function () {
-                    // pUUID: window.device && window.device.uuid
-                    /*function create_UUID() {
-                        var dt = new Date().getTime();
-                        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                            var r = (dt + Math.random() * 16) % 16 | 0;
-                            dt = Math.floor(dt / 16);
-                            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-                        });
-                        return uuid;
-                    }*/
                     if (AppData._persistentStates.registerData &&
                         AppData._persistentStates.registerData.Email) {
                         that.binding.dataRegister = copyByValue(AppData._persistentStates.registerData);
@@ -161,10 +151,6 @@
 
                     }
                     that.binding.dataRegister.AnredeID = 0;
-                    /*if (!AppData._persistentStates.registerData.userToken) {
-                        AppData._persistentStates.registerData.userToken = create_UUID();
-                        Application.pageframe.savePersistentStates();
-                    }*/
 
                     if (typeof AppData._persistentStates.registerData.confirmStatusID === "undefined") {
                         AppData._persistentStates.registerData.confirmStatusID = null;

@@ -814,14 +814,14 @@
                                 // Stand 15.6 setze showRegisterMail auf true und tuhe so als müssen der user neu registrieren
                                 // Feature showReRegisterEventMail erstmal deaktiviert dadurch
                                 registerFragment.controller.binding.showReRegisterEventMail = false;
-                                registerFragment.controller.binding.showRegisterMail = !that.binding.dataEvent.RequireReg;
+                                registerFragment.controller.binding.showRegisterMail = !!that.binding.dataEvent.RequireReg;
                                 registerFragment.controller.binding.showRegisterParticipation = !that.binding.dataEvent.RequireReg;
                                 registerFragment.controller.binding.showResendEditableMail = false;
                                 //registerFragment.controller.binding.registerStatus = getResourceText("register.re_registerMessage");
                             } else {
-                                registerFragment.controller.binding.showRegisterMail = !that.binding.dataEvent.RequireReg; // Registrierungspflicht
-                                registerFragment.controller.binding.showRegisterParticipation = !that.binding.dataEvent.RequireReg;
-                                registerFragment.controller.binding.showResendEditableMail = that.binding.dataEvent.RequireReg;
+                                registerFragment.controller.binding.showRegisterMail = false; // Registrierungspflicht
+                                registerFragment.controller.binding.showRegisterParticipation = false;
+                                registerFragment.controller.binding.showResendEditableMail = !!that.binding.dataEvent.RequireReg;
                             }
                             //registerFragment.controller.binding.registerStatus = getResourceText("register.sendEmailMessage");
                         }
