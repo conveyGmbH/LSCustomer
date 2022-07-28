@@ -112,7 +112,7 @@
         }
 
         function saveBodyContent() {
-            var customerElement = document.querySelector("#"+rootElementId);
+            var customerElement = document.querySelector("#" + rootElementId);
             if (customerElement && customerElement.parentElement) {
                 var mainBottomElement = null;
                 var customerRootElement = customerElement;
@@ -165,7 +165,7 @@
         }
         var extraPath = null;
         function extraStartup() {
-            var customerElement = document.querySelector("#"+rootElementId);
+            var customerElement = document.querySelector("#" + rootElementId);
             if (customerElement) {
                 var data = getDataset(customerElement);
                 if (data) {
@@ -185,7 +185,7 @@
             }
         }
         function createRootElement() {
-            var customerElement = document.querySelector("#"+rootElementId);
+            var customerElement = document.querySelector("#" + rootElementId);
             if (customerElement && customerElement.parentElement) {
                 var data = getDataset(customerElement);
                 if (data) {
@@ -211,7 +211,7 @@
                         " extra=" + Application.extra + 
                         " extraPath=" + Application.extraPath);
                 }
-                
+
                 var customerRootElement = customerElement;
                 while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
                     customerRootElement = customerRootElement.parentElement;
@@ -418,11 +418,14 @@
             js.push(include("lib/convey/scripts/inertia.js"));
             js.push(include("lib/convey/scripts/winjs-es6promise.js"));
             js.push(include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js"));
+            js.push(include("lib/fontawesome/js/all.js"));
             js.push(include("lib/fontawesome/js/fontawesome.js"));
             js.push(include("lib/fontawesome/js/brands.min.js"));
             js.push(include("scripts/generalData.js"));
             return includeJoined(js);
-        }).then(function() {
+        }).then(function () {
+            css.push(include("lib/fontawesome/css/brands.css"));
+            css.push(include("lib/fontawesome/css/solid.css"));
             css.push(include("lib/fontawesome/css/fontawesome.css"));
             css.push(include("lib/fontawesome/css/brands.css"));
             return includeJoined(css);
@@ -435,7 +438,7 @@
     }
 
     function checkForRootElement() {
-        if (!document.querySelector("#"+rootElementId)) {
+        if (!document.querySelector("#" + rootElementId)) {
             //cancel processing if no root element present!
             return;
         }

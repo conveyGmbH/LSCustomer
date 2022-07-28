@@ -166,7 +166,7 @@
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1299px 
     @media (max-width:1299px) {
-    }
+}
 
     use: .view-size-biggest
 */

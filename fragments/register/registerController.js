@@ -24,7 +24,7 @@
                     Name: "",
                     Vorname: "",
                     Position: "",
-                        Firmenname: "",
+                    Firmenname: "",
                     privacyPolicyFlag: false,
                     UserTZ: AppData._persistentStates.registerData.UserTZ || moment.tz.guess(),
                     LanguageId: AppData._persistentStates.languageId
@@ -117,31 +117,31 @@
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                        Log.print(Log.l.trace, "calling select initAnredeData...");
+                    Log.print(Log.l.trace, "calling select initAnredeData...");
                     //load the list of INITAnrede for Checkbox
-                        return AppData.initAnredeView.select(function (json) {
-                            Log.print(Log.l.trace, "initAnredeView: success!");
-                            if (json && json.d && json.d.results) {
-                                // Now, we call WinJS.Binding.List to get the bindable list
-                                var results = json.d.results.filter(function (item, index) {
+                    return AppData.initAnredeView.select(function (json) {
+                        Log.print(Log.l.trace, "initAnredeView: success!");
+                        if (json && json.d && json.d.results) {
+                            // Now, we call WinJS.Binding.List to get the bindable list
+                            var results = json.d.results.filter(function (item, index) {
                                 if (AppData._persistentStates.registerData.AnredeID === item.INITAnredeID) {
                                     item.AnredeChecked = true;
                                 } else {
                                     item.AnredeChecked = false;
                                 }
-                                    return (item && (item.INITAnredeID !== 0 && item.INITAnredeID !== 3));
-                                });
+                                return (item && (item.INITAnredeID !== 0 && item.INITAnredeID !== 3));
+                            });
                             that.anrede = new WinJS.Binding.List(results);
                             if (anredeRepeater.winControl) {
                                 // add anredeRepeater data
                                 anredeRepeater.winControl.data = that.anrede;
-                                }
                             }
-                        }, function (errorResponse) {
-                            // called asynchronously if an error occurs
-                            // or server returns response with an error status.
-                            AppData.setErrorMsg(that.binding, errorResponse);
-                        });
+                        }
+                    }, function (errorResponse) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        AppData.setErrorMsg(that.binding, errorResponse);
+                    });
                 }).then(function () {
                     // pUUID: window.device && window.device.uuid
                     /*function create_UUID() {
@@ -418,18 +418,18 @@
             var loadInitSelection = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
                 //if (typeof that.binding.dataContact.KontaktVIEWID !== "undefined") {
-                    var map, results, curIndex;
+                var map, results, curIndex;
                 if (typeof that.binding.dataRegister.AnredeID !== "undefined") {
                     Log.print(Log.l.trace, "calling select initAnredeData: Id=" + that.binding.dataRegister.AnredeID + "...");
-                        map = AppData.initAnredeView.getMap();
-                        results = AppData.initAnredeView.getResults();
-                        if (map && results) {
+                    map = AppData.initAnredeView.getMap();
+                    results = AppData.initAnredeView.getResults();
+                    if (map && results) {
                         curIndex = map[that.binding.dataRegister.AnredeID];
-                            if (typeof curIndex !== "undefined") {
-                                that.setInitAnredeItem(results[curIndex]);
-                            }
+                        if (typeof curIndex !== "undefined") {
+                            that.setInitAnredeItem(results[curIndex]);
                         }
                     }
+                }
                 Log.ret(Log.l.trace);
                 return WinJS.Promise.as();
             }

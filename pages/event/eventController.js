@@ -266,11 +266,11 @@
                                 headerHeight = stickyHeader.clientHeight;
                             }
                             if (contentArea.scrollTop > 0) {
-                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild, "sticky-scrolled")) {
                                     WinJS.Utilities.addClass(headerHost.firstElementChild, "sticky-scrolled");
                                 }
                             } else {
-                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
+                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild, "sticky-scrolled")) {
                                     WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
                                 }
                             }
@@ -288,8 +288,8 @@
                                 if (Math.abs(offsetTop) < (content.offsetTop - headerHeight) / 2) {
                                     if (!that.inSnap) {
                                         that.inSnap = true;
-                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000)/2 + content.offsetTop - headerHeight;
-                                        Log.print(Log.l.trace, "onScroll: scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop );
+                                        contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000) / 2 + content.offsetTop - headerHeight;
+                                        Log.print(Log.l.trace, "onScroll: scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop);
                                         that.noMomentumScroll = true;
                                         WinJS.Promise.timeout(5).then(function() {
                                             that.inSnap = false;
@@ -390,7 +390,7 @@
                 var ret = new WinJS.Promise.as().then(function() {
                     fragmentController = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath(fragmentName));
                     if (!fragmentController) {
-                        var parentElement = pageElement.querySelector("#"+fragmentName+"host");
+                        var parentElement = pageElement.querySelector("#" + fragmentName + "host");
                         if (parentElement && that.binding.eventId) {
                             return Application.loadFragmentById(parentElement, fragmentName, { eventId: that.binding.eventId, dataEvent: that.binding.dataEvent });
                         } else {
@@ -451,7 +451,7 @@
                                 for (var key in query) {
                                     if (query.hasOwnProperty(key)) {
                                         var value = query[key];
-                                        Log.print(Log.l.trace, "added "+ key + "=" + value);
+                                        Log.print(Log.l.trace, "added " + key + "=" + value);
                                         Application.query[key] = value;
                                     }
                                 }
@@ -754,9 +754,9 @@
                         that.binding.showEvText = true;
                         that.binding.showOffText = false;
                     } else {
-                            that.binding.showEvText = false;
-                            that.binding.showOffText = true;
-                        }
+                        that.binding.showEvText = false;
+                        that.binding.showOffText = true;
+                    }
                 }).then(function () {
                     return that.getFragmentByName("teaser");
                 }).then(function (teaserFragment) {
@@ -790,9 +790,9 @@
                             var now = new Date().getTime();
                             var remainderTime = dateEnd - now;
                             if (remainderTime > 0) {
-                            teaserFragment.controller.binding.showEvDoc = true;
-                            teaserFragment.controller.binding.showOnDoc = false;
-                            teaserFragment.controller.binding.showOffDoc = false;
+                                teaserFragment.controller.binding.showEvDoc = true;
+                                teaserFragment.controller.binding.showOnDoc = false;
+                                teaserFragment.controller.binding.showOffDoc = false;
                             } else {
                                 teaserFragment.controller.binding.showEvDoc = false;
                                 teaserFragment.controller.binding.showOnDoc = false;
@@ -858,18 +858,18 @@
                                 that.binding.showMaintenance = true;
                                 return that.getFragmentByName("maintenance");
                             } else {
-                            that.binding.showCountdown = false;
-                            that.binding.showConference = true;
-                            that.binding.showTeaser = false;
-                            return that.getFragmentByName("conference").then(function(conferenceFragment) {
-                                conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
+                                that.binding.showCountdown = false;
+                                that.binding.showConference = true;
+                                that.binding.showTeaser = false;
+                                return that.getFragmentByName("conference").then(function(conferenceFragment) {
+                                    conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
                                         //alert("sessionEndRequested received: " + (param ? param : ""));
-                                    // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
-                                    // call PRC_RegisterContact?!
-                                    that.loadData();
+                                        // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
+                                        // call PRC_RegisterContact?!
+                                        that.loadData();
+                                    });
                                 });
-                            });
-                        }
+                            }
                         }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
                         // recordedcontent noch nicht da noch nicht da 
@@ -885,7 +885,7 @@
                                 recordedContentFragment.controller.binding) {
                                 // option set in portal - eventgensettings RecordSession und PublishRecording
                                 if (that.binding.dataEvent.RecordSession && that.binding.dataEvent.PublishRecording) {
-                                recordedContentFragment.controller.binding.showDelayContent = true;
+                                    recordedContentFragment.controller.binding.showDelayContent = true;
                                 } else {
                                     recordedContentFragment.controller.binding.showDelayContent = false;
                                 }
@@ -898,7 +898,7 @@
                         that.binding.showConference = false;
                         // option set in portal - eventgensettings
                         if (that.binding.dataEvent.RecordSession) {
-                        that.binding.showRecordedContent = true;
+                            that.binding.showRecordedContent = true;
                         } else {
                             that.binding.showRecordedContent = false;
                         }
@@ -936,11 +936,11 @@
                           that.binding.showCountdown = false;
                           that.binding.showConference = true;
                           that.binding.showTeaser = false;
-                    }*/ else {
+                    } */else {
                         if (AppData._persistentStates.registerData.resultCode === 0 || AppData._persistentStates.registerData.resultCode === 13) {
                             that.binding.showRegister = true; /*!!that.binding.dataEvent.ShowReg*/
-                        that.binding.showTeaser = true;
-                        that.binding.showLogOffEventMail = false;
+                            that.binding.showTeaser = true;
+                            that.binding.showLogOffEventMail = false;
                             that.binding.showMaintenance = false;
                         } else if (AppData._persistentStates.registerData.confirmStatusID === null && !that.binding.conferenceLink) {
                             that.binding.showRegister = false;
@@ -985,7 +985,7 @@
                     var now = new Date().getTime();
                     var timeleft = dateEnd - now;
                     if (timeleft < 0) {
-                       /* AppData._persistentStates.registerData.confirmStatusID = 15;
+                        /* AppData._persistentStates.registerData.confirmStatusID = 15;
                         Application.pageframe.savePersistentStates();*/
                         that.binding.showEvText = false;
                         that.binding.showOffText = true;
@@ -996,9 +996,9 @@
                 }).then(function () {
                     that.inLoadData = false;
                     if (that.binding.showEvText) {
-                    that.refreshResultsPromise = WinJS.Promise.timeout(that.refreshWaitTimeMs).then(function () {
-                        that.showEvOffText();
-                    });
+                        that.refreshResultsPromise = WinJS.Promise.timeout(that.refreshWaitTimeMs).then(function () {
+                            that.showEvOffText();
+                        });
                     }
                     that.addDisposablePromise(that.refreshResultsPromise);
                 });

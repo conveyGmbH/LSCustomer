@@ -163,7 +163,7 @@ input[disabled] {
     box-sizing: content-box;
 }
 
-    .circle:hover {
+.circle:hover {
     opacity: 0.7;
 }
 

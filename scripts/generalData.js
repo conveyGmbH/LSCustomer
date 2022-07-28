@@ -17,7 +17,7 @@
                 Log.ret(Log.l.error, "parent element not specified!");
                 return;
             }
-            var sibling,nextSibling;
+            var sibling, nextSibling;
             var listHeader = element.querySelector(headerClassName);
             if (listHeader) {
                 var bodyContentTop = Application.navigator.pageElement &&
@@ -303,12 +303,12 @@
                     break;
                 case 18:
                     //if (AppData._persistentStates.individualColors) {
-                        if (item.LocalValue === "1") {
-                            AppData._persistentStates.isDarkTheme = true;
-                        } else {
-                            AppData._persistentStates.isDarkTheme = false;
-                        }
-                        Colors.isDarkTheme = AppData._persistentStates.isDarkTheme;
+                    if (item.LocalValue === "1") {
+                        AppData._persistentStates.isDarkTheme = true;
+                    } else {
+                        AppData._persistentStates.isDarkTheme = false;
+                    }
+                    Colors.isDarkTheme = AppData._persistentStates.isDarkTheme;
                     //}
                     break;
                 case 19:
@@ -412,7 +412,7 @@
                     }
                     break;
                 default:
-                // defaultvalues
+                    // defaultvalues
             }
             if (item.pageProperty) {
                 if (item.LocalValue === "1") {
@@ -428,12 +428,12 @@
             Log.call(Log.l.u1, "AppData.", "colorProperty=" + colorProperty + " color=" + color);
             Colors[colorProperty] = color;
             switch (colorProperty) {
-            case "accentColor":
-            // fall through...
-            case "navigationColor":
-                AppBar.loadIcons();
-                NavigationBar.groups = Application.navigationBarGroups;
-                break;
+                case "accentColor":
+                    // fall through...
+                case "navigationColor":
+                    AppBar.loadIcons();
+                    NavigationBar.groups = Application.navigationBarGroups;
+                    break;
             }
             Log.ret(Log.l.u1);
         },
