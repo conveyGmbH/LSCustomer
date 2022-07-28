@@ -387,6 +387,7 @@
 
         // WinJS references 
         var js = [];
+        var css = [];
         include("lib/crc32/scripts/crc32.js").then(function() {
             return extraStartup();
         }).then(function() {
@@ -417,9 +418,15 @@
             js.push(include("lib/convey/scripts/inertia.js"));
             js.push(include("lib/convey/scripts/winjs-es6promise.js"));
             js.push(include("lib/moment/scripts/moment-timezone-with-data-10-year-range.js"));
+            js.push(include("lib/fontawesome/js/fontawesome.js"));
+            js.push(include("lib/fontawesome/js/brands.min.js"));
             js.push(include("scripts/generalData.js"));
             return includeJoined(js);
         }).then(function() {
+            css.push(include("lib/fontawesome/css/fontawesome.css"));
+            css.push(include("lib/fontawesome/css/brands.css"));
+            return includeJoined(css);
+        }).then(function () {
             createRootElement();
             return include("scripts/index.js");
         }).then(function() {

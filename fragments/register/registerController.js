@@ -32,6 +32,7 @@
                 InitAnredeItem: { AnredeID: 0, TITLE: "" },
                 registerMessage: "",
                 showRegisterMail: true,
+                showRegisterParticipation: false,
                 showResendEditableMail: false,
                 showReRegisterEventMail: false,
                 editDisabled: false,

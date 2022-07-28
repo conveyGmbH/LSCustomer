@@ -419,14 +419,6 @@
                 Log.call(Log.l.trace, "Event.Controller.");
                 if (json && json.d && json.d.results) {
                     var result = json.d.results[0];
-                    //Absicherung wenn 
-                    /*if (result.resultCode === 21) {
-                        //copyToken = AppData._persistentStates.registerData.userToken;
-                        AppData._persistentStates.registerData.userToken = null;
-                    }
-                    if (result.UserToken && result.UserToken !== AppData._persistentStates.registerData.userToken) {
-                        AppData._persistentStates.registerData.userToken = result.UserToken;
-                    }*/
                     if (result.VeranstaltungID &&
                         result.VeranstaltungID !== AppData._persistentStates.registerData.eventId) {
                         AppData._persistentStates.registerData.eventId = result.VeranstaltungID;
@@ -822,12 +814,14 @@
                                 // Stand 15.6 setze showRegisterMail auf true und tuhe so als müssen der user neu registrieren
                                 // Feature showReRegisterEventMail erstmal deaktiviert dadurch
                                 registerFragment.controller.binding.showReRegisterEventMail = false;
-                                registerFragment.controller.binding.showRegisterMail = true;
+                                registerFragment.controller.binding.showRegisterMail = !that.binding.dataEvent.RequireReg;
+                                registerFragment.controller.binding.showRegisterParticipation = !that.binding.dataEvent.RequireReg;
                                 registerFragment.controller.binding.showResendEditableMail = false;
                                 //registerFragment.controller.binding.registerStatus = getResourceText("register.re_registerMessage");
                             } else {
-                                registerFragment.controller.binding.showRegisterMail = false;
-                                registerFragment.controller.binding.showResendEditableMail = true;
+                                registerFragment.controller.binding.showRegisterMail = !that.binding.dataEvent.RequireReg; // Registrierungspflicht
+                                registerFragment.controller.binding.showRegisterParticipation = !that.binding.dataEvent.RequireReg;
+                                registerFragment.controller.binding.showResendEditableMail = that.binding.dataEvent.RequireReg;
                             }
                             //registerFragment.controller.binding.registerStatus = getResourceText("register.sendEmailMessage");
                         }
@@ -964,6 +958,7 @@
                             registerFragment.controller.binding) {
                             // Show full registration or only field Name
                             registerFragment.controller.binding.showRegisterMail = !!that.binding.dataEvent.RequireReg;
+                            registerFragment.controller.binding.showRegisterParticipation = !that.binding.dataEvent.RequireReg;
                             registerFragment.controller.binding.showResendEditableMail = false;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
                         }
