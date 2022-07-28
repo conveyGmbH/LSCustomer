@@ -424,10 +424,9 @@
             js.push(include("scripts/generalData.js"));
             return includeJoined(js);
         }).then(function () {
-            css.push(include("lib/fontawesome/css/brands.css"));
-            css.push(include("lib/fontawesome/css/solid.css"));
-            css.push(include("lib/fontawesome/css/fontawesome.css"));
-            css.push(include("lib/fontawesome/css/brands.css"));
+            css.push(Colors.loadCSSfile("lib/fontawesome/css/brands.css"));
+            css.push(Colors.loadCSSfile("lib/fontawesome/css/solid.css"));
+            css.push(Colors.loadCSSfile("lib/fontawesome/css/fontawesome.css"));
             return includeJoined(css);
         }).then(function () {
             createRootElement();
