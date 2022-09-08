@@ -1497,19 +1497,19 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: 100% !important;
 }
 #conference.mediaview .svgContainer--Z1z3wO0 > .presentationToolbar--Z7DDdn > div,
-#conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:last-child > div {
+#conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper {
     width: 100% !important;
 }
 
 #conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button,
-#conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:last-child button {
+#conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper button {
     background-color: transparent;
     border-radius: 0 !important;
 }
 #conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button:not([aria-disabled="true"]):hover,
 #conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button:not([aria-disabled="true"]):active,
-#conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:last-child button:not([aria-disabled="true"]):hover,
-#conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:last-child button:not([aria-disabled="true"]):active {
+#conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper button:not([aria-disabled="true"]):hover,
+#conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper button:not([aria-disabled="true"]):active {
     background-color: var(--color-white);
 }
 
