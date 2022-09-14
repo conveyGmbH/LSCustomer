@@ -101,6 +101,7 @@
   background: #e6e6e6;
   cursor: pointer;
   border-radius: 3px;
+  z-index: 1;
 }
 .acorn-player.bigbluebutton .acorn-seek-slider .ui-slider-handle:hover {
   /* height: 18px; */
