@@ -142,13 +142,6 @@
     padding: 15px 15px 0 0 !important;
 }
 
-.teaser .ITbackground, .teaser .ipadImg {
-    border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-    -webkit-border-radius: 0 !important;
-}
-
-.home .content-header-line > span, .events .content-header-line > span,
 .event .content-header-line > span {
     font-size: 15px !important;
     line-height: 25px !important;
@@ -175,8 +168,7 @@
 .home .content-header-line > h2,
 .events .content-header-line > h2 {
     font-family: var(--font-family-default) !important;
-    font-size: 24px !important;
-    line-height: 48px !important;
+    
 }
 
 .event .content-header-line > .win-h2 {
@@ -224,7 +216,6 @@
 }
 
 .event .hero-header {
-    margin-left: 0 !important;
     padding: 15px 0 !important
 }
 
@@ -241,7 +232,6 @@
 }
 
 .event .intersection {
-    margin-left: 0 !important;
     padding: 15px 15px 0 0 !important;
 }
 
@@ -261,7 +251,7 @@
 .home .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
     width: 100% !important;
-    padding: 0 !important;
+    padding: 0 0 40px 0 !important;
 }
 
 .home .win-listview .win-vertical .win-gridlayout.win-surface,
@@ -271,17 +261,6 @@
     margin-top: 10px !important;
 }
 
-.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
-    margin: 0 auto !important;
-    max-width: var(--max-content-width-surface) !important;
-}
-
-.home .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout,
-.events .win-listview .win-vertical .win-gridlayout.win-structuralnodes .win-uniformgridlayout.win-itemscontainer.win-laidout {
-    max-width: var(--max-content-width-surface) !important;
-    margin-bottom: 40px !important;
-    padding: 0 0 30px 0 !important;
-}
 
 .home .win-listview .win-groupheader {
     padding: 5px 0 0 35px !important;
@@ -387,7 +366,6 @@
 }
 
 .event .section-3 {
-    padding: 15px 15px 0 0 !important;
     margin-left: 0 !important;
 }
 
