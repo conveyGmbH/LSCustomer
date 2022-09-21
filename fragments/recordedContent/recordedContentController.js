@@ -24,7 +24,7 @@ var __meteor_runtime_config__;
             var playButtonObserver = null;
             var sendResizePromise = null;
             var handleCommandPromise = null;
-            var registerUiHandler= null;
+            var registerUiHandler = null;
             var slideClickHandlerDone = false;
 
             Fragments.Controller.apply(this, [fragmentElement, {
@@ -54,7 +54,7 @@ var __meteor_runtime_config__;
 
             var that = this;
 
-            that.dispose = function() {
+            that.dispose = function () {
                 Log.call(Log.l.trace, "RecordedContent.Controller.");
                 if (registerUiHandler) {
                     registerUiHandler.cancel();
@@ -111,7 +111,7 @@ var __meteor_runtime_config__;
                         .replace(/window\.document\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.hostname/g, newHostname)
                         .replace(/window\.location\.href/g, newHref)
-                        ;
+                    ;
                     return scriptText;
                 });
             }
@@ -367,8 +367,8 @@ var __meteor_runtime_config__;
                         cacheStore[fragmentId] = state;
                     }
                     var result = state.promise = createEntry(state, href);
-                    state.promise.then(function() {
-                         delete state.promise;
+                    state.promise.then(function () {
+                        delete state.promise;
                     });
                     return result;
                 }
@@ -480,7 +480,7 @@ var __meteor_runtime_config__;
                 Log.call(Log.l.info, "RecordedContent.Controller.", "state=" + state);
                 if (recordedContent) {
                     switch (state) {
-                        case "tiled": {
+                        case "tiled":
                             if (!WinJS.Utilities.hasClass(recordedContent, "presenter-mode")) {
                                 WinJS.Utilities.addClass(recordedContent, "presenter-mode");
                             }
@@ -493,9 +493,8 @@ var __meteor_runtime_config__;
                             if (!WinJS.Utilities.hasClass(recordedContent, "presenter-mode-tiled")) {
                                 WinJS.Utilities.addClass(recordedContent, "presenter-mode-tiled");
                             }
-                        }
-                        break;
-                        case "full": {
+                            break;
+                        case "full":
                             if (!WinJS.Utilities.hasClass(recordedContent, "presenter-mode")) {
                                 WinJS.Utilities.addClass(recordedContent, "presenter-mode");
                             }
@@ -508,9 +507,8 @@ var __meteor_runtime_config__;
                             if (!WinJS.Utilities.hasClass(recordedContent, "presenter-mode-full")) {
                                 WinJS.Utilities.addClass(recordedContent, "presenter-mode-full");
                             }
-                        }
-                        break;
-                        case "small": {
+                            break;
+                        case "small":
                             if (!WinJS.Utilities.hasClass(recordedContent, "presenter-mode")) {
                                 WinJS.Utilities.addClass(recordedContent, "presenter-mode");
                             }
@@ -523,9 +521,8 @@ var __meteor_runtime_config__;
                             if (!WinJS.Utilities.hasClass(recordedContent, "presenter-mode-small")) {
                                 WinJS.Utilities.addClass(recordedContent, "presenter-mode-small");
                             }
-                        }
-                        break;
-                        default: {
+                            break;
+                        default:
                             if (WinJS.Utilities.hasClass(recordedContent, "presenter-mode")) {
                                 WinJS.Utilities.removeClass(recordedContent, "presenter-mode");
                             }
@@ -538,7 +535,6 @@ var __meteor_runtime_config__;
                             if (WinJS.Utilities.hasClass(recordedContent, "presenter-mode-full")) {
                                 WinJS.Utilities.removeClass(recordedContent, "presenter-mode-full");
                             }
-                        }
                     }
                 }
                 Log.ret(Log.l.trace);
@@ -761,7 +757,7 @@ var __meteor_runtime_config__;
                 }
             };
 
-            var handleCommandWithParam = function(commandWithParam, typeFilter) {
+            var handleCommandWithParam = function (commandWithParam, typeFilter) {
                 Log.call(Log.l.trace, "RecordedContent.Controller.", "commandWithParam=" + commandWithParam);
                 if (!commandWithParam) {
                     Log.ret(Log.l.info, "null param");
@@ -784,15 +780,15 @@ var __meteor_runtime_config__;
                     handleCommandPromise.cancel();
                     handleCommandPromise = null;
                 }
-                commandQueue = commandQueue.filter(function(item) {
+                commandQueue = commandQueue.filter(function (item) {
                     return (!commandInfo.redundantList || commandInfo.redundantList.indexOf(item.command) < 0);
                 });
                 commandQueue.push(commandWithParam);
-                handleCommandPromise = WinJS.Promise.timeout(250).then(function() {
+                handleCommandPromise = WinJS.Promise.timeout(250).then(function () {
                     var commandsToHandle = commandQueue;
                     commandQueue = [];
                     AppBar.notifyModified = false;
-                    commandsToHandle.forEach(function(queuedCommandWithParam) {
+                    commandsToHandle.forEach(function (queuedCommandWithParam) {
                         var queuedCommand = queuedCommandWithParam.command;
                         var queuedParam = null;
                         if (queuedCommandWithParam.param) {
@@ -819,16 +815,16 @@ var __meteor_runtime_config__;
                 if (text) {
                     if (that.allCommandInfos[text]) {
                         return {
-                            command: text, 
+                            command: text,
                             param: ""
                         };
                     }
                     for (var prop in that.allCommandInfos) {
                         if (that.allCommandInfos.hasOwnProperty(prop)) {
-                            if (that.allCommandInfos[text.substr(0, prop.length)] && 
+                            if (that.allCommandInfos[text.substr(0, prop.length)] &&
                                 text[prop.length] === "(" && text[text.length - 1] === ")") {
                                 return {
-                                    command: text.substr(0, prop.length), 
+                                    command: text.substr(0, prop.length),
                                     param: text.substr(prop.length + 1, text.length - prop.length - 2)
                                 };
                             }
@@ -838,7 +834,7 @@ var __meteor_runtime_config__;
                 }
                 return null;
             }
-            var parseChatMessage = function(message, typeFilter) {
+            var parseChatMessage = function (message, typeFilter) {
                 var responseReplaced = false;
                 var newResponseText = "";
                 Log.call(Log.l.trace, "RecordedContent.Controller.", "message=" + message);
@@ -867,7 +863,7 @@ var __meteor_runtime_config__;
                                     Log.print(Log.l.info, "received command=" + commandWithParam.command);
                                     that.handleCommandWithParam(commandWithParam, typeFilter);
                                 }
-                            } 
+                            }
                             prevFieldStartPos += posMagicStart + magicStart.length + command.length + magicStop.length;
                         } else {
                             if (fieldReplaced) {
@@ -877,12 +873,12 @@ var __meteor_runtime_config__;
                         }
                     }
                 }
-                Log.ret(Log.l.trace, responseReplaced ? newResponseText: message);
-                return responseReplaced ? newResponseText: message;
+                Log.ret(Log.l.trace, responseReplaced ? newResponseText : message);
+                return responseReplaced ? newResponseText : message;
             }
             that.parseChatMessage = parseChatMessage;
 
-            var setCurrentPresenterMode = function(chatLine) {
+            var setCurrentPresenterMode = function (chatLine) {
                 Log.call(Log.l.trace, "RecordedContent.Controller.");
                 var oldMessageAll = chatLine.getAttribute("name");
                 var newMessageAll = "";
@@ -922,7 +918,7 @@ var __meteor_runtime_config__;
             }
             that.setCurrentPresenterMode = setCurrentPresenterMode;
 
-            var syncPresenterMode = function() {
+            var syncPresenterMode = function () {
                 Log.call(Log.l.trace, "RecordedContent.Controller.");
                 var chat = fragmentElement.querySelector("#chat");
                 if (chat) {
@@ -980,14 +976,14 @@ var __meteor_runtime_config__;
                             mutationList.forEach(function (mutation) {
                                 switch (mutation.type) {
                                     case "attributes":
-                                    if (mutation.target) {
-                                        var ariaHidden = mutation.target.getAttribute("aria-hidden");
-                                        Log.print(Log.l.trace, "chat attributes changed! ariaHidden=" + ariaHidden);
-                                        if (ariaHidden === "false") {
-                                            that.setCurrentPresenterMode(mutation.target);
+                                        if (mutation.target) {
+                                            var ariaHidden = mutation.target.getAttribute("aria-hidden");
+                                            Log.print(Log.l.trace, "chat attributes changed! ariaHidden=" + ariaHidden);
+                                            if (ariaHidden === "false") {
+                                                that.setCurrentPresenterMode(mutation.target);
+                                            }
                                         }
-                                    }
-                                    break;
+                                        break;
                                 }
                             });
                         });
@@ -1004,15 +1000,15 @@ var __meteor_runtime_config__;
                             mutationList.forEach(function (mutation) {
                                 switch (mutation.type) {
                                     case "attributes":
-                                    if (mutation.target) {
-                                        Log.print(Log.l.trace, "chat attributes changed! disabled=" + mutation.target.disabled);
-                                        if (!mutation.target.disabled) {
-                                            WinJS.Promise.timeout(50).then(function() {
-                                                that.syncPresenterMode();
-                                            });
+                                        if (mutation.target) {
+                                            Log.print(Log.l.trace, "chat attributes changed! disabled=" + mutation.target.disabled);
+                                            if (!mutation.target.disabled) {
+                                                WinJS.Promise.timeout(50).then(function () {
+                                                    that.syncPresenterMode();
+                                                });
+                                            }
                                         }
-                                    }
-                                    break;
+                                        break;
                                 }
                             });
                         });
@@ -1029,7 +1025,6 @@ var __meteor_runtime_config__;
                 Log.ret(Log.l.trace);
             }
             that.registerObserver = registerObserver;
-        
 
             var loadData = function () {
                 var url;
@@ -1081,13 +1076,13 @@ var __meteor_runtime_config__;
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
                 if (AppData._persistentStates.registerData.confirmStatusID === 20) {
-                    if (!that.binding.showDelayContent && recordedContent) {
-                        recordedContent.scrollIntoView();
-                    }
-                return that.loadData();
-                } else {
+                    //if (!that.binding.showDelayContent && recordedContent) {
+                    recordedContent.scrollIntoView();
+                    //}
+                    //return that.loadData();
+                } /*else {
                     return WinJS.Promise.as();
-                }
+                }*/
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
             });

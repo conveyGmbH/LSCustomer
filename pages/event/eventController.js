@@ -908,7 +908,7 @@
                                 recordedContentFragment.controller &&
                                 recordedContentFragment.controller.binding) {
                                 recordedContentFragment.controller.binding.showDelayContent = false;
-
+                                recordedContentFragment.controller.binding.loadData();
                             }
                         });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
