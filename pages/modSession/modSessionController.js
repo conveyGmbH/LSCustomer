@@ -309,7 +309,14 @@
                         // dateBegin in future
                         confirm(warning, function (result) {
                             if (result) {
-                                Application.navigateById("home");
+                                that.updateFragment().then(function (conferenceFragment) {
+                                    // call sendCommandMessage 
+                                    // Abfrage nach Enddatum ob kleiner als heutige datum 
+                                    if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
+                                        conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
+                                    }
+                                });
+                                
                             } else {
                                 Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
                             }
@@ -336,8 +343,8 @@
                                         if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
                                             conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
                                         }
+                                        that.binding.showConference = false;
                                     });
-                                    Application.navigateById("home");
                                     Log.ret(Log.l.trace);
                                 }, function (error) {
                                     Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");

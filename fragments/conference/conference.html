@@ -19,8 +19,12 @@
         <section aria-label="Main content" role="main" class="animationElement">
             <div class="contentarea content-noscroll win-type-body">
                 <div class="doc-container">
-                    <div id="conference" class="mediaview"
-                         data-win-bind="style.display: showConference"></div>
+                <div id="conference" class="mediaview"
+                     data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
+                <!--Hier noch ein Text anzeigen wenn keine session geöffnet ist-->
+                <div class="no-session-placeholder" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
+                    <span data-win-res="{textContent: ''}"></span>
+                </div>
                     <div class="presenter-button-container">
                         <button id="presenterModeTiled" class="win-button"
                                 onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">

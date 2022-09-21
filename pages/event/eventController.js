@@ -866,7 +866,13 @@
                                         //alert("sessionEndRequested received: " + (param ? param : ""));
                                         // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
                                         // call PRC_RegisterContact?!
-                                        that.loadData();
+                                        // Wenn Enddatum erreicht dann loaddata  sonst navigiere nach home (Mantis#6916)
+                                        var endDate = getDateObject(that.binding.dataEvent.LiveEndDatum);
+                                        var now = new Date().getTime();
+                                        var timeleft = endDate - now;
+                                        if (timeleft < 0) {
+                                            that.loadData();
+                                        }
                                     });
                                 });
                             }
