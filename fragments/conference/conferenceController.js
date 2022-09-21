@@ -1786,6 +1786,18 @@ var __meteor_runtime_config__;
                         if (mediaContainer) {
                             var cameraDock = mediaContainer.querySelector(elementSelectors.cameraDock);
                             var overlayElement = cameraDock && cameraDock.parentElement;
+                            var overlayElementParent = overlayElement && overlayElement.parentElement;
+                            if (overlayElementParent) {
+                                if (overlayElementParent.parentElement && overlayElementParent.parentElement.id === "layout") {
+                                    if (!WinJS.Utilities.hasClass(overlayElementParent, "video-overlay-pane")) {
+                                        WinJS.Utilities.addClass(overlayElementParent, "video-overlay-pane");
+                                    }
+                                } else if (overlayElementParent.id === "layout") {
+                                    if (!WinJS.Utilities.hasClass(overlayElement, "video-overlay-pane")) {
+                                        WinJS.Utilities.addClass(overlayElement, "video-overlay-pane");
+                                    }
+                                }
+                            }
                             var numVideos = 0;
                             WinJS.Promise.timeout(20).then(function() {
                                 var paneWidth = 0;
