@@ -3840,6 +3840,11 @@ var __meteor_runtime_config__;
                 },
                 sessionEndRequested: function(param) {
                     Log.call(Log.l.info, "Conference.Controller.", "param=" + (param ? param : ""));
+                    if (pageControllerName === "eventController") {
+                        if (AppBar.scope && typeof AppBar.scope.loadData === "function") {
+                            AppBar.scope.loadData();
+                        }
+                    }
                     Log.ret(Log.l.info);
                 },
                 pQ: function(value) {
