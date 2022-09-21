@@ -343,8 +343,8 @@
                                         if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
                                             conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
                                         }
+                                        that.binding.showConference = false;
                                     });
-                                    Application.navigateById("home");
                                     Log.ret(Log.l.trace);
                                 }, function (error) {
                                     Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");

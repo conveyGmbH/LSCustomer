@@ -3840,7 +3840,6 @@ var __meteor_runtime_config__;
                 },
                 sessionEndRequested: function(param) {
                     Log.call(Log.l.info, "Conference.Controller.", "param=" + (param ? param : ""));
-                    Application.navigateById("home");
                     Log.ret(Log.l.info);
                 },
                 pQ: function(value) {
