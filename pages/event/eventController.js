@@ -34,7 +34,6 @@
                 showOffText: false,
                 showMaintenance: false,
                 registerStatus: "",
-                recordedLink: null,
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
@@ -43,6 +42,7 @@
                 link: window.location.href,
                 registerEmail: null,
                 conferenceLink: null,
+                recordedLink: null,
                 emptySpeakerList: false
             }, commandList]);
 
@@ -432,11 +432,13 @@
                     }
                     if (result.ConferenceLink && result.ConferenceLink !== that.binding.conferenceLink) {
                         that.binding.conferenceLink = result.ConferenceLink;
+                        that.binding.recordedLink = null;
                     }
                     // Status 15 -> session beendet und warten auf recordedContent
                     if (result.ConfirmStatusID === 15) {
                         // set conferenceLink to null -> refresh condition
                         that.binding.conferenceLink = null;
+                        that.binding.recordedLink = null;
                     }
                     // Status 20 -> session beendet und recordedContent da
                     if (result.ConfirmStatusID === 20) {
@@ -630,6 +632,11 @@
                     if (!that.binding.conferenceLink && AppData._persistentStates.registerData.resultCode !== 13 &&
                         (AppData._persistentStates.registerData.confirmStatusID === 10 || AppData._persistentStates.registerData.confirmStatusID === 11 ||
                             AppData._persistentStates.registerData.confirmStatusID === 15)) {
+                        that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
+                            that.loadData();
+                        });
+                    }
+                    if (!that.binding.recordedLink && AppData._persistentStates.registerData.confirmStatusID === 20) {
                         that.refreshMaintenanceResultsPromise = WinJS.Promise.timeout(that.refreshMaintenanceTimeMs).then(function () {
                             that.loadData();
                         });
