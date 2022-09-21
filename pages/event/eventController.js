@@ -85,7 +85,7 @@
             };
             this.setDataEvent = setDataEvent;
 
-            var setDataText = function(results) {
+            var setDataText = function (results) {
                 Log.call(Log.l.trace, "Event.Controller.");
                 var newDataText = {};
                 for (var i = 0; i < results.length; i++) {
@@ -114,7 +114,7 @@
             }
             this.setDataText = setDataText;
 
-            var setDataDoc = function(results) {
+            var setDataDoc = function (results) {
                 Log.call(Log.l.trace, "Event.Controller.");
                 var newDataDoc = getEmptyDefaultValue(Event.medienView.defaultValue);
                 for (var i = 0; i < results.length; i++) {
@@ -172,16 +172,16 @@
             }
             this.setDataDocText = setDataDocText;
 
-            var setDataSpeaker = function(results) {
+            var setDataSpeaker = function (results) {
                 Log.call(Log.l.trace, "Event.Controller.");
                 if (results && speakerLines && speakerLines.winControl) {
                     var speakerData = new WinJS.Binding.List([]);
-                    results.forEach(function(item, index) {
+                    results.forEach(function (item, index) {
                         if (item && item.SpeakerIDX > 0) {
                             speakerData.push({
                                 dataEvent: that.binding.dataEvent,
                                 dataDoc: {
-                                    ev_doc_mod: that.binding.dataDoc["ev_doc_mod" + item.SpeakerIDX] ? 
+                                    ev_doc_mod: that.binding.dataDoc["ev_doc_mod" + item.SpeakerIDX] ?
                                         that.binding.dataDoc["ev_doc_mod" + item.SpeakerIDX] : "images/user.svg"
                                 },
                                 dataDocText: {
@@ -213,7 +213,7 @@
                     }
                     Log.ret(Log.l.trace);
                 },
-                clickHome: function(event) {
+                clickHome: function (event) {
                     Log.call(Log.l.trace, "Event.Controller.");
                     Application.navigateById("home", event);
                     Log.ret(Log.l.trace);
@@ -291,7 +291,7 @@
                                         contentArea.scrollTop = offsetTop - (1.05 * offsetTop - offsetTop * offsetTop * offsetTop / 40000) / 2 + content.offsetTop - headerHeight;
                                         Log.print(Log.l.trace, "onScroll: scrollTop=" + scrollTop + " offsetTop=" + content.offsetTop + " => scrollTop=" + contentArea.scrollTop);
                                         that.noMomentumScroll = true;
-                                        WinJS.Promise.timeout(5).then(function() {
+                                        WinJS.Promise.timeout(5).then(function () {
                                             that.inSnap = false;
                                         });
                                     }
@@ -308,32 +308,32 @@
                     if (onScrollResizePromise) {
                         onScrollResizePromise.cancel();
                     }
-                    onScrollResizePromise = WinJS.Promise.timeout(20).then(function() {
+                    onScrollResizePromise = WinJS.Promise.timeout(20).then(function () {
                         var resizeEvent = document.createEvent('uievent');
                         resizeEvent.initEvent('resize', true, true);
                         window.dispatchEvent(resizeEvent);
                     });
                     Log.ret(Log.l.u1);
                 },
-                onTouchMove: function(event) {
+                onTouchMove: function (event) {
                     Log.call(Log.l.u1, "Event.Controller.");
                     var item = event && event.touches && event.touches.item && event.touches.item(0);
-                    Log.print(Log.l.trace, "onTouchMove: deltaX=" + ((item && item.pageX || that.cursorPos.x) - that.cursorPos.x) + 
+                    Log.print(Log.l.trace, "onTouchMove: deltaX=" + ((item && item.pageX || that.cursorPos.x) - that.cursorPos.x) +
                         " deltaY=" + ((item && item.pageY || that.cursorPos.y) - that.cursorPos.y));
                     if (event && that.noMomentumScroll) {
                         event.preventDefault();
-                        WinJS.Promise.timeout(20).then(function() {
+                        WinJS.Promise.timeout(20).then(function () {
                             that.noMomentumScroll = false;
                         });
                     }
                     Log.ret(Log.l.u1);
                 },
-                onWheel: function(event) {
+                onWheel: function (event) {
                     Log.call(Log.l.u1, "Event.Controller.");
                     Log.print(Log.l.trace, "onWheel: deltaMode=" + (event && event.deltaMode) + " deltaX=" + (event && event.deltaX) + " deltaY=" + (event && event.deltaY));
                     if (event && that.noMomentumScroll) {
                         event.preventDefault();
-                        WinJS.Promise.timeout(20).then(function() {
+                        WinJS.Promise.timeout(20).then(function () {
                             that.noMomentumScroll = false;
                         });
                     }
@@ -376,7 +376,7 @@
 
             // page command disable handler
             this.disableHandlers = {
-                clickBack: function() {
+                clickBack: function () {
                     if (WinJS.Navigation.canGoBack === true) {
                         return false;
                     } else {
@@ -385,9 +385,9 @@
                 }
             };
 
-            var getFragmentByName = function(fragmentName) {
+            var getFragmentByName = function (fragmentName) {
                 var fragmentController;
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
                     fragmentController = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath(fragmentName));
                     if (!fragmentController) {
                         var parentElement = pageElement.querySelector("#" + fragmentName + "host");
@@ -415,7 +415,7 @@
             }
             this.getFragmentByName = getFragmentByName;
 
-            var resultConverter = function(json) {
+            var resultConverter = function (json) {
                 Log.call(Log.l.trace, "Event.Controller.");
                 if (json && json.d && json.d.results) {
                     var result = json.d.results[0];
@@ -702,7 +702,7 @@
             }
             this.saveData = saveData;
 
-            var reSendEmail = function(complete, error) {
+            var reSendEmail = function (complete, error) {
                 Log.call(Log.l.trace, "Event.Controller.");
                 AppData.setErrorMsg(that.binding);
                 var userToken = AppData._persistentStates.registerData.userToken;
@@ -908,7 +908,11 @@
                                 recordedContentFragment.controller &&
                                 recordedContentFragment.controller.binding) {
                                 recordedContentFragment.controller.binding.showDelayContent = false;
-                                recordedContentFragment.controller.binding.loadData();
+                            }
+                            if (recordedContentFragment &&
+                                recordedContentFragment.controller &&
+                                typeof recordedContentFragment.controller.loadData() === "function") {
+                                recordedContentFragment.controller.loadData();
                             }
                         });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
@@ -1014,9 +1018,9 @@
                 }
             }
 
-            var adjustContainerSize = function() {
+            var adjustContainerSize = function () {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var ret = new WinJS.Promise.as().then(function() {
+                var ret = new WinJS.Promise.as().then(function () {
                     var headerHost = document.querySelector("#headerhost");
                     if (contentArea && headerHost) {
                         var stickyHeader = headerHost.querySelector(".sticky-header-pinned-fixed");
@@ -1044,7 +1048,7 @@
             that.adjustContainerSize = adjustContainerSize;
 
             // finally, load the data
-            that.processAll().then(function() {
+            that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");
                 return that.loadData();
             }).then(function () {
