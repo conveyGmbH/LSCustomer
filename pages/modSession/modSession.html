@@ -62,6 +62,10 @@
                         </div>
                     </div>
                     <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
+                    <!--Hier noch ein Text anzeigen wenn keine session geöffnet ist-->
+                    <div class="no-session-placeholder" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
+                        <span data-win-res="{textContent: ''}"></span>
+                    </div>
                     <div class="hero-footer">
 
                     </div>

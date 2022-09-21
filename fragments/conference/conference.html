@@ -14,290 +14,285 @@
     <script type="text/javascript" src="conference.js"></script>
 </head>
 <body class="win-type-body">
-<div class="conference fragment">
-    <div id="conferenceController" class="data-container">
-        <section aria-label="Main content" role="main" class="animationElement">
-            <div class="contentarea content-noscroll win-type-body">
-                <div class="doc-container">
-                <div id="conference" class="mediaview"
-                     data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
-                <!--Hier noch ein Text anzeigen wenn keine session geöffnet ist-->
-                <div class="no-session-placeholder" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
-                    <span data-win-res="{textContent: ''}"></span>
-                </div>
-                    <div class="presenter-button-container">
-                        <button id="presenterModeTiled" class="win-button"
-                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
-                            <div class="button-tip">
-                                <div class="presenter-mode-image" id="presenter_mode_tiled"></div>
-                                <div class="win-tooltip">
-                                    <div class="bubble-arrow"></div>
-                                    <div class="bubble-body">
-                                        <span data-win-res="{textContent: 'tooltip.presenterModeTiled'}"></span>
+    <div class="conference fragment">
+        <div id="conferenceController" class="data-container">
+            <section aria-label="Main content" role="main" class="animationElement">
+                <div class="contentarea content-noscroll win-type-body">
+                    <div class="doc-container">
+                        <div id="conference" class="mediaview"></div>
+                        <div class="presenter-button-container">
+                            <button id="presenterModeTiled" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                                <div class="button-tip">
+                                    <div class="presenter-mode-image" id="presenter_mode_tiled"></div>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.presenterModeTiled'}"></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </button>
-                        <button id="presenterModeFull" class="win-button"
-                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
-                            <div class="button-tip">
-                                <div class="presenter-mode-image" id="presenter_mode_full"></div>
-                                <div class="win-tooltip">
-                                    <div class="bubble-arrow"></div>
-                                    <div class="bubble-body">
-                                        <span data-win-res="{textContent: 'tooltip.presenterModeFull'}"></span>
+                            </button>
+                            <button id="presenterModeFull" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                                <div class="button-tip">
+                                    <div class="presenter-mode-image" id="presenter_mode_full"></div>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.presenterModeFull'}"></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </button>
-                        <button id="presenterModeSmall" class="win-button"
-                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
-                            <div class="button-tip">
+                            </button>
+                            <button id="presenterModeSmall" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                                <div class="button-tip">
+                                    <div class="presenter-mode-image" id="presenter_mode_small"></div>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.presenterModeSmall'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button id="videoListLeft" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                                <div class="button-tip">
+                                    <div class="presenter-mode-image" id="video_list_left"></div>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.videoListLeft'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button id="videoListRight" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                                <div class="button-tip">
+                                    <div class="presenter-mode-image" id="video_list_right"></div>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.videoListRight'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button id="videoListDefault" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
+                                <div class="button-tip">
+                                    <div class="presenter-mode-image" id="video_list_default"></div>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.videoListDefault'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button id="togglePresenterButtonContainer" class="container-close-button"
+                                    onclick="AppBar.handleEvent('click', 'togglePresenterButtonContainer', event)">
                                 <div class="presenter-mode-image" id="presenter_mode_small"></div>
-                                <div class="win-tooltip">
-                                    <div class="bubble-arrow"></div>
-                                    <div class="bubble-body">
-                                        <span data-win-res="{textContent: 'tooltip.presenterModeSmall'}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
-                        <button id="videoListLeft" class="win-button"
-                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
-                            <div class="button-tip">
-                                <div class="presenter-mode-image" id="video_list_left"></div>
-                                <div class="win-tooltip">
-                                    <div class="bubble-arrow"></div>
-                                    <div class="bubble-body">
-                                        <span data-win-res="{textContent: 'tooltip.videoListLeft'}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
-                        <button id="videoListRight" class="win-button"
-                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
-                            <div class="button-tip">
-                                <div class="presenter-mode-image" id="video_list_right"></div>
-                                <div class="win-tooltip">
-                                    <div class="bubble-arrow"></div>
-                                    <div class="bubble-body">
-                                        <span data-win-res="{textContent: 'tooltip.videoListRight'}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
-                        <button id="videoListDefault" class="win-button"
-                                onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)">
-                            <div class="button-tip">
-                                <div class="presenter-mode-image" id="video_list_default"></div>
-                                <div class="win-tooltip">
-                                    <div class="bubble-arrow"></div>
-                                    <div class="bubble-body">
-                                        <span data-win-res="{textContent: 'tooltip.videoListDefault'}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
-                        <button id="togglePresenterButtonContainer" class="container-close-button"
-                                onclick="AppBar.handleEvent('click', 'togglePresenterButtonContainer', event)">
-                            <div class="presenter-mode-image" id="presenter_mode_small"></div>
-                            <i class="container-close-icon icon-bbb-close"></i>
-                        </button>
-                    </div>
-                    <div class="show-selfie-toggle-container">
-                        <div id="showSelfie" data-win-control="WinJS.UI.ToggleSwitch"
-                             data-win-bind="winControl.checked: showSelfie; winControl.title: labelShowSelfie; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
-                             onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
-                    </div>
-                    <div class="show-presentation-toggle-container">
-                        <div id="showPresentation" data-win-control="WinJS.UI.ToggleSwitch"
-                             data-win-bind="winControl.checked: showPresentation; winControl.title: labelShowPresentation; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
-                             onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
-                    </div>
-                    <div class="show-videolist-toggle-container">
-                        <div id="showVideoList" data-win-control="WinJS.UI.ToggleSwitch"
-                             data-win-bind="winControl.checked: showVideoList; winControl.title: labelShowVideoList; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
-                             onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
-                    </div>
-                    <div class="show-chat-button-container">
-                        <button id="toggleChatButtonContainer" class="win-button"
-                                onclick="AppBar.handleEvent('click', 'clickShowChat', event)">
-                            <div class="button-tip">
-                                <span class="show-button">
-                                    <i class="show-button-image" id="message"></i>
-                                </span>
-                                <div class="win-tooltip">
-                                    <div class="bubble-arrow"></div>
-                                    <div class="bubble-body">
-                                        <span data-win-res="{textContent: 'tooltip.openChat'}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="emoji-button-container">
-                        <button id="toggleEmojiChooser" class="win-button"
-                                onclick="AppBar.handleEvent('click', 'clickToggleEmojiButton', event)">
-                            <div class="button-tip">
-                                <span class="emoji-button-icon"></span>
-                                <div class="win-tooltip">
-                                    <div class="bubble-arrow"></div>
-                                    <div class="bubble-body">
-                                        <span data-win-res="{textContent: 'tooltip.emojiChooserc'}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="video-list-template"
-                         data-win-control="WinJS.Binding.Template" style="display: none">
-                        <div data-win-bind="className: videoListItemClassName; name: key; style.display: enabled Binding.Converter.toDisplay">
-                            <video class="video-item" data-win-bind="srcObject: mediaStream" autoplay playsinline disablePictureInPicture></video>
-                            <div class="video-label">
-                                <span data-win-bind="textContent: userName"></span>
-                                <i data-win-bind="innerHTML: myselfLabel; style.display: myselfLabel Binding.Converter.toDisplay"></i>
-                            </div>
-                            <button class="win-button video-item-button"
-                                    onclick="AppBar.handleEvent('click', 'clickPinVideoButton', event)">
-                                <span class="pin"></span>
+                                <i class="container-close-icon icon-bbb-close"></i>
                             </button>
                         </div>
-                    </div>
-                    <div class="unpinned-video-list-container"
-                         data-win-bind="style.display: showUnpinnedVideoList Binding.Converter.toDisplay">
-                        <div id="unpinnedVideos"
-                             class="listview"
-                             data-win-control="WinJS.UI.ListView"
-                             data-win-options="{
+                        <div class="show-selfie-toggle-container">
+                            <div id="showSelfie" data-win-control="WinJS.UI.ToggleSwitch"
+                                 data-win-bind="winControl.checked: showSelfie; winControl.title: labelShowSelfie; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
+                                 onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
+                        </div>
+                        <div class="show-presentation-toggle-container">
+                            <div id="showPresentation" data-win-control="WinJS.UI.ToggleSwitch"
+                                 data-win-bind="winControl.checked: showPresentation; winControl.title: labelShowPresentation; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
+                                 onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
+                        </div>
+                        <div class="show-videolist-toggle-container">
+                            <div id="showVideoList" data-win-control="WinJS.UI.ToggleSwitch"
+                                 data-win-bind="winControl.checked: showVideoList; winControl.title: labelShowVideoList; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
+                                 onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
+                        </div>
+                        <div class="show-chat-button-container">
+                            <button id="toggleChatButtonContainer" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickShowChat', event)">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="message"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.openChat'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="emoji-button-container">
+                            <button id="toggleEmojiChooser" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickToggleEmojiButton', event)">
+                                <div class="button-tip">
+                                    <span class="emoji-button-icon"></span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.emojiChooserc'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="video-list-template"
+                             data-win-control="WinJS.Binding.Template" style="display: none">
+                            <div data-win-bind="className: videoListItemClassName; name: key; style.display: enabled Binding.Converter.toDisplay">
+                                <video class="video-item" data-win-bind="srcObject: mediaStream" autoplay playsinline disablePictureInPicture></video>
+                                <div class="video-label">
+                                    <span data-win-bind="textContent: userName"></span>
+                                    <i data-win-bind="innerHTML: myselfLabel; style.display: myselfLabel Binding.Converter.toDisplay"></i>
+                                </div>
+                                <button class="win-button video-item-button"
+                                        onclick="AppBar.handleEvent('click', 'clickPinVideoButton', event)">
+                                    <span class="pin"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="unpinned-video-list-container"
+                             data-win-bind="style.display: showUnpinnedVideoList Binding.Converter.toDisplay">
+                            <div id="unpinnedVideos"
+                                 class="listview"
+                                 data-win-control="WinJS.UI.ListView"
+                                 data-win-options="{
                             selectionMode: 'none',
                             tapBehavior: 'none',
                             layout : {type: WinJS.UI.GridLayout},
                             itemTemplate: select('.video-list-template')
                          }">
-                        </div>
-                    </div>
-                    <div id="emojiToolbar" class="tool-box box-bkg box-is-minimized"
-                     data-win-control="WinJS.UI.Repeater">
-                        <div class="win-button emoji"
-                             onclick="AppBar.handleEvent('click', 'clickEmoji', event)"
-                             data-win-bind="name: text">
-                            <div class="button-tip color-emoji">
-                                <div data-win-bind="className: className"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="chat-menu-container">
-                        <div id="chatMenu" class="chat-menu"
-                             data-win-control="WinJS.UI.Menu">
-                            <button data-win-control="WinJS.UI.MenuCommand"
-                                    data-win-options="{id: 'showNotification', icon: 'comment'}"
-                                    data-win-res="{winControl: {label: 'event.sendPostLabel'}}"
-                                    data-win-bind="winControl.disabled: dataMessage.locked"
-                                    onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
-                            <hr data-win-control="WinJS.UI.MenuCommand"
-                                data-win-options="{id:'separator',type:'separator'}" />
-                            <button data-win-control="WinJS.UI.MenuCommand"
-                                    data-win-options="{id: 'lockChatMessage', icon: 'blockcontact'}"
-                                    data-win-bind="winControl.disabled: dataMessage.locked"
-                                    data-win-res="{winControl: {label: 'event.lockPostLabel'}}"
-                                    onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
-                            <button data-win-control="WinJS.UI.MenuCommand"
-                                    data-win-options="{id: 'unlockChatMessage', icon: 'contactinfo'}"
-                                    data-win-bind="winControl.disabled: dataMessage.locked Binding.Converter.not"
-                                    data-win-res="{winControl: {label: 'event.unlockPostLabel'}}"
-                                    onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
-                        </div>
-                    </div>
-                    <div class="post-notification-container">
-                        <div id="postNotificationPopup" class="post-notification-popup"
-                             data-win-control="WinJS.UI.Flyout">
-                            <div class="notification-title">
-                                <span data-win-res="{textContent: 'event.sendNotification'}"></span>
-                            </div>
-                            <div class="notification-content">
-                                <div class="notification-meta">
-                                    <div class="notification-name">
-                                        <span data-win-bind="textContent: dataMessage.name"></span>
-                                    </div>
-                                    <div class="notification-time">
-                                        <span data-win-bind="textContent: dataMessage.time"></span>
-                                    </div>
-                                </div>
-                                <div class="notification-text">
-                                    <span data-win-bind="textContent: dataMessage.text"></span>
+                        <div id="emojiToolbar" class="tool-box box-bkg box-is-minimized"
+                             data-win-control="WinJS.UI.Repeater">
+                            <div class="win-button emoji"
+                                 onclick="AppBar.handleEvent('click', 'clickEmoji', event)"
+                                 data-win-bind="name: text">
+                                <div class="button-tip color-emoji">
+                                    <div data-win-bind="className: className"></div>
                                 </div>
                             </div>
-                            <div class="notification-action">
-                                <button class="win-button"
-                                        onclick="AppBar.handleEvent('click', 'clickSendNotification', event)">
-                                    <span data-win-res="{textContent: 'flyout.ok'}"></span>
-                                </button>
-                                <button class="win-button"
-                                        onclick="AppBar.handleEvent('click', 'clickCancelNotification', event)">
-                                    <span data-win-res="{textContent: 'flyout.cancel'}"></span>
-                                </button>
+                        </div>
+                        <div class="chat-menu-container">
+                            <div id="chatMenu" class="chat-menu"
+                                 data-win-control="WinJS.UI.Menu">
+                                <button data-win-control="WinJS.UI.MenuCommand"
+                                        data-win-options="{id: 'showNotification', icon: 'comment'}"
+                                        data-win-res="{winControl: {label: 'event.sendPostLabel'}}"
+                                        data-win-bind="winControl.disabled: dataMessage.locked"
+                                        onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
+                                <hr data-win-control="WinJS.UI.MenuCommand"
+                                    data-win-options="{id:'separator',type:'separator'}" />
+                                <button data-win-control="WinJS.UI.MenuCommand"
+                                        data-win-options="{id: 'lockChatMessage', icon: 'blockcontact'}"
+                                        data-win-bind="winControl.disabled: dataMessage.locked"
+                                        data-win-res="{winControl: {label: 'event.lockPostLabel'}}"
+                                        onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
+                                <button data-win-control="WinJS.UI.MenuCommand"
+                                        data-win-options="{id: 'unlockChatMessage', icon: 'contactinfo'}"
+                                        data-win-bind="winControl.disabled: dataMessage.locked Binding.Converter.not"
+                                        data-win-res="{winControl: {label: 'event.unlockPostLabel'}}"
+                                        onclick="AppBar.handleEvent('click', 'clickChatMenuCommand', event)"></button>
                             </div>
                         </div>
-                    </div>
-                    <div class="notification-container">
-                        <div id="notificationPopup" class="notification-popup"
-                             onclick="AppBar.handleEvent('click', 'clickNotification', event)">
-                            <div class="notification-content">
-                                <div class="notification-meta">
-                                    <div class="notification-name">
-                                        <span data-win-bind="textContent: dataNotification.name"></span>
+                        <div class="post-notification-container">
+                            <div id="postNotificationPopup" class="post-notification-popup"
+                                 data-win-control="WinJS.UI.Flyout">
+                                <div class="notification-title">
+                                    <span data-win-res="{textContent: 'event.sendNotification'}"></span>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-meta">
+                                        <div class="notification-name">
+                                            <span data-win-bind="textContent: dataMessage.name"></span>
+                                        </div>
+                                        <div class="notification-time">
+                                            <span data-win-bind="textContent: dataMessage.time"></span>
+                                        </div>
                                     </div>
-                                    <div class="notification-time">
-                                        <span data-win-bind="textContent: dataNotification.time"></span>
+                                    <div class="notification-text">
+                                        <span data-win-bind="textContent: dataMessage.text"></span>
                                     </div>
                                 </div>
-                                <div class="notification-text">
-                                    <span data-win-bind="textContent: dataNotification.text"></span>
+                                <div class="notification-action">
+                                    <button class="win-button"
+                                            onclick="AppBar.handleEvent('click', 'clickSendNotification', event)">
+                                        <span data-win-res="{textContent: 'flyout.ok'}"></span>
+                                    </button>
+                                    <button class="win-button"
+                                            onclick="AppBar.handleEvent('click', 'clickCancelNotification', event)">
+                                        <span data-win-res="{textContent: 'flyout.cancel'}"></span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="poll-question-container">
-                        <div class="poll-question-and-answers">
-                            <select id="pollQuestion"
-                                    class="poll-question win-dropdown"
-                                    data-win-control="WinJS.UI.Repeater"
-                                    onchange="AppBar.handleEvent('change', 'changePollQuestion', event)">
-                                <option data-win-bind="value: QuestionID; textContent: QuestionText"></option>
-                            </select>
-                            <div class="selected-answers">
-                                <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.Answer01Text Binding.Converter.toDisplay">
-                                    <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.Answer01Text"></span>
+                        <div class="notification-container">
+                            <div id="notificationPopup" class="notification-popup"
+                                 onclick="AppBar.handleEvent('click', 'clickNotification', event)">
+                                <div class="notification-content">
+                                    <div class="notification-meta">
+                                        <div class="notification-name">
+                                            <span data-win-bind="textContent: dataNotification.name"></span>
+                                        </div>
+                                        <div class="notification-time">
+                                            <span data-win-bind="textContent: dataNotification.time"></span>
+                                        </div>
+                                    </div>
+                                    <div class="notification-text">
+                                        <span data-win-bind="textContent: dataNotification.text"></span>
+                                    </div>
                                 </div>
-                                <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.Answer02Text Binding.Converter.toDisplay">
-                                    <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.Answer02Text"></span>
-                                </div>
-                                <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.Answer03Text Binding.Converter.toDisplay">
-                                    <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.Answer03Text"></span>
-                                </div>
-                                <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.Answer04Text Binding.Converter.toDisplay">
-                                    <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.Answer04Text"></span>
-                                </div>
-                                <div class="selected-answer"
-                                     data-win-bind="style.display: dataQuestionnaire.Answer05Text Binding.Converter.toDisplay">
-                                    <div class="answer-counter"><span></span></div>
-                                    <span data-win-bind="textContent: dataQuestionnaire.Answer05Text"></span>
+                            </div>
+                        </div>
+                        <div class="poll-question-container">
+                            <div class="poll-question-and-answers">
+                                <select id="pollQuestion"
+                                        class="poll-question win-dropdown"
+                                        data-win-control="WinJS.UI.Repeater"
+                                        onchange="AppBar.handleEvent('change', 'changePollQuestion', event)">
+                                    <option data-win-bind="value: QuestionID; textContent: QuestionText"></option>
+                                </select>
+                                <div class="selected-answers">
+                                    <div class="selected-answer"
+                                         data-win-bind="style.display: dataQuestionnaire.Answer01Text Binding.Converter.toDisplay">
+                                        <div class="answer-counter"><span></span></div>
+                                        <span data-win-bind="textContent: dataQuestionnaire.Answer01Text"></span>
+                                    </div>
+                                    <div class="selected-answer"
+                                         data-win-bind="style.display: dataQuestionnaire.Answer02Text Binding.Converter.toDisplay">
+                                        <div class="answer-counter"><span></span></div>
+                                        <span data-win-bind="textContent: dataQuestionnaire.Answer02Text"></span>
+                                    </div>
+                                    <div class="selected-answer"
+                                         data-win-bind="style.display: dataQuestionnaire.Answer03Text Binding.Converter.toDisplay">
+                                        <div class="answer-counter"><span></span></div>
+                                        <span data-win-bind="textContent: dataQuestionnaire.Answer03Text"></span>
+                                    </div>
+                                    <div class="selected-answer"
+                                         data-win-bind="style.display: dataQuestionnaire.Answer04Text Binding.Converter.toDisplay">
+                                        <div class="answer-counter"><span></span></div>
+                                        <span data-win-bind="textContent: dataQuestionnaire.Answer04Text"></span>
+                                    </div>
+                                    <div class="selected-answer"
+                                         data-win-bind="style.display: dataQuestionnaire.Answer05Text Binding.Converter.toDisplay">
+                                        <div class="answer-counter"><span></span></div>
+                                        <span data-win-bind="textContent: dataQuestionnaire.Answer05Text"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
-</div>
 </body>
 </html>
