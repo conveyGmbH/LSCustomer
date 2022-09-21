@@ -84,7 +84,7 @@
     "modSession.closeSessionEvent"   : "Termina sessione",
     "modSession.labelCloseSession": "Vuoi terminare la sessione?",
     "modSession.labelCloseBeforeBegin": "La sessione non è ancora iniziata!",
-    "modSessiont.messageSessionClosed": "Questa sessione è terminata. Torna alla pagina di riepilogo.",
+    "modSession.messageSessionClosed": "Questa sessione è terminata. Torna alla pagina di riepilogo.",
 
     "home.moreEvents": "Tutti gli eventi"
 }
