@@ -5,6 +5,7 @@
     "label.home"            : "Start",
     "label.events"          : "Serie",
     "label.event"           : "Evento",
+    "label.overview"        : "Panoramica",
     "label.on"	            : "On",
     "label.off"	            : "Off",
     "label.me"              : "Io",
@@ -81,5 +82,9 @@
 
     "modSession.logOffEvent"   : "Disconnetti",
     "modSession.closeSessionEvent"   : "Termina sessione",
-    "modSession.labelCloseSession": "Vuoi terminare la sessione?"
+    "modSession.labelCloseSession": "Vuoi terminare la sessione?",
+    "modSession.labelCloseBeforeBegin": "La sessione non è ancora iniziata!",
+    "modSessiont.messageSessionClosed": "Questa sessione è terminata. Torna alla pagina di riepilogo.",
+
+    "home.moreEvents": "Tutti gli eventi"
 }

@@ -5,6 +5,7 @@
     "label.home"            : "Démarrer",
     "label.events"          : "Série",
     "label.event"           : "Événement",
+    "label.overview"        : "Aperçu",
     "label.on"	            : "On",
     "label.off"	            : "Off",
     "label.me"              : "Moi",
@@ -81,5 +82,9 @@
 
     "modSession.logOffEvent"   : "Se déconnecter",
     "modSession.closeSessionEvent"   : "Terminer la session",
-    "modSession.labelCloseSession": "Voulez-vous terminer la session?"
+    "modSession.labelCloseSession": "Voulez-vous terminer la session?",
+    "modSession.labelCloseBeforeBegin": "La session n'a pas encore démarré !",
+    "modSessiont.messageSessionClosed": "Cette session est terminée. Veuillez revenir à la page de résumé.",
+	
+    "home.moreEvents" : "Alle Events"
 }

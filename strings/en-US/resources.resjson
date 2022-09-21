@@ -83,6 +83,8 @@
     "modSession.logOffEvent"   : "Log off",
     "modSession.closeSessionEvent"   : "End session",
     "modSession.labelCloseSession": "Would you like to end the session?",
+    "modSession.labelCloseBeforeBegin": "Session has not started yet!",
+    "modSessiont.messageSessionClosed": "This session has ended. Please navigate back to the summary page.",
 
 	"home.moreEvents" : "More Events"
 }

@@ -84,6 +84,7 @@
     "modSession.closeSessionEvent"   : "Session beenden",
     "modSession.labelCloseSession"  : "Möchten Sie die Session beenden?",
 	"modSession.labelCloseBeforeBegin" : "Session hat noch nicht begonnen!",
+	"modSessiont.messageSessionClosed" : "Dieses Session ist zu Ende. Bitte navigieren Sie zurück zur Überblicksseite.",
 
 	"home.moreEvents" : "Alle Events"
 }			
