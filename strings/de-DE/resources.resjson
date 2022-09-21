@@ -83,6 +83,7 @@
 	"modSession.logOffEvent"   : "Abmelden",
     "modSession.closeSessionEvent"   : "Session beenden",
     "modSession.labelCloseSession"  : "Möchten Sie die Session beenden?",
+	"modSession.labelCloseBeforeBegin" : "Session hat noch nicht begonnen!",
 
 	"home.moreEvents" : "Alle Events"
 }			

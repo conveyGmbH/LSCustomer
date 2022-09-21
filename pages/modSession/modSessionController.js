@@ -304,23 +304,10 @@
                     var now = new Date().getTime();
                     var timeleft = dateBegin - now;
                     //var timeleft2 = dateEnd - now;
-                    var warning = getResourceText("modSession.labelCloseSession");
+                    var warning = getResourceText("modSession.labelCloseBeforeBegin");
                     if (timeleft > 0) {
                         // dateBegin in future
-                        confirm(warning, function (result) {
-                            if (result) {
-                                that.updateFragment().then(function (conferenceFragment) {
-                                    // call sendCommandMessage 
-                                    // Abfrage nach Enddatum ob kleiner als heutige datum 
-                                    if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
-                                        conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
-                                    }
-                                });
-                                
-                            } else {
-                                Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
-                            }
-                        });
+                        alert(warning);
                     } else {
                         Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
                         var confirmTitle = getResourceText("modSession.labelCloseSession") + " ";
