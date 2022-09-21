@@ -861,20 +861,7 @@
                                 that.binding.showCountdown = false;
                                 that.binding.showConference = true;
                                 that.binding.showTeaser = false;
-                                return that.getFragmentByName("conference").then(function(conferenceFragment) {
-                                    conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
-                                        //alert("sessionEndRequested received: " + (param ? param : ""));
-                                        // bzw. irgendwas sinnvolles machen wenn man das Kommando "sessionEndRequested" empfängt...
-                                        // call PRC_RegisterContact?!
-                                        // Wenn Enddatum erreicht dann loaddata  sonst navigiere nach home (Mantis#6916)
-                                        var endDate = getDateObject(that.binding.dataEvent.LiveEndDatum);
-                                        var now = new Date().getTime();
-                                        var timeleft = endDate - now;
-                                        if (timeleft < 0) {
-                                            that.loadData();
-                                        }
-                                    });
-                                });
+                                return that.getFragmentByName("conference");
                             }
                         }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 15) {
