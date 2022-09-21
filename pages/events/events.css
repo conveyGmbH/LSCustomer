@@ -96,7 +96,7 @@
     width: 20%;
     height: auto;
     margin: 15px 0 0 0;
-    padding:5px;
+    padding: 5px;
     text-align: center;
 }
 
@@ -112,7 +112,7 @@
     line-height: 14px;
     letter-spacing: 0.04em;
     text-transform: none;
-color: var(--e-global-color-text);
+    color: var(--e-global-color-text);
 }
 
 .events .button-tip {
@@ -223,7 +223,6 @@ color: var(--e-global-color-text);
     font-size: 14px;
     line-height: 14px;
     letter-spacing: 0.04em;
-
 }
 
 .events .event-item .event-comment {
@@ -365,5 +364,3 @@ color: var(--e-global-color-text);
     margin: 5px 0;
     padding: 5px 0;
 }
-
-

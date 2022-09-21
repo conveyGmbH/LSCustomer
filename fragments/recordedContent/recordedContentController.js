@@ -1067,6 +1067,8 @@ var __meteor_runtime_config__;
                         }
                         that.registerObserver();
                     }
+                }).then(function () {
+                    recordedContent.scrollIntoView();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -1075,14 +1077,6 @@ var __meteor_runtime_config__;
 
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
-                if (AppData._persistentStates.registerData.confirmStatusID === 20) {
-                    //if (!that.binding.showDelayContent && recordedContent) {
-                    recordedContent.scrollIntoView();
-                    //}
-                    //return that.loadData();
-                } /*else {
-                    return WinJS.Promise.as();
-                }*/
             }).then(function () {
                 Log.print(Log.l.trace, "Data loaded");
             });

@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <!--sessionID?-->
-                        <div class="closeSession-container" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
+                        <div class="closeSession-container" data-win-bind="style.display: showMessageSessionClosed Binding.Converter.toDisplayNone">
                             <div class="field_line_full">
                                 <div id="closeSessionButton"
                                      class="win-link"
@@ -63,7 +63,7 @@
                     </div>
                     <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
                     <!--Hier noch ein Text anzeigen wenn keine session geöffnet ist-->
-                    <div class="no-session-placeholder" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
+                    <div class="no-session-placeholder win-type-body" data-win-bind="style.display: showMessageSessionClosed Binding.Converter.toDisplay">
                         <span data-win-res="{textContent: 'modSession.messageSessionClosed'}"></span>
                     </div>
                     <div class="hero-footer">

@@ -23,6 +23,7 @@
 
             Application.Controller.apply(this, [pageElement, {
                 showConference: false,
+                showMessageSessionClosed: false,
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
@@ -331,6 +332,7 @@
                                             conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
                                         }
                                         that.binding.showConference = false;
+                                        that.binding.showMessageSessionClosed = true;
                                     });
                                     Log.ret(Log.l.trace);
                                 }, function (error) {

@@ -17,7 +17,8 @@
 }
 
 .modSession .hero-header,
-.modSession .content-container {
+.modSession .content-container,
+.modSession .no-session-placeholder {
     margin-left: var(--max-content-margin-left);
     width: var(--max-content-width);
     padding: 15px;
@@ -171,7 +172,8 @@
     use: .view-size-biggest
 */
 .view-size-biggest .modSession .hero-header,
-.view-size-biggest .modSession .content-container {
+.view-size-biggest .modSession .content-container,
+.view-size-biggest .modSession .no-session-placeholder {
     margin-left: 20px;
     width: calc(100% - 70px);
     padding: 15px;
@@ -192,7 +194,8 @@
     use: .view-size-medium
 */
 .view-size-medium .modSession .hero-header,
-.view-size-medium .modSession .content-container {
+.view-size-medium .modSession .content-container,
+.view-size-medium .modSession .no-session-placeholder {
     margin-left: 5px;
     width: calc(100% - 30px);
     padding: 10px;
@@ -230,7 +233,8 @@
     use: .view-size-small
 */
 .view-size-small .modSession .hero-header,
-.view-size-small .modSession .content-container {
+.view-size-small .modSession .content-container,
+.view-size.small .modSession .no-session-placeholder {
     margin-left: 0;
     width: calc(100% - 20px);
 }
