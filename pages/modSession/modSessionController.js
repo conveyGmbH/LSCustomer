@@ -307,8 +307,22 @@
                     //var timeleft2 = dateEnd - now;
                     var warning = getResourceText("modSession.labelCloseBeforeBegin");
                     if (timeleft > 0) {
-                        // dateBegin in future
-                        alert(warning);
+                        // dateBegin in future -> wenn es sich um eine Testsession handelt 
+                        confirm(warning, function (result) {
+                            if (result) {
+                                that.updateFragment().then(function (conferenceFragment) {
+                                    // call sendCommandMessage 
+                                    // Abfrage nach Enddatum ob kleiner als heutige datum 
+                                    if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
+                                        conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
+                                    }
+                                    that.binding.showConference = false;
+                                    that.binding.showMessageSessionClosed = true;
+                                });
+                            } else {
+                                Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
+                            }
+                        }, closeSessionButton);
                     } else {
                         Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
                         var confirmTitle = getResourceText("modSession.labelCloseSession") + " ";
