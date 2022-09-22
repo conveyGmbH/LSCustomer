@@ -68,3 +68,7 @@
     .teaser .ITbackground { margin: 0 !important;}
 }
 
+.view-size-small .teaser .ITbackground {
+    margin: 0;
+}
+

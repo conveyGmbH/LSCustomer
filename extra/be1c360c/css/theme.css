@@ -282,17 +282,6 @@
     margin-top: 10% !important;
 }
 
-.events button.win-button,
-.events button.win-button:focus,
-.event button.win-button,
-.event button.win-button:focus {
-    border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-    -webkit-border-radius: 0 !important;
-    outline-style: none;
-
-}
-
 .events button#homeButton {
     font-family: var(--font-family-default) !important;
     position: sticky !important;
@@ -375,9 +364,8 @@
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) {
-    border-color: var(--the7-additional-menu-elements-color, #006b8a);
+    border-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
-    border-radius: 0 !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
@@ -388,14 +376,16 @@
     border-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     cursor: pointer;
+    border-radius: 40px !important;
+    -webkit-border-radius: 40px !important;
+    -moz-border-radius: 40px !important;
 }
 
 .register #loginButton, .register #re_registerEvent {
-    border-radius: 0 !important;
     border-style: solid;
     border-width: 2px;
-    border-color: var(--the7-additional-menu-elements-color, #006b8a);
-    background-color: var(--the7-additional-menu-elements-color, #006b8a);
+    border-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
+    background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
 .register #loginButton > div > span, .register #re_registerEvent > span {
@@ -410,6 +400,10 @@
 
 .register .centerarea .registerEmail {
     padding-top: 10px !important;
+}
+
+.register .register_title {
+    display: none !important;
 }
 
 .event .logOff-container {
@@ -537,6 +531,27 @@ section.elementor-inner-section > div {
     }
 }
 
+/**margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1500px**/
+@media (min-width: 1300px) and (max-width: 1490px) {
+    .event .content-grid {
+        width: var(--max-content-width) !important;
+        margin-left: var(--max-content-margin-left) !important;
+    }
+
+    .event .hero-header, .event .intersection{
+        margin-left: 0 !important;
+    }
+    .teaser .ITbackground {
+        margin: 0 20px 0 0 !important;
+    }
+
+    .event .section-3 {
+        padding-left: 0 !important;
+    }
+
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1299px 
     @media (max-width:1299px) {
@@ -582,7 +597,7 @@ section.elementor-inner-section > div {
 }
 .view-size-bigger .event .homeButton {
     width: calc(100% - 20px - 20px) !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
 }
 .view-size-bigger .home .content-header,
 .view-size-bigger .events .content-header,
@@ -603,6 +618,7 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .event .logOff-container {
     width: calc(100% - 20px - 20px) !important;
+    margin-left: 0 !important;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -629,10 +645,14 @@ section.elementor-inner-section > div {
 }
 
 .view-size-medium .home .content-header,
-.view-size-medium .events .content-header,
-.view-size-medium .event .content-header {
+.view-size-medium .events .content-header {
     width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
+}
+
+.view-size-medium .event .content-header {
+    width: calc(100% - 20px - 20px) !important;
+    margin: 0 !important;
 }
 
 .view-size-medium .home .group-header {
