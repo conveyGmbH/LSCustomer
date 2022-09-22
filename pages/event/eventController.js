@@ -430,7 +430,7 @@
                         AppData._persistentStates.registerData.Email = result.EMail;
                         that.binding.registerEmail = result.EMail;
                     }
-                    if (result.ConferenceLink && result.ConferenceLink !== that.binding.conferenceLink) {
+                    if (result.ConferenceLink !== that.binding.conferenceLink) {
                         that.binding.conferenceLink = result.ConferenceLink;
                         that.binding.recordedLink = null;
                     }
