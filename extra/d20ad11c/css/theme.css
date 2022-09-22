@@ -214,6 +214,10 @@
     background-color: inherit;
 }
 
+.register .register_title {
+    display: none;
+}
+
 .register #loginButton, .register #re_registerEvent, .text-lightcolor.win-button {
     border-radius: 30px;
     -webkit-border-radius: 30px;
