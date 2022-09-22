@@ -402,6 +402,10 @@
     padding-top: 10px !important;
 }
 
+.register .register_title {
+    display: none !important;
+}
+
 .event .logOff-container {
     float: none !important;
     height: auto;
@@ -534,6 +538,18 @@ section.elementor-inner-section > div {
         width: var(--max-content-width) !important;
         margin-left: var(--max-content-margin-left) !important;
     }
+
+    .event .hero-header, .event .intersection{
+        margin-left: 0 !important;
+    }
+    .teaser .ITbackground {
+        margin: 0 20px 0 0 !important;
+    }
+
+    .event .section-3 {
+        padding-left: 0 !important;
+    }
+
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -581,7 +597,7 @@ section.elementor-inner-section > div {
 }
 .view-size-bigger .event .homeButton {
     width: calc(100% - 20px - 20px) !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
 }
 .view-size-bigger .home .content-header,
 .view-size-bigger .events .content-header,
@@ -602,6 +618,7 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .event .logOff-container {
     width: calc(100% - 20px - 20px) !important;
+    margin-left: 0 !important;
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -628,10 +645,14 @@ section.elementor-inner-section > div {
 }
 
 .view-size-medium .home .content-header,
-.view-size-medium .events .content-header,
-.view-size-medium .event .content-header {
+.view-size-medium .events .content-header {
     width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
+}
+
+.view-size-medium .event .content-header {
+    width: calc(100% - 20px - 20px) !important;
+    margin: 0 !important;
 }
 
 .view-size-medium .home .group-header {
