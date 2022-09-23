@@ -107,6 +107,7 @@
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
     border-color: var(--border-color);
+	height: initial !important;
 }
 .home .win-listview .win-groupheadercontainer/*.group-expanded*/ {
     border-width: 1px 1px 0 1px;
@@ -348,7 +349,7 @@
     width: auto;
     transform: translate3d(0,0,0);
     transition-property: box-shadow,transform,opacity;
-    transition-duration: 200ms;
+    transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
     border: 1px transparent;
     border-radius: 12px;
@@ -366,9 +367,6 @@
 .home .win-listview .win-gridlayout .win-container:focus {
     transform: translate3d(0,-2px,0);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-    transition-property: box-shadow,transform;
-    transition-duration: 400ms;
-    transition-timing-function: cubic-bezier(.16,1,.29,.99);
 }
 
 html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
