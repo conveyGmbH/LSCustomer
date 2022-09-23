@@ -36,6 +36,7 @@
                 count: 0
             }, commandList, false, Events.eventView, null, listView]);
 
+            var adjustContainerSizePromise = null;
             var that = this;
 
             this.dispose = function() {
@@ -263,7 +264,7 @@
                         AppData.setErrorMsg(that.binding, errorResponse);
                     }, eventIds);
                 }).then(function() {
-                    return that.adjustContainerSize();
+                    that.adjustContainerSize();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -273,7 +274,10 @@
             var adjustContainerSize = function() {
                 Log.call(Log.l.trace, "Events.Controller.");
                 var i;
-                var ret = new WinJS.Promise.as().then(function() {
+                if (adjustContainerSizePromise) {
+                    adjustContainerSizePromise.cancel();
+                }
+                adjustContainerSizePromise = WinJS.Promise.timeout(50).then(function() {
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost) {
