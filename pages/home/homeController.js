@@ -522,11 +522,11 @@
                                     var winGroupHeaderContainer = winElement;
                                     if (winGroupHeaderContainer && winGroupHeaderContainer.style) {
                                         winGroupHeaderContainer.style.width = clientWidth.toString() + "px";
-                                        //var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
-                                        //if (winGroupHeader) {
-                                        //    var heightGroupHeader = Math.floor(winGroupHeader.clientHeight + 60);
-                                        //    winGroupHeaderContainer.style.height = heightGroupHeader.toString() + "px";
-                                        //}
+                                        var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
+                                        if (winGroupHeader) {
+                                            var heightGroupHeader = Math.floor(winGroupHeader.clientHeight + 60);
+                                            winGroupHeaderContainer.style.height = heightGroupHeader.toString() + "px";
+                                        }
                                         var expanderButton = winGroupHeaderContainer.querySelector(".expander-button");
                                         if (expanderButton) {
                                             var seriesId = parseInt(expanderButton.seriesId);
