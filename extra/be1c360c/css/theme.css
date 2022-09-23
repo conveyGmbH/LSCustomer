@@ -531,6 +531,13 @@ section.elementor-inner-section > div {
     }
 }
 
+/**contentarea is more than 1500px**/
+@media (min-width: 1500px) {
+    .event .section-3, .event .speakerblock {
+        padding-left: 0 !important;
+    }
+}
+
 /**margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1500px**/
 @media (min-width: 1300px) and (max-width: 1490px) {
