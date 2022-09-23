@@ -156,7 +156,7 @@
 
 
 .events .win-listview .win-gridlayout .win-container {
-    margin: 15px;
+    margin: 15px 15px 15px 1px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
     border: 1px transparent;
     border-radius: 12px;
@@ -169,6 +169,21 @@
     transition-property: box-shadow,transform;
     transition-duration: 200ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+
+    /* Deep Shadow */
+
+    filter: drop-shadow(0px 0px 32px rgba(0, 0, 0, 0.04)) drop-shadow(0px 16px 24px rgba(0, 0, 0, 0.04));
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
 }
 
 .events .win-listview .win-gridlayout .win-container:hover,
@@ -191,7 +206,7 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 180px;
+    height: 200px;
     padding: 0;
     background-color: var(--e-global-color-buttontext);
     overflow: hidden;
@@ -214,7 +229,7 @@
     display: inline-block;
     position: absolute;
     left: 0;
-    top: 180px;
+    top: 200px;
     width: 100%;
     height: calc(100% - 180px);
     padding-left: 10px;
@@ -227,6 +242,7 @@
     font-size: 22px;
     line-height: 28px;
     padding: 15px 0 5px 0;
+    min-height: 40px;
 }
 
 .events .event-item .event-subtitle {
