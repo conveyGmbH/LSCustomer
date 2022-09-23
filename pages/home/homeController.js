@@ -392,6 +392,7 @@
             }
             this.loadEventText = loadEventText;
 
+            var bSeriesTextLoaded = false;
             var loadSeriesText = function (seriesIds) {
                 var i, j, dataGroupText;
                 var seriesId = 0;
@@ -474,7 +475,10 @@
                     },
                     null,
                     seriesIds);
+                }).then(function () {
+                    return WinJS.Promise.timeout(150);
                 }).then(function() {
+					bSeriesTextLoaded = true;
                     that.adjustContainerSize();
                 });
                 Log.ret(Log.l.trace);
@@ -488,7 +492,7 @@
                 if (adjustContainerSizePromise) {
                     adjustContainerSizePromise.cancel();
                 }
-                adjustContainerSizePromise = WinJS.Promise.timeout(150).then(function() {
+                adjustContainerSizePromise = WinJS.Promise.timeout(50).then(function() {
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost) {
@@ -517,7 +521,7 @@
                             }
                             var tileWidth = Math.floor(clientWidth / tilesPerRow - 2*margin);
 
-                            var winElements = listView.querySelectorAll(".win-groupheadercontainer, .win-itemscontainer, .event-item");
+                            var winElements = listView.querySelectorAll(".win-groupheadercontainer, .win-itemscontainer, .event-item" + (bSeriesTextLoaded ? ", .win-container" : ""));
                             var expandFlag = null;
                             for (i = 0; i < winElements.length; i++) {
                                 var winElement = winElements[i];
@@ -562,7 +566,6 @@
                                     var winItemsContainer = winElement;
                                     if (winItemsContainer && winItemsContainer.style && winItemsContainer.clientWidth !== clientWidth) {
                                         winItemsContainer.style.width = clientWidth.toString() + "px";
-                                        winItemsContainer.style.visibility = true;
                                     }
 									if (typeof expandFlag === "boolean") {
 										if (expandFlag) {
@@ -582,6 +585,10 @@
 											//	WinJS.Utilities.removeClass(winItemsContainer, "group-expanded");
 											//}
 										}
+									}
+                                } else if (WinJS.Utilities.hasClass(winElement, "win-container")) {
+									if (!WinJS.Utilities.hasClass(winElement, "loading-complete")) {
+										WinJS.Utilities.addClass(winElement, "loading-complete");
 									}
                                 } else { // event-item
                                     var eventItem = winElement;
