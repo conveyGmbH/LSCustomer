@@ -242,6 +242,10 @@
     color: var(--e-global-color-buttontext);
 }
 
+.home .expander-container {
+    padding-top: 5px !important;
+}
+
 .home .expander-button {
     border: 2px solid var(--the7-accent-color) !important;
     font-family: var(--font-family-default) !important;
@@ -251,7 +255,7 @@
 .home .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
     width: 100% !important;
-    padding: 0 0 40px 0 !important;
+    padding: 0 !important;
 }
 
 .home .win-listview .win-vertical .win-gridlayout.win-surface,
@@ -263,7 +267,7 @@
 
 
 .home .win-listview .win-groupheader {
-    padding: 5px 0 0 35px !important;
+    padding: 0 0 0 35px !important;
 }
 
 .events .list-footer {
