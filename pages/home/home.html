@@ -77,7 +77,8 @@
                     <div class="event-list-template"
                          data-win-control="WinJS.Binding.Template" style="display: none">
                         <div class="event-item">
-                            <div class="event-image-container">
+                            <div class="event-image-container"
+                                 data-win-bind="style.visibility: dataDoc.ov_doc_event Binding.Converter.toVisibility">
                                 <img data-win-bind="src: dataDoc.ov_doc_event; alt: dataDocText.ov_doc_event_alt; title: dataDocText.ov_doc_event_title; longdesc: dataDocText.ov_doc_event_descr" />
                             </div>
                             <div class="event-detail">
