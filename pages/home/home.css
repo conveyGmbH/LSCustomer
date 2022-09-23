@@ -44,7 +44,7 @@
     padding: 0 0 30px 0;
 }
 
-.home .win-listview .win-vertical .win-itemscontainer/*.group-expanded*/ {
+.home .win-listview .win-vertical .win-itemscontainer:not(.group-collapsed) {
     height: auto !important;
     border-color: var(--border-color);
     border-width: 0 1px 1px 1px;
