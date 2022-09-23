@@ -492,7 +492,7 @@
                 if (adjustContainerSizePromise) {
                     adjustContainerSizePromise.cancel();
                 }
-                adjustContainerSizePromise = WinJS.Promise.timeout(50).then(function() {
+                adjustContainerSizePromise = new WinJS.Promise.as().then(function() {
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost) {
