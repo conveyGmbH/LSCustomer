@@ -523,7 +523,6 @@
 
                             var winElements = listView.querySelectorAll(".win-groupheadercontainer, .win-itemscontainer, .event-item" + (bSeriesTextLoaded ? ", .win-container" : ""));
                             var expandFlag = null;
-                            var animationElements = [];
                             for (i = 0; i < winElements.length; i++) {
                                 var winElement = winElements[i];
                                 if (WinJS.Utilities.hasClass(winElement, "win-groupheadercontainer")) {
@@ -589,8 +588,7 @@
 									}
                                 } else if (WinJS.Utilities.hasClass(winElement, "win-container")) {
 									if (!WinJS.Utilities.hasClass(winElement, "loading-complete")) {
-										WinJS.Utilities.addClass(winElement, "loading-complete");
-                                        animationElements.push(winElement);
+							            WinJS.Utilities.addClass(winElement, "loading-complete");
                                     }
                                 } else { // event-item
                                     var eventItem = winElement;
@@ -598,9 +596,6 @@
                                         eventItem.style.width = tileWidth.toString() + "px";
                                     }
                                 }
-                            }
-                            if (animationElements.length > 0) {
-                                WinJS.UI.Animation.enterPage(animationElements);
                             }
                         }
                     }
