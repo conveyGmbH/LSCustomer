@@ -115,7 +115,7 @@
     font-family: var(--font-family-default) !important;
 }
 
-.home .content-header {
+.home .content-header, .events .top-header {
     margin: 0 auto !important;
     max-width: calc(1300px - 50px - 50px) !important;
     padding-bottom: 0 !important;
@@ -247,7 +247,8 @@
 }
 
 .home .win-listview .win-vertical .win-footercontainer,
-.home .win-listview .win-vertical .win-headercontainer {
+.home .win-listview .win-vertical .win-headercontainer,
+.events .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
     width: 100% !important;
     padding: 0 !important;
@@ -493,10 +494,6 @@ section.elementor-inner-section > div {
     width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-}
-
-.home .contentarea, .events .contentarea {
-    background-color: #f2f2f2;
 }
 
 .win-type-body {

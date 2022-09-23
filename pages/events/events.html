@@ -14,33 +14,34 @@
                 <div class="contentarea win-type-body">
                     <div class="headerFooterPlaceholder">
                         <div class="list-header">
+                            <div class="top-header"> 
+                                <div class="homeButton">
 
-                            <div class="homeButton">
-
-                                <button id="homeButton" class="win-button"
-                                        onclick="AppBar.handleEvent('click', 'clickHome', event)">
-                                    <div class="button-tip">
-                                        <div class="action-image" id="home"></div>
-                                        <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
-                                        <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
+                                    <button id="homeButton" class="win-button"
+                                            onclick="AppBar.handleEvent('click', 'clickHome', event)">
+                                        <div class="button-tip">
+                                            <div class="action-image" id="home"></div>
+                                            <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
+                                            <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="hero-image-container" data-win-bind="style.display: dataDoc.ser_doc Binding.Converter.toDisplay">
+                                    <img data-win-bind="src: dataDoc.ser_doc; alt: dataDocText.ser_doc_alt; title: dataDocText.ser_doc_title; longdesc: dataDocText.ser_doc_descr"/>
+                                </div>
+                                <div class="content-header">
+                                    <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ser_text_name_h1 Binding.Converter.toDisplay">
+                                        <h1 data-win-bind="textContent: dataText.ser_text_name_h1"></h1>
                                     </div>
-                                </button>
-                            </div>
-                            <div class="hero-image-container" data-win-bind="style.display: dataDoc.ser_doc Binding.Converter.toDisplay">
-                                <img data-win-bind="src: dataDoc.ser_doc; alt: dataDocText.ser_doc_alt; title: dataDocText.ser_doc_title; longdesc: dataDocText.ser_doc_descr"/>
-                            </div>
-                            <div class="content-header">
-                                <div class="content-header-line win-type-title" data-win-bind="style.display: dataText.ser_text_name_h1 Binding.Converter.toDisplay">
-                                    <h1 data-win-bind="textContent: dataText.ser_text_name_h1"></h1>
-                                </div>
-                                <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ser_text_subtitle_h2 Binding.Converter.toDisplay">
-                                    <h2 data-win-bind="textContent: dataText.ser_text_subtitle_h2"></h2>
-                                </div>
-                                <div class="content-header-line win-type-body" data-win-bind="style.display: dataText.ser_text_free_body Binding.Converter.toDisplay">
-                                    <span data-win-bind="textContent: dataText.ser_text_free_body"></span>
+                                    <div class="content-header-line win-type-subtitle" data-win-bind="style.display: dataText.ser_text_subtitle_h2 Binding.Converter.toDisplay">
+                                        <h2 data-win-bind="textContent: dataText.ser_text_subtitle_h2"></h2>
+                                    </div>
+                                    <div class="content-header-line win-type-body" data-win-bind="style.display: dataText.ser_text_free_body Binding.Converter.toDisplay">
+                                        <span data-win-bind="textContent: dataText.ser_text_free_body"></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            </div>
                         <div class="list-footer">
                         </div>
                     </div>
