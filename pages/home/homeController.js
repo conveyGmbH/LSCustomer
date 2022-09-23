@@ -560,8 +560,9 @@
                                     }
                                 } else if (WinJS.Utilities.hasClass(winElement, "win-itemscontainer")) {
                                     var winItemsContainer = winElement;
-                                    if (winItemsContainer && winItemsContainer.style && winItemsContainer.clientWidth != clientWidth) {
+                                    if (winItemsContainer && winItemsContainer.style && winItemsContainer.clientWidth !== clientWidth) {
                                         winItemsContainer.style.width = clientWidth.toString() + "px";
+                                        winItemsContainer.style.visibility = true;
                                     }
 									if (typeof expandFlag === "boolean") {
 										if (expandFlag) {
@@ -584,7 +585,7 @@
 									}
                                 } else { // event-item
                                     var eventItem = winElement;
-                                    if (eventItem && eventItem.style && eventItem.clientWidth != tileWidth) {
+                                    if (eventItem && eventItem.style && eventItem.clientWidth !== tileWidth) {
                                         eventItem.style.width = tileWidth.toString() + "px";
                                     }
                                 }
