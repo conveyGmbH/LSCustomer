@@ -348,7 +348,7 @@
     height: 506px;
     width: auto;
     transform: translate3d(0,0,0);
-    transition-property: box-shadow,transform,opacity;
+    transition-property: box-shadow,transform/*,opacity*/;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
     border: 1px transparent;
@@ -357,11 +357,11 @@
     -webkit-border-radius: 12px;
     background-color: var(--e-global-color-buttontext) !important;
 	visibility: hidden;
-	opacity: 0;
+	/*opacity: 0;*/
 }
 .home .win-listview .win-gridlayout .win-container.loading-complete {
 	visibility: visible;
-	opacity: 1;
+	/*opacity: 1;*/
 }
 .home .win-listview .win-gridlayout .win-container:hover,
 .home .win-listview .win-gridlayout .win-container:focus {
