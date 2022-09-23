@@ -483,7 +483,7 @@
 
             var adjustContainerSize = function() {
                 Log.call(Log.l.trace, "Home.Controller.");
-                var i;
+                var i, bDoResize = false;
                 var ret = new WinJS.Promise.as().then(function() {
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
@@ -511,7 +511,7 @@
                             if (WinJS.Utilities.hasClass(pageElement, "view-size-medium-small")) {
                                 tilesPerRow = 1;
                             }
-                            var tileWidth = clientWidth / tilesPerRow - 2*margin;
+                            var tileWidth = Math.floor(clientWidth / tilesPerRow - 2*margin);
 
                             var winElements = listView.querySelectorAll(".win-groupheadercontainer, .win-itemscontainer, .event-item");
                             var expandFlag = null;
@@ -522,11 +522,11 @@
                                     var winGroupHeaderContainer = winElement;
                                     if (winGroupHeaderContainer && winGroupHeaderContainer.style) {
                                         winGroupHeaderContainer.style.width = clientWidth.toString() + "px";
-                                        var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
-                                        if (winGroupHeader) {
-                                            var heightGroupHeader = winGroupHeader.clientHeight + 60;
-                                            winGroupHeaderContainer.style.height = heightGroupHeader.toString() + "px";
-                                        }
+                                        //var winGroupHeader = winGroupHeaderContainer.querySelector(".group-header");
+                                        //if (winGroupHeader) {
+                                        //    var heightGroupHeader = Math.floor(winGroupHeader.clientHeight + 60);
+                                        //    winGroupHeaderContainer.style.height = heightGroupHeader.toString() + "px";
+                                        //}
                                         var expanderButton = winGroupHeaderContainer.querySelector(".expander-button");
                                         if (expanderButton) {
                                             var seriesId = parseInt(expanderButton.seriesId);
@@ -534,45 +534,53 @@
                                                 expandFlag = that.itemGroupHeaderState[seriesId].expandFlag;
                                             }
                                         }
-                                        if (expandFlag) {
-                                            if (!WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-expanded")) {
-                                                WinJS.Utilities.addClass(winGroupHeaderContainer, "group-expanded");
-                                            }
-                                            if (WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-collapsed")) {
-                                                WinJS.Utilities.removeClass(winGroupHeaderContainer, "group-collapsed");
-                                            }
-                                        } else {
-                                            if (!WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-collapsed")) {
-                                                WinJS.Utilities.addClass(winGroupHeaderContainer, "group-collapsed");
-                                            }
-                                            if (WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-expanded")) {
-                                                WinJS.Utilities.removeClass(winGroupHeaderContainer, "group-expanded");
-                                            }
-                                        }
+										if (typeof expandFlag === "boolean") {
+											if (expandFlag) {
+												//if (!WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-expanded")) {
+												//	WinJS.Utilities.addClass(winGroupHeaderContainer, "group-expanded");
+												//}
+												if (WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-collapsed")) {
+													WinJS.Utilities.removeClass(winGroupHeaderContainer, "group-collapsed");
+													bDoResize = true;
+												}
+											} else {
+												if (!WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-collapsed")) {
+													WinJS.Utilities.addClass(winGroupHeaderContainer, "group-collapsed");
+													bDoResize = true;
+												}
+												//if (WinJS.Utilities.hasClass(winGroupHeaderContainer, "group-expanded")) {
+												//	WinJS.Utilities.removeClass(winGroupHeaderContainer, "group-expanded");
+												//}
+											}
+										}
                                     }
                                 } else if (WinJS.Utilities.hasClass(winElement, "win-itemscontainer")) {
                                     var winItemsContainer = winElement;
-                                    if (winItemsContainer && winItemsContainer.style) {
+                                    if (winItemsContainer && winItemsContainer.style && winItemsContainer.clientWidth != clientWidth) {
                                         winItemsContainer.style.width = clientWidth.toString() + "px";
                                     }
-                                    if (expandFlag) {
-                                        if (!WinJS.Utilities.hasClass(winItemsContainer, "group-expanded")) {
-                                            WinJS.Utilities.addClass(winItemsContainer, "group-expanded");
-                                        }
-                                        if (WinJS.Utilities.hasClass(winItemsContainer, "group-collapsed")) {
-                                            WinJS.Utilities.removeClass(winItemsContainer, "group-collapsed");
-                                        }
-                                    } else {
-                                        if (!WinJS.Utilities.hasClass(winItemsContainer, "group-collapsed")) {
-                                            WinJS.Utilities.addClass(winItemsContainer, "group-collapsed");
-                                        }
-                                        if (WinJS.Utilities.hasClass(winItemsContainer, "group-expanded")) {
-                                            WinJS.Utilities.removeClass(winItemsContainer, "group-expanded");
-                                        }
-                                    }
+									if (typeof expandFlag === "boolean") {
+										if (expandFlag) {
+											//if (!WinJS.Utilities.hasClass(winItemsContainer, "group-expanded")) {
+											//	WinJS.Utilities.addClass(winItemsContainer, "group-expanded");
+											//}
+											if (WinJS.Utilities.hasClass(winItemsContainer, "group-collapsed")) {
+												WinJS.Utilities.removeClass(winItemsContainer, "group-collapsed");
+												bDoResize = true;
+											}
+										} else {
+											if (!WinJS.Utilities.hasClass(winItemsContainer, "group-collapsed")) {
+												WinJS.Utilities.addClass(winItemsContainer, "group-collapsed");
+												bDoResize = true;
+											}
+											//if (WinJS.Utilities.hasClass(winItemsContainer, "group-expanded")) {
+											//	WinJS.Utilities.removeClass(winItemsContainer, "group-expanded");
+											//}
+										}
+									}
                                 } else { // event-item
                                     var eventItem = winElement;
-                                    if (eventItem && eventItem.style) {
+                                    if (eventItem && eventItem.style && eventItem.clientWidth != tileWidth) {
                                         eventItem.style.width = tileWidth.toString() + "px";
                                     }
                                 }
@@ -581,28 +589,30 @@
                     }
                     return WinJS.Promise.timeout(1000);
                 }).then(function () {
-                    Application.navigator._resized();
+					if (bDoResize) {
+						Application.navigator._resized();
+					}                    
                     return WinJS.Promise.timeout(50);
                 }).then(function () {
                     if (listView) {
-                            var headerHost = document.querySelector("#headerhost");
-                            var viewPort = listView.querySelector(".win-viewport");
-                            if (viewPort && headerHost) {
-                                var firstElementChild = headerHost.firstElementChild;
-                                while (firstElementChild) {
-                                    var styles = getComputedStyle(firstElementChild);
-                                    if (styles && styles.getPropertyValue("position") === "fixed") {
-                                        if (firstElementChild.style) {
-                                            var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
-                                            var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
-                                            firstElementChild.style.maxWidth = maxWidth;
-                                        }
-                                        break;
-                                    }
-                                    firstElementChild = firstElementChild.firstElementChild;
-                                }
-                            }
-                        }
+						var headerHost = document.querySelector("#headerhost");
+						var viewPort = listView.querySelector(".win-viewport");
+						if (viewPort && headerHost) {
+							var firstElementChild = headerHost.firstElementChild;
+							while (firstElementChild) {
+								var styles = getComputedStyle(firstElementChild);
+								if (styles && styles.getPropertyValue("position") === "fixed") {
+									if (firstElementChild.style) {
+										var scrollBarWidth = viewPort.offsetWidth - viewPort.clientWidth;
+										var maxWidth = "calc(100% - " + (firstElementChild.offsetLeft + scrollBarWidth).toString() + "px)";
+										firstElementChild.style.maxWidth = maxWidth;
+									}
+									break;
+								}
+								firstElementChild = firstElementChild.firstElementChild;
+							}
+						}
+					}
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -1132,11 +1142,11 @@
                         }
                         // Double the size of the buffers on both sides
                         if (!maxLeadingPages) {
-                            maxLeadingPages = listView.winControl.maxLeadingPages * 2;
+                            maxLeadingPages = listView.winControl.maxLeadingPages * 20;
                             listView.winControl.maxLeadingPages = maxLeadingPages;
                         }
                         if (!maxTrailingPages) {
-                            maxTrailingPages = listView.winControl.maxTrailingPages * 2;
+                            maxTrailingPages = listView.winControl.maxTrailingPages * 20;
                             listView.winControl.maxTrailingPages = maxTrailingPages;
                         }
                         if (listView.winControl.loadingState === "itemsLoaded") {

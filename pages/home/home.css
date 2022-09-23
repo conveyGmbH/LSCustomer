@@ -44,7 +44,7 @@
     padding: 0 0 30px 0;
 }
 
-.home .win-listview .win-vertical .win-itemscontainer.group-expanded {
+.home .win-listview .win-vertical .win-itemscontainer/*.group-expanded*/ {
     height: auto !important;
     border-color: var(--border-color);
     border-width: 0 1px 1px 1px;
@@ -108,7 +108,7 @@
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
     border-color: var(--border-color);
 }
-.home .win-listview .win-groupheadercontainer.group-expanded {
+.home .win-listview .win-groupheadercontainer/*.group-expanded*/ {
     border-width: 1px 1px 0 1px;
     border-style: solid solid none solid;
     border-top-left-radius: 20px;
@@ -135,7 +135,7 @@
 }
 
 .home .group-header {
-    margin: 0;
+    margin: 0 0 60px 0;
     padding: 0;
     width: 100%;
 }
