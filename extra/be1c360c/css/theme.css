@@ -235,15 +235,10 @@
     padding: 15px 15px 0 0 !important;
 }
 
-
 .home #more_Button {
     background-color: var(--e-global-color-accent);
     border-color: var(--e-global-color-accent);
     color: var(--e-global-color-buttontext);
-}
-
-.home .expander-container {
-    padding-top: 5px !important;
 }
 
 .home .expander-button {
@@ -267,7 +262,7 @@
 
 
 .home .win-listview .win-groupheader {
-    padding: 0 0 0 35px !important;
+    padding: 5px 0 0 35px !important;
 }
 
 .events .list-footer {
@@ -722,6 +717,10 @@ section.elementor-inner-section > div {
         }
     use: .view-size-small
 */
+
+.view-size-small .home .win-listview .win-groupheader {
+    width: calc(100% - 70px) !important;
+}
 .view-size-small .home .content-header,
 .view-size-small .events .content-header,
 .view-size-small .event .content-header {
