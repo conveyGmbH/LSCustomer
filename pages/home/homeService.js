@@ -10,7 +10,7 @@
         _eventView: {
             get: function () {
                 var ret = AppData.getFormatView("Veranstaltung", 20650);
-                ret.maxPageSize = 20;
+                //ret.maxPageSize = 20;
                 return ret;
             }
         },
