@@ -44,6 +44,7 @@
             }
             this.recordsGrouped = null;
 
+            var adjustContainerSizePromise = null;
             var that = this;
 
             this.dispose = function () {
@@ -474,7 +475,7 @@
                     null,
                     seriesIds);
                 }).then(function() {
-                    return that.adjustContainerSize();
+                    that.adjustContainerSize();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
@@ -484,7 +485,10 @@
             var adjustContainerSize = function() {
                 Log.call(Log.l.trace, "Home.Controller.");
                 var i, bDoResize = false;
-                var ret = new WinJS.Promise.as().then(function() {
+                if (adjustContainerSizePromise) {
+                    adjustContainerSizePromise.cancel();
+                }
+                adjustContainerSizePromise = WinJS.Promise.timeout(20).then(function() {
                     if (listView) {
                         var headerHost = document.querySelector("#headerhost");
                         if (headerHost) {
@@ -589,9 +593,7 @@
                     }
                     return WinJS.Promise.timeout(1000);
                 }).then(function () {
-					if (bDoResize) {
-						Application.navigator._resized();
-					}                    
+                    Application.navigator._resized();
                     return WinJS.Promise.timeout(50);
                 }).then(function () {
                     if (listView) {
