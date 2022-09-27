@@ -474,6 +474,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 #conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-label="Audiogerät wechseln"],
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button[aria-label="Audiogerät wechseln"],
+#conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-label="Erweiterte Einstellungen öffnen"],
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button[aria-label="Erweiterte Einstellungen öffnen"] {
     background-color: var(--btn-default-bg,var(--color-white,#FFF)) !important;
     border-radius: 50% !important;
