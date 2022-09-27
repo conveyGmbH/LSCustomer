@@ -459,7 +459,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview #layout > header:first-of-type > div:first-child div:not(.presenter-button-container) > button:not(.win-button),
 #conference.mediaview #layout > section[aria-label="Actions bar"] button:not(.gjwodI):not(.win-button),
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not(.gjwodI):not(.win-button),
-#conference.mediaview div[data-test="publicChat"] form button,
+#conference.mediaview div[data-test="publicChat"] form button
 .portal--27FHYi .buttonWrapper--x8uow,
 .ReactModalPortal header > button {
     background: none !important;
@@ -545,6 +545,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border: var(--border-size-large) solid transparent !important;
 }*/
 #conference.mediaview div[data-test="publicChat"] header button:first-of-type,
+#conference.mediaview div[data-test="notes"] header button:first-of-type,
 #conference.mediaview #pollPanel header button:first-of-type {
     font-size: var(--btn-md-font-size);
     text-transform: uppercase !important;
@@ -555,6 +556,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: transparent !important;
     letter-spacing: normal;
     box-shadow: none !important;
+    border-radius: var(--border-radius) !important;
 }
 #conference.mediaview #pollPanel header ~ div button[data-test="startPoll"] {
     text-transform: uppercase !important;
