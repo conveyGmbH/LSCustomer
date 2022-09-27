@@ -468,9 +468,18 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     margin: 0 !important;
 }
 #conference.mediaview #layout > header:first-of-type > div:first-child button:focus,
-#conference.mediaview #layout > #layout > section[aria-label="Actions bar"] button:focus,
-#conference.mediaview #layout > #layout > section[aria-label="Aktionsmenü"] button:focus {
+#conference.mediaview #layout > section[aria-label="Actions bar"] button:focus,
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:focus {
     outline: var(--outline-focus) !important;
+}
+
+#conference.mediaview #layout > section[aria-label="Actions bar"] button button,
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button button {
+    background-color: var(--btn-default-bg,var(--color-white,#FFF)) !important;
+    border-radius: 50% !important;
+    margin: 0 !important;
+    padding: 1px 6px !important;
+    font-size: inherit !important;
 }
 
 .ReactModalPortal h1 {
