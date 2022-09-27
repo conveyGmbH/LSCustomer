@@ -1616,6 +1616,7 @@ button[data-test="optionsButton"] {
     letter-spacing: normal;
     line-height: 1;
     font-family: var(--font-family-default);
+    color: var(--color-white,#FFF) !important;
 }
 
 #conference.mediaview button[data-test="isTalking"] span {
