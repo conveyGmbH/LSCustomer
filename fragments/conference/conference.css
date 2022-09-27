@@ -193,9 +193,9 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
 .fullScreenButton--Z1bf0vj,
 .kJJEZB {
     z-index: 11;
-    padding: 5px;
-    font-size: var(--btn-sm-font-size);
-    line-height: 1;
+    padding: 5px !important;
+    font-size: var(--btn-sm-font-size) !important;
+    line-height: 1 !important;
 }
 
 .view-size-medium .show-chat-button-container,
