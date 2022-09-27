@@ -473,6 +473,20 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     outline: var(--outline-focus) !important;
 }
 
+.ReactModalPortal h1 {
+    font-weight: 400 !important;
+    font-size: 1.25rem !important;
+    color: var(--color-gray-dark,#06172A) !important;
+    line-height: 1.2 !important;
+}
+
+.ReactModalPortal h2 {
+    font-weight: 400 !important;
+    font-size: 1.3rem !important;
+    color: var(--color-gray-dark,#06172A) !important;
+    line-height: 1.2 !important;
+}
+
 .ReactModalPortal button[aria-describedby="mic-description"],
 .ReactModalPortal button[aria-describedby="listenOnly-description"],
 .ReactModalPortal button[aria-label="Echo is audible"],
@@ -482,6 +496,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .ReactModalPortal button[aria-label="Audio wiedergeben"],
 .ReactModalPortal div[aria-label="Play audio"] {
     margin: 0 1.5rem !important;
+    background: none;
 }
 .portal--27FHYi .circle--Z2c8umk,
 .portal--27FHYi .jumbo--Z12Rgj4,
