@@ -473,8 +473,8 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     outline: var(--outline-focus) !important;
 }
 
-#conference.mediaview #layout > section[aria-label="Actions bar"] button button,
-#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button button {
+#conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-label="Audiogerät wechseln"],
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button[aria-label="Erweiterte Einstellungen öffnen"] {
     background-color: var(--btn-default-bg,var(--color-white,#FFF)) !important;
     border-radius: 50% !important;
     margin: 0 !important;
@@ -652,6 +652,22 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .ReactModalPortal div[aria-label="Webcameinstellungen"] > header + div > div:last-child button[color="danger"] {
     background-color: var(--color-danger);
     color: var(--btn-primary-color);
+}
+
+.ReactModalPortal div[aria-label="Webcam settings"] button[aria-describedby="vr-cam-btn-none"],
+.ReactModalPortal div[aria-label="Webcameinstellungen"] button[aria-describedby="vr-cam-btn-none"] {
+    color: var(--btn-default-color,var(--color-gray,#4E5A66)) !important;
+    background-color: var(--btn-default-bg,var(--color-white,#FFF)) !important;
+}
+.ReactModalPortal div[aria-label="Webcam settings"] button[aria-describedby="vr-cam-btn-blur"],
+.ReactModalPortal div[aria-label="Webcameinstellungen"] button[aria-describedby="vr-cam-btn-blur"],
+.ReactModalPortal div[aria-label="Webcam settings"] button[aria-describedby="vr-cam-btn-0"],
+.ReactModalPortal div[aria-label="Webcameinstellungen"] button[aria-describedby="vr-cam-btn-0"],
+.ReactModalPortal div[aria-label="Webcam settings"] button[aria-describedby="vr-cam-btn-1"],
+.ReactModalPortal div[aria-label="Webcameinstellungen"] button[aria-describedby="vr-cam-btn-1"],
+.ReactModalPortal div[aria-label="Webcam settings"] button[aria-describedby="vr-cam-btn-2"],
+.ReactModalPortal div[aria-label="Webcameinstellungen"] button[aria-describedby="vr-cam-btn-2"] {
+    background-color: transparent !important;
 }
 
 /* buttons in top nav area */
