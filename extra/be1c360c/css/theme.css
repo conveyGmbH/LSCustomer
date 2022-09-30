@@ -421,7 +421,6 @@
     position: relative !important;
     float: none !important;
     right: 0;
-    width: calc(1300px - 70px - 70px) !important;
     margin: 0 auto !important;
 }
 
@@ -676,13 +675,23 @@ section.elementor-inner-section > div {
 }
 
 .view-size-medium .event .countdown-fragmenthost {
-    width: calc(100% - 20px - 20px) !important;
+    margin: 0 !important;
+}
+
+.view-size-medium .countdown .field_line_full {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
 }
 
 .view-size-medium .countdown .count {
-    padding-top: 25px !important;
+    padding-top: 15px !important;
 }
 
+.view-size-medium .countdown .count-block {
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
@@ -704,11 +713,6 @@ section.elementor-inner-section > div {
     margin-top: 10px !important;
 }
 
-.view-size-medium .countdown .field_line_full {
-    width: 100% !important;
-}
-
-
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
         }
@@ -729,6 +733,11 @@ section.elementor-inner-section > div {
 .view-size-small .event .speakerblock {
     margin-left: 0;
     width: calc(100% - 20px);
+}
+
+.view-size-small .event .countdown-fragmenthost {
+    grid-column: 1/span 6 !important;
+    position: fixed !important;
 }
 
 .view-size-small .countdown .field_line_full {
