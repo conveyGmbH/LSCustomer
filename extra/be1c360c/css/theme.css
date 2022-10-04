@@ -79,7 +79,29 @@
 .event .win-tooltip,
 .event .win-type-caption,
 .event .caption-field,
-.event .content-header {
+.event .content-header,
+.speakerSession .win-type-title,
+.speakerSession .win-type-subtitle,
+.speakerSession .win-type-body,
+.speakerSession .win-h1,
+.speakerSession .win-h2,
+.speakerSession .win-h3,
+.speakerSession .win-h5,
+.speakerSession .win-tooltip,
+.speakerSession .win-type-caption,
+.speakerSession .caption-field,
+.speakerSession .content-header,
+.modSession .win-type-title,
+.modSession .win-type-subtitle,
+.modSession .win-type-body,
+.modSession .win-h1,
+.modSession .win-h2,
+.modSession .win-h3,
+.modSession .win-h5,
+.modSession .win-tooltip,
+.modSession .win-type-caption,
+.modSession .caption-field,
+.modSession .content-header {
     font-family: var(--font-family-default) !important;
 }
 
@@ -108,7 +130,11 @@
     font-weight: 500 !important;
 }
 
-.home .win-type-body, .events .win-type-body, .event .win-type-body {
+.home .win-type-body,
+.events .win-type-body,
+.event .win-type-body,
+.modSession .win-type-body,
+.speakerSession .win-type-body {
     font-size: 15px !important;
     line-height: 25px !important;
     color: var(--e-global-color-text) !important;
@@ -121,7 +147,9 @@
     padding-bottom: 0 !important;
 }
 
-.event .content-header {
+.event .content-header,
+.modSession .content-header,
+.speakerSession .content-header{
     margin: 15px 20px 0 0 !important;
     padding: 5px 15px 0 0 !important;
 }
@@ -149,7 +177,9 @@
 
 .home .content-header-line > h1,
 .events .content-header-line > h1,
-.event .content-header-line > h1 {
+.event .content-header-line > h1,
+.modSession .content-header-line > h1,
+.speakerSession .content-header-line > h1 {
     font-family: var(--font-family-default) !important;
     font-size: 46px !important;
     line-height: 56px !important;
@@ -159,7 +189,9 @@
 
 .home .win-type-subtitle, .events .win-type-subtitle,
 .events .win-h2, .events .win-h3,
-.event .win-h2, .event .win-h3 {
+.event .win-h2, .event .win-h3,
+.modSession .win-h2, .modSession .win-h3,
+.speakerSession .win-h2, .speakerSession .win-h3 {
     font-family: var(--font-family-default) !important;
     font-size: 18px !important;
     line-height: 30px !important;
@@ -171,7 +203,9 @@
     
 }
 
-.event .content-header-line > .win-h2 {
+.event .content-header-line > .win-h2,
+.modSession .content-header-line > .win-h2,
+.speakerSession .content-header-line > .win-h2 {
     font-family: var(--font-family-default) !important;
     font-size: 14px !important;
     line-height: 14px !important;
@@ -202,7 +236,9 @@
     
 }
 
-.event .ev-text {
+.event .ev-text,
+.modSession .ev-text,
+.speakerSession .ev-text {
     font-family: var(--font-family-default) !important;
     font-size: 15px !important;
     line-height: 25px !important;
@@ -215,17 +251,23 @@
     height: auto !important;
 }
 
-.event .hero-header {
-    padding: 15px 0 !important
+.event .hero-header,
+.modSession .hero-header,
+.speakerSession .hero-header {
+    padding: 15px 0 !important;
 }
 
-.event .homeButton {
+.event .homeButton,
+.modSession .homeButton,
+.speakerSession .homeButton {
     margin-left: 0 !important;
     padding: 15px 0 !important;
     font-family: var(--font-family-default) !important;
 }
 
-.event .logOff-container {
+.event .logOff-container,
+.modSession .logOff-container,
+.speakerSession .logOff-container {
     margin-left: 0 !important;
     padding: 15px 0 !important;
     font-family: var(--font-family-default) !important;
@@ -303,7 +345,9 @@
 }
 
 .events .button-tip .win-tooltip,
-.event .button-tip .win-tooltip {
+.event .button-tip .win-tooltip,
+.modSession .button-tip .win-tooltip,
+.speakerSession .button-tip .win-tooltip {
     font-family: var(--font-family-default) !important;
     visibility: hidden;
     position: absolute;
@@ -327,7 +371,9 @@
     white-space: normal !important;
 }
 
-.event .share-block .win-tooltip {
+.event .share-block .win-tooltip,
+.modSession .share-block .win-tooltip,
+.speakerSession .share-block .win-tooltip {
     font-family: var(--font-family-default) !important;
     visibility: hidden;
     position: relative;
@@ -347,7 +393,9 @@
     -moz-transition: opacity 0.3s;
 }
 
-.event .caption-field {
+.event .caption-field,
+.modSession .caption-field,
+.speakerSession caption-field {
     font-family: var(--font-family-default) !important;
     color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     line-height: 20px !important;

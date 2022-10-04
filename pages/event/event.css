@@ -340,8 +340,8 @@
 .event .maintenance-fragmenthost {
     height: auto;
     margin-top: 20px;
-    margin-left: 20px;
-    padding: 15px;
+    margin-left: 0;
+    padding: 15px 0;
 }
 
 .event .register-fragmenthost {
@@ -353,6 +353,11 @@
     grid-row: 1/1;
     grid-column: 5/span 2;
     margin-right: 5%;
+}
+
+.event .conference-fragmenthost {
+    margin-left: 0;
+    width: 100%;
 }
 
 .event .share-block {

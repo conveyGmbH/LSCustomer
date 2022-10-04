@@ -1,9 +1,4 @@
-﻿.event .content-grid-full-width {
-    margin-left: 0 !important;
-    width: 100% !important;
-}
-
-#conferenceController .contentarea {
+﻿#conferenceController .contentarea {
     position: absolute;
     background-color: transparent;
 }
