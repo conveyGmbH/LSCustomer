@@ -584,7 +584,7 @@ section.elementor-inner-section > div {
 /**margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1500px**/
 @media (min-width: 1300px) and (max-width: 1490px) {
-    .event .content-grid {
+    .event .content-grid, .modSession .content-grid {
         width: var(--max-content-width) !important;
         margin-left: var(--max-content-margin-left) !important;
     }
@@ -622,7 +622,8 @@ section.elementor-inner-section > div {
     width: 100% !important;
 }
 
-.view-size-biggest .event .content-grid {
+.view-size-biggest .event .content-grid,
+.view-size-biggest .modSession .content-grid {
     padding: 0 10px !important;
 }
 

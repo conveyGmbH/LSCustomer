@@ -67,7 +67,29 @@
 .event .win-tooltip,
 .event .win-type-caption,
 .event .caption-field,
-.event .content-header {
+.event .content-header,
+.modSession .win-type-title,
+.modSession .win-type-subtitle,
+.modSession .win-type-body,
+.modSession .win-h1,
+.modSession .win-h2,
+.modSession .win-h3,
+.modSession .win-h5,
+.modSession .win-tooltip,
+.modSession .win-type-caption,
+.modSession .caption-field,
+.modSession .content-header,
+.speakerSession .win-type-title,
+.speakerSession .win-type-subtitle,
+.speakerSession .win-type-body,
+.speakerSession .win-h1,
+.speakerSession .win-h2,
+.speakerSession .win-h3,
+.speakerSession .win-h5,
+.speakerSession .win-tooltip,
+.speakerSession .win-type-caption,
+.speakerSession .caption-field,
+.speakerSession .content-header {
     font-family: var(--font-family-default);
 }
 
@@ -81,7 +103,7 @@
 .register .field_line_full,
 .register .label,
 .register .checkbox {
-    font-family: "Barlow";
+    font-family: var(--font-family-default);
     font-weight: 400;
 }
 
@@ -90,7 +112,7 @@
 .countdown .win-h3,
 .countdown .win-h4,
 .countdown .win-h5 {
-    font-family: "Barlow";
+    font-family: var(--font-family-default);
 }
 
 .events button.win-button,

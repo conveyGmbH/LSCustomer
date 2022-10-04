@@ -8,12 +8,25 @@
 .modSession .win-tooltip,
 .modSession .win-type-caption,
 .modSession .caption-field,
-.modSession .content-header{
+.modSession .content-header {
     font-family: var(--font-family-default);
 }
 
 .modSession .bold {
     font-weight: 600;
+}
+
+.modSession .color_container2 {
+    position: relative;
+    z-index: -2;
+    height: auto;
+    width: 100%;
+    top: 0;
+}
+
+.modSession .section-1 {
+    grid-column: 1/span 6;
+    margin-right: 30px;
 }
 
 .modSession .hero-header,
