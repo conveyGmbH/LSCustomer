@@ -159,7 +159,9 @@
     font-family: var(--font-family-default) !important;
 }
 
-.event button .win-type-title {
+.event button .win-type-title,
+.modSession button .win-type-title,
+.speakerSession button .win-type-title {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-text) !important;
 }

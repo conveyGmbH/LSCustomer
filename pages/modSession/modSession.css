@@ -16,6 +16,10 @@
     font-weight: 600;
 }
 
+.modSession .customer-top-header {
+    width: 100%;
+}
+
 .modSession .contentarea {
     background-color: var(--e-global-color-background);
 }
@@ -26,6 +30,15 @@
     height: auto;
     width: 100%;
     top: 0;
+}
+
+.modSession .content-grid {
+    display: grid;
+    grid-template-columns: 20% 15% 15% 15% 15% 20%;
+    grid-gap: 0;
+    margin-left: var(--max-content-margin-left);
+    width: var(--max-content-width);
+    padding: 15px 0;
 }
 
 .modSession .section-1 {

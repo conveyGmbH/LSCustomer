@@ -16,6 +16,10 @@
     font-weight: 600;
 }
 
+.speakerSession .customer-top-header {
+    width: 100%;
+}
+
 .speakerSession .contentarea {
     background-color: var(--e-global-color-background);
 }
@@ -26,6 +30,15 @@
     height: auto;
     width: 100%;
     top: 0;
+}
+
+.speakerSession .content-grid {
+    display: grid;
+    grid-template-columns: 20% 15% 15% 15% 15% 20%;
+    grid-gap: 0;
+    margin-left: var(--max-content-margin-left);
+    width: var(--max-content-width);
+    padding: 15px 0;
 }
 
 .speakerSession .section-1 {
@@ -269,10 +282,9 @@
     font-size: 16px;
 }
 
-.speakerSession .logOff-container {
-    float: right;
+.speakerSession .win-link {
+    color: var(--e-global-color-text);
 }
 .speakerSession .closeSession-container {
-    float: right;
     width: 200px;
 }
