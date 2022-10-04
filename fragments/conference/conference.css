@@ -596,6 +596,21 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 
+[class*=" icon-bbb-"]:before, [class^=icon-bbb-]:before {
+    font-family: inherit !important;
+    font-style: inherit !important;
+    font-weight: inherit !important;
+    speak: inherit !important;
+    display: inherit !important;
+    width: inherit !important;
+    margin-right: inherit !important;
+    text-align: inherit !important;
+    font-variant: inherit !important;
+    text-transform: inherit !important;
+    line-height: inherit !important;
+    margin-left: inherit !important;
+}
+
 #conference.mediaview div[data-test="publicChat"] header .icon-bbb-more {
     color: var(--btn-primary-color) !important;
     letter-spacing: normal;
