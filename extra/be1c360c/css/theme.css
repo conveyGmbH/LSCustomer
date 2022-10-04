@@ -334,7 +334,9 @@
     background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
-.event button#homeButton {
+.event button#homeButton,
+.modSession button#homeButton,
+.speakerSession button#homeButton {
     font-family: var(--font-family-default) !important;
     position: sticky !important;
     margin-top: 20px !important;
@@ -463,6 +465,10 @@
 
 .event #logOffbutton .win-link {
     float: right !important;
+}
+
+.modSession .win-link, .speakerSession .win-link {
+    color: var(--e-global-color-text) !important;
 }
 
 .event .countdown-fragmenthost {
