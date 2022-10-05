@@ -356,8 +356,8 @@
 }
 
 .event .conference-fragmenthost {
-    margin-left: 0;
-    width: 100%;
+    width: auto;
+    margin: 0;
 }
 
 .event .share-block {

@@ -87,13 +87,17 @@
 .modSession .win-h1 {
     font-size: 46px;
     font-weight: 600;
-    line-height: 62px;
+    line-height: 56px;
+    letter-spacing: 0;
+    text-align: left;
 }
 
 .modSession .win-h2 {
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 28px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    text-align: left;
 }
 
 .modSession .win-type-body {
@@ -156,10 +160,12 @@
 }
 
 .modSession button .win-type-title {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 1px;
+    font-weight: 400;
+    text-transform: none;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    text-align: left;
 }
 .modSession .button-tip {
     position: relative;
