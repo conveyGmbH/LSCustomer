@@ -41,12 +41,6 @@
     padding: 15px 0;
 }
 
-.view-size-biggest .modSession .content-grid {
-    margin-left: 0;
-    width: 100%;
-    padding: 0;
-}
-
 .modSession .section-1 {
     grid-column: 1/span 6;
     margin-right: 30px;

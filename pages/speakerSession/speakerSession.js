@@ -32,7 +32,7 @@
                     contentarea.style.backgroundColor = Colors.tileBackgroundColor;
                 }
             }*/
-            Application.insertBodyContent(element, ".hero-header", ".hero-footer");
+            Application.insertBodyContent(element, ".customer-top-header", ".hero-footer");
 
             this.inResize = 0;
             this.prevWidth = 0;
