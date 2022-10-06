@@ -340,8 +340,8 @@
 .event .maintenance-fragmenthost {
     height: auto;
     margin-top: 20px;
-    margin-left: 0;
-    padding: 15px 0;
+    margin-left: 20px;
+    padding: 15px;
 }
 
 .event .register-fragmenthost {
@@ -419,6 +419,11 @@ p.ev-text {
 @media (min-width: 1500px) {
     .event .hero-header, .event .teaser-fragmenthost, .event .intersection, .event .section-3 {
         margin-left: 0;
+    }
+
+    .event .maintenance-fragmenthost {
+        margin-left: 20px;
+        padding: 15px 0;
     }
 
 }
