@@ -148,7 +148,12 @@
     padding-bottom: 0 !important;
 }
 
-.event .content-grid,
+.event .content-grid {
+    width: var(--max-content-width) !important;
+    margin-left: var(--max-content-margin-left) !important;
+    padding: 10px !important;
+}
+
 .modSession .content-grid,
 .speakerSession .content-grid {
     width: var(--max-content-width) !important;
@@ -654,6 +659,8 @@ section.elementor-inner-section > div {
 .view-size-biggest .modSession .content-grid,
 .view-size-biggest .speakerSession .content-grid {
     padding: 0 10px !important;
+    width: 100% !important;
+    margin-left: 0 !important;
 }
 
 .view-size-biggest .modSession .hero-header,
@@ -693,17 +700,21 @@ section.elementor-inner-section > div {
     margin: 0 !important;
 }
 .view-size-bigger .home .content-header,
-.view-size-bigger .events .content-header,
-.view-size-bigger .event .content-header {
+.view-size-bigger .events .content-header{
     width: calc(100% - 20px - 20px) !important;
     margin: 0 auto !important;
 }
 
-.view-size-bigger .event .content-container,
-.view-size-bigger .event .speakerblock {
+.view-size-bigger .event .content-header {
     width: calc(100% - 20px - 20px) !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
 }
+
+    .view-size-bigger .event .content-container,
+    .view-size-bigger .event .speakerblock {
+        width: calc(100% - 20px - 20px) !important;
+        margin: 0 auto !important;
+    }
 
 .view-size-bigger .countdown .count {
     padding-top: 25px !important;
