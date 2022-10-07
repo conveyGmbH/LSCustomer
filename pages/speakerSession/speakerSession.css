@@ -21,7 +21,7 @@
 }
 
 .speakerSession .contentarea {
-    background-color: var(--e-global-color-background);
+    background-color: var(--e-global-color-buttontext);
 }
 
 .speakerSession .color_container2 {
