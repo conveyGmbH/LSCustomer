@@ -150,7 +150,7 @@
 
 .event .content-grid {
     width: var(--max-content-width) !important;
-    margin: var(--max-content-margin-left) !important;
+    margin-left: var(--max-content-margin-left) !important;
     padding: 10px !important;
 }
 
