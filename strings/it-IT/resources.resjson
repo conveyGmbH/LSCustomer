@@ -36,6 +36,7 @@
     "event.unlockPostLabel" : "Sblocca il messaggio",
     "event.lockedMessage"   : "Messaggio bloccato",
     "event.speaker"         : "Speaker",
+    "event.chatInputPlaceholder" : "Inserire il messaggio",
 
     "conference.waitMessage": "Divertiti con la tua conferenza online oggi",
 
