@@ -1210,6 +1210,17 @@ var __meteor_runtime_config__;
                                 }
                             } else if (dataTest === "publicChat") {
                                 Log.print(Log.l.trace, "chat panel opened" );
+                                var hideChatButton = addedNode.querySelector("button[aria-label=\"Verbergen Öffentlicher Chat\"], button[aria-label=\"Hide public chat\"]");
+                                if (hideChatButton) {
+                                    var hideChatButtonSpan = hideChatButton.querySelector("span");
+                                    if (hideChatButtonSpan) {
+                                        hideChatButtonSpan.textContent = "Chat";
+                                    }
+                                }
+                                var messageInput = fragmentElement.querySelector(elementSelectors.publicChat + " form textarea#message-input");
+                                if (messageInput) {
+                                    messageInput.placeholder = getResourceText("event.chatInputPlaceholder");
+                                }
                                 if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
                                     if (!observeChatMessageListPromise) {
                                         observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
