@@ -704,10 +704,27 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview div[aria-label="Presentation tools"],
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] {
     z-index: 100 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    -webkit-box-pack: center !important;
+    justify-content: center !important;
+    margin: 0px 0.8rem 0px 0px !important;
+    position: absolute !important;
+    inset: 0px 0px 0px auto !important;
+    pointer-events: none !important;
 }
 #conference.mediaview div[aria-label="Presentation tools"] > div:first-child,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] > div:first-child {
     box-shadow: var(--toolbar-box-shadow) !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    -webkit-box-align: center !important;
+    align-items: center !important;
+    -webkit-box-pack: center !important;
+    justify-content: center !important;
+    border-radius: 5px !important;
+    pointer-events: all !important;
 }
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT > button,
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper > button,
