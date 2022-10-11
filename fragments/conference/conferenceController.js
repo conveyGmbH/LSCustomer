@@ -103,7 +103,11 @@ var __meteor_runtime_config__;
         minimizePresentation:    '#conference.mediaview #layout button[data-test="minimizePresentation"]',
         restorePresentation:'#conference.mediaview #layout button[data-test="restorePresentation"]',
 
-        leaveAudio:      '#conference.mediaview #layout button[aria-describedby="leaveAudio"]'
+        leaveAudio:      '#conference.mediaview #layout button[aria-describedby="leaveAudio"]',
+
+        // dangerous global CSS definitions to remove:
+        htmlElement:     "html {",
+        allElements:     "*, *:before, *:after {"
     };
     // BBB 2.4 RC1
     elementSelectors.leaveAudio = '#conference.mediaview button[data-test="leaveAudio"]';
@@ -529,11 +533,27 @@ var __meteor_runtime_config__;
                 return null;
             }
 
+            var removeStyle = function(style, selector) {
+                var text = style.innerHTML;
+                if (text) {
+                    var posStart = text.indexOf(selector);
+                    if (posStart >= 0) {
+                        var posEnd = text.indexOf("}", posStart);
+                        if (posEnd >= 0) {
+                            style.innerHTML = text.substr(0, posStart) + text.substr(posEnd + 1);
+                        }
+                    }
+                }
+            }
+
             var addStyle = function (styleTag, fragmentHref, position) {
                 var src = (fragmentHref + "script[" + position + "]").toLowerCase();
                 if (!(src in styles)) {
                     styles[src] = true;
-                    head.appendChild(styleTag.cloneNode(true));
+                    var clonedNode = styleTag.cloneNode(true);
+                    removeStyle(clonedNode, elementSelectors.htmlElement);
+                    removeStyle(clonedNode, elementSelectors.allElements);
+                    head.appendChild(clonedNode);
                 }
             }
 

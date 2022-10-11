@@ -14,6 +14,12 @@
     position: absolute;
 }
 
+#conference.mediaview *, #conference.mediaview *:before, #conference.mediaview *:after,
+.portal--27FHYi *, .portal--27FHYi *:before, .portal--27FHYi *:after,
+.ReactModalPortal *, .ReactModalPortal *:before, .ReactModalPortal *:after {
+    box-sizing: border-box;
+}
+
 #conference.mediaview #app {
     width: 100%;
     height: 100%;
