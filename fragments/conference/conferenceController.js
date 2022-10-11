@@ -1210,6 +1210,17 @@ var __meteor_runtime_config__;
                                 }
                             } else if (dataTest === "publicChat") {
                                 Log.print(Log.l.trace, "chat panel opened" );
+                                var hideChatButton = addedNode.querySelector("button[aria-label=\"Verbergen Öffentlicher Chat\"], button[aria-label=\"Hide public chat\"]");
+                                if (hideChatButton) {
+                                    var hideChatButtonSpan = hideChatButton.querySelector("span");
+                                    if (hideChatButtonSpan) {
+                                        hideChatButtonSpan.textContent = "Chat";
+                                    }
+                                }
+                                var messageInput = fragmentElement.querySelector(elementSelectors.publicChat + " form textarea#message-input");
+                                if (messageInput) {
+                                    messageInput.placeholder = getResourceText("event.chatInputPlaceholder");
+                                }
                                 if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
                                     if (!observeChatMessageListPromise) {
                                         observeChatMessageListPromise = WinJS.Promise.timeout(50).then(function () {
@@ -1522,13 +1533,9 @@ var __meteor_runtime_config__;
             that.observeChatMessageList = observeChatMessageList;
 
             var onWheelSvg = function (event) {
-                if (pageControllerName === "modSessionController" ||
-                    pageControllerName === "speakerSessionController") {
-                    if (event) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    return false;
+                if (event) {
+                    //event.preventDefault();
+                    event.stopPropagation();
                 }
                 return true;
             }
@@ -1750,17 +1757,18 @@ var __meteor_runtime_config__;
                         if (svgWhiteboard) {
                             var svgContainer = svgWhiteboard.parentElement.parentElement;
                             presentationOpened = true;
-                            // prevent scrolling on zoom per mouse wheel! Now always!
-                            if (/*(pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController") && */
-                                !that.onWheelSvg) {
+                            // prevent zoom per mouse wheel!
+                            if (!that.onWheelSvg) {
                                 that.onWheelSvg = onWheelSvg;
-                                that.addRemovableEventListener(svgContainer.firstElementChild, "wheel", that.onWheelSvg.bind(that), true);
+                                that.addRemovableEventListener(svgWhiteboard, "wheel", that.onWheelSvg.bind(that), true);
                             }
                             var presentationFullscreen = svgContainer.querySelector(elementSelectors.fullScreenButton);
                             if (presentationFullscreen && !presentationFullscreen._handlerRegistered) {
                                 that.registerFullscreenHandlers(svgContainer, presentationFullscreen);
                                 presentationFullscreen._handlerRegistered = true;
                             }
+                        } else {
+                            that.onWheelSvg = null;
                         }
                         if (!userListDefaults.panelWrapperObserver) {
                             userListDefaults.panelWrapperObserver = new MutationObserver(function (mutationList, observer) {

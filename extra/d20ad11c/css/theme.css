@@ -341,7 +341,7 @@ section.elementor-inner-section > div {
     cursor: pointer;
 }
 
-.event .contentarea {
+.event .contentarea, .modSession .contentarea, .speakerSession .contentarea {
     background-color: var(--e-global-color-buttontext);
 }
 
@@ -374,6 +374,15 @@ section.elementor-inner-section > div {
 
     use: .view-size-biggest
 */
+
+.view-size-biggest .event .content-grid,
+.view-size-biggest .modSession .content-grid,
+.view-size-biggest .speakerSession .content-grid {
+    padding: 0 10px !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+}
+
 
 
 /*margins/paddings for medium size screens or orientation landscape
