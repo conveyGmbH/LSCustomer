@@ -459,10 +459,10 @@
 .register #loginButton > div > span, .register #re_registerEvent > span {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-buttontext) !important;
-    font-size: 16px;
+    font-size: 16px !important;
     font-weight: 600;
     text-transform: uppercase;
-    line-height: 20px;
+    line-height: 20px !important;
     letter-spacing: 1px;
 }
 
