@@ -591,8 +591,12 @@ section.elementor-inner-section > div {
     cursor: default;
 }
 
-/**contentarea is more than 1460px**/
+/* conference: slide number selector */
+.dafGPL select {
+    min-width: 85px;
+}
 
+/**contentarea is more than 1460px**/
 @media (min-width:1820px) {
     .body-content-top {
         width: 100%;
