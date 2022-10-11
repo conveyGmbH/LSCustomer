@@ -19,7 +19,6 @@
 :root {
     /***new vars***/
     --max-content-margin-left: calc(50% - 600px) !important;
-    --content-margin-left: calc(50% - 550px) !important;
     --max-content-width: calc(1300px - 50px - 50px) !important;
     --max-content-width-surface: calc(1300px - 50px - 50px) !important;
     --font-family-default: "Raleway",  Helvetica,  Arial,  Verdana, sans-serif !important;
@@ -148,16 +147,11 @@
     padding-bottom: 0 !important;
 }
 
-.event .content-grid {
-    width: var(--max-content-width) !important;
-    margin-left: var(--max-content-margin-left) !important;
-    padding: 10px !important;
-}
-
+.event .content-grid,
 .modSession .content-grid,
 .speakerSession .content-grid {
     width: var(--max-content-width) !important;
-    margin-left: var(--content-margin-left) !important;
+    margin-left: var(--max-content-margin-left) !important;
     padding: 10px !important;
 }
 .body-content-top .header-bar {
@@ -614,15 +608,11 @@ section.elementor-inner-section > div {
 /**margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1500px**/
 @media (min-width: 1300px) and (max-width: 1499px) {
-    .event .content-grid {
-        width: var(--max-content-width) !important;
-        margin: 0 auto !important;
-    }
-
+    .event .content-grid,
     .modSession .content-grid,
     .speakerSession .content-grid {
         width: var(--max-content-width) !important;
-        margin-left: var(--content-margin-left) !important;
+        margin: 0 auto !important;
     }
 
     .event .hero-header, .event .intersection{
