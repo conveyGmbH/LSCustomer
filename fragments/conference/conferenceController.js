@@ -2996,7 +2996,6 @@ var __meteor_runtime_config__;
                             if (contentGrid && !WinJS.Utilities.hasClass(contentGrid, "content-grid-full-width")) {
                                 WinJS.Utilities.addClass(contentGrid, "content-grid-full-width");
                             }
-                            contentGrid.style.marginLeft = "calc(50% - 550px) !important;";
                             that.showUserList(false,!!that.binding.dataEvent.ListOnlyModerators);
                             if (!adjustContentPositionsPromise) {
                                 adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function() {
