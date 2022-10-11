@@ -474,6 +474,10 @@
     display: none !important;
 }
 
+.register .input_field {
+    width: inherit !important;
+}
+
 .event .logOff-container {
     float: none !important;
     height: auto;
