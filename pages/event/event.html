@@ -74,7 +74,7 @@
                                 </div>
                                 <div id="teaserhost" class="teaser-fragmenthost" data-win-bind="style.display: showTeaser Binding.Converter.toDisplay"></div>
                                 <div id="maintenancehost" class="maintenance-fragmenthost" data-win-bind="style.display: showMaintenance Binding.Converter.toDisplay"></div>
-                                <div class="intersection">
+                                <div class="intersection" data-win-bind="style.display: showEventDetails Binding.Converter.toDisplay">
                                     <!-- Add font awesome icons -->
                                     <div class="caption-field" data-win-bind="style.visibility: showShare Binding.Converter.toVisibility">
                                         <span data-win-bind="textContent: dataText.ev_text_share_text"></span>
@@ -121,7 +121,7 @@
                         <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
                         
                         <div class="content-grid">
-                            <div class="section-3">
+                            <div class="section-3" data-win-bind="style.display: showEventDetails Binding.Converter.toDisplay">
                                 <!--evText-->
                                 <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                                     <div class="win-h2 content-header" data-win-bind="style.display: dataText.ev_text_para_h2 Binding.Converter.toDisplay">

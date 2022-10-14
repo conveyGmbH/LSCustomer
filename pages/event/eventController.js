@@ -33,6 +33,7 @@
                 showEvText: false,
                 showOffText: false,
                 showMaintenance: false,
+                showEventDetails: true,
                 registerStatus: "",
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
@@ -868,6 +869,7 @@
                                 that.binding.showCountdown = false;
                                 that.binding.showConference = true;
                                 that.binding.showTeaser = false;
+                                that.binding.showEventDetails = false;
                                 return that.getFragmentByName("conference");
                             }
                         }
@@ -879,6 +881,7 @@
                         that.binding.showConference = false;
                         that.binding.showMaintenance = false;
                         that.binding.showRecordedContent = true;
+                        that.binding.showEventDetails = true;
                         return that.getFragmentByName("recordedContent").then(function (recordedContentFragment) {
                             if (recordedContentFragment &&
                                 recordedContentFragment.controller &&
@@ -896,6 +899,7 @@
                         that.binding.showTeaser = false;
                         that.binding.showCountdown = false;
                         that.binding.showConference = false;
+                        that.binding.showEventDetails = true;
                         // option set in portal - eventgensettings
                         if (that.binding.dataEvent.RecordSession) {
                             that.binding.showRecordedContent = true;
@@ -941,6 +945,7 @@
                           that.binding.showConference = true;
                           that.binding.showTeaser = false;
                     } */else {
+                        that.binding.showEventDetails = true;
                         if (AppData._persistentStates.registerData.resultCode === 0 || AppData._persistentStates.registerData.resultCode === 13) {
                             that.binding.showRegister = true; /*!!that.binding.dataEvent.ShowReg*/
                             that.binding.showTeaser = true;
