@@ -36,8 +36,8 @@
     display: grid;
     grid-template-columns: 20% 15% 15% 15% 15% 20%;
     grid-gap: 0;
-    margin-left: var(--max-content-margin-left);
-    width: var(--max-content-width);
+    margin-left: 0;
+    width: 100%;
     padding: 15px 0;
 }
 

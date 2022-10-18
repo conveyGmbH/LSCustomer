@@ -36,8 +36,8 @@
     display: grid;
     grid-template-columns: 20% 15% 15% 15% 15% 20%;
     grid-gap: 0;
-    margin-left: var(--max-content-margin-left);
-    width: var(--max-content-width);
+    margin-left: 0;
+    width: 100%;
     padding: 15px 0;
 }
 
@@ -74,6 +74,9 @@
 .modSession .content-header {
     height: auto;
     width: 100%;
+    margin: 15px 0 0 0;
+    padding: 5px 0;
+    float: left;
 }
 
 .modSession .content-header-line {
@@ -105,13 +108,6 @@
     line-height: 28px;
 }
 
-.modSession .content-header {
-    height: auto;
-    width: auto;
-    margin: 15px 0 0 0;
-    padding: 5px 0;
-    
-}
 .modSession .content-header-line {
     margin-top: 10px;
 }
