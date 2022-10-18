@@ -41,7 +41,14 @@
     width: var(--max-content-width);
     padding: 15px;
 }
-.event .recordedContent-fragmenthost,
+.event .recordedContent-fragmenthost {
+    width: auto;
+    height: auto;
+    margin-left: 20px;
+    padding: 15px;
+    grid-column: 1/span 6;
+}
+
 .event .conference-fragmenthost {
     width: auto;
     height: auto;
@@ -417,7 +424,7 @@ p.ev-text {
     *******/
 
 @media (min-width: 1500px) {
-    .event .hero-header, .event .teaser-fragmenthost, .event .intersection, .event .section-3 {
+    .event .hero-header, .event .teaser-fragmenthost, .event .recordedContent-fragmenthost, .event .intersection, .event .section-3 {
         margin-left: 0;
     }
 
