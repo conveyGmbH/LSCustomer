@@ -71,11 +71,6 @@
     object-fit: cover;
 }
 
-.speakerSession .content-header {
-    height: auto;
-    width: 100%;
-}
-
 .speakerSession .content-header-line {
     height: auto;
     width: 100%;

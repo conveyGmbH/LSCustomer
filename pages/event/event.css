@@ -95,11 +95,6 @@
     object-fit: cover;
 }
 
-.event .content-header {
-    height: auto;
-    width: 100%;
-}
-
 .event .content-header-line {
     height: auto;
     width: 100%;
