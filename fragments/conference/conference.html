@@ -114,8 +114,13 @@
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'event.showPresentation'}"></span>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.hidePresentation'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.showPresentation'}"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -131,24 +136,117 @@
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showVideoList Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.hideVideoList'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showVideoList Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.showVideoList'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="show-media-button-container">
+                            <button id="showMedia" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="media"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
                                         <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'event.showVideoList'}"></span>
+                                            <span data-win-res="{textContent: 'tooltip.showMedia'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="show-deskshare-button-container">
+                            <button id="showDeskShare" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)"
+                                    data-win-bind="ariaChecked: showDeskShare">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="desk_share"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showDeskShare Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.showDeskShare'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showDeskShare Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.stopDeskShare'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="show-userlist-button-container">
+                            <button id="showUserList" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickShowPane', event)"
+                                    data-win-bind="ariaChecked: showUserList">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="team"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.closeUserList'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.openUserList'}"></span>
                                         </div>
                                     </div>
                                 </div>
                             </button>
                         </div>
                         <div class="show-chat-button-container">
-                            <button id="toggleChatButtonContainer" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickShowChat', event)">
+                            <button id="showChat" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickShowPane', event)"
+                                    data-win-bind="ariaChecked: showChat">
                                 <div class="button-tip">
                                     <span class="show-button">
                                         <i class="show-button-image" id="chat"></i>
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.closeChat'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplayNone">
                                             <span data-win-res="{textContent: 'tooltip.openChat'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="show-notes-button-container">
+                            <button id="showNotes" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickShowPane', event)"
+                                    data-win-bind="ariaChecked: showNotes">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="notes"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.closeNotes'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.openNotes'}"></span>
                                         </div>
                                     </div>
                                 </div>

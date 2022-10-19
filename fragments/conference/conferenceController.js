@@ -77,6 +77,7 @@ var __meteor_runtime_config__;
         userNameMainSelfLabel: 'div[role="button"] div[role="button"] > span > i',
 
         publicChat:      '#conference.mediaview #layout div[data-test="publicChat"]',
+        notes:      '#conference.mediaview #layout div[data-test="notes"]',
         chatMessages:    'div[data-test="chatMessages"]',
         grid:            'div[aria-label="grid"]',
         nameElement:     ".meta--ZfU5fg .name--ZfTXko span, .meta--ZfU5fg .logout--Z1DfGNI > span",
@@ -97,9 +98,16 @@ var __meteor_runtime_config__;
         presentationContainer: "#conference.mediaview #layout > div[data-test=\"presentationContainer\"]",
         presentationPlaceholder: "#conference.mediaview #layout > div[data-test=\"presentationPlaceholder\"]",
 
+        showMediaButton: '#conference.mediaview #layout button[aria-label="Aktionen"], #conference.mediaview #layout button[aria-label="Actions"]',
+        startDeskShare: '#conference.mediaview #layout button[aria-label="Bildschirm freigeben"], #conference.mediaview #layout button[aria-label="Share screen"]',
+        stopDeskShare: '#conference.mediaview #layout button[aria-label="Bildschirmfreigabe beenden"], #conference.mediaview #layout button[aria-label="End screen share"]',
         userListToggleButton: '#conference.mediaview #layout button[aria-label="Users and messages toggle"], #conference.mediaview #layout button[aria-label="Teilnehmer/Nachrichten-Umschaltung"]',
         chatToggleButton: '#conference.mediaview #layout div[role="button"]#chat-toggle-button',
+        notesToggleButton: '#conference.mediaview #layout div[aria-label="Geteilte Notizen"], #conference.mediaview #layout div[aria-label="Shared notes"]',
         fullScreenButton: 'button[data-test="presentationFullscreenButton"]',
+
+        closeChatButton: '#conference.mediaview #layout button[aria-label="Verbergen Öffentlicher Chat"], #conference.mediaview #layout button[aria-label="Hide public chat"]',
+        closeNotesButton: '#conference.mediaview #layout button[aria-label="Notizen verbergen"], #conference.mediaview #layout button[aria-label="Hide notes"]',
 
         hidePresentationButton:   '#conference.mediaview #layout button[data-test="hidePresentationButton"]',
         restorePresentationButton:'#conference.mediaview #layout button[data-test="restorePresentationButton"]',
@@ -256,6 +264,10 @@ var __meteor_runtime_config__;
                 showSelfie: true,
                 showPresentation: true,
                 showVideoList: true,
+                showChat: false,
+                showNotes: false,
+                showUserList: false,
+                showDeskShare: false,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 showUnpinnedVideoList: false,
@@ -291,7 +303,11 @@ var __meteor_runtime_config__;
             var showSelfieToggleContainer = fragmentElement.querySelector(".show-selfie-toggle-container");
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
+            var showMediaButtonContainer = fragmentElement.querySelector(".show-media-button-container");
+            var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
             var showChatButtonContainer = fragmentElement.querySelector(".show-chat-button-container");
+            var showNotesButtonContainer = fragmentElement.querySelector(".show-notes-button-container");
+            var showUserListButtonContainer = fragmentElement.querySelector(".show-userlist-button-container");
             var pollQuestionContainer = fragmentElement.querySelector("poll-question-container");
             var emojiButtonContainer = fragmentElement.querySelector(".emoji-button-container");
             var emojiToolbar = fragmentElement.querySelector("#emojiToolbar");
@@ -311,6 +327,7 @@ var __meteor_runtime_config__;
             var observePollPromise = null;
             var submitCommandMessagePromise = null;
             var openChatPanePromise = null;
+            var openNotesPanePromise = null;
             var showNotificationPromise = null;
             var hideNotificationPromise = null;
             var setPollingPromise = null;
@@ -1683,7 +1700,6 @@ var __meteor_runtime_config__;
 
             var lastDeviceListTime = 0;
             var adjustContentPositions = function () {
-                var actionsBarRight = null, actionsBarLeft = null;
                 Log.call(Log.l.trace, "Conference.Controller.", "videoListPosition=" + (that.binding.dataSessionStatus && that.binding.dataSessionStatus.VideoListPosition));
                 if (adjustContentPositionsPromise) {
                     adjustContentPositionsPromise.cancel();
@@ -1830,6 +1846,8 @@ var __meteor_runtime_config__;
                                 childList: true
                             });
                         }
+                        var actionsBarCenter = fragmentElement.querySelector(elementSelectors.actionsBarCenter);
+
                         var mediaContainer = panelWrapper;
                         if (mediaContainer) {
                             var cameraDock = mediaContainer.querySelector(elementSelectors.cameraDock);
@@ -1850,6 +1868,7 @@ var __meteor_runtime_config__;
                             WinJS.Promise.timeout(20).then(function() {
                                 var paneWidth = 0;
                                 var currentPane = panelWrapper.firstElementChild;
+                                var actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
                                 if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium")) {
                                     panelWrapper.style.left = "0";
                                     panelWrapper.style.width = "100%";
@@ -1884,6 +1903,11 @@ var __meteor_runtime_config__;
                                             WinJS.Utilities.removeClass(panelWrapper, "pane-expanded");
                                         }
                                     }
+                                    if (actionsBar && actionsBar.style) {
+                                        actionsBar.style.left = 0;
+                                        actionsBar.style.width = "100%";
+                                        actionsBar.style.maxWidth = "100%";
+                                    }
                                 } else {
                                     while (currentPane &&
                                         typeof currentPane.tagName === "string" &&
@@ -1903,6 +1927,11 @@ var __meteor_runtime_config__;
                                         Log.print(Log.l.trace, "paneWidth=" + paneWidth);
                                         panelWrapper.style.width = "calc(100% - " + paneWidth.toString() + "px)";
                                         panelWrapper.style.left = paneWidth.toString() + "px";
+                                        if (actionsBar && actionsBar.style) {
+                                            actionsBar.style.left = (-paneWidth).toString() + "px";
+                                            actionsBar.style.width = "calc(100% + " + paneWidth.toString() + "px)";
+                                            actionsBar.style.maxWidth = "calc(100% + " + paneWidth.toString() + "px)";
+                                        }
                                         currentPane = panelWrapper.firstElementChild;
                                         while (currentPane &&
                                             typeof currentPane.tagName === "string" &&
@@ -1917,6 +1946,11 @@ var __meteor_runtime_config__;
                                         }
                                         panelWrapper.style.width = "100%";
                                         panelWrapper.style.left = "0";
+                                        if (actionsBar && actionsBar.style) {
+                                            actionsBar.style.left = 0;
+                                            actionsBar.style.width = "100%";
+                                            actionsBar.style.maxWidth = "100%";
+                                        }
                                     }
                                     if (overlayElement) {
                                         var overlayStyle = window.getComputedStyle(overlayElement);
@@ -1986,6 +2020,7 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             }
+                            var actionsBarLeft = fragmentElement.querySelector(elementSelectors.actionsBarLeft);
                             if (pageControllerName === "modSessionController") {
                                 if (presenterButtonContainer && presenterButtonContainer.style) {
                                     var navBarTopCenter = fragmentElement.querySelector(elementSelectors.navBarTopCenter);
@@ -1996,30 +2031,70 @@ var __meteor_runtime_config__;
                                         presenterButtonContainer.style.display = "inline-block";
                                     }
                                 }
-                                if (showPresentationToggleContainer && showPresentationToggleContainer.style) {
-                                    actionsBarRight = fragmentElement.querySelector(elementSelectors.actionsBarRight);
-                                    if (actionsBarRight &&
-                                        !isChildElement(actionsBarRight, showPresentationToggleContainer)) {
-                                        actionsBarRight.appendChild(showPresentationToggleContainer);
-                                        showPresentationToggleContainer.style.display = "inline-block";
+                                if (showDeskShareButtonContainer && showDeskShareButtonContainer.style) {
+                                    if (actionsBarCenter &&
+                                        !isChildElement(actionsBarCenter, showDeskShareButtonContainer)) {
+                                        if (actionsBarCenter.firstElementChild) {
+                                            actionsBarCenter.insertBefore(showDeskShareButtonContainer, actionsBarCenter.firstElementChild);
+                                        } else {
+                                            actionsBarCenter.appendChild(showDeskShareButtonContainer);
+                                        }
+                                        showDeskShareButtonContainer.style.display = "inline-block";
+                                    }
+                                }
+                                if (showMediaButtonContainer && showMediaButtonContainer.style) {
+                                    if (actionsBarCenter &&
+                                        !isChildElement(actionsBarCenter, showMediaButtonContainer)) {
+                                        if (actionsBarCenter.firstElementChild) {
+                                            actionsBarCenter.insertBefore(showMediaButtonContainer, actionsBarCenter.firstElementChild);
+                                        } else {
+                                            actionsBarCenter.appendChild(showMediaButtonContainer);
+                                        }
+                                        showMediaButtonContainer.style.display = "inline-block";
                                     }
                                 }
                                 if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
-                                    actionsBarRight = fragmentElement.querySelector(elementSelectors.actionsBarRight);
-                                    if (actionsBarRight &&
-                                        !isChildElement(actionsBarRight, showVideoListToggleContainer)) {
-                                        actionsBarRight.appendChild(showVideoListToggleContainer);
+                                    if (actionsBarCenter &&
+                                        !isChildElement(actionsBarCenter, showVideoListToggleContainer)) {
+                                        if (actionsBarCenter.firstElementChild) {
+                                            actionsBarCenter.insertBefore(showVideoListToggleContainer, actionsBarCenter.firstElementChild);
+                                        } else {
+                                            actionsBarCenter.appendChild(showVideoListToggleContainer);
+                                        }
                                         showVideoListToggleContainer.style.display = "inline-block";
                                     }
                                 }
-                            } else {
-                                if (showChatButtonContainer && showChatButtonContainer.style) {
-                                    actionsBarLeft = fragmentElement.querySelector(elementSelectors.actionsBarLeft);
-                                    if (actionsBarLeft &&
-                                        !isChildElement(actionsBarLeft, showChatButtonContainer)) {
-                                        actionsBarLeft.appendChild(showChatButtonContainer);
-                                        showChatButtonContainer.style.display = "inline-block";
+                                if (showPresentationToggleContainer && showPresentationToggleContainer.style) {
+                                    if (actionsBarCenter &&
+                                        !isChildElement(actionsBarCenter, showPresentationToggleContainer)) {
+                                        if (actionsBarCenter.firstElementChild) {
+                                            actionsBarCenter.insertBefore(showPresentationToggleContainer, actionsBarCenter.firstElementChild);
+                                        } else {
+                                            actionsBarCenter.appendChild(showPresentationToggleContainer);
+                                        }
+                                        showPresentationToggleContainer.style.display = "inline-block";
                                     }
+                                }
+                            }
+                            if (showUserListButtonContainer && showUserListButtonContainer.style) {
+                                if (actionsBarLeft &&
+                                    !isChildElement(actionsBarLeft, showUserListButtonContainer)) {
+                                    actionsBarLeft.appendChild(showUserListButtonContainer);
+                                    showUserListButtonContainer.style.display = "inline-block";
+                                }
+                            }
+                            if (showChatButtonContainer && showChatButtonContainer.style) {
+                                if (actionsBarLeft &&
+                                    !isChildElement(actionsBarLeft, showChatButtonContainer)) {
+                                    actionsBarLeft.appendChild(showChatButtonContainer);
+                                    showChatButtonContainer.style.display = "inline-block";
+                                }
+                            }
+                            if (showNotesButtonContainer && showNotesButtonContainer.style) {
+                                if (actionsBarLeft &&
+                                    !isChildElement(actionsBarLeft, showNotesButtonContainer)) {
+                                    actionsBarLeft.appendChild(showNotesButtonContainer);
+                                    showNotesButtonContainer.style.display = "inline-block";
                                 }
                             }
                             if (overlayElement) {
@@ -2405,7 +2480,6 @@ var __meteor_runtime_config__;
                             }
                         }
                         if (pageControllerName === "eventController" || pageControllerName === "speakerSessionController") {
-                            var actionsBarCenter = fragmentElement.querySelector(elementSelectors.actionsBarCenter);
                             if (actionsBarCenter && emojiButtonContainer && emojiToolbar &&
                                 actionsBarCenter.lastElementChild !== emojiToolbar) {
                                 var audioControlsContainer = actionsBarCenter.querySelector(elementSelectors.audioControlsContainer);
@@ -4084,19 +4158,19 @@ var __meteor_runtime_config__;
                 clickToggleSwitch: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (AppBar.notifyModified && event && event.currentTarget) {
-                        var command = event.currentTarget.id;
                         var toggle = event.currentTarget;
-                        if (toggle && command) {
+                        if (toggle && toggle.id && typeof toggle.ariaChecked !== "undefined") {
+                            var command = toggle.id;
                             var checked;
                             if (typeof toggle.ariaChecked === "string") {
                                 checked = (toggle.ariaChecked === "true") ? true : false;
-                            } else {
+                            } else  {
                                 checked = toggle.ariaChecked;
                             }
                             checked = !checked;
                             if (typeof toggle.ariaChecked === "string") {
                                 toggle.ariaChecked = checked ? "true" : "false";
-                            } else {
+                            } else  {
                                 toggle.ariaChecked = checked;
                             }
                             var value = that.binding[command];
@@ -4139,9 +4213,142 @@ var __meteor_runtime_config__;
                     }
                     Log.ret(Log.l.info);
                 },
-                clickShowChat: function(event) {
+                clickAction: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    that.openChatPane(event);
+                    if (AppBar.notifyModified && event && event.currentTarget) {
+                        var button = event.currentTarget;
+                        if (button && button.id) {
+                            var command = button.id;
+                            switch (command) {
+                            case "showMedia":
+                                var showMediaButton = fragmentElement.querySelector(elementSelectors.showMediaButton);
+                                if (showMediaButton) {
+                                    showMediaButton.click();
+                                }
+                                break;
+                            case "showDeskShare":
+                                var startDeskShare = fragmentElement.querySelector(elementSelectors.startDeskShare);
+                                var stopDeskShare = fragmentElement.querySelector(elementSelectors.stopDeskShare);
+                                if (startDeskShare) {
+                                    startDeskShare.click();
+                                } else if (stopDeskShare) {
+                                    stopDeskShare.click();
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickShowPane: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (AppBar.notifyModified && event && event.currentTarget) {
+                        var button = event.currentTarget;
+                        if (button && button.id && typeof button.ariaChecked !== "undefined") {
+                            var command = button.id;
+                            var checked;
+                            if (typeof button.ariaChecked === "string") {
+                                checked = (button.ariaChecked === "true") ? true : false;
+                            } else {
+                                checked = button.ariaChecked;
+                            }
+                            checked = !checked;
+                            if (typeof button.ariaChecked === "string") {
+                                button.ariaChecked = checked ? "true" : "false";
+                            } else {
+                                button.ariaChecked = checked;
+                            }
+                            var value = that.binding[command];
+                            if (typeof value === "boolean" && value !== checked) {
+                                var closeChatButton = fragmentElement.querySelector(elementSelectors.closeChatButton);
+                                var closeNotesButton = fragmentElement.querySelector(elementSelectors.closeNotesButton);
+                                var userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
+                                var btnToggleUserList = fragmentElement.querySelector(elementSelectors.userListToggleButton);
+                                var panelWrapper = fragmentElement.querySelector(getMediaContainerSelector());
+                                that.binding[command] = checked;
+                                switch (command) {
+                                case "showChat":
+                                    if (checked) {
+                                        that.binding.showNotes = false;
+                                        that.binding.showUserList = false;
+                                        if (closeNotesButton) {
+                                            closeNotesButton.click();
+                                        }
+                                        if (userListContent) {
+                                            if (panelWrapper) {
+                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                                    WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                                                }
+                                            }
+                                        }
+                                        that.openChatPane(event);
+                                    } else {
+                                        if (closeChatButton) {
+                                            closeChatButton.click();
+                                        }
+                                    }
+                                    break;
+                                case "showNotes":
+                                    if (checked) {
+                                        that.binding.showChat = false;
+                                        that.binding.showUserList = false;
+                                        if (closeChatButton) {
+                                            closeChatButton.click();
+                                        }
+                                        if (userListContent) {
+                                            if (panelWrapper) {
+                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                                    WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                                                }
+                                            }
+                                        }
+                                        that.openNotesPane(event);
+                                    } else {
+                                        if (closeNotesButton) {
+                                            closeNotesButton.click();
+                                        }
+                                    }
+                                    break;
+                                case "showUserList":
+                                    if (checked) {
+                                        that.binding.showChat = false;
+                                        that.binding.showNotes = false;
+                                        if (closeChatButton) {
+                                            closeChatButton.click();
+                                        }
+                                        if (closeNotesButton) {
+                                            closeNotesButton.click();
+                                        }
+                                        if (!userListContent) {
+                                            if (btnToggleUserList) {
+                                                btnToggleUserList.click();
+                                            }
+                                        } else {
+                                            if (panelWrapper) {
+                                                if (WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                                    WinJS.Utilities.removeClass(panelWrapper, "hide-user-list-section");
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if (userListContent) {
+                                            if (panelWrapper) {
+                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                                    WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                                                }
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                                if (!adjustContentPositionsPromise) {
+                                    adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                        that.adjustContentPositions();
+                                    });
+                                }
+                            }
+                        }
+                    }
                     Log.ret(Log.l.info);
                 },
                 clickToggleEmojiButton: function(event) {
@@ -4451,6 +4658,42 @@ var __meteor_runtime_config__;
                 Log.ret(Log.l.info);
             }
             that.setCommandMessageHandler = setCommandMessageHandler;
+
+            var openNotesPane = function(event) {
+                var btnToggleNotes, btnToggleUserList;
+                Log.call(Log.l.info, "Conference.Controller.");
+                if (openNotesPanePromise) {
+                    openNotesPanePromise.cancel();
+                    openNotesPanePromise = null;
+                }
+                var panelWrapper = fragmentElement.querySelector(getMediaContainerSelector());
+                var notes = fragmentElement.querySelector(elementSelectors.notes);
+                if (!notes) {
+                    var userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
+                    if (!userListContent) {
+                        if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                            WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                        } else {
+                            btnToggleUserList = fragmentElement.querySelector(elementSelectors.userListToggleButton);
+                            if (btnToggleUserList) {
+                                userListDefaults.inSubmitCommand = true;
+                                btnToggleUserList.click();
+                            }
+                        }
+                    } else {
+                        userListDefaults.inSubmitCommand = false;
+                        btnToggleNotes = fragmentElement.querySelector(elementSelectors.notesToggleButton);
+                        if (btnToggleNotes) {
+                            btnToggleNotes.click();
+                        }
+                    }
+                    openNotesPanePromise = WinJS.Promise.timeout(20).then(function() {
+                        that.openNotesPane();
+                    });
+                }
+                Log.ret(Log.l.info);
+            }
+            that.openNotesPane = openNotesPane;
 
             var openChatPane = function(event) {
                 var btnToggleChat, btnToggleUserList;

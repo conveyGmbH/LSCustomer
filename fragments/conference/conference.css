@@ -52,14 +52,32 @@
 
 #conference.mediaview section[aria-label="Actions bar"],
 #conference.mediaview section[aria-label="Aktionsmenü"] {
-    left: 0 !important;
-    top: calc(100% - 64px) !important;
-    width: 100% !important;
+    left: 0;
+    top: calc(100% - 64px);
+    width: 100%;
     max-width: 100%;
 }
 
 .modSession #conference.mediaview #layout > header:first-of-type > div:first-child > div {
     align-items: flex-start;
+}
+
+/* hide user-list toggle button*/
+#conference.mediaview #layout button[aria-label="Users and messages toggle"],
+#conference.mediaview #layout button[aria-label="Teilnehmer/Nachrichten-Umschaltung"],
+#conference.mediaview #layout button[aria-label="Aktionen"],
+#conference.mediaview #layout button[aria-label="Actions"],
+#conference.mediaview #layout button[aria-label="Bildschirm freigeben"],
+#conference.mediaview #layout button[aria-label="Share screen"],
+#conference.mediaview #layout button[aria-label="Bildschirmfreigabe beenden"], 
+#conference.mediaview #layout button[aria-label="End screen share"] {
+    display: none;
+}
+
+/* hide chat & notes buttons in user-list*/
+#conference.mediaview #layout div[data-test="userListContent"] > div:first-child,
+#conference.mediaview #layout div[data-test="userListContent"] > div:first-child + div {
+    display: none;
 }
 
 .show-selfie-toggle-container,
@@ -168,9 +186,6 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
 #conference.mediaview #layout button[data-test="switchButton"] {
     padding: var(--btn-sm-padding) !important;
 }
-.show-chat-button-container {
-    display: none;
-}
 
 /* set fullscreen button to the top */
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]):not(:last-child) > .wrapper--Z17x8k2.dark--Z1Y80Wt.bottom--Z1oNR9L,
@@ -199,10 +214,14 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
     line-height: 1 !important;
 }
 
-.view-size-medium .show-chat-button-container,
-.pane-expanded .show-chat-button-container {
-    display: none !important;
+.show-chat-button-container,
+.show-userlist-button-container,
+.show-notes-button-container,
+.show-media-button-container,
+.show-deskshare-button-container {
+    display: none;
 }
+
 .button--Z2dosza {
     border-radius: var(--border-size);
     font-weight: var(--btn-font-weight);
@@ -909,7 +928,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 #conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN > i.icon-bbb-settings,
 #conference.mediaview div[data-test="userList"] > div:first-child button > i.icon-bbb-settings {
-    margin: 5px;
+    margin: 0;
     color: var(--btn-primary-color) !important;
 }
 #conference.mediaview .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN:not([aria-disabled="true"]):hover,
@@ -1006,8 +1025,8 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview div[data-test="userListContent"] {
     color: var(--user-list-text) !important;
 }
-#conference.mediaview .userList--Z2q1D0p + .resizeSidebarNavWrapper,
-#conference.mediaview #layout > div:first-child > div:not([data-test="publicChat"]):not([data-test="notes"]):not(#pollPanel) + .resizeSidebarNavWrapper {
+.resizeSidebarNavWrapper,
+.resizeSidebarContentWrapper {
     display: none;
 }
 
@@ -1024,15 +1043,15 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 .pagecontrol:not(.view-size-medium) #conference.mediaview #layout > div:first-child,
 .pagecontrol:not(.view-size-medium) #conference.mediaview #layout > div:first-child + div {
-    width: 240px;
-    min-width: 240px !important;
-    max-width: 240px !important;
-    height: 100% !important;
+    width: 320px;
+    min-width: 320px !important;
+    max-width: 320px !important;
+    height: calc(100% - 64px) !important;
 }
 .pagecontrol:not(.view-size-medium) #conference.mediaview #layout > div:first-child + div {
-    width: 240px;
-    min-width: 180px !important;
-    max-width: 400px !important;
+    width: 320px;
+    min-width: 320px !important;
+    max-width: 320px !important;
 }
 .pagecontrol:not(.view-size-medium) #conference.mediaview .hide-user-list-section > div:first-child,
 .pagecontrol:not(.view-size-medium) #conference.mediaview .hide-user-list-section > div:first-child *,
@@ -1106,9 +1125,8 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] {
     height: 64px !important;
     display: block;
-    position: absolute;
+    position: absolute !important;
     bottom: 0;
-    width: 100%;
     margin: 0;
     /*
     width: calc(100% - 480px);
@@ -1152,12 +1170,15 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     max-height: 40px;
 }
 
-.modSession #conference.mediaview #layout > header:first-of-type > div:first-child .icon-bbb-left_arrow,
-.modSession #conference.mediaview #layout > header:first-of-type > div:first-child .icon-bbb-right_arrow {
+#conference.mediaview #layout > header:first-of-type > div:first-child .icon-bbb-left_arrow,
+#conference.mediaview #layout > header:first-of-type > div:first-child .icon-bbb-right_arrow {
+    /*
     margin: 14px -10px;
     z-index: 10;
     color: var(--btn-primary-bg);
     font-weight: bold;
+*/
+    display: none !important;
 }
 /* hide event title */
 #conference.mediaview .presentationTitle--1LT79g,
@@ -2182,9 +2203,13 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     margin: 0 10px;
     z-index: 10;
 }
+#conferenceController .show-deskshare-button-container > .win-button,
+#conferenceController .show-media-button-container > .win-button,
 #conferenceController .show-videolist-toggle-container > .win-button,
 #conferenceController .show-presentation-toggle-container > .win-button,
 #conferenceController .show-chat-button-container > .win-button,
+#conferenceController .show-userlist-button-container > .win-button,
+#conferenceController .show-notes-button-container > .win-button,
 #conferenceController .emoji-button-container > .win-button {
     background-color: var(--btn-primary-bg) !important;
     border-color: transparent;
@@ -2199,46 +2224,74 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border-radius: 50%;
     outline-style: none;
 }
+#conferenceController .show-deskshare-button-container > .win-button[aria-checked=true],
 #conferenceController .show-videolist-toggle-container > .win-button[aria-checked=true],
-#conferenceController .show-presentation-toggle-container > .win-button[aria-checked=true] {
+#conferenceController .show-presentation-toggle-container > .win-button[aria-checked=true],
+#conferenceController .show-chat-button-container > .win-button[aria-checked=true],
+#conferenceController .show-userlist-button-container > .win-button[aria-checked=true],
+#conferenceController .show-notes-button-container > .win-button[aria-checked=true] {
     opacity: 1.0;
 }
 
+#conferenceController .show-media-button-container > .win-button:hover,
+#conferenceController .show-media-button-container > .win-button:active,
+#conferenceController .show-deskshare-button-container > .win-button:hover,
+#conferenceController .show-deskshare-button-container > .win-button:active,
 #conferenceController .show-videolist-toggle-container > .win-button:hover,
 #conferenceController .show-videolist-toggle-container > .win-button:active,
 #conferenceController .show-presentation-toggle-container > .win-button:hover,
 #conferenceController .show-presentation-toggle-container > .win-button:active,
 #conferenceController .show-chat-button-container > .win-button:hover,
 #conferenceController .show-chat-button-container > .win-button:active,
+#conferenceController .show-userlist-button-container > .win-button:hover,
+#conferenceController .show-userlist-button-container > .win-button:active,
+#conferenceController .show-notes-button-container > .win-button:hover,
+#conferenceController .show-notes-button-container > .win-button:active,
 #conferenceController .emoji-button-container > .win-button:hover,
 #conferenceController .emoji-button-container > .win-button:active {
     background-color: var(--btn-primary-bg) !important;
     opacity: 0.8;
 }
 
+#conferenceController .show-media-button-container > .win-button .button-tip,
+#conferenceController .show-deskshare-button-container > .win-button .button-tip,
 #conferenceController .show-videolist-toggle-container > .win-button .button-tip,
 #conferenceController .show-presentation-toggle-container > .win-button .button-tip,
 #conferenceController .show-chat-button-container > .win-button .button-tip,
+#conferenceController .show-userlist-button-container > .win-button .button-tip,
+#conferenceController .show-notes-button-container > .win-button .button-tip,
 #conferenceController .emoji-button-container > .win-button .button-tip {
     text-align: center;
     vertical-align: middle;
     margin: 0;
 }
 
+#conferenceController .show-media-button-container .show-button-image > svg,
+#conferenceController .show-deskshare-button-container .show-button-image > svg,
 #conferenceController .show-videolist-toggle-container .show-button-image > svg,
 #conferenceController .show-presentation-toggle-container .show-button-image > svg,
-#conferenceController .show-chat-button-container .show-button-image > svg {
+#conferenceController .show-chat-button-container .show-button-image > svg,
+#conferenceController .show-userlist-button-container .show-button-image > svg,
+#conferenceController .show-notes-button-container .show-button-image > svg {
     margin-top: 4px;
     width: 20px;
     height: 20px;
 }
 
+#conferenceController .show-media-button-container > button:hover .show-button-image,
+#conferenceController .show-media-button-container > button:active .show-button-image,
+#conferenceController .show-deskshare-button-container > button:hover .show-button-image,
+#conferenceController .show-deskshare-button-container > button:active .show-button-image,
 #conferenceController .show-videolist-toggle-container > button:hover .show-button-image,
 #conferenceController .show-videolist-toggle-container > button:active .show-button-image,
 #conferenceController .show-presentation-toggle-container > button:hover .show-button-image,
 #conferenceController .show-presentation-toggle-container > button:active .show-button-image,
 #conferenceController .show-chat-button-container > button:hover .show-button-image,
-#conferenceController .show-chat-button-container > button:active .show-button-image {
+#conferenceController .show-chat-button-container > button:active .show-button-image,
+#conferenceController .show-userlist-button-container > button:hover .show-button-image,
+#conferenceController .show-userlist-button-container > button:active .show-button-image,
+#conferenceController .show-notes-button-container > button:hover .show-button-image,
+#conferenceController .show-notes-button-container > button:active .show-button-image {
     opacity: 0.8;
 }
 
@@ -2250,15 +2303,19 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
     content: "\1f642";
 }
+#conferenceController .show-media-button-container > button .button-tip .win-tooltip,
+#conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip,
 #conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip,
 #conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip,
-#conferenceController .show-chat-button-container > button .button-tip .win-tooltip {
+#conferenceController .show-chat-button-container > button .button-tip .win-tooltip,
+#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip,
+#conferenceController .show-notes-button-container > button .button-tip .win-tooltip {
     top: -15px;
-    left: -18px;
+    left: -50px;
     min-height: 40px;
-    min-width: 100px;
-    width: 110px !important;
-    max-width: 110px !important;
+    min-width: 120px;
+    width: 120px !important;
+    max-width: 120px !important;
     transition-duration: 500ms;
     transition-property: top, opacity;
     opacity: 0;
@@ -2287,12 +2344,20 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border: none;
     padding: 0;
 }
+#conferenceController .show-media-button-container > button:hover .button-tip .win-tooltip,
+#conferenceController .show-media-button-container > button:active .button-tip .win-tooltip,
+#conferenceController .show-deskshare-button-container > button:hover .button-tip .win-tooltip,
+#conferenceController .show-deskshare-button-container > button:active .button-tip .win-tooltip,
 #conferenceController .show-videolist-toggle-container > button:hover .button-tip .win-tooltip,
 #conferenceController .show-videolist-toggle-container > button:active .button-tip .win-tooltip,
 #conferenceController .show-presentation-toggle-container > button:hover .button-tip .win-tooltip,
 #conferenceController .show-presentation-toggle-container > button:active .button-tip .win-tooltip,
 #conferenceController .show-chat-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-chat-button-container > button:active .button-tip .win-tooltip {
+#conferenceController .show-chat-button-container > button:active .button-tip .win-tooltip,
+#conferenceController .show-userlist-button-container > button:hover .button-tip .win-tooltip,
+#conferenceController .show-userlist-button-container > button:active .button-tip .win-tooltip,
+#conferenceController .show-notes-button-container > button:hover .button-tip .win-tooltip,
+#conferenceController .show-notes-button-container > button:active .button-tip .win-tooltip {
     top: -36px;
     opacity: 1;
     text-align: center;
@@ -2305,12 +2370,16 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     text-align: center;
     vertical-align: middle;
 }
+#conferenceController .show-media-button-container > button .button-tip .win-tooltip .bubble-arrow,
+#conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-arrow {
+#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-arrow,
+#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip .bubble-arrow,
+#conferenceController .show-notes-button-container > button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
-    margin-left: calc(50% - 36px);
+    margin-left: calc(50% - 10px);
     transform: rotate(45deg);
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
@@ -2327,9 +2396,13 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     position: absolute;
     top: 34px;
 }
+#conferenceController .show-media-button-container > button .button-tip .win-tooltip .bubble-body,
+#conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip .bubble-body,
 #conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip .bubble-body,
 #conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body {
+#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body,
+#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip .bubble-body,
+#conferenceController .show-notes-button-container > button .button-tip .win-tooltip .bubble-body {
     border-radius: 5px;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
@@ -2337,6 +2410,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     padding: 4px 7px 6px;
     position: absolute;
     top: -4px;
+    min-width: 120px;
+    min-height: 25px;
 }
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 5px;
