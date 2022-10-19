@@ -94,6 +94,9 @@ var __meteor_runtime_config__;
         videoPlayer:     "#video-player",
         audioControlsContainer: "span:first-child",
 
+        presentationContainer: "#conference.mediaview #layout > div[data-test=\"presentationContainer\"]",
+        presentationPlaceholder: "#conference.mediaview #layout > div[data-test=\"presentationPlaceholder\"]",
+
         userListToggleButton: '#conference.mediaview #layout button[aria-label="Users and messages toggle"], #conference.mediaview #layout button[aria-label="Teilnehmer/Nachrichten-Umschaltung"]',
         chatToggleButton: '#conference.mediaview #layout div[role="button"]#chat-toggle-button',
         fullScreenButton: 'button[data-test="presentationFullscreenButton"]',
@@ -1716,8 +1719,10 @@ var __meteor_runtime_config__;
                     var presentationOpened = false;
                     var panelWrapper = fragmentElement.querySelector(getMediaContainerSelector());
                     if (panelWrapper) {
+                        Log.print(Log.l.trace, "panelWrapper open!");
                         var videoPlayer = panelWrapper.querySelector(elementSelectors.videoPlayer);
                         if (videoPlayer && videoPlayer.firstElementChild) {
+                            Log.print(Log.l.trace, "videoPlayer open!");
                             videoPLayerOpened = true;
                             var videoElement = videoPlayer.firstElementChild;
                             var fullScreenButton = null;
@@ -1765,6 +1770,7 @@ var __meteor_runtime_config__;
                         }
                         var screenShareVideo = panelWrapper.querySelector(elementSelectors.screenShareVideo);
                         if (screenShareVideo) {
+                            Log.print(Log.l.trace, "screenShareVideo open!");
                             var screenShareContainer = screenShareVideo.parentElement;
                             screenShareOpened = true;
                             var screenShareFullscreen = screenShareContainer.querySelector(elementSelectors.fullScreenButton);
@@ -1775,6 +1781,7 @@ var __meteor_runtime_config__;
                         }
                         var svgWhiteboard = panelWrapper.querySelector(elementSelectors.svgWhiteboard);
                         if (svgWhiteboard) {
+                            Log.print(Log.l.trace, "svgWhiteboard open!");
                             var svgContainer = svgWhiteboard.parentElement.parentElement;
                             presentationOpened = true;
                             // prevent zoom per mouse wheel!
@@ -1789,6 +1796,19 @@ var __meteor_runtime_config__;
                             }
                         } else {
                             that.onWheelSvg = null;
+                            if (!videoPLayerOpened && !screenShareOpened) {
+                                Log.print(Log.l.trace, "svgWhiteboard not open - look for presentationContainer or presentationPlaceholder");
+                                var presentationContainer = panelWrapper.querySelector(elementSelectors.presentationContainer );
+                                var presentationPlaceholder = panelWrapper.querySelector(elementSelectors.presentationPlaceholder);
+                                if (presentationContainer || presentationPlaceholder) {
+                                    Log.print(Log.l.trace, "svgWhiteboard not ready yet!");
+                                    if (!adjustContentPositionsPromise) {
+                                        adjustContentPositionsPromise = WinJS.Promise.timeout(250).then(function () {
+                                            that.adjustContentPositions();
+                                        });
+                                    }
+                                }
+                            }
                         }
                         if (!userListDefaults.panelWrapperObserver) {
                             userListDefaults.panelWrapperObserver = new MutationObserver(function (mutationList, observer) {
