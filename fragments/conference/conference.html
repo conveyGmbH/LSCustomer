@@ -105,21 +105,45 @@
                                  onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
                         </div>
                         <div class="show-presentation-toggle-container">
-                            <div id="showPresentation" data-win-control="WinJS.UI.ToggleSwitch"
-                                 data-win-bind="winControl.checked: showPresentation; winControl.title: labelShowPresentation; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
-                                 onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
+                            <button id="showPresentation" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickToggleSwitch', event)"
+                                    data-win-bind="ariaChecked: showVideoList">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="presentation"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'event.showPresentation'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
                         </div>
                         <div class="show-videolist-toggle-container">
-                            <div id="showVideoList" data-win-control="WinJS.UI.ToggleSwitch"
-                                 data-win-bind="winControl.checked: showVideoList; winControl.title: labelShowVideoList; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
-                                 onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
+                            <button id="showVideoList" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickToggleSwitch', event)"
+                                    data-win-bind="ariaChecked: showVideoList">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="camera_user"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'event.showVideoList'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
                         </div>
                         <div class="show-chat-button-container">
                             <button id="toggleChatButtonContainer" class="win-button"
                                     onclick="AppBar.handleEvent('click', 'clickShowChat', event)">
                                 <div class="button-tip">
                                     <span class="show-button">
-                                        <i class="show-button-image" id="message"></i>
+                                        <i class="show-button-image" id="chat"></i>
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>

@@ -23,9 +23,9 @@
             this.prevHeight = 0;
 
             Colors.loadSVGImageElements(element, "presenter-mode-image", 42, "#ffffff");
-            Colors.loadSVGImageElements(element, "show-button-image", 20, "#ffffff", null, null, {
-                 message: { strokeWidth: 400 }
-            });
+            Colors.loadSVGImageElements(element, "show-button-image", 20);/*, "#ffffff", null, null, {
+                message: { strokeWidth: 400 }
+            });*/
 
             // add page specific commands to AppBar
             var commandList = [];

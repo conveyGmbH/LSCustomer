@@ -2182,6 +2182,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     margin: 0 10px;
     z-index: 10;
 }
+#conferenceController .show-videolist-toggle-container > .win-button,
+#conferenceController .show-presentation-toggle-container > .win-button,
 #conferenceController .show-chat-button-container > .win-button,
 #conferenceController .emoji-button-container > .win-button {
     background-color: var(--btn-primary-bg) !important;
@@ -2197,6 +2199,15 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border-radius: 50%;
     outline-style: none;
 }
+#conferenceController .show-videolist-toggle-container > .win-button[aria-checked=true],
+#conferenceController .show-presentation-toggle-container > .win-button[aria-checked=true] {
+    opacity: 1.0;
+}
+
+#conferenceController .show-videolist-toggle-container > .win-button:hover,
+#conferenceController .show-videolist-toggle-container > .win-button:active,
+#conferenceController .show-presentation-toggle-container > .win-button:hover,
+#conferenceController .show-presentation-toggle-container > .win-button:active,
 #conferenceController .show-chat-button-container > .win-button:hover,
 #conferenceController .show-chat-button-container > .win-button:active,
 #conferenceController .emoji-button-container > .win-button:hover,
@@ -2205,6 +2216,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     opacity: 0.8;
 }
 
+#conferenceController .show-videolist-toggle-container > .win-button .button-tip,
+#conferenceController .show-presentation-toggle-container > .win-button .button-tip,
 #conferenceController .show-chat-button-container > .win-button .button-tip,
 #conferenceController .emoji-button-container > .win-button .button-tip {
     text-align: center;
@@ -2212,12 +2225,18 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     margin: 0;
 }
 
+#conferenceController .show-videolist-toggle-container .show-button-image > svg,
+#conferenceController .show-presentation-toggle-container .show-button-image > svg,
 #conferenceController .show-chat-button-container .show-button-image > svg {
     margin-top: 4px;
     width: 20px;
     height: 20px;
 }
 
+#conferenceController .show-videolist-toggle-container > button:hover .show-button-image,
+#conferenceController .show-videolist-toggle-container > button:active .show-button-image,
+#conferenceController .show-presentation-toggle-container > button:hover .show-button-image,
+#conferenceController .show-presentation-toggle-container > button:active .show-button-image,
 #conferenceController .show-chat-button-container > button:hover .show-button-image,
 #conferenceController .show-chat-button-container > button:active .show-button-image {
     opacity: 0.8;
@@ -2231,6 +2250,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
     content: "\1f642";
 }
+#conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip,
+#conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip,
 #conferenceController .show-chat-button-container > button .button-tip .win-tooltip {
     top: -15px;
     left: -18px;
@@ -2266,6 +2287,10 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border: none;
     padding: 0;
 }
+#conferenceController .show-videolist-toggle-container > button:hover .button-tip .win-tooltip,
+#conferenceController .show-videolist-toggle-container > button:active .button-tip .win-tooltip,
+#conferenceController .show-presentation-toggle-container > button:hover .button-tip .win-tooltip,
+#conferenceController .show-presentation-toggle-container > button:active .button-tip .win-tooltip,
 #conferenceController .show-chat-button-container > button:hover .button-tip .win-tooltip,
 #conferenceController .show-chat-button-container > button:active .button-tip .win-tooltip {
     top: -36px;
@@ -2280,6 +2305,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     text-align: center;
     vertical-align: middle;
 }
+#conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip .bubble-arrow,
+#conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
@@ -2300,6 +2327,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     position: absolute;
     top: 34px;
 }
+#conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip .bubble-body,
+#conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip .bubble-body,
 #conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body {
     border-radius: 5px;
     background: var(--e-global-color-text, #2A2F3D);

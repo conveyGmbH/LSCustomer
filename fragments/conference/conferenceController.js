@@ -2923,6 +2923,7 @@ var __meteor_runtime_config__;
                         that.adjustContentPositions();
                     });
                 }
+                that.sendResize(500);
                 Log.ret(Log.l.trace);
             }
             that.reflectSessionStatus = reflectSessionStatus;
@@ -4064,12 +4065,24 @@ var __meteor_runtime_config__;
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (AppBar.notifyModified && event && event.currentTarget) {
                         var command = event.currentTarget.id;
-                        var toggle = event.currentTarget.winControl;
+                        var toggle = event.currentTarget;
                         if (toggle && command) {
+                            var checked;
+                            if (typeof toggle.ariaChecked === "string") {
+                                checked = (toggle.ariaChecked === "true") ? true : false;
+                            } else {
+                                checked = toggle.ariaChecked;
+                            }
+                            checked = !checked;
+                            if (typeof toggle.ariaChecked === "string") {
+                                toggle.ariaChecked = checked ? "true" : "false";
+                            } else {
+                                toggle.ariaChecked = checked;
+                            }
                             var value = that.binding[command];
-                            if (typeof value === "boolean" && value !== toggle.checked) {
-                                that.binding[command] = toggle.checked;
-                                if (!toggle.checked) {
+                            if (typeof value === "boolean" && value !== checked) {
+                                that.binding[command] = checked;
+                                if (!checked) {
                                     command = command.replace(/show/, "hide");
                                 }
                                 if (pageControllerName === "modSessionController") {
