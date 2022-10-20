@@ -30,23 +30,22 @@
     --max-content-margin-left: calc(50% - 720px);
     --max-content-width: 1410px;
     --max-content-width-surface: 1460px !important;
-    
     --e-global-color-primary: #2A2F3D;
     --e-global-color-secondary: #07B9CB;
     --e-global-color-text: #2A2F3D;
     --e-global-color-accent: #C2D63E;
     --e-global-color-d4faeed: #F3FBFC;
     --e-global-color-buttontext: #FFFFFF;
-
     --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
     --outline-focus: 1px solid var(--color-gray-lighter);
-
-
     --font-family-default: 'Barlow' !important;
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
     --outline-focus: none;
+    /****Icons in Conference***/
+    --btn-primary-bg: #2856A0;
+
 }
 .home .win-type-title,
 .home .win-type-subtitle,

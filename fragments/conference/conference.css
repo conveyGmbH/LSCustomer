@@ -482,10 +482,20 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview div[data-test="publicChat"] form button
 .portal--27FHYi .buttonWrapper--x8uow,
 .ReactModalPortal header > button {
-    background: none !important;
-    padding: 0 !important;
     outline: none !important;
     margin: 0 !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
 }
 #conference.mediaview #layout > header:first-of-type > div:first-child button:focus,
 #conference.mediaview #layout > section[aria-label="Actions bar"] button:focus,
@@ -721,9 +731,22 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview .wrapper--ZhSWmd .button--Z2dosza,
 #conference.mediaview .ghost--Z136aiN,
 #conference.mediaview .button--yKJ5d {
-    background-color: var(--btn-primary-bg) !important;
+    background-color: var(--btn-primary-bg,#2856A0) !important;
+    border-color: var(--btn-primary-bg,#2856A0) !important;
     box-shadow: var(--box-shadow-button) !important;
     opacity: 0.8;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
 }
 /* Toolbar Buttons */
 #conference.mediaview div[aria-label="Presentation tools"],
@@ -2203,27 +2226,35 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     margin: 0 10px;
     z-index: 10;
 }
-#conferenceController .show-deskshare-button-container > .win-button,
-#conferenceController .show-media-button-container > .win-button,
-#conferenceController .show-videolist-toggle-container > .win-button,
-#conferenceController .show-presentation-toggle-container > .win-button,
-#conferenceController .show-chat-button-container > .win-button,
-#conferenceController .show-userlist-button-container > .win-button,
-#conferenceController .show-notes-button-container > .win-button,
-#conferenceController .emoji-button-container > .win-button {
-    background-color: var(--btn-primary-bg) !important;
-    border-color: transparent;
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    box-shadow: var(--box-shadow-button) !important;
-    opacity: 0.64;
-    padding: 0;
-    border: none;
-    margin-top: 2px;
-    border-radius: 50%;
-    outline-style: none;
-}
+    #conferenceController .show-deskshare-button-container > .win-button,
+    #conferenceController .show-media-button-container > .win-button,
+    #conferenceController .show-videolist-toggle-container > .win-button,
+    #conferenceController .show-presentation-toggle-container > .win-button,
+    #conferenceController .show-chat-button-container > .win-button,
+    #conferenceController .show-userlist-button-container > .win-button,
+    #conferenceController .show-notes-button-container > .win-button,
+    #conferenceController .emoji-button-container > .win-button {
+        background-color: var(--btn-primary-bg) !important;
+        border-color: transparent;
+        width: 48px;
+        height: 48px;
+        min-width: 40px;
+        box-shadow: var(--box-shadow-button) !important;
+        opacity: 0.64;
+        margin-top: 2px;
+        outline-style: none;
+        border-radius: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+        gap: 8px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+
+    }
 #conferenceController .show-deskshare-button-container > .win-button[aria-checked=true],
 #conferenceController .show-videolist-toggle-container > .win-button[aria-checked=true],
 #conferenceController .show-presentation-toggle-container > .win-button[aria-checked=true],
@@ -2250,7 +2281,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .emoji-button-container > .win-button:hover,
 #conferenceController .emoji-button-container > .win-button:active {
     background-color: var(--btn-primary-bg) !important;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 #conferenceController .show-media-button-container > .win-button .button-tip,
