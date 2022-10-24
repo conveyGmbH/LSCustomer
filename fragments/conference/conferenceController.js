@@ -98,6 +98,7 @@ var __meteor_runtime_config__;
         presentationContainer: "#conference.mediaview #layout > div[data-test=\"presentationContainer\"]",
         presentationPlaceholder: "#conference.mediaview #layout > div[data-test=\"presentationPlaceholder\"]",
 
+        showConnectionStatus: '#conference.mediaview #layout button[aria-label="Show connection status of users"], #conference.mediaview #layout button[aria-label="Verbindungsstatus der Teilnehmer anzeigen"]',
         showMediaButton: '#conference.mediaview #layout button[aria-label="Aktionen"], #conference.mediaview #layout button[aria-label="Actions"]',
         startDeskShare: '#conference.mediaview #layout button[aria-label="Bildschirm freigeben"], #conference.mediaview #layout button[aria-label="Share screen"]',
         stopDeskShare: '#conference.mediaview #layout button[aria-label="Bildschirmfreigabe beenden"], #conference.mediaview #layout button[aria-label="End screen share"]',
@@ -113,6 +114,8 @@ var __meteor_runtime_config__;
         restorePresentationButton:'#conference.mediaview #layout button[data-test="restorePresentationButton"]',
         minimizePresentation:    '#conference.mediaview #layout button[data-test="minimizePresentation"]',
         restorePresentation:'#conference.mediaview #layout button[data-test="restorePresentation"]',
+        raiseHandLabel:'#conference.mediaview #layout button[data-test="raiseHandLabel"]',
+        lowerHandLabel:'#conference.mediaview #layout button[data-test="lowerHandLabel"]',
 
         leaveAudio:      '#conference.mediaview #layout button[aria-describedby="leaveAudio"]',
 
@@ -268,6 +271,7 @@ var __meteor_runtime_config__;
                 showNotes: false,
                 showUserList: false,
                 showDeskShare: false,
+                raiseHand: false,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 showUnpinnedVideoList: false,
@@ -304,7 +308,9 @@ var __meteor_runtime_config__;
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var showMediaButtonContainer = fragmentElement.querySelector(".show-media-button-container");
+            var showConnectionStatusContainer = fragmentElement.querySelector(".show-connection-button-container");
             var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
+            var raiseHandButtonContainer = fragmentElement.querySelector(".raise-hand-button-container");
             var showChatButtonContainer = fragmentElement.querySelector(".show-chat-button-container");
             var showNotesButtonContainer = fragmentElement.querySelector(".show-notes-button-container");
             var showUserListButtonContainer = fragmentElement.querySelector(".show-userlist-button-container");
@@ -2021,6 +2027,24 @@ var __meteor_runtime_config__;
                                 }
                             }
                             var actionsBarLeft = fragmentElement.querySelector(elementSelectors.actionsBarLeft);
+                            var actionsBarRight = fragmentElement.querySelector(elementSelectors.actionsBarRight);
+                            if (raiseHandButtonContainer && raiseHandButtonContainer.style) {
+                                if (actionsBarCenter &&
+                                    !isChildElement(actionsBarCenter, raiseHandButtonContainer)) {
+                                    if (actionsBarCenter.firstElementChild) {
+                                        actionsBarCenter.insertBefore(raiseHandButtonContainer, actionsBarCenter.firstElementChild);
+                                    } else {
+                                        actionsBarCenter.appendChild(raiseHandButtonContainer);
+                                    }
+                                    raiseHandButtonContainer.style.display = "inline-block";
+                                    var lowerHandLabel = fragmentElement.querySelector(elementSelectors.lowerHandLabel);
+                                    if (lowerHandLabel) {
+                                        that.binding.raiseHand = true;
+                                    } else {
+                                        that.binding.raiseHand = false;
+                                    }
+                                }
+                            }
                             if (pageControllerName === "modSessionController") {
                                 if (presenterButtonContainer && presenterButtonContainer.style) {
                                     var navBarTopCenter = fragmentElement.querySelector(elementSelectors.navBarTopCenter);
@@ -2029,17 +2053,6 @@ var __meteor_runtime_config__;
                                         navBarTopCenter.insertBefore(presenterButtonContainer,
                                             navBarTopCenter.firstElementChild);
                                         presenterButtonContainer.style.display = "inline-block";
-                                    }
-                                }
-                                if (showDeskShareButtonContainer && showDeskShareButtonContainer.style) {
-                                    if (actionsBarCenter &&
-                                        !isChildElement(actionsBarCenter, showDeskShareButtonContainer)) {
-                                        if (actionsBarCenter.firstElementChild) {
-                                            actionsBarCenter.insertBefore(showDeskShareButtonContainer, actionsBarCenter.firstElementChild);
-                                        } else {
-                                            actionsBarCenter.appendChild(showDeskShareButtonContainer);
-                                        }
-                                        showDeskShareButtonContainer.style.display = "inline-block";
                                     }
                                 }
                                 if (showMediaButtonContainer && showMediaButtonContainer.style) {
@@ -2051,6 +2064,17 @@ var __meteor_runtime_config__;
                                             actionsBarCenter.appendChild(showMediaButtonContainer);
                                         }
                                         showMediaButtonContainer.style.display = "inline-block";
+                                    }
+                                }
+                                if (showDeskShareButtonContainer && showDeskShareButtonContainer.style) {
+                                    if (actionsBarCenter &&
+                                        !isChildElement(actionsBarCenter, showDeskShareButtonContainer)) {
+                                        if (actionsBarCenter.firstElementChild) {
+                                            actionsBarCenter.insertBefore(showDeskShareButtonContainer, actionsBarCenter.firstElementChild);
+                                        } else {
+                                            actionsBarCenter.appendChild(showDeskShareButtonContainer);
+                                        }
+                                        showDeskShareButtonContainer.style.display = "inline-block";
                                     }
                                 }
                                 if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
@@ -2073,6 +2097,17 @@ var __meteor_runtime_config__;
                                             actionsBarCenter.appendChild(showPresentationToggleContainer);
                                         }
                                         showPresentationToggleContainer.style.display = "inline-block";
+                                    }
+                                }
+                                if (showConnectionStatusContainer && showConnectionStatusContainer.style) {
+                                    if (actionsBarRight &&
+                                        !isChildElement(actionsBarRight, showConnectionStatusContainer)) {
+                                        if (actionsBarRight.firstElementChild) {
+                                            actionsBarRight.insertBefore(showConnectionStatusContainer, actionsBarRight.firstElementChild);
+                                        } else {
+                                            actionsBarRight.appendChild(showConnectionStatusContainer);
+                                        }
+                                        showConnectionStatusContainer.style.display = "inline-block";
                                     }
                                 }
                             }
@@ -4233,6 +4268,25 @@ var __meteor_runtime_config__;
                                     startDeskShare.click();
                                 } else if (stopDeskShare) {
                                     stopDeskShare.click();
+                                }
+                                break;
+                            case "showConnectionStatus":
+                                var showConnectionStatus = fragmentElement.querySelector(elementSelectors.showConnectionStatus);
+                                if (showConnectionStatus) {
+                                    showConnectionStatus.click();
+                                }
+                                break;
+                            case "raiseHand":
+                                var lowerHandLabel = fragmentElement.querySelector(elementSelectors.lowerHandLabel);
+                                if (lowerHandLabel) {
+                                    lowerHandLabel.click();
+                                    that.binding.raiseHand = false;
+                                } else {
+                                    var raiseHandLabel = fragmentElement.querySelector(elementSelectors.raiseHandLabel);
+                                    if (raiseHandLabel) {
+                                        raiseHandLabel.click();
+                                        that.binding.raiseHand = true;
+                                    }
                                 }
                                 break;
                             }

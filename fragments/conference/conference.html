@@ -164,6 +164,44 @@
                                 </div>
                             </button>
                         </div>
+                        <div class="show-connection-button-container">
+                            <button id="showConnectionStatus" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="connection_status"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.showConnectionStatus'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="raise-hand-button-container">
+                            <button id="raiseHand" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)"
+                                    data-win-bind="ariaChecked: raiseHand">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="raise_hand"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: raiseHand Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.lowerHand'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: raiseHand Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.raiseHand'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
                         <div class="show-deskshare-button-container">
                             <button id="showDeskShare" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)"
