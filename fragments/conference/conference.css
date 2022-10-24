@@ -71,13 +71,13 @@
 #conference.mediaview #layout button[aria-label="Share screen"],
 #conference.mediaview #layout button[aria-label="Bildschirmfreigabe beenden"], 
 #conference.mediaview #layout button[aria-label="End screen share"] {
-    display: none;
+    display: none !important;
 }
 
 /* hide chat & notes buttons in user-list*/
 #conference.mediaview #layout div[data-test="userListContent"] > div:first-child,
 #conference.mediaview #layout div[data-test="userListContent"] > div:first-child + div {
-    display: none;
+    display: none !important;
 }
 
 .show-selfie-toggle-container,
