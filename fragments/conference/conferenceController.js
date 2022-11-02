@@ -271,6 +271,12 @@ var __meteor_runtime_config__;
                 showNotes: false,
                 showUserList: false,
                 showDeskShare: false,
+                presenterModeTiled: false,
+                presenterModeFull: false,
+                presenterModeSmall: false,
+                videoListLeft: false,
+                videoListRight: false,
+                videoListDefault: false,
                 raiseHand: false,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
@@ -1625,7 +1631,7 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
-                    if ((options.presenterModeTiledIsSet || options.presenterModeSmallIsSet) && !options.isHidden) {
+                    if ((that.binding.presenterModeTiled || that.binding.presenterModeSmall) && !options.isHidden) {
                         var left = (overlayElement.clientWidth - (overlayElement.clientHeight * video.videoWidth / video.videoHeight)) / 2;
                         var width;
                         if (left < 0) {
@@ -1637,7 +1643,7 @@ var __meteor_runtime_config__;
                             video.style.left = "0";
                             video.style.right = "";
                             width = overlayElement.clientWidth - 2 * left;
-                            if (options.videoOverlayIsRightIsSet) {
+                            if (that.binding.videoListRight) {
                                 videoListItem.style.marginLeft = Math.abs(left).toString() + "px";;
                             } else {
                                 videoListItem.style.marginLeft = "";
@@ -2560,28 +2566,65 @@ var __meteor_runtime_config__;
                 }).then(function () {
                     var mediaContainer = fragmentElement.querySelector(getMediaContainerSelector());
                     if (mediaContainer) {
+                        var options = {
+                            presentationIsHidden: false,
+                            isHidden: false
+                        }
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode")) {
+                            if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
+                                that.binding.presenterModeTiled = true;
+                                that.binding.presenterModeFull = false;
+                                that.binding.presenterModeSmall = false;
+                                that.binding.videoListLeft = false;
+                                that.binding.videoListRight = false;
+                                that.binding.videoListDefault = false;
+                            } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-full")) {
+                                that.binding.presenterModeTiled = false;
+                                that.binding.presenterModeFull = true;
+                                that.binding.presenterModeSmall = false;
+                                that.binding.videoListLeft = false;
+                                that.binding.videoListRight = false;
+                                that.binding.videoListDefault = false;
+                            } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-small")) {
+                                that.binding.presenterModeTiled = false;
+                                that.binding.presenterModeFull = false;
+                                that.binding.presenterModeSmall = true;
+                                that.binding.videoListLeft = false;
+                                that.binding.videoListRight = false;
+                                that.binding.videoListDefault = false;
+                            }
+                        } else {
+                            if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
+                                that.binding.presenterModeTiled = false;
+                                that.binding.presenterModeFull = false;
+                                that.binding.presenterModeSmall = false;
+                                that.binding.videoListLeft = true;
+                                that.binding.videoListRight = false;
+                                that.binding.videoListDefault = false;
+                            } else if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                that.binding.presenterModeTiled = false;
+                                that.binding.presenterModeFull = false;
+                                that.binding.presenterModeSmall = false;
+                                that.binding.videoListLeft = false;
+                                that.binding.videoListRight = true;
+                                that.binding.videoListDefault = false;
+                            } else {
+                                that.binding.presenterModeTiled = false;
+                                that.binding.presenterModeFull = false;
+                                that.binding.presenterModeSmall = false;
+                                that.binding.videoListLeft = false;
+                                that.binding.videoListRight = false;
+                                that.binding.videoListDefault = true;
+                            }
+                        }
+                        if (WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
+                            options.presentationIsHidden = true;
+                        }
                         var cameraDock = mediaContainer.querySelector(elementSelectors.cameraDock);
                         var overlayElement = cameraDock && cameraDock.parentElement;
                         if (overlayElement) {
                             var videoList = mediaContainer.querySelector(elementSelectors.videoList);
                             if (videoList) {
-                                var options = {
-                                    presentationIsHidden: false,
-                                    presenterModeTiledIsSet: false,
-                                    presenterModeSmallIsSet: false,
-                                    videoOverlayIsRightIsSet: false,
-                                    isHidden: false
-                                }
-                                if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
-                                    options.videoOverlayIsRightIsSet = true;
-                                }
-                                if (WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
-                                    options.presentationIsHidden = true;
-                                } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-tiled")) {
-                                    options.presenterModeTiledIsSet = true;
-                                } else if (WinJS.Utilities.hasClass(mediaContainer, "presenter-mode-small")) {
-                                    options.presenterModeSmallIsSet = true;
-                                }
                                 var numVideos = 0;
                                 var videoListItem = videoList.firstElementChild;
                                 while (videoListItem) {

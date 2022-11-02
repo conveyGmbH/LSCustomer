@@ -321,7 +321,7 @@ div[data-test="recordingIndicator"] #recording-description + span {
     height: 48px;
     min-width: 64px;
     box-shadow: none !important;
-    opacity: 0.8;
+    opacity: 0.64;
     font-size: var(--btn-sm-font-size) !important;
     padding: 0 !important;
     border-radius: var(--border-radius) !important;
@@ -331,6 +331,11 @@ div[data-test="recordingIndicator"] #recording-description + span {
 }
 #conferenceController .presenter-button-container > button.win-button:hover,
 #conferenceController .presenter-button-container > button.win-button:active {
+    background-color: var(--btn-primary-bg) !important;
+    opacity: 0.9;
+    color: var(--btn-primary-color) !important;
+}
+#conferenceController .presenter-button-container > button.win-button[aria-checked=true] {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
     color: var(--btn-primary-color) !important;
@@ -354,7 +359,7 @@ div[data-test="recordingIndicator"] #recording-description + span {
 #conferenceController .presenter-button-container > button.win-button:hover .button-tip .win-tooltip,
 #conferenceController .presenter-button-container > button.win-button:active .button-tip .win-tooltip {
     top: 64px;
-    opacity: 1;
+    opacity: 1.0;
 }
 #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
@@ -394,7 +399,7 @@ div[data-test="recordingIndicator"] #recording-description + span {
     font-weight: normal !important;
 }
 #conferenceController .presenter-button-container > button.container-close-button:hover {
-    opacity: 1;
+    opacity: 1.0;
 }
 
 #conferenceController .presenter-button-container .container-close-icon {
@@ -2399,7 +2404,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .show-userlist-button-container > button:active .show-button-image,
 #conferenceController .show-notes-button-container > button:hover .show-button-image,
 #conferenceController .show-notes-button-container > button:active .show-button-image {
-    opacity: 0.8;
+    opacity: 1.0;
 }
 
 
