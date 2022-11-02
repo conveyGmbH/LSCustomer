@@ -308,6 +308,7 @@ var __meteor_runtime_config__;
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var showMediaButtonContainer = fragmentElement.querySelector(".show-media-button-container");
+            var closeConnectionButtonContainer = fragmentElement.querySelector(".close-connection-button-container");
             var showConnectionStatusContainer = fragmentElement.querySelector(".show-connection-button-container");
             var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
             var raiseHandButtonContainer = fragmentElement.querySelector(".raise-hand-button-container");
@@ -2109,6 +2110,13 @@ var __meteor_runtime_config__;
                                         }
                                         showConnectionStatusContainer.style.display = "inline-block";
                                     }
+                                }
+                            }
+                            if (closeConnectionButtonContainer && closeConnectionButtonContainer.style) {
+                                if (actionsBarRight &&
+                                    !isChildElement(actionsBarRight, closeConnectionButtonContainer)) {
+                                    actionsBarRight.appendChild(closeConnectionButtonContainer);
+                                    closeConnectionButtonContainer.style.display = "inline-block";
                                 }
                             }
                             if (showUserListButtonContainer && showUserListButtonContainer.style) {
@@ -4255,6 +4263,9 @@ var __meteor_runtime_config__;
                         if (button && button.id) {
                             var command = button.id;
                             switch (command) {
+                            case "closeConnection":
+                                Application.navigateById("home", event);
+                                break;
                             case "showMedia":
                                 var showMediaButton = fragmentElement.querySelector(elementSelectors.showMediaButton);
                                 if (showMediaButton) {
