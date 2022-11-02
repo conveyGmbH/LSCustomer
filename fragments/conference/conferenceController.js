@@ -4264,7 +4264,11 @@ var __meteor_runtime_config__;
                             var command = button.id;
                             switch (command) {
                             case "closeConnection":
-                                Application.navigateById("home", event);
+                                if (pageControllerName === "modSessionController") {
+                                    AppBar.handleEvent('click', 'clickCloseSessionEvent', event);
+                                } else {
+                                    AppBar.handleEvent('click', 'clickHome', event);
+                                }
                                 break;
                             case "showMedia":
                                 var showMediaButton = fragmentElement.querySelector(elementSelectors.showMediaButton);
