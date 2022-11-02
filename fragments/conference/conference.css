@@ -1180,18 +1180,15 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     padding: 0;
 }
 
-.feTdjY {
-    gap: 14px;
+#conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:last-child,
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div:first-child > div:last-child {
+    position: relative;
+    bottom: 0;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1
 }
 
-    #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:last-child,
-    #conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div:first-child > div:last-child {
-        position: relative;
-        bottom: 0;
-        justify-content: flex-end;
-        align-items: center;
-        flex: 1
-    }
 .speakerSession #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:first-child,
 .speakerSession #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:last-child,
 .event #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:first-child,
@@ -1205,13 +1202,16 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     flex-direction: row;
     align-items: flex-start;
     padding: 0;
-    gap: 14px;
     width: 172px;
     height: 48px;
 }
 
 .dlTfni > * {
     margin: 0;
+}
+
+.feTdjY {
+    margin-left: 0 !important;
 }
 
 #conference.mediaview
@@ -2253,7 +2253,6 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 
 #conferenceController .emoji-button-container {
     display: none;
-    margin: 0;
     z-index: 10;
 }
 
@@ -2296,7 +2295,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     min-width: 40px;
     box-shadow: var(--box-shadow-button) !important;
     opacity: 0.64;
-    margin-top: 2px;
+    /*margin-top: 2px;*/
     outline-style: none;
     border-radius: 50px;
     display: flex;
