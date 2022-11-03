@@ -113,7 +113,7 @@
                         <div class="show-presentation-toggle-container">
                             <button id="showPresentation" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickToggleSwitch', event)"
-                                    data-win-bind="ariaChecked: showVideoList">
+                                    data-win-bind="ariaChecked: showPresentation">
                                 <div class="button-tip">
                                     <span class="show-button">
                                         <i class="show-button-image" id="presentation"></i>
@@ -121,11 +121,11 @@
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
                                         <div class="bubble-body"
-                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplay">
+                                             data-win-bind="style.display: showPresentation Binding.Converter.toDisplay">
                                             <span data-win-res="{textContent: 'tooltip.hidePresentation'}"></span>
                                         </div>
                                         <div class="bubble-body"
-                                             data-win-bind="style.display: showUserList Binding.Converter.toDisplayNone">
+                                             data-win-bind="style.display: showPresentation Binding.Converter.toDisplayNone">
                                             <span data-win-res="{textContent: 'tooltip.showPresentation'}"></span>
                                         </div>
                                     </div>
