@@ -117,14 +117,17 @@ var __meteor_runtime_config__;
         raiseHandLabel:'#conference.mediaview #layout button[data-test="raiseHandLabel"]',
         lowerHandLabel:'#conference.mediaview #layout button[data-test="lowerHandLabel"]',
 
-        leaveAudio:      '#conference.mediaview #layout button[aria-describedby="leaveAudio"]',
+        microphoneOn: '#conference.mediaview #layout button[aria-label="Freischalten"], #conference.mediaview #layout button[aria-label="Unlock"]',
+        microphoneOff: '#conference.mediaview #layout button[aria-label="Stummschalten"], #conference.mediaview #layout button[aria-label="Mute"]',
+        leaveAudio: '#conference.mediaview #layout button[data-test="leaveAudio"]',
+        joinAudio: '#conference.mediaview #layout button[data-test="joinAudio"]',
+        leaveVideo: '#conference.mediaview #layout button[data-test="leaveVideo"]',
+        joinVideo: '#conference.mediaview #layout button[data-test="joinVideo"]',
 
         // dangerous global CSS definitions to remove:
         htmlElement:     "html {",
         allElements:     "*, *:before, *:after {"
     };
-    // BBB 2.4 RC1
-    elementSelectors.leaveAudio = '#conference.mediaview button[data-test="leaveAudio"]';
     // BBB 2.5.2
     elementSelectors.avatar = elementSelectors.avatar + " > div";
     elementSelectors.moderator = 'div[data-test="moderatorAvatar"]';
@@ -248,7 +251,7 @@ var __meteor_runtime_config__;
                 small: "small"
             }
             var myselfLabel = "&nbsp;(" + getResourceText("label.me") + ")";
-
+            var actionsBarCenterObserver = null;
             var emojiToolbarPositionObserver = null;
 
             Fragments.Controller.apply(this, [fragmentElement, {
@@ -277,6 +280,10 @@ var __meteor_runtime_config__;
                 videoListRight: false,
                 videoListDefault: false,
                 raiseHand: false,
+                audioOn: false,
+                microphoneEnabled: false,
+                microphoneOn: false,
+                cameraOn: false,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 showUnpinnedVideoList: false,
@@ -314,6 +321,8 @@ var __meteor_runtime_config__;
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var showMediaButtonContainer = fragmentElement.querySelector(".show-media-button-container");
             var closeConnectionButtonContainer = fragmentElement.querySelector(".close-connection-button-container");
+            var toggleMicrophoneButtonContainer = fragmentElement.querySelector(".toggle-microphone-button-container");
+            var toggleCameraButtonContainer = fragmentElement.querySelector(".toggle-camera-button-container");
             var showConnectionStatusContainer = fragmentElement.querySelector(".show-connection-button-container");
             var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
             var raiseHandButtonContainer = fragmentElement.querySelector(".raise-hand-button-container");
@@ -1710,6 +1719,39 @@ var __meteor_runtime_config__;
             }
             that.registerFullscreenHandlers = registerFullscreenHandlers;
 
+            var handleAudioVideoButtonStatus = function() {
+                Log.call(Log.l.trace, "Conference.Controller.", "");
+                var microphoneOff = fragmentElement.querySelector(elementSelectors.microphoneOff);
+                if (microphoneOff) {
+                    that.binding.audioOn = true;
+                    that.binding.microphoneEnabled = true;
+                    that.binding.microphoneOn = true;
+                } else {
+                    that.binding.microphoneOn = false;
+                    var microphoneOn = fragmentElement.querySelector(elementSelectors.microphoneOn);
+                    if (microphoneOn) {
+                        that.binding.audioOn = true;
+                        that.binding.microphoneEnabled = true;
+                    } else {
+                        that.binding.microphoneEnabled = false;
+                        var leaveAudio = fragmentElement.querySelector(elementSelectors.leaveAudio);
+                        if (leaveAudio) {
+                            that.binding.audioOn = true;
+                        } else {
+                            that.binding.audioOn = false;
+                        }
+                    }
+                } 
+                var leaveVideo = fragmentElement.querySelector(elementSelectors.leaveVideo);
+                if (leaveVideo) {
+                    that.binding.cameraOn = true;
+                } else {
+                    that.binding.cameraOn = false;
+                } 
+                Log.ret(Log.l.trace, "");
+            }
+            that.handleAudioVideoButtonStatus = handleAudioVideoButtonStatus;
+
             var lastDeviceListTime = 0;
             var adjustContentPositions = function () {
                 Log.call(Log.l.trace, "Conference.Controller.", "videoListPosition=" + (that.binding.dataSessionStatus && that.binding.dataSessionStatus.VideoListPosition));
@@ -1859,6 +1901,20 @@ var __meteor_runtime_config__;
                             });
                         }
                         var actionsBarCenter = fragmentElement.querySelector(elementSelectors.actionsBarCenter);
+                        if (actionsBarCenter && !actionsBarCenterObserver) {
+                            actionsBarCenterObserver = new MutationObserver(function (mutationList, observer) {
+                                WinJS.Promise.timeout(0).then(function () {
+                                    that.handleAudioVideoButtonStatus();
+                                });
+                            });
+                            if (actionsBarCenterObserver) {
+                                actionsBarCenterObserver.observe(actionsBarCenter, {
+                                    childList: true,
+                                    attributeFilter: ["aria-label"],
+                                    subtree: true
+                                });
+                            }
+                        }
 
                         var mediaContainer = panelWrapper;
                         if (mediaContainer) {
@@ -2115,6 +2171,28 @@ var __meteor_runtime_config__;
                                         }
                                         showConnectionStatusContainer.style.display = "inline-block";
                                     }
+                                }
+                            }
+                            if (toggleCameraButtonContainer && toggleCameraButtonContainer.style) {
+                                if (actionsBarRight &&
+                                    !isChildElement(actionsBarRight, toggleCameraButtonContainer)) {
+                                    if (actionsBarRight.firstElementChild) {
+                                        actionsBarRight.insertBefore(toggleCameraButtonContainer, actionsBarRight.firstElementChild);
+                                    } else {
+                                        actionsBarRight.appendChild(toggleCameraButtonContainer);
+                                    }
+                                    toggleCameraButtonContainer.style.display = "inline-block";
+                                }
+                            }
+                            if (toggleMicrophoneButtonContainer && toggleMicrophoneButtonContainer.style) {
+                                if (actionsBarRight &&
+                                    !isChildElement(actionsBarRight, toggleMicrophoneButtonContainer)) {
+                                    if (actionsBarRight.firstElementChild) {
+                                        actionsBarRight.insertBefore(toggleMicrophoneButtonContainer, actionsBarRight.firstElementChild);
+                                    } else {
+                                        actionsBarRight.appendChild(toggleMicrophoneButtonContainer);
+                                    }
+                                    toggleMicrophoneButtonContainer.style.display = "inline-block";
                                 }
                             }
                             if (closeConnectionButtonContainer && closeConnectionButtonContainer.style) {
@@ -4327,6 +4405,39 @@ var __meteor_runtime_config__;
                                     stopDeskShare.click();
                                 }
                                 break;
+                            case "joinAudio":
+                                var joinAudio = fragmentElement.querySelector(elementSelectors.joinAudio);
+                                if (joinAudio) {
+                                    joinAudio.click();
+                                } else {
+                                    var leaveAudio = fragmentElement.querySelector(elementSelectors.leaveAudio);
+                                    if (leaveAudio) {
+                                        leaveAudio.click();
+                                    }
+                                }
+                                break;
+                            case "toggleMicrophone":
+                                var microphoneOff = fragmentElement.querySelector(elementSelectors.microphoneOff);
+                                if (microphoneOff) {
+                                    microphoneOff.click();
+                                } else {
+                                    var microphoneOn = fragmentElement.querySelector(elementSelectors.microphoneOn);
+                                    if (microphoneOn) {
+                                        microphoneOn.click();
+                                    }
+                                } 
+                                break;
+                            case "toggleCamera":
+                                var leaveVideo = fragmentElement.querySelector(elementSelectors.leaveVideo);
+                                if (leaveVideo) {
+                                    leaveVideo.click();
+                                } else {
+                                    var joinVideo = fragmentElement.querySelector(elementSelectors.joinVideo);
+                                    if (joinVideo) {
+                                        joinVideo.click();
+                                    }
+                                } 
+                                break;
                             case "showConnectionStatus":
                                 var showConnectionStatus = fragmentElement.querySelector(elementSelectors.showConnectionStatus);
                                 if (showConnectionStatus) {
@@ -4343,6 +4454,8 @@ var __meteor_runtime_config__;
                                     if (raiseHandLabel) {
                                         raiseHandLabel.click();
                                         that.binding.raiseHand = true;
+                                    } else {
+                                        that.binding.raiseHand = false;
                                     }
                                 }
                                 break;

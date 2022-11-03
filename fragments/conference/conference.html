@@ -170,17 +170,65 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="close-connection-button-container">
-                            <button id="closeConnection" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickAction', event)">
+                        <div class="toggle-microphone-button-container">
+                            <button id="toggleMicrophone" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)"
+                                    data-win-bind="ariaChecked: microphoneOn; style.display: microphoneEnabled Binding.Converter.toDisplay">
                                 <div class="button-tip">
                                     <span class="show-button">
-                                        <i class="show-button-image" id="close_connection"></i>
+                                        <i class="show-button-image" id="microphone_off"></i>
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'tooltip.closeConnection'}"></span>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: microphoneOn Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.microphoneOff'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: microphoneOn Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.microphoneOn'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button id="joinAudio" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)"
+                                    data-win-bind="ariaChecked: audioOn; style.display: microphoneEnabled Binding.Converter.toDisplayNone">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="loudspeaker"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: audioOn Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.audioOff'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: audioOn Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.audioOn'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="toggle-camera-button-container">
+                            <button id="toggleCamera" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)"
+                                    data-win-bind="ariaChecked: cameraOn">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="camera_off"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: cameraOn Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.cameraOff'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: cameraOn Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.cameraOn'}"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -197,6 +245,22 @@
                                         <div class="bubble-arrow"></div>
                                         <div class="bubble-body">
                                             <span data-win-res="{textContent: 'tooltip.showConnectionStatus'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="close-connection-button-container">
+                            <button id="closeConnection" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="close_connection"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.closeConnection'}"></span>
                                         </div>
                                     </div>
                                 </div>

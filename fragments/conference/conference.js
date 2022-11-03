@@ -32,7 +32,10 @@
                 desk_share: { strokeWidth: 900 },
                 team: { strokeWidth: 900 },
                 chat: { strokeWidth: 900 },
-                notes: { strokeWidth: 900 }
+                notes: { strokeWidth: 900 },
+                microphone_off: { strokeWidth: 900 },
+                camera_off: { strokeWidth: 900 },
+                loudspeaker: { strokeWidth: 400, color: "#ffffff" }
             });
 
             // add page specific commands to AppBar

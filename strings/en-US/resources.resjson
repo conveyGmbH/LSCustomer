@@ -37,6 +37,12 @@
     "tooltip.openChat" : "Open chat",
     "tooltip.closeNotes" : "Close notes",
     "tooltip.openNotes" : "Open notes",
+    "tooltip.cameraOn" : "Start camera",
+    "tooltip.cameraOff" : "Stop camera",
+    "tooltip.microphoneOn" : "Start microphone",
+    "tooltip.microphoneOff" : "Stop microphone",
+    "tooltip.audioOn" : "Start audio",
+    "tooltip.audioOff" : "Stop audio",
 
     "events.title"          : "Series",
 
