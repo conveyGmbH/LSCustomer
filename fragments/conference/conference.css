@@ -2420,6 +2420,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     content: "\1f642";
 }
 #conferenceController .show-media-button-container > button .button-tip .win-tooltip,
+#conferenceController .close-connection-button-container > button .button-tip .win-tooltip,
 #conferenceController .show-connection-button-container > button .button-tip .win-tooltip,
 #conferenceController .raise-hand-button-container > button .button-tip .win-tooltip,
 #conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip,
@@ -2429,10 +2430,10 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .show-userlist-button-container > button .button-tip .win-tooltip,
 #conferenceController .show-notes-button-container > button .button-tip .win-tooltip {
     top: -15px;
-    left: -50px;
+    left: 50%;
     min-height: 40px;
     min-width: 60px !important;
-    width: auto !important;
+    width: fit-content !important;
     max-width: 240px !important;
     transition-duration: 500ms;
     transition-property: top, opacity;
@@ -2445,23 +2446,11 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border: none;
     padding: 0;
 }
+#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip {
+    left: calc(50% + 40px);
+}
 #conferenceController .close-connection-button-container > button .button-tip .win-tooltip {
-    top: -15px;
-    left: -100px;
-    min-height: 40px;
-    min-width: 60px !important;
-    width: auto !important;
-    max-width: 240px !important;
-    transition-duration: 500ms;
-    transition-property: top, opacity;
-    opacity: 0;
-    text-transform: none !important;
-    letter-spacing: normal;
-    font-size: 13px !important;
-    white-space: nowrap !important;
-    background: transparent;
-    border: none;
-    padding: 0;
+    left: calc(50% - 40px);
 }
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip {
     top: -55px;
@@ -2513,6 +2502,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     vertical-align: middle;
 }
 #conferenceController .show-media-button-container > button .button-tip .win-tooltip .bubble-arrow,
+#conferenceController .close-connection-button-container > button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .show-connection-button-container > button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .raise-hand-button-container > button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip .bubble-arrow,
@@ -2523,24 +2513,19 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .show-notes-button-container > button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
-    margin-left: calc(50% - 10px);
+    margin-left: -10px;
     transform: rotate(45deg);
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
-    position: absolute;
-    top: 4px;
+    position: relative;
+    top: 2px;
     border-radius: 3px;
 }
+#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip .bubble-arrow {
+    margin-left: -50px;
+}
 #conferenceController .close-connection-button-container > button .button-tip .win-tooltip .bubble-arrow {
-    width: 20px;
-    height: 20px;
-    margin-left: calc(50% + 15px);
-    transform: rotate(45deg);
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
-    position: absolute;
-    top: 4px;
-    border-radius: 3px;
+    margin-left: 30px;
 }
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
@@ -2567,12 +2552,27 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
     color: var(--btn-primary-color) !important;
-    padding: 4px 7px 6px;
-    position: absolute;
-    top: -4px;
+    padding: 6px;
+    position: relative;
+    top: -28px;
     min-width: 50px;
     min-height: 25px;
+    left: -50%;
+    width: fit-content;
 }
+#conferenceController .show-media-button-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .close-connection-button-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .show-connection-button-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .raise-hand-button-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .show-notes-button-container > button .button-tip .win-tooltip .bubble-body > span {
+    display: inline;
+}
+
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 4px;
     background: var(--e-global-color-text, #2A2F3D);
