@@ -275,7 +275,7 @@
                 },
                 clickLogOffEvent: function (event) {
                     Log.call(Log.l.trace, "SpeakerSession.Controller.");
-                    var logOffButton = pageElement.querySelector("#logOffButton");
+                    var logOffButton = pageElement.querySelector("#closeConnection");
                     // that.binding.registerEmail = AppData._persistentStates.registerData.Email;
                     // Email vom Moderator?!
                     var confirmTitle = getResourceText("event.labelLogOff") + " ";

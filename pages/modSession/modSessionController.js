@@ -276,7 +276,7 @@
                 },
                 clickLogOffEvent: function (event) {
                     Log.call(Log.l.trace, "ModSession.Controller.");
-                    var logOffButton = pageElement.querySelector("#logOffButton");
+                    var logOffButton = pageElement.querySelector("#closeConnection");
                     // that.binding.registerEmail = AppData._persistentStates.registerData.Email;
                     // Email vom Moderator?!
                     var confirmTitle = getResourceText("event.labelLogOff") + " ";
@@ -294,7 +294,7 @@
                 },
                 clickCloseSessionEvent: function (event) {
                     Log.call(Log.l.trace, "ModSession.Controller.");
-                    var closeSessionButton = pageElement.querySelector("#closeSessionButton");
+                    var closeSessionButton = pageElement.querySelector("#closeConnection");
                     var modToken = null;
                     if (Application.query.UserToken) {
                         modToken = Application.query.UserToken;

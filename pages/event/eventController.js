@@ -342,7 +342,7 @@
                 },
                 clickLogOffEvent: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    var logOffButton = pageElement.querySelector("#logOffButton");
+                    var logOffButton = pageElement.querySelector("#closeConnection");
                     that.binding.registerEmail = AppData._persistentStates.registerData.Email || "";
                     var confirmTitle = getResourceText("event.labelLogOff") + " " + that.binding.registerEmail;
                     confirm(confirmTitle, function (result) {
