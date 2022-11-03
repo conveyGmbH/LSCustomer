@@ -23,9 +23,17 @@
             this.prevHeight = 0;
 
             Colors.loadSVGImageElements(element, "presenter-mode-image", 42, "#ffffff");
-            Colors.loadSVGImageElements(element, "show-button-image", 20);/*, "#ffffff", null, null, {
-                message: { strokeWidth: 400 }
-            });*/
+            Colors.loadSVGImageElements(element, "show-button-image", 20, null, null, null, {
+                presentation: { strokeWidth: 900 },
+                camera_user: { strokeWidth: 900 },
+                media: { strokeWidth: 900 },
+                close_connection: { strokeWidth: 900 },
+                raise_hand: { strokeWidth: 900 },
+                desk_share: { strokeWidth: 900 },
+                team: { strokeWidth: 900 },
+                chat: { strokeWidth: 900 },
+                notes: { strokeWidth: 900 }
+            });
 
             // add page specific commands to AppBar
             var commandList = [];
