@@ -270,7 +270,6 @@ var __meteor_runtime_config__;
                 showChat: false,
                 showNotes: false,
                 showUserList: false,
-                showDeskShare: false,
                 presenterModeTiled: false,
                 presenterModeFull: false,
                 presenterModeSmall: false,

@@ -226,21 +226,15 @@
                         </div>
                         <div class="show-deskshare-button-container">
                             <button id="showDeskShare" class="win-button" aria-checked="false"
-                                    onclick="AppBar.handleEvent('click', 'clickAction', event)"
-                                    data-win-bind="ariaChecked: showDeskShare">
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)">
                                 <div class="button-tip">
                                     <span class="show-button">
                                         <i class="show-button-image" id="desk_share"></i>
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
-                                        <div class="bubble-body"
-                                             data-win-bind="style.display: showDeskShare Binding.Converter.toDisplay">
+                                        <div class="bubble-body">
                                             <span data-win-res="{textContent: 'tooltip.showDeskShare'}"></span>
-                                        </div>
-                                        <div class="bubble-body"
-                                             data-win-bind="style.display: showDeskShare Binding.Converter.toDisplayNone">
-                                            <span data-win-res="{textContent: 'tooltip.stopDeskShare'}"></span>
                                         </div>
                                     </div>
                                 </div>
