@@ -84,7 +84,11 @@
 #conference.mediaview #layout button[data-test="joinAudio"],
 #conference.mediaview #layout button[data-test="leaveVideo"],
 #conference.mediaview #layout button[data-test="leaveVideo"] + span,
-#conference.mediaview #layout button[data-test="joinVideo"] {
+#conference.mediaview #layout button[data-test="joinVideo"],
+#conference.mediaview #layout > section[aria-label="Actions bar"] > div > div > span,
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div > div > span,
+#conference.mediaview #layout > section[aria-label="Actions bar"] > div > div > div:not(.action-button-container):not(.emoji-button-container):not(.tool-box),
+#conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div > div > div:not(.action-button-container):not(.emoji-button-container):not(.tool-box) {
     display: none !important;
 }
 
@@ -97,7 +101,8 @@
 .show-selfie-toggle-container,
 .show-presentation-toggle-container,
 .show-videolist-toggle-container,
-.action-button-container {
+.action-button-container,
+.emoji-button-container {
     display: none;
     margin: 0 4px !important;
 }
@@ -2510,8 +2515,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 
 #conferenceController .tool-box {
     display: none;
-    bottom: 2px;
-    left: 142px;
+    bottom: 3px;
+    left: 150px;
     width: auto;
     height: 46px;
     opacity: 0.9;

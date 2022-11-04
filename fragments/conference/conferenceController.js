@@ -286,6 +286,8 @@ var __meteor_runtime_config__;
                 microphoneEnabled: false,
                 microphoneOn: false,
                 cameraOn: false,
+                showDeskShareOn: false,
+                showMediaOn: false,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 showUnpinnedVideoList: false,
@@ -322,11 +324,11 @@ var __meteor_runtime_config__;
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var showMediaButtonContainer = fragmentElement.querySelector(".show-media-button-container");
+            var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
             var closeConnectionButtonContainer = fragmentElement.querySelector(".close-connection-button-container");
             var toggleMicrophoneButtonContainer = fragmentElement.querySelector(".toggle-microphone-button-container");
             var toggleCameraButtonContainer = fragmentElement.querySelector(".toggle-camera-button-container");
             var showConnectionStatusContainer = fragmentElement.querySelector(".show-connection-button-container");
-            var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
             var raiseHandButtonContainer = fragmentElement.querySelector(".raise-hand-button-container");
             var showChatButtonContainer = fragmentElement.querySelector(".show-chat-button-container");
             var showNotesButtonContainer = fragmentElement.querySelector(".show-notes-button-container");
@@ -1754,6 +1756,19 @@ var __meteor_runtime_config__;
                 } else {
                     that.binding.cameraOn = false;
                 } 
+                var showMediaButton = fragmentElement.querySelector(elementSelectors.showMediaButton);
+                if (showMediaButton) {
+                    that.binding.showMediaOn = true;
+                } else {
+                    that.binding.showMediaOn = false;
+                }
+                var startDeskShare = fragmentElement.querySelector(elementSelectors.startDeskShare);
+                var stopDeskShare = fragmentElement.querySelector(elementSelectors.stopDeskShare);
+                if (startDeskShare || stopDeskShare) {
+                    that.binding.showDeskShareOn = true;
+                } else {
+                    that.binding.showDeskShareOn = false;
+                }
                 Log.ret(Log.l.trace, "");
             }
             that.handleAudioVideoButtonStatus = handleAudioVideoButtonStatus;
@@ -2113,6 +2128,28 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             }
+                            if (showMediaButtonContainer && showMediaButtonContainer.style) {
+                                if (actionsBarCenter &&
+                                    !isChildElement(actionsBarCenter, showMediaButtonContainer)) {
+                                    if (actionsBarCenter.firstElementChild) {
+                                        actionsBarCenter.insertBefore(showMediaButtonContainer, actionsBarCenter.firstElementChild);
+                                    } else {
+                                        actionsBarCenter.appendChild(showMediaButtonContainer);
+                                    }
+                                    showMediaButtonContainer.style.display = "inline-block";
+                                }
+                            }
+                            if (showDeskShareButtonContainer && showDeskShareButtonContainer.style) {
+                                if (actionsBarCenter &&
+                                    !isChildElement(actionsBarCenter, showDeskShareButtonContainer)) {
+                                    if (actionsBarCenter.firstElementChild) {
+                                        actionsBarCenter.insertBefore(showDeskShareButtonContainer, actionsBarCenter.firstElementChild);
+                                    } else {
+                                        actionsBarCenter.appendChild(showDeskShareButtonContainer);
+                                    }
+                                    showDeskShareButtonContainer.style.display = "inline-block";
+                                }
+                            }
                             if (pageControllerName === "modSessionController") {
                                 if (presenterButtonContainer && presenterButtonContainer.style) {
                                     var navBarTopCenter = fragmentElement.querySelector(elementSelectors.navBarTopCenter);
@@ -2121,28 +2158,6 @@ var __meteor_runtime_config__;
                                         navBarTopCenter.insertBefore(presenterButtonContainer,
                                             navBarTopCenter.firstElementChild);
                                         presenterButtonContainer.style.display = "inline-block";
-                                    }
-                                }
-                                if (showMediaButtonContainer && showMediaButtonContainer.style) {
-                                    if (actionsBarCenter &&
-                                        !isChildElement(actionsBarCenter, showMediaButtonContainer)) {
-                                        if (actionsBarCenter.firstElementChild) {
-                                            actionsBarCenter.insertBefore(showMediaButtonContainer, actionsBarCenter.firstElementChild);
-                                        } else {
-                                            actionsBarCenter.appendChild(showMediaButtonContainer);
-                                        }
-                                        showMediaButtonContainer.style.display = "inline-block";
-                                    }
-                                }
-                                if (showDeskShareButtonContainer && showDeskShareButtonContainer.style) {
-                                    if (actionsBarCenter &&
-                                        !isChildElement(actionsBarCenter, showDeskShareButtonContainer)) {
-                                        if (actionsBarCenter.firstElementChild) {
-                                            actionsBarCenter.insertBefore(showDeskShareButtonContainer, actionsBarCenter.firstElementChild);
-                                        } else {
-                                            actionsBarCenter.appendChild(showDeskShareButtonContainer);
-                                        }
-                                        showDeskShareButtonContainer.style.display = "inline-block";
                                     }
                                 }
                                 if (showVideoListToggleContainer && showVideoListToggleContainer.style) {

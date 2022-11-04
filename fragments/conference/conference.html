@@ -154,9 +154,27 @@
                                 </div>
                             </button>
                         </div>
+                        <div class="action-button-container show-deskshare-button-container">
+                            <button id="showDeskShare" class="win-button"
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)"
+                                    data-win-bind="style.display: showDeskShareOn Binding.Converter.toDisplay">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="desk_share"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body">
+                                            <span data-win-res="{textContent: 'tooltip.showDeskShare'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
                         <div class="action-button-container show-media-button-container">
                             <button id="showMedia" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickAction', event)">
+                                    onclick="AppBar.handleEvent('click', 'clickAction', event)"
+                                    data-win-bind="style.display: showMediaOn Binding.Converter.toDisplay">
                                 <div class="button-tip">
                                     <span class="show-button">
                                         <i class="show-button-image" id="media"></i>
@@ -317,22 +335,6 @@
                                         <div class="bubble-body"
                                              data-win-bind="style.display: raiseHand Binding.Converter.toDisplayNone">
                                             <span data-win-res="{textContent: 'tooltip.raiseHand'}"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                        <div class="action-button-container show-deskshare-button-container">
-                            <button id="showDeskShare" class="win-button" aria-checked="false"
-                                    onclick="AppBar.handleEvent('click', 'clickAction', event)">
-                                <div class="button-tip">
-                                    <span class="show-button">
-                                        <i class="show-button-image" id="desk_share"></i>
-                                    </span>
-                                    <div class="win-tooltip">
-                                        <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'tooltip.showDeskShare'}"></span>
                                         </div>
                                     </div>
                                 </div>
