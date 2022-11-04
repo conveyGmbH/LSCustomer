@@ -110,7 +110,7 @@
                                  data-win-bind="winControl.checked: showSelfie; winControl.title: labelShowSelfie; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
                                  onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
                         </div>
-                        <div class="show-presentation-toggle-container">
+                        <div class="action-button-container show-presentation-toggle-container">
                             <button id="showPresentation" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickToggleSwitch', event)"
                                     data-win-bind="ariaChecked: showPresentation">
@@ -132,7 +132,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="show-videolist-toggle-container">
+                        <div class="action-button-container show-videolist-toggle-container">
                             <button id="showVideoList" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickToggleSwitch', event)"
                                     data-win-bind="ariaChecked: showVideoList">
@@ -154,7 +154,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="show-media-button-container">
+                        <div class="action-button-container show-media-button-container">
                             <button id="showMedia" class="win-button"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)">
                                 <div class="button-tip">
@@ -170,7 +170,24 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="toggle-microphone-button-container">
+                        <div class="action-button-container toggle-microphone-button-container">
+                            <div class="settings-container"
+                                 data-win-bind="style.display: audioOn Binding.Converter.toDisplay">
+                                <button id="audioSettings" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickAction', event)">
+                                    <div class="button-tip">
+                                        <span class="show-button">
+                                            <i class="show-button-image" id="navigate_up"></i>
+                                        </span>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body">
+                                                <span data-win-res="{textContent: 'tooltip.audioSettings'}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
                             <button id="toggleMicrophone" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)"
                                     data-win-bind="ariaChecked: microphoneOn; style.display: microphoneEnabled Binding.Converter.toDisplay">
@@ -212,7 +229,24 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="toggle-camera-button-container">
+                        <div class="action-button-container toggle-camera-button-container">
+                            <div class="settings-container"
+                                 data-win-bind="style.display: cameraOn Binding.Converter.toDisplay">
+                                <button id="videoSettings" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickAction', event)">
+                                    <div class="button-tip">
+                                        <span class="show-button">
+                                            <i class="show-button-image" id="navigate_up"></i>
+                                        </span>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body">
+                                                <span data-win-res="{textContent: 'tooltip.videoSettings'}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
                             <button id="toggleCamera" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)"
                                     data-win-bind="ariaChecked: cameraOn">
@@ -234,7 +268,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="show-connection-button-container">
+                        <div class="action-button-container show-connection-button-container">
                             <button id="showConnectionStatus" class="win-button"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)">
                                 <div class="button-tip">
@@ -250,7 +284,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="close-connection-button-container">
+                        <div class="action-button-container close-connection-button-container">
                             <button id="closeConnection" class="win-button"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)">
                                 <div class="button-tip">
@@ -266,7 +300,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="raise-hand-button-container">
+                        <div class="action-button-container raise-hand-button-container">
                             <button id="raiseHand" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)"
                                     data-win-bind="ariaChecked: raiseHand">
@@ -288,7 +322,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="show-deskshare-button-container">
+                        <div class="action-button-container show-deskshare-button-container">
                             <button id="showDeskShare" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)">
                                 <div class="button-tip">
@@ -304,7 +338,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="show-userlist-button-container">
+                        <div class="action-button-container show-userlist-button-container">
                             <button id="showUserList" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickShowPane', event)"
                                     data-win-bind="ariaChecked: showUserList">
@@ -326,7 +360,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="show-chat-button-container">
+                        <div class="action-button-container show-chat-button-container">
                             <button id="showChat" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickShowPane', event)"
                                     data-win-bind="ariaChecked: showChat">
@@ -348,7 +382,7 @@
                                 </div>
                             </button>
                         </div>
-                        <div class="show-notes-button-container">
+                        <div class="action-button-container show-notes-button-container">
                             <button id="showNotes" class="win-button" aria-checked="false"
                                     onclick="AppBar.handleEvent('click', 'clickShowPane', event)"
                                     data-win-bind="ariaChecked: showNotes">

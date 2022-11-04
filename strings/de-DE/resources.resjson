@@ -43,6 +43,8 @@
     "tooltip.microphoneOff" : "Mikrofon ausschalten",
     "tooltip.audioOn" : "Tonwiedergabe einschalten",
     "tooltip.audioOff" : "Tonwiedergabe ausschalten",
+    "tooltip.audioSettings" : "Audiogeräte auswählen",
+    "tooltip.videoSettings" : "Videokamera-Einstellungen",
 
     "events.title"          : "Serie",
 

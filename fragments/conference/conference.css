@@ -80,8 +80,10 @@
 #conference.mediaview #layout button[aria-label="Stummschalten"],
 #conference.mediaview #layout button[aria-label="Mute"],
 #conference.mediaview #layout button[data-test="leaveAudio"],
+#conference.mediaview #layout button[data-test="leaveAudio"] + span,
 #conference.mediaview #layout button[data-test="joinAudio"],
 #conference.mediaview #layout button[data-test="leaveVideo"],
+#conference.mediaview #layout button[data-test="leaveVideo"] + span,
 #conference.mediaview #layout button[data-test="joinVideo"] {
     display: none !important;
 }
@@ -226,16 +228,7 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
     line-height: 1 !important;
 }
 
-.show-chat-button-container,
-.show-userlist-button-container,
-.show-notes-button-container,
-.show-media-button-container,
-.toggle-microphone-button-container,
-.toggle-camera-button-container,
-.close-connection-button-container,
-.show-connection-button-container,
-.show-deskshare-button-container,
-.raise-hand-button-container {
+.action-button-container {
     display: none;
 }
 
@@ -2277,38 +2270,28 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 }
 
 
-    #conferenceController .raise-hand-button-container > .win-button,
-    #conferenceController .show-deskshare-button-container > .win-button,
-    #conferenceController .show-media-button-container > .win-button,
-    #conferenceController .toggle-microphone-button-container > .win-button,
-    #conferenceController .toggle-camera-button-container > .win-button,
-    #conferenceController .show-connection-button-container > .win-button,
-    #conferenceController .show-videolist-toggle-container > .win-button,
-    #conferenceController .show-presentation-toggle-container > .win-button,
-    #conferenceController .show-chat-button-container > .win-button,
-    #conferenceController .show-userlist-button-container > .win-button,
-    #conferenceController .show-notes-button-container > .win-button,
-    #conferenceController .emoji-button-container > .win-button {
-        background-color: var(--btn-primary-bg) !important;
-        border-color: var(--btn-primary-bg) !important;
-        width: 48px;
-        height: 48px;
-        min-width: 40px;
-        box-shadow: var(--box-shadow-button) !important;
-        opacity: 0.64;
-        margin-top: 2px;
-        outline-style: none;
-        border-radius: 50px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 12px;
-        gap: 8px;
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-    }
+#conferenceController .action-button-container > .win-button,
+#conferenceController .emoji-button-container > .win-button {
+    background-color: var(--btn-primary-bg) !important;
+    border-color: var(--btn-primary-bg) !important;
+    width: 48px;
+    height: 48px;
+    min-width: 40px;
+    box-shadow: var(--box-shadow-button) !important;
+    opacity: 0.64;
+    margin-top: 2px;
+    outline-style: none;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
 #conferenceController .close-connection-button-container > .win-button {
     background-color: var(--color-danger) !important;
     border-color: var(--color-danger) !important;
@@ -2330,40 +2313,37 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     order: 0;
     flex-grow: 0;
 }
-#conferenceController .raise-hand-button-container > .win-button[aria-checked=true],
-#conferenceController .toggle-microphone-button-container > .win-button[aria-checked=true],
-#conferenceController .toggle-camera-button-container > .win-button[aria-checked=true],
-#conferenceController .show-deskshare-button-container > .win-button[aria-checked=true],
-#conferenceController .show-videolist-toggle-container > .win-button[aria-checked=true],
-#conferenceController .show-presentation-toggle-container > .win-button[aria-checked=true],
-#conferenceController .show-chat-button-container > .win-button[aria-checked=true],
-#conferenceController .show-userlist-button-container > .win-button[aria-checked=true],
-#conferenceController .show-notes-button-container > .win-button[aria-checked=true] {
+
+#conferenceController .action-button-container .settings-container > .win-button {
+    display: block;
+    position: absolute;
+    top: -28px;
+    width: 48px;
+    height: 46px;
+    min-width: 40px;
+    opacity: 0.64;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding-bottom: 20px;
+    border-bottom: none;
+    border-color: var(--btn-primary-border);
+    background-color: transparent !important;
+    padding-top: 4px;
+    z-index: -1;
+}
+
+#conferenceController .action-button-container > .win-button[aria-checked=true] {
     opacity: 1;
 }
 
-#conferenceController .show-media-button-container > .win-button:hover,
-#conferenceController .show-media-button-container > .win-button:active,
-#conferenceController .toggle-microphone-button-container > .win-button:hover,
-#conferenceController .toggle-microphone-button-container > .win-button:active,
-#conferenceController .toggle-camera-button-container > .win-button:hover,
-#conferenceController .toggle-camera-button-container > .win-button:active,
-#conferenceController .show-connection-button-container > .win-button:hover,
-#conferenceController .show-connection-button-container > .win-button:active,
-#conferenceController .raise-hand-button-container > .win-button:hover,
-#conferenceController .raise-hand-button-container > .win-button:active,
-#conferenceController .show-deskshare-button-container > .win-button:hover,
-#conferenceController .show-deskshare-button-container > .win-button:active,
-#conferenceController .show-videolist-toggle-container > .win-button:hover,
-#conferenceController .show-videolist-toggle-container > .win-button:active,
-#conferenceController .show-presentation-toggle-container > .win-button:hover,
-#conferenceController .show-presentation-toggle-container > .win-button:active,
-#conferenceController .show-chat-button-container > .win-button:hover,
-#conferenceController .show-chat-button-container > .win-button:active,
-#conferenceController .show-userlist-button-container > .win-button:hover,
-#conferenceController .show-userlist-button-container > .win-button:active,
-#conferenceController .show-notes-button-container > .win-button:hover,
-#conferenceController .show-notes-button-container > .win-button:active,
+#conferenceController .action-button-container .settings-container > .win-button:hover,
+#conferenceController .action-button-container .settings-container > .win-button:active {
+    opacity: 1;
+}
+#conferenceController .action-button-container > .win-button:hover,
+#conferenceController .action-button-container > .win-button:active,
 #conferenceController .emoji-button-container > .win-button:hover,
 #conferenceController .emoji-button-container > .win-button:active {
     background-color: var(--btn-primary-bg) !important;
@@ -2375,65 +2355,22 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     opacity: 1;
 }
 
-#conferenceController .show-media-button-container > .win-button .button-tip,
-#conferenceController .close-connection-button-container > .win-button .button-tip,
-#conferenceController .toggle-microphone-button-container > .win-button .button-tip,
-#conferenceController .toggle-camera-button-container > .win-button .button-tip,
-#conferenceController .show-connection-button-container > .win-button .button-tip,
-#conferenceController .raise-hand-button-container > .win-button .button-tip,
-#conferenceController .show-deskshare-button-container > .win-button .button-tip,
-#conferenceController .show-videolist-toggle-container > .win-button .button-tip,
-#conferenceController .show-presentation-toggle-container > .win-button .button-tip,
-#conferenceController .show-chat-button-container > .win-button .button-tip,
-#conferenceController .show-userlist-button-container > .win-button .button-tip,
-#conferenceController .show-notes-button-container > .win-button .button-tip,
+#conferenceController .action-button-container .settings-container > .win-button .button-tip,
+#conferenceController .action-button-container > .win-button .button-tip,
 #conferenceController .emoji-button-container > .win-button .button-tip {
     text-align: center;
     vertical-align: middle;
     margin: 0;
 }
 
-#conferenceController .show-media-button-container .show-button-image > svg,
-#conferenceController .close-connection-button-container .show-button-image > svg,
-#conferenceController .toggle-microphone-button-container .show-button-image > svg,
-#conferenceController .toggle-camera-button-container .show-button-image > svg,
-#conferenceController .show-connection-button-container .show-button-image > svg,
-#conferenceController .raise-hand-button-container .show-button-image > svg,
-#conferenceController .show-deskshare-button-container .show-button-image > svg,
-#conferenceController .show-videolist-toggle-container .show-button-image > svg,
-#conferenceController .show-presentation-toggle-container .show-button-image > svg,
-#conferenceController .show-chat-button-container .show-button-image > svg,
-#conferenceController .show-userlist-button-container .show-button-image > svg,
-#conferenceController .show-notes-button-container .show-button-image > svg {
+#conferenceController .action-button-container > .win-button .show-button-image > svg {
     margin-top: 4px;
     width: 20px;
     height: 20px;
 }
 
-#conferenceController .show-media-button-container > button:hover .show-button-image,
-#conferenceController .show-media-button-container > button:active .show-button-image,
-#conferenceController .close-connection-button-container > button:hover .show-button-image,
-#conferenceController .close-connection-button-container > button:active .show-button-image,
-#conferenceController .toggle-microphone-button-container > button:hover .show-button-image,
-#conferenceController .toggle-microphone-button-container > button:active .show-button-image,
-#conferenceController .toggle-camera-button-container > button:hover .show-button-image,
-#conferenceController .toggle-camera-button-container > button:active .show-button-image,
-#conferenceController .show-connection-button-container > button:hover .show-button-image,
-#conferenceController .show-connection-button-container > button:active .show-button-image,
-#conferenceController .raise-hand-button-container > button:hover .show-button-image,
-#conferenceController .raise-hand-button-container > button:active .show-button-image,
-#conferenceController .show-deskshare-button-container > button:hover .show-button-image,
-#conferenceController .show-deskshare-button-container > button:active .show-button-image,
-#conferenceController .show-videolist-toggle-container > button:hover .show-button-image,
-#conferenceController .show-videolist-toggle-container > button:active .show-button-image,
-#conferenceController .show-presentation-toggle-container > button:hover .show-button-image,
-#conferenceController .show-presentation-toggle-container > button:active .show-button-image,
-#conferenceController .show-chat-button-container > button:hover .show-button-image,
-#conferenceController .show-chat-button-container > button:active .show-button-image,
-#conferenceController .show-userlist-button-container > button:hover .show-button-image,
-#conferenceController .show-userlist-button-container > button:active .show-button-image,
-#conferenceController .show-notes-button-container > button:hover .show-button-image,
-#conferenceController .show-notes-button-container > button:active .show-button-image {
+#conferenceController .action-button-container > .win-button:hover .show-button-image,
+#conferenceController .action-button-container > .win-button:active .show-button-image {
     opacity: 0.8;
 }
 
@@ -2445,18 +2382,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
     content: "\1f642";
 }
-#conferenceController .show-media-button-container > button .button-tip .win-tooltip,
-#conferenceController .close-connection-button-container > button .button-tip .win-tooltip,
-#conferenceController .toggle-microphone-button-container > button .button-tip .win-tooltip,
-#conferenceController .toggle-camera-button-container > button .button-tip .win-tooltip,
-#conferenceController .show-connection-button-container > button .button-tip .win-tooltip,
-#conferenceController .raise-hand-button-container > button .button-tip .win-tooltip,
-#conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip,
-#conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip,
-#conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip,
-#conferenceController .show-chat-button-container > button .button-tip .win-tooltip,
-#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip,
-#conferenceController .show-notes-button-container > button .button-tip .win-tooltip {
+#conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip,
+#conferenceController .action-button-container > .win-button .button-tip .win-tooltip {
     top: -15px;
     left: 50%;
     min-height: 40px;
@@ -2474,10 +2401,10 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border: none;
     padding: 0;
 }
-#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip {
+#conferenceController .show-userlist-button-container > .win-button .button-tip .win-tooltip {
     left: calc(50% + 40px);
 }
-#conferenceController .close-connection-button-container > button .button-tip .win-tooltip {
+#conferenceController .close-connection-button-container > .win-button .button-tip .win-tooltip {
     left: calc(50% - 40px);
 }
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip {
@@ -2497,30 +2424,10 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border: none;
     padding: 0;
 }
-#conferenceController .show-media-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-media-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .close-connection-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .close-connection-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .toggle-microphone-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .toggle-microphone-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .toggle-camera-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .toggle-camera-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .show-connection-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-connection-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .raise-hand-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .raise-hand-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .show-deskshare-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-deskshare-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .show-videolist-toggle-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-videolist-toggle-container > button:active .button-tip .win-tooltip,
-#conferenceController .show-presentation-toggle-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-presentation-toggle-container > button:active .button-tip .win-tooltip,
-#conferenceController .show-chat-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-chat-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .show-userlist-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-userlist-button-container > button:active .button-tip .win-tooltip,
-#conferenceController .show-notes-button-container > button:hover .button-tip .win-tooltip,
-#conferenceController .show-notes-button-container > button:active .button-tip .win-tooltip {
+#conferenceController .action-button-container .settings-container > .win-button:hover .button-tip .win-tooltip,
+#conferenceController .action-button-container .settings-container > .win-button:active .button-tip .win-tooltip,
+#conferenceController .action-button-container > .win-button:hover .button-tip .win-tooltip,
+#conferenceController .action-button-container > .win-button:active .button-tip .win-tooltip {
     top: -40px;
     opacity: 1;
     text-align: center;
@@ -2533,18 +2440,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     text-align: center;
     vertical-align: middle;
 }
-#conferenceController .show-media-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .close-connection-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .toggle-microphone-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .toggle-camera-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .show-connection-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .raise-hand-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip .bubble-arrow,
-#conferenceController .show-notes-button-container > button .button-tip .win-tooltip .bubble-arrow {
+#conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-arrow,
+#conferenceController .action-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
     margin-left: -10px;
@@ -2555,10 +2452,12 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     top: 2px;
     border-radius: 3px;
 }
-#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip .bubble-arrow {
+#conferenceController .show-userlist-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-arrow,
+#conferenceController .show-userlist-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     margin-left: -50px;
 }
-#conferenceController .close-connection-button-container > button .button-tip .win-tooltip .bubble-arrow {
+#conferenceController .close-connection-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-arrow,
+#conferenceController .close-connection-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     margin-left: 30px;
 }
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
@@ -2572,18 +2471,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     top: 34px;
     border-radius: 3px;
 }
-#conferenceController .show-media-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .close-connection-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .toggle-microphone-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .toggle-camera-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .show-connection-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .raise-hand-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip .bubble-body,
-#conferenceController .show-notes-button-container > button .button-tip .win-tooltip .bubble-body {
+#conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-body,
+#conferenceController .action-button-container > .win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 4px;
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
@@ -2596,18 +2485,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     left: -50%;
     width: fit-content;
 }
-#conferenceController .show-media-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .close-connection-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .toggle-microphone-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .toggle-camera-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .show-connection-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .raise-hand-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .show-deskshare-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .show-videolist-toggle-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .show-presentation-toggle-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .show-chat-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .show-userlist-button-container > button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .show-notes-button-container > button .button-tip .win-tooltip .bubble-body > span {
+#conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-body > span,
+#conferenceController .action-button-container > .win-button .button-tip .win-tooltip .bubble-body > span {
     display: inline;
 }
 

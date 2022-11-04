@@ -43,6 +43,8 @@
     "tooltip.microphoneOff" : "Stop microphone",
     "tooltip.audioOn" : "Start audio",
     "tooltip.audioOff" : "Stop audio",
+    "tooltip.audioSettings" : "Seleziona dispositivi audio",
+    "tooltip.videoSettings" : "Impostazioni della videocamera",
 
     "events.title"          : "Series",
 

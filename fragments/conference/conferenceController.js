@@ -123,6 +123,8 @@ var __meteor_runtime_config__;
         joinAudio: '#conference.mediaview #layout button[data-test="joinAudio"]',
         leaveVideo: '#conference.mediaview #layout button[data-test="leaveVideo"]',
         joinVideo: '#conference.mediaview #layout button[data-test="joinVideo"]',
+        audioSettings: '#conference.mediaview #layout button[data-test="leaveAudio"] + span > button',
+        videoSettings: '#conference.mediaview #layout button[data-test="leaveVideo"] + span > button',
 
         // dangerous global CSS definitions to remove:
         htmlElement:     "html {",
@@ -1721,6 +1723,10 @@ var __meteor_runtime_config__;
 
             var handleAudioVideoButtonStatus = function() {
                 Log.call(Log.l.trace, "Conference.Controller.", "");
+                var audioSettings = fragmentElement.querySelector(elementSelectors.audioSettings);
+                if (audioSettings) {
+
+                }
                 var microphoneOff = fragmentElement.querySelector(elementSelectors.microphoneOff);
                 if (microphoneOff) {
                     that.binding.audioOn = true;
@@ -4403,6 +4409,18 @@ var __meteor_runtime_config__;
                                     startDeskShare.click();
                                 } else if (stopDeskShare) {
                                     stopDeskShare.click();
+                                }
+                                break;
+                            case "audioSettings":
+                                var audioSettings = fragmentElement.querySelector(elementSelectors.audioSettings);
+                                if (audioSettings) {
+                                    audioSettings.click();
+                                }
+                                break;
+                            case "videoSettings":
+                                var videoSettings = fragmentElement.querySelector(elementSelectors.videoSettings);
+                                if (videoSettings) {
+                                    videoSettings.click();
                                 }
                                 break;
                             case "joinAudio":
