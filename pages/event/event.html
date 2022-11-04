@@ -17,7 +17,7 @@
                         <div class="content-grid">
                             <div class="section-1">
                                 <div class="hero-header">
-                                    <div class="homeButton">
+                                    <div class="homeButton"  data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
                                         <button id="homeButton" class="win-button"
                                                 onclick="AppBar.handleEvent('click', 'clickHome', event)">
                                             <div class="button-tip">
@@ -27,7 +27,7 @@
                                             </div>
                                         </button>
                                     </div>
-                                    <div class="logOff-container">
+                                    <div class="logOff-container" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
                                         <!--<div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
                                         <span class="large_field"
                                               data-win-bind="textContent: email; style.fontWeight: email Binding.Converter.toBold"></span><!--registerMessage

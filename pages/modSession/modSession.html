@@ -18,14 +18,14 @@
                             <div class="section-1">
                                 <div class="hero-header">
                                     <button id="homeButton" class="win-button"
-                                            onclick="AppBar.handleEvent('click', 'clickHome', event)">
+                                            onclick="AppBar.handleEvent('click', 'clickHome', event)" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
                                         <div class="button-tip">
                                             <div class="action-image" id="home"></div>
                                             <span class="win-type-title" data-win-res="{textContent: 'label.home'}"></span>
                                             <span class="win-tooltip" data-win-res="{textContent: 'tooltip.home'}"></span>
                                         </div>
                                     </button>
-                                    <div class="logOff-container">
+                                    <div class="logOff-container" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
                                         <div class="field_line_full">
                                             <div id="logOffButton"
                                                  class="win-link"
