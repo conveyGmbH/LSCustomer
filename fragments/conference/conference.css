@@ -105,6 +105,7 @@
 .emoji-button-container {
     display: none;
     margin: 0 4px !important;
+    transition: none;
 }
 
 .modSession #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-empty) .show-videolist-toggle-container,
