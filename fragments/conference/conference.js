@@ -35,7 +35,7 @@
                 notes: { strokeWidth: 900 },
                 microphone_off: { strokeWidth: 900 },
                 camera_off: { strokeWidth: 900 },
-                loudspeaker: { strokeWidth: 400, color: "#ffffff" },
+                loudspeaker4: { strokeWidth: 400, color: "#ffffff" },
                 navigate_up: { strokeWidth: 400, color: "#2A2F3D" }
             });
 

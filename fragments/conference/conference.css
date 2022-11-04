@@ -96,9 +96,10 @@
 
 .show-selfie-toggle-container,
 .show-presentation-toggle-container,
-.show-videolist-toggle-container {
+.show-videolist-toggle-container,
+.action-button-container {
     display: none;
-    margin: 0 10px;
+    margin: 0 4px !important;
 }
 
 .modSession #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-empty) .show-videolist-toggle-container,
@@ -2274,19 +2275,19 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .emoji-button-container > .win-button {
     background-color: var(--btn-primary-bg) !important;
     border-color: var(--btn-primary-bg) !important;
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     min-width: 40px;
     box-shadow: var(--box-shadow-button) !important;
     opacity: 0.64;
     margin-top: 2px;
     outline-style: none;
-    border-radius: 50px;
+    border-radius: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 12px;
+    padding: 8px;
     gap: 8px;
     flex: none;
     order: 0;
@@ -2295,19 +2296,19 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .close-connection-button-container > .win-button {
     background-color: var(--color-danger) !important;
     border-color: var(--color-danger) !important;
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     min-width: 40px;
     box-shadow: var(--box-shadow-button) !important;
     opacity: 0.64;
     /*margin-top: 2px;*/
     outline-style: none;
-    border-radius: 50px;
+    border-radius: 50%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 12px;
+    padding: 8px;
     gap: 8px;
     flex: none;
     order: 0;
@@ -2317,20 +2318,20 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .action-button-container .settings-container > .win-button {
     display: block;
     position: absolute;
-    top: -28px;
-    width: 48px;
-    height: 46px;
+    top: -20px;
+    width: 40px;
+    height: 38px;
     min-width: 40px;
     opacity: 0.64;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
     padding-bottom: 20px;
     border-bottom: none;
     border-color: var(--btn-primary-border);
     background-color: transparent !important;
-    padding-top: 4px;
+    padding-top: 2px;
     z-index: -1;
 }
 
@@ -2428,14 +2429,14 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .action-button-container .settings-container > .win-button:active .button-tip .win-tooltip,
 #conferenceController .action-button-container > .win-button:hover .button-tip .win-tooltip,
 #conferenceController .action-button-container > .win-button:active .button-tip .win-tooltip {
-    top: -40px;
+    top: -34px;
     opacity: 1;
     text-align: center;
     vertical-align: middle;
 }
 #conferenceController .emoji-button-container > .win-button:hover .button-tip .win-tooltip,
 #conferenceController .emoji-button-container > .win-button:active .button-tip .win-tooltip {
-    top: -70px;
+    top: -64px;
     opacity: 1;
     text-align: center;
     vertical-align: middle;
