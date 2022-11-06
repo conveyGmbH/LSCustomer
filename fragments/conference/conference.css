@@ -63,22 +63,14 @@
 }
 
 /* hide user-list toggle button*/
-#conference.mediaview #layout button[aria-label="Users and messages toggle"],
-#conference.mediaview #layout button[aria-label="Teilnehmer/Nachrichten-Umschaltung"],
-#conference.mediaview #layout button[aria-label="Show connection status of users"],
-#conference.mediaview #layout button[aria-label="Verbindungsstatus der Teilnehmer anzeigen"],
-#conference.mediaview #layout button[aria-label="Options"],
-#conference.mediaview #layout button[aria-label="Optionen"],
-#conference.mediaview #layout button[aria-label="Aktionen"],
-#conference.mediaview #layout button[aria-label="Actions"],
-#conference.mediaview #layout button[aria-label="Bildschirm freigeben"],
-#conference.mediaview #layout button[aria-label="Share screen"],
-#conference.mediaview #layout button[aria-label="Bildschirmfreigabe beenden"],
-#conference.mediaview #layout button[aria-label="End screen share"],
-#conference.mediaview #layout button[aria-label="Freischalten"],
-#conference.mediaview #layout button[aria-label="Unlock"],
-#conference.mediaview #layout button[aria-label="Stummschalten"],
-#conference.mediaview #layout button[aria-label="Mute"],
+#conference.mediaview #layout button[data-test="toggleUserList"],
+#conference.mediaview #layout button[data-test="hasUnreadMessages"],
+#conference.mediaview #layout button[data-test="connectionStatusButton"],
+#conference.mediaview #layout button[data-test="optionsButton"],
+#conference.mediaview #layout button[data-test="actionsButton"],
+#conference.mediaview #layout button[data-test="startScreenShare"],
+#conference.mediaview #layout button[data-test="stopScreenShare"],
+#conference.mediaview #layout button[data-test="toggleMicrophoneButton"],
 #conference.mediaview #layout button[data-test="leaveAudio"],
 #conference.mediaview #layout button[data-test="leaveAudio"] + span,
 #conference.mediaview #layout button[data-test="joinAudio"],
@@ -530,9 +522,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     outline: var(--outline-focus) !important;
 }
 
-#conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-label="Audiogerät wechseln"],
+#conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-label="Change audio device"],
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button[aria-label="Audiogerät wechseln"],
-#conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-label="Erweiterte Einstellungen öffnen"],
+#conference.mediaview #layout > section[aria-label="Actions bar"] button[aria-label="Open advanced settings"],
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button[aria-label="Erweiterte Einstellungen öffnen"] {
     background-color: var(--btn-default-bg,var(--color-white,#FFF)) !important;
     border-radius: 50% !important;
@@ -562,7 +554,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .ReactModalPortal button[aria-label="Echo ist hörbar"],
 .ReactModalPortal button[aria-label="Echo ist nicht hörbar"],
 .ReactModalPortal button[aria-label="Audio wiedergeben"],
-.ReactModalPortal div[aria-label="Play audio"] {
+.ReactModalPortal button[aria-label="Play audio"] {
     margin: 0 1.5rem !important;
     background: none;
 }
@@ -575,7 +567,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .ReactModalPortal button[aria-label="Echo ist hörbar"] > span:first-child,
 .ReactModalPortal button[aria-label="Echo ist nicht hörbar"] > span:first-child,
 .ReactModalPortal button[aria-label="Audio wiedergeben"] > span:first-child,
-.ReactModalPortal div[aria-label="Play audio"] > span:first-child {
+.ReactModalPortal button[aria-label="Play audio"] > span:first-child {
     --btn-sm-padding-x: calc(var(--sm-padding-x) / 2);
     --btn-md-padding-x: calc(var(--md-padding-x) / 2);
     --btn-lg-padding-x: calc(var(--lg-padding-x) / 2);
