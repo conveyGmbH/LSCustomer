@@ -644,6 +644,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: transparent !important;
 }
 
+
+#conference.mediaview div[data-test="talkingIndicator"] {
+    display: none;
+}
 /* buttons in top nav area */
 #conference.mediaview #layout > header:first-of-type > div:first-child > div:first-child,
 #conference.mediaview #layout > header:first-of-type > div:first-child > div:last-child {
