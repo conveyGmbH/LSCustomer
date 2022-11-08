@@ -321,7 +321,7 @@ var __meteor_runtime_config__;
 
             var conference = fragmentElement.querySelector("#conference");
             var paneTools = fragmentElement.querySelector(".pane-tools");
-            var showPresentationToggleContainer = fragmentElement.querySelector(".pane-tool");
+            var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var showMediaButtonContainer = fragmentElement.querySelector(".show-media-button-container");
             var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
