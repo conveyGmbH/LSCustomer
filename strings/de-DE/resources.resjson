@@ -37,6 +37,8 @@
     "tooltip.openChat" : "Chat öffnen",
     "tooltip.closeNotes" : "Notizen schließen",
     "tooltip.openNotes" : "Notizen öffnen",
+    "tooltip.closePaneTools" : "Moderatorwerkzeuge schließen",
+    "tooltip.openPaneTools" : "Moderatorwerkzeuge öffnen",
     "tooltip.cameraOn" : "Kamera freigeben",
     "tooltip.cameraOff" : "Kamera ausschalten",
     "tooltip.microphoneOn" : "Mikrofon einschalten",
@@ -110,6 +112,7 @@
     "modSession.labelCloseSession"  : "Möchten Sie die Session beenden?",
 	"modSession.labelCloseBeforeBegin" : "Session hat noch nicht begonnen!",
 	"modSession.messageSessionClosed" : "Dieses Session ist zu Ende. Bitte navigieren Sie zurück zur Überblicksseite.",
+    "modSession.unpinnedVideos"   : "Teilnehmer nicht auf der Bühne",
 
 	"home.moreEvents" : "Alle Events"
 }			

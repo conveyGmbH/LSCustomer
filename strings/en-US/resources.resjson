@@ -37,6 +37,8 @@
     "tooltip.openChat" : "Open chat",
     "tooltip.closeNotes" : "Close notes",
     "tooltip.openNotes" : "Open notes",
+    "tooltip.closePaneTools" : "Close moderator tools",
+    "tooltip.openPaneTools" : "Open moderator tools",
     "tooltip.cameraOn" : "Start camera",
     "tooltip.cameraOff" : "Stop camera",
     "tooltip.microphoneOn" : "Start microphone",
@@ -110,6 +112,7 @@
     "modSession.labelCloseSession": "Would you like to end the session?",
     "modSession.labelCloseBeforeBegin": "Session has not started yet!",
     "modSession.messageSessionClosed": "This session has ended. Please navigate back to the summary page.",
+    "modSession.unpinnedVideos"   : "Participants not on stage",
 
 	"home.moreEvents" : "More Events"
 }

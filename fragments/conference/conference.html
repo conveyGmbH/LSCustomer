@@ -20,95 +20,119 @@
                 <div class="contentarea content-noscroll win-type-body">
                     <div class="doc-container">
                         <div id="conference" class="mediaview"></div>
-                        <div class="presenter-button-container">
-                            <button id="presenterModeTiled" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
-                                    data-win-bind="ariaChecked: presenterModeTiled">
-                                <div class="button-tip">
-                                    <div class="presenter-mode-image" id="presenter_mode_tiled"></div>
-                                    <div class="win-tooltip">
-                                        <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'tooltip.presenterModeTiled'}"></span>
+                        <div class="pane-tools"
+                             data-win-bind="style.display: showPaneTools Binding.Converter.toDisplay">
+                            <div class="unpinned-video-list-header">
+                                <div class="unpinned-video-list-title">
+                                    <h2 data-win-res="{textContent: 'modSession.unpinnedVideos'}"></h2>
+                                </div>
+                            </div>
+                            <div class="video-list-template"
+                                 data-win-control="WinJS.Binding.Template" style="display: none">
+                                <div data-win-bind="className: videoListItemClassName; name: key; style.display: enabled Binding.Converter.toDisplay">
+                                    <video class="video-item" data-win-bind="srcObject: mediaStream" autoplay playsinline disablePictureInPicture></video>
+                                    <div class="video-label">
+                                        <span data-win-bind="textContent: userName"></span>
+                                        <i data-win-bind="innerHTML: myselfLabel; style.display: myselfLabel Binding.Converter.toDisplay"></i>
+                                    </div>
+                                    <button class="win-button video-item-button"
+                                            onclick="AppBar.handleEvent('click', 'clickPinVideoButton', event)">
+                                        <span class="pin"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="unpinned-video-list-container"
+                                 data-win-bind="style.display: showUnpinnedVideoList Binding.Converter.toDisplay">
+                                <div id="unpinnedVideos"
+                                     class="listview"
+                                     data-win-control="WinJS.UI.ListView"
+                                     data-win-options="{selectionMode: 'none',
+                                            tapBehavior: 'none',
+                                            header: select('.unpinned-video.list-header'),
+                                            layout : {type: WinJS.UI.GridLayout, orientation: WinJS.UI.Orientation.vertical},
+                                            itemTemplate: select('.video-list-template')}"></div>
+                            </div>
+                            <div class="presenter-button-container"
+                                 data-win-bind="style.display: showPresenterButtons Binding.Converter.toDisplay">
+                                <button id="presenterModeTiled" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
+                                        data-win-bind="ariaChecked: presenterModeTiled">
+                                    <div class="button-tip">
+                                        <div class="presenter-mode-image" id="presenter_mode_tiled"></div>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body">
+                                                <span data-win-res="{textContent: 'tooltip.presenterModeTiled'}"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
-                            <button id="presenterModeFull" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
-                                    data-win-bind="ariaChecked: presenterModeFull">
-                                <div class="button-tip">
-                                    <div class="presenter-mode-image" id="presenter_mode_full"></div>
-                                    <div class="win-tooltip">
-                                        <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'tooltip.presenterModeFull'}"></span>
+                                </button>
+                                <button id="presenterModeFull" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
+                                        data-win-bind="ariaChecked: presenterModeFull">
+                                    <div class="button-tip">
+                                        <div class="presenter-mode-image" id="presenter_mode_full"></div>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body">
+                                                <span data-win-res="{textContent: 'tooltip.presenterModeFull'}"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
-                            <button id="presenterModeSmall" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
-                                    data-win-bind="ariaChecked: presenterModeSmall">
-                                <div class="button-tip">
-                                    <div class="presenter-mode-image" id="presenter_mode_small"></div>
-                                    <div class="win-tooltip">
-                                        <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'tooltip.presenterModeSmall'}"></span>
+                                </button>
+                                <button id="presenterModeSmall" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
+                                        data-win-bind="ariaChecked: presenterModeSmall">
+                                    <div class="button-tip">
+                                        <div class="presenter-mode-image" id="presenter_mode_small"></div>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body">
+                                                <span data-win-res="{textContent: 'tooltip.presenterModeSmall'}"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
-                            <button id="videoListLeft" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
-                                    data-win-bind="ariaChecked: videoListLeft">
-                                <div class="button-tip">
-                                    <div class="presenter-mode-image" id="video_list_left"></div>
-                                    <div class="win-tooltip">
-                                        <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'tooltip.videoListLeft'}"></span>
+                                </button>
+                                <button id="videoListLeft" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
+                                        data-win-bind="ariaChecked: videoListLeft">
+                                    <div class="button-tip">
+                                        <div class="presenter-mode-image" id="video_list_left"></div>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body">
+                                                <span data-win-res="{textContent: 'tooltip.videoListLeft'}"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
-                            <button id="videoListRight" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
-                                    data-win-bind="ariaChecked: videoListRight">
-                                <div class="button-tip">
-                                    <div class="presenter-mode-image" id="video_list_right"></div>
-                                    <div class="win-tooltip">
-                                        <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'tooltip.videoListRight'}"></span>
+                                </button>
+                                <button id="videoListRight" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
+                                        data-win-bind="ariaChecked: videoListRight">
+                                    <div class="button-tip">
+                                        <div class="presenter-mode-image" id="video_list_right"></div>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body">
+                                                <span data-win-res="{textContent: 'tooltip.videoListRight'}"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
-                            <button id="videoListDefault" class="win-button"
-                                    onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
-                                    data-win-bind="ariaChecked: videoListDefault">
-                                <div class="button-tip">
-                                    <div class="presenter-mode-image" id="video_list_default"></div>
-                                    <div class="win-tooltip">
-                                        <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
-                                            <span data-win-res="{textContent: 'tooltip.videoListDefault'}"></span>
+                                </button>
+                                <button id="videoListDefault" class="win-button"
+                                        onclick="AppBar.handleEvent('click', 'clickPresenterMode', event)"
+                                        data-win-bind="ariaChecked: videoListDefault">
+                                    <div class="button-tip">
+                                        <div class="presenter-mode-image" id="video_list_default"></div>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body">
+                                                <span data-win-res="{textContent: 'tooltip.videoListDefault'}"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
-                            <button id="togglePresenterButtonContainer" class="container-close-button"
-                                    onclick="AppBar.handleEvent('click', 'togglePresenterButtonContainer', event)">
-                                <div class="presenter-mode-image" id="presenter_mode_small"></div>
-                                <i class="container-close-icon icon-bbb-close"></i>
-                            </button>
-                        </div>
-                        <div class="show-selfie-toggle-container">
-                            <div id="showSelfie" data-win-control="WinJS.UI.ToggleSwitch"
-                                 data-win-bind="winControl.checked: showSelfie; winControl.title: labelShowSelfie; winControl.labelOn: labelOn; winControl.labelOff: labelOff"
-                                 onchange="AppBar.handleEvent('change', 'clickToggleSwitch', event)"></div>
+                                </button>
+                            </div>
                         </div>
                         <div class="action-button-container show-presentation-toggle-container">
                             <button id="showPresentation" class="win-button" aria-checked="false"
@@ -307,7 +331,7 @@
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)">
                                 <div class="button-tip">
                                     <span class="show-button">
-                                        <i class="show-button-image" id="close_connection"></i>
+                                        <i class="show-button-image" id="phone_receiver"></i>
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
@@ -406,6 +430,28 @@
                                 </div>
                             </button>
                         </div>
+                        <div class="action-button-container show-panetools-button-container">
+                            <button id="showPaneTools" class="win-button" aria-checked="false"
+                                    onclick="AppBar.handleEvent('click', 'clickShowPane', event)"
+                                    data-win-bind="ariaChecked: showPaneTools">
+                                <div class="button-tip">
+                                    <span class="show-button">
+                                        <i class="show-button-image" id="video_list_left"></i>
+                                    </span>
+                                    <div class="win-tooltip">
+                                        <div class="bubble-arrow"></div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showPaneTools Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.closePaneTools'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showPaneTools Binding.Converter.toDisplayNone">
+                                            <span data-win-res="{textContent: 'tooltip.openPaneTools'}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
                         <div class="emoji-button-container">
                             <button id="toggleEmojiChooser" class="win-button"
                                     onclick="AppBar.handleEvent('click', 'clickToggleEmojiButton', event)">
@@ -419,33 +465,6 @@
                                     </div>
                                 </div>
                             </button>
-                        </div>
-                        <div class="video-list-template"
-                             data-win-control="WinJS.Binding.Template" style="display: none">
-                            <div data-win-bind="className: videoListItemClassName; name: key; style.display: enabled Binding.Converter.toDisplay">
-                                <video class="video-item" data-win-bind="srcObject: mediaStream" autoplay playsinline disablePictureInPicture></video>
-                                <div class="video-label">
-                                    <span data-win-bind="textContent: userName"></span>
-                                    <i data-win-bind="innerHTML: myselfLabel; style.display: myselfLabel Binding.Converter.toDisplay"></i>
-                                </div>
-                                <button class="win-button video-item-button"
-                                        onclick="AppBar.handleEvent('click', 'clickPinVideoButton', event)">
-                                    <span class="pin"></span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="unpinned-video-list-container"
-                             data-win-bind="style.display: showUnpinnedVideoList Binding.Converter.toDisplay">
-                            <div id="unpinnedVideos"
-                                 class="listview"
-                                 data-win-control="WinJS.UI.ListView"
-                                 data-win-options="{
-                            selectionMode: 'none',
-                            tapBehavior: 'none',
-                            layout : {type: WinJS.UI.GridLayout},
-                            itemTemplate: select('.video-list-template')
-                         }">
-                            </div>
                         </div>
                         <div id="emojiToolbar" class="tool-box box-bkg box-is-minimized"
                              data-win-control="WinJS.UI.Repeater">

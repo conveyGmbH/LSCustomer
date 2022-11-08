@@ -274,6 +274,8 @@ var __meteor_runtime_config__;
                 showVideoList: true,
                 showChat: false,
                 showNotes: false,
+                showPaneTools: false,
+                showPresenterButtons: false,
                 showUserList: false,
                 presenterModeTiled: false,
                 presenterModeFull: false,
@@ -295,7 +297,6 @@ var __meteor_runtime_config__;
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
                 showConference: false,
-                labelShowSelfie: getResourceText("event.showSelfie"),
                 labelShowPresentation: getResourceText("event.showPresentation"),
                 labelShowVideoList: getResourceText("event.showVideoList"),
                 labelOn: getResourceText("label.on"),
@@ -319,9 +320,8 @@ var __meteor_runtime_config__;
             }, commandList]);
 
             var conference = fragmentElement.querySelector("#conference");
-            var presenterButtonContainer = fragmentElement.querySelector(".modSession .presenter-button-container");
-            var showSelfieToggleContainer = fragmentElement.querySelector(".show-selfie-toggle-container");
-            var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
+            var paneTools = fragmentElement.querySelector(".pane-tools");
+            var showPresentationToggleContainer = fragmentElement.querySelector(".pane-tool");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var showMediaButtonContainer = fragmentElement.querySelector(".show-media-button-container");
             var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
@@ -332,6 +332,7 @@ var __meteor_runtime_config__;
             var raiseHandButtonContainer = fragmentElement.querySelector(".raise-hand-button-container");
             var showChatButtonContainer = fragmentElement.querySelector(".show-chat-button-container");
             var showNotesButtonContainer = fragmentElement.querySelector(".show-notes-button-container");
+            var showPaneToolsButtonContainer = fragmentElement.querySelector(".show-panetools-button-container");
             var showUserListButtonContainer = fragmentElement.querySelector(".show-userlist-button-container");
             var pollQuestionContainer = fragmentElement.querySelector("poll-question-container");
             var emojiButtonContainer = fragmentElement.querySelector(".emoji-button-container");
@@ -1958,6 +1959,9 @@ var __meteor_runtime_config__;
                                 var paneWidth = 0;
                                 var currentPane = panelWrapper.firstElementChild;
                                 var actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
+                                if (pageControllerName === "modSessionController" && that.binding.showPaneTools) {
+                                    paneWidth = paneTools.clientWidth;
+                                }
                                 if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium")) {
                                     panelWrapper.style.left = "0";
                                     panelWrapper.style.width = "100%";
@@ -1982,7 +1986,8 @@ var __meteor_runtime_config__;
                                     }
                                     if (paneWidth > 0 &&
                                         !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section") &&
-                                        !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                        !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section") ||
+                                        pageControllerName === "modSessionController" && that.binding.showPaneTools) {
                                         if (!WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
                                             WinJS.Utilities.addClass(panelWrapper, "pane-expanded");
                                         }
@@ -2009,7 +2014,8 @@ var __meteor_runtime_config__;
                                     }
                                     if (paneWidth > 0 &&
                                         !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section") &&
-                                        !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section")) {
+                                        !WinJS.Utilities.hasClass(panelWrapper, "hide-panel-section") ||
+                                        pageControllerName === "modSessionController" && that.binding.showPaneTools) {
                                         if (!WinJS.Utilities.hasClass(panelWrapper, "pane-expanded")) {
                                             WinJS.Utilities.addClass(panelWrapper, "pane-expanded");
                                         }
@@ -2109,6 +2115,14 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             }
+                            var actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
+                            if (paneTools && paneTools.style && actionsBar &&
+                                !isChildElement(mediaContainer, paneTools)) {
+                                mediaContainer.insertBefore(paneTools, actionsBar);
+                                if (pageControllerName === "modSessionController") {
+                                    that.binding.showPresenterButtons = true;
+                                }
+                            }
                             var actionsBarLeft = fragmentElement.querySelector(elementSelectors.actionsBarLeft);
                             var actionsBarRight = fragmentElement.querySelector(elementSelectors.actionsBarRight);
                             if (raiseHandButtonContainer && raiseHandButtonContainer.style) {
@@ -2151,15 +2165,6 @@ var __meteor_runtime_config__;
                                 }
                             }
                             if (pageControllerName === "modSessionController") {
-                                if (presenterButtonContainer && presenterButtonContainer.style) {
-                                    var navBarTopCenter = fragmentElement.querySelector(elementSelectors.navBarTopCenter);
-                                    if (navBarTopCenter &&
-                                        navBarTopCenter.firstElementChild !== presenterButtonContainer) {
-                                        navBarTopCenter.insertBefore(presenterButtonContainer,
-                                            navBarTopCenter.firstElementChild);
-                                        presenterButtonContainer.style.display = "inline-block";
-                                    }
-                                }
                                 if (showVideoListToggleContainer && showVideoListToggleContainer.style) {
                                     if (actionsBarCenter &&
                                         !isChildElement(actionsBarCenter, showVideoListToggleContainer)) {
@@ -2242,6 +2247,15 @@ var __meteor_runtime_config__;
                                     !isChildElement(actionsBarLeft, showNotesButtonContainer)) {
                                     actionsBarLeft.appendChild(showNotesButtonContainer);
                                     showNotesButtonContainer.style.display = "inline-block";
+                                }
+                            }
+                            if (pageControllerName === "modSessionController") {
+                                if (showPaneToolsButtonContainer && showPaneToolsButtonContainer.style) {
+                                    if (actionsBarLeft &&
+                                        !isChildElement(actionsBarLeft, showPaneToolsButtonContainer)) {
+                                        actionsBarLeft.appendChild(showPaneToolsButtonContainer);
+                                        showPaneToolsButtonContainer.style.display = "inline-block";
+                                    }
                                 }
                             }
                             if (overlayElement) {
@@ -3025,17 +3039,7 @@ var __meteor_runtime_config__;
                         }
                     }
                     videoListDefaults.activeVideoCount = numVideos;
-                    if (unpinnedVideoList && listView && listView.parentElement && listView.winControl) {
-                        if (listView.parentElement.parentElement !== mediaContainer) {
-                            var actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
-                            if (actionsBar) {
-                                mediaContainer.insertBefore(listView.parentElement, actionsBar);
-                                if (pageControllerName === "modSessionController") {
-                                    listView.winControl.itemsReorderable = true;
-                                }
-                                listView.winControl.itemDataSource = unpinnedVideoList.dataSource;
-                            }
-                        }
+                    if (unpinnedVideoList && listView && listView.winControl) {
                         if (newUnpinnedVideoLists.length > 0) {
                             var oldIndex, oldItem, newIndexesFound = [], oldIndexesFound = [];
                             newUnpinnedVideoLists.forEach(function(item, index) {
@@ -3085,33 +3089,13 @@ var __meteor_runtime_config__;
                                         unpinnedVideoList.splice(oldIndex, 1);
                                     }
                                 }
-                                if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
-                                    var actionsBarLeft =
-                                        fragmentElement.querySelector(elementSelectors.actionsBarLeft);
-                                    if (actionsBarLeft && !isChildElement(actionsBarLeft, showSelfieToggleContainer)) {
-                                        actionsBarLeft.appendChild(showSelfieToggleContainer);
-                                    }
-                                    showSelfieToggleContainer.style.display = "inline-block";
-                                }
-                            } else {
-                                if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
-                                    showSelfieToggleContainer.style.display = "none";
-                                }
                             }
                         } else {
                             unpinnedVideoList.length = 0;
-                            if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
-                                showSelfieToggleContainer.style.display = "none";
-                            }
-                        }
-                    } else {
-                        if (showSelfieToggleContainer && showSelfieToggleContainer.style) {
-                            showSelfieToggleContainer.style.display = "none";
                         }
                     }
-                    if ((pageControllerName === "modSessionController" || myselfIsUnpinned) && 
-                        unpinnedVideoList.length > 0) {
-                        if (!that.binding.unpinnedVideoListLength) {
+                    if ((pageControllerName === "modSessionController" || myselfIsUnpinned) && unpinnedVideoList.length > 0) {
+                        if (!that.binding.showUnpinnedVideoList) {
                             WinJS.Promise.timeout(100).then(function() {
                                 if (listView && listView.winControl) {
                                     listView.winControl.forceLayout();
@@ -3124,6 +3108,20 @@ var __meteor_runtime_config__;
                     }
                     that.binding.showUnpinnedVideoList = that.binding.unpinnedVideoListLength > 0 &&
                         !(that.binding.unpinnedVideoListLength === 1 && myselfIsUnpinned && !that.binding.showSelfie);
+                    if (!(pageControllerName === "modSessionController")) {
+                        that.binding.showPaneTools = that.binding.showUnpinnedVideoList && that.binding.showUserList;
+                        if (mediaContainer) {
+                            if (that.binding.showPaneTools) {
+                                if (!WinJS.Utilities.hasClass(mediaContainer, "show-selfie-unpinned")) {
+                                    WinJS.Utilities.addClass(mediaContainer, "show-selfie-unpinned");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(mediaContainer, "show-selfie-unpinned")) {
+                                    WinJS.Utilities.removeClass(mediaContainer, "show-selfie-unpinned");
+                                }
+                            }
+                        }
+                    }
                     if (!checkForInactiveVideoPromise && checkLaterAgain) {
                         checkForInactiveVideoPromise = WinJS.Promise.timeout(250).then(function () {
                             that.checkForInactiveVideo();
@@ -3935,34 +3933,6 @@ var __meteor_runtime_config__;
                     that.delayedLoadSessionStatus();
                     Log.ret(Log.l.info);
                 },
-                togglePresenterButtonContainer: function () {
-                    Log.call(Log.l.info, "Conference.Controller.");
-                    if (presenterButtonContainer) {
-                        var containerCloseIcon = presenterButtonContainer.querySelector(".container-close-icon");
-                        if (WinJS.Utilities.hasClass(presenterButtonContainer, "container-collapsed")) {
-                            WinJS.Utilities.removeClass(presenterButtonContainer, "container-collapsed");
-                            if (containerCloseIcon) {
-                                if (WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-right_arrow")) {
-                                    WinJS.Utilities.removeClass(containerCloseIcon, "icon-bbb-right_arrow");
-                                }
-                                if (!WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-close")) {
-                                    WinJS.Utilities.addClass(containerCloseIcon, "icon-bbb-close");
-                                }
-                            }
-                        } else {
-                            WinJS.Utilities.addClass(presenterButtonContainer, "container-collapsed");
-                            if (containerCloseIcon) {
-                                if (WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-close")) {
-                                    WinJS.Utilities.removeClass(containerCloseIcon, "icon-bbb-close");
-                                }
-                                if (!WinJS.Utilities.hasClass(containerCloseIcon, "icon-bbb-right_arrow")) {
-                                    WinJS.Utilities.addClass(containerCloseIcon, "icon-bbb-right_arrow");
-                                }
-                            }
-                        }
-                    }
-                    Log.ret(Log.l.info);
-                },
                 clickPresenterMode: function (event) {
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (AppBar.notifyModified && event && event.currentTarget) {
@@ -4383,14 +4353,6 @@ var __meteor_runtime_config__;
                                         }
                                         that.saveSessionStatus(dataSessionStatus);
                                     }
-                                } else {
-                                    switch (command) {
-                                    case "showSelfie":
-                                    case "hideSelfie":
-                                        that.binding.showUnpinnedVideoList = that.binding.unpinnedVideoListLength > 0 &&
-                                            !(that.binding.unpinnedVideoListLength === 1 && myselfIsUnpinned && !that.binding.showSelfie);
-                                        break;
-                                    }
                                 }
                             }
                         }
@@ -4469,6 +4431,23 @@ var __meteor_runtime_config__;
                                     if (joinVideo) {
                                         joinVideo.click();
                                     }
+                                    if (pageControllerName === "modSessionController") {
+                                        if (showPaneToolsButtonContainer && 
+                                            !that.binding.showPane) {
+                                            var showPaneButton = showPaneToolsButtonContainer.querySelector("button");
+                                            if (showPaneButton) {
+                                                showPaneButton.click();
+                                            }
+                                        }
+                                    } else {
+                                        if (showUserListButtonContainer && 
+                                            !that.binding.showUserList) {
+                                            var showUserListButton = showUserListButtonContainer.querySelector("button");
+                                            if (showUserListButton) {
+                                                showUserListButton.click();
+                                            }
+                                        }
+                                    }
                                 } 
                                 break;
                             case "showConnectionStatus":
@@ -4524,48 +4503,6 @@ var __meteor_runtime_config__;
                                 var panelWrapper = fragmentElement.querySelector(getMediaContainerSelector());
                                 that.binding[command] = checked;
                                 switch (command) {
-                                case "showChat":
-                                    if (checked) {
-                                        that.binding.showNotes = false;
-                                        that.binding.showUserList = false;
-                                        if (closeNotesButton) {
-                                            closeNotesButton.click();
-                                        }
-                                        if (userListContent) {
-                                            if (panelWrapper) {
-                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
-                                                    WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
-                                                }
-                                            }
-                                        }
-                                        that.openChatPane(event);
-                                    } else {
-                                        if (closeChatButton) {
-                                            closeChatButton.click();
-                                        }
-                                    }
-                                    break;
-                                case "showNotes":
-                                    if (checked) {
-                                        that.binding.showChat = false;
-                                        that.binding.showUserList = false;
-                                        if (closeChatButton) {
-                                            closeChatButton.click();
-                                        }
-                                        if (userListContent) {
-                                            if (panelWrapper) {
-                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
-                                                    WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
-                                                }
-                                            }
-                                        }
-                                        that.openNotesPane(event);
-                                    } else {
-                                        if (closeNotesButton) {
-                                            closeNotesButton.click();
-                                        }
-                                    }
-                                    break;
                                 case "showUserList":
                                     if (checked) {
                                         that.binding.showChat = false;
@@ -4587,6 +4524,20 @@ var __meteor_runtime_config__;
                                                 }
                                             }
                                         }
+                                        if (pageControllerName === "modSessionController") {
+                                            that.binding.showPaneTools = false;
+                                        } else if (!checkForInactiveVideoPromise) {
+                                            checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
+                                                that.checkForInactiveVideo();
+                                            });
+                                        }
+                                        if (that.binding.showPaneTools) {
+                                            WinJS.Promise.timeout(100).then(function() {
+                                                if (listView && listView.winControl) {
+                                                    listView.winControl.forceLayout();
+                                                }
+                                            });
+                                        }
                                     } else {
                                         if (userListContent) {
                                             if (panelWrapper) {
@@ -4595,6 +4546,79 @@ var __meteor_runtime_config__;
                                                 }
                                             }
                                         }
+                                    }
+                                    break;
+                                case "showChat":
+                                    if (checked) {
+                                        that.binding.showNotes = false;
+                                        that.binding.showUserList = false;
+                                        if (pageControllerName === "modSessionController") {
+                                            that.binding.showPaneTools = false;
+                                        }
+                                        if (closeNotesButton) {
+                                            closeNotesButton.click();
+                                        }
+                                        if (userListContent) {
+                                            if (panelWrapper) {
+                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                                    WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                                                }
+                                            }
+                                        }
+                                        that.openChatPane(event);
+                                    } else {
+                                        if (closeChatButton) {
+                                            closeChatButton.click();
+                                        }
+                                    }
+                                    break;
+                                case "showNotes":
+                                    if (checked) {
+                                        that.binding.showChat = false;
+                                        that.binding.showUserList = false;
+                                        if (pageControllerName === "modSessionController") {
+                                            that.binding.showPaneTools = false;
+                                        }
+                                        if (closeChatButton) {
+                                            closeChatButton.click();
+                                        }
+                                        if (userListContent) {
+                                            if (panelWrapper) {
+                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                                    WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                                                }
+                                            }
+                                        }
+                                        that.openNotesPane(event);
+                                    } else {
+                                        if (closeNotesButton) {
+                                            closeNotesButton.click();
+                                        }
+                                    }
+                                    break;
+                                case "showPaneTools":
+                                    if (checked) {
+                                        that.binding.showNotes = false;
+                                        that.binding.showChat = false;
+                                        that.binding.showUserList = false;
+                                        if (closeChatButton) {
+                                            closeChatButton.click();
+                                        }
+                                        if (closeNotesButton) {
+                                            closeNotesButton.click();
+                                        }
+                                        if (userListContent) {
+                                            if (panelWrapper) {
+                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                                    WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                                                }
+                                            }
+                                        }
+                                        WinJS.Promise.timeout(100).then(function() {
+                                            if (listView && listView.winControl) {
+                                                listView.winControl.forceLayout();
+                                            }
+                                        });
                                     }
                                     break;
                                 }
@@ -5696,6 +5720,12 @@ var __meteor_runtime_config__;
             }
             if (listView) {
                 this.addRemovableEventListener(listView, "loadingstatechanged", this.eventHandlers.onListViewLoadingStateChanged.bind(this));
+                if (listView.winControl && unpinnedVideoList) {
+                    if (pageControllerName === "modSessionController") {
+                        listView.winControl.itemsReorderable = true;
+                    }
+                    listView.winControl.itemDataSource = unpinnedVideoList.dataSource;
+                }
             }
 
             that.processAll().then(function () {
