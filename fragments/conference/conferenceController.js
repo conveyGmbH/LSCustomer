@@ -4433,7 +4433,7 @@ var __meteor_runtime_config__;
                                     }
                                     if (pageControllerName === "modSessionController") {
                                         if (showPaneToolsButtonContainer && 
-                                            !that.binding.showPane) {
+                                            !that.binding.showPaneTools) {
                                             var showPaneButton = showPaneToolsButtonContainer.querySelector("button");
                                             if (showPaneButton) {
                                                 showPaneButton.click();

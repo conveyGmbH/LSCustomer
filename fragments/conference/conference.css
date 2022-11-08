@@ -2881,7 +2881,7 @@ c
     font-size: 80%;
     top: 188px;
 }
-.modsession #conferenceController #unpinnedVideos.listview .video-label {
+.modSession #conferenceController #unpinnedVideos.listview .video-label {
     top: 86px;
 }
 #conferenceController div[data-test="webcamItem"] > div .video-item-button,
