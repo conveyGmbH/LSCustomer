@@ -1754,6 +1754,14 @@ var __meteor_runtime_config__;
                 var leaveVideo = fragmentElement.querySelector(elementSelectors.leaveVideo);
                 if (leaveVideo) {
                     that.binding.cameraOn = true;
+                    if (pageControllerName === "modSessionController" && that.binding.showPaneTools ||
+                        !(pageControllerName === "modSessionController") && that.binding.showUserList) {
+                        if (!checkForInactiveVideoPromise) {
+                            checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
+                                that.checkForInactiveVideo();
+                            });
+                        }
+                    }
                 } else {
                     that.binding.cameraOn = false;
                 } 
