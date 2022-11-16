@@ -93,9 +93,10 @@
 .action-button-container,
 .emoji-button-container {
     display: none;
-    margin: 0 4px !important;
+    margin: 0 !important;
     transition: none;
 }
+
 
 .modSession #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-empty) .show-videolist-toggle-container,
 .modSession #conference.mediaview .video-overlay-is-top:not(.video-overlay-is-empty) .show-videolist-toggle-container,
@@ -2202,6 +2203,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     box-shadow: var(--box-shadow-button) !important;
     opacity: 0.64;
     margin-top: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
     outline-style: none;
     border-radius: 50%;
     display: flex;
@@ -2223,6 +2226,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     box-shadow: var(--box-shadow-button) !important;
     opacity: 0.64;
     /*margin-top: 2px;*/
+    margin-left: 4px;
+    margin-right: 4px;
     outline-style: none;
     border-radius: 50%;
     display: flex;
@@ -2244,6 +2249,9 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     height: 38px;
     min-width: 40px;
     opacity: 0.64;
+    /*margin-top: 2px;*/
+    margin-left: 4px;
+    margin-right: 4px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-top-left-radius: 50%;

@@ -1765,17 +1765,22 @@ var __meteor_runtime_config__;
                 } else {
                     that.binding.cameraOn = false;
                 } 
-                var showMediaButton = fragmentElement.querySelector(elementSelectors.showMediaButton);
-                if (showMediaButton) {
-                    that.binding.showMediaOn = true;
+                if (that.binding.showPresentation) {
+                    var showMediaButton = fragmentElement.querySelector(elementSelectors.showMediaButton);
+                    if (showMediaButton) {
+                        that.binding.showMediaOn = true;
+                    } else {
+                        that.binding.showMediaOn = false;
+                    }
+                    var startDeskShare = fragmentElement.querySelector(elementSelectors.startDeskShare);
+                    var stopDeskShare = fragmentElement.querySelector(elementSelectors.stopDeskShare);
+                    if (startDeskShare || stopDeskShare) {
+                        that.binding.showDeskShareOn = true;
+                    } else {
+                        that.binding.showDeskShareOn = false;
+                    }
                 } else {
                     that.binding.showMediaOn = false;
-                }
-                var startDeskShare = fragmentElement.querySelector(elementSelectors.startDeskShare);
-                var stopDeskShare = fragmentElement.querySelector(elementSelectors.stopDeskShare);
-                if (startDeskShare || stopDeskShare) {
-                    that.binding.showDeskShareOn = true;
-                } else {
                     that.binding.showDeskShareOn = false;
                 }
                 Log.ret(Log.l.trace, "");
@@ -3207,6 +3212,9 @@ var __meteor_runtime_config__;
                         that.adjustContentPositions();
                     });
                 }
+                WinJS.Promise.timeout(0).then(function () {
+                    that.handleAudioVideoButtonStatus();
+                });
                 that.sendResize(500);
                 Log.ret(Log.l.trace);
             }
@@ -3218,7 +3226,6 @@ var __meteor_runtime_config__;
                     pUserToken: userToken
                 }, function (json) {
                     Log.print(Log.l.trace, "Prc_GetBBBSessionStatus success!");
-                    var prevPresenterMode = that.binding.dataSessionStatus.PresenterMode;
                     if (json && json.d && json.d.results && json.d.results.length > 0) {
                         that.binding.dataSessionStatus = json.d.results[0];
                         that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
