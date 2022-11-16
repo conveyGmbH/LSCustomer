@@ -181,14 +181,19 @@
                         <div class="action-button-container show-deskshare-button-container">
                             <button id="showDeskShare" class="win-button"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)"
-                                    data-win-bind="style.display: showDeskShareOn Binding.Converter.toDisplay">
+                                    data-win-bind="style.display: showDeskShareOn Binding.Converter.toDisplay; ariaChecked: showDeskShareActive">
                                 <div class="button-tip">
                                     <span class="show-button">
                                         <i class="show-button-image" id="desk_share"></i>
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
-                                        <div class="bubble-body">
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showDeskShareActive Binding.Converter.toDisplay">
+                                            <span data-win-res="{textContent: 'tooltip.stopDeskShare'}"></span>
+                                        </div>
+                                        <div class="bubble-body"
+                                             data-win-bind="style.display: showDeskShareActive Binding.Converter.toDisplayNone">
                                             <span data-win-res="{textContent: 'tooltip.showDeskShare'}"></span>
                                         </div>
                                     </div>

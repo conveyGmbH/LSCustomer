@@ -289,6 +289,7 @@ var __meteor_runtime_config__;
                 microphoneOn: false,
                 cameraOn: false,
                 showDeskShareOn: false,
+                showDeskShareActive: false,
                 showMediaOn: false,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
@@ -1774,9 +1775,14 @@ var __meteor_runtime_config__;
                     }
                     var startDeskShare = fragmentElement.querySelector(elementSelectors.startDeskShare);
                     var stopDeskShare = fragmentElement.querySelector(elementSelectors.stopDeskShare);
-                    if (startDeskShare || stopDeskShare) {
+                    if (stopDeskShare) {
+                        that.binding.showDeskShareActive = true;
+                        that.binding.showDeskShareOn = true;
+                    } else if (startDeskShare) {
+                        that.binding.showDeskShareActive = false;
                         that.binding.showDeskShareOn = true;
                     } else {
+                        that.binding.showDeskShareActive = false;
                         that.binding.showDeskShareOn = false;
                     }
                 } else {
