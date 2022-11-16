@@ -2983,3 +2983,9 @@ c
     right: -0.3em !important;
     bottom: -0.1em !important;
 }
+
+.MuiMenu-paper {
+    left: calc(50% - 150px) !important;
+    top: auto !important;
+    bottom: 64px !important;
+}
