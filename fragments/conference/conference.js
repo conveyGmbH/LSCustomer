@@ -24,7 +24,7 @@
 
             Colors.loadSVGImageElements(element, "presenter-mode-image", 42, "#ffffff");
             Colors.loadSVGImageElements(element, "show-button-image", 20, null, null, null, {
-                presentation: { strokeWidth: 900 },
+                /*presentation: { strokeWidth: 900 },
                 camera_user: { strokeWidth: 900 },
                 media: { strokeWidth: 900 },
                 raise_hand: { strokeWidth: 900 },
@@ -35,7 +35,7 @@
                 microphone_off: { strokeWidth: 900 },
                 camera_off: { strokeWidth: 900 },
                 phone_receiver: { strokeWidth: 400, color: "#ffffff" },
-                loudspeaker4: { strokeWidth: 400, color: "#ffffff" },
+                loudspeaker4: { strokeWidth: 400, color: "#ffffff" },*/
                 navigate_up: { strokeWidth: 400, color: "#2A2F3D" }
             });
 
