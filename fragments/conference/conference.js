@@ -32,10 +32,11 @@
                 team: { strokeWidth: 900 },
                 chat: { strokeWidth: 900 },
                 notes: { strokeWidth: 900 },
-                microphone_off: { strokeWidth: 900 },
-                camera_off: { strokeWidth: 900 },
-                phone_receiver: { strokeWidth: 400, color: "#ffffff" },
-                loudspeaker4: { strokeWidth: 400, color: "#ffffff" },
+                presenter_management: { strokeWidth: 900 },
+                microphone_on: { strokeWidth: 900 },
+                camera_on: { strokeWidth: 900 },
+                phone_receiver_horizontal: { strokeWidth: 900 },
+                loudspeaker_on: { strokeWidth: 900 },
                 navigate_up: { strokeWidth: 400, color: "#2A2F3D" }
             });
 
