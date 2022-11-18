@@ -2997,6 +2997,17 @@ c
 #conference.mediaview #cameraDock {
     pointer-events: none;
 }
+#conference.mediaview .video-overlay-default #cameraDock {
+    margin-bottom: 20px !important;
+}
+#conference.mediaview .video-overlay-default #cameraDock + span {
+    height: 20px !important;
+    bottom: -20px !important;
+}
+#conference.mediaview .video-overlay-default #cameraDock div[data-test="webcamVideoItem"] {
+    pointer-events: none;
+}
+
 #conference.mediaview #cameraDock > * {
     pointer-events: auto;
 }
