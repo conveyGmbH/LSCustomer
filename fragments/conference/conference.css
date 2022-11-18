@@ -3004,6 +3004,10 @@ c
     height: 40px !important;
     bottom: -40px !important;
 }
+#conference.mediaview .video-overlay-default #cameraDock + span > div:active {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
 #conference.mediaview .video-overlay-default #cameraDock div[data-test="webcamVideoItem"] {
     pointer-events: none;
 }
