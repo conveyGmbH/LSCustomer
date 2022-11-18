@@ -58,8 +58,16 @@
     max-width: 100%;
 }
 
-.modSession #conference.mediaview #layout > header:first-of-type > div:first-child > div {
+#conference.mediaview #layout > header:first-of-type {
+    height: 0 !important;
+}
+#conference.mediaview #layout > header:first-of-type > div:first-child {
+    height: 0 !important;
+}
+
+#conference.mediaview #layout > header:first-of-type > div:first-child > div {
     align-items: flex-start;
+    height: 0 !important;
 }
 
 /* hide user-list toggle button*/
