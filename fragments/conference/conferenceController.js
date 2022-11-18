@@ -1368,6 +1368,14 @@ var __meteor_runtime_config__;
                         }
                         return WinJS.Promise.timeout(250);
                     }).then(function () {
+                        var userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
+                        if (!that.binding.showUserList && !that.binding.showChat && !that.binding.showNotes && !that.binding.showPaneTools &&
+                            userListContent && WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium-small")) {
+                            var btnToggleUserList = fragmentElement.querySelector(elementSelectors.userListToggleButton);
+                            if (btnToggleUserList) {
+                                btnToggleUserList.click();
+                            }
+                        }
                         that.sendResize(50);
                     });
                 }
@@ -2091,6 +2099,24 @@ var __meteor_runtime_config__;
                                         overlayElement.style.width = "100%";
                                     }
                                 } 
+                                if (!that.binding.showUserList && !WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                    var userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
+                                    if (userListContent) {
+                                        WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
+                                    }
+                                }
+                                if (!that.binding.showChat && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
+                                    var closeChatButton = fragmentElement.querySelector(elementSelectors.closeChatButton);
+                                    if (closeChatButton) {
+                                        closeChatButton.click();
+                                    }
+                                }
+                                if (!that.binding.showNotes) {
+                                    var closeNotesButton = fragmentElement.querySelector(elementSelectors.closeNotesButton);
+                                    if (closeNotesButton) {
+                                        closeNotesButton.click();
+                                    }
+                                }
                             });
                             if (!sessionStatusIsSet && that.binding.dataSessionStatus) {
                                 that.setPresenterModeState(that.binding.dataSessionStatus.PresenterMode);
@@ -4559,11 +4585,20 @@ var __meteor_runtime_config__;
                                     } else {
                                         if (userListContent) {
                                             if (panelWrapper) {
-                                                if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
+                                                if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium-small")) {
+                                                    if (btnToggleUserList) {
+                                                        btnToggleUserList.click();
+                                                    }
+                                                } else if (!WinJS.Utilities.hasClass(panelWrapper, "hide-user-list-section")) {
                                                     WinJS.Utilities.addClass(panelWrapper, "hide-user-list-section");
                                                 }
                                             }
                                         }
+                                    }
+                                    if (!adjustContentPositionsPromise) {
+                                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                            that.adjustContentPositions();
+                                        });
                                     }
                                     break;
                                 case "showChat":
@@ -4637,13 +4672,25 @@ var __meteor_runtime_config__;
                                                 listView.winControl.forceLayout();
                                             }
                                         });
+                                        if (!adjustContentPositionsPromise) {
+                                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
+                                                that.adjustContentPositions();
+                                            });
+                                        }
+                                    } else {
+                                        WinJS.Promise.timeout(250).then(function() {
+                                            userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
+                                            if (!that.binding.showUserList && !that.binding.showChat && !that.binding.showNotes && !that.binding.showPaneTools &&
+                                                userListContent && WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium-small")) {
+                                                btnToggleUserList = fragmentElement.querySelector(elementSelectors.userListToggleButton);
+                                                if (btnToggleUserList) {
+                                                    btnToggleUserList.click();
+                                                }
+                                            }
+                                        });
+
                                     }
                                     break;
-                                }
-                                if (!adjustContentPositionsPromise) {
-                                    adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                        that.adjustContentPositions();
-                                    });
                                 }
                             }
                         }
