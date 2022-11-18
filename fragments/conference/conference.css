@@ -1143,6 +1143,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 .view-size-medium-small #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:first-child,
 .view-size-medium-small #conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child {
     position: absolute;
+    top: 10px;
 }
 #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:first-child + div,
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child + div {
@@ -1171,8 +1172,8 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 .view-size-medium-small #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:last-child,
 .view-size-medium-small #conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div:first-child > div:last-child {
-    width: 50%;
-    margin-left: 50%;
+    width: 50% !important;
+    margin-left: 50% !important;
 }
 
 .speakerSession #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:first-child,
