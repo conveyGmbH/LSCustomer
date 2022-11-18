@@ -2345,7 +2345,7 @@ var __meteor_runtime_config__;
                                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
                                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-right");
                                         }
-                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-right")) {
+                                        if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-top")) {
                                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-top");
                                         }
                                         if (WinJS.Utilities.hasClass(overlayElement, "video-overlay-left")) {
