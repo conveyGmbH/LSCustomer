@@ -3032,10 +3032,19 @@ c
     border: none;
 }
 
+
+#conferenceController div[data-test="webcamItem"] > div button[data-test="presentationFullscreenButton"],
+#conferenceController div[data-test="webcamItemTalkingUser"] > div button[data-test="presentationFullscreenButton"] {
+    right: 2px;
+    height: 26px;
+    pointer-events: initial;
+}
+
 #conferenceController div[data-test="webcamItem"] > div .video-item-button,
 #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button {
     right: 28px;
-    height: 24px;
+    height: 26px;
+    pointer-events: initial;
 }
 #conferenceController #unpinnedVideos.listview .video-item-button {
     right: 2px;
