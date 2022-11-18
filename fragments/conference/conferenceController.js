@@ -1984,9 +1984,6 @@ var __meteor_runtime_config__;
                                 if (WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium")) {
                                     panelWrapper.style.left = "0";
                                     panelWrapper.style.width = "100%";
-                                    if (overlayElement) {
-                                        overlayElement.style.left = "";
-                                    }
                                     while (currentPane &&
                                         typeof currentPane.tagName === "string" &&
                                         currentPane.tagName.toLowerCase() !== "header") {
@@ -2066,34 +2063,34 @@ var __meteor_runtime_config__;
                                             actionsBar.style.maxWidth = "100%";
                                         }
                                     }
-                                    if (overlayElement) {
-                                        var overlayStyle = window.getComputedStyle(overlayElement);
-                                        if (overlayStyle) {
-                                            var transform = overlayStyle.getPropertyValue("transform");
-                                            if (typeof transform === "string") {
-                                                if (transform.substr(0, 10) === "translate(" ||
-                                                    transform.substr(0, 7) === "matrix(") {
-                                                    var stop = transform.lastIndexOf(",");
-                                                    if (stop > 0) {
-                                                        var start = stop-1;
-                                                        while (start > 0 && transform[start] !== "," && transform[start] !== "(") {
-                                                            start--;
-                                                        }
-                                                        var newTransform = transform.substr(0, start + 1) + " 0" + transform.substr(stop);
-                                                        overlayElement.style.transform = newTransform;
+                                }
+                                if (overlayElement) {
+                                    var overlayStyle = window.getComputedStyle(overlayElement);
+                                    if (overlayStyle) {
+                                        var transform = overlayStyle.getPropertyValue("transform");
+                                        if (typeof transform === "string") {
+                                            if (transform.substr(0, 10) === "translate(" ||
+                                                transform.substr(0, 7) === "matrix(") {
+                                                var stop = transform.lastIndexOf(",");
+                                                if (stop > 0) {
+                                                    var start = stop-1;
+                                                    while (start > 0 && transform[start] !== "," && transform[start] !== "(") {
+                                                        start--;
                                                     }
+                                                    var newTransform = transform.substr(0, start + 1) + " 0" + transform.substr(stop);
+                                                    overlayElement.style.transform = newTransform;
                                                 }
                                             }
                                         }
-                                        if (videoPLayerOpened || screenShareOpened || presentationOpened) {
-                                            overlayElement.style.left = "";
-                                            overlayElement.style.width = "";
-                                        } else {
-                                            overlayElement.style.left = "0";
-                                            overlayElement.style.width = "100%";
-                                        }
-                                    } 
-                                }
+                                    }
+                                    if (videoPLayerOpened || screenShareOpened || presentationOpened) {
+                                        overlayElement.style.left = "";
+                                        overlayElement.style.width = "";
+                                    } else {
+                                        overlayElement.style.left = "0";
+                                        overlayElement.style.width = "100%";
+                                    }
+                                } 
                             });
                             if (!sessionStatusIsSet && that.binding.dataSessionStatus) {
                                 that.setPresenterModeState(that.binding.dataSessionStatus.PresenterMode);
