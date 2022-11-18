@@ -2998,11 +2998,11 @@ c
     pointer-events: none;
 }
 #conference.mediaview .video-overlay-default #cameraDock {
-    margin-bottom: 20px !important;
+    margin-bottom: 40px !important;
 }
 #conference.mediaview .video-overlay-default #cameraDock + span > div {
-    height: 20px !important;
-    bottom: -20px !important;
+    height: 40px !important;
+    bottom: -40px !important;
 }
 #conference.mediaview .video-overlay-default #cameraDock div[data-test="webcamVideoItem"] {
     pointer-events: none;
