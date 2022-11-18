@@ -1019,6 +1019,11 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     min-width: 320px !important;
     max-width: 320px !important;
 }
+.view-size-medium #conference.mediaview #layout > div:first-child,
+.view-size-medium #conference.mediaview #layout > div:first-child + div {
+    box-shadow: rgba(0, 0, 0, 0.133) 1.6px -2px 3.6px 0.6px, rgba(0, 0, 0, 0.11) 0.6px -1px 0.9px 0px;
+}
+
 #conference.mediaview .hide-user-list-section > div:first-child,
 #conference.mediaview .hide-user-list-section > div:first-child *,
 #conference.mediaview .hide-chat-section > div:first-child + div,
@@ -2845,6 +2850,7 @@ c
 }
 .view-size-medium #conferenceController .pane-tools {
     left: 0;
+    box-shadow: rgba(0, 0, 0, 0.133) 1.6px -2px 3.6px 0.6px, rgba(0, 0, 0, 0.11) 0.6px -1px 0.9px 0px;
 }
 
 .modSession #conferenceController .pane-tools {
