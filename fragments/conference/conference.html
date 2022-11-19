@@ -178,6 +178,35 @@
                                 </div>
                             </button>
                         </div>
+                        <div class="action-button-container expand-actions-toggle-container">
+                            <div class="settings-container">
+                                <button id="expandActions" class="win-button" aria-checked="false"
+                                        onclick="AppBar.handleEvent('click', 'clickShowPane', event)"
+                                        data-win-bind="ariaChecked: expandActions">
+                                    <div class="button-tip">
+                                        <span class="show-button"
+                                              data-win-bind="style.display: expandActions Binding.Converter.toDisplay">
+                                            <i class="show-button-image" id="navigate_down"></i>
+                                        </span>
+                                        <span class="show-button"
+                                              data-win-bind="style.display: expandActions Binding.Converter.toDisplayNone">
+                                            <i class="show-button-image" id="navigate_up"></i>
+                                        </span>
+                                        <div class="win-tooltip">
+                                            <div class="bubble-arrow"></div>
+                                            <div class="bubble-body"
+                                                 data-win-bind="style.display: expandActions Binding.Converter.toDisplay">
+                                                <span data-win-res="{textContent: 'tooltip.compressActions'}"></span>
+                                            </div>
+                                            <div class="bubble-body"
+                                                 data-win-bind="style.display: expandActions Binding.Converter.toDisplayNone">
+                                                <span data-win-res="{textContent: 'tooltip.expandActions'}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                         <div class="action-button-container show-deskshare-button-container">
                             <button id="showDeskShare" class="win-button"
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)"

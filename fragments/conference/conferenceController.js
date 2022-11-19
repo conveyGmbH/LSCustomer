@@ -291,6 +291,7 @@ var __meteor_runtime_config__;
                 showDeskShareOn: false,
                 showDeskShareActive: false,
                 showMediaOn: false,
+                expandActions: false,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 showUnpinnedVideoList: false,
@@ -324,6 +325,7 @@ var __meteor_runtime_config__;
             var paneTools = fragmentElement.querySelector(".pane-tools");
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
+            var expandActionsToggleContainer = fragmentElement.querySelector(".expand-actions-toggle-container");
             var showMediaButtonContainer = fragmentElement.querySelector(".show-media-button-container");
             var showDeskShareButtonContainer = fragmentElement.querySelector(".show-deskshare-button-container");
             var closeConnectionButtonContainer = fragmentElement.querySelector(".close-connection-button-container");
@@ -2298,6 +2300,17 @@ var __meteor_runtime_config__;
                                         actionsBarLeft.appendChild(showPaneToolsButtonContainer);
                                         showPaneToolsButtonContainer.style.display = "inline-block";
                                     }
+                                }
+                            }
+                            if (expandActionsToggleContainer && expandActionsToggleContainer.style) {
+                                if (actionsBarCenter &&
+                                    !isChildElement(actionsBarCenter, expandActionsToggleContainer)) {
+                                    if (actionsBarCenter.firstElementChild) {
+                                        actionsBarCenter.insertBefore(expandActionsToggleContainer, actionsBarCenter.firstElementChild);
+                                    } else {
+                                        actionsBarCenter.appendChild(expandActionsToggleContainer);
+                                    }
+                                    expandActionsToggleContainer.style.display = "block";
                                 }
                             }
                             if (overlayElement) {
@@ -4679,6 +4692,19 @@ var __meteor_runtime_config__;
                                             }
                                         });
 
+                                    }
+                                    break;
+                                case "expandActions":
+                                    if (panelWrapper) {
+                                        if (checked) {
+                                            if (!WinJS.Utilities.hasClass(panelWrapper, "actions-menu-expanded")) {
+                                                WinJS.Utilities.addClass(panelWrapper, "actions-menu-expanded");
+                                            }
+                                        } else {
+                                            if (WinJS.Utilities.hasClass(panelWrapper, "actions-menu-expanded")) {
+                                                WinJS.Utilities.removeClass(panelWrapper, "actions-menu-expanded");
+                                            }
+                                        }
                                     }
                                     break;
                                 }

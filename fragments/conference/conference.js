@@ -38,7 +38,8 @@
                 phone_receiver_horizontal: { strokeWidth: 900 },
                 loudspeaker_on: { strokeWidth: 900 },
                 connection_status: { strokeWidth: 900 },*/
-                navigate_up: { strokeWidth: 400, color: "#2A2F3D" }
+                navigate_up: { strokeWidth: 400, color: "#2A2F3D" },
+                navigate_down: { strokeWidth: 400, color: "#2A2F3D" }
             });
 
             // add page specific commands to AppBar

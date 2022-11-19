@@ -47,6 +47,8 @@
     "tooltip.audioOff" : "Tonwiedergabe ausschalten",
     "tooltip.audioSettings" : "Audiogeräte auswählen",
     "tooltip.videoSettings" : "Videokamera-Einstellungen",
+	"tooltip.expandActions" : "Zusätzliche Funktionen anzeigen",
+    "tooltip.compressActions" : "Zusätzliche Funktionen ausblenden",
 
     "events.title"          : "Serie",
 

@@ -47,6 +47,8 @@
     "tooltip.audioOff" : "Stop audio",
     "tooltip.audioSettings" : "Seleziona dispositivi audio",
     "tooltip.videoSettings" : "Impostazioni della videocamera",
+    "tooltip.expandActions" : "Mostra funzioni aggiuntive",
+    "tooltip.compressActions" : "Nascondi funzioni aggiuntive",
 
     "events.title"          : "Series",
 
