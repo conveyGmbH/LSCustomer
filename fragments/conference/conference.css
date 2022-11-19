@@ -2391,7 +2391,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border: none !important;
     top: -12px;
     height: 20px;
-    left: calc(50% - 20px);
+    left: calc(50% - 24px);
 }
 #conferenceController #layout.actions-menu-expanded .action-button-container.expand-actions-toggle-container .settings-container > .win-button {
     top: 30px;
