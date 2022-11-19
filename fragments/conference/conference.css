@@ -350,7 +350,7 @@ div[data-test="recordingIndicator"] #recording-description + span {
     top: -40px;
     left: -80px;
     min-height: 40px;
-    transition-duration: 500ms;
+    transition-duration: 300ms;
     transition-property: top, opacity;
     opacity: 0;
     text-transform: none;
@@ -2434,7 +2434,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     min-width: 60px !important;
     width: fit-content !important;
     max-width: 240px !important;
-    transition-duration: 500ms;
+    transition-duration: 300ms;
     transition-property: top, opacity;
     opacity: 0;
     text-transform: none !important;
@@ -2444,6 +2444,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     background: transparent;
     border: none;
     padding: 0;
+    z-index: -1;
 }
 #conferenceController .show-userlist-button-container > .win-button .button-tip .win-tooltip {
     left: calc(50% + 40px);
@@ -2457,7 +2458,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     min-height: 40px;
     width: 240px !important;
     max-width: 240px !important;
-    transition-duration: 500ms;
+    transition-duration: 300ms;
     transition-property: top, opacity;
     opacity: 0;
     text-transform: none !important;
@@ -2467,6 +2468,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     background: transparent;
     border: none;
     padding: 0;
+    z-index: -1;
 }
 #conferenceController .action-button-container .settings-container > .win-button:hover .button-tip .win-tooltip,
 #conferenceController .action-button-container .settings-container > .win-button:active .button-tip .win-tooltip,
