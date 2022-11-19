@@ -153,6 +153,26 @@
                                     that.controller.adjustContainerSize();
                                 }
                             }
+                            if (height <= Application._maxViewSize.small &&
+                                !WinJS.Utilities.hasClass(element, "view-size-small")) {
+                                if (WinJS.Utilities.hasClass(element, "view-size-medium-small")) {
+                                    WinJS.Utilities.removeClass(element, "view-size-medium-small");
+                                }
+                                if (WinJS.Utilities.hasClass(element, "view-size-medium")) {
+                                    WinJS.Utilities.removeClass(element, "view-size-medium");
+                                }
+                            } else {
+                                if (width <= Application.maxViewSize.mediumSmall &&
+                                    !WinJS.Utilities.hasClass(element, "view-size-medium-small")) {
+                                    // add class: view-size-medium-small    
+                                    WinJS.Utilities.addClass(element, "view-size-medium-small");
+                                }
+                                if (width <= Application.maxViewSize.medium && 
+                                    !WinJS.Utilities.hasClass(element, "view-size-medium")) {
+                                    // add class: view-size-medium
+                                    WinJS.Utilities.addClass(element, "view-size-medium");
+                                }
+                            }
                         }
                     }
                     that.inResize = 0;
