@@ -2563,17 +2563,14 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     margin-left: -196px;
     margin-top: 2px;
     padding: 1px 1px 1px 50px;
-    width: auto;
     overflow: hidden;
     transition: width 0.3s ease-in-out;
 }
 
 .view-size-medium #conferenceController .tool-box {
-    left: -55px;
+    left: -46px;
     position: relative;
     margin-left: 0;
-    margin-bottom: 0;
-    bottom: 0;
 }
 
 #conferenceController .box-bkg {
