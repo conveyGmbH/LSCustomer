@@ -125,9 +125,9 @@
                                             }
                                             var contentHeight;
                                             if (WinJS.Utilities.hasClass(content, "recordedContent-fragmenthost")) {
-                                                contentHeight = Math.max(height - (offsetTop + headerHeight), 750);
+                                                contentHeight = Math.max(height - (offsetTop + headerHeight), 400);
                                             } else {
-                                                contentHeight = Math.max(Math.min(height - headerHeight,height - offsetTop), 750);
+                                                contentHeight = Math.max(Math.min(height - headerHeight,height - offsetTop), 400);
                                             }
                                             content.style.height = contentHeight.toString() + "px";
                                             var fragmentElement = content.firstElementChild;

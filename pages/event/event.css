@@ -54,8 +54,9 @@
     height: auto;
     margin: 0;
     background-color: rgba(128,128,128,0.1);
+    /*
     grid-column: 1 / span 6;
-    /*grid-row: 2 / span 4;
+        grid-row: 2 / span 4;
         scroll-snap-align: end;
 }
 .event .content-container {
