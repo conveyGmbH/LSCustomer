@@ -4595,11 +4595,6 @@ var __meteor_runtime_config__;
                                             }
                                         }
                                     }
-                                    if (!adjustContentPositionsPromise) {
-                                        adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
-                                            that.adjustContentPositions();
-                                        });
-                                    }
                                     break;
                                 case "showChat":
                                     if (checked) {
@@ -4672,11 +4667,6 @@ var __meteor_runtime_config__;
                                                 listView.winControl.forceLayout();
                                             }
                                         });
-                                        if (!adjustContentPositionsPromise) {
-                                            adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function() {
-                                                that.adjustContentPositions();
-                                            });
-                                        }
                                     } else {
                                         WinJS.Promise.timeout(250).then(function() {
                                             userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
@@ -4691,6 +4681,11 @@ var __meteor_runtime_config__;
 
                                     }
                                     break;
+                                }
+                                if (!adjustContentPositionsPromise) {
+                                    adjustContentPositionsPromise = WinJS.Promise.timeout(50).then(function () {
+                                        that.adjustContentPositions();
+                                    });
                                 }
                             }
                         }
