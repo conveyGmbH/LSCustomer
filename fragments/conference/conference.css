@@ -2562,7 +2562,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     position: relative;
     margin-left: -196px;
     margin-top: 2px;
-    padding: 1px 1px 1px 50px;
+    padding: 1px 1px 1px 46px;
     overflow: hidden;
     transition: width 0.3s ease-in-out;
 }
@@ -2605,7 +2605,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     width: 36px;
     height: 36px;
     min-width: 36px;
-    margin: 5px;
+    margin: 4px;
     border-radius: 50%;
     padding: 2px;
     float: left;
