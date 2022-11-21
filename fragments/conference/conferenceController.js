@@ -1331,7 +1331,8 @@ var __meteor_runtime_config__;
                     for (i = 0; i < removedNodes.length; i++) {
                         var removedNode = removedNodes[i];
                         if (removedNode && removedNode.firstElementChild) {
-                            var dataTest = removedNode.firstElementChild.getAttribute("data-test") ||
+                            var dataTest = removedNode.getAttribute("data-test") ||
+                                removedNode.firstElementChild.getAttribute("data-test") ||
                                 removedNode.firstElementChild.firstElementChild.getAttribute("data-test");
                             if (dataTest === "userListContent") {
                                 Log.print(Log.l.trace, "userList panel closed");
@@ -1343,14 +1344,17 @@ var __meteor_runtime_config__;
                                     filterUserListPromise.cancel();
                                     filterUserListPromise = null;
                                 }
+                                that.binding.showUserList = false;
                             } else if (dataTest === "publicChat") {
                                 Log.print(Log.l.trace, "chat panel closed");
                                 if (observeChatMessageListPromise) {
                                     observeChatMessageListPromise.cancel();
                                     observeChatMessageListPromise = null;
                                 }
-                            } else if (dataTest === "note") {
+                                that.binding.showChat = false;
+                            } else if (dataTest === "notes") {
                                 Log.print(Log.l.trace, "note panel closed");
+                                that.binding.showNotes = false;
                             } else if (removedNode.firstElementChild.id === "pollPanel") {
                                 Log.print(Log.l.trace, "poll panel closed");
                                 that.removeQuestionSelection();
@@ -1739,10 +1743,6 @@ var __meteor_runtime_config__;
 
             var handleAudioVideoButtonStatus = function() {
                 Log.call(Log.l.trace, "Conference.Controller.", "");
-                var audioSettings = fragmentElement.querySelector(elementSelectors.audioSettings);
-                if (audioSettings) {
-
-                }
                 var microphoneOff = fragmentElement.querySelector(elementSelectors.microphoneOff);
                 if (microphoneOff) {
                     that.binding.audioOn = true;
@@ -1800,12 +1800,6 @@ var __meteor_runtime_config__;
                 } else {
                     that.binding.showMediaOn = false;
                     that.binding.showDeskShareOn = false;
-                }
-                var hasUnreadMessagesButton = fragmentElement.querySelector(elementSelectors.hasUnreadMessagesButton);
-                if (hasUnreadMessagesButton) {
-                    that.binding.hasUnreadMessages = true;
-                } else {
-                    that.binding.hasUnreadMessages = false;
                 }
                 Log.ret(Log.l.trace, "");
             }
@@ -1955,7 +1949,12 @@ var __meteor_runtime_config__;
                                     }
                                 }
                                 WinJS.Promise.timeout(0).then(function () {
-                                    that.handleAudioVideoButtonStatus();
+                                    var hasUnreadMessagesButton = fragmentElement.querySelector(elementSelectors.hasUnreadMessagesButton);
+                                    if (hasUnreadMessagesButton) {
+                                        that.binding.hasUnreadMessages = true;
+                                    } else {
+                                        that.binding.hasUnreadMessages = false;
+                                    }
                                 });
                             });
                             userListDefaults.panelWrapperObserver.observe(panelWrapper, {
