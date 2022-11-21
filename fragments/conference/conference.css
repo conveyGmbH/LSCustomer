@@ -2560,6 +2560,20 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     display: inline;
 }
 
+#conferenceController .action-button-container .new-message {
+    position: absolute;
+    top: -10px;
+    left: 16px;
+}
+
+#conferenceController .action-button-container .statusNew {
+    background-color: var(--btn-primary-bg);
+    color: white;
+    top: -20px;
+    left: -16px;
+    font-style: italic;
+}
+
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 4px;
     background: var(--e-global-color-text, #2A2F3D);

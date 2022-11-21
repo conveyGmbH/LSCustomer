@@ -103,6 +103,7 @@ var __meteor_runtime_config__;
         startDeskShare: '#conference.mediaview #layout button[data-test="startScreenShare"]',
         stopDeskShare: '#conference.mediaview #layout button[data-test="stopScreenShare"]',
         userListToggleButton: '#conference.mediaview #layout button[data-test="toggleUserList"], #conference.mediaview #layout button[data-test="hasUnreadMessages"]',
+        hasUnreadMessagesButton: '#conference.mediaview #layout button[data-test="hasUnreadMessages"]',
         chatToggleButton: '#conference.mediaview #layout div[role="button"]#chat-toggle-button',
         notesToggleButton: '#conference.mediaview #layout div[aria-label="Geteilte Notizen"], #conference.mediaview #layout div[aria-label="Shared Notes"]',
         fullScreenButton: 'button[data-test="presentationFullscreenButton"]',
@@ -292,6 +293,7 @@ var __meteor_runtime_config__;
                 showDeskShareActive: false,
                 showMediaOn: false,
                 expandActions: false,
+                hasUnreadMessages: false,
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 showUnpinnedVideoList: false,
@@ -1799,6 +1801,12 @@ var __meteor_runtime_config__;
                     that.binding.showMediaOn = false;
                     that.binding.showDeskShareOn = false;
                 }
+                var hasUnreadMessagesButton = fragmentElement.querySelector(elementSelectors.hasUnreadMessagesButton);
+                if (hasUnreadMessagesButton) {
+                    that.binding.hasUnreadMessages = true;
+                } else {
+                    that.binding.hasUnreadMessages = false;
+                }
                 Log.ret(Log.l.trace, "");
             }
             that.handleAudioVideoButtonStatus = handleAudioVideoButtonStatus;
@@ -1946,9 +1954,14 @@ var __meteor_runtime_config__;
                                         }
                                     }
                                 }
+                                WinJS.Promise.timeout(0).then(function () {
+                                    that.handleAudioVideoButtonStatus();
+                                });
                             });
                             userListDefaults.panelWrapperObserver.observe(panelWrapper, {
-                                childList: true
+                                childList: true,
+                                attributeFilter: ["data-test"],
+                                subtree: true
                             });
                         }
                         var actionsBarCenter = fragmentElement.querySelector(elementSelectors.actionsBarCenter);
