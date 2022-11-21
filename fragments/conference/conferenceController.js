@@ -1265,7 +1265,8 @@ var __meteor_runtime_config__;
                     for (i = 0; i < addedNodes.length; i++) {
                         var addedNode = addedNodes[i];
                         if (addedNode && addedNode.firstElementChild && addedNode.firstElementChild.firstElementChild) {
-                            var dataTest = addedNode.firstElementChild.getAttribute("data-test") ||
+                            var dataTest = addedNode.getAttribute("data-test") ||
+                                addedNode.firstElementChild.getAttribute("data-test") ||
                                 addedNode.firstElementChild.firstElementChild.getAttribute("data-test");
                             if (dataTest === "userListContent") {
                                 Log.print(Log.l.trace, "userList panel opened" );
@@ -1299,8 +1300,8 @@ var __meteor_runtime_config__;
                                         });
                                     }
                                 }
-                            } else if (dataTest === "note") {
-                                Log.print(Log.l.trace, "note panel closed");
+                            } else if (dataTest === "notes") {
+                                Log.print(Log.l.trace, "notes panel opened");
                             } else if (addedNode.firstElementChild.id === "pollPanel") {
                                 Log.print(Log.l.trace, "poll panel opened" );
                                 that.createQuestionSelection();
@@ -1353,7 +1354,7 @@ var __meteor_runtime_config__;
                                 }
                                 that.binding.showChat = false;
                             } else if (dataTest === "notes") {
-                                Log.print(Log.l.trace, "note panel closed");
+                                Log.print(Log.l.trace, "notes panel closed");
                                 that.binding.showNotes = false;
                             } else if (removedNode.firstElementChild.id === "pollPanel") {
                                 Log.print(Log.l.trace, "poll panel closed");
