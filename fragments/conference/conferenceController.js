@@ -1282,11 +1282,11 @@ var __meteor_runtime_config__;
                                 }
                             } else if (dataTest === "publicChat") {
                                 Log.print(Log.l.trace, "chat panel opened" );
-                                var hideChatButton = addedNode.querySelector("button[aria-label=\"Verbergen Öffentlicher Chat\"], button[aria-label=\"Hide public chat\"]");
-                                if (hideChatButton) {
-                                    var hideChatButtonSpan = hideChatButton.querySelector("span");
-                                    if (hideChatButtonSpan) {
-                                        hideChatButtonSpan.textContent = "Chat";
+                                var closeChatButton = addedNode.querySelector(elementSelectors.closeChatButton);
+                                if (closeChatButton) {
+                                    var closeChatButtonSpan = closeChatButton.querySelector("span");
+                                    if (closeChatButtonSpan) {
+                                        closeChatButtonSpan.textContent = "Chat";
                                     }
                                 }
                                 var messageInput = fragmentElement.querySelector(elementSelectors.publicChat + " form textarea#message-input");
