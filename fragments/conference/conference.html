@@ -268,8 +268,13 @@
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)"
                                     data-win-bind="ariaChecked: microphoneOn; style.display: microphoneEnabled Binding.Converter.toDisplay">
                                 <div class="button-tip">
-                                    <span class="show-button">
+                                    <span class="show-button"
+                                         data-win-bind="style.display: microphoneOn Binding.Converter.toDisplay">
                                         <i class="show-button-image" id="microphone_on"></i>
+                                    </span>
+                                    <span class="show-button"
+                                         data-win-bind="style.display: microphoneOn Binding.Converter.toDisplay">
+                                        <i class="show-button-image" id="microphone_off"></i>
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
@@ -327,8 +332,13 @@
                                     onclick="AppBar.handleEvent('click', 'clickAction', event)"
                                     data-win-bind="ariaChecked: cameraOn">
                                 <div class="button-tip">
-                                    <span class="show-button">
+                                    <span class="show-button"
+                                         data-win-bind="style.display: cameraOn Binding.Converter.toDisplay">
                                         <i class="show-button-image" id="camera_on"></i>
+                                    </span>
+                                    <span class="show-button"
+                                         data-win-bind="style.display: cameraOn Binding.Converter.toDisplay">
+                                        <i class="show-button-image" id="camera_off"></i>
                                     </span>
                                     <div class="win-tooltip">
                                         <div class="bubble-arrow"></div>
