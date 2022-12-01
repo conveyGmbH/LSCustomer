@@ -4742,6 +4742,15 @@ var __meteor_runtime_config__;
                     if (command) {
                         Log.print(Log.l.info, "command=" + command);
                         that.submitCommandMessage(command, event);
+                        AppData.call("PRC_CreateIncident", {
+                            pUserToken: userToken,
+                            pIncidentName: "Emoji",
+                            pTextInfo1: command
+                        }, function (json) {
+                            Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                        }, function (error) {
+                            Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                        });
                     }
                     that.eventHandlers.hideToolbox("emojiToolbar");
                     Log.ret(Log.l.info);
