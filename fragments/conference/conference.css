@@ -2572,6 +2572,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     top: -20px;
     left: -16px;
     font-style: italic;
+    font-size: 14pt;
 }
 
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
