@@ -1264,9 +1264,10 @@ var __meteor_runtime_config__;
                     var panelWrapper = fragmentElement.querySelector(getMediaContainerSelector());
                     for (i = 0; i < addedNodes.length; i++) {
                         var addedNode = addedNodes[i];
-                        if (addedNode && addedNode.firstElementChild && addedNode.firstElementChild.firstElementChild) {
+                        if (addedNode && addedNode.firstElementChild) {
                             var dataTest = addedNode.getAttribute("data-test") ||
                                 addedNode.firstElementChild.getAttribute("data-test") ||
+                                addedNode.firstElementChild.firstElementChild &&
                                 addedNode.firstElementChild.firstElementChild.getAttribute("data-test");
                             if (dataTest === "userListContent") {
                                 Log.print(Log.l.trace, "userList panel opened" );
@@ -1334,6 +1335,7 @@ var __meteor_runtime_config__;
                         if (removedNode && removedNode.firstElementChild) {
                             var dataTest = removedNode.getAttribute("data-test") ||
                                 removedNode.firstElementChild.getAttribute("data-test") ||
+                                removedNode.firstElementChild.firstElementChild &&
                                 removedNode.firstElementChild.firstElementChild.getAttribute("data-test");
                             if (dataTest === "userListContent") {
                                 Log.print(Log.l.trace, "userList panel closed");
@@ -4536,6 +4538,14 @@ var __meteor_runtime_config__;
                                     if (raiseHandLabel) {
                                         raiseHandLabel.click();
                                         that.binding.raiseHand = true;
+                                        AppData.call("PRC_CreateIncident", {
+                                            pUserToken: userToken,
+                                            pIncidentName: "Hand"
+                                        }, function (json) {
+                                            Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                                        }, function (error) {
+                                            Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                                        });
                                     } else {
                                         that.binding.raiseHand = false;
                                     }
