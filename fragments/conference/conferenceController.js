@@ -61,6 +61,7 @@ var __meteor_runtime_config__;
         return false;
     }
     var elementSelectors = {
+        mediaView:       "#conference.mediaview",
         navBar:          "#conference.mediaview #layout > header:first-of-type",
         navBarTopCenter: "#conference.mediaview #layout > header:first-of-type > div:first-child > div:first-child + div",
         actionsBar:      '#conference.mediaview #layout > section[aria-label="Actions bar"], #conference.mediaview #layout > section[aria-label="Aktionsmenü"]',
@@ -303,13 +304,7 @@ var __meteor_runtime_config__;
                 dataConference: {
                     media: ""
                 },
-                dataSessionStatus: {
-                    ShowPresentation: 1,
-                    ShowVideoList: 1,
-                    VideoListPosition: videoListDefaults.right,
-                    PresenterMode: presenterModeDefaults.off,
-                    PinnedVideos: "[]"
-                },
+                dataSessionStatus: null,
                 showSelfie: true,
                 showPresentation: true,
                 showVideoList: true,
@@ -2255,6 +2250,12 @@ var __meteor_runtime_config__;
                                         sessionStatusIsSet = true;
                                     }
                                 }
+                                if (sessionStatusIsSet) {
+                                    var mediaView = fragmentElement.querySelector(elementSelectors.mediaView);
+                                    if (mediaView && !WinJS.Utilities.hasClass(mediaView, "session-state-complete")) {
+                                        WinJS.Utilities.addClass(mediaView, "session-state-complete");
+                                    }
+                                }
                             }
                             var actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
                             if (paneTools && paneTools.style && actionsBar &&
@@ -2465,8 +2466,10 @@ var __meteor_runtime_config__;
                                     }
                                     var videoListItem = videoList.firstElementChild;
                                     var resCount = 0, imageScale = 1, curCount = 0;
-                                    if (!that.binding.dataSessionStatus.ShowPresentation ||
-                                        that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.default ||
+                                    if (!that.binding.dataSessionStatus ||
+                                        that.binding.dataSessionStatus && 
+                                        (!that.binding.dataSessionStatus.ShowPresentation ||
+                                         that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.default) ||
                                         WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
                                         !(videoPLayerOpened || screenShareOpened || presentationOpened) || overlayIsHidden) {
                                         if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
@@ -2532,7 +2535,8 @@ var __meteor_runtime_config__;
                                             }
                                             videoListItem = videoListItem.nextSibling;
                                         }
-                                    } else if (that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.top) {
+                                    } else if (that.binding.dataSessionStatus &&
+                                        that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.top) {
                                         if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                                             WinJS.Utilities.removeClass(videoList, "video-list-vertical");
                                         }
@@ -2650,7 +2654,8 @@ var __meteor_runtime_config__;
                                         if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-default")) {
                                             WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-default");
                                         }
-                                        if (that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.right) {
+                                        if (that.binding.dataSessionStatus &&
+                                            that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.right) {
                                             if (WinJS.Utilities.hasClass(mediaContainer, "video-overlay-is-left")) {
                                                 WinJS.Utilities.removeClass(mediaContainer, "video-overlay-is-left");
                                             }
@@ -3367,10 +3372,10 @@ var __meteor_runtime_config__;
                     Log.print(Log.l.trace, "Prc_GetBBBSessionStatus success!");
                     if (json && json.d && json.d.results && json.d.results.length > 0) {
                         that.binding.dataSessionStatus = json.d.results[0];
-                        that.binding.showPresentation = !!that.binding.dataSessionStatus.ShowPresentation;
-                        that.binding.showVideoList = !!that.binding.dataSessionStatus.ShowVideoList;
+                        that.binding.showPresentation = !!(that.binding.dataSessionStatus && that.binding.dataSessionStatus.ShowPresentation);
+                        that.binding.showVideoList = !!(that.binding.dataSessionStatus && that.binding.dataSessionStatus.ShowVideoList);
                         try {
-                            that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus.PinnedVideos);
+                            that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus && that.binding.dataSessionStatus.PinnedVideos || []);
                         } catch (ex) {
                             Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
                         }
@@ -4015,30 +4020,38 @@ var __meteor_runtime_config__;
                 },
                 showPresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    that.binding.dataSessionStatus.ShowPresentation = 1;
-                    that.reflectSessionStatus();
+                    if (that.binding.dataSessionStatus) {
+                        that.binding.dataSessionStatus.ShowPresentation = 1;
+                        that.reflectSessionStatus();
+                    }
                     that.delayedLoadSessionStatus();
                     Log.ret(Log.l.info);
                 },
                 hidePresentation: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    that.binding.dataSessionStatus.ShowPresentation = 0;
                     that.setPresenterModeState(presenterModeDefaults.off);
-                    that.reflectSessionStatus();
+                    if (that.binding.dataSessionStatus) {
+                        that.binding.dataSessionStatus.ShowPresentation = 0;
+                        that.reflectSessionStatus();
+                    }
                     that.delayedLoadSessionStatus();
                     Log.ret(Log.l.info);
                 },
                 showVideoList: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    that.binding.dataSessionStatus.ShowVideoList = 1;
-                    that.reflectSessionStatus();
+                    if (that.binding.dataSessionStatus) {
+                        that.binding.dataSessionStatus.ShowVideoList = 1;
+                        that.reflectSessionStatus();
+                    }
                     that.delayedLoadSessionStatus();
                     Log.ret(Log.l.info);
                 },
                 hideVideoList: function () {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    that.binding.dataSessionStatus.ShowVideoList = 0;
-                    that.reflectSessionStatus();
+                    if (that.binding.dataSessionStatus) {
+                        that.binding.dataSessionStatus.ShowVideoList = 0;
+                        that.reflectSessionStatus();
+                    }
                     that.delayedLoadSessionStatus();
                     Log.ret(Log.l.info);
                 },
@@ -4089,7 +4102,7 @@ var __meteor_runtime_config__;
                 },
                 clickPresenterMode: function (event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    if (AppBar.notifyModified && event && event.currentTarget) {
+                    if (AppBar.notifyModified && event && event.currentTarget && that.binding.dataSessionStatus) {
                         var command = event.currentTarget.id;
                         if (command) {
                             Log.print(Log.l.info, "command=" + command);
@@ -4144,7 +4157,7 @@ var __meteor_runtime_config__;
                 },
                 clickPinVideoButton: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    if (AppBar.notifyModified && event && event.currentTarget) {
+                    if (AppBar.notifyModified && event && event.currentTarget && that.binding.dataSessionStatus) {
                         var targetParent = event.currentTarget.parentElement;
                         if (targetParent) {
                             var key = targetParent.name;
@@ -4186,7 +4199,8 @@ var __meteor_runtime_config__;
                     Log.call(Log.l.info, "Conference.Controller.");
                     if (AppBar.notifyModified && event && event.currentTarget && 
                         event.currentTarget.parentElement &&
-                        event.currentTarget.parentElement.parentElement) {
+                        event.currentTarget.parentElement.parentElement &&
+                        that.binding.dataSessionStatus) {
                         var videoListItem = event.currentTarget.parentElement.parentElement.parentElement;
                         if (videoListItem) {
                             var key = getInternalInstanceKey(videoListItem) || "0";
@@ -4465,7 +4479,7 @@ var __meteor_runtime_config__;
                 },
                 clickToggleSwitch: function(event) {
                     Log.call(Log.l.info, "Conference.Controller.");
-                    if (AppBar.notifyModified && event && event.currentTarget) {
+                    if (AppBar.notifyModified && event && event.currentTarget && that.binding.dataSessionStatus) {
                         var toggle = event.currentTarget;
                         if (toggle && toggle.id && typeof toggle.ariaChecked !== "undefined") {
                             var command = toggle.id;
@@ -5024,7 +5038,8 @@ var __meteor_runtime_config__;
                     Log.call(Log.l.trace, "Conference.Controller.");
                     if (videoListDefaults._lastInsertPoint &&
                         videoListDefaults._pressedEntity &&
-                        videoListDefaults._pressedEntity.index >= 0) {
+                        videoListDefaults._pressedEntity.index >= 0 &&
+                        that.binding.dataSessionStatus) {
                         /*if (videoListDefaults._dragSourceElement &&
                             videoListDefaults._element) {
                             if (videoListDefaults._lastInsertPoint.insertAfterItem) {

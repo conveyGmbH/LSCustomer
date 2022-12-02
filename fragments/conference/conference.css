@@ -14,6 +14,7 @@
     position: absolute;
 }
 
+
 #conference.mediaview *, #conference.mediaview *:before, #conference.mediaview *:after,
 .portal--27FHYi *, .portal--27FHYi *:before, .portal--27FHYi *:after,
 .ReactModalPortal *, .ReactModalPortal *:before, .ReactModalPortal *:after {
@@ -2943,9 +2944,18 @@ c
 
 #conference.mediaview #layout > header ~ div,
 #conference.mediaview #layout > header ~ span {
-    transition-property: left, top, right, width, min-width, max-width, height, min-height, max-height;
+    transition-property: left, top, right, width, min-width, max-width, height, min-height, max-height, visibility;
     transition-duration: 300ms;
 }
+#conference.mediaview:not(.session-state-complete) #layout > div:first-child,
+#conference.mediaview:not(.session-state-complete) #layout > div:first-child + div,
+#conference.mediaview:not(.session-state-complete) #layout > header,
+#conference.mediaview:not(.session-state-complete) #layout > header ~ div,
+#conference.mediaview:not(.session-state-complete) #layout > header ~ span,
+#conference.mediaview:not(.session-state-complete) #layout > section {
+    visibility: hidden;
+}
+
 
 #conferenceController .pane-tools {
     width: 320px;
