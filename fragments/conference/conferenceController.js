@@ -137,6 +137,9 @@ var __meteor_runtime_config__;
     elementSelectors.nameElement = ".sc-kffHwx .sc-bEvXvO span";
     elementSelectors.videoUserName = 'div[data-test="dropdownWebcamButton"]';
 
+    elementSelectors.publicChatSubmitButton = elementSelectors.publicChat + ' form  button[type="submit"]';
+    elementSelectors.publicChatMessageInput = elementSelectors.publicChat + " form textarea#message-input";
+
     function getMediaContainerSelector() {
         return elementSelectors.layout;
     }
@@ -212,6 +215,42 @@ var __meteor_runtime_config__;
         return null;
     }
 
+    var deleteMagicFromXhrResponse = function(res, magicStart, magicStop) {
+        var responseReplaced = false;
+        var responseText = res && res.responseText;
+        if (typeof responseText === "string") {
+            var newResponseText = "";
+            var prevStopPos = 0;
+            var posMagicStart, posMagicStop;
+            while (prevStopPos >= 0) {
+                posMagicStart = responseText.indexOf(magicStart, prevStopPos);
+                if (posMagicStart >= prevStopPos) {
+                    posMagicStop = responseText.indexOf(magicStop, posMagicStart + magicStart.length);
+                    if (posMagicStop >= posMagicStart + magicStart.length) {
+                        newResponseText += responseText.substr(prevStopPos, posMagicStart - prevStopPos);
+                        responseReplaced = true;
+                        prevStopPos = posMagicStop + magicStop.length;
+                    } else {
+                        if (responseReplaced) {
+                            newResponseText += responseText.substr(prevStopPos);
+                        }
+                        prevStopPos = -1;
+                    }
+                } else {
+                    if (responseReplaced) {
+                        newResponseText += responseText.substr(prevStopPos);
+                    }
+                    prevStopPos = -1;
+                }
+            }
+            if (responseReplaced) {
+                res.responseText = newResponseText;
+            }
+        }
+        return responseReplaced;
+    }
+
+
     WinJS.Namespace.define("Conference", {
         Controller: WinJS.Class.derive(Fragments.Controller, function Controller(fragmentElement, options, commandList) {
             Log.call(Log.l.trace, "Conference.Controller.", "eventId=" + (options && options.eventId));
@@ -245,7 +284,8 @@ var __meteor_runtime_config__;
                 panelWrapperObserver: null,
                 pollContentObserver: null,
                 selfLabels: ["(Sie)", "(You)", "(Ich)", "(Me)", "(I)"],
-                selfName: null
+                selfName: null,
+                publicChatSubmit: null
             };
             var presenterModeDefaults = {
                 off: "off",
@@ -1257,6 +1297,47 @@ var __meteor_runtime_config__;
             }
             that.removeQuestionSelection = removeQuestionSelection;
 
+            var addPublicChatSubmitHandler = function(messageInput) {
+                var submitButton = fragmentElement.querySelector(elementSelectors.publicChatSubmitButton);
+                if (submitButton) {
+                    userListDefaults.publicChatSubmit = submitButton.onclick;
+                    submitButton.onclick = function(event) {
+                        var chatText = messageInput && messageInput.innerHTML && messageInput.innerHTML.slice(0);
+                        userListDefaults.publicChatSubmit(event);
+                        if (chatText) {
+                            var idxEmoji = floatingEmojisMessage.indexOf(chatText);
+                            if (idxEmoji < 0) {
+                                WinJS.Promise.timeout(10).then(function() {
+                                    if (pageControllerName === "modSessionController") {
+                                        if (chatText) {
+                                            var res = {
+                                                responseText: chatText
+                                            }
+                                            if (deleteMagicFromXhrResponse(res, magicStart, magicStop)) {
+                                                chatText = res.responseText;
+                                            }
+                                        }
+                                    }
+                                    if (chatText && chatText.length > 0) {
+                                        Log.print(Log.l.trace, "chatText=" + chatText);
+                                        AppData.call("PRC_CreateIncident", {
+                                            pUserToken: userToken,
+                                            pIncidentName: "ChatMessage",
+                                            pTextInfo1: chatText
+                                        }, function (json) {
+                                            Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                                        }, function (error) {
+                                            Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            that.addPublicChatSubmitHandler = addPublicChatSubmitHandler;
+
             var handlePanelsOpened = function(addedNodes) {
                 var i;
                 Log.call(Log.l.trace, "Conference.Controller.");
@@ -1290,9 +1371,10 @@ var __meteor_runtime_config__;
                                         closeChatButtonSpan.textContent = "Chat";
                                     }
                                 }
-                                var messageInput = fragmentElement.querySelector(elementSelectors.publicChat + " form textarea#message-input");
+                                var messageInput = fragmentElement.querySelector(elementSelectors.publicChatMessageInput);
                                 if (messageInput) {
                                     messageInput.placeholder = getResourceText("event.chatInputPlaceholder");
+                                    that.addPublicChatSubmitHandler(messageInput);
                                 }
                                 if (panelWrapper && !WinJS.Utilities.hasClass(panelWrapper, "hide-chat-section")) {
                                     if (!observeChatMessageListPromise) {
@@ -5155,7 +5237,7 @@ var __meteor_runtime_config__;
                 }
                 var panelWrapper = fragmentElement.querySelector(getMediaContainerSelector());
                 var userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
-                var messageInput = fragmentElement.querySelector(elementSelectors.publicChat + " form textarea#message-input");
+                var messageInput = fragmentElement.querySelector(elementSelectors.publicChatMessageInput);
                 if (messageInput) {
                     //messageInput.focus();
                     if (messageInput.form && typeof messageInput.form.reset === "function") {
@@ -5165,7 +5247,7 @@ var __meteor_runtime_config__;
                     var inputEvent = document.createEvent('event');
                     inputEvent.initEvent('input', true, true);
                     messageInput.dispatchEvent(inputEvent);
-                    var submitButton = fragmentElement.querySelector(elementSelectors.publicChat + ' form  button[type="submit"]');
+                    var submitButton = fragmentElement.querySelector(elementSelectors.publicChatSubmitButton);
                     if (submitButton) {
                         submitButton.click();
                     }
@@ -5468,41 +5550,6 @@ var __meteor_runtime_config__;
                     }
                 }
                 return 0;
-            }
-
-            var deleteMagicFromXhrResponse = function(res, magicStart, magicStop) {
-                var responseReplaced = false;
-                var responseText = res && res.responseText;
-                if (typeof responseText === "string") {
-                    var newResponseText = "";
-                    var prevStopPos = 0;
-                    var posMagicStart, posMagicStop;
-                    while (prevStopPos >= 0) {
-                        posMagicStart = responseText.indexOf(magicStart, prevStopPos);
-                        if (posMagicStart >= prevStopPos) {
-                            posMagicStop = responseText.indexOf(magicStop, posMagicStart + magicStart.length);
-                            if (posMagicStop >= posMagicStart + magicStart.length) {
-                                newResponseText += responseText.substr(prevStopPos, posMagicStart - prevStopPos);
-                                responseReplaced = true;
-                                prevStopPos = posMagicStop + magicStop.length;
-                            } else {
-                                if (responseReplaced) {
-                                    newResponseText += responseText.substr(prevStopPos);
-                                }
-                                prevStopPos = -1;
-                            }
-                        } else {
-                            if (responseReplaced) {
-                                newResponseText += responseText.substr(prevStopPos);
-                            }
-                            prevStopPos = -1;
-                        }
-                    }
-                    if (responseReplaced) {
-                        res.responseText = newResponseText;
-                    }
-                }
-                return responseReplaced;
             }
 
             var msgQuote = "\\\"";
