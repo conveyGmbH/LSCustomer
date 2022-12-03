@@ -2944,7 +2944,7 @@ c
 
 #conference.mediaview #layout > header ~ div,
 #conference.mediaview #layout > header ~ span {
-    transition-property: left, top, right, width, min-width, max-width, height, min-height, max-height, visibility;
+    transition-property: left, top, right, width, min-width, max-width, height, min-height, max-height;
     transition-duration: 300ms;
 }
 #conference.mediaview:not(.session-state-complete) #layout > div:first-child,
