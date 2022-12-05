@@ -127,6 +127,7 @@ var __meteor_runtime_config__;
         joinVideo: '#conference.mediaview #layout button[data-test="joinVideo"]',
         audioSettings: '#conference.mediaview #layout button[data-test="leaveAudio"] + span > button',
         videoSettings: '#conference.mediaview #layout button[data-test="leaveVideo"] + span > button',
+        talkingIndicator: '#conference.mediaview div[data-test="talkingIndicator"]',
 
         // dangerous global CSS definitions to remove:
         htmlElement:     "html {",
@@ -296,7 +297,11 @@ var __meteor_runtime_config__;
             }
             var myselfLabel = "&nbsp;(" + getResourceText("label.me") + ")";
             var actionsBarCenterObserver = null;
+            var talkingIndicatorObserver = null;
             var emojiToolbarPositionObserver = null;
+            var myTalkingActivityStart = null;
+            var myTalkingActivityEnd = null;
+            var myTalkingActivityIndicator = null;
 
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
@@ -398,6 +403,8 @@ var __meteor_runtime_config__;
             var hideNotificationPromise = null;
             var setPollingPromise = null;
             var delayedLoadSessionStatusPromise = null;
+            var checkForTalkingEndPromise = null;
+
 
             var filterUserListFailedCount = 0;
             var showUserListFailedCount = 0;
@@ -426,6 +433,14 @@ var __meteor_runtime_config__;
 
             that.dispose = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
+                if (openChatPanePromise) {
+                    openChatPanePromise.cancel();
+                    openChatPanePromise = null;
+                }
+                if (openNotesPanePromise) {
+                    openNotesPanePromise.cancel();
+                    openNotesPanePromise = null;
+                }
                 if (handleCommandPromise) {
                     handleCommandPromise.cancel();
                     handleCommandPromise = null;
@@ -481,6 +496,10 @@ var __meteor_runtime_config__;
                 if (delayedLoadSessionStatusPromise) {
                     delayedLoadSessionStatusPromise.cancel();
                     delayedLoadSessionStatusPromise = null;
+                }
+                if (checkForTalkingEndPromise) {
+                    checkForTalkingEndPromise.cancel();
+                    checkForTalkingEndPromise = null;
                 }
                 var leaveAudioButton = fragmentElement.querySelector(elementSelectors.leaveAudio);
                 if (leaveAudioButton) {
@@ -1160,6 +1179,9 @@ var __meteor_runtime_config__;
                     }
                     var userListContent = fragmentElement.querySelector(elementSelectors.userListContent);
                     if (userListContent) {
+                        if (!userListDefaults.selfName) {
+                            that.filterUserList();
+                        };
                         ret = true;
                         if (!show) {
                             btnToggleUserList.click();
@@ -1885,6 +1907,133 @@ var __meteor_runtime_config__;
             }
             that.handleAudioVideoButtonStatus = handleAudioVideoButtonStatus;
 
+            var checkForTalkingEnd = function(now) {
+                Log.call(Log.l.trace, "Conference.Controller.", "now=" + now + " myTalkingActivityStart=" + myTalkingActivityStart);
+                if (checkForTalkingEndPromise) {
+                    checkForTalkingEndPromise.cancel();
+                    checkForTalkingEndPromise = null;
+                }
+                if (now) {
+                    if (!myTalkingActivityEnd) {
+                        myTalkingActivityEnd = now;
+                    }
+                } else {
+                    now = Date.now();
+                }
+                if (myTalkingActivityStart) {
+                    var talkingIndicator = fragmentElement.querySelector(elementSelectors.talkingIndicator); 
+                    if (myTalkingActivityIndicator &&
+                        myTalkingActivityIndicator.parentElement &&
+                        myTalkingActivityIndicator.parentElement.parentElement === talkingIndicator &&
+                        myTalkingActivityIndicator.getAttribute("data-test") === "isTalking") {
+                        Log.print(Log.l.trace, "still talking!");
+                        myTalkingActivityEnd = null;
+                    } else if (!myTalkingActivityEnd) {
+                        Log.print(Log.l.trace, "no longer talking!");
+                        myTalkingActivityEnd = now;
+                        myTalkingActivityIndicator = null;
+                    }
+                }
+                if (myTalkingActivityEnd) {
+                    var inactivity = now - myTalkingActivityEnd;
+                    Log.print(Log.l.trace, "inactivity=" + inactivity);
+                    if (myTalkingActivityStart && inactivity > videoListDefaults.inactivityDelay + 2000) {
+                        var myTalkingActivityDuration = myTalkingActivityEnd - myTalkingActivityStart;
+                        Log.print(Log.l.trace, "myTalkingActivityDuration=" + myTalkingActivityDuration);
+                        AppData.call("PRC_CreateIncident", {
+                                pUserToken: userToken,
+                                pIncidentName: "Voice",
+                                pTextInfo1: myTalkingActivityDuration.toString()
+                            },
+                            function(json) {
+                                Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                            },
+                            function(error) {
+                                Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                            });
+                        myTalkingActivityStart = null;
+                        myTalkingActivityEnd = null;
+                        myTalkingActivityIndicator = null;
+                    } 
+                }
+                if (myTalkingActivityStart && !checkForTalkingEndPromise) {
+                    checkForTalkingEndPromise = WinJS.Promise.timeout(250).then(function() {
+                        that.checkForTalkingEnd();
+                    });
+                }
+                Log.ret(Log.l.trace, "");
+            }
+            that.checkForTalkingEnd = checkForTalkingEnd;
+
+            var handleTalkingStart = function(addedNodes) {
+                var i;
+                Log.call(Log.l.trace, "Conference.Controller.", "");
+                if (addedNodes && addedNodes.length > 0 && userListDefaults.selfName) {
+                    for (i = 0; i < addedNodes.length; i++) {
+                        var addedNode = addedNodes[i];
+                        if (addedNode) {
+                            var dataTest = addedNode.getAttribute("data-test");
+                            var span = addedNode.querySelector("span");
+                            if (span && span.firstChild) {
+                                var talkingName = span.firstChild.textContent;
+                                Log.print(Log.l.trace, "talkingName=" + talkingName + " dataTest=" + dataTest + " selfName=" + userListDefaults.selfName);
+                                if (talkingName === userListDefaults.selfName) {
+                                    myTalkingActivityIndicator = addedNode;
+                                    var now = Date.now();
+                                    if (!myTalkingActivityStart) {
+                                        myTalkingActivityStart = now;
+                                        myTalkingActivityEnd = null;
+                                        Log.print(Log.l.trace, "Talking started");
+                                        AppData.call("PRC_CreateIncident", {
+                                            pUserToken: userToken,
+                                            pIncidentName: "Voice",
+                                            pTextInfo1: "Start"
+                                        },
+                                        function(json) {
+                                            Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                                        },
+                                        function(error) {
+                                            Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                                        });
+                                    }
+                                    if (!checkForTalkingEndPromise) {
+                                        checkForTalkingEndPromise = WinJS.Promise.timeout(250).then(function() {
+                                            that.checkForTalkingEnd();
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                Log.ret(Log.l.trace, "");
+            }
+            that.handleTalkingStart = handleTalkingStart;
+
+            var handleTalkingEnd = function(removedNodes) {
+                var i;
+                Log.call(Log.l.trace, "Conference.Controller.", "");
+                if (removedNodes && removedNodes.length > 0 && userListDefaults.selfName) {
+                    for (i = 0; i < removedNodes.length; i++) {
+                        var removedNode = removedNodes[i];
+                        if (removedNode) {
+                            var span = removedNode.querySelector("span");
+                            if (span && span.firstChild) {
+                                var talkingName = span.firstChild.textContent;
+                                Log.print(Log.l.trace, "talkingName=" + talkingName + " selfName=" + userListDefaults.selfName);
+                                if (talkingName === userListDefaults.selfName) {
+                                    myTalkingActivityIndicator = null;
+                                    var now = Date.now();
+                                    that.checkForTalkingEnd(now);
+                                }
+                            }
+                        }
+                    }
+                }
+                Log.ret(Log.l.trace, "");
+            }
+            that.handleTalkingEnd = handleTalkingEnd;
+
             var lastDeviceListTime = 0;
             var adjustContentPositions = function () {
                 Log.call(Log.l.trace, "Conference.Controller.", "videoListPosition=" + (that.binding.dataSessionStatus && that.binding.dataSessionStatus.VideoListPosition));
@@ -2057,6 +2206,33 @@ var __meteor_runtime_config__;
                                     subtree: true
                                 });
                             }
+                        }
+                        var talkingIndicator = fragmentElement.querySelector(elementSelectors.talkingIndicator);
+                        if (talkingIndicator && talkingIndicator.firstElementChild && !talkingIndicatorObserver &&
+                            that.binding.microphoneOn && !that.binding.cameraOn) {
+                            talkingIndicatorObserver = new MutationObserver(function (mutationList, observer) {
+                                for (var i = 0; i < mutationList.length; i++) {
+                                    var mutation = mutationList[i];
+                                    if (mutation && mutation.type === "childList") {
+                                        if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+                                            Log.print(Log.l.trace, "talkingIndicator added!");
+                                            that.handleTalkingStart(mutation.addedNodes);
+                                        }
+                                        if (mutation.removedNodes && mutation.removedNodes.length > 0) {
+                                            Log.print(Log.l.trace, "talkingIndicator removed!");
+                                            that.handleTalkingEnd(mutation.removedNodes);
+                                        }
+                                    }
+                                }
+                            });
+                            if (talkingIndicatorObserver) {
+                                talkingIndicatorObserver.observe(talkingIndicator.firstElementChild, {
+                                    childList: true
+                                });
+                            }
+                        } else if (talkingIndicatorObserver) {
+                            talkingIndicatorObserver.disconnect();
+                            talkingIndicatorObserver = null;
                         }
 
                         var mediaContainer = panelWrapper;
@@ -3048,9 +3224,23 @@ var __meteor_runtime_config__;
                                             checkLaterAgain = true;
                                             Log.print(Log.l.trace, "no mediaStream, checkLaterAgain=" + checkLaterAgain);
                                         }
+                                        var isMyself = WinJS.Utilities.hasClass(videoListItem, "selfie-video");
                                         var muted = null;
                                         var dataTest = content.getAttribute("data-test");
                                         if (dataTest === "webcamItemTalkingUser") {
+                                            if (isMyself && !myTalkingActivityStart) {
+                                                myTalkingActivityStart = now;
+                                                Log.print(Log.l.trace, "Talking started");
+                                                AppData.call("PRC_CreateIncident", {
+                                                    pUserToken: userToken,
+                                                    pIncidentName: "Voice",
+                                                    pTextInfo1: "Start"
+                                                }, function (json) {
+                                                    Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                                                }, function (error) {
+                                                    Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                                                });
+                                            }
                                             videoListDefaults.contentActivity[key] = now;
                                         } else {
                                             if (typeof videoListDefaults.contentActivity[key] === "undefined") {
@@ -3059,9 +3249,26 @@ var __meteor_runtime_config__;
                                             muted = content.querySelector("." + bbbClass.muted + ", ." + bbbClass.listen);
                                         }
                                         var inactivity = now - videoListDefaults.contentActivity[key];
+                                        if (isMyself && myTalkingActivityStart && inactivity >= videoListDefaults.inactivityDelay) {
+                                            var myTalkingActivityDuration = videoListDefaults.contentActivity[key] - myTalkingActivityStart;
+                                            Log.print(Log.l.trace, "myTalkingActivityDuration=" + myTalkingActivityDuration);
+                                            AppData.call("PRC_CreateIncident", {
+                                                pUserToken: userToken,
+                                                pIncidentName: "Voice",
+                                                pTextInfo1: myTalkingActivityDuration.toString()
+                                            }, function (json) {
+                                                Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                                            }, function (error) {
+                                                Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                                            });
+                                            myTalkingActivityStart = null;
+                                        }
+                                        if (myTalkingActivityStart) {
+                                            checkLaterAgain = true;
+                                            Log.print(Log.l.trace, "myTalkingActivityStart=" + myTalkingActivityStart);
+                                        }
                                         if (usePinned && pinnedIndex < 0 && key) {
                                             var userName = "";
-                                            var isMyself = WinJS.Utilities.hasClass(videoListItem, "selfie-video");
                                             var userNameElement = videoListItem.querySelector(elementSelectors.videoUserName);
                                             if (userNameElement && userNameElement.firstChild) {
                                                 userName = userNameElement.firstChild.textContent;
@@ -3284,6 +3491,7 @@ var __meteor_runtime_config__;
                             that.checkForInactiveVideo();
                         });
                     }
+
                 });
                 Log.ret(Log.l.trace);
                 return ret;
