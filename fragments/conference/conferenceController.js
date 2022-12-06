@@ -1940,7 +1940,8 @@ var __meteor_runtime_config__;
                     if (myTalkingActivityStart && inactivity > videoListDefaults.inactivityDelay + 2000) {
                         var myTalkingActivityDuration = myTalkingActivityEnd - myTalkingActivityStart;
                         Log.print(Log.l.trace, "myTalkingActivityDuration=" + myTalkingActivityDuration);
-                        AppData.call("PRC_CreateIncident", {
+                        if (myTalkingActivityDuration > 2000) {
+                            AppData.call("PRC_CreateIncident", {
                                 pUserToken: userToken,
                                 pIncidentName: "Voice",
                                 pTextInfo1: myTalkingActivityDuration.toString()
@@ -1951,6 +1952,7 @@ var __meteor_runtime_config__;
                             function(error) {
                                 Log.print(Log.l.error, "PRC_CreateIncident error! ");
                             });
+                        }
                         myTalkingActivityStart = null;
                         myTalkingActivityEnd = null;
                         myTalkingActivityIndicator = null;
@@ -1984,7 +1986,7 @@ var __meteor_runtime_config__;
                                         myTalkingActivityStart = now;
                                         myTalkingActivityEnd = null;
                                         Log.print(Log.l.trace, "Talking started");
-                                        AppData.call("PRC_CreateIncident", {
+                                        /*AppData.call("PRC_CreateIncident", {
                                             pUserToken: userToken,
                                             pIncidentName: "Voice",
                                             pTextInfo1: "Start"
@@ -1994,7 +1996,7 @@ var __meteor_runtime_config__;
                                         },
                                         function(error) {
                                             Log.print(Log.l.error, "PRC_CreateIncident error! ");
-                                        });
+                                        });*/
                                     }
                                     if (!checkForTalkingEndPromise) {
                                         checkForTalkingEndPromise = WinJS.Promise.timeout(250).then(function() {
@@ -3231,7 +3233,7 @@ var __meteor_runtime_config__;
                                             if (isMyself && !myTalkingActivityStart) {
                                                 myTalkingActivityStart = now;
                                                 Log.print(Log.l.trace, "Talking started");
-                                                AppData.call("PRC_CreateIncident", {
+                                                /*AppData.call("PRC_CreateIncident", {
                                                     pUserToken: userToken,
                                                     pIncidentName: "Voice",
                                                     pTextInfo1: "Start"
@@ -3239,7 +3241,7 @@ var __meteor_runtime_config__;
                                                     Log.print(Log.l.trace, "PRC_CreateIncident success!");
                                                 }, function (error) {
                                                     Log.print(Log.l.error, "PRC_CreateIncident error! ");
-                                                });
+                                                });*/
                                             }
                                             videoListDefaults.contentActivity[key] = now;
                                         } else {
@@ -3252,15 +3254,17 @@ var __meteor_runtime_config__;
                                         if (isMyself && myTalkingActivityStart && inactivity >= videoListDefaults.inactivityDelay) {
                                             var myTalkingActivityDuration = videoListDefaults.contentActivity[key] - myTalkingActivityStart;
                                             Log.print(Log.l.trace, "myTalkingActivityDuration=" + myTalkingActivityDuration);
-                                            AppData.call("PRC_CreateIncident", {
-                                                pUserToken: userToken,
-                                                pIncidentName: "Voice",
-                                                pTextInfo1: myTalkingActivityDuration.toString()
-                                            }, function (json) {
-                                                Log.print(Log.l.trace, "PRC_CreateIncident success!");
-                                            }, function (error) {
-                                                Log.print(Log.l.error, "PRC_CreateIncident error! ");
-                                            });
+                                            if (myTalkingActivityDuration > 2000) {
+                                                AppData.call("PRC_CreateIncident", {
+                                                    pUserToken: userToken,
+                                                    pIncidentName: "Voice",
+                                                    pTextInfo1: myTalkingActivityDuration.toString()
+                                                }, function (json) {
+                                                    Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                                                }, function (error) {
+                                                    Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                                                });
+                                            } 
                                             myTalkingActivityStart = null;
                                         }
                                         if (myTalkingActivityStart) {
