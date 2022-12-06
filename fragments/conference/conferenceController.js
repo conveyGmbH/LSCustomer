@@ -1940,7 +1940,7 @@ var __meteor_runtime_config__;
                     if (myTalkingActivityStart && inactivity > videoListDefaults.inactivityDelay + 2000) {
                         var myTalkingActivityDuration = myTalkingActivityEnd - myTalkingActivityStart;
                         Log.print(Log.l.trace, "myTalkingActivityDuration=" + myTalkingActivityDuration);
-                        if (myTalkingActivityDuration > 2000) {
+                        if (myTalkingActivityDuration > 1000) {
                             AppData.call("PRC_CreateIncident", {
                                 pUserToken: userToken,
                                 pIncidentName: "Voice",
@@ -3254,7 +3254,7 @@ var __meteor_runtime_config__;
                                         if (isMyself && myTalkingActivityStart && inactivity >= videoListDefaults.inactivityDelay) {
                                             var myTalkingActivityDuration = videoListDefaults.contentActivity[key] - myTalkingActivityStart;
                                             Log.print(Log.l.trace, "myTalkingActivityDuration=" + myTalkingActivityDuration);
-                                            if (myTalkingActivityDuration > 2000) {
+                                            if (myTalkingActivityDuration > 1000) {
                                                 AppData.call("PRC_CreateIncident", {
                                                     pUserToken: userToken,
                                                     pIncidentName: "Voice",
