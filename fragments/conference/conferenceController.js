@@ -1944,7 +1944,7 @@ var __meteor_runtime_config__;
                             AppData.call("PRC_CreateIncident", {
                                 pUserToken: userToken,
                                 pIncidentName: "Voice",
-                                pTextInfo1: myTalkingActivityDuration.toString()
+                                pTextInfo1: Math.round(myTalkingActivityDuration / 1000).toString()
                             },
                             function(json) {
                                 Log.print(Log.l.trace, "PRC_CreateIncident success!");
@@ -3258,7 +3258,7 @@ var __meteor_runtime_config__;
                                                 AppData.call("PRC_CreateIncident", {
                                                     pUserToken: userToken,
                                                     pIncidentName: "Voice",
-                                                    pTextInfo1: myTalkingActivityDuration.toString()
+                                                    pTextInfo1: Math.round(myTalkingActivityDuration / 1000).toString()
                                                 }, function (json) {
                                                     Log.print(Log.l.trace, "PRC_CreateIncident success!");
                                                 }, function (error) {
