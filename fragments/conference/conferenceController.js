@@ -3584,16 +3584,24 @@ var __meteor_runtime_config__;
                     Log.print(Log.l.trace, "Prc_GetBBBSessionStatus success!");
                     if (json && json.d && json.d.results && json.d.results.length > 0) {
                         that.binding.dataSessionStatus = json.d.results[0];
-                        that.binding.showPresentation = !!(that.binding.dataSessionStatus && that.binding.dataSessionStatus.ShowPresentation);
-                        that.binding.showVideoList = !!(that.binding.dataSessionStatus && that.binding.dataSessionStatus.ShowVideoList);
-                        try {
-                            that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus && that.binding.dataSessionStatus.PinnedVideos || []);
-                        } catch (ex) {
-                            Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
+                    } else {
+                        that.binding.dataSessionStatus = {
+                            ShowPresentation: 1,
+                            ShowVideoList: 1,
+                            VideoListPosition: "right",
+                            PresenterMode: "off",
+                            PinnedVideos: []
                         }
-                        if ( !that.binding.pinnedVideos ) {
-                            that.binding.pinnedVideos = [];
-                        }
+                    }
+                    that.binding.showPresentation = !!(that.binding.dataSessionStatus && that.binding.dataSessionStatus.ShowPresentation);
+                    that.binding.showVideoList = !!(that.binding.dataSessionStatus && that.binding.dataSessionStatus.ShowVideoList);
+                    try {
+                        that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus && that.binding.dataSessionStatus.PinnedVideos || []);
+                    } catch (ex) {
+                        Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
+                    }
+                    if (!that.binding.pinnedVideos) {
+                        that.binding.pinnedVideos = [];
                     }
                     that.reflectSessionStatus();
                 }, function (error) {
