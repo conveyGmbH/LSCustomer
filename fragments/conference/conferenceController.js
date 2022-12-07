@@ -1322,7 +1322,7 @@ var __meteor_runtime_config__;
                         var chatText = messageInput && messageInput.innerHTML && messageInput.innerHTML.slice(0);
                         userListDefaults.publicChatSubmit(event);
                         if (chatText) {
-                            var idxEmoji = floatingEmojisMessage.indexOf(chatText);
+                            var idxEmoji = floatingEmojisSymbols.indexOf(chatText);
                             if (idxEmoji < 0) {
                                 WinJS.Promise.timeout(10).then(function() {
                                     if (pageControllerName === "modSessionController") {
