@@ -1449,6 +1449,13 @@ var __meteor_runtime_config__;
                                 that.binding.showUserList = false;
                             } else if (dataTest === "publicChat") {
                                 Log.print(Log.l.trace, "chat panel closed");
+                                if (userListDefaults.publicChatSubmit) {
+                                    var submitButton = removedNode.querySelector('form  button[type="submit"]');
+                                    if (submitButton) {
+                                        submitButton.onclick = userListDefaults.publicChatSubmit;
+                                        userListDefaults.publicChatSubmit = null;
+                                    }
+                                }
                                 if (observeChatMessageListPromise) {
                                     observeChatMessageListPromise.cancel();
                                     observeChatMessageListPromise = null;
