@@ -3185,6 +3185,6 @@ c
     top: auto !important;
     bottom: 64px !important;
 }
-#conference.mediaview button[aria-label="Lernanalyse-Dashboard öffnen"] {
+#conference.mediaview button[aria-label="Lernanalyse-Dashboard öffnen"], button[aria-label="Open Learning Analytics Dashboard"] {
     display: none;
 }
