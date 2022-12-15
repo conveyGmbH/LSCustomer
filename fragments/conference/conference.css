@@ -3188,3 +3188,37 @@ c
 #conference.mediaview button[aria-label="Lernanalyse-Dashboard öffnen"], button[aria-label="Open Learning Analytics Dashboard"] {
     display: none;
 }
+.meeting-end-message {
+    display: none;
+}
+.session-ended .meeting-end-message {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-gray-darkest);
+    z-index: 1000;
+}
+
+.session-ended .meeting-end-message > div {
+    position: absolute;
+    text-align: center;
+    left: calc(50% - 200px);
+    top: calc(50% - 70px);
+    width: 400px;
+    height: 140px;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background-color: var(--color-off-white);
+}
+
+.session-ended .meeting-end-message button {
+    margin: 10px;
+    border-radius: var(--border-radius);
+    color: var(--btn-primary-color);
+    background-color: var(--btn-primary-bg);
+    opacity: 0.8;
+    font-family: Barlow;
+}

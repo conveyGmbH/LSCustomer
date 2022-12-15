@@ -621,6 +621,13 @@
                 }).then(function () {
                     return that.updateFragment();
                 }).then(function () {
+                    var conferenceFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("conference"));
+                    if (conferenceFragment) {
+                        conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
+                            WinJS.Utilities.addClass(pageElement, "session-ended");
+                        });
+                    }
+                }).then(function () {
                     AppBar.notifyModified = true;
                     return WinJS.Promise.timeout(1000);
                 }).then(function () {

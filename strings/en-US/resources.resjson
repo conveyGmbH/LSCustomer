@@ -1,6 +1,8 @@
 ﻿{
     "flyout.ok"             : "OK",
     "flyout.cancel"         : "Cancel",
+    "flyout.forwardHome"    : "You will be forwarded back to the home screen",
+    "flyout.sessionEnded"    : "This session has ended",
 
     "label.home"            : "Start",
     "label.events"          : "Series",

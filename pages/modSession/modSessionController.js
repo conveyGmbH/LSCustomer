@@ -478,6 +478,10 @@
                     }
                 }).then(function () {
                     return that.updateFragment();
+                }).then(function (conferenceFragment) {
+                    conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
+                        WinJS.Utilities.addClass(pageElement, "session-ended");
+                    });
                 }).then(function () {
                     AppBar.notifyModified = true;
                     return WinJS.Promise.timeout(1000);

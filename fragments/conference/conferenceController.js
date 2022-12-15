@@ -369,6 +369,7 @@ var __meteor_runtime_config__;
 
             var conference = fragmentElement.querySelector("#conference");
             var paneTools = fragmentElement.querySelector(".pane-tools");
+            var meetingEndMessage = fragmentElement.querySelector(".meeting-end-message");
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var expandActionsToggleContainer = fragmentElement.querySelector(".expand-actions-toggle-container");
@@ -2488,6 +2489,9 @@ var __meteor_runtime_config__;
                                 if (pageControllerName === "modSessionController") {
                                     that.binding.showPresenterButtons = true;
                                 }
+                            }
+                            if (meetingEndMessage && !isChildElement(mediaContainer, meetingEndMessage)) {
+                                mediaContainer.appendChild(meetingEndMessage);
                             }
                             var actionsBarLeft = fragmentElement.querySelector(elementSelectors.actionsBarLeft);
                             var actionsBarRight = fragmentElement.querySelector(elementSelectors.actionsBarRight);

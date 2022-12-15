@@ -1,6 +1,8 @@
 ﻿{
     "flyout.ok"             : "OK",
     "flyout.cancel"         : "Abbrechen",
+    "flyout.forwardHome"    : "Sie werden zum Startbildschirm weitergeleitet",
+    "flyout.sessionEnded"    : "Diese Konferenz wurde beendet",
 
     "label.home"            : "< Übersicht",
     "label.events"          : "Serie",
