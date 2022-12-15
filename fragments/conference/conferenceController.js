@@ -62,6 +62,7 @@ var __meteor_runtime_config__;
     }
     var elementSelectors = {
         mediaView:       "#conference.mediaview",
+        app:             "#conference.mediaview > #app",
         navBar:          "#conference.mediaview #layout > header:first-of-type",
         navBarTopCenter: "#conference.mediaview #layout > header:first-of-type > div:first-child > div:first-child + div",
         actionsBar:      '#conference.mediaview #layout > section[aria-label="Actions bar"], #conference.mediaview #layout > section[aria-label="Aktionsmenü"]',
@@ -128,6 +129,8 @@ var __meteor_runtime_config__;
         audioSettings: '#conference.mediaview #layout button[data-test="leaveAudio"] + span > button',
         videoSettings: '#conference.mediaview #layout button[data-test="leaveVideo"] + span > button',
         talkingIndicator: '#conference.mediaview div[data-test="talkingIndicator"]',
+
+        meetingEndedModalTitle: '#conference.mediaview h1[data-test="meetingEndedModalTitle"]',
 
         // dangerous global CSS definitions to remove:
         htmlElement:     "html {",
@@ -284,6 +287,7 @@ var __meteor_runtime_config__;
                 toggleUserList: null,
                 inSubmitCommand: false,
                 panelWrapperObserver: null,
+                appObserver: null,
                 pollContentObserver: null,
                 selfLabels: ["(Sie)", "(You)", "(Ich)", "(Me)", "(I)"],
                 selfName: null,
@@ -2081,6 +2085,41 @@ var __meteor_runtime_config__;
                     var panelWrapper = fragmentElement.querySelector(getMediaContainerSelector());
                     if (panelWrapper) {
                         Log.print(Log.l.trace, "panelWrapper open!");
+                        if (!userListDefaults.appObserver) {
+                            var appElement = fragmentElement.querySelector(elementSelectors.app);
+                            if (appElement) {
+                                userListDefaults.appObserver = new MutationObserver(function (mutationList, observer) {
+                                    for (var i = 0; i < mutationList.length; i++) {
+                                        var mutation = mutationList[i];
+                                        if (mutation && mutation.type === "childList") {
+                                            if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+                                                Log.print(Log.l.trace, "app children added!");
+                                                for (var j = 0; j < mutation.addedNodes.length; j++) {
+                                                    var addedNode = mutation.addedNodes[j];
+                                                    if (addedNode) {
+                                                        var meetingEndedModalTitle = addedNode.querySelector(elementSelectors.meetingEndedModalTitle);
+                                                        if (meetingEndedModalTitle && 
+                                                            meetingEndedModalTitle.parentElement &&
+                                                            meetingEndedModalTitle.parentElement.parentElement) {
+                                                            var buttonOk = meetingEndedModalTitle.parentElement.parentElement.querySelector('button[aria-label="OK"]');
+                                                            if (buttonOk) {
+                                                                buttonOk.id = "closeConnection";
+                                                                buttonOk.onclick = function(event) {
+                                                                    AppBar.handleEvent('click', 'clickAction', event);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                                userListDefaults.appObserver.observe(appElement, {
+                                    childList: true
+                                });
+                            }
+                        }
                         var videoPlayer = panelWrapper.querySelector(elementSelectors.videoPlayer);
                         if (videoPlayer && videoPlayer.firstElementChild) {
                             Log.print(Log.l.trace, "videoPlayer open!");

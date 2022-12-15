@@ -3185,3 +3185,6 @@ c
     top: auto !important;
     bottom: 64px !important;
 }
+#conference.mediaview button[aria-label="Lernanalyse-Dashboard öffnen"] {
+    display: none;
+}
