@@ -17,6 +17,18 @@
         Controller: WinJS.Class.derive(Application.Controller, function Controller(pageElement, commandList) {
             Log.call(Log.l.trace, "Event.Controller.");
 
+            function isChildElement(parent, element) {
+                if (parent && element) {
+                    var childElement = parent.firstElementChild;
+                    while (childElement) {
+                        if (childElement === element) {
+                            return true;
+                        }
+                        childElement = childElement.nextElementSibling;
+                    }
+                }
+                return false;
+            }
             if (Application.query && Application.query.eventId) {
                 AppData.setRecordId("Veranstaltung", Application.query.eventId);
             }
@@ -624,6 +636,11 @@
                     var conferenceFragment = Application.navigator.getFragmentControlFromLocation(Application.getFragmentPath("conference"));
                     if (conferenceFragment) {
                         conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
+                            var mediaContainer = pageElement.querySelector("#conference.mediaview #layout");
+                            var meetingEndMessage = pageElement.querySelector(".meeting-end-message");
+                            if (mediaContainer && meetingEndMessage && !isChildElement(mediaContainer, meetingEndMessage)) {
+                                mediaContainer.appendChild(meetingEndMessage);
+                            }
                             WinJS.Utilities.addClass(pageElement, "session-ended");
                         });
                     }
