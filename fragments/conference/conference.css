@@ -2200,7 +2200,7 @@ button[data-test="optionsButton"] {
     font-style: normal !important;
 }
 #conference.mediaview div[data-test="chatMessages"] p[data-test="chatUserMessageText"] {
-    font-family: var(--font-family-default), color-emoji !important;
+    font-family: var(--font-family-default), "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji" !important;
     width: fit-content !important;
     min-width: 40px !important;
     word-break: break-word;
@@ -2299,7 +2299,7 @@ button[data-test="optionsButton"] {
 }
 
 #conference.mediaview .float-container div * {
-    font-family: emoji;
+    font-family: "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 
@@ -2444,7 +2444,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 
 
 #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon {
-    font-family: color-emoji;
+    font-family: "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 130%;
 }
 #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
@@ -2670,7 +2670,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 }
 
 #conferenceController .tool-box > button.win-button .button-tip .emoji-button-icon {
-    font-family: color-emoji;
+    font-family: "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 180%;
 }
 
@@ -2775,7 +2775,7 @@ c
     font-size: 16px;
     flex: 1;
     font-weight: 300;
-    font-family: Barlow, color-emoji;
+    font-family: var(--font-family-default), "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
     white-space: pre-line;
 }
 .post-notification-popup .notification-action {
@@ -2935,7 +2935,7 @@ c
 }
 
 .color-emoji {
-    font-family: color-emoji;
+    font-family: "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 /* transition effects */
