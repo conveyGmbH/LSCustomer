@@ -423,15 +423,6 @@
                     }
                 }).then(function () {
                     return that.updateFragment();
-                }).then(function (conferenceFragment) {
-                    conferenceFragment.controller.setCommandMessageHandler("sessionEndRequested", function (param) {
-                        var mediaContainer = pageElement.querySelector("#conference.mediaview #layout");
-                        var meetingEndMessage = pageElement.querySelector(".meeting-end-message");
-                        if (mediaContainer && meetingEndMessage && !isChildElement(mediaContainer, meetingEndMessage)) {
-                            mediaContainer.appendChild(meetingEndMessage);
-                        }
-                        WinJS.Utilities.addClass(pageElement, "session-ended");
-                    });
                 }).then(function () {
                     AppBar.notifyModified = true;
                     return WinJS.Promise.timeout(1000);

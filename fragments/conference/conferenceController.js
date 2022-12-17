@@ -408,7 +408,7 @@ var __meteor_runtime_config__;
             var setPollingPromise = null;
             var delayedLoadSessionStatusPromise = null;
             var checkForTalkingEndPromise = null;
-
+            var sessionEndRequestPromise = null;
 
             var filterUserListFailedCount = 0;
             var showUserListFailedCount = 0;
@@ -437,6 +437,10 @@ var __meteor_runtime_config__;
 
             that.dispose = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
+                if (sessionEndRequestPromise) {
+                    sessionEndRequestPromise.cancel();
+                    sessionEndRequestPromise = null;
+                }
                 if (openChatPanePromise) {
                     openChatPanePromise.cancel();
                     openChatPanePromise = null;
@@ -4564,10 +4568,15 @@ var __meteor_runtime_config__;
                 },
                 sessionEndRequested: function(param) {
                     Log.call(Log.l.info, "Conference.Controller.", "param=" + (param ? param : ""));
-                    if (pageControllerName === "eventController") {
-                        if (AppBar.scope && typeof AppBar.scope.loadData === "function") {
-                            AppBar.scope.loadData();
-                        }
+                    if (!sessionEndRequestPromise) {
+                        sessionEndRequestPromise = WinJS.Promise.timeout(3000).then(function () {
+                            var mediaContainer = fragmentElement.querySelector("#conference.mediaview #layout");
+                            var meetingEndMessage = fragmentElement.querySelector(".meeting-end-message");
+                            if (mediaContainer && meetingEndMessage && !isChildElement(mediaContainer, meetingEndMessage)) {
+                                mediaContainer.appendChild(meetingEndMessage);
+                            }
+                            WinJS.Utilities.addClass(fragmentElement, "session-ended");
+                        });
                     }
                     Log.ret(Log.l.info);
                 },
