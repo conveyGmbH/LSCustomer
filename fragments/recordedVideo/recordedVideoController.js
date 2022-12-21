@@ -12,12 +12,18 @@
 
     var nav = WinJS.Navigation;
 
+    var typeIndex = [
+        "video/webm",
+        "video/mp4"
+    ];
+
     WinJS.Namespace.define("RecordedVideo", {
         Controller: WinJS.Class.derive(Fragments.Controller, function Controller(fragmentElement, options, commandList) {
             Log.call(Log.l.trace, "RecordedVideo.Controller.", "eventId=" + (options && options.eventId));
 
             var sources = {};
             var qualities = [];
+            var sourceElements = [];
 
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
@@ -79,6 +85,7 @@
                     if (response && response.responseText) {
                         sources = {};
                         qualities = [];
+                        sourceElements = [];
                         var results = response.responseText.split("\n");
                         for (var l = 0; l < results.length; l++) {
                             var fileName = results[l];
@@ -87,17 +94,20 @@
                                 var pQuality = fileName.lastIndexOf("-");
                                 var pExt = fileName.lastIndexOf(".");
                                 if (pQuality > 0 && pExt > pQuality + 1) {
-                                    var quality = parseInt(fileName.substr(pQuality + 1, pExt - pQuality - 1));
                                     var type = "video/" + fileName.substr(pExt + 1);
-                                    var src = options.url.replace(/files\.txt/g, fileName);
-                                    if (!sources[quality]) {
-                                        sources[quality] = [];
-                                        qualities.push(quality);
+                                    var idx = typeIndex.indexOf(type);
+                                    if (idx >= 0) {
+                                        var src = options.url.replace(/files\.txt/g, fileName);
+                                        var quality = parseInt(fileName.substr(pQuality + 1, pExt - pQuality - 1));
+                                        if (!sources[quality]) {
+                                            sources[quality] = [];
+                                            qualities.push(quality);
+                                        }
+                                        sources[quality][idx] = {
+                                            src: src,
+                                            type: type
+                                        };
                                     }
-                                    sources[quality].push({
-                                        src: src,
-                                        type: type
-                                    });
                                 }
                             }
                         }
@@ -118,6 +128,7 @@
                                     sourceElement.src = source[i].src;
                                     sourceElement.type = source[i].type;
                                     videoElement.appendChild(sourceElement);
+                                    sourceElements[i] = sourceElement;
                                 }
                                 recordedVideo.appendChild(videoElement);
                                 that.binding.showDelayContent = false;
