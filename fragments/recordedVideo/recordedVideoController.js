@@ -106,7 +106,8 @@
                             if (videoElement) {
                                 recordedVideo.removeChild();
                             }
-                            var curQuality = qualities.sort()[qualities.length - 1];
+                            qualities.sort((a, b) => a - b);
+                            var curQuality = qualities[qualities.length - 1];
                             var source = sources[curQuality];
                             if (source && source.length > 0) {
                                 videoElement = document.createElement("video");
