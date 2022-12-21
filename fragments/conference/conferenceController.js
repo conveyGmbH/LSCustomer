@@ -4568,6 +4568,14 @@ var __meteor_runtime_config__;
                 },
                 sessionEndRequested: function(param) {
                     Log.call(Log.l.info, "Conference.Controller.", "param=" + (param ? param : ""));
+                    var microphoneOff = fragmentElement.querySelector(elementSelectors.microphoneOff);
+                    if (microphoneOff) {
+                        microphoneOff.click();
+                    }
+                    var leaveVideo = fragmentElement.querySelector(elementSelectors.leaveVideo);
+                    if (leaveVideo) {
+                        leaveVideo.click();
+                    }
                     if (!sessionEndRequestPromise) {
                         sessionEndRequestPromise = WinJS.Promise.timeout(3000).then(function () {
                             var mediaContainer = fragmentElement.querySelector("#conference.mediaview #layout");
