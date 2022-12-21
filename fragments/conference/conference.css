@@ -3222,3 +3222,8 @@ c
     opacity: 0.8;
     font-family: Barlow;
 }
+
+.hide-ui-elements #conference.mediaview #layout > section[role="region"] {
+    display: none;
+}
+

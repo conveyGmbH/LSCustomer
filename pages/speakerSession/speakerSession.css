@@ -289,3 +289,11 @@
 .speakerSession .closeSession-container {
     width: 200px;
 }
+
+.hide-ui-elements .customer-top-header,
+.hide-ui-elements .content-grid,
+.hide-ui-elements .hero-footer {
+    display: none;
+}
+
+
