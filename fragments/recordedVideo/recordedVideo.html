@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="recordedVideo.css" rel="stylesheet" />
+    <script type="text/javascript" src="recordedVideoService.js"></script>
+    <script type="text/javascript" src="recordedVideoController.js"></script>
+    <script type="text/javascript" src="recordedVideo.js"></script>
+</head>
+<body class="win-type-body">
+    <div class="recordedVideo fragment">
+        <div id="recordedVideoController" class="data-container">
+            <section aria-label="Main content" role="main" class="animationElement">
+                <div class="contentarea content-noscroll win-type-body">
+                    <div class="delay-container" 
+                         data-win-bind="style.display: showDelayContent Binding.Converter.toDisplay">
+                        <div class="ITbackground">
+                            <img class="ipadImg" data-win-bind="src: dataDoc.off_doc_delay; alt: dataDocText.off_doc_delay_alt" />
+                        </div>
+                        <div class="field_line_full">
+                            <span class="large_field" data-win-bind="innerHTML: dataText.off_text_delay_title"></span>
+                        </div>
+                        <div class="field_line_full">
+                            <span class="large_field" data-win-bind="innerHTML: dataText.off_text_delay_body"></span>
+                        </div>
+                    </div>
+                    <div class="doc-container"
+                         data-win-bind="style.display: showDelayContent Binding.Converter.toDisplayNone">
+                        <div id="recordedVideo" class="mediaview"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

@@ -41,6 +41,7 @@
                 showCountdown: false,
                 showConference: false,
                 showRecordedContent: false,
+                showRecordedVideo: false,
                 showLogOffEventMail: false,
                 showEvText: false,
                 showOffText: false,
@@ -292,6 +293,8 @@
                             var content = null;
                             if (that.binding.showRecordedContent) {
                                 content = contentArea.querySelector(".recordedContent-fragmenthost");
+                            } else if (that.binding.showRecordedVideo) {
+                                content = contentArea.querySelector(".recordedVideo-fragmenthost");
                             } else if (that.binding.showConference) {
                                 content = contentArea.querySelector(".conference-fragmenthost");
                             }
@@ -786,6 +789,7 @@
                     that.binding.showConference = false;
                     that.binding.showMaintenance = false;
                     that.binding.showRecordedContent = false;
+                    that.binding.showRecordedVideo = false;
                     //Behandlung welches Bild in teaser-fragment angezeigt wird
                     if (teaserFragment &&
                         teaserFragment.controller &&
@@ -894,15 +898,15 @@
                         that.binding.showMaintenance = false;
                         that.binding.showRecordedContent = true;
                         that.binding.showEventDetails = true;
-                        return that.getFragmentByName("recordedContent").then(function (recordedContentFragment) {
-                            if (recordedContentFragment &&
-                                recordedContentFragment.controller &&
-                                recordedContentFragment.controller.binding) {
+                        return that.getFragmentByName("recordedVideo").then(function (fragment) {
+                            if (fragment &&
+                                fragment.controller &&
+                                fragment.controller.binding) {
                                 // option set in portal - eventgensettings RecordSession und PublishRecording
                                 if (that.binding.dataEvent.RecordSession && that.binding.dataEvent.PublishRecording) {
-                                    recordedContentFragment.controller.binding.showDelayContent = true;
+                                    fragment.controller.binding.showDelayContent = true;
                                 } else {
-                                    recordedContentFragment.controller.binding.showDelayContent = false;
+                                    fragment.controller.binding.showDelayContent = false;
                                 }
                             }
                         });;
@@ -914,21 +918,23 @@
                         that.binding.showEventDetails = true;
                         // option set in portal - eventgensettings
                         if (that.binding.dataEvent.RecordSession) {
-                            that.binding.showRecordedContent = true;
+                            //that.binding.showRecordedContent = true;
+                            that.binding.showRecordedVideo = true;
                         } else {
                             that.binding.showRecordedContent = false;
+                            that.binding.showRecordedVideo = false;
                         }
                         that.binding.showLogOffEventMail = true;
-                        return that.getFragmentByName("recordedContent").then(function (recordedContentFragment) {
-                            if (recordedContentFragment &&
-                                recordedContentFragment.controller &&
-                                recordedContentFragment.controller.binding) {
-                                recordedContentFragment.controller.binding.showDelayContent = false;
+                        return that.getFragmentByName("recordedVideo").then(function (fragment) {
+                            if (fragment &&
+                                fragment.controller &&
+                                fragment.controller.binding) {
+                                fragment.controller.binding.showDelayContent = false;
                             }
-                            if (recordedContentFragment &&
-                                recordedContentFragment.controller &&
-                                typeof recordedContentFragment.controller.loadData() === "function") {
-                                recordedContentFragment.controller.loadData();
+                            if (fragment &&
+                                fragment.controller &&
+                                typeof fragment.controller.loadData() === "function") {
+                                fragment.controller.loadData();
                             }
                         });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {

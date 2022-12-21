@@ -3796,7 +3796,7 @@ var __meteor_runtime_config__;
             this.loadData = loadData;
 
             var setPresenterModeState = function (state) {
-                Log.call(Log.l.info, "Conference.Controller.", "state=" + state);
+                Log.call(Log.l.trace, "Conference.Controller.", "state=" + state);
                 var mediaContainer = fragmentElement.querySelector(getMediaContainerSelector());
                 if (mediaContainer) {
                     switch (state) {
