@@ -3223,7 +3223,14 @@ c
     font-family: Barlow;
 }
 
-.hide-ui-elements #conference.mediaview #layout > section[role="region"] {
+.hide-ui-elements #conference.mediaview #layout > section[role="region"],
+.hide-ui-elements #conference.mediaview #layout button[data-test="whiteboardOptionsButton"],
+.hide-ui-elements #conference.mediaview #layout .presentationFullscreenButton,
+.hide-ui-elements #conference.mediaview #layout button[data-test="switchButton"],
+.hide-ui-elements #conference.mediaview #layout div[data-test="recordingIndicator"],
+.hide-ui-elements #conference.mediaview #layout button[aria-label="Videoplayer aktualisieren"],
+.hide-ui-elements #conference.mediaview #layout .sc-lepLyc .fKrLsw,
+.hide-ui-elements #conference.mediaview #layout .sc-lnDqNf .iZJmQy {
     display: none;
 }
 
