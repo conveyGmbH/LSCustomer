@@ -369,7 +369,6 @@ var __meteor_runtime_config__;
             }, commandList]);
 
             var conference = fragmentElement.querySelector("#conference");
-            var paneTools = fragmentElement.querySelector(".pane-tools");
             var showPresentationToggleContainer = fragmentElement.querySelector(".show-presentation-toggle-container");
             var showVideoListToggleContainer = fragmentElement.querySelector(".show-videolist-toggle-container");
             var expandActionsToggleContainer = fragmentElement.querySelector(".expand-actions-toggle-container");
@@ -2287,7 +2286,6 @@ var __meteor_runtime_config__;
                             talkingIndicatorObserver.disconnect();
                             talkingIndicatorObserver = null;
                         }
-
                         var mediaContainer = panelWrapper;
                         if (mediaContainer) {
                             var cameraDock = mediaContainer.querySelector(elementSelectors.cameraDock);
@@ -2305,10 +2303,19 @@ var __meteor_runtime_config__;
                                 }
                             }
                             var numVideos = 0;
+                            var actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
+                            var paneTools = fragmentElement.querySelector(".pane-tools");
+                            if (paneTools && actionsBar &&
+                                !isChildElement(mediaContainer, paneTools)) {
+                                mediaContainer.insertBefore(paneTools, actionsBar);
+                                if (pageControllerName === "modSessionController") {
+                                    that.binding.showPresenterButtons = true;
+                                }
+                            }
                             WinJS.Promise.timeout(20).then(function() {
                                 var paneWidth = 0;
                                 var currentPane = panelWrapper.firstElementChild;
-                                var actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
+                                actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
                                 if (pageControllerName === "modSessionController" && that.binding.showPaneTools) {
                                     paneWidth = paneTools.clientWidth;
                                 }
@@ -2469,6 +2476,15 @@ var __meteor_runtime_config__;
                                     if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
                                         WinJS.Utilities.addClass(mediaContainer, "presentation-is-hidden");
                                     }
+                                    /*if (videoPLayerOpened || screenShareOpened || presentationOpened) {
+                                        var closeDescButton = fragmentElement.querySelector(elementSelectors.minimizePresentation + ", " + elementSelectors.hidePresentationButton);
+                                        if (closeDescButton) {
+                                            Log.ret(Log.l.trace, "click closeDescButton");
+                                            closeDescButton.click();
+                                        }
+                                    } else {
+                                        sessionStatusIsSet = true;
+                                    }*/
                                     sessionStatusIsSet = true;
                                 }
                                 if (sessionStatusIsSet) {
@@ -2476,14 +2492,6 @@ var __meteor_runtime_config__;
                                     if (mediaView && !WinJS.Utilities.hasClass(mediaView, "session-state-complete")) {
                                         WinJS.Utilities.addClass(mediaView, "session-state-complete");
                                     }
-                                }
-                            }
-                            var actionsBar = fragmentElement.querySelector(elementSelectors.actionsBar);
-                            if (paneTools && paneTools.style && actionsBar &&
-                                !isChildElement(mediaContainer, paneTools)) {
-                                mediaContainer.insertBefore(paneTools, actionsBar);
-                                if (pageControllerName === "modSessionController") {
-                                    that.binding.showPresenterButtons = true;
                                 }
                             }
                             var actionsBarLeft = fragmentElement.querySelector(elementSelectors.actionsBarLeft);
@@ -2692,6 +2700,7 @@ var __meteor_runtime_config__;
                                         (!that.binding.dataSessionStatus.ShowPresentation ||
                                          that.binding.dataSessionStatus.VideoListPosition === videoListDefaults.default) ||
                                         WinJS.Utilities.hasClass(Application.navigator.pageElement, "view-size-medium") ||
+                                        !that.binding.dataSessionStatus.ShowPresentation ||
                                         !(videoPLayerOpened || screenShareOpened || presentationOpened) || overlayIsHidden) {
                                         if (WinJS.Utilities.hasClass(videoList, "video-list-vertical")) {
                                             WinJS.Utilities.removeClass(videoList, "video-list-vertical");
