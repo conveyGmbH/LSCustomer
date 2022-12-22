@@ -491,11 +491,6 @@
             }
             this.updateFragment = updateFragment;
 
-            var element = pageElement.querySelector(".speakerSession");
-            if (element && element.classList) {
-                element.classList.add("hide-ui-elements");
-            }
-
             // finally, load the data
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete, now load data");

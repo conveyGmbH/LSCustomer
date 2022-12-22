@@ -2461,12 +2461,6 @@ var __meteor_runtime_config__;
                                         if (restoreDescButton) {
                                             Log.ret(Log.l.trace, "click restoreDescButton");
                                             restoreDescButton.click();
-                                        } else {
-                                            var restoreVideoPlayer = fragmentElement.querySelector(elementSelectors.restoreVideoPlayer);
-                                            if (restoreVideoPlayer) {
-                                                Log.ret(Log.l.trace, "click restoreVideoPlayer");
-                                                restoreVideoPlayer.click();
-                                            }
                                         }
                                     } else {
                                         sessionStatusIsSet = true;
