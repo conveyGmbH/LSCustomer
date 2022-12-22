@@ -493,7 +493,7 @@
 
             var element = pageElement.querySelector(".speakerSession");
             if (element && element.classList) {
-                //element.classList.add("hide-ui-elements");
+                element.classList.add("hide-ui-elements");
             }
 
             // finally, load the data

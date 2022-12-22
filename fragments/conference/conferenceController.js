@@ -117,6 +117,7 @@ var __meteor_runtime_config__;
         restorePresentationButton:'#conference.mediaview #layout button[data-test="restorePresentationButton"]',
         minimizePresentation:    '#conference.mediaview #layout button[data-test="minimizePresentation"]',
         restorePresentation:'#conference.mediaview #layout button[data-test="restorePresentation"]',
+        restoreVideoPlayer: '#conference.mediaview #layout button[aria-label="Videoplayer aktualisieren"], #conference.mediaview #layout button[aria-label="Refresh Video Player"]',
         raiseHandLabel:'#conference.mediaview #layout button[data-test="raiseHandLabel"]',
         lowerHandLabel:'#conference.mediaview #layout button[data-test="lowerHandLabel"]',
 
@@ -2460,6 +2461,12 @@ var __meteor_runtime_config__;
                                         if (restoreDescButton) {
                                             Log.ret(Log.l.trace, "click restoreDescButton");
                                             restoreDescButton.click();
+                                        } else {
+                                            var restoreVideoPlayer = fragmentElement.querySelector(elementSelectors.restoreVideoPlayer);
+                                            if (restoreVideoPlayer) {
+                                                Log.ret(Log.l.trace, "click restoreVideoPlayer");
+                                                restoreVideoPlayer.click();
+                                            }
                                         }
                                     } else {
                                         sessionStatusIsSet = true;
