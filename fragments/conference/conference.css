@@ -3237,7 +3237,7 @@ c
 .hide-ui-elements button[data-test="presentationFullscreenButton"],
 .hide-ui-elements button[data-test="switchButton"],
 .hide-ui-elements div[data-test="recordingIndicator"],
-/*.hide-ui-elements button[aria-label="Videoplayer aktualisieren"], .hide-ui-elements button[aria-label="Refresh Video Player"],*/
+.hide-ui-elements button[aria-label="Videoplayer aktualisieren"], .hide-ui-elements button[aria-label="Refresh Video Player"],
 .hide-ui-elements #video-player .sc-lepLyc.fKrLsw,
 .hide-ui-elements #video-player .sc-lnDqNf.iZJmQy {
     display: none !important;
