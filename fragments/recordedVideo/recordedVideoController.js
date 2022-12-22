@@ -103,10 +103,11 @@
                                             sources[quality] = [];
                                             qualities.push(quality);
                                         }
-                                        sources[quality][idx] = {
+                                        sources[quality].push({
                                             src: src,
-                                            type: type
-                                        };
+                                            type: type,
+                                            priority: idx+1
+                                        });
                                     }
                                 }
                             }
@@ -120,6 +121,7 @@
                             var curQuality = qualities[qualities.length - 1];
                             var source = sources[curQuality];
                             if (source && source.length > 0) {
+                                source.sort((a, b) => a.priority - b.priority);
                                 videoElement = document.createElement("video");
                                 videoElement.disablePictureInPicture = true;
                                 videoElement.controls = true;
