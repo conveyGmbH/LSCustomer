@@ -293,7 +293,7 @@
 .hide-ui-elements .customer-top-header,
 .hide-ui-elements .content-grid,
 .hide-ui-elements .hero-footer {
-    display: none;
+    display: none !important;
 }
 
 

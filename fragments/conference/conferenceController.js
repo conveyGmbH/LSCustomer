@@ -2468,15 +2468,7 @@ var __meteor_runtime_config__;
                                     if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-is-hidden")) {
                                         WinJS.Utilities.addClass(mediaContainer, "presentation-is-hidden");
                                     }
-                                    if (videoPLayerOpened || screenShareOpened || presentationOpened) {
-                                        var closeDescButton = fragmentElement.querySelector(elementSelectors.minimizePresentation + ", " + elementSelectors.hidePresentationButton);
-                                        if (closeDescButton) {
-                                            Log.ret(Log.l.trace, "click closeDescButton");
-                                            closeDescButton.click();
-                                        }
-                                    } else {
-                                        sessionStatusIsSet = true;
-                                    }
+                                    sessionStatusIsSet = true;
                                 }
                                 if (sessionStatusIsSet) {
                                     var mediaView = fragmentElement.querySelector(elementSelectors.mediaView);
