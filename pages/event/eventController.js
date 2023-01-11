@@ -896,7 +896,8 @@
                         that.binding.showCountdown = false;
                         that.binding.showConference = false;
                         that.binding.showMaintenance = false;
-                        that.binding.showRecordedContent = true;
+                        //that.binding.showRecordedContent = true;
+                        that.binding.showRecordedVideo = true;
                         that.binding.showEventDetails = true;
                         return that.getFragmentByName("recordedVideo").then(function (fragment) {
                             if (fragment &&
