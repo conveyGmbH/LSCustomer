@@ -4421,6 +4421,7 @@ var __meteor_runtime_config__;
                                     }
                                     that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
                                 } else {
+                                    dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
                                     that.saveSessionStatus(dataSessionStatus);
                                 }
                             }
@@ -4805,6 +4806,7 @@ var __meteor_runtime_config__;
                                             dataSessionStatus.ShowVideoList = 0;
                                             break;
                                         }
+                                        dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
                                         that.saveSessionStatus(dataSessionStatus);
                                     }
                                 }
