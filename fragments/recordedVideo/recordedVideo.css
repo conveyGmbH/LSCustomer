@@ -4,7 +4,26 @@
     height: 100%;
     float: none;
 }
+#recordedVideoController .quality-select-container {
+    position: absolute;
+    bottom: 32px;
+    left: calc(50% - 40px);
+    z-index: 10;
+}
+#recordedVideo select,
+#recordedVideo option {
+    border: none;
+    outline: none;
+    background: none;
+    color: var(--color-gray-lightest);
+    font-size: 20px;
+}
 
+
+#recordedVideo select:hover {
+    color: white;
+
+}
 
 #recordedVideo video {
     width: 100%;
@@ -13,3 +32,5 @@
 #recordedVideo .win-progress-ring {
     margin-left: 50%;
 }
+
+

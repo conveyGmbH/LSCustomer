@@ -26,7 +26,20 @@
                     </div>
                     <div class="doc-container"
                          data-win-bind="style.display: showDelayContent Binding.Converter.toDisplayNone">
-                        <div id="recordedVideo" class="mediaview"></div>
+                        <div id="recordedVideo" class="mediaview">
+                            <video controls controlslist="play timeline volume fullscreen nodownload noplaybackrate" autoplay disablepictureinpicture 
+                                   data-win-bind="src: videoSource"></video>
+                            <div class="quality-select-container"
+                                 data-win-bind="style.display: showQualitySelect Binding.Converter.toDisplay">
+                                <select id="qualitySelect"
+                                        class="win-dropdown win-ui-dark"
+                                        data-win-control="WinJS.UI.Repeater"
+                                        data-win-bind="value: videoQuality"
+                                        onchange="AppBar.handleEvent('change', 'changedQualitySelect', event)">
+                                    <option data-win-bind="value: quality; textContent: label"></option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

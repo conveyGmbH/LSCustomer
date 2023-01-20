@@ -24,6 +24,7 @@
             var sources = {};
             var qualities = [];
             var sourceElements = [];
+            var qualitySelectList = null;
 
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
@@ -47,7 +48,10 @@
                 dataDocText: AppBar.scope.binding.dataDocText,
                 showEvText: AppBar.scope.binding.showEvText,
                 showOffText: AppBar.scope.binding.showOffText,
-                showDelayContent: true
+                showDelayContent: true,
+                showQualitySelect: false,
+                videoQuality: 0,
+                videoSource: ""
             }, commandList]);
 
             var that = this;
@@ -58,6 +62,23 @@
             }
 
             var recordedVideo = fragmentElement.querySelector("#recordedVideo");
+            var qualitySelect = fragmentElement.querySelector("#qualitySelect");
+            var videoElement = fragmentElement.querySelector("#recordedVideo > video");
+
+            var setVideoSrc = function(quality) {
+                Log.call(Log.l.trace, "RecordedVideo.Controller.", "quality=" + quality);
+                var source = sources && sources[quality];
+                if (videoElement && source) {
+                    source.sort((a, b) => a.priority - b.priority);
+                    for (var i = 0; i < source.length; i++) {
+                        if (videoElement.canPlayType(source[i].type)) {
+                            that.binding.videoQuality = quality;
+                            that.binding.videoSource = source[i].src;
+                        }
+                    }
+                }
+                Log.ret(Log.l.trace, "videoQuality=" + that.binding.videoQuality + " videoSource=" + that.binding.videoSource);
+            }
 
             var loadData = function () {
                 Log.call(Log.l.trace, "RecordedVideo.Controller.");
@@ -112,33 +133,16 @@
                                 }
                             }
                         }
-                        if (recordedVideo && qualities.length > 0) {
-                            var videoElement = recordedVideo.querySelector("video");
-                            if (videoElement) {
-                                recordedVideo.removeChild();
+                        if (qualities.length > 0 && qualitySelectList) {
+                            qualities.sort((a, b) => b - a);
+                            qualitySelectList.length = 0;
+                            for (var i = 0; i < qualities.length; i++) {
+                                var curQuality = qualities[i];
+                                qualitySelectList.push({
+                                    quality: curQuality,
+                                    label: (curQuality >= 1920) ? "FullHD" : (curQuality >= 1280) ? "HD" : "SD"
+                                });
                             }
-                            qualities.sort((a, b) => a - b);
-                            var curQuality = qualities[qualities.length - 1];
-                            var source = sources[curQuality];
-                            if (source && source.length > 0) {
-                                source.sort((a, b) => a.priority - b.priority);
-                                videoElement = document.createElement("video");
-                                videoElement.disablePictureInPicture = true;
-                                videoElement.controls = true;
-                                for (var i = 0; i < source.length; i++) {
-                                    var sourceElement = document.createElement("source");
-                                    sourceElement.src = source[i].src;
-                                    sourceElement.type = source[i].type;
-                                    videoElement.appendChild(sourceElement);
-                                    sourceElements[i] = sourceElement;
-                                }
-                                recordedVideo.appendChild(videoElement);
-                                that.binding.showDelayContent = false;
-                            } else {
-                                videoElement = null;
-                                that.binding.showDelayContent = true;
-                            }
-                            recordedVideo.scrollIntoView(videoElement);
                         }
                     } else {
                         Log.print(Log.l.error, "no response");
@@ -148,11 +152,41 @@
                     Log.print(Log.l.error, "error=" + AppData.getErrorMsgFromResponse(errorResponse));
                     AppData.setErrorMsg(AppBar.scope.binding, errorResponse);
                     return WinJS.Promise.as();
+                }).then(function () {
+                    if (qualitySelectList && qualitySelectList.length > 0) {
+                        that.binding.showDelayContent = false;
+                        that.binding.showQualitySelect = true;
+                        if (recordedVideo) {
+                            recordedVideo.scrollIntoView(videoElement);
+                        }
+                        setVideoSrc(qualities[0]);
+                    } else {
+                        that.binding.showDelayContent = true;
+                        that.binding.showQualitySelect = false;
+                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;
             }
             this.loadData = loadData;
+
+            that.eventHandlers = {
+                changedQualitySelect: function(event) {
+                    Log.call(Log.l.trace, "RecordedVideo.Controller.");
+                    if (event.currentTarget) {
+                        setVideoSrc(event.currentTarget.value);
+                    }
+                    Log.ret(Log.l.trace);
+                }
+            };
+
+            if (qualitySelect && qualitySelect.winControl) {
+                qualitySelectList = new WinJS.Binding.List({
+                    quality: 0,
+                    label: ""
+                });
+                qualitySelect.winControl.data = qualitySelectList;
+            }
 
             that.processAll().then(function () {
                 Log.print(Log.l.trace, "Binding wireup page complete");
