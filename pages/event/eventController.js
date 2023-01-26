@@ -229,7 +229,31 @@
                 },
                 clickHome: function (event) {
                     Log.call(Log.l.trace, "Event.Controller.");
-                    Application.navigateById("home", event);
+                    if (that.binding.showConference &&
+                        that.binding.conferenceLink &&
+                        AppData._persistentStates.registerData &&
+                        AppData._persistentStates.registerData.userToken) {
+                        that.getFragmentByName("conference").then(function (conferenceFragment) {
+                            if (conferenceFragment && typeof conferenceFragment.controller.endKeepAlive === "function") {
+                                conferenceFragment.controller.endKeepAlive();
+                            }
+                        });
+                        Log.print(Log.l.trace, "calling PRC_CreateIncident: Disconnected");
+                        AppData.call("PRC_CreateIncident", {
+                            pUserToken: AppData._persistentStates.registerData.userToken,
+                            pIncidentName: "Disconnected"
+                        },
+                        function(json) {
+                            Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                        },
+                        function(error) {
+                            Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                        }).then(function() {
+                            Application.navigateById("home", event);
+                        });
+                    } else {
+                        Application.navigateById("home", event);
+                    }
                     Log.ret(Log.l.trace);
                 },
                 clickOk: function (event) {

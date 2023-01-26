@@ -409,6 +409,7 @@ var __meteor_runtime_config__;
             var delayedLoadSessionStatusPromise = null;
             var checkForTalkingEndPromise = null;
             var sessionEndRequestPromise = null;
+            var sendKeepAlivePromise = null;
 
             var filterUserListFailedCount = 0;
             var showUserListFailedCount = 0;
@@ -437,6 +438,7 @@ var __meteor_runtime_config__;
 
             that.dispose = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
+                that.endKeepAlive();
                 if (sessionEndRequestPromise) {
                     sessionEndRequestPromise.cancel();
                     sessionEndRequestPromise = null;
@@ -6196,6 +6198,34 @@ var __meteor_runtime_config__;
                 }
             }
 
+            var sendKeepAlive = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (sendKeepAlivePromise) {
+                    sendKeepAlivePromise.cancel();
+                    Log.print(Log.l.trace, "calling PRC_SendKontaktKeepAlive()");
+                    AppData.call("PRC_SendKontaktKeepAlive", {}, function (json) {
+                        Log.print(Log.l.trace, "PRC_SendKontaktKeepAlive success!");
+                    }, function (error) {
+                        Log.print(Log.l.error, "PRC_SendKontaktKeepAlive error! ");
+                    });
+                }
+                sendKeepAlivePromise = WinJS.Promise.timeout(60000).then(function () {
+                    that.sendKeepAlive();
+                });
+                Log.ret(Log.l.trace);
+            }
+            that.sendKeepAlive = sendKeepAlive;
+
+            var endKeepAlive = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (sendKeepAlivePromise) {
+                    sendKeepAlivePromise.cancel();
+                    sendKeepAlivePromise = null;
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.endKeepAlive = endKeepAlive;
+
             that.processAll().then(function () {
                 AppBar.notifyModified = false;
                 Log.print(Log.l.trace, "Binding wireup page complete");
@@ -6219,6 +6249,7 @@ var __meteor_runtime_config__;
                 if (AppBar.scope.binding.showConference && conference) {
                     conference.scrollIntoView();
                 }
+                that.sendKeepAlive();
             });
             Log.ret(Log.l.trace);
         })

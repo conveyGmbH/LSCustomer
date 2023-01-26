@@ -311,63 +311,90 @@
                     if (Application.query.UserToken) {
                         modToken = Application.query.UserToken;
                     }
-                    // binding von event für startdatum und diesen mit dem heutigen Datum vergleichen
-                    var dateBegin = that.binding.dataEvent.dateBegin;
-                    var dateEnd = that.binding.dataEvent.dateEndDatum;
-                    var now = new Date().getTime();
-                    var timeleft = dateBegin - now;
-                    //var timeleft2 = dateEnd - now;
-                    var warning = getResourceText("modSession.labelCloseBeforeBegin");
-                    if (timeleft > 0) {
-                        // dateBegin in future -> wenn es sich um eine Testsession handelt 
-                        confirm(warning, function (result) {
-                            if (result) {
-                                that.updateFragment().then(function (conferenceFragment) {
-                                    // call sendCommandMessage 
-                                    // Abfrage nach Enddatum ob kleiner als heutige datum 
-                                    if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
-                                        conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
-                                    }
-                                    that.binding.showConference = false;
-                                    that.binding.showMessageSessionClosed = true;
-                                });
-                            } else {
-                                Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
-                            }
-                        }, closeSessionButton);
-                    } else {
-                        Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
-                        var confirmTitle = getResourceText("modSession.labelCloseSession") + " ";
-                        confirm(confirmTitle, function (result) {
-                            if (result) {
-                                AppBar.busy = true;
-                                Log.print(Log.l.trace, "clickCloseSessionEvent: user choice OK");
-                                return AppData.call("PRC_RequestSessionEnd", {
-                                    pVeranstaltungID: that.binding.eventId,
-                                    pUserToken: modToken
-                                }, function (json) {
-                                    AppBar.busy = false;
-                                    Log.print(Log.l.trace, "PRC_RequestSessionEnd success!");
-                                    if (json && json.d && json.d.results) {
-                                        var result = json.d.results[0];
-                                    }
+                    if (that.binding.showConference && modToken) {
+                        // binding von event für startdatum und diesen mit dem heutigen Datum vergleichen
+                        var dateBegin = that.binding.dataEvent.dateBegin;
+                        var dateEnd = that.binding.dataEvent.dateEndDatum;
+                        var now = new Date().getTime();
+                        var timeleft = dateBegin - now;
+                        //var timeleft2 = dateEnd - now;
+                        var warning = getResourceText("modSession.labelCloseBeforeBegin");
+                        if (timeleft > 0) {
+                            // dateBegin in future -> wenn es sich um eine Testsession handelt 
+                            confirm(warning, function (result) {
+                                if (result) {
                                     that.updateFragment().then(function (conferenceFragment) {
-                                        // call sendCommandMessage 
-                                        // Abfrage nach Enddatum ob kleiner als heutige datum 
-                                        if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
-                                            conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
+                                        if (conferenceFragment && typeof conferenceFragment.controller.endKeepAlive === "function") {
+                                            conferenceFragment.controller.endKeepAlive();
                                         }
-                                        that.binding.showConference = false;
-                                        that.binding.showMessageSessionClosed = true;
                                     });
-                                    Log.ret(Log.l.trace);
-                                }, function (error) {
-                                    Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");
-                                });
-                            } else {
-                                Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
-                            }
-                        }, closeSessionButton);
+                                    Log.print(Log.l.trace, "calling PRC_CreateIncident: Disconnected");
+                                    AppData.call("PRC_CreateIncident", {
+                                        pUserToken: modToken,
+                                        pIncidentName: "Disconnected"
+                                    }, function (json) {
+                                        Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                                    }, function (error) {
+                                        Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                                    }).then(function () {
+                                        that.updateFragment().then(function (conferenceFragment) {
+                                            // call sendCommandMessage 
+                                            // Abfrage nach Enddatum ob kleiner als heutige datum 
+                                            if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
+                                                conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
+                                            }
+                                            that.binding.showConference = false;
+                                            that.binding.showMessageSessionClosed = true;
+                                        });
+                                    });
+                                } else {
+                                    Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
+                                }
+                            }, closeSessionButton);
+                        } else {
+                            Log.print(Log.l.trace, "calling PRC_RequestSessionEnd...");
+                            var confirmTitle = getResourceText("modSession.labelCloseSession") + " ";
+                            confirm(confirmTitle, function (result) {
+                                if (result) {
+                                    Log.print(Log.l.trace, "calling PRC_CreateIncident: Disconnected");
+                                    AppData.call("PRC_CreateIncident", {
+                                        pUserToken: modToken,
+                                        pIncidentName: "Disconnected"
+                                    }, function (json) {
+                                        Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                                    }, function (error) {
+                                        Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                                    }).then(function () {
+                                        AppBar.busy = true;
+                                        Log.print(Log.l.trace, "clickCloseSessionEvent: user choice OK");
+                                        AppData.call("PRC_RequestSessionEnd", {
+                                            pVeranstaltungID: that.binding.eventId,
+                                            pUserToken: modToken
+                                        }, function (json) {
+                                            AppBar.busy = false;
+                                            Log.print(Log.l.trace, "PRC_RequestSessionEnd success!");
+                                            if (json && json.d && json.d.results) {
+                                                var result = json.d.results[0];
+                                            }
+                                            that.updateFragment().then(function (conferenceFragment) {
+                                                // call sendCommandMessage 
+                                                // Abfrage nach Enddatum ob kleiner als heutige datum 
+                                                if (conferenceFragment && typeof conferenceFragment.controller.sendCommandMessage === "function") {
+                                                    conferenceFragment.controller.sendCommandMessage("sessionEndRequested", "optional parameters");
+                                                }
+                                                that.binding.showConference = false;
+                                                that.binding.showMessageSessionClosed = true;
+                                            });
+                                            Log.ret(Log.l.trace);
+                                        }, function (error) {
+                                            Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");
+                                        });
+                                    });
+                                } else {
+                                    Log.print(Log.l.trace, "clickCloseSessionEvent: user choice CANCEL");
+                                }
+                            }, closeSessionButton);
+                        }
                     }
                 }
             };
