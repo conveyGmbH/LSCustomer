@@ -3741,7 +3741,8 @@ var __meteor_runtime_config__;
                         return AppData.call("PRC_BBBModeratorLink", {
                             pVeranstaltungID: 0,
                             pAlias: null,
-                            pUserToken: userToken
+                            pUserToken: userToken,
+                            pCreateIncident: 1
                         }, function (json) {
                             if (json && json.d && json.d.results) {
                                 that.binding.dataConference = json.d.results[0];
