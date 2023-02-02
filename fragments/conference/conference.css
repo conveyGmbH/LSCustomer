@@ -1144,6 +1144,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child {
     position: absolute;
     top: 10px;
+    align-items: normal;
 }
 #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:first-child + div,
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child + div {
@@ -1174,6 +1175,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Aktionsmenü"] > div:first-child > div:last-child {
     width: 50% !important;
     margin-left: 50% !important;
+    align-items: normal;
 }
 
 .view-size-medium-small #conference.mediaview #layout:not(.actions-menu-expanded) > section[aria-label="Actions bar"] > div:first-child > div:first-child,
