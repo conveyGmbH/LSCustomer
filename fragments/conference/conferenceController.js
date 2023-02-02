@@ -2090,7 +2090,16 @@ var __meteor_runtime_config__;
                     var presentationOpened = false;
                     var panelWrapper = fragmentElement.querySelector(getMediaContainerSelector());
                     if (panelWrapper) {
-                        Log.print(Log.l.trace, "panelWrapper open!");
+                        Log.print(Log.l.trace, "panelWrapper open! clientWidth=" + panelWrapper.clientWidth);
+                        if (panelWrapper.clientWidth < 450) {
+                            if (!WinJS.Utilities.hasClass(panelWrapper, "extra-small-width")) {
+                                WinJS.Utilities.addClass(panelWrapper, "extra-small-width");
+                            }
+                        } else {
+                            if (WinJS.Utilities.hasClass(panelWrapper, "extra-small-width")) {
+                                WinJS.Utilities.removeClass(panelWrapper, "extra-small-width");
+                            }
+                        }
                         if (!userListDefaults.appObserver) {
                             var appElement = fragmentElement.querySelector(elementSelectors.app);
                             if (appElement) {

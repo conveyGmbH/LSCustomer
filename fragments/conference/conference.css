@@ -1177,6 +1177,11 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     margin-left: 50% !important;
     align-items: normal;
 }
+.view-size-medium-small #conference.mediaview #layout.actions-menu-expanded.extra-small-width > section[aria-label="Actions bar"] > div:first-child > div:last-child,
+.view-size-medium-small #conference.mediaview #layout.actions-menu-expanded.extra-small-width > section[aria-label="Aktionsmenü"] > div:first-child > div:last-child {
+    margin-top: 50px;
+}
+
 
 .view-size-medium-small #conference.mediaview #layout:not(.actions-menu-expanded) > section[aria-label="Actions bar"] > div:first-child > div:first-child,
 .view-size-medium-small #conference.mediaview #layout:not(.actions-menu-expanded) > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child,
@@ -1202,6 +1207,11 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     padding: 0;
     width: 172px;
     height: 48px;
+}
+
+
+.view-size-medium-small .win-tooltip {
+    display: none !important;
 }
 
 .dlTfni > * {
@@ -2408,6 +2418,11 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     top: 30px;
     z-index: 10;
 }
+#conferenceController #layout.actions-menu-expanded.extra-small-width .action-button-container.expand-actions-toggle-container .settings-container > .win-button {
+    left: 10px;
+    top: 70px;
+}
+
 
 .pagecontrol:not(.view-size-medium-small) #conferenceController .action-button-container.expand-actions-toggle-container .settings-container {
     display: none;
