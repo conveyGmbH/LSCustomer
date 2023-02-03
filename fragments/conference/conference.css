@@ -98,6 +98,11 @@
     display: none !important;
 }
 
+.event #conference.mediaview #layout #user-list-virtualized-scroll div[role="button"],
+.speakerSession #conference.mediaview #layout #user-list-virtualized-scroll div[role="button"] {
+    pointer-events: none !important;
+}
+
 .action-button-container,
 .emoji-button-container {
     display: none;
