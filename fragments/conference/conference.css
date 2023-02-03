@@ -98,9 +98,15 @@
     display: none !important;
 }
 
+#conference.mediaview #layout #user-list-virtualized-scroll div[role="button"] {
+    width: calc(100% - 0.5em) !important;
+}
 .event #conference.mediaview #layout #user-list-virtualized-scroll div[role="button"],
 .speakerSession #conference.mediaview #layout #user-list-virtualized-scroll div[role="button"] {
     pointer-events: none !important;
+}
+li[data-test="startPrivateChat"] {
+    display: none !important;
 }
 
 .action-button-container,
