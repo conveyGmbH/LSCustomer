@@ -1016,6 +1016,7 @@
                             registerFragment.controller.binding.showRegisterMail = !!that.binding.dataEvent.RequireReg;
                             registerFragment.controller.binding.showRegisterParticipation = !that.binding.dataEvent.RequireReg;
                             registerFragment.controller.binding.seriesRegistration = !!that.binding.dataEvent.AcceptRec; //Serienregistrierung (vorerst)
+                            registerFragment.controller.binding.dataRegister.seriesRegFlag = !!that.binding.dataEvent.AcceptRec;
                             registerFragment.controller.binding.showResendEditableMail = false;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
                         }
