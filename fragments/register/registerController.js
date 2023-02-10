@@ -27,10 +27,12 @@
                     Firmenname: "",
                     privacyPolicyFlag: false,
                     UserTZ: AppData._persistentStates.registerData.UserTZ || moment.tz.guess(),
-                    LanguageId: AppData._persistentStates.languageId
+                    LanguageId: AppData._persistentStates.languageId,
+                    seriesRegFlag: false
                 },
                 InitAnredeItem: { AnredeID: 0, TITLE: "" },
                 registerMessage: "",
+                seriesRegistration: false, /*show hide the Option register for series*/
                 showRegisterMail: true,
                 showRegisterParticipation: false,
                 showResendEditableMail: false,
@@ -184,6 +186,7 @@
                     AppData._persistentStates.registerData.Position = that.binding.dataRegister.Position;
                     AppData._persistentStates.registerData.Firmenname = that.binding.dataRegister.Firmenname;
                     AppData._persistentStates.registerData.privacyPolicyFlag = that.binding.dataRegister.privacyPolicyFlag;
+                    AppData._persistentStates.registerData.seriesRegFlag = that.binding.dataRegister.seriesRegFlag;
                     AppData._persistentStates.registerData.UserTZ = that.binding.dataRegister.UserTZ;
                     AppData._persistentStates.registerData.LanguageId = that.binding.dataRegister.LanguageId;
                     if (AppBar.scope.binding &&

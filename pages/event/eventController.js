@@ -81,6 +81,9 @@
                 that.binding.dataEvent.dateBegin = getDateObject(newDataEvent.Startdatum);
                 that.binding.dataEvent.dateStartDatum = getDateObject(newDataEvent.LiveStartDatum);
                 that.binding.dataEvent.dateEndDatum = getDateObject(newDataEvent.LiveEndDatum);
+                if (!that.binding.dataEvent.AcceptRec) {
+                    AppData._persistentStates.registerData.seriesRegFlag = false;
+                }
                 if (AppData._persistentStates.registerData.dateBegin !== that.binding.dataEvent.dateBegin) {
                     AppData._persistentStates.registerData.dateBegin = that.binding.dataEvent.dateBegin;
                     Application.pageframe.savePersistentStates();
@@ -706,8 +709,9 @@
                     pEMail: AppData._persistentStates.registerData.Email,
                     pAddressData: addressData, /**/
                     pBaseURL: location,
-                    pCopyToken: copyToken
-                }, function (json) {
+                    pCopyToken: copyToken,
+                    pSeriesReg: AppData._persistentStates.registerData.seriesRegFlag ? 1 : 0
+            }, function (json) {
                     AppBar.busy = false;
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");
                     that.resultConverter(json);
@@ -1011,6 +1015,7 @@
                             // Show full registration or only field Name
                             registerFragment.controller.binding.showRegisterMail = !!that.binding.dataEvent.RequireReg;
                             registerFragment.controller.binding.showRegisterParticipation = !that.binding.dataEvent.RequireReg;
+                            registerFragment.controller.binding.seriesRegistration = !!that.binding.dataEvent.AcceptRec; //Serienregistrierung (vorerst)
                             registerFragment.controller.binding.showResendEditableMail = false;
                             registerFragment.controller.binding.showReRegisterEventMail = false;
                         }

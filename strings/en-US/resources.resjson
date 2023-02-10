@@ -98,7 +98,8 @@
     "register.eventNotStartedYet": "There is no conference for the event yet, please be patient or go back to the event list and select another event.",
     "register.facebookRegister"     : "Login with Facebook",
     "register.mandatoryText"  : "* These fields must be completed",
-    "register.mandatoryParticipationText" : "Enter a name. It will be displayed in the participant list", 
+    "register.mandatoryParticipationText" : "Enter a name. It will be displayed in the participant list",
+    "register.seriesText"   : "I register for the whole series",
 
 	"registerConfirm.waitMessage": "Thank you for your registration. You will shortly receive a confirmation email.",
 

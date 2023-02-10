@@ -16,7 +16,8 @@
     color: var(--input-border-color);
 }
 
-.register .privacy {
+.register .privacy,
+.register .series {
     font-size: small;
     line-height: 1.5;
 }

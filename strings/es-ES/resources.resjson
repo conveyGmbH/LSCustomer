@@ -99,6 +99,7 @@
 	"register.facebookRegister"     : "Login mit Facebook",
 	"register.mandatoryText"  : "* Diese Felder müssen ausgefüllt werden",
     "register.mandatoryParticipationText" : "Geben Sie einen Namen ein. Dieser wird in der Teilnehmerliste angezeigt", 
+    "register.seriesText"   : "Ich registriere mich für die ganze Serie",
 
     "registerConfirm.waitMessage"  : "Vielen Dank für Ihre Registrierung. Sie erhalten in Kürze ein Bestätigungsemail.",
 
