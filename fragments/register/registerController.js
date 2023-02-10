@@ -398,7 +398,11 @@
                 var prevNotifyModified = AppBar.notifyModified;
                 AppBar.notifyModified = false;
                 that.binding.InitAnredeItem = newInitAnredeItem;
-                that.binding.dataRegister.AnredeID = 0;
+                if (AppData._persistentStates.registerData.AnredeID) {
+                    that.binding.dataRegister.AnredeID = AppData._persistentStates.registerData.AnredeID;
+                } else {
+                    that.binding.dataRegister.AnredeID = 0;
+                }
                 AppBar.modified = false;
                 AppBar.notifyModified = prevNotifyModified;
             }
