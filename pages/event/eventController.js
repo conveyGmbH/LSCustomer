@@ -938,7 +938,7 @@
                                     fragment.controller.binding.showDelayContent = false;
                                 }
                             }
-                        });;
+                        });
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
                         that.binding.showRegister = false;
                         that.binding.showTeaser = false;
@@ -947,13 +947,32 @@
                         that.binding.showEventDetails = true;
                         // option set in portal - eventgensettings
                         if (that.binding.dataEvent.RecordSession) {
-                            //that.binding.showRecordedContent = true;
+                            if (that.binding.recordedLink.includes("playback")) {
+                                that.binding.showRecordedContent = true;
+                                that.binding.showRecordedVideo = false;
+                            } else {
                             that.binding.showRecordedVideo = true;
+                                that.binding.showRecordedContent = false;
+                            }
                         } else {
                             that.binding.showRecordedContent = false;
                             that.binding.showRecordedVideo = false;
                         }
                         that.binding.showLogOffEventMail = true;
+                        if (that.binding.recordedLink.includes("playback")) {
+                            return that.getFragmentByName("recordedContent").then(function (fragment) {
+                                if (fragment &&
+                                    fragment.controller &&
+                                    fragment.controller.binding) {
+                                    fragment.controller.binding.showDelayContent = false;
+                                }
+                                if (fragment &&
+                                    fragment.controller &&
+                                    typeof fragment.controller.loadData() === "function") {
+                                    fragment.controller.loadData();
+                                }
+                            });
+                        } else {
                         return that.getFragmentByName("recordedVideo").then(function (fragment) {
                             if (fragment &&
                                 fragment.controller &&
@@ -966,6 +985,7 @@
                                 fragment.controller.loadData();
                             }
                         });
+                        }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
                         that.binding.showICS = true;
                         if (registerFragment &&
