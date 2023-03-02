@@ -246,12 +246,12 @@
                             pUserToken: AppData._persistentStates.registerData.userToken,
                             pIncidentName: "Disconnected"
                         },
-                        function(json) {
+                        function (json) {
                             Log.print(Log.l.trace, "PRC_CreateIncident success!");
                         },
-                        function(error) {
+                        function (error) {
                             Log.print(Log.l.error, "PRC_CreateIncident error! ");
-                        }).then(function() {
+                        }).then(function () {
                             Application.navigateById("home", event);
                         });
                     } else {
@@ -711,7 +711,7 @@
                     pBaseURL: location,
                     pCopyToken: copyToken,
                     pSeriesReg: AppData._persistentStates.registerData.seriesRegFlag ? 1 : 0
-            }, function (json) {
+                }, function (json) {
                     AppBar.busy = false;
                     Log.print(Log.l.trace, "PRC_RegisterContact success!");
                     that.resultConverter(json);
@@ -951,7 +951,7 @@
                                 that.binding.showRecordedContent = true;
                                 that.binding.showRecordedVideo = false;
                             } else {
-                            that.binding.showRecordedVideo = true;
+                                that.binding.showRecordedVideo = true;
                                 that.binding.showRecordedContent = false;
                             }
                         } else {
@@ -973,18 +973,18 @@
                                 }
                             });
                         } else {
-                        return that.getFragmentByName("recordedVideo").then(function (fragment) {
-                            if (fragment &&
-                                fragment.controller &&
-                                fragment.controller.binding) {
-                                fragment.controller.binding.showDelayContent = false;
-                            }
-                            if (fragment &&
-                                fragment.controller &&
-                                typeof fragment.controller.loadData() === "function") {
-                                fragment.controller.loadData();
-                            }
-                        });
+                            return that.getFragmentByName("recordedVideo").then(function (fragment) {
+                                if (fragment &&
+                                    fragment.controller &&
+                                    fragment.controller.binding) {
+                                    fragment.controller.binding.showDelayContent = false;
+                                }
+                                if (fragment &&
+                                    fragment.controller &&
+                                    typeof fragment.controller.loadData() === "function") {
+                                    fragment.controller.loadData();
+                                }
+                            });
                         }
                     } else if (AppData._persistentStates.registerData.confirmStatusID === 403) {
                         that.binding.showICS = true;
