@@ -2411,11 +2411,13 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     border-bottom-right-radius: 0;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
-    padding-bottom: 20px;
     border-bottom: none;
     border-color: var(--btn-primary-border) !important;
     background-color: transparent !important;
     padding-top: 2px;
+    padding-bottom: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
     z-index: -1;
 }
 
