@@ -523,6 +523,10 @@ var __meteor_runtime_config__;
                     typeof Session.destroy === "function") {
                     Session.destroy();
                 }
+                var appHeader = document.querySelector(".appHeader.fragment");
+                if (appHeader && appHeader.style) {
+                    appHeader.style.display = "";
+                }
                 conference = null;
                 videoListDefaults = {};
                 userListDefaults = {};
@@ -6254,7 +6258,11 @@ var __meteor_runtime_config__;
                 return WinJS.Promise.timeout(250);
             }).then(function () {
                 return that.sendResize(2000);
-            }).then(function() {
+            }).then(function () {
+                var appHeader = document.querySelector(".appHeader.fragment");
+                if (appHeader && appHeader.style) {
+                    appHeader.style.display = "none";
+                }
                 var conference = fragmentElement.querySelector("#conference");
                 if (AppBar.scope.binding.showConference && conference) {
                     conference.scrollIntoView();
