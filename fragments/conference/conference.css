@@ -512,10 +512,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 .portal--27FHYi .dismiss--1zWwpv .default--Z19H5du,
-.ReactModalPortal button[data-test="closeModal"] > span {
-    box-shadow: none !important;
+.ReactModalPortal button[data-test="closeModal"] {
     background: none;
     padding: 2px !important;
+}
+.portal--27FHYi .dismiss--1zWwpv .default--Z19H5du,
+.ReactModalPortal button[data-test="closeModal"] > span {
+    box-shadow: none !important;
 }
 /*#conference.mediaview .default--Z19H5du,
 .portal--27FHYi .default--Z19H5du {
