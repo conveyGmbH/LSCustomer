@@ -337,6 +337,17 @@
                                     }, function (error) {
                                         Log.print(Log.l.error, "PRC_CreateIncident error! ");
                                     }).then(function () {
+                                        AppBar.busy = true;
+                                        Log.print(Log.l.trace, "clickCloseSessionEvent: user choice OK");
+                                        AppData.call("PRC_RequestSessionEnd", {
+                                            pVeranstaltungID: that.binding.eventId,
+                                            pUserToken: modToken
+                                        }, function (json) {
+                                            AppBar.busy = false;
+                                            Log.print(Log.l.trace, "PRC_RequestSessionEnd success!");
+                                            if (json && json.d && json.d.results) {
+                                                var result = json.d.results[0];
+                                            }
                                         that.updateFragment().then(function (conferenceFragment) {
                                             // call sendCommandMessage 
                                             // Abfrage nach Enddatum ob kleiner als heutige datum 
@@ -345,6 +356,10 @@
                                             }
                                             that.binding.showConference = false;
                                             that.binding.showMessageSessionClosed = true;
+                                        });
+                                            Log.ret(Log.l.trace);
+                                        }, function (error) {
+                                            Log.print(Log.l.error, "PRC_RequestSessionEnd error! ");
                                         });
                                     });
                                 } else {
