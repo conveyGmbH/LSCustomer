@@ -389,6 +389,7 @@
 
             var eventLinkToShare = function() {
                 return window.location.href.split("?")[0] + "?" + createQueryStringFromParameters({
+                    pageId: "event",
                     eventId: Application.query.eventId
                 });
             }
