@@ -1565,8 +1565,8 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview .videoplayer-open.presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     left: 50px !important;
     top: 15% !important;
-    width: calc(calc(100% - 100px) * 0.54) !important;
-    height: 45% !important;
+    width: calc(calc(100% - 100px) * 0.46) !important;
+    height: 50% !important;
 }
 
 #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
