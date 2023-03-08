@@ -1730,11 +1730,13 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 
 /* presentation toolbar buttons */
-#conference.mediaview .svgContainer--Z1z3wO0 > .presentationToolbar--Z7DDdn,
 #conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:last-child:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]) {
     width: 100% !important;
-    /*height: 100% !important;*/
 }
+#conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:first-child:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]) {
+    height: 100% !important;
+}
+
 #conference.mediaview .svgContainer--Z1z3wO0 > .presentationToolbar--Z7DDdn > div,
 #conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper {
     width: 100% !important;
