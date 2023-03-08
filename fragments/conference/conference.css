@@ -1268,7 +1268,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 #conference.mediaview .svgContainer--Z1z3wO0,
 #conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child {
-    /*height: 100% !important;*/
+    height: 100% !important;
     width: 100% !important;
 }
 
@@ -1700,8 +1700,8 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview .svgContainer--Z1z3wO0 > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]):not(.presentationToolbar--Z7DDdn),
 #conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]):not(:last-child) {
     max-width: 100% !important;
-    /*height: fit-content !important;*/
     max-height: 100% !important;
+    height: 100% !important;
 }
 
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.presenter-mode-small) .svgContainer--Z1z3wO0 > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]):not(.presentationToolbar--Z7DDdn),
@@ -2980,11 +2980,6 @@ c
 
 .color-emoji {
     font-family: "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
-}
-
-img.emoji {
-    width: 0px !important;
-    height: 0px !important;
 }
 
 /* transition effects */
