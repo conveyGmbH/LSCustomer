@@ -670,6 +670,11 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 }
 
 
+.ReactModalPortal input {
+    padding: 0.4em;
+    border-radius: 0.2em;
+}
+
 #conference.mediaview div[data-test="talkingIndicator"] {
     display: none;
 }
@@ -3281,3 +3286,6 @@ c
     display: none !important;
 }
 
+#external-video-note {
+    display: none;
+}
