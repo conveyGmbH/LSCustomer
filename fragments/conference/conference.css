@@ -1268,7 +1268,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 #conference.mediaview .svgContainer--Z1z3wO0,
 #conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child {
-    /*height: 100% !important;*/
+    height: 100% !important;
     width: 100% !important;
 }
 
