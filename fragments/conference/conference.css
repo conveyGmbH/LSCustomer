@@ -2982,9 +2982,12 @@ c
     font-family: "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
 }
 
+img.emoji {
+    width: 0px !important;
+    height: 0px !important;
+}
+
 /* transition effects */
-
-
 #conference.mediaview #layout > header ~ div,
 #conference.mediaview #layout > header ~ span {
     transition-property: left, top, right, width, min-width, max-width, height, min-height, max-height;
