@@ -639,4 +639,18 @@ section.elementor-inner-section > div {
     background-color: var(--color-gray-lighter);
 }
 
+#alertFlyout button {
+    color: #000;
+    background-color: rgba(0,0,0,.2);
+    border-color: transparent;
+    padding: 4px 8px;
+    border-radius: 2px;
+}
+
+#alertFlyout button:hover,
+#alertFlyout button:active {
+    background-color: rgba(0,0,0,.4);
+    border-radius: 2px;
+}
+
 /******** Ende Fonts for LiveBridge*********/
