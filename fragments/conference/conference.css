@@ -1268,7 +1268,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 #conference.mediaview .svgContainer--Z1z3wO0,
 #conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child {
-    height: 100% !important;
+    /*height: 100% !important;*/
     width: 100% !important;
 }
 
@@ -1697,11 +1697,11 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: 100% !important;
 }
 
-#conference.mediaview .svgContainer--Z1z3wO0 > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]):not(.presentationToolbar--Z7DDdn),
+#conference.mediaview .svgContainer--Z1z3wO0 > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]):not(.presentationToolbar--Z7DDdn):not(:last-child),
 #conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]):not(:last-child) {
     max-width: 100% !important;
     max-height: 100% !important;
-    height: 100% !important;
+    /*height: 100% !important;*/
 }
 
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.presenter-mode-small) .svgContainer--Z1z3wO0 > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]):not(.presentationToolbar--Z7DDdn),
@@ -1733,7 +1733,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview .svgContainer--Z1z3wO0 > .presentationToolbar--Z7DDdn,
 #conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child > div:last-child:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]) {
     width: 100% !important;
-    height: 100% !important;
+    /*height: 100% !important;*/
 }
 #conference.mediaview .svgContainer--Z1z3wO0 > .presentationToolbar--Z7DDdn > div,
 #conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper {
