@@ -1752,6 +1752,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper button:not([aria-disabled="true"]):hover,
 #conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper button:not([aria-disabled="true"]):active {
     background-color: var(--color-white);
+    color: var(--color-text);
 }
 
 /* hide button: hide-presentation  */
