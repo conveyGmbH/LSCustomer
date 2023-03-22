@@ -37,6 +37,16 @@
             }, commandList]);
 
             var that = this;
+            var countDown = null;
+
+            that.dispose = function() {
+                Log.call(Log.l.trace, "Countdown.Controller.");
+                if (countDown) {
+                    clearInterval(countDown);
+                    countDown = null;
+                }
+                Log.ret(Log.l.trace);
+            }
 
             //var registerConfirm = fragmentElement.querySelector("#registerConfirm");
 
@@ -44,32 +54,35 @@
                 Log.call(Log.l.trace, "Countdown.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
                 var ret = new WinJS.Promise.as().then(function () {
-                    var countDownDate = AppBar.scope.binding.dataEvent.dateBegin;
-                    var timeleft = 0;
-                    var countDown = setInterval(function () {
-                        var now = new Date().getTime();
-                        timeleft = countDownDate - now;
-                        that.binding.countdown.day = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-                        that.binding.countdown.hour = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        that.binding.countdown.minute = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-                        that.binding.countdown.second = Math.floor((timeleft % (1000 * 60)) / 1000);
+                    if (!countDown) {
+                        var countDownDate = AppBar.scope.binding.dataEvent.dateBegin;
+                        var timeleft = 0;
+                        countDown = setInterval(function () {
+                            var now = new Date().getTime();
+                            timeleft = countDownDate - now;
+                            that.binding.countdown.day = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+                            that.binding.countdown.hour = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            that.binding.countdown.minute = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+                            that.binding.countdown.second = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-                        if (timeleft < 0) {
-                            clearInterval(countDown);
-                            that.binding.countdown.day = 0;
-                            that.binding.countdown.hour = 0;
-                            that.binding.countdown.minute = 0;
-                            that.binding.countdown.second = 0;
-                            that.binding.countdownIsOver = true;
-                            AppBar.scope.binding.showCountdown = false;
-                            //AppBar.scope.binding.showConference = true;
-                            //lade fragment mediathek
-                            if (typeof AppBar.scope.loadData === "function") {
-                                return AppBar.scope.loadData();
-                            }
-                            //return WinJS.Promise.as();
-                        } 
-                    }, 1000);
+                            if (timeleft < 0) {
+                                if (countDown) {
+                                    clearInterval(countDown);
+                                    countDown = null;
+                                }
+                                that.binding.countdown.day = 0;
+                                that.binding.countdown.hour = 0;
+                                that.binding.countdown.minute = 0;
+                                that.binding.countdown.second = 0;
+                                that.binding.countdownIsOver = true;
+                                AppBar.scope.binding.showCountdown = false;
+                                //AppBar.scope.binding.showConference = true;
+                                if (typeof AppBar.scope.loadData === "function") {
+                                    AppBar.scope.loadData();
+                                }
+                            } 
+                        }, 1000);
+                    }
                 })/*.then(function() {
                     if (typeof AppBar.scope.loadData === "function") {
                         AppBar.scope.loadData();
