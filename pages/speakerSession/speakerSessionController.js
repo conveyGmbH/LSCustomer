@@ -39,7 +39,19 @@
                 dataEvent: {},
                 dataText: {},
                 dataDoc: getEmptyDefaultValue(SpeakerSession.medienView.defaultValue),
-                dataDocText: {}
+                dataDocText: {},
+                countdown: {
+                    day: "",
+                    hour: "",
+                    minute: "",
+                    second: ""
+                },
+                showCountdown: false,
+                countdownIsOver: false,
+                recordingOn: false,
+                recordingWait: false,
+                playingOn: false,
+                playingWait: false
             }, commandList]);
 
             var onScrollResizePromise = null;
@@ -48,6 +60,16 @@
             var magicStop = "--&gt;";
 
             var that = this;
+            var countDown = null;
+
+            this.dispose = function () {
+                Log.call(Log.l.trace, "SpeakerSession.Controller.");
+                if (countDown) {
+                    clearInterval(countDown);
+                    countDown = null;
+                }
+                Log.ret(Log.l.trace);
+            }
 
             var setDataEvent = function (newDataEvent) {
                 Log.call(Log.l.trace, "SpeakerSession.Controller.");
@@ -452,6 +474,48 @@
                     return WinJS.Promise.timeout(50);
                 }).then(function () {
                     return that.adjustContainerSize();
+                }).then(function () {
+                    if (!countDown) {
+                        countDown = setInterval(function () {
+                            if (that.binding.dataEvent) {
+                                var countDownDate = that.binding.dataEvent.dateBegin;
+                                if (countDownDate) {
+                                    var now = new Date();
+                                    var timeleft = now.getTime() - countDownDate;
+                                    that.binding.countdownIsOver = (timeleft >= 0);
+                                    timeleft = Math.abs(timeleft);
+                                    that.binding.countdown.day = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+                                    that.binding.countdown.hour = (100 + Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().substr(1);
+                                    that.binding.countdown.minute = (100 + Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60))).toString().substr(1);
+                                    that.binding.countdown.second = (100 + Math.floor((timeleft % (1000 * 60)) / 1000)).toString().substr(1);
+                                    if (!that.binding.showCountdown) {
+                                        that.binding.showCountdown = true;
+                                    }
+                                    if (that.binding.dataEvent.RecordSession) {
+                                        that.binding.playingWait = false;
+                                        that.binding.playingOn = false;
+                                        if (that.binding.countdownIsOver) {
+                                            that.binding.recordingWait = false;
+                                            that.binding.recordingOn = true;
+                                        } else {
+                                            that.binding.recordingWait = true;
+                                            that.binding.recordingOn = false;
+                                        }
+                                    } else {
+                                        that.binding.recordingWait = false;
+                                        that.binding.recordingOn = false;
+                                        if (that.binding.countdownIsOver) {
+                                            that.binding.playingWait = false;
+                                            that.binding.playingOn = true;
+                                        } else {
+                                            that.binding.playingWait = true;
+                                            that.binding.playingOn = false;
+                                        }
+                                    }
+                                }
+                            }
+                        }, 1000);
+                    }
                 });
                 Log.ret(Log.l.trace);
                 return ret;

@@ -293,4 +293,49 @@
 .modSession .closeSession-container {
     width: 200px;
 }
-
+.modSession .countdown-container {
+    position: relative;
+    width: 180px;
+    top: 24px;
+    left: 0;
+    z-index: 10;
+    overflow: hidden;
+}
+.modSession .countdown-line {
+    display: inline;
+}
+.modSession .timer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    height: 22px;
+}
+.modSession .count-block {
+    display: inline;
+    margin: 0 2px;
+}
+.modSession .count-block.count-days {
+}
+.modSession .count-block.count-time {
+}
+.modSession .count-block.recording-wait span::before {
+    content: "\25CF";
+    color: var( --color-gray-lightest);
+    font-size: 20px;
+}
+.modSession .count-block.recording-on span::before {
+    content: "\25CF";
+    color: var( --color-danger);
+    font-size: 20px;
+}
+.modSession .count-block.playing-wait span::before {
+    content: "\25BA";
+    color: var( --color-gray-lightest);
+    font-size: 20px;
+}
+.modSession .count-block.playing-on span::before {
+    content: "\25BA";
+    color: var( --color-success);
+    font-size: 20px;
+}

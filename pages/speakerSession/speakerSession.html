@@ -56,6 +56,36 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="countdown-container" data-win-bind="style.display: showCountdown Binding.Converter.toDisplay">
+                            <div class="countdown-line">
+                                <div class="timer">
+                                    <div class="count-block count-days" data-win-bind="style.display: countdown.day Binding.Converter.toDisplay">
+                                        <span class="countdown" data-win-bind="textContent: countdown.day"></span>
+                                        <span> </span>
+                                        <span class="countdown" data-win-res="{textContent: 'register.days'}"></span>
+                                    </div>
+                                    <div class="count-block count-time">
+                                        <span class="countdown" data-win-bind="textContent: countdown.hour"></span>
+                                        <span>:</span>
+                                        <span class="countdown" data-win-bind="textContent: countdown.minute"></span>
+                                        <span>:</span>
+                                        <span class="countdown" data-win-bind="textContent: countdown.second"></span>
+                                    </div>
+                                    <div class="count-block recording-on" data-win-bind="style.display: recordingOn Binding.Converter.toDisplay">
+                                        <span> </span>
+                                    </div>
+                                    <div class="count-block recording-wait" data-win-bind="style.display: recordingWait Binding.Converter.toDisplay">
+                                        <span> </span>
+                                    </div>
+                                    <div class="count-block playing-on" data-win-bind="style.display: playingOn Binding.Converter.toDisplay">
+                                        <span> </span>
+                                    </div>
+                                    <div class="count-block playing-wait" data-win-bind="style.display: playingWait Binding.Converter.toDisplay">
+                                        <span> </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="conferencehost" class="conference-fragmenthost" data-win-bind="style.display: showConference Binding.Converter.toDisplay"></div>
                         <div class="hero-footer">
 
