@@ -56,10 +56,10 @@
                 var ret = new WinJS.Promise.as().then(function () {
                     if (!countDown) {
                         countDown = setInterval(function () {
-                            var countDownDate = AppBar.scope.binding.dataEvent && AppBar.scope.binding.dataEvent.dateBegin;
+                            var countDownDate = AppBar.scope.binding.dataEvent && AppBar.scope.binding.dataEvent.dateStartDatum;
                             if (countDownDate) {
                                 var now = new Date();
-                                var timeleft = countDownDate - now.getTime();
+                                var timeleft = countDownDate.getTime() - now.getTime();
                                 that.binding.countdown.day = Math.floor(timeleft / (1000 * 60 * 60 * 24));
                                 that.binding.countdown.hour = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                                 that.binding.countdown.minute = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
