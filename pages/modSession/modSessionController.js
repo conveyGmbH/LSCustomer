@@ -378,6 +378,7 @@
                                             }
                                             that.binding.showConference = false;
                                             that.binding.showMessageSessionClosed = true;
+                                            that.binding.showCountdown = false;
                                         });
                                             Log.ret(Log.l.trace);
                                         }, function (error) {
@@ -421,6 +422,7 @@
                                                 }
                                                 that.binding.showConference = false;
                                                 that.binding.showMessageSessionClosed = true;
+                                                that.binding.showCountdown = false;
                                             });
                                             Log.ret(Log.l.trace);
                                         }, function (error) {
