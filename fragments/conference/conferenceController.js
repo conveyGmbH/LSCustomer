@@ -131,6 +131,8 @@ var __meteor_runtime_config__;
         videoSettings: '#conference.mediaview #layout button[data-test="leaveVideo"] + span > button',
         talkingIndicator: '#conference.mediaview div[data-test="talkingIndicator"]',
 
+        listenOnlyBtn: '.ReactModalPortal button[aria-label="Audio wiedergeben"], .ReactModalPortal button[aria-label="Play audio"]',
+
         meetingEndedModalTitle: '#conference.mediaview h1[data-test="meetingEndedModalTitle"]',
 
         // dangerous global CSS definitions to remove:
@@ -1887,6 +1889,13 @@ var __meteor_runtime_config__;
                         }
                     }
                 } 
+                if (pageControllerName === "eventController" &&
+                    AppBar.scope.binding.connectListenOnly) {
+                    var listenOnlyBtn = document.querySelector(elementSelectors.listenOnlyBtn);
+                    if (listenOnlyBtn) {
+                        listenOnlyBtn.click();
+                    }
+                }
                 var leaveVideo = fragmentElement.querySelector(elementSelectors.leaveVideo);
                 if (leaveVideo) {
                     that.binding.cameraOn = true;

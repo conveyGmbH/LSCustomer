@@ -47,6 +47,7 @@
                 showOffText: false,
                 showMaintenance: false,
                 showEventDetails: true,
+                connectListenOnly: false,
                 registerStatus: "",
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
@@ -81,6 +82,7 @@
                 that.binding.dataEvent.dateBegin = getDateObject(newDataEvent.Startdatum);
                 that.binding.dataEvent.dateStartDatum = getDateObject(newDataEvent.LiveStartDatum);
                 that.binding.dataEvent.dateEndDatum = getDateObject(newDataEvent.LiveEndDatum);
+                that.binding.connectListenOnly = !newDataEvent.AllowAudio;
                 if (!that.binding.dataEvent.AcceptRec) {
                     AppData._persistentStates.registerData.seriesRegFlag = false;
                 }
