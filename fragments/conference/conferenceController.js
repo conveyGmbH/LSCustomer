@@ -3774,9 +3774,9 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             }
-                            Log.print(Log.l.trace, "PRC_BBBConferenceLink success!");
+                            Log.print(Log.l.trace, "PRC_BBBModeratorLink success!");
                         }, function (error) {
-                            Log.print(Log.l.error, "PRC_BBBConferenceLink error! ");
+                            Log.print(Log.l.error, "PRC_BBBModeratorLink error! ");
                             AppData.setErrorMsg(AppBar.scope.binding, error);
                         });
                     } else {
