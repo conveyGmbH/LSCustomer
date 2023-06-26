@@ -2099,6 +2099,7 @@ button[data-test="optionsButton"] {
     display: inline-block;
     position: absolute;
     /*object-fit: cover;*/
+    left: 0 !important;
 }
 
 #conference.mediaview .presenter-mode-full .video-list-horizontal,
