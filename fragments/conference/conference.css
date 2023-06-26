@@ -3320,5 +3320,7 @@ c
     transition: all 0.25s ease 0s;
 }
 
-
+#CookiebotWidget {
+    display: none !important;
+}
 
