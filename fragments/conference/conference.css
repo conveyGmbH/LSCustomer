@@ -2098,7 +2098,7 @@ button[data-test="optionsButton"] {
     width: auto !important;
     display: inline-block;
     position: absolute;
-    /*object-fit: cover;*/
+    object-fit: cover;
     left: 0 !important;
 }
 
