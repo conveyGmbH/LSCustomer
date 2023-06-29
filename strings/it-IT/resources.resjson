@@ -114,8 +114,8 @@
 
     "modSession.logOffEvent"   : "Disconnetti",
     "modSession.closeSessionEvent"   : "Termina sessione",
-    "modSession.labelCloseSession": "Vuoi terminare la sessione?",
-    "modSession.labelCloseBeforeBegin": "La sessione non è ancora iniziata!",
+    "modSession.labelCloseSession" : "Vuoi chiudere la sessione? Se si fa clic su Ok, la sessione verrà chiusa per tutti i partecipanti",
+	"modSession.labelCloseBeforeBegin": "La sessione non è ancora iniziata!",
     "modSession.messageSessionClosed": "Questa sessione è terminata. Torna alla pagina di riepilogo.",
     "modSession.unpinnedVideos"   : "Partecipanti non sul palco",
 

@@ -114,8 +114,8 @@
     
     "modSession.logOffEvent"   : "Log off",
     "modSession.closeSessionEvent"   : "End session",
-    "modSession.labelCloseSession": "Would you like to end the session?",
-    "modSession.labelCloseBeforeBegin": "Session has not started yet!",
+    "modSession.labelCloseSession" : "Do you want to close the session? If you click Ok, then the session will be closed for all participants",
+	"modSession.labelCloseBeforeBegin": "Session has not started yet!",
     "modSession.messageSessionClosed": "This session has ended. Please navigate back to the summary page.",
     "modSession.unpinnedVideos"   : "Participants not on stage",
 

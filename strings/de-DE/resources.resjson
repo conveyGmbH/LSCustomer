@@ -114,7 +114,7 @@
     
 	"modSession.logOffEvent"   : "Abmelden",
     "modSession.closeSessionEvent"   : "Session beenden",
-    "modSession.labelCloseSession"  : "Möchten Sie die Session beenden?",
+    "modSession.labelCloseSession"  : "Möchten Sie die Session beenden? Wenn Sie auf Ok klicken, dann wird die Session für alle Teilnehmer beendet",
 	"modSession.labelCloseBeforeBegin" : "Session hat noch nicht begonnen!",
 	"modSession.messageSessionClosed" : "Dieses Session ist zu Ende. Bitte navigieren Sie zurück zur Überblicksseite.",
     "modSession.unpinnedVideos"   : "Teilnehmer nicht auf der Bühne",
