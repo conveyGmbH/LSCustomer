@@ -3733,7 +3733,8 @@ var __meteor_runtime_config__;
                 }).then(function () {
                     if (pageControllerName === "eventController") {
                         return AppData.call("PRC_BBBConferenceLink", {
-                            pUserToken: userToken
+                            pUserToken: userToken,
+                            pJoinNow: 1
                         }, function (json) {
                             if (json && json.d && json.d.results) {
                                 that.binding.dataConference = json.d.results[0];
