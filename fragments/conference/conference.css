@@ -3324,3 +3324,7 @@ c
     display: none !important;
 }
 
+/*hide guest access*/
+li[data-test="guestPolicyLabel"] {
+    display: none;
+}
