@@ -1334,6 +1334,12 @@ var __meteor_runtime_config__;
                 var submitButton = fragmentElement.querySelector(elementSelectors.publicChatSubmitButton);
                 if (submitButton) {
                     userListDefaults.publicChatSubmit = submitButton.onclick;
+                    messageInput.addEventListener("keydown", function (event) {
+                        if (event.key === "Enter") {
+                            event.preventDefault();
+                            submitButton.click();
+                        }
+                    });
                     submitButton.onclick = function(event) {
                         var chatText = messageInput && messageInput.innerHTML && messageInput.innerHTML.slice(0);
                         userListDefaults.publicChatSubmit(event);
