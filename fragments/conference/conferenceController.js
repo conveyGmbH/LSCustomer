@@ -1800,6 +1800,12 @@ var __meteor_runtime_config__;
                         }
                         var divLabel = document.createElement("div");
                         divLabel.textContent = video.videoWidth + "x" + video.videoHeight;
+                        if (divLabel.style) {
+                            divLabel.style.color = "#ffffff";
+                            divLabel.style.backgroundColor = "rgba(0,0,0,0.5)";
+                            divLabel.style.fontSize = "8pt";
+                            divLabel.style.textAlign = "center";
+                        }
                         dropdownWebcamButton.parentElement.appendChild(divLabel);
                     }
                     if ((that.binding.presenterModeTiled || that.binding.presenterModeSmall) && !options.isHidden) {
