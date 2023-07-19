@@ -1372,6 +1372,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     top: 30px !important;
     left: 50px !important;
     width: calc(100% - 110px) !important;
+    height: calc(100% - 110px) !important;
 }
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
