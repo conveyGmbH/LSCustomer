@@ -162,7 +162,8 @@
     padding: 5px 15px 0 0 !important;
 }
 
-.event .calenderButton {
+.event .calenderButton,
+.event .homeButton {
     color: var(--e-global-color-buttontext) !important;
     font-family: var(--font-family-default) !important;
 }
@@ -428,16 +429,19 @@
     color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
-.event button#calenderButton:not(:hover):not(:active):not(:focus) {
+.event button#calenderButton:not(:hover):not(:active):not(:focus),
+.event button#homeButton:not(:hover):not(:active):not(:focus) {
     border-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
 }
 
-.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title {
+.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title,
+.event button#homeButton:not(:hover):not(:active):not(:focus) .win-type-title {
     color: var(--e-global-color-buttontext) !important;
 }
 
-.event button#calenderButton:hover {
+.event button#calenderButton:hover,
+.event button#homeButton:hover {
     border-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
     cursor: pointer;
