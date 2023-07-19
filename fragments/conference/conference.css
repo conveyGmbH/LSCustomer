@@ -1287,7 +1287,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview #layout:not(.presentation-open) > div[data-test="presentationContainer"]:not(:fullscreen),
 #conference.mediaview .presentation-is-hidden > div[data-test="presentationContainer"]:not(:fullscreen),
 #conference.mediaview .presentation-is-hidden > header ~ span,
-#conference.mediaview .presentation-is-hidden > header ~ div:not(.video-overlay-pane):not(.pane-tools),
+#conference.mediaview .presentation-is-hidden > header ~ div:not(.video-overlay-pane):not(.pane-tools):not(.float-container),
 #conference.mediaview .presentation-is-hidden button[data-test="actionsButton"],
 #conference.mediaview .presentation-is-hidden button[data-test="startScreenShare"] {
     display: none !important;
@@ -1295,7 +1295,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 
 #conference.mediaview #layout.presentation-open:not(.videoplayer-open):not(.deskshare-open):not(.presentation-is-hidden) > div[data-test="presentationContainer"],
 #conference.mediaview #layout.presentation-open:not(.videoplayer-open):not(.deskshare-open):not(.presentation-is-hidden) > div[data-test="presentationPlaceholder"],
-#conference.mediaview #layout.deskshare-open:not(.presentation-is-hidden) > header ~ div:not(.video-overlay-pane):not(.pane-tools),
+#conference.mediaview #layout.deskshare-open:not(.presentation-is-hidden) > header ~ div:not(.video-overlay-pane):not(.pane-tools):not(.float-container),
 #conference.mediaview #layout.videoplayer-open:not(.presentation-is-hidden) > header ~ span {
     display: block !important;
 }
