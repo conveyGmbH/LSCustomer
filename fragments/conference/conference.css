@@ -2096,17 +2096,17 @@ button[data-test="optionsButton"] {
     max-width: 100% !important;
 }
 
-#conference.mediaview .presenter-mode-tiled .video-list-horizontal video[data-test="videoContainer"],
-#conference.mediaview .presenter-mode-small .video-list-horizontal video[data-test="videoContainer"],
-#conference.mediaview .presenter-mode-tiled .video-list-vertical video[data-test="videoContainer"],
-#conference.mediaview .presenter-mode-small .video-list-vertical video[data-test="videoContainer"] {
-    height: 100%;
-    width: auto !important;
-    display: inline-block;
-    position: absolute;
-    object-fit: cover;
-    /*left: 0 !important;*/
-}
+    #conference.mediaview .presenter-mode-tiled .video-list-horizontal video[data-test="videoContainer"],
+    #conference.mediaview .presenter-mode-small .video-list-horizontal video[data-test="videoContainer"],
+    #conference.mediaview .presenter-mode-tiled .video-list-vertical video[data-test="videoContainer"],
+    #conference.mediaview .presenter-mode-small .video-list-vertical video[data-test="videoContainer"] {
+        height: 100%;
+        width: auto !important;
+        max-width: inherit !important;
+        display: inline-block;
+        position: absolute;
+        object-fit: cover;
+    }
 
 #conference.mediaview .presenter-mode-full .video-list-horizontal,
 #conference.mediaview .presenter-mode-full .video-list-vertical {
