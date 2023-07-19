@@ -1792,6 +1792,16 @@ var __meteor_runtime_config__;
                             }
                         }
                     }
+                    Log.print(Log.l.trace, "videoListItem: videoWidth=" + video.videoWidth + " videoHeight=" + video.videoHeight);
+                    var dropdownWebcamButton = videoListItem.querySelector('div[data-test="dropdownWebcamButton"]');
+                    if (dropdownWebcamButton) {
+                        if (dropdownWebcamButton.nextElementSibling) {
+                            dropdownWebcamButton.parentElement.removeChild(dropdownWebcamButton.nextElementSibling);
+                        }
+                        var divLabel = document.createElement("div");
+                        divLabel.textContent = video.videoWidth + "x" + video.videoHeight;
+                        dropdownWebcamButton.parentElement.appendChild(divLabel);
+                    }
                     if ((that.binding.presenterModeTiled || that.binding.presenterModeSmall) && !options.isHidden) {
                         var left = (overlayElement.clientWidth - (overlayElement.clientHeight * video.videoWidth / video.videoHeight)) / 2;
                         var width;
