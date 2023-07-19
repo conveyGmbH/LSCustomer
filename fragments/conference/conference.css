@@ -1748,6 +1748,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview .svgContainer--Z1z3wO0 > .presentationToolbar--Z7DDdn > div,
 #conference.mediaview div[data-test="presentationContainer"] #presentationToolbarWrapper {
     width: 100% !important;
+    background-color: rgba(255,255,255,0.75) !important;
 }
 
 #conference.mediaview .svgContainer--Z1z3wO0 .presentationToolbar--Z7DDdn button,
