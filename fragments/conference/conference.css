@@ -2099,7 +2099,7 @@ button[data-test="optionsButton"] {
     display: inline-block;
     position: absolute;
     object-fit: cover;
-    left: 0 !important;
+    /*left: 0 !important;*/
 }
 
 #conference.mediaview .presenter-mode-full .video-list-horizontal,
@@ -2204,6 +2204,16 @@ button[data-test="optionsButton"] {
 #conference.mediaview .inactive-video-hidden {
     display: none !important;
 }
+
+.video-resolution-label {
+    color: #ffffff;
+    background-color: rgba(0,0,0,0.5);
+    font-size: 8pt;
+    text-align: center;
+    position: relative;
+    top: -4px;
+}
+
 
 #conference.mediaview .selfie-video video[data-test="videoContainer"],
 #conferenceController #unpinnedVideos.listview .selfie-video > video {

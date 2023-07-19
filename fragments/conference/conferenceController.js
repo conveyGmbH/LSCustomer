@@ -1793,20 +1793,19 @@ var __meteor_runtime_config__;
                         }
                     }
                     Log.print(Log.l.trace, "videoListItem: videoWidth=" + video.videoWidth + " videoHeight=" + video.videoHeight);
-                    var dropdownWebcamButton = videoListItem.querySelector('div[data-test="dropdownWebcamButton"]');
-                    if (dropdownWebcamButton) {
-                        if (dropdownWebcamButton.nextElementSibling) {
-                            dropdownWebcamButton.parentElement.removeChild(dropdownWebcamButton.nextElementSibling);
+                    if (pageControllerName === "modSessionController") {
+                        var videoResolutionLabel = videoListItem.querySelector(".video-resolution-label");
+                        if (!videoResolutionLabel) {
+                            var dropdownWebcamButton = videoListItem.querySelector('div[data-test="dropdownWebcamButton"]');
+                            if (dropdownWebcamButton) {
+                                videoResolutionLabel = document.createElement("div");
+                                WinJS.Utilities.addClass(videoResolutionLabel, "video-resolution-label");
+                                dropdownWebcamButton.parentElement.appendChild(videoResolutionLabel);
+                            }
                         }
-                        var divLabel = document.createElement("div");
-                        divLabel.textContent = video.videoWidth + "x" + video.videoHeight;
-                        if (divLabel.style) {
-                            divLabel.style.color = "#ffffff";
-                            divLabel.style.backgroundColor = "rgba(0,0,0,0.5)";
-                            divLabel.style.fontSize = "8pt";
-                            divLabel.style.textAlign = "center";
+                        if (videoResolutionLabel) {
+                            videoResolutionLabel.textContent = video.videoWidth + "x" + video.videoHeight;
                         }
-                        dropdownWebcamButton.parentElement.appendChild(divLabel);
                     }
                     if ((that.binding.presenterModeTiled || that.binding.presenterModeSmall) && !options.isHidden) {
                         var left = (overlayElement.clientWidth - (overlayElement.clientHeight * video.videoWidth / video.videoHeight)) / 2;

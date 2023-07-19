@@ -310,6 +310,7 @@
     align-items: center;
     justify-content: flex-end;
     height: 22px;
+    font-size: 10pt;
 }
 
 .speakerSession .count-block {
