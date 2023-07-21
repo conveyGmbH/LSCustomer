@@ -20,6 +20,19 @@
                 <div class="contentarea content-noscroll win-type-body">
                     <div class="doc-container">
                         <div id="conference" class="mediaview"></div>
+                        <div class="video-item-container">
+                            <div data-win-bind="className: presentationVideoItem.videoItemClassName; name: presentationVideoItem.key;">
+                                <video class="video-item" data-win-bind="srcObject: presentationVideoItem.mediaStream" autoplay playsinline disablePictureInPicture></video>
+                                <div class="video-label">
+                                    <span data-win-bind="textContent: presentationVideoItem.userName"></span>
+                                    <i data-win-bind="innerHTML: presentationVideoItem.myselfLabel; style.display: presentationVideoItem.myselfLabel Binding.Converter.toDisplay"></i>
+                                </div>
+                                <button class="win-button video-item-button"
+                                        onclick="AppBar.handleEvent('click', 'clickUnpinPresentationVideoButton', event)">
+                                    <span class="unpin"></span>
+                                </button>
+                            </div>
+                        </div>
                         <div class="pane-tools"
                              data-win-bind="style.display: showPaneTools Binding.Converter.toDisplay">
                             <div class="unpinned-video-list-header">
@@ -35,7 +48,11 @@
                                         <span data-win-bind="textContent: userName"></span>
                                         <i data-win-bind="innerHTML: myselfLabel; style.display: myselfLabel Binding.Converter.toDisplay"></i>
                                     </div>
-                                    <button class="win-button video-item-button"
+                                    <button class="win-button video-item-button video-item-button-presentation"
+                                            onclick="AppBar.handleEvent('click', 'clickPresentationVideoButton', event)">
+                                        <span class="presentation"></span>
+                                    </button>
+                                    <button class="win-button video-item-button video-item-button-pin"
                                             onclick="AppBar.handleEvent('click', 'clickPinVideoButton', event)">
                                         <span class="pin"></span>
                                     </button>

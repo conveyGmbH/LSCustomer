@@ -1277,27 +1277,46 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: 100% !important;
 }
 
+#conferenceController .video-item-container {
+    display: none;
+}
 
+#conferenceController .presentation-video-open:not(.presentation-is-hidden) .video-item-container {
+    display: block;
+}
+
+#conference.mediaview .presentation-is-hidden > .video-item-container,
+#conference.mediaview #layout:not(.presentation-video-open) > .video-item-container,
 #conference.mediaview #layout:not(.presentation-open) > .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presentation-is-hidden > .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
+#conference.mediaview .presentation-video-open > .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview #layout:not(.presentation-open) > .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .presentation-is-hidden > .presentationContainer--1wqUYG:not(:fullscreen),
+#conference.mediaview .presentation-video-open > .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview #layout:not(.presentation-open) > div[data-test="presentationPlaceholder"]:not(:fullscreen),
 #conference.mediaview .presentation-is-hidden > div[data-test="presentationPlaceholder"]:not(:fullscreen),
+#conference.mediaview .presentation-video-open > div[data-test="presentationPlaceholder"]:not(:fullscreen),
 #conference.mediaview #layout:not(.presentation-open) > div[data-test="presentationContainer"]:not(:fullscreen),
 #conference.mediaview .presentation-is-hidden > div[data-test="presentationContainer"]:not(:fullscreen),
+#conference.mediaview .presentation-video-open > div[data-test="presentationContainer"]:not(:fullscreen),
 #conference.mediaview .presentation-is-hidden > header ~ span,
+#conference.mediaview .presentation-video-open > header ~ span,
 #conference.mediaview .presentation-is-hidden > header ~ div:not(.video-overlay-pane):not(.pane-tools):not(.float-container),
+#conference.mediaview .presentation-video-open > header ~ div:not(.video-overlay-pane):not(.pane-tools):not(.float-container),
 #conference.mediaview .presentation-is-hidden button[data-test="actionsButton"],
-#conference.mediaview .presentation-is-hidden button[data-test="startScreenShare"] {
+#conference.mediaview .presentation-video-open button[data-test="actionsButton"],
+#conference.mediaview .presentation-is-hidden button[data-test="startScreenShare"],
+#conference.mediaview .presentation-video-open button[data-test="startScreenShare"] {
     display: none !important;
 }
 
-#conference.mediaview #layout.presentation-open:not(.videoplayer-open):not(.deskshare-open):not(.presentation-is-hidden) > div[data-test="presentationContainer"],
-#conference.mediaview #layout.presentation-open:not(.videoplayer-open):not(.deskshare-open):not(.presentation-is-hidden) > div[data-test="presentationPlaceholder"],
-#conference.mediaview #layout.deskshare-open:not(.presentation-is-hidden) > header ~ div:not(.video-overlay-pane):not(.pane-tools):not(.float-container),
-#conference.mediaview #layout.videoplayer-open:not(.presentation-is-hidden) > header ~ span {
+#conference.mediaview #layout.presentation-video-open:not(.presentation-is-hidden) > .video-item-container,
+#conference.mediaview #layout.presentation-open:not(.videoplayer-open):not(.deskshare-open):not(.presentation-is-hidden):not(.presentation-video-open) > div[data-test="presentationContainer"],
+#conference.mediaview #layout.presentation-open:not(.videoplayer-open):not(.deskshare-open):not(.presentation-is-hidden):not(.presentation-video-open) > div[data-test="presentationPlaceholder"],
+#conference.mediaview #layout.deskshare-open:not(.presentation-is-hidden):not(.presentation-video-open) > header ~ div:not(.video-overlay-pane):not(.pane-tools):not(.float-container),
+#conference.mediaview #layout.videoplayer-open:not(.presentation-is-hidden):not(.presentation-video-open) > header ~ span {
     display: block !important;
+    position: absolute;
 }
 
 #conference.mediaview #layout:not(.presentation-open):not(.deskshare-open):not(.videoplayer-open):not(.video-overlay-is-hidden) .video-overlay-default,
@@ -1307,15 +1326,17 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     height: calc(100% - 120px) !important;
 }
 
+#conference.mediaview .presentation-video-open > .video-item-container,
 #conference.mediaview .presentation-open > .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presentation-open > .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .presentation-open > div[data-test="presentationPlaceholder"]:not(:fullscreen),
 #conference.mediaview .presentation-open > div[data-test="presentationContainer"]:not(:fullscreen),
-#conference.mediaview .deskshare-open > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open > div:not(.video-item-container):not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open > span {
     background-color: transparent !important;
 }
 
+.pagecontrol:not(.view-size-bigger) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 .pagecontrol:not(.view-size-bigger) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .pagecontrol:not(.view-size-bigger) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
 .pagecontrol:not(.view-size-bigger) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1326,6 +1347,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     height: calc(100% - 90px) !important;
     position: absolute;
 }
+.view-size-bigger:not(.view-size-medium) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1336,7 +1358,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: calc(100% - 100px) !important;
     position: absolute;
 }
-
+.view-size-medium #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 .view-size-medium #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-medium #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1347,7 +1369,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: 100% !important;
     position: absolute;
 }
-
+.view-size-medium-small #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 .view-size-medium-small #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1356,13 +1378,14 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 .view-size-medium-small #conference.mediaview .videoplayer-open.video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     padding-bottom: 60px;
 }
-
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-video-open.video-overlay-is-hidden .video-item-container,
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-hidden div[data-test="presentationPlaceholder"]:not(:fullscreen),
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-hidden div[data-test="presentationContainer"]:not(:fullscreen),
 .pagecontrol:not(.view-size-medium) #conference.mediaview .deskshare-open.video-overlay-is-hidden > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 .pagecontrol:not(.view-size-medium) #conference.mediaview .videoplayer-open.video-overlay-is-hidden > span,
+.pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-video-open.video-overlay-is-empty .video-item-container,
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-empty .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-empty .presentationContainer--1wqUYG:not(:fullscreen),
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-empty div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1374,12 +1397,14 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: calc(100% - 110px) !important;
     height: calc(100% - 110px) !important;
 }
+.view-size-medium #conference.mediaview .presentation-video-open.video-overlay-is-hidden .video-item-container,
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-hidden div[data-test="presentationPlaceholder"]:not(:fullscreen),
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-hidden div[data-test="presentationContainer"]:not(:fullscreen),
 .view-size-medium #conference.mediaview .deskshare-open.video-overlay-is-hidden > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 .view-size-medium #conference.mediaview .videoplayer-open.video-overlay-is-hidden > span,
+.view-size-medium #conference.mediaview .presentation-video-open.video-overlay-is-empty .video-item-container,
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-empty .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-empty .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-empty div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1390,12 +1415,14 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 0 !important;
     width: 100% !important;
 }
+.view-size-medium-small #conference.mediaview .presentation-video-open.video-overlay-is-hidden .video-item-container,
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-hidden div[data-test="presentationPlaceholder"]:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-hidden div[data-test="presentationContainer"]:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .deskshare-open.video-overlay-is-hidden > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 .view-size-medium-small #conference.mediaview .videoplayer-open.video-overlay-is-hidden > span,
+.view-size-medium-small #conference.mediaview .presentation-video-open.video-overlay-is-empty .video-item-container,
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-empty .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-empty .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-empty div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1404,7 +1431,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 .view-size-medium-small #conference.mediaview .videoplayer-open.video-overlay-is-empty > span {
     padding-bottom: 60px;
 }
-
+#conference.mediaview .presentation-video-open:not(.presentation-is-hidden):not(.video-overlay-is-top):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .video-item-container,
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-top):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-top):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-top):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1415,7 +1442,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     height: calc(100% - 110px) !important;
     position: absolute;
 }
-
+#conference.mediaview .presentation-video-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) .video-item-container,
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1424,7 +1451,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) > span {
     top: 30px !important;
 }
-
+#conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1434,7 +1461,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 400px !important;
     width: calc(100% - 450px) !important;
 }
-
+.view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1444,7 +1471,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 200px !important;
     width: calc(100% - 250px) !important;
 }
-
+#conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1454,7 +1481,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     top: 180px !important;
     height: calc(100% - 280px) !important;
 }
-
+.pagecontrol:not(view-size-bigger) #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 .pagecontrol:not(view-size-bigger) #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .pagecontrol:not(view-size-bigger) #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 .pagecontrol:not(view-size-bigger) #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1464,6 +1491,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 50px !important;
     width: calc(100% - 100px) !important;
 }
+.view-size-bigger #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 .view-size-bigger #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-bigger #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-bigger #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1479,7 +1507,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 
 
-
+#conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1489,7 +1517,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 50px !important;
     width: calc(100% - 450px) !important;
 }
-
+.view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -1506,6 +1534,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
       Define here the CSS styles applied only to Safari browsers
       (any version and any device)
      */
+        #conference.mediaview #layout:not(.presentation-is-hidden) .video-item-container:not(:-webkit-full-screen),
         #conference.mediaview #layout:not(.presentation-is-hidden) .presentationPlaceholder--Z1hmVeX:not(:-webkit-full-screen),
         #conference.mediaview #layout:not(.presentation-is-hidden) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
         #conference.mediaview #layout:not(.presentation-is-hidden) div[data-test="presentationPlaceholder"]:not(:-webkit-full-screen),
@@ -1518,6 +1547,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
             position: absolute;
         }
 
+        #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) .video-item-container:not(:-webkit-full-screen),
         #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) .presentationPlaceholder--Z1hmVeX:not(:-webkit-full-screen),
         #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
         #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) div[data-test="presentationPlaceholder"]:not(:-webkit-full-screen),
@@ -1528,6 +1558,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
             width: calc(100% - 450px) !important;
         }
 
+        .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container:not(:-webkit-full-screen),
         .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:-webkit-full-screen),
         .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
         .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:-webkit-full-screen),
@@ -1540,34 +1571,36 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     }
 }
 
-#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     left: 50px !important;
     right: 392px;
     width: calc(calc(100% - 100px) * 0.62) !important;
 }
-#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     left: 50px !important;
     right: 392px;
     width: calc(calc(100% - 100px) * 0.54) !important;
 }
+#conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:fullscreen),
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"]:not(:fullscreen),
-#conference.mediaview .deskshare-open.presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open.presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open.presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     left: 50px !important;
     width: calc(calc(100% - 30px) * 0.62) !important;
     right: calc(100% - 30px) !important;
     height: calc(100% - 150px) !important;
 }
+#conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:fullscreen),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"]:not(:fullscreen),
-#conference.mediaview .deskshare-open.presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open.presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open.presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     left: 50px !important;
     top: 15% !important;
@@ -1575,16 +1608,17 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     height: 55% !important;
 }
 
-#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     z-index: 10;
 }
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:fullscreen) > div,
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:fullscreen) > div,
-#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     z-index: 10;
 }
+#conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container:not(:fullscreen),
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0 div[aria-label="Presentation tools"] > div,
@@ -1596,16 +1630,16 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     box-shadow: var(--box-shadow-popup) !important;
     background-color: white !important;
 }
-#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span video:not(:fullscreen) {
     box-shadow: var(--box-shadow-popup) !important;
 }
-
+#conference.mediaview .presentation-video-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"]:not(:fullscreen),
-#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+#conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     left: 50px !important;
     width: calc(100% - 100px) !important;
@@ -1617,64 +1651,69 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
       Define here the CSS styles applied only to Safari browsers
       (any version and any device)
      */
+        #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) .video-item-container:not(:-webkit-full-screen),
         #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) .presentationPlaceholder--Z1hmVeX:not(:-webkit-full-screen),
         #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
         #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) div[data-test="presentationPlaceholder"]:not(:-webkit-full-screen),
         #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) div[data-test="presentationContainer"]:not(:-webkit-full-screen),
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
         #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode-full) > span {
             right: 400px;
             width: calc(100% - 450px) !important;
         }
 
+        .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container:not(:-webkit-full-screen),
         .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:-webkit-full-screen),
         .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
         .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationPlaceholder"]:not(:-webkit-full-screen),
         .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) div[data-test="presentationContainer"]:not(:-webkit-full-screen),
-        .view-size-biggest #conference.mediaview .deskshare-open:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+        .view-size-biggest #conference.mediaview .deskshare-open:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
         .view-size-biggest #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) > span {
             right: 200px;
             width: calc(100% - 250px) !important;
         }
 
+        #conference.mediaview .presenter-mode-tiled:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-tiled:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-tiled:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-tiled:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-tiled:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"]:not(:-webkit-full-screen),
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
         #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-tiled.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
             width: calc(calc(100% - 30px) * 0.62) !important;
             height: calc(100% - 30px) !important;
         }
 
+        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"]:not(:-webkit-full-screen),
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
         #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
             width: calc(calc(100% - 100px) * 0.54) !important;
             height: calc(100% - 150px) !important;
             left: 50px !important;
         }
 
+        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationPlaceholder"]:not(:-webkit-full-screen),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"]:not(:-webkit-full-screen),
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
-        #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane) {
+        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+        #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane) {
             top: 30px !important;
         }
 
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools),
+        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools),
         #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
             z-index: 10;
         }
 
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) > div,
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) > div,
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
         #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
             z-index: 10;
         }
@@ -1685,14 +1724,14 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]),
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) div[aria-label="Presentation tools"] > div,
         #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) div[aria-label="Präsentationswerkzeuge"] > div,
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
         #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span video:not(:-webkit-full-screen) {
             box-shadow: var(--box-shadow-popup) !important;
         }
     }
 }
 
-
+.view-size-small #conference.mediaview .presentation-video-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full) .video-item-container:not(:fullscreen),
 .view-size-small #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-small #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full) .presentationContainer--1wqUYG:not(:fullscreen),
 .view-size-small #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full) div[data-test="presentationPlaceholder"]:not(:fullscreen),
@@ -3031,7 +3070,6 @@ c
     visibility: hidden;
 }
 
-
 #conferenceController .pane-tools {
     width: 320px;
     height: 240px;
@@ -3104,10 +3142,12 @@ c
     height: 102px;
 }
 
-#conferenceController #unpinnedVideos.listview .win-itembox {
+#conferenceController #unpinnedVideos.listview .win-itembox,
+#conferenceController .video-item-container .video-itembox {
     background-color: var(--btn-dark-bg);
 }
-#conferenceController #unpinnedVideos.listview .win-itembox:hover::before {
+#conferenceController #unpinnedVideos.listview .win-itembox:hover::before,
+#conferenceController .video-item-container .video-itembox:hover::before {
     display: none;
 }
 #conferenceController #unpinnedVideos.listview .video-list-item {
@@ -3115,6 +3155,13 @@ c
     height: 210px;
     display: flex;
     justify-content: center;
+}
+#conferenceController .video-item-container .video-itembox {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
 }
 .modSession #conferenceController #unpinnedVideos.listview .video-list-item {
     width: 136px;
@@ -3124,6 +3171,11 @@ c
     width: 100%;
     max-height: 210px;
 }
+#conferenceController .video-item-container .video-item {
+    height: 100%;
+    width: auto;
+}
+
 .modSession #conferenceController #unpinnedVideos.listview .video-item {
     max-height: 102px;
 }
@@ -3138,12 +3190,25 @@ c
     font-size: 80%;
     top: 188px;
 }
+#conferenceController .video-item-container .video-label {
+    position: absolute;
+    height: 15px;
+    left: 2px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 1px;
+    color: var(--color-off-white);
+    padding: 0 1rem 0 .5rem !important;
+    font-size: 80%;
+    bottom: 4px;
+}
+
 .modSession #conferenceController #unpinnedVideos.listview .video-label {
     top: 86px;
 }
 #conferenceController div[data-test="webcamItem"] > div .video-item-button,
 #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button,
-#conferenceController #unpinnedVideos.listview .video-item-button {
+#conferenceController #unpinnedVideos.listview .video-item-button,
+#conferenceController .video-item-container .video-item-button {
     position: absolute;
     top: 2px;
     min-width: 24px;
@@ -3155,6 +3220,9 @@ c
     border: none;
 }
 
+#conferenceController .video-item-container .video-item-button {
+    right: 2px;
+}
 
 #conferenceController div[data-test="webcamItem"] > div button[data-test="presentationFullscreenButton"],
 #conferenceController div[data-test="webcamItemTalkingUser"] > div button[data-test="presentationFullscreenButton"] {
@@ -3170,9 +3238,15 @@ c
     pointer-events: initial;
 }
 #conferenceController #unpinnedVideos.listview .video-item-button {
-    right: 2px;
     height: 24px;
 }
+#conferenceController #unpinnedVideos.listview .video-item-button.video-item-button-pin {
+    right: 2px;
+}
+#conferenceController #unpinnedVideos.listview .video-item-button.video-item-button-presentation {
+    right: 28px;
+}
+
 .speakerSession #conferenceController div[data-test="webcamItem"] > div .video-item-button,
 .speakerSession #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button,
 .speakerSession #conferenceController #unpinnedVideos.listview .video-item-button,
@@ -3182,12 +3256,19 @@ c
     display: none;
 }
 
+#conferenceController #unpinnedVideos.listview .video-item-button .presentation::before {
+    font-size: 14px;
+    font-family: "Segoe MDL2 Assets", "Symbols";
+    font-weight: normal;
+    content: "\E78B"
+}
 #conferenceController #unpinnedVideos.listview .video-item-button .pin::before {
     font-size: 14px;
     font-family: "Segoe MDL2 Assets", "Symbols";
     font-weight: normal;
     content: "\E141"
 }
+#conferenceController .video-item-container .video-item-button .unpin::before,
 #conferenceController div[data-test="webcamItem"] > div .video-item-button .unpin::before,
 #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button .unpin::before {
     font-size: 14px;

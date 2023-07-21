@@ -309,7 +309,13 @@ var __meteor_runtime_config__;
             var myTalkingActivityStart = null;
             var myTalkingActivityEnd = null;
             var myTalkingActivityIndicator = null;
-
+            var presentationVideoItemDefault = {
+                key: "",
+                userName: "",
+                myselfLabel: "",
+                mediaStream: null,
+                videoItemClassName: "video-presentation-item"
+            };
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
                 dataEvent: options ? options.dataEvent : {},
@@ -341,6 +347,8 @@ var __meteor_runtime_config__;
                 showMediaOn: false,
                 expandActions: false,
                 hasUnreadMessages: false,
+                presentationVideoKey: null,
+                presentationVideoItem: copyByValue(presentationVideoItemDefault),
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 showUnpinnedVideoList: false,
@@ -2228,7 +2236,10 @@ var __meteor_runtime_config__;
                                 screenShareFullscreen._handlerRegistered = true;
                             }
                         }
+                        var videoItemContainer = fragmentElement.querySelector(".video-item-container");
                         var svgWhiteboard = panelWrapper.querySelector(elementSelectors.svgWhiteboard);
+                        var presentationContainer = null;
+                        var presentationPlaceholder = null;
                         if (svgWhiteboard) {
                             Log.print(Log.l.trace, "svgWhiteboard open!");
                             var svgContainer = svgWhiteboard.parentElement.parentElement;
@@ -2243,12 +2254,20 @@ var __meteor_runtime_config__;
                                 that.registerFullscreenHandlers(svgContainer, presentationFullscreen);
                                 presentationFullscreen._handlerRegistered = true;
                             }
+                            if (videoItemContainer) {
+                                presentationContainer = panelWrapper.querySelector(elementSelectors.presentationContainer);
+                                if (!presentationContainer) {
+                                    presentationPlaceholder = panelWrapper.querySelector(elementSelectors.presentationPlaceholder);
+                                }
+                            }
                         } else {
                             that.onWheelSvg = null;
                             if (!videoPLayerOpened && !screenShareOpened) {
                                 Log.print(Log.l.trace, "svgWhiteboard not open - look for presentationContainer or presentationPlaceholder");
-                                var presentationContainer = panelWrapper.querySelector(elementSelectors.presentationContainer );
-                                var presentationPlaceholder = panelWrapper.querySelector(elementSelectors.presentationPlaceholder);
+                                presentationContainer = panelWrapper.querySelector(elementSelectors.presentationContainer );
+                                if (!presentationContainer) {
+                                    presentationPlaceholder = panelWrapper.querySelector(elementSelectors.presentationPlaceholder);
+                                }
                                 if (presentationContainer || presentationPlaceholder) {
                                     Log.print(Log.l.trace, "svgWhiteboard not ready yet!");
                                     if (!adjustContentPositionsPromise) {
@@ -2258,6 +2277,10 @@ var __meteor_runtime_config__;
                                     }
                                 }
                             }
+                        }
+                        if (videoItemContainer && (presentationContainer || presentationPlaceholder) &&
+                            !isChildElement(panelWrapper, videoItemContainer)) {
+                            panelWrapper.insertBefore(videoItemContainer, presentationContainer || presentationPlaceholder);
                         }
                         if (!userListDefaults.panelWrapperObserver) {
                             userListDefaults.panelWrapperObserver = new MutationObserver(function (mutationList, observer) {
@@ -3248,6 +3271,12 @@ var __meteor_runtime_config__;
                 var ret = new WinJS.Promise.as().then(function () {
                     var mediaContainer = fragmentElement.querySelector(getMediaContainerSelector());
                     if (mediaContainer) {
+                        if (!that.binding.presentationVideoKey) {
+                            that.binding.presentationVideoItem = copyByValue(presentationVideoItemDefault);
+                            if (WinJS.Utilities.hasClass(mediaContainer, "presentation-video-open")) {
+                                WinJS.Utilities.removeClass(mediaContainer, "presentation-video-open");
+                            }
+                        }
                         var presenterModeActive = WinJS.Utilities.hasClass(mediaContainer, "presenter-mode");
                         var cameraDock = mediaContainer.querySelector(elementSelectors.cameraDock);
                         var overlayElement = cameraDock && cameraDock.parentElement;
@@ -3381,15 +3410,33 @@ var __meteor_runtime_config__;
                                             if (!myselfIsUnpinned && isMyself) {
                                                 myselfIsUnpinned = true;
                                             }
-                                            Log.print(Log.l.trace, "added newUnpinnedVideoLists.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
-                                            newUnpinnedVideoLists.push({
-                                                key: key,
-                                                userName: userName,
-                                                myselfLabel: (isMyself ? myselfLabel : ""),
-                                                mediaStream: mediaStream,
-                                                videoListItemClassName: "video-list-item" + (isMyself ? " selfie-video" : ""),
-                                                enabled: (isMyself || pageControllerName === "modSessionController")
-                                            });
+                                            if (key === that.binding.presentationVideoKey) {
+                                                if (key !== (that.binding.presentationVideoItem && that.binding.presentationVideoItem.key)) {
+                                                    Log.print(Log.l.trace, "added presentationVideoItem.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
+                                                    that.binding.presentationVideoItem = {
+                                                        key: key,
+                                                        userName: userName,
+                                                        myselfLabel: (isMyself ? myselfLabel : ""),
+                                                        mediaStream: mediaStream,
+                                                        videoItemClassName: "video-itembox" +
+                                                            (isMyself ? " selfie-video" : "")
+                                                    };
+                                                    if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-video-open")) {
+                                                        WinJS.Utilities.addClass(mediaContainer, "presentation-video-open");
+                                                    }
+                                                }
+                                            } else {
+                                                Log.print(Log.l.trace, "added newUnpinnedVideoLists.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
+                                                newUnpinnedVideoLists.push({
+                                                    key: key,
+                                                    userName: userName,
+                                                    myselfLabel: (isMyself ? myselfLabel : ""),
+                                                    mediaStream: mediaStream,
+                                                    videoListItemClassName: "video-list-item" +
+                                                        (isMyself ? " selfie-video" : ""),
+                                                    enabled: (isMyself || pageControllerName === "modSessionController")
+                                                });
+                                            }
                                         }
                                         if (!presenterModeActive && hideInactive && (muted || inactivity > videoListDefaults.inactivityDelay) ||
                                             usePinned && pinnedIndex < 0) {
@@ -3683,8 +3730,20 @@ var __meteor_runtime_config__;
                         that.binding.dataSessionStatus = json.d.results[0];
                         try {
                             that.binding.pinnedVideos = JSON.parse(that.binding.dataSessionStatus && that.binding.dataSessionStatus.PinnedVideos || []);
+                            var presentationVideoKey = null;
+                            for (var i = 0; i < that.binding.pinnedVideos.length; i++) {
+                                var key = that.binding.pinnedVideos[i];
+                                if (key && key.substr(0,1) === "!") {
+                                    presentationVideoKey = key.substr(1);
+                                    that.binding.pinnedVideos.splice(i, 1);
+                                    break;
+                                }
+                            }
+                            that.binding.presentationVideoKey = presentationVideoKey;
                         } catch (ex) {
                             Log.print(Log.l.error, "Exception occured! ex=" + ex.toString());
+                            that.binding.presentationVideoKey = null;
+                            that.binding.pinnedVideos = [];
                         }
                     } else {
                         that.binding.dataSessionStatus = {
@@ -3694,6 +3753,7 @@ var __meteor_runtime_config__;
                             PresenterMode: "off",
                             PinnedVideos: []
                         }
+                        that.binding.presentationVideoKey = null;
                         that.binding.pinnedVideos = [];
                     }
                     that.binding.showPresentation = !!(that.binding.dataSessionStatus && that.binding.dataSessionStatus.ShowPresentation);
@@ -4455,11 +4515,15 @@ var __meteor_runtime_config__;
                                         dataSessionStatus.VideoListPosition = videoListDefaults.top;
                                         break;
                                 }
+                                var pinnedVideos;
                                 if (videoListDefaults.usePinned &&
                                     dataSessionStatus.PresenterMode !== presenterModeDefaults.off &&
                                     that.binding.pinnedVideos && that.binding.pinnedVideos.length > 1) {
                                     that.binding.pinnedVideos.splice(1);
-                                    dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                                    pinnedVideos = that.binding.presentationVideoKey ?
+                                        ["!" + that.binding.presentationVideoKey].concat(that.binding.pinnedVideos) :
+                                        that.binding.pinnedVideos;
+                                    dataSessionStatus.PinnedVideos = JSON.stringify(pinnedVideos);
                                     that.saveSessionStatus(dataSessionStatus);
                                     if (!checkForInactiveVideoPromise) {
                                         checkForInactiveVideoPromise = WinJS.Promise.timeout(0).then(function() {
@@ -4468,9 +4532,71 @@ var __meteor_runtime_config__;
                                     }
                                     that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
                                 } else {
-                                    dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                                    pinnedVideos = that.binding.presentationVideoKey ?
+                                        ["!" + that.binding.presentationVideoKey].concat(that.binding.pinnedVideos) :
+                                        that.binding.pinnedVideos;
+                                    dataSessionStatus.PinnedVideos = JSON.stringify(pinnedVideos);
                                     that.saveSessionStatus(dataSessionStatus);
                                 }
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickPresentationVideoButton: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (AppBar.notifyModified && event && event.currentTarget && that.binding.dataSessionStatus) {
+                        var targetParent = event.currentTarget.parentElement;
+                        if (targetParent) {
+                            var key = targetParent.name;
+                            if (key) {
+                                var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                                that.binding.presentationVideoKey = key;
+                                if (!that.binding.pinnedVideos) {
+                                    that.binding.pinnedVideos = [];
+                                }
+                                if (that.binding.pinnedVideos.indexOf(key) < 0) {
+                                    if (unpinnedVideoList) {
+                                        for (var oldIndex = 0; oldIndex < unpinnedVideoList.length; oldIndex++) {
+                                            var oldItem = unpinnedVideoList.getAt(oldIndex);
+                                            if (oldItem && key === oldItem.key) {
+                                                unpinnedVideoList.splice(oldIndex, 1);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                var pinnedVideos = ["!" + that.binding.presentationVideoKey].concat(that.binding.pinnedVideos);
+                                dataSessionStatus.PinnedVideos = JSON.stringify(pinnedVideos);
+                                that.saveSessionStatus(dataSessionStatus);
+                                if (!checkForInactiveVideoPromise) {
+                                    checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function () {
+                                        that.checkForInactiveVideo();
+                                    });
+                                }
+                                that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.info);
+                },
+                clickUnpinPresentationVideoButton: function(event) {
+                    Log.call(Log.l.info, "Conference.Controller.");
+                    if (AppBar.notifyModified && event && event.currentTarget && that.binding.dataSessionStatus) {
+                        var targetParent = event.currentTarget.parentElement;
+                        if (targetParent) {
+                            var key = targetParent.name;
+                            if (key === that.binding.presentationVideoKey) {
+                                that.binding.presentationVideoKey = null;
+                                var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
+                                dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                                that.saveSessionStatus(dataSessionStatus);
+                                if (!checkForInactiveVideoPromise) {
+                                    checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function () {
+                                        that.checkForInactiveVideo();
+                                    });
+                                }
+                                that.submitCommandMessage(magicStart + "loadSessionStatus" + magicStop, event);
                             }
                         }
                     }
@@ -4503,7 +4629,10 @@ var __meteor_runtime_config__;
                                         that.binding.pinnedVideos.push(key);
                                     }
                                 }
-                                dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                                var pinnedVideos = that.binding.presentationVideoKey ?
+                                    ["!" + that.binding.presentationVideoKey].concat(that.binding.pinnedVideos) :
+                                    that.binding.pinnedVideos;
+                                dataSessionStatus.PinnedVideos = JSON.stringify(pinnedVideos);
                                 that.saveSessionStatus(dataSessionStatus);
                                 if (!checkForInactiveVideoPromise) {
                                     checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
@@ -4530,7 +4659,10 @@ var __meteor_runtime_config__;
                                 that.binding.pinnedVideos.splice(index, 1);
                             }
                             var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
-                            dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                            var pinnedVideos = that.binding.presentationVideoKey ?
+                                ["!" + that.binding.presentationVideoKey].concat(that.binding.pinnedVideos) :
+                                that.binding.pinnedVideos;
+                            dataSessionStatus.PinnedVideos = JSON.stringify(pinnedVideos);
                             that.saveSessionStatus(dataSessionStatus);
                             if (!checkForInactiveVideoPromise) {
                                 checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
@@ -4853,7 +4985,10 @@ var __meteor_runtime_config__;
                                             dataSessionStatus.ShowVideoList = 0;
                                             break;
                                         }
-                                        dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                                        var pinnedVideos = that.binding.presentationVideoKey ?
+                                            ["!" + that.binding.presentationVideoKey].concat(that.binding.pinnedVideos) :
+                                            that.binding.pinnedVideos;
+                                        dataSessionStatus.PinnedVideos = JSON.stringify(pinnedVideos);
                                         that.saveSessionStatus(dataSessionStatus);
                                     }
                                 }
@@ -5400,27 +5535,28 @@ var __meteor_runtime_config__;
                         var index = videoListDefaults._pressedEntity.index;
                         var insertAfterIndex = videoListDefaults._lastInsertPoint.insertAfterIndex;
                         if (index >= 0 && index !== insertAfterIndex) {
-                            var pinnedVideos;
                             if (insertAfterIndex >= 0) {
                                 if (index < insertAfterIndex) {
-                                    pinnedVideos = that.binding.pinnedVideos.slice(0, index)
+                                    that.binding.pinnedVideos = that.binding.pinnedVideos.slice(0, index)
                                         .concat(that.binding.pinnedVideos.slice(index + 1, insertAfterIndex + 1))
                                         .concat([that.binding.pinnedVideos[index]])
                                         .concat(that.binding.pinnedVideos.slice(insertAfterIndex + 1));
                                 } else {
-                                    pinnedVideos = that.binding.pinnedVideos.slice(0, insertAfterIndex + 1)
+                                    that.binding.pinnedVideos = that.binding.pinnedVideos.slice(0, insertAfterIndex + 1)
                                         .concat([that.binding.pinnedVideos[index]])
                                         .concat(that.binding.pinnedVideos.slice(insertAfterIndex + 1, index))
                                         .concat(that.binding.pinnedVideos.slice(index + 1));
                                 }
                             } else {
-                                pinnedVideos = [that.binding.pinnedVideos[index]]
+                                that.binding.pinnedVideos = [that.binding.pinnedVideos[index]]
                                     .concat(that.binding.pinnedVideos.slice(0, index))
                                     .concat(that.binding.pinnedVideos.slice(index + 1));
                             }
-                            that.binding.pinnedVideos = pinnedVideos;
                             var dataSessionStatus = copyByValue(that.binding.dataSessionStatus);
-                            dataSessionStatus.PinnedVideos = JSON.stringify(that.binding.pinnedVideos);
+                            var pinnedVideos = that.binding.presentationVideoKey ?
+                                ["!" + that.binding.presentationVideoKey].concat(that.binding.pinnedVideos) :
+                                that.binding.pinnedVideos;
+                            dataSessionStatus.PinnedVideos = JSON.stringify(pinnedVideos);
                             that.saveSessionStatus(dataSessionStatus);
                             if (!checkForInactiveVideoPromise) {
                                 checkForInactiveVideoPromise = WinJS.Promise.timeout(20).then(function() {
