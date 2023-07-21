@@ -3267,9 +3267,11 @@ c
 .speakerSession #conferenceController div[data-test="webcamItem"] > div .video-item-button,
 .speakerSession #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button,
 .speakerSession #conferenceController #unpinnedVideos.listview .video-item-button,
+.speakerSession #conferenceController .video-item-container .video-item-button,
 .event #conferenceController div[data-test="webcamItem"] > div .video-item-button,
 .event #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button,
-.event #conferenceController #unpinnedVideos.listview .video-item-button {
+.event #conferenceController #unpinnedVideos.listview .video-item-button,
+.event #conferenceController .video-item-container .video-item-button {
     display: none;
 }
 
