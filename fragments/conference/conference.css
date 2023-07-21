@@ -2142,17 +2142,17 @@ button[data-test="optionsButton"] {
     max-width: 100% !important;
 }
 
-    #conference.mediaview .presenter-mode-tiled .video-list-horizontal video[data-test="videoContainer"],
-    #conference.mediaview .presenter-mode-small .video-list-horizontal video[data-test="videoContainer"],
-    #conference.mediaview .presenter-mode-tiled .video-list-vertical video[data-test="videoContainer"],
-    #conference.mediaview .presenter-mode-small .video-list-vertical video[data-test="videoContainer"] {
-        height: 100%;
-        width: auto !important;
-        max-width: inherit !important;
-        display: inline-block;
-        position: absolute;
-        object-fit: cover;
-    }
+#conference.mediaview .presenter-mode-tiled .video-list-horizontal video[data-test="videoContainer"],
+#conference.mediaview .presenter-mode-small .video-list-horizontal video[data-test="videoContainer"],
+#conference.mediaview .presenter-mode-tiled .video-list-vertical video[data-test="videoContainer"],
+#conference.mediaview .presenter-mode-small .video-list-vertical video[data-test="videoContainer"] {
+    height: 100%;
+    width: auto !important;
+    max-width: inherit !important;
+    display: inline-block;
+    position: absolute;
+    object-fit: cover;
+}
 
 #conference.mediaview .presenter-mode-full .video-list-horizontal,
 #conference.mediaview .presenter-mode-full .video-list-vertical {
@@ -3180,7 +3180,7 @@ c
 }
 #conferenceController .video-item-container .video-itembox:not(.video-item-contain) .video-item {
     height: 100%;
-    width: auto;
+    width: 100%;
 }
 #conferenceController .video-item-container .video-itembox.video-item-contain .video-item {
     width: 100%;
