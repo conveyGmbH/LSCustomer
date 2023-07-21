@@ -1317,6 +1317,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview #layout.videoplayer-open:not(.presentation-is-hidden):not(.presentation-video-open) > header ~ span {
     display: block !important;
     position: absolute;
+    z-index: 1;
 }
 
 #conference.mediaview #layout:not(.presentation-open):not(.deskshare-open):not(.videoplayer-open):not(.video-overlay-is-hidden) .video-overlay-default,
