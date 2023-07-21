@@ -2271,11 +2271,13 @@ button[data-test="optionsButton"] {
 
 
 #conference.mediaview .selfie-video video[data-test="videoContainer"],
-#conferenceController #unpinnedVideos.listview .selfie-video > video {
+#conferenceController #unpinnedVideos.listview .selfie-video > video,
+#conferenceController .video-item-container .selfie-video > video {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
-#conferenceController #unpinnedVideos.listview video {
+#conferenceController #unpinnedVideos.listview video,
+#conferenceController .video-item-container video {
     object-fit: cover;
 }
 
