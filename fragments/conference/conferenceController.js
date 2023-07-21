@@ -3357,7 +3357,8 @@ var __meteor_runtime_config__;
                                             video.disablePictureInPicture = true;
                                             mediaStream = video.srcObject;
                                         }
-                                        if (!mediaStream) {
+                                        if (!mediaStream || !mediaStream.active) {
+                                            mediaStream = null;
                                             checkLaterAgain = true;
                                             Log.print(Log.l.trace, "no mediaStream, checkLaterAgain=" + checkLaterAgain);
                                         }
@@ -3406,7 +3407,10 @@ var __meteor_runtime_config__;
                                             checkLaterAgain = true;
                                             Log.print(Log.l.trace, "myTalkingActivityStart=" + myTalkingActivityStart);
                                         }
-                                        if (usePinned && pinnedIndex < 0 && key) {
+                                        if (usePinned && pinnedIndex < 0 && key && mediaStream) {
+                                            if (!myselfIsUnpinned && isMyself) {
+                                                myselfIsUnpinned = true;
+                                            }
                                             var userName = "";
                                             var userNameElement = videoListItem.querySelector(elementSelectors.videoUserName);
                                             if (userNameElement && userNameElement.firstChild) {
@@ -3414,38 +3418,36 @@ var __meteor_runtime_config__;
                                             }
                                             if (!userName) {
                                                 checkLaterAgain = true;
-                                                Log.print(Log.l.trace, "no mediaStream, userName=" + checkLaterAgain);
-                                            }
-                                            if (!myselfIsUnpinned && isMyself) {
-                                                myselfIsUnpinned = true;
-                                            }
-                                            if (key === that.binding.presentationVideoKey) {
-                                                if (key !== (that.binding.presentationVideoItem && that.binding.presentationVideoItem.key)) {
-                                                    Log.print(Log.l.trace, "added presentationVideoItem.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
-                                                    that.binding.presentationVideoItem = {
+                                                Log.print(Log.l.trace, "no userName, checkLaterAgain=" + checkLaterAgain);
+                                            } else {
+                                                if (key === that.binding.presentationVideoKey) {
+                                                    if (key !== (that.binding.presentationVideoItem && that.binding.presentationVideoItem.key)) {
+                                                        Log.print(Log.l.trace, "added presentationVideoItem.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
+                                                        that.binding.presentationVideoItem = {
+                                                            key: key,
+                                                            userName: userName,
+                                                            myselfLabel: (isMyself ? myselfLabel : ""),
+                                                            mediaStream: mediaStream,
+                                                            videoItemClassName: "video-itembox" +
+                                                                (isMyself ? " selfie-video" : ""),
+                                                            resolutionLabel: ""
+                                                        };
+                                                        if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-video-open")) {
+                                                            WinJS.Utilities.addClass(mediaContainer, "presentation-video-open");
+                                                        }
+                                                    }
+                                                } else {
+                                                    Log.print(Log.l.trace, "added newUnpinnedVideoLists.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
+                                                    newUnpinnedVideoLists.push({
                                                         key: key,
                                                         userName: userName,
                                                         myselfLabel: (isMyself ? myselfLabel : ""),
                                                         mediaStream: mediaStream,
-                                                        videoItemClassName: "video-itembox" +
+                                                        videoListItemClassName: "video-list-item" +
                                                             (isMyself ? " selfie-video" : ""),
-                                                        resolutionLabel: ""
-                                                    };
-                                                    if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-video-open")) {
-                                                        WinJS.Utilities.addClass(mediaContainer, "presentation-video-open");
-                                                    }
+                                                        enabled: (isMyself || pageControllerName === "modSessionController")
+                                                    });
                                                 }
-                                            } else {
-                                                Log.print(Log.l.trace, "added newUnpinnedVideoLists.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
-                                                newUnpinnedVideoLists.push({
-                                                    key: key,
-                                                    userName: userName,
-                                                    myselfLabel: (isMyself ? myselfLabel : ""),
-                                                    mediaStream: mediaStream,
-                                                    videoListItemClassName: "video-list-item" +
-                                                        (isMyself ? " selfie-video" : ""),
-                                                    enabled: (isMyself || pageControllerName === "modSessionController")
-                                                });
                                             }
                                         }
                                         if (!presenterModeActive && hideInactive && (muted || inactivity > videoListDefaults.inactivityDelay) ||
