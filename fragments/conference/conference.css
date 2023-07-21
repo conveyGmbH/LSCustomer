@@ -2277,10 +2277,12 @@ button[data-test="optionsButton"] {
     transform: scaleX(-1);
 }
 #conferenceController #unpinnedVideos.listview video,
-#conferenceController .video-item-container video {
+#conferenceController .video-item-container .video-itembox:not(.video-item-contain) video {
     object-fit: cover;
 }
-
+#conferenceController .video-item-container .video-itembox.video-item-contain video {
+    object-fit: contain;
+}
 /* Toast container message */
 #conference.mediaview div[data-test="toastSmallMsg"] {
     overflow: hidden;
@@ -3176,9 +3178,13 @@ c
     width: 100%;
     max-height: 210px;
 }
-#conferenceController .video-item-container .video-item {
+#conferenceController .video-item-container .video-itembox:not(.video-item-contain) .video-item {
     height: 100%;
     width: auto;
+}
+#conferenceController .video-item-container .video-itembox.video-item-contain .video-item {
+    width: 100%;
+    height: auto;
 }
 
 .modSession #conferenceController #unpinnedVideos.listview .video-item {
@@ -3228,7 +3234,10 @@ c
     border: none;
 }
 
-#conferenceController .video-item-container .video-item-button {
+#conferenceController .video-item-container .video-item-button.video-item-button-contain {
+    right: 28px;
+}
+#conferenceController .video-item-container .video-item-button.video-item-button-unpin {
     right: 2px;
 }
 
@@ -3283,6 +3292,18 @@ c
     font-family: "Segoe MDL2 Assets", "Symbols";
     font-weight: normal;
     content: "\E196";
+}
+#conferenceController .video-item-container .video-itembox:not(.video-item-contain) .video-item-button .fitpage::before {
+    font-size: 14px;
+    font-family: "Segoe MDL2 Assets", "Symbols";
+    font-weight: normal;
+    content: "\E9A6";
+}
+#conferenceController .video-item-container .video-itembox.video-item-contain .video-item-button .fitpage::before {
+    font-size: 14px;
+    font-family: "Segoe MDL2 Assets", "Symbols";
+    font-weight: normal;
+    content: "\E799";
 }
 #conference.mediaview #cameraDock {
     pointer-events: none;

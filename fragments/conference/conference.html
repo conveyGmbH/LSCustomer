@@ -31,7 +31,11 @@
                                     <div class="video-resolution-label"
                                          data-win-bind="textContent: presentationVideoItem.resolutionLabel; style.display: presentationVideoItem.resolutionLabel Binding.Converter.toDisplay"></div>
                                 </div>
-                                <button class="win-button video-item-button"
+                                <button class="win-button video-item-button video-item-button-contain"
+                                        onclick="AppBar.handleEvent('click', 'clickFitPageVideoButton', event)">
+                                    <span class="fitpage"></span>
+                                </button>
+                                <button class="win-button video-item-button video-item-button-unpin"
                                         onclick="AppBar.handleEvent('click', 'clickUnpinPresentationVideoButton', event)">
                                     <span class="unpin"></span>
                                 </button>
