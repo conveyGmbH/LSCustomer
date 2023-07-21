@@ -135,10 +135,10 @@
 .event .win-type-body,
 .modSession .win-type-body,
 .speakerSession .win-type-body {
-    font-size: 15px !important;
-    line-height: 25px !important;
-    color: var(--e-global-color-text) !important;
-    font-family: var(--font-family-default) !important;
+    font-size: 15px;
+    line-height: 25px;
+    color: var(--e-global-color-text);
+    font-family: var(--font-family-default);
 }
 
 .home .content-header, .events .top-header {
