@@ -130,11 +130,11 @@
     font-weight: 500 !important;
 }
 
-.home .win-type-body,
-.events .win-type-body,
-.event .win-type-body,
-.modSession .win-type-body,
-.speakerSession .win-type-body {
+.home .win-type-body div:not(#conference),
+.events .win-type-body div:not(#conference),
+.event .win-type-body div:not(#conference),
+.modSession .win-type-body div:not(#conference),
+.speakerSession .win-type-body div:not(#conference) {
     font-size: 15px !important;
     line-height: 25px !important;
     color: var(--e-global-color-text) !important;
