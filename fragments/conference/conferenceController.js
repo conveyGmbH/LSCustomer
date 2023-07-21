@@ -135,6 +135,8 @@ var __meteor_runtime_config__;
 
         meetingEndedModalTitle: '#conference.mediaview h1[data-test="meetingEndedModalTitle"]',
 
+        presentationVideoElement: ".video-item-container video",
+
         // dangerous global CSS definitions to remove:
         htmlElement:     "html {",
         allElements:     "*, *:before, *:after {"
@@ -314,7 +316,8 @@ var __meteor_runtime_config__;
                 userName: "",
                 myselfLabel: "",
                 mediaStream: null,
-                videoItemClassName: "video-presentation-item"
+                videoItemClassName: "video-presentation-item",
+                resolutionLabel: ""
             };
             Fragments.Controller.apply(this, [fragmentElement, {
                 eventId: options ? options.eventId : null,
@@ -3206,6 +3209,12 @@ var __meteor_runtime_config__;
                                     that.adjustVideoPosition(mediaContainer, overlayElement, videoListItem, options);
                                     videoListItem = videoListItem.nextSibling;
                                 }
+                                if (pageControllerName === "modSessionController" && that.binding.presentationVideoKey && that.binding.presentationVideoItem) {
+                                    var presentationVideoElement = mediaContainer.querySelector(elementSelectors.presentationVideoElement);
+                                    if (presentationVideoElement) {
+                                        that.binding.presentationVideoItem.resolutionLabel = presentationVideoElement.videoWidth + "x" + presentationVideoElement.videoHeight;
+                                    }
+                                } 
                                 if (options.presentationIsHidden) {
                                     var sqrtNumVideos = Math.sqrt(numVideos);
                                     var columnCount = Math.ceil(sqrtNumVideos);
@@ -3419,7 +3428,8 @@ var __meteor_runtime_config__;
                                                         myselfLabel: (isMyself ? myselfLabel : ""),
                                                         mediaStream: mediaStream,
                                                         videoItemClassName: "video-itembox" +
-                                                            (isMyself ? " selfie-video" : "")
+                                                            (isMyself ? " selfie-video" : ""),
+                                                        resolutionLabel: ""
                                                     };
                                                     if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-video-open")) {
                                                         WinJS.Utilities.addClass(mediaContainer, "presentation-video-open");

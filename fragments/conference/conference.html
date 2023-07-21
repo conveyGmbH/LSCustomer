@@ -23,9 +23,13 @@
                         <div class="video-item-container">
                             <div data-win-bind="className: presentationVideoItem.videoItemClassName; name: presentationVideoItem.key;">
                                 <video class="video-item" data-win-bind="srcObject: presentationVideoItem.mediaStream" autoplay playsinline disablePictureInPicture></video>
-                                <div class="video-label">
-                                    <span data-win-bind="textContent: presentationVideoItem.userName"></span>
-                                    <i data-win-bind="innerHTML: presentationVideoItem.myselfLabel; style.display: presentationVideoItem.myselfLabel Binding.Converter.toDisplay"></i>
+                                <div class="video-label-container">
+                                    <div class="video-label">
+                                        <span data-win-bind="textContent: presentationVideoItem.userName"></span>
+                                        <i data-win-bind="innerHTML: presentationVideoItem.myselfLabel; style.display: presentationVideoItem.myselfLabel Binding.Converter.toDisplay"></i>
+                                    </div>
+                                    <div class="video-resolution-label"
+                                         data-win-bind="textContent: presentationVideoItem.resolutionLabel; style.display: presentationVideoItem.resolutionLabel Binding.Converter.toDisplay"></div>
                                 </div>
                                 <button class="win-button video-item-button"
                                         onclick="AppBar.handleEvent('click', 'clickUnpinPresentationVideoButton', event)">

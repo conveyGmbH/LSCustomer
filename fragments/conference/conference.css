@@ -2265,6 +2265,9 @@ button[data-test="optionsButton"] {
     position: relative;
     top: -4px;
 }
+.video-label-container .video-resolution-label {
+    top: 0;
+}
 
 
 #conference.mediaview .selfie-video video[data-test="videoContainer"],
@@ -3190,16 +3193,19 @@ c
     font-size: 80%;
     top: 188px;
 }
-#conferenceController .video-item-container .video-label {
+#conferenceController .video-item-container .video-label-container {
     position: absolute;
-    height: 15px;
     left: 2px;
+    bottom: 4px;
+}
+#conferenceController .video-item-container .video-label {
+    position: relative;
+    height: 15px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 1px;
     color: var(--color-off-white);
     padding: 0 1rem 0 .5rem !important;
     font-size: 80%;
-    bottom: 4px;
 }
 
 .modSession #conferenceController #unpinnedVideos.listview .video-label {
