@@ -140,6 +140,7 @@ var __meteor_runtime_config__;
 
         meetingEndedModalTitle: '#conference.mediaview h1[data-test="meetingEndedModalTitle"]',
 
+        presentationVideoItembox: ".video-item-container .video-itembox",
         presentationVideoElement: ".video-item-container video",
 
         // dangerous global CSS definitions to remove:
@@ -3446,6 +3447,16 @@ var __meteor_runtime_config__;
                                                                 (that.binding.presentationVideoFitPage ? " video-item-contain" : ""),
                                                             resolutionLabel: ""
                                                         };
+                                                        var presentationVideoItembox = mediaContainer.querySelector(elementSelectors.presentationVideoItembox);
+                                                        if (presentationVideoItembox &&
+                                                            presentationVideoItembox.style) {
+                                                            if (that.binding.dataEvent.VideoBackgroundColor) {
+                                                                presentationVideoItembox.style.backgroundColor =
+                                                                    "#" + that.binding.dataEvent.VideoBackgroundColor;
+                                                            } else {
+                                                                presentationVideoItembox.style.backgroundColor = "";
+                                                            }
+                                                        }
                                                         if (!WinJS.Utilities.hasClass(mediaContainer, "presentation-video-open")) {
                                                             WinJS.Utilities.addClass(mediaContainer, "presentation-video-open");
                                                         }
