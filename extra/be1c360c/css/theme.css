@@ -40,8 +40,8 @@
 }
 
 :root {
-    --e-global-color-text: #006b8a !important; /*#333333;*/
-    --e-global-color-buttontext: #006b8a !important;/*#ffffff*/
+    --e-global-color-text: #006b8a; /*#333333;*/
+    --e-global-color-buttontext: #006b8a;/*#ffffff*/
     --e-global-color-accent: #006b8a !important;
     --the7-additional-menu-elements-color: #ffffff !important; /*#006b8a !important;*/
     --the7-accent-color: #dcdc3e !important;
