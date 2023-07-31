@@ -40,8 +40,8 @@
 }
 
 :root {
-    --e-global-color-text: #006b8a; /*#333333;*/
-    --e-global-color-buttontext: #006b8a;/*#ffffff*/
+    --e-global-color-text: #006b8a !important; /*#333333;*/
+    --e-global-color-buttontext: #006b8a !important;/*#ffffff*/
     --e-global-color-accent: #006b8a !important;
     --the7-additional-menu-elements-color: #ffffff !important; /*#006b8a !important;*/
     --the7-accent-color: #dcdc3e !important;
@@ -149,9 +149,9 @@
     color: var(--e-global-color-text) !important;
 }
 
-.register ::placeholder,
-.register ::-ms-input-placeholder,
-.register ::-webkit-input-placeholder {
+::placeholder,
+::-ms-input-placeholder,
+::-webkit-input-placeholder {
     color: var(--e-global-color-text, #006b8a) !important;
 }
 
@@ -561,7 +561,7 @@
     margin-top: 56% !important;
 }
 
-.register .centerarea .registerEmail {
+.centerarea.registerEmail {
     width: 99% !important;
     padding-top: 10px !important;
     background-color: transparent !important;
