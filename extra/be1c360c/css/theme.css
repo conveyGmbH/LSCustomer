@@ -140,11 +140,19 @@
 .register .field_line_odd,
 .register .field_line_full,
 .register .label,
-.register .checkbox {
+.register .checkbox,
+.register .mandatory {
     font-family: var(--font-family-default) !important;
-    font-weight: 500;
-    font-size: 15px !important;
-    line-height: 25px !important;
+    font-weight: 400;
+    font-size: 16px !important;
+    line-height: 160% !important;
+    color: var(--e-global-color-text) !important;
+}
+
+.register ::placeholder,
+.register ::-ms-input-placeholder,
+.register ::-webkit-input-placeholder {
+    color: var(--e-global-color-text, #006b8a) !important;
 }
 
 .countdown .win-type-body,
@@ -169,6 +177,10 @@
     line-height: 160%; /* 28.8px */
 }
 
+.teaser .centerarea {
+    background-color: var(--the7-accent-color, #dcdc3e) !important;
+}
+
 .home .content-header, .events .top-header {
     margin: 0 auto !important;
     max-width: calc(1300px - 50px - 50px) !important;
@@ -190,10 +202,20 @@
     padding: 5px 15px 0 0 !important;
 }
 
+.event .contentarea {
+    background-color: transparent !important;
+}
+
 .event .calenderButton,
 .event .homeButton {
-    color: var(--e-global-color-buttontext) !important;
+    color: var(--e-global-color-text) !important;
     font-family: var(--font-family-default) !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: 120% !important; /* 19.2px */
+    letter-spacing: 0.48px !important;
+    text-transform: uppercase !important;
 }
 
 .event button .win-type-title,
@@ -329,6 +351,13 @@
     margin-left: 0 !important;
     padding: 15px 0 !important;
     font-family: var(--font-family-default) !important;
+    color: var(--e-global-color-text) !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: 120% !important; /* 19.2px */
+    letter-spacing: 0.48px !important;
+    text-transform: uppercase !important;
 }
 
 .event .logOff-container,
@@ -504,25 +533,39 @@
     -moz-border-radius: 40px !important;
 }
 
+.register .centerarea .field_line_full,
+.register .centerarea .field_line_odd,
+.register .centerarea .field_line_even {
+    width: calc(100% - 20px) !important;
+}
+
 .register #loginButton, .register #re_registerEvent {
     border-style: solid;
     border-width: 2px;
     border-color: var(--e-global-color-text, #006b8a) !important;
-    background-color: transparent !important;
+    background-color: var(--e-global-color-text) !important;
 }
 
 .register #loginButton > div > span, .register #re_registerEvent > span {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-buttontext) !important;
+    color: var(--the7-accent-color, #dcdc3e) !important;
     font-size: 16px !important;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    line-height: 20px !important;
-    letter-spacing: 1px;
+    line-height: 120% /* 19.2px */ !important;
+    letter-spacing: 0.48px;
+}
+
+.register .contentarea {
+    background-color: var(--the7-accent-bg-color, #dcdc3e) !important;
+    margin-top: 56% !important;
 }
 
 .register .centerarea .registerEmail {
+    width: 99% !important;
     padding-top: 10px !important;
+    background-color: transparent !important;
+    border: 2px solid var(--e-global-color-text) !important;
 }
 
 .register .register_title {
@@ -530,8 +573,9 @@
 }
 
 .register .input_field {
+    background-color: transparent !important;
     width: inherit !important;
-    border: 2px solid var(--e-global-color-buttontext) !important;
+    border: 2px solid var(--e-global-color-text) !important;
     border-radius: none !important;
     -webkit-border-radius: none !important;
     -moz-border-radius: none !important;
@@ -873,6 +917,10 @@ section.elementor-inner-section > div {
 
 .view-size-medium-small .event .register-fragmenthost {
     margin-top: 10px !important;
+}
+
+.view-size-medium-small .register .contentarea {
+    margin-top: 0 !important;
 }
 
 /*margins/paddings for small screens and orientation vertical
