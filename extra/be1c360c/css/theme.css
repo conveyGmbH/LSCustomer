@@ -724,8 +724,8 @@ section.elementor-inner-section > div {
 .sticky-header-pinned-fixed {
     background-color: Window;
     inset-inline-start: initial !important;
-    max-width: 100% !important;
-    width: 100% !important;
+    max-width: calc(100% - 15px) !important;
+    width: calc(100% - 15px) !important;
 }
 
 .win-button {
