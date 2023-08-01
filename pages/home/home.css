@@ -270,6 +270,7 @@
 }*/
 .expander-icon-container {
     display: block;
+    line-height: initial;
 }
 .home .expander-icon {
     width: 40px;
