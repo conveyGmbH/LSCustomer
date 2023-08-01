@@ -719,6 +719,9 @@ section.elementor-inner-section > div {
 }
 .sticky-scrolled .sticky-header-pinned-fixed {
     background-color: Window;
+    inset-inline-start: initial !important;
+    max-width: 100% !important;
+    width: 100% !important;
 }
 
 .win-button {
