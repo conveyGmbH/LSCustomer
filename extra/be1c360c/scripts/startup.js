@@ -1,21 +1,22 @@
 /* startup script for customizations */
-(function () {
+(function() {
     "use strict";
 
     function saveBodyContent() {
-        var customerElement = document.querySelector("#"+rootElementId);
+        var customerElement = document.querySelector("#" + rootElementId);
         if (customerElement && customerElement.parentElement) {
             var mainBottomElement = null;
             var customerRootElement = customerElement;
             while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
-                if (customerRootElement.parentElement.parentElement === document.body && 
+                if (customerRootElement.parentElement.parentElement === document.body &&
                     customerRootElement.nextElementSibling) {
                     var nextElementSibling = customerRootElement.nextElementSibling;
                     mainBottomElement = document.createElement(customerRootElement.parentElement.tagName);
-                    if (mainBottomElement) while (nextElementSibling) {
-                        mainBottomElement.appendChild(nextElementSibling);
-                        nextElementSibling = nextElementSibling.nextElementSibling;
-                    }
+                    if (mainBottomElement)
+                        while (nextElementSibling) {
+                            mainBottomElement.appendChild(nextElementSibling);
+                            nextElementSibling = nextElementSibling.nextElementSibling;
+                        }
                 }
                 customerRootElement = customerRootElement.parentElement;
             }
@@ -29,7 +30,7 @@
             var curBodyChild = document.body.firstElementChild;
             while (curBodyChild && curBodyChild !== customerRootElement) {
                 nextBodyChild = curBodyChild.nextElementSibling;
-                if (curBodyChild.tagName && 
+                if (curBodyChild.tagName &&
                     curBodyChild.tagName.toLowerCase() !== "script" &&
                     curBodyChild.tagName.toLowerCase() !== "link") {
                     bodyContentTop.appendChild(curBodyChild);
@@ -42,7 +43,7 @@
             curBodyChild = customerRootElement.nextElementSibling;
             while (curBodyChild) {
                 nextBodyChild = curBodyChild.nextElementSibling;
-                if (curBodyChild.tagName && 
+                if (curBodyChild.tagName &&
                     curBodyChild.tagName.toLowerCase() !== "script" &&
                     curBodyChild.tagName.toLowerCase() !== "link") {
                     bodyContentBottom.appendChild(curBodyChild);
@@ -57,6 +58,8 @@
 
     saveBodyContent();
 
-    Application.buttonSymbolColor = "#006B8A";
+    window.LiveBridgeSettings = {
+        buttonSymbolColor: "#006B8A"
+    };
 
 })();
