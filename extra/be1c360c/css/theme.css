@@ -41,6 +41,62 @@
     --the7-accent-color: #dcdc3e !important;
     --the7-accent-bg-color: #dcdc3e !important;
     --the7-background-color: #eeeeee;
+    --e-global-typography-primary-font-family: "Helvetica";
+    --e-global-typography-primary-font-size: 18px;
+    --e-global-typography-primary-font-weight: 400;
+    --e-global-typography-secondary-font-family: "Roboto Slab";
+    --e-global-typography-secondary-font-weight: 400;
+    --e-global-typography-text-font-family: "Helvetica";
+    --e-global-typography-text-font-size: 18px;
+    --e-global-typography-text-font-weight: 300;
+    --e-global-typography-text-line-height: 160%;
+    --e-global-typography-accent-font-family: "Roboto";
+    --e-global-typography-accent-font-weight: 500;
+    --e-global-typography-73a9cb8-font-family: "Helvetica";
+    --e-global-typography-73a9cb8-font-size: 82px;
+    --e-global-typography-73a9cb8-font-weight: 700;
+    --e-global-typography-73a9cb8-line-height: 115%;
+    --e-global-typography-73a9cb8-letter-spacing: 0.82px;
+    --e-global-typography-d990e6c-font-family: "Helvetica";
+    --e-global-typography-d990e6c-font-size: 42px;
+    --e-global-typography-d990e6c-font-weight: 500;
+    --e-global-typography-d990e6c-line-height: 120%;
+    --e-global-typography-1317078-font-size: 24px;
+    --e-global-typography-1317078-font-weight: 400;
+    --e-global-typography-1317078-line-height: 140%;
+    --e-global-typography-4fdefc3-font-size: 22px;
+    --e-global-typography-4fdefc3-font-weight: 700;
+    --e-global-typography-4fdefc3-text-transform: none;
+    --e-global-typography-4fdefc3-font-style: normal;
+    --e-global-typography-4fdefc3-line-height: 120%;
+    --e-global-typography-8dd2c1e-font-family: "Helvetica";
+    --e-global-typography-8dd2c1e-font-size: 18px;
+    --e-global-typography-8dd2c1e-font-weight: 400;
+    --e-global-typography-8dd2c1e-text-transform: none;
+    --e-global-typography-8dd2c1e-line-height: 160%;
+    --e-global-typography-fe7e3cd-font-family: "Helvetica";
+    --e-global-typography-fe7e3cd-font-size: 24px;
+    --e-global-typography-fe7e3cd-font-weight: 400;
+    --e-global-typography-fe7e3cd-line-height: 170;
+    --e-global-typography-531f646-font-family: "Helvetica";
+    --e-global-typography-531f646-font-size: 14px;
+    --e-global-typography-531f646-font-weight: 400;
+    --e-global-typography-531f646-line-height: 160%;
+    --e-global-typography-531f646-letter-spacing: 0.14px;
+    --e-global-typography-1ff88cb-font-family: "Helvetica";
+    --e-global-typography-1ff88cb-font-size: 16px;
+    --e-global-typography-1ff88cb-font-weight: 400;
+    --e-global-typography-1ff88cb-line-height: 160%;
+    --e-global-typography-a0c44a6-font-family: "Helvetica";
+    --e-global-typography-a0c44a6-font-size: 16px;
+    --e-global-typography-a0c44a6-font-weight: 700;
+    --e-global-typography-a0c44a6-text-transform: uppercase;
+    --e-global-typography-a0c44a6-line-height: 120%;
+    --e-global-typography-a0c44a6-letter-spacing: 0.48px;
+    --e-global-typography-2401bc8-font-size: 14px;
+    --e-global-typography-2401bc8-font-weight: 700;
+    --e-global-typography-2401bc8-line-height: 120%;
+    --e-global-typography-2401bc8-letter-spacing: 0.28px;
 }
 /****************img und #main von MP entfernen*******************/
 .home #fancy-header, .events #fancy-header, .event #fancy-header {
@@ -69,9 +125,9 @@
 .home .win-listview .win-gridlayout .win-container {
     background-color: transparent !important;
     border: 2px solid var(--e-global-color-primary) !important;
-    border-radius: none !important;
-    -webkit-border-radius: none !important;
-    -moz-border-radius: none !important;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
 }
 /************ENDE Change border for itemboxes new MP webpage ***************/
 /************Change bg new MP webpage ***************/
@@ -265,12 +321,15 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .home .content-header-line > span,
+.events .content-header-line > span,
 .event .content-header-line > span {
+    font-family: var(--e-global-typography-8dd2c1e-font-family) !important;
     color: var(--e-global-color-primary) !important;
-    font-size: 18px !important;
+    font-size: var(--e-global-typography-8dd2c1e-font-size) !important;
     font-style: normal !important;
-    font-weight: 400 !important;
-    line-height: 160% !important; /* 28.8px */
+    font-weight: var(--e-global-typography-8dd2c1e-font-weight) !important;
+    line-height: var(--e-global-typography-8dd2c1e-line-height) !important; /* 28.8px */
+    text-transform: var(--e-global-typography-8dd2c1e-text-transform) !important;
 }
 
 .home .content-header-line > h1,
@@ -278,12 +337,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .event .content-header-line > h1,
 .modSession .content-header-line > h1,
 .speakerSession .content-header-line > h1 {
-    font-family: var(--font-family-default) !important;
-    font-size: 82px !important;
-    font-style: normal !important;
-    font-weight: 700 !important;
-    line-height: 115% !important; /* 94.3px */
-    letter-spacing: 0.82px !important;
+    font-family: var(--e-global-typography-73a9cb8-font-family ), Sans-serif !important;
+    font-size: var(--e-global-typography-73a9cb8-font-size ) !important;
+    font-weight: var(--e-global-typography-73a9cb8-font-weight ) !important;
+    line-height: var(--e-global-typography-73a9cb8-line-height ) !important;
+    letter-spacing: var(--e-global-typography-73a9cb8-letter-spacing ) !important;
+    word-spacing: var(--e-global-typography-73a9cb8-word-spacing ) !important;
     margin-top: 20px !important;
 }
 
@@ -292,18 +351,20 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .event .win-h2, .event .win-h3,
 .modSession .win-h2, .modSession .win-h3,
 .speakerSession .win-h2, .speakerSession .win-h3 {
-    font-family: var(--font-family-default) !important;
+    font-family: var(--e-global-typography-d990e6c-font-family) !important;
     font-size: 18px !important;
     line-height: 30px !important;
+    --e-global-typography-d990e6c-font-family: "Helvetica";
+    
 }
 
 .home .content-header-line > h2,
 .events .content-header-line > h2 {
-    font-family: var(--font-family-default) !important;
-    font-size: 40px !important;
+    font-family: var(--e-global-typography-d990e6c-font-family) !important;
+    font-size: var(--e-global-typography-d990e6c-font-size) !important;
     font-style: normal !important;
-    font-weight: 700 !important;
-    line-height: 120% !important; /* 48px */
+    font-weight: var(--e-global-typography-d990e6c-font-weight) !important;
+    line-height: var(--e-global-typography-d990e6c-line-height) !important; /* 48px */
     text-transform: none !important;
 }
 
@@ -615,9 +676,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: transparent !important;
     width: inherit !important;
     border: 2px solid var(--e-global-color-primary) !important;
-    border-radius: none !important;
-    -webkit-border-radius: none !important;
-    -moz-border-radius: none !important;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
 }
 
 .event .logOff-container {
@@ -765,10 +826,21 @@ section.elementor-inner-section > div {
 /**margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1500px**/
 @media (min-width: 1300px) and (max-width: 1499px) {
+
+    .home .content-header {
+        width: calc(100% - 30px - 30px) !important;
+    }
+
+    .home .win-listview .win-vertical .win-gridlayout.win-surface,
+    .events .win-listview .win-vertical .win-gridlayout.win-surface {
+        width: calc(100% - 30px - 30px) !important;
+        margin: 0 auto !important;
+    }
+
     .event .content-grid,
     .modSession .content-grid,
     .speakerSession .content-grid {
-        width: var(--max-content-width) !important;
+        width: calc(100% - 30px - 30px) !important;
         margin: 0 auto !important;
     }
 
