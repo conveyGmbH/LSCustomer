@@ -270,6 +270,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin: 0 auto !important;
     max-width: 1400px !important;
     padding-bottom: 0 !important;
+    width: calc(100% - 30px - 30px) !important;
 }
 
 .event .content-grid,
@@ -826,10 +827,6 @@ section.elementor-inner-section > div {
 /**margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1500px**/
 @media (min-width: 1300px) and (max-width: 1499px) {
-
-    .home .content-header {
-        width: calc(100% - 30px - 30px) !important;
-    }
 
     .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
