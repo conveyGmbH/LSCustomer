@@ -18,37 +18,29 @@
 
 :root {
     /***new vars***/
-    --max-content-margin-left: calc(50% - 600px) !important;
-    --max-content-width: calc(1300px - 50px - 50px) !important;
-    --max-content-width-surface: calc(1300px - 50px - 50px) !important;
-    --font-family-default: "Raleway",  Helvetica,  Arial,  Verdana, sans-serif !important;
+    --max-content-margin-left: calc(50% - 700px) !important;
+    --max-content-width: 1400px !important; /*calc(1300px - 50px - 50px) !important;*/
+    --max-content-width-surface: 1400px !important; /*calc(1300px - 50px - 50px) !important;*/
+    --font-family-default: "Raleway", Helvetica, Arial, Verdana, sans-serif !important;
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
     --outline-focus: none;
-    /*    
-    --e-global-color-primary: #2A2F3D;
-    --e-global-color-secondary: #07B9CB;
-    --e-global-color-text: #2A2F3D;
-    --e-global-color-accent: #C2D63E;
-    --e-global-color-d4faeed: #F3FBFC;
-    --e-global-color-buttontext: #FFFFFF;
-
-    --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
-    --outline-focus: 1px solid var(--color-gray-lighter);
-    */
+    
 }
 
 :root {
-    --e-global-color-text: #006b8a; /*#333333;*/
-    --e-global-color-buttontext: #006b8a;/*#ffffff*/
+    --e-global-color-primary: #006B8A;
+    --e-global-color-secondary: #DCDC3E;
+    --e-global-color-text: #333333;
+    --e-global-color-accent: #DCDC3E;
+    --e-global-color-text: #333333;
+    --e-global-color-buttontext: #ffffff;
     --e-global-color-accent: #006b8a !important;
     --the7-additional-menu-elements-color: #ffffff !important; /*#006b8a !important;*/
     --the7-accent-color: #dcdc3e !important;
     --the7-accent-bg-color: #dcdc3e !important;
     --the7-background-color: #eeeeee;
-    --the7-additional-menu-elements-font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
-    --the7-base-font-family: "Raleway", Helvetica, Arial, Verdana, sans-serif;
 }
 /****************img und #main von MP entfernen*******************/
 .home #fancy-header, .events #fancy-header, .event #fancy-header {
@@ -76,7 +68,7 @@
 /************ Change border for itemboxes new MP webpage *******************/
 .home .win-listview .win-gridlayout .win-container {
     background-color: transparent !important;
-    border: 2px solid var(--e-global-color-text) !important;
+    border: 2px solid var(--e-global-color-primary) !important;
     border-radius: none !important;
     -webkit-border-radius: none !important;
     -moz-border-radius: none !important;
@@ -95,6 +87,11 @@
 .home .list-header {
     margin-bottom: 60px;
     padding: 0 0 20px 0 !important;
+}
+
+.home .list-footer {
+    padding: 30px 0 0 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .home .win-headercontainer,
@@ -178,13 +175,13 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     font-weight: 400;
     font-size: 16px !important;
     line-height: 160% !important;
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
 }
 
 ::placeholder,
 ::-ms-input-placeholder,
 ::-webkit-input-placeholder {
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
 }
 
 .countdown .win-type-body,
@@ -201,7 +198,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .event .win-type-body,
 .modSession .win-type-body,
 .speakerSession .win-type-body {
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
     font-family: var(--font-family-default);
     font-size: 18px;
     font-style: normal;
@@ -215,7 +212,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .home .content-header, .events .top-header {
     margin: 0 auto !important;
-    max-width: calc(1300px - 50px - 50px) !important;
+    max-width: 1400px !important;
     padding-bottom: 0 !important;
 }
 
@@ -240,7 +237,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .event .calenderButton,
 .event .homeButton {
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
     font-family: var(--font-family-default) !important;
     font-size: 16px !important;
     font-style: normal !important;
@@ -254,7 +251,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .modSession button .win-type-title,
 .speakerSession button .win-type-title {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
 }
 
 .event .teaser-fragmenthost {
@@ -263,9 +260,13 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     padding: 15px 15px 0 0 !important;
 }
 
+.home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
+    width: 100% !important;
+}
+
 .home .content-header-line > span,
 .event .content-header-line > span {
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
     font-size: 18px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -318,7 +319,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .home .event-item .event-title,
 .events .event-item .event-title {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
     padding: 20px 0 10px 0 !important;
     font-size: 22px !important;
     line-height: 120% !important;
@@ -329,7 +330,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .home .event-item .event-subtitle,
 .events .event-item .event-subtitle {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
     padding-bottom: 5px !important;
     letter-spacing: 0.14px !important;
     padding: 5px 0 20px 0 !important;
@@ -343,7 +344,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .home .event-item .event-comment,
 .events .event-item .event-comment {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
     font-size: 16px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -383,7 +384,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin-left: 0 !important;
     padding: 15px 0 !important;
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
     font-size: 16px !important;
     font-style: normal !important;
     font-weight: 700 !important;
@@ -411,12 +412,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .home .expander-button {
-    border: 2px solid var(--e-global-color-text) !important;
+    border: 2px solid var(--e-global-color-primary, #006b8a) !important;
     font-family: var(--font-family-default) !important;
 }
 
 .home .expander-icon {
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
 }
 
 .home .win-listview .win-vertical .win-footercontainer,
@@ -438,6 +439,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 /**************No  Left Margin/Border/Padding for event boxes new MP webpage************************/
 .home .win-listview .win-groupheader {
     padding: 5px 0 0 0 !important;
+    width: 100% !important;
 }
 
 .home .win-itemsblock, .events .win-itemsblock {
@@ -497,9 +499,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     text-align: center;
     left: 90px;
     top: 0;
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
     background-color: #f2f2f2;
-    border-color: var(--e-global-color-text, #006b8a);
+    border-color: var(--e-global-color-primary, #006b8a);
     border-radius: 0 !important;
     transition: opacity 0.3s;
     -webkit-transition: opacity 0.3s;
@@ -522,7 +524,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     top: 100%;
     color: #fff;
     background: var(--the7-additional-menu-elements-color);
-    border-color: var(--e-global-color-text, #006b8a);
+    border-color: var(--e-global-color-primary, #006b8a);
     border-radius: 0 !important;
     -webkit-border-radius: 0 !important;
     -moz-border-radius: 0 !important;
@@ -535,7 +537,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .modSession .caption-field,
 .speakerSession caption-field {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
     line-height: 20px !important;
     font-size: 16px !important;
 }
@@ -546,12 +548,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .event .section-4 .caption-field {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus),
 .event button#homeButton:not(:hover):not(:active):not(:focus) {
-    border-color: var(--e-global-color-text, #006b8a) !important;
+    border-color: var(--e-global-color-primary, #006b8a) !important;
     background-color: transparent !important;
 }
 
@@ -562,7 +564,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .event button#calenderButton:hover,
 .event button#homeButton:hover {
-    border-color: var(--e-global-color-text, #006b8a) !important;
+    border-color: var(--e-global-color-primary, #006b8a) !important;
     background-color: transparent !important;
     cursor: pointer;
     border-radius: 40px !important;
@@ -579,8 +581,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .register #loginButton, .register #re_registerEvent {
     border-style: solid;
     border-width: 2px;
-    border-color: var(--e-global-color-text, #006b8a) !important;
-    background-color: var(--e-global-color-text) !important;
+    border-color: var(--e-global-color-primary, #006b8a) !important;
+    background-color: var(--e-global-color-primary) !important;
 }
 
 .register #loginButton > div > span, .register #re_registerEvent > span {
@@ -602,7 +604,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     width: 99% !important;
     padding-top: 10px !important;
     background-color: transparent !important;
-    border: 2px solid var(--e-global-color-text) !important;
+    border: 2px solid var(--e-global-color-primary) !important;
 }
 
 .register .register_title {
@@ -612,7 +614,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .register .input_field {
     background-color: transparent !important;
     width: inherit !important;
-    border: 2px solid var(--e-global-color-text) !important;
+    border: 2px solid var(--e-global-color-primary) !important;
     border-radius: none !important;
     -webkit-border-radius: none !important;
     -moz-border-radius: none !important;
@@ -630,7 +632,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .modSession .win-link, .speakerSession .win-link {
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
 }
 
 .event .countdown-fragmenthost {
@@ -657,13 +659,13 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .countdown .win-h3 {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
     font-size: 24px !important;
 }
 
 .countdown .win-h5 {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
     font-size: 12px !important;
 }
 
@@ -712,10 +714,10 @@ section.elementor-inner-section > div {
 }
 
 .win-type-body {
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
 }
 .caption-field {
-    color: var(--e-global-color-text) !important;
+    color: var(--e-global-color-primary) !important;
 }
 .sticky-scrolled .sticky-header-pinned-fixed {
     background-color: Window;
@@ -737,7 +739,7 @@ section.elementor-inner-section > div {
 }
 
 .text-lightcolor.win-button:disabled {
-    color: var(--e-global-color-text, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
     cursor: default;
 }
 
@@ -792,7 +794,8 @@ section.elementor-inner-section > div {
 */
 
 
-.view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface, .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
+.view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
+.view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     max-width: var(--max-content-width-surface) !important;
     margin-left: var(--max-content-margin-left) !important;
 }
@@ -951,7 +954,7 @@ section.elementor-inner-section > div {
 .view-size-medium-small .home .content-header,
 .view-size-medium-small .events .content-header,
 .view-size-medium-small .event .content-header {
-    width: calc(100% - 20px - 20px) !important;
+    width: calc(100% - 15px - 15px) !important;
     margin: 0 auto !important;
 }
 
@@ -979,7 +982,7 @@ section.elementor-inner-section > div {
 .view-size-small .home .content-header,
 .view-size-small .events .content-header,
 .view-size-small .event .content-header {
-    width: calc(100% - 20px - 20px) !important;
+    width: calc(100% - 15px - 15px) !important;
     margin: 0 auto !important;
 }
 
