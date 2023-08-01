@@ -71,7 +71,7 @@
             Colors.changeCSS(".home .win-listview .win-groupheadercontainer", AppData._persistentStates.inputBorderRadius + "px");
 
             Application.insertBodyContent(element, ".list-header", ".list-footer");
-            Colors.loadSVGImageElements(element, "expander-icon", 40, "#c2d63e");
+            Colors.loadSVGImageElements(element, "expander-icon", 40, Application.buttonSymbolColor || "#c2d63e");
 
             this.inResize = 0;
             this.prevWidth = 0;

@@ -57,4 +57,6 @@
 
     saveBodyContent();
 
+    Application.buttonSymbolColor = "#006B8A";
+
 })();
