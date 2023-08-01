@@ -75,6 +75,7 @@
 /*************ENDE Remove border for new MP webpage***************/
 /************ Change border for itemboxes new MP webpage *******************/
 .home .win-listview .win-gridlayout .win-container {
+    background-color: transparent !important;
     border: 2px solid var(--e-global-color-text) !important;
     border-radius: none !important;
     -webkit-border-radius: none !important;
@@ -91,6 +92,11 @@
     background-color: var(--the7-additional-menu-elements-color, #ffffff) !important;
 }
 
+.home .list-header {
+    margin-bottom: 60px;
+    padding: 0 0 20px 0 !important;
+}
+
 .home .win-headercontainer,
 .events .top-header {
     background-image: url("../img/Line.svg");
@@ -104,6 +110,13 @@
     background-position: left top;
 }
 
+.home .win-listview .win-itembox {
+    background-color: transparent !important;
+}
+
+html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
+    background-color: transparent !important;
+}
 /************ENDE Change bg new MP webpage ***************/
 /***********FONT for MP***********/
 .home .win-type-title,
@@ -398,8 +411,12 @@
 }
 
 .home .expander-button {
-    border: 2px solid var(--e-global-color-buttontext) !important;
+    border: 2px solid var(--e-global-color-text) !important;
     font-family: var(--font-family-default) !important;
+}
+
+.home .expander-icon {
+    color: var(--e-global-color-text, #006b8a) !important;
 }
 
 .home .win-listview .win-vertical .win-footercontainer,
