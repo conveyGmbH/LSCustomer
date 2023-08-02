@@ -504,6 +504,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin-left: var(--max-content-margin-left) !important;
     max-width: var(--max-content-width-surface) !important;
     margin-top: 10px !important;
+    width: calc(100% - 30px - 30px) !important;
 }
 
 /**************No  Left Margin/Border/Padding for event boxes new MP webpage************************/
@@ -842,13 +843,6 @@ section.elementor-inner-section > div {
     contentarea is less than 1500px**/
 @media (min-width: 1300px) and (max-width: 1499px) {
 
-    .home .win-listview .win-vertical .win-gridlayout.win-surface,
-    .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        max-width: 1400px !important;
-        width: calc(100% - 30px - 30px) !important;
-        margin: 0 2% !important;
-    }
-
     .event .content-grid,
     .modSession .content-grid,
     .speakerSession .content-grid {
@@ -881,7 +875,8 @@ section.elementor-inner-section > div {
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     max-width: var(--max-content-width-surface) !important;
-    margin: 0 2% !important;
+    margin: 0 30px 0 30px !important;
+    width: 100% !important;
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
