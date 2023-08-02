@@ -1240,13 +1240,16 @@
                                     WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
                                 }
                             }
-                            if (listView.winControl.scrollPosition > prevScrollPosition) {
-                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild, "headerup")) {
-                                    WinJS.Utilities.addClass(headerHost.firstElementChild, "headerup");
-                                }
-                            } else {
-                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild, "headerup")) {
-                                    WinJS.Utilities.removeClass(headerHost.firstElementChild, "headerup");
+                            var stickyHeaderPinnedFixed = headerHost.firstElementChild.querySelector(".sticky-header-pinned-fixed");
+                            if (stickyHeaderPinnedFixed) {
+                                if (listView.winControl.scrollPosition > prevScrollPosition) {
+                                    if (!WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "headerup")) {
+                                        WinJS.Utilities.addClass(stickyHeaderPinnedFixed, "headerup");
+                                    }
+                                } else {
+                                    if (WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "headerup")) {
+                                        WinJS.Utilities.removeClass(stickyHeaderPinnedFixed, "headerup");
+                                    }
                                 }
                             }
                         }
