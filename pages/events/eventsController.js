@@ -586,6 +586,7 @@
                                 }
                             }
                         }
+                        prevScrollPosition = listView.winControl.scrollPosition;
                     }
                     Log.ret(Log.l.u1);
                 }
