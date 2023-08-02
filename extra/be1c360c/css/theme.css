@@ -949,6 +949,12 @@ section.elementor-inner-section > div {
     margin-left: 0 !important;
 }
 
+.view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
+.view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    width: calc(100% - 20px - 20px) !important;
+    margin: 0 auto !important;
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
@@ -1046,6 +1052,13 @@ section.elementor-inner-section > div {
 .view-size-medium-small .register .contentarea {
     margin-top: 0 !important;
 }
+
+.view-size-medium-small .home .win-listview .win-vertical .win-gridlayout.win-surface,
+.view-size-medium-small .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    width: calc(100% - 15px - 15px) !important;
+    margin: 0 auto !important;
+}
+
 
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
