@@ -8,11 +8,18 @@
          url(../../../lib/WinJS/fonts/Symbols.ttf) format("truetype");
 }
 
-@font-face {
+/*@font-face {
     font-family: "Raleway";
     src: url(../fonts/Raleway-Medium.ttf) format("truetype");
     font-style: normal;
     font-weight: 500;
+}*/
+
+@font-face {
+    font-family: "Helvetica";
+    src: url(../fonts/Hlcr____.ttf) format("truetype");
+    font-style: normal;
+    font-weight: 400;
 }
 
 
@@ -21,7 +28,7 @@
     --max-content-margin-left: calc(50% - 700px) !important;
     --max-content-width: 1400px !important; /*calc(1300px - 50px - 50px) !important;*/
     --max-content-width-surface: 1400px !important; /*calc(1300px - 50px - 50px) !important;*/
-    --font-family-default: "Raleway", Helvetica, Arial, Verdana, sans-serif !important;
+    --font-family-default: "Helvetica", Helvetica, Arial, Verdana, sans-serif !important;
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
