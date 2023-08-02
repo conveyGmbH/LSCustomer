@@ -490,13 +490,17 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-primary, #006b8a) !important;
 }
 
-.home .win-listview .win-vertical .win-footercontainer,
-.home .win-listview .win-vertical .win-headercontainer,
-.events .win-listview .win-vertical .win-headercontainer {
+.home .win-listview .win-vertical .win-footercontainer {
     margin-left: 0 !important;
     width: 100% !important;
     padding: 0 !important;
-
+}
+.home .win-listview .win-vertical .win-headercontainer,
+.events .win-listview .win-vertical .win-headercontainer {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    width: 100% !important;
+    padding: 102px 0 0 0 !important;
 }
 
 .home .win-listview .win-vertical .win-gridlayout.win-surface,
