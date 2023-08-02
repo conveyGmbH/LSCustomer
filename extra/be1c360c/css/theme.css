@@ -1074,7 +1074,7 @@ section.elementor-inner-section > div {
     margin: 0 15px !important;
 }
 
-.view-size-bigger .home .expander-button {
+.view-size-medium-small .home .expander-button {
     transform: scale(0.7);
 }
 
