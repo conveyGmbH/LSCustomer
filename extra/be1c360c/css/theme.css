@@ -910,7 +910,7 @@ section.elementor-inner-section > div {
     padding: 15px 0 !important;
 }
 
-.view-size-bigger .home .win-listview .win-groupheader {
+.view-size-biggest .home .win-listview .win-groupheader {
     width: calc(100% - 60px) !important;
 }
 
