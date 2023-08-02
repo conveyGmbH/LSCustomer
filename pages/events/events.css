@@ -281,7 +281,7 @@
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 20px;
     margin-top: 20px;
-    width: calc(100% - 20px) !important;
+    width: calc(100% - 20px);
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -310,7 +310,7 @@
 
 .view-size-medium .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 5px;
-    width: calc(100% + 10px) !important;
+    width: calc(100% + 10px);
 }
 
 .view-size-medium .events .win-listview .win-gridlayout .win-container {
@@ -359,7 +359,7 @@
 
 .view-size-small .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 0;
-    width: calc(100% + 20px) !important;
+    width: calc(100% + 20px);
 }
 
 .view-size-small .events .win-listview .win-gridlayout .win-container {
