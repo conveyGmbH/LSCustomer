@@ -968,6 +968,9 @@ section.elementor-inner-section > div {
     margin: 0 20px !important;
 }
 
+.view-size-bigger .home .expander-button {
+    transform: scale(0.8);
+}
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
@@ -975,7 +978,6 @@ section.elementor-inner-section > div {
 
     use: .view-size-medium
 */
-
 .view-size-medium .home .win-listview .win-vertical .win-gridlayout .win-surface, view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surface {
     margin: 0 5px !important;
     width: calc(100% - 10px) !important;
@@ -1072,6 +1074,9 @@ section.elementor-inner-section > div {
     margin: 0 15px !important;
 }
 
+.view-size-bigger .home .expander-button {
+    transform: scale(0.7);
+}
 
 /*margins/paddings for small screens and orientation vertical
         @media (max-width:499px) {
