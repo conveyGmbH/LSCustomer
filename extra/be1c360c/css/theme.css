@@ -1087,7 +1087,7 @@ section.elementor-inner-section > div {
     transform: scale(0.7);
 }
 
-.view-size-medium .home .win-listview .win-groupheader {
+.view-size-medium-small .home .win-listview .win-groupheader {
     width: calc(100% - 20px) !important;
 }
 
