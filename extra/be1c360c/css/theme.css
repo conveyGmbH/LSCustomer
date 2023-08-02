@@ -515,7 +515,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 /**************No  Left Margin/Border/Padding for event boxes new MP webpage************************/
 .home .win-listview .win-groupheader {
     padding: 5px 0 0 0 !important;
-    width: calc(100% - 70px) !important;
+    width: calc(100% - 60px) !important;
 }
 
 .home .win-itemsblock, .events .win-itemsblock {
@@ -968,6 +968,10 @@ section.elementor-inner-section > div {
     margin: 0 20px !important;
 }
 
+.view-size-bigger .home .win-listview .win-groupheader {
+    width: calc(100% - 45px) !important;
+}
+
 .view-size-bigger .home .expander-button {
     transform: scale(0.8);
 }
@@ -1044,6 +1048,11 @@ section.elementor-inner-section > div {
     padding: 0 !important;
 }
 
+.view-size-medium .home .win-listview .win-groupheader {
+    width: calc(100% - 30px) !important;
+}
+
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
 
@@ -1076,6 +1085,10 @@ section.elementor-inner-section > div {
 
 .view-size-medium-small .home .expander-button {
     transform: scale(0.7);
+}
+
+.view-size-medium .home .win-listview .win-groupheader {
+    width: calc(100% - 20px) !important;
 }
 
 /*margins/paddings for small screens and orientation vertical
