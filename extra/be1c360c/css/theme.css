@@ -221,6 +221,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .modSession .caption-field,
 .modSession .content-header {
     font-family: var(--font-family-default) !important;
+    color: var(--e-global-color-accent, #006b8a) !important;
 }
 
 .register .win-type-body,
@@ -261,7 +262,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .event .win-type-body,
 .modSession .win-type-body,
 .speakerSession .win-type-body {
-    color: var(--e-global-color-primary) !important;
+    color: var(--e-global-color-accent, #006b8a) !important;
     font-family: var(--font-family-default);
     font-size: 18px;
     font-style: normal;
@@ -620,9 +621,15 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-primary, #006b8a) !important;
 }
 
+.event .homeButton,
+.modSession .homeButton,
+.speakerSession .homeButton {
+    color: var(--e-global-color-accent, #006b8a) !important;
+}
+
 .event button#calenderButton:not(:hover):not(:active):not(:focus),
 .event button#homeButton:not(:hover):not(:active):not(:focus) {
-    border-color: var(--e-global-color-primary, #006b8a) !important;
+    border-color: var(--e-global-color-accent, #006b8a) !important;
     background-color: transparent !important;
 }
 
@@ -633,7 +640,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .event button#calenderButton:hover,
 .event button#homeButton:hover {
-    border-color: var(--e-global-color-primary, #006b8a) !important;
+    border-color: var(--e-global-color-accent, #006b8a) !important;
     background-color: transparent !important;
     cursor: pointer;
     border-radius: 40px !important;
@@ -837,8 +844,9 @@ section.elementor-inner-section > div {
 
     .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
+        max-width: 1400px !important;
         width: calc(100% - 30px - 30px) !important;
-        margin: 0 auto !important;
+        margin: 0 2% !important;
     }
 
     .event .content-grid,
@@ -873,7 +881,7 @@ section.elementor-inner-section > div {
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     max-width: var(--max-content-width-surface) !important;
-    margin-left: var(--max-content-margin-left) !important;
+    margin: 0 2% !important;
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
@@ -902,12 +910,6 @@ section.elementor-inner-section > div {
 
     use: .view-size-bigger
 */
-.view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
-.view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 10px !important;
-}
-
-
 .view-size-bigger .speakerSession .content-grid,
 .view-size-bigger .modSession .content-grid {
     margin: 0 !important;
@@ -937,11 +939,11 @@ section.elementor-inner-section > div {
     margin: 0 !important;
 }
 
-    .view-size-bigger .event .content-container,
-    .view-size-bigger .event .speakerblock {
-        width: calc(100% - 20px - 20px) !important;
-        margin: 0 auto !important;
-    }
+.view-size-bigger .event .content-container,
+.view-size-bigger .event .speakerblock {
+    width: calc(100% - 20px - 20px) !important;
+    margin: 0 auto !important;
+}
 
 .view-size-bigger .countdown .count {
     padding-top: 25px !important;
@@ -988,6 +990,10 @@ section.elementor-inner-section > div {
 
 .view-size-medium .home .group-header {
     width: 100% !important;
+}
+
+.view-size-medium .home .win-listview .win-groupheader {
+    padding: 0 5px !important;
 }
 
 .view-size-medium .events button#homeButton,
@@ -1054,7 +1060,9 @@ section.elementor-inner-section > div {
 
 .view-size-small .home .win-listview .win-groupheader {
     width: calc(100% - 70px) !important;
+    padding: 0 5px 0 10px !important;
 }
+
 .view-size-small .home .content-header,
 .view-size-small .events .content-header,
 .view-size-small .event .content-header {
