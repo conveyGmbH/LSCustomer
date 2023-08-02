@@ -352,7 +352,6 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     font-weight: var(--e-global-typography-73a9cb8-font-weight ) !important;
     line-height: var(--e-global-typography-73a9cb8-line-height ) !important;
     letter-spacing: var(--e-global-typography-73a9cb8-letter-spacing ) !important;
-    word-spacing: var(--e-global-typography-73a9cb8-word-spacing ) !important;
     margin-top: 20px !important;
 }
 
