@@ -17,7 +17,6 @@
             if (Application.query && Application.query.eventStartId) {
                 Home._eventStartId = Application.query.eventStartId;
             }
-
             // ListView control
             var listView = pageElement.querySelector("#events.listview");
 
@@ -68,6 +67,7 @@
 
             var maxLeadingPages = 0;
             var maxTrailingPages = 0;
+            var prevScrollPosition = 0;
 
             // result-set returns non-unique recordIds!!!
             var allScopesFromRecordId = function (recordId, seriesId) {
@@ -1239,8 +1239,18 @@
                                 if (WinJS.Utilities.hasClass(headerHost.firstElementChild,"sticky-scrolled")) {
                                     WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
                                 }
-                }
+                            }
+                            if (listView.winControl.scrollPosition > prevScrollPosition) {
+                                if (!WinJS.Utilities.hasClass(headerHost.firstElementChild, "headerup")) {
+                                    WinJS.Utilities.addClass(headerHost.firstElementChild, "headerup");
+                                }
+                            } else {
+                                if (WinJS.Utilities.hasClass(headerHost.firstElementChild, "headerup")) {
+                                    WinJS.Utilities.removeClass(headerHost.firstElementChild, "headerup");
+                                }
+                            }
                         }
+                        prevScrollPosition = listView.winControl.scrollPosition;
                     }
                     Log.ret(Log.l.u1);
                 }
