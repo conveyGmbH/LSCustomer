@@ -221,7 +221,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .modSession .caption-field,
 .modSession .content-header {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-accent, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
 }
 
 .register .win-type-body,
@@ -255,6 +255,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .countdown .win-h5 {
     font-family: var(--font-family-default) !important;
     font-weight: 500 !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
 }
 
 .home .win-type-body,
@@ -262,7 +263,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .event .win-type-body,
 .modSession .win-type-body,
 .speakerSession .win-type-body {
-    color: var(--e-global-color-accent, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
     font-family: var(--font-family-default);
     font-size: 18px;
     font-style: normal;
@@ -477,7 +478,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .home #more_Button {
     background-color: var(--e-global-color-accent);
-    border-color: var(--e-global-color-accent);
+    border-color: var(--e-global-color-primary);
     color: var(--e-global-color-buttontext);
 }
 
@@ -529,7 +530,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .event .register-fragmenthost {
-    margin-top: 10% !important;
+    margin-top: 60% !important;
 }
 
 .events button#homeButton {
@@ -538,8 +539,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin-top: 20px !important;
     margin-bottom: 20px !important;
     padding: 14px 26px;
-    color: var(--e-global-color-buttontext, #006b8a) !important;
-    background-color: var(--the7-additional-menu-elements-color, #ffffff) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
+    background-color: transparent !important;
 }
 
 .event button#homeButton,
@@ -550,8 +551,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin-top: 20px !important;
     margin-left: 0 !important;
     padding: 14px 26px;
-    color: var(--e-global-color-buttontext) !important;
-    background-color: var(--the7-additional-menu-elements-color, #006b8a) !important;
+    color: var(--e-global-color-primary) !important;
+    background-color: transparent !important;
 }
 
 .events .button-tip .win-tooltip,
@@ -592,7 +593,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     text-align: center;
     left: 0;
     top: 100%;
-    color: #fff;
+    color: var(--e-global-color-primary, #006b8a) !important;
     background: var(--the7-additional-menu-elements-color);
     border-color: var(--e-global-color-primary, #006b8a);
     border-radius: 0 !important;
@@ -624,23 +625,23 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .event .homeButton,
 .modSession .homeButton,
 .speakerSession .homeButton {
-    color: var(--e-global-color-accent, #006b8a) !important;
+    color: var(--e-global-color-primary, #006b8a) !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus),
 .event button#homeButton:not(:hover):not(:active):not(:focus) {
-    border-color: var(--e-global-color-accent, #006b8a) !important;
+    border-color: var(--e-global-color-primary, #006b8a) !important;
     background-color: transparent !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title,
 .event button#homeButton:not(:hover):not(:active):not(:focus) .win-type-title {
-    color: var(--e-global-color-buttontext) !important;
+    color: var(--e-global-color-primary) !important;
 }
 
 .event button#calenderButton:hover,
 .event button#homeButton:hover {
-    border-color: var(--e-global-color-accent, #006b8a) !important;
+    border-color: var(--e-global-color-primary, #006b8a) !important;
     background-color: transparent !important;
     cursor: pointer;
     border-radius: 40px !important;
@@ -701,6 +702,10 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     height: auto;
     width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
+}
+
+.win-link {
+    color: var(--e-global-color-primary, #006b8a) !important;
 }
 
 .event #logOffbutton .win-link {
@@ -861,6 +866,10 @@ section.elementor-inner-section > div {
     }
     .teaser .ITbackground {
         margin-left: 0 !important;
+    }
+
+    .event .register-fragmenthost {
+        margin-top: 55% !important;
     }
 
     .event .section-3 {
