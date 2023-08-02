@@ -71,6 +71,9 @@
     height: auto !important;
     padding: 4px 0;
 }
+.home .win-listview .win-vertical .group-collapsed .win-itemsblock {
+    padding: 0;
+}
 
 .home .list-header {
     padding: 0;
