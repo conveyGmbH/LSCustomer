@@ -69,6 +69,7 @@
 .home .win-listview .win-vertical .win-itemsblock {
     width: 100% !important;
     height: auto !important;
+    padding: 4px 0;
 }
 
 .home .list-header {
