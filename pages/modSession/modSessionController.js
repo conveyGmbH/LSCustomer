@@ -56,6 +56,7 @@
             }, commandList]);
 
             var onScrollResizePromise = null;
+            var prevScrollPosition = 0;
             var contentArea = pageElement.querySelector(".contentarea");
             var magicStart = "&lt;!--";
             var magicStop = "--&gt;";
@@ -244,6 +245,18 @@
                             } else {
                                 if (WinJS.Utilities.hasClass(headerHost.firstElementChild, "sticky-scrolled")) {
                                     WinJS.Utilities.removeClass(headerHost.firstElementChild, "sticky-scrolled");
+                                }
+                            }
+                            var stickyHeaderPinnedFixed = headerHost.firstElementChild.querySelector(".sticky-header-pinned-fixed");
+                            if (stickyHeaderPinnedFixed) {
+                                if (listView.winControl.scrollPosition > Math.max(prevScrollPosition, 15)) {
+                                    if (!WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "headerup")) {
+                                        WinJS.Utilities.addClass(stickyHeaderPinnedFixed, "headerup");
+                                    }
+                                } else {
+                                    if (WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "headerup")) {
+                                        WinJS.Utilities.removeClass(stickyHeaderPinnedFixed, "headerup");
+                                    }
                                 }
                             }
                         }
