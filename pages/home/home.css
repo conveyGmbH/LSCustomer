@@ -462,7 +462,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin: 0 1% 0 2%;
-    width: calc(100% - 60px) !important;
+    width: calc(100% - 60px);
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -561,7 +561,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .view-size-small .home .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 0;
-    width: calc(100% - 10px) !important;
+    width: calc(100% - 10px);
 }
 
 .view-size-small .home .win-listview .win-gridlayout .win-container {
