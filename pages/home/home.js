@@ -67,9 +67,6 @@
                     contentarea.style.backgroundColor = Colors.tileBackgroundColor;
                 }
             }*/
-            Colors.changeCSS(".home .win-listview .win-gridlayout .win-container", "border-radius", AppData._persistentStates.inputBorderRadius + "px");
-            Colors.changeCSS(".home .win-listview .win-groupheadercontainer", AppData._persistentStates.inputBorderRadius + "px");
-
             Application.insertBodyContent(element, ".list-header", ".list-footer");
             Colors.loadSVGImageElements(element, "expander-icon", 40, window.LiveBridgeSettings && window.LiveBridgeSettings.buttonSymbolColor || "#c2d63e");
 
