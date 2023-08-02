@@ -505,6 +505,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     max-width: var(--max-content-width-surface) !important;
     margin-top: 10px !important;
     width: calc(100% - 30px - 30px) !important;
+    min-height: 800px;
 }
 
 /**************No  Left Margin/Border/Padding for event boxes new MP webpage************************/
