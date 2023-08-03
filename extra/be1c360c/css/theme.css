@@ -879,10 +879,15 @@ section.elementor-inner-section > div {
     }
     .teaser .ITbackground {
         margin-left: 0 !important;
+        border-radius: 0 !important;
+        -moz-border-radius: 0 !important;
+        -webkit-border-radius: 0 !important;
     }
 
     .teaser .ipadImg {
         border-radius: 0 !important;
+        -moz-border-radius: 0 !important;
+        -webkit-border-radius: 0 !important;
     }
 
     .event .register-fragmenthost {
