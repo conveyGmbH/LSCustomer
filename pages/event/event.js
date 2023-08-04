@@ -42,17 +42,24 @@
             this.prevHeight = 0;
 
             var homeSymbolAttribute = null;
-            if (window.LiveBridgeSettings && window.LiveBridgeSettings.homeSymbolName) {
-                var actionImageHome = element.querySelector("#home.action-image");
-                if (actionImageHome) {
-                    homeSymbolAttribute = "name";
-                    actionImageHome[homeSymbolAttribute] = window.LiveBridgeSettings.homeSymbolName;
+            var homeSymbolOptions = {
+                home: { strokeWidth: 400 }
+            };
+            if (window.LiveBridgeSettings) {
+                if (window.LiveBridgeSettings.homeSymbolName) {
+                    var actionImageHome = element.querySelector("#home.action-image");
+                    if (actionImageHome) {
+                        homeSymbolAttribute = "name";
+                        actionImageHome[homeSymbolAttribute] = window.LiveBridgeSettings.homeSymbolName;
+                    }
+                }
+                if (window.LiveBridgeSettings.homeSymbolOptions) {
+                    homeSymbolOptions = window.LiveBridgeSettings.homeSymbolOptions;
                 }
             }
-
             Colors.loadSVGImageElements(element, "action-image", 16,
                 window.LiveBridgeSettings && window.LiveBridgeSettings.buttonSymbolColor || "#ffffff",
-                homeSymbolAttribute, null, { home: { strokeWidth: 400 } });
+                homeSymbolAttribute, null, homeSymbolOptions);
 
             var commandList = [];
             this.controller = new Event.Controller(element, commandList);

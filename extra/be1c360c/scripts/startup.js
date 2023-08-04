@@ -60,7 +60,16 @@
 
     window.LiveBridgeSettings = {
         buttonSymbolColor: "#006B8A",
-        homeSymbolName: "vector_left"
+        homeSymbolName: "vector_left",
+        homeSymbolOptions: {
+            useFillColor: false,
+            useStrokeColor: true,
+            strokeWidth: 200,
+            size: {
+                width: 14,
+                height: 25
+            }
+        }
     };
 
 })();
