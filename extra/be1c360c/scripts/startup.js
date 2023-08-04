@@ -59,7 +59,8 @@
     saveBodyContent();
 
     window.LiveBridgeSettings = {
-        buttonSymbolColor: "#006B8A"
+        buttonSymbolColor: "#006B8A",
+        homeSymbolName: "vector_left"
     };
 
 })();

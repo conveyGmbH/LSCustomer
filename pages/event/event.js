@@ -41,7 +41,18 @@
             this.prevWidth = 0;
             this.prevHeight = 0;
 
-            Colors.loadSVGImageElements(element, "action-image", 16, window.LiveBridgeSettings && window.LiveBridgeSettings.buttonSymbolColor || "#ffffff", null, null, {home:{strokeWidth: 400}});
+            var homeSymbolAttribute = null;
+            if (window.LiveBridgeSettings && window.LiveBridgeSettings.homeSymbolName) {
+                var actionImageHome = element.querySelector("#home.action-image");
+                if (actionImageHome) {
+                    homeSymbolAttribute = "name";
+                    actionImageHome[homeSymbolAttribute] = window.LiveBridgeSettings.homeSymbolName;
+                }
+            }
+
+            Colors.loadSVGImageElements(element, "action-image", 16,
+                window.LiveBridgeSettings && window.LiveBridgeSettings.buttonSymbolColor || "#ffffff",
+                homeSymbolAttribute, null, { home: { strokeWidth: 400 } });
 
             var commandList = [];
             this.controller = new Event.Controller(element, commandList);
