@@ -246,9 +246,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-primary) !important;
 }
 
-.register input::placeholder,
-.register input::-ms-input-placeholder,
-.register input::-webkit-input-placeholder {
+.register input::placeholder {
     color: var(--e-global-color-primary, #006b8a) !important;
 }
 
