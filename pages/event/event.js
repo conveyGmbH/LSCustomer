@@ -54,7 +54,9 @@
                     }
                 }
                 if (window.LiveBridgeSettings.homeSymbolOptions) {
-                    homeSymbolOptions = window.LiveBridgeSettings.homeSymbolOptions;
+                    homeSymbolOptions = {
+                        home: window.LiveBridgeSettings.homeSymbolOptions
+                    };
                 }
             }
             Colors.loadSVGImageElements(element, "action-image", 16,
