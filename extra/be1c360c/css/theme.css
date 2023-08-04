@@ -574,7 +574,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .event .button-tip .action-image {
-    top: 6px;
+    top: 6px !important;
     padding-right: 5px;
 }
 
