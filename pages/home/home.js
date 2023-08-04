@@ -68,7 +68,7 @@
                 }
             }*/
             Application.insertBodyContent(element, ".list-header", ".list-footer");
-            Colors.loadSVGImageElements(element, "expander-icon", 40, window.LiveBridgeSettings && window.LiveBridgeSettings.buttonSymbolColor || "#c2d63e");
+            Colors.loadSVGImageElements(element, "expander-icon", 24, window.LiveBridgeSettings && window.LiveBridgeSettings.buttonSymbolColor || "#c2d63e");
 
             this.inResize = 0;
             this.prevWidth = 0;
