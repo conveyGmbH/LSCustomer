@@ -54,9 +54,15 @@
                     }
                 }
                 if (window.LiveBridgeSettings.homeSymbolOptions) {
-                    homeSymbolOptions = {
-                        home: window.LiveBridgeSettings.homeSymbolOptions
-                    };
+                    if (homeSymbolAttribute) {
+                        homeSymbolOptions = {};
+                        homeSymbolOptions[homeSymbolAttribute] =
+                            window.LiveBridgeSettings.homeSymbolOptions;
+                    } else {
+                        homeSymbolOptions = {
+                            home: window.LiveBridgeSettings.homeSymbolOptions
+                        };
+                    }
                 }
             }
             Colors.loadSVGImageElements(element, "action-image", 16,
