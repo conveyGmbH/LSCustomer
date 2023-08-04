@@ -64,7 +64,7 @@
         homeSymbolOptions: {
             useFillColor: false,
             useStrokeColor: true,
-            strokeWidth: 200,
+            strokeWidth: 1400,
             size: {
                 width: 14,
                 height: 25
