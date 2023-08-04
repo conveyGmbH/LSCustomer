@@ -54,9 +54,9 @@
                     }
                 }
                 if (window.LiveBridgeSettings.homeSymbolOptions) {
-                    if (homeSymbolAttribute) {
+                    if (window.LiveBridgeSettings.homeSymbolName) {
                         homeSymbolOptions = {};
-                        homeSymbolOptions[homeSymbolAttribute] =
+                        homeSymbolOptions[window.LiveBridgeSettings.homeSymbolName] =
                             window.LiveBridgeSettings.homeSymbolOptions;
                     } else {
                         homeSymbolOptions = {
