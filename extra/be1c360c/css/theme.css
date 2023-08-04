@@ -573,6 +573,11 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: transparent !important;
 }
 
+.event .button-tip .action-image {
+    top: 6px;
+    padding-right: 5px;
+}
+
 .events .button-tip .win-tooltip,
 .event .button-tip .win-tooltip,
 .modSession .button-tip .win-tooltip,
@@ -916,6 +921,7 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .event .content-grid {
     margin: 0 30px 0 30px !important;
+    width: calc(100% - 30px - 30px) !important;
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
@@ -962,8 +968,12 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .event .content-grid {
     margin: 0 20px !important;
-    width: 100% !important;
+    width: calc(100% - 30px - 30px) !important;
     padding: 40px 0 0 0 !important;
+}
+
+.view-size-bigger .event .register-fragmenthost {
+    margin-top: 85% !important;
 }
 
 
@@ -1025,6 +1035,7 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 
 .view-size-medium .event .content-grid {
     margin: 0 5px !important;
+    width: calc(100% - 10px) !important;
 }
 
 .view-size-medium .home .hero-image-container,
@@ -1148,6 +1159,7 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 }
 
 .view-size-medium-small .event .content-grid {
+    width: calc(100% - 15px - 15px) !important;
     margin: 0 15px !important;
 }
 
@@ -1215,6 +1227,11 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 }
 
 .view-size-small .event .content-grid {
+    width: calc(100% - 15px - 15px) !important;
     margin: 0 15px !important;
+}
+
+.view-size-small .event .content-header-line > h1 {
+    word-wrap: break-word;
 }
 
