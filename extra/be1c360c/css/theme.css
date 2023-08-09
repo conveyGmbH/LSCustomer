@@ -292,6 +292,13 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     padding: 100px 10px 10px 10px !important;
 }
 
+.event .speaker-block {
+    width: var(--max-content-width) !important;
+    margin-left: var(--max-content-margin-left) !important;
+    padding: 15px !important;
+    max-width: 1400px !important;
+}
+
 .event .content-header,
 .modSession .content-header,
 .speakerSession .content-header{
@@ -551,7 +558,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .event .color_container4 {
-    background-color: var(--the7-background-color, #eeeeee) !important;
+    background-color: var(--the7-additional-menu-elements-color, #ffffff) !important;
 }
 
 .event .hero-footer {
@@ -997,8 +1004,8 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .event .content-container,
 .view-size-biggest .event .speakerblock {
-    margin-left: var(--max-content-margin-left) !important;
-    width: var(--max-content-width) !important;
+    margin: 0 30px 0 30px !important;
+    width: calc(100% - 30px - 30px) !important;
     padding: 15px 0 !important;
 }
 
@@ -1049,8 +1056,8 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .event .content-container,
 .view-size-bigger .event .speakerblock {
-    width: calc(100% - 20px - 20px) !important;
-    margin: 0 auto !important;
+    margin: 0 20px !important;
+    width: calc(100% - 30px - 30px) !important;
 }
 
 .view-size-bigger .countdown .count {
@@ -1142,9 +1149,13 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 
 .view-size-medium .event .content-container,
 .view-size-medium .event .speakerblock {
-    margin-left: 5px !important;
-    width: calc(100% - 20px - 20px) !important;
     padding: 10px !important;
+    margin: 0 5px !important;
+    width: 100% !important;
+}
+
+.view-size-medium .event .speaker-line {
+    flex: 100% !important;
 }
 
 .view-size-medium .event .countdown-fragmenthost {
@@ -1235,6 +1246,10 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
     margin: 0 15px !important;
 }
 
+.view-size-medium-small .event .speaker-line {
+    flex: 100% !important;
+}
+
 .view-size-medium-small .home .expander-button {
     transform: scale(0.7);
 }
@@ -1273,8 +1288,8 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 
 .view-size-small .event .content-container,
 .view-size-small .event .speakerblock {
-    margin-left: 0;
-    width: calc(100% - 20px);
+    width: calc(100% - 15px - 15px) !important;
+    margin: 0 15px !important;
 }
 
 .view-size-small .event .countdown-fragmenthost {
@@ -1310,10 +1325,19 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
     margin: 0 15px !important;
 }
 
-.view-size-small .event .speaker-image-container {
+.view-size-small .event .speaker-line {
     float: left;
     width: 100%;
-    flex: 100%;
+    flex: 100% !important;
+}
+
+.view-size-small .event .speaker-image-container {
+    width: auto !important;
+}
+
+.view-size-small .event .speaker-text > span {
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 
