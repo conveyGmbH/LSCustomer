@@ -373,6 +373,11 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin-top: 20px !important;
 }
 
+.modSession .content-header-line > h1,
+.speakerSession .content-header-line > h1 {
+    width: 60% !important;
+}
+
 .home .win-type-subtitle, .events .win-type-subtitle,
 .events .win-h2, .events .win-h3,
 .event .win-h2, .event .win-h3,
@@ -382,7 +387,6 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     font-size: 18px !important;
     line-height: 30px !important;
     --e-global-typography-d990e6c-font-family: "Helvetica";
-    
 }
 
 .home .content-header-line > h2,
@@ -820,7 +824,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .countdown .count-block {
     font-family: var(--font-family-default) !important;
-    background-color: var(--e-global-color-buttontext);
+    background-color: inherit !important;
 }
 
 .countdown .win-h3 {
@@ -1136,6 +1140,11 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
     font-size: 42px !important;
 }
 
+.view-size-medium .modSession .content-header-line > h1,
+.view-size-medium .speakerSession .content-header-line > h1 {
+    width: 80% !important;
+}
+
 .view-size-medium .events button#homeButton,
 .view-size-medium .event button#homeButton {
     margin-left: 0 !important;
@@ -1227,6 +1236,11 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
     font-size: 32px !important;
 }
 
+.view-size-medium-small .modSession .content-header-line > h1,
+.view-size-medium-small .speakerSession .content-header-line > h1 {
+    width: 90% !important;
+}
+
 .view-size-medium-small .event .register-fragmenthost {
     margin-top: 10px !important;
 }
@@ -1277,6 +1291,11 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 .view-size-small .speakerSession .content-header-line > h1 {
     font-size: 32px !important;
     word-wrap: break-word;
+}
+
+.view-size-medium-small .modSession .content-header-line > h1,
+.view-size-medium-small .speakerSession .content-header-line > h1 {
+    width: 95% !important;
 }
 
 .view-size-small .home .content-header,
