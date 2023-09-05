@@ -570,7 +570,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .event .register-fragmenthost {
-    margin-top: 55% !important;
+    margin-top: calc(100% - 355px) !important;
 }
 
 .events button#homeButton {
@@ -736,6 +736,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     border-radius: 54px !important;
     -webkit-border-radius: 54px !important;
     -moz-border-radius: 54px !important;
+}
+
+.teaser .ipadImg {
+    border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
 }
 
 .register .centerarea .field_line_full,
@@ -960,7 +966,7 @@ section.elementor-inner-section > div {
     }
 
     .event .register-fragmenthost {
-        margin-top: 55% !important;
+        margin-top: calc(100% - 325px) !important;
     }
 
     .event .section-3 {
