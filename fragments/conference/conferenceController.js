@@ -3438,8 +3438,9 @@ var __meteor_runtime_config__;
                                                 var audioActive = fragmentElement.querySelector(elementSelectors.leaveAudio + ", " +
                                                     elementSelectors.microphoneOff + ", " +
                                                     elementSelectors.microphoneOn);
+                                                var listenOnlyBtn = document.querySelector(elementSelectors.listenOnlyBtn);
                                                 if (key === that.binding.presentationVideoKey &&
-                                                    (audioActive ||
+                                                    (audioActive && !listenOnlyBtn ||
                                                      pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController")) {
                                                     if (key !== (that.binding.presentationVideoItem && that.binding.presentationVideoItem.key)) {
                                                         Log.print(Log.l.trace, "added presentationVideoItem.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
