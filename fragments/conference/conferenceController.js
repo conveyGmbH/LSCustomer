@@ -3435,7 +3435,12 @@ var __meteor_runtime_config__;
                                                 checkLaterAgain = true;
                                                 Log.print(Log.l.trace, "no userName, checkLaterAgain=" + checkLaterAgain);
                                             } else {
-                                                if (key === that.binding.presentationVideoKey) {
+                                                var audioActive = fragmentElement.querySelector(elementSelectors.leaveAudio + ", " +
+                                                    elementSelectors.microphoneOff + ", " +
+                                                    elementSelectors.microphoneOn);
+                                                if (key === that.binding.presentationVideoKey &&
+                                                    (audioActive ||
+                                                     pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController")) {
                                                     if (key !== (that.binding.presentationVideoItem && that.binding.presentationVideoItem.key)) {
                                                         Log.print(Log.l.trace, "added presentationVideoItem.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
                                                         that.binding.presentationVideoItem = {
