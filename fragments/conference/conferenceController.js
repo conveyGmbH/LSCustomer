@@ -1937,7 +1937,7 @@ var __meteor_runtime_config__;
                 } 
                 if (pageControllerName === "eventController" &&
                     AppBar.scope.binding.connectListenOnly &&
-                    !(navigator.getAutoplayPolicy && navigator.getAutoplayPolicy("mediaelement") !== "allowed")) {
+                    (navigator.getAutoplayPolicy && navigator.getAutoplayPolicy("mediaelement") === "allowed")) {
                     var listenOnlyBtn = document.querySelector(elementSelectors.listenOnlyBtn);
                     if (listenOnlyBtn) {
                         listenOnlyBtn.click();
