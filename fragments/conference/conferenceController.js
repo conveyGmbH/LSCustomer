@@ -3435,12 +3435,9 @@ var __meteor_runtime_config__;
                                                 checkLaterAgain = true;
                                                 Log.print(Log.l.trace, "no userName, checkLaterAgain=" + checkLaterAgain);
                                             } else {
-                                                var audioActive = fragmentElement.querySelector(elementSelectors.leaveAudio + ", " +
-                                                    elementSelectors.microphoneOff + ", " +
-                                                    elementSelectors.microphoneOn);
                                                 var listenOnlyBtn = document.querySelector(elementSelectors.listenOnlyBtn);
                                                 if (key === that.binding.presentationVideoKey &&
-                                                    (audioActive && !listenOnlyBtn ||
+                                                    (!listenOnlyBtn ||
                                                      pageControllerName === "modSessionController" || pageControllerName === "speakerSessionController")) {
                                                     if (key !== (that.binding.presentationVideoItem && that.binding.presentationVideoItem.key)) {
                                                         Log.print(Log.l.trace, "added presentationVideoItem.key=" + key + " userName=" + userName + " isMyself=" + isMyself);
