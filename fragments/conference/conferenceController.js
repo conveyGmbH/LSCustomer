@@ -1938,10 +1938,12 @@ var __meteor_runtime_config__;
                 if (pageControllerName === "eventController" &&
                     AppBar.scope.binding.connectListenOnly &&
                     (typeof navigator.getAutoplayPolicy === "function" &&
-                     navigator.getAutoplayPolicy("mediaelement") === "allowed") ||
-                    (document.featurePolicy &&
-                     typeof document.featurePolicy.allowsFeature === "function" &&
-                     document.featurePolicy.allowsFeature("autoplay"))) {
+                        navigator.getAutoplayPolicy("mediaelement") === "allowed")
+                    // ||
+                    // (document.featurePolicy &&
+                    //  typeof document.featurePolicy.allowsFeature === "function" &&
+                    //  document.featurePolicy.allowsFeature("autoplay"))
+                    ) {
                     var listenOnlyBtn = document.querySelector(elementSelectors.listenOnlyBtn);
                     if (listenOnlyBtn) {
                         listenOnlyBtn.click();
