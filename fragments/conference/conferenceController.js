@@ -6465,13 +6465,16 @@ var __meteor_runtime_config__;
                 if (sendKeepAlivePromise) {
                     sendKeepAlivePromise.cancel();
                     Log.print(Log.l.trace, "calling PRC_SendKontaktKeepAlive()");
-                    AppData.call("PRC_SendKontaktKeepAlive", {}, function (json) {
+                    AppData.call("PRC_SendKontaktKeepAlive",
+                        {
+                            pUserToken: userToken
+                        }, function (json) {
                         Log.print(Log.l.trace, "PRC_SendKontaktKeepAlive success!");
                     }, function (error) {
                         Log.print(Log.l.error, "PRC_SendKontaktKeepAlive error! ");
                     });
                 }
-                sendKeepAlivePromise = WinJS.Promise.timeout(60000).then(function () {
+                sendKeepAlivePromise = WinJS.Promise.timeout(30000).then(function () {
                     that.sendKeepAlive();
                 });
                 Log.ret(Log.l.trace);
