@@ -656,7 +656,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     width: 200px;
     text-align: center;
     left: 0;
-    top: 0;
+    top: 0 !important;
     color: var(--e-global-color-primary, #006b8a) !important;
     background: var(--the7-additional-menu-elements-color);
     border-color: var(--e-global-color-primary, #006b8a);
