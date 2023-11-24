@@ -284,7 +284,11 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     width: calc(100% - 30px - 30px) !important;
 }
 
-.event .content-grid,
+.event .content-grid {
+    width: var(--max-content-width) !important;
+    margin-left: var(--max-content-margin-left) !important;
+    padding: 0 10px 10px 10px !important;
+}
 .modSession .content-grid,
 .speakerSession .content-grid {
     width: var(--max-content-width) !important;
@@ -640,7 +644,30 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     white-space: normal !important;
 }
 
-.event .share-block .win-tooltip,
+.event .share-block {
+    height: 80px !important;
+}
+
+.event .share-block .win-tooltip {
+    font-family: var(--font-family-default) !important;
+    visibility: hidden;
+    position: relative;
+    opacity: 0;
+    width: 200px;
+    text-align: center;
+    left: 0;
+    top: 0;
+    color: var(--e-global-color-primary, #006b8a) !important;
+    background: var(--the7-additional-menu-elements-color);
+    border-color: var(--e-global-color-primary, #006b8a);
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+}
+
 .modSession .share-block .win-tooltip,
 .speakerSession .share-block .win-tooltip {
     font-family: var(--font-family-default) !important;
