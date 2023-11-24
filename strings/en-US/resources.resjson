@@ -69,6 +69,8 @@
     "event.chatInputPlaceholder" : "Enter message",
 
     "conference.waitMessage": "Have fun on your online conference today",
+    "conference.attentionMessage1" : "Note: This participant link is already in use!",
+    "conference.attentionMessage2" : "Note: Someone else is using your participant link to the session!",
 
     "register.email"		: "Email *",
     "register.salutation"   : "Salutation *",

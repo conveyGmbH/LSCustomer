@@ -430,11 +430,14 @@ var __meteor_runtime_config__;
             var checkForTalkingEndPromise = null;
             var sessionEndRequestPromise = null;
             var sendKeepAlivePromise = null;
+            var checkJoinedToSessionPromise = null;
 
             var filterUserListFailedCount = 0;
             var showUserListFailedCount = 0;
             var adjustContentPositionsFailedCount = 0;
             var setPollingFailedCount = 0;
+            var confirmedCheckJoinedSession = false;
+            var prevParticipatedIncident = null;
             
             var commandQueue = [];
             var deviceList = [];
@@ -459,6 +462,7 @@ var __meteor_runtime_config__;
             that.dispose = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 that.endKeepAlive();
+                that.endCheckJoinedToSession();
                 if (sessionEndRequestPromise) {
                     sessionEndRequestPromise.cancel();
                     sessionEndRequestPromise = null;
@@ -587,6 +591,7 @@ var __meteor_runtime_config__;
                     var aGetImageUriU = "s,u=(function(){" + reBase + "let au=rebase(a.imageUri);Log.print(Log.l.info,\"au=\"+JSON.stringify(au));return au})(),m=a.content;";
                     var uGetImageUri = "k,{imageUri:(function(){" + reBase + "let uu=rebase(u);Log.print(Log.l.info,\"uu=\"+JSON.stringify(uu));return uu})(),";
                     // BBB 2.4 RC1
+                    var eGetImageUriO = "let t=(function(){" + reBase + "let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,o=e.svgHeight;";
                     var eGetImageUriO = "let t=(function(){" + reBase + "let et=rebase(e.imageUri);Log.print(Log.l.info,\"et=\"+JSON.stringify(et));return et})(),n=e.svgWidth,o=e.svgHeight;";
                     var rGetImageUriP = "a,p=(function(){" + reBase + "let rp=rebase(r.imageUri);Log.print(Log.l.info,\"rp=\"+JSON.stringify(rp));return rp})(),m=r.content;";
                     var pGetImageUri = "k,{imageUri:(function(){" + reBase + "let pp=rebase(p);Log.print(Log.l.info,\"pp=\"+JSON.stringify(pp));return pp})(),";
@@ -6491,6 +6496,73 @@ var __meteor_runtime_config__;
             }
             that.endKeepAlive = endKeepAlive;
 
+
+            var checkJoinedToSession = function () {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (checkJoinedToSessionPromise) {
+                    AppData.call("PRC_CheckJoinedToSession",
+                        {
+                            pUserToken: userToken
+                        },
+                        function (json) {
+                            //get Incident
+                            if (json && json.d && json.d.results && json.d.results.length > 0) {
+                                // Get last participated incident of userToken 
+                                var result = json.d.results[0];
+                                //var incidentMs = null;
+                                if (result.IncidentTSUTC) {
+                                    var msString = result.IncidentTSUTC.replace("\/Date(", "").replace(")\/", "");
+                                    var timeZoneAdjustment = AppData.appSettings.odata.timeZoneAdjustment || 0;
+                                    //var milliseconds = parseInt(msString) - timeZoneAdjustment * 60000;
+                                    result.IncidentMs = parseInt(msString);
+                                } else {
+                                    result.IncidentMs = null;
+                                }
+
+                                if (!confirmedCheckJoinedSession &&
+                                    AppData._persistentStates.registerData.joinedSessionDate &&
+                                    result.IncidentMs &&
+                                    AppData._persistentStates.registerData.joinedSessionDate > result.IncidentMs) {
+                                    alert(getResourceText("conference.attentionMessage1"), function () {
+                                        Log.print(Log.l.trace, "Confirmed!");
+                                        confirmedCheckJoinedSession = true;
+                                    }, conference);
+                                }
+                                if (prevParticipatedIncident &&
+                                    prevParticipatedIncident.IncidentMs &&
+                                    result.IncidentMs &&
+                                    prevParticipatedIncident.IncidentMs < result.IncidentMs) {
+                                    alert(getResourceText("conference.attentionMessage2"), function () {
+                                        Log.print(Log.l.trace, "Confirmed!");
+                                    }, conference);
+                                }
+                                prevParticipatedIncident = result;
+                            }
+                            Log.print(Log.l.trace, "PRC_CheckJoinedToSession success!");
+                        },
+                        function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                            error({});
+                            Log.print(Log.l.error, "PRC_CheckJoinedToSession error! ");
+                        });
+                }
+                checkJoinedToSessionPromise = WinJS.Promise.timeout(10000).then(function () {
+                    that.checkJoinedToSession();
+                });
+                Log.ret(Log.l.trace);
+            }
+            this.checkJoinedToSession = checkJoinedToSession;
+
+            var endCheckJoinedToSession = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (checkJoinedToSessionPromise) {
+                    checkJoinedToSessionPromise.cancel();
+                    checkJoinedToSessionPromise = null;
+                }
+                Log.ret(Log.l.trace);
+            }
+            this.endCheckJoinedToSession = endCheckJoinedToSession;
+
             that.processAll().then(function () {
                 AppBar.notifyModified = false;
                 Log.print(Log.l.trace, "Binding wireup page complete");
@@ -6519,6 +6591,10 @@ var __meteor_runtime_config__;
                     conference.scrollIntoView();
                 }
                 that.sendKeepAlive();
+                //only call for non moderator/speaker
+                if (AppData._persistentStates.registerData.joinedSessionDate) {
+                    that.checkJoinedToSession();
+                }
             });
             Log.ret(Log.l.trace);
         })

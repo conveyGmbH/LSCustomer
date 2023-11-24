@@ -66,7 +66,8 @@
             Firmenname: "",
             UserTZ: moment.tz.guess(),
             privacyPolicyFlag: false,
-            LanguageId: null
+            LanguageId: null,
+            joinedSessionDate: null
         }
     };
 

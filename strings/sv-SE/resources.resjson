@@ -69,6 +69,8 @@
     "event.chatInputPlaceholder" : "Enter message",
 
 	"conference.waitMessage" : "Viel Spaß auf ihrer heutigen Onlinekonferenz",
+    "conference.attentionMessage1" : "Hinweiß: Dieser Teilnehmerlink wird bereits genutzt!",
+    "conference.attentionMessage2" : "Hinweiß: Jemand anderer verwendet dein Teilnehmerlink zur Session!",
 
     "register.email"		: "E-Mail *",
 	"register.salutation"   : "Anrede *",

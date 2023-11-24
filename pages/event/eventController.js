@@ -249,14 +249,14 @@
                             pUserToken: AppData._persistentStates.registerData.userToken,
                             pIncidentName: "Disconnected"
                         },
-                        function (json) {
-                            Log.print(Log.l.trace, "PRC_CreateIncident success!");
-                        },
-                        function (error) {
-                            Log.print(Log.l.error, "PRC_CreateIncident error! ");
-                        }).then(function () {
-                            Application.navigateById("home", event);
-                        });
+                            function (json) {
+                                Log.print(Log.l.trace, "PRC_CreateIncident success!");
+                            },
+                            function (error) {
+                                Log.print(Log.l.error, "PRC_CreateIncident error! ");
+                            }).then(function () {
+                                Application.navigateById("home", event);
+                            });
                     } else {
                         Application.navigateById("home", event);
                     }
@@ -646,6 +646,12 @@
                             ? parseInt(AppData._persistentStates.registerData.eventId)
                             : AppData._persistentStates.registerData.eventId;
                         Log.print(Log.l.trace, "calling PRC_RegisterContact... eventId=" + eventId);
+                        // save date time in ms when joined to conference
+                        if (AppData._persistentStates.registerData.userToken) {
+                            AppData._persistentStates.registerData.joinedSessionDate =
+                                new Date().getTime(); /*+ new Date().getTimezoneOffset() * 60 * 1000*/
+                            Application.pageframe.savePersistentStates();
+                        }
                         return AppData.call("PRC_RegisterContact",
                             {
                                 pVeranstaltungID: eventId,
@@ -904,7 +910,9 @@
                         }
                         that.binding.showRegister = false;
                         that.binding.showLogOffEventMail = true;
-
+                        // check if already joined by getting the last incident with type 3 (participated)
+                        // that.checkJoinedToSession();
+                        
                         //AppData._persistentStates.registerData.dateBegin > date heute 
                         var countDownDate = that.binding.dataEvent.dateBegin;
                         var now = new Date().getTime();
@@ -926,6 +934,8 @@
                                 that.binding.showMaintenance = true;
                                 return that.getFragmentByName("maintenance");
                             } else {
+                                // Remember clock time when joined to conference
+                                // AppData._persistentStates.registerData.joinedSessionDate = new Date();
                                 that.binding.showCountdown = false;
                                 that.binding.showConference = true;
                                 that.binding.showTeaser = false;

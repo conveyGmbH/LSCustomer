@@ -69,6 +69,8 @@
     "event.chatInputPlaceholder" : "Entrer le message",
 
     "conference.waitMessage": "Amusez-vous avec votre conférence en ligne aujourd'hui",
+    "conference.attentionMessage1" : "Remarque : ce lien de participant est déjà utilisé !",
+    "conference.attentionMessage2" : "Remarque : quelqu'un d'autre utilise votre lien de participant à la session !",
 
     "register.email"        : "Email *",
     "register.salutation"   : "Anrede *",
