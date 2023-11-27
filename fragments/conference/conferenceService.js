@@ -7,6 +7,10 @@
     "use strict";
 
     WinJS.Namespace.define("Conference", {
+        videoExtList: [
+            "mpg", "mpeg", "m1v", "mp2", "mpe", "mpv2", "mp4", "m4v",
+            "mp4v", "ogg", "ogv", "asf", "avi", "mov", "wmv"
+        ],
         questionnaireView: {
             select: function (complete, error, eventId) {
                 Log.call(Log.l.trace, "questionnaireView.");
@@ -31,6 +35,24 @@
                 Answer03Code: "",
                 Answer04Code: "",
                 Answer05Code: ""
+            }
+        },
+        presenterVideoUrlView: {
+            select: function (complete, error, eventId) {
+                Log.call(Log.l.trace, "questionnaireView.");
+                var ret = AppData.call("PRC_BBBPresenterVideoUrl", {
+                    pVeranstaltungID: eventId,
+                    pLanguageSpecID: AppData.getLanguageId()
+                }, complete, error);
+                Log.ret(Log.l.trace);
+                return ret;
+            },
+            pkName: "MandantDokumentVIEWID",
+            defaultValue: {
+                MandantDokumentVIEWID: 0,
+                AddIndex: 0,
+                Title: "",
+                Url: ""
             }
         }
     });

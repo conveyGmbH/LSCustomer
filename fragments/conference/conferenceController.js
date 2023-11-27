@@ -143,6 +143,15 @@ var __meteor_runtime_config__;
         presentationVideoItembox: ".video-item-container .video-itembox",
         presentationVideoElement: ".video-item-container video",
 
+        shareExternalVideo: '#default-dropdown-menu li[data-test="shareExternalVideo"]',
+        videoModalHeader: '.ReactModalPortal header[data-test="videoModalHeader"]',
+        videoModalInput: ".ReactModalPortal #video-modal-input",
+        noteFrame: "#noteFrame",
+        noteVideo: "#noteVideo",
+        modalOverlay: '.ReactModalPortal .modalOverlay',
+        closeModal: '.ReactModalPortal button[data-test="closeModal"]',
+        startNewVideo: '.ReactModalPortal button[data-test="startNewVideo"]',
+
         // dangerous global CSS definitions to remove:
         htmlElement:     "html {",
         allElements:     "*, *:before, *:after {"
@@ -314,6 +323,7 @@ var __meteor_runtime_config__;
             var actionsBarCenterObserver = null;
             var talkingIndicatorObserver = null;
             var emojiToolbarPositionObserver = null;
+            var shareExternalVideoPromise = null;
             var myTalkingActivityStart = null;
             var myTalkingActivityEnd = null;
             var myTalkingActivityIndicator = null;
@@ -362,6 +372,9 @@ var __meteor_runtime_config__;
                 pinnedVideos: [],
                 unpinnedVideoListLength: 0,
                 showUnpinnedVideoList: false,
+                showPresenterVideoSelect : false,
+                showPresenterFrame: false,
+                showPresenterVideo: false,
                 dataText: AppBar.scope.binding.dataText,
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
@@ -411,6 +424,9 @@ var __meteor_runtime_config__;
             var chatMenu = fragmentElement.querySelector("#chatMenu");
             var pollQuestion = fragmentElement.querySelector("#pollQuestion");
             var listView = fragmentElement.querySelector("#unpinnedVideos.listview");
+            var presenterVideoSelect = fragmentElement.querySelector("#presenterVideoSelect");
+            var presenterVideoSelectParent = presenterVideoSelect ? presenterVideoSelect.parentElement : null;
+            var presenterVideoSelectContainer = fragmentElement.querySelector(".presenter-video-select-container");
 
             var handleCommandPromise = null;
             var sendResizePromise = null;
@@ -457,12 +473,22 @@ var __meteor_runtime_config__;
             var unpinnedVideoList = new WinJS.Binding.List([]);
             var myselfIsUnpinned = false;
 
+            var presenterVideoUrlList = new WinJS.Binding.List([]);
+
+            var clickShareExternalVideoBound = null;
+            var closedShareExternalVideoBound = null;
+
             var that = this;
 
             that.dispose = function () {
                 Log.call(Log.l.trace, "Conference.Controller.");
                 that.endKeepAlive();
                 that.endCheckJoinedToSession();
+                clickShareExternalVideoBound = null;
+                if (shareExternalVideoPromise) {
+                    shareExternalVideoPromise.cancel();
+                    shareExternalVideoPromise = null;
+                }
                 if (sessionEndRequestPromise) {
                     sessionEndRequestPromise.cancel();
                     sessionEndRequestPromise = null;
@@ -551,6 +577,7 @@ var __meteor_runtime_config__;
                 if (appHeader && appHeader.style) {
                     appHeader.style.display = "";
                 }
+                unpinnedVideoList = null;
                 conference = null;
                 videoListDefaults = {};
                 userListDefaults = {};
@@ -1776,6 +1803,47 @@ var __meteor_runtime_config__;
             }
             that.observeChatMessageList = observeChatMessageList;
 
+
+            var observeShareExternalVideo = function() {
+                Log.call(Log.l.trace, "Conference.Controller.");
+                if (shareExternalVideoPromise) {
+                    shareExternalVideoPromise.cancel();
+                    shareExternalVideoPromise = null;
+                } 
+                var videoModalHeader = document.querySelector(elementSelectors.videoModalHeader);
+                if (videoModalHeader) {
+                    if (presenterVideoSelectParent) {
+                        closedShareExternalVideoBound = that.eventHandlers.closedShareExternalVideo.bind(that);
+                        var modalOverlay = document.querySelector(elementSelectors.modalOverlay);
+                        if (modalOverlay) {
+                            //that.addRemovableEventListener(modalOverlay, "click", closedShareExternalVideoBound, false);
+                        }
+                        var closeModal = document.querySelector(elementSelectors.closeModal);
+                        if (closeModal) {
+                            that.addRemovableEventListener(closeModal, "click", closedShareExternalVideoBound, false);
+                        }
+                        var startNewVideo = document.querySelector(elementSelectors.startNewVideo);
+                        if (startNewVideo) {
+                            that.addRemovableEventListener(startNewVideo, "click", closedShareExternalVideoBound, false);
+                        }
+                        videoModalHeader.parentElement.insertBefore(presenterVideoSelectParent,
+                            videoModalHeader.nextElementSibling);
+                        that.binding.showPresenterVideoSelect = true;
+                        var videoModalInput = document.querySelector(elementSelectors.videoModalInput);
+                        if (videoModalInput && videoModalInput.parentElement &&
+                            videoModalInput.parentElement.style) {
+                            videoModalInput.parentElement.style.display = "none";
+                        }
+                    }
+                } else {
+                    shareExternalVideoPromise = WinJS.Promise.timeout(50).then(function () {
+                        that.observeShareExternalVideo();
+                    });
+                }
+                Log.ret(Log.l.trace);
+            }
+            that.observeShareExternalVideo = observeShareExternalVideo;
+
             var onWheelSvg = function (event) {
                 if (event) {
                     //event.preventDefault();
@@ -2382,6 +2450,11 @@ var __meteor_runtime_config__;
                         } else if (talkingIndicatorObserver) {
                             talkingIndicatorObserver.disconnect();
                             talkingIndicatorObserver = null;
+                        }
+                        var shareExternalVideo = document.querySelector(elementSelectors.shareExternalVideo);
+                        if (shareExternalVideo && !clickShareExternalVideoBound) {
+                            clickShareExternalVideoBound = that.eventHandlers.clickShareExternalVideo.bind(that);
+                            that.addRemovableEventListener(shareExternalVideo, "click", clickShareExternalVideoBound, false);
                         }
                         var mediaContainer = panelWrapper;
                         if (mediaContainer) {
@@ -4467,6 +4540,12 @@ var __meteor_runtime_config__;
                 return null;
             }
 
+            var getVideoId = function (url) {
+                var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+                var match = url ? url.match(regExp) : null;
+                return (match && match[2] && match[2].length === 11) ? match[2] : null;
+            }
+
             this.eventHandlers = {
                 loadSessionStatus: function() {
                     Log.call(Log.l.info, "Conference.Controller.");
@@ -5654,6 +5733,156 @@ var __meteor_runtime_config__;
                     }
                     videoListDefaults._clearDragProperties();
                     eventObject.preventDefault();
+                    Log.ret(Log.l.trace);
+                },
+                clickShareExternalVideo: function (eventObject) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    WinJS.Promise.timeout(0).then(function () {
+                        return Conference.presenterVideoUrlView.select(function (json) {
+                            AppData.setErrorMsg(that.binding);
+                            Log.print(Log.l.trace, "questionnaireView: success!");
+                            if (json && json.d && json.d.results) {
+                                // create binding list
+                                if (presenterVideoSelect && presenterVideoSelect.winControl) {
+                                    presenterVideoUrlList = new WinJS.Binding.List(json.d.results);
+                                    presenterVideoSelect.winControl.data = presenterVideoUrlList;
+                                }
+                            } else {
+                                Log.print(Log.l.trace, "no data found");
+                            }
+                        },
+                        function (errorResponse) {
+                            AppData.setErrorMsg(that.binding, errorResponse);
+                        },
+                        that.binding.eventId);
+                    }).then(function () {
+                        if (presenterVideoSelect && presenterVideoSelect.winControl &&
+                            presenterVideoSelect.winControl.data &&
+                            presenterVideoSelect.winControl.data.length > 0) {
+                            that.observeShareExternalVideo();
+                        }
+                        return WinJS.Promise.timeout(100);
+                    }).then(function () {
+                        var video = document.querySelector(elementSelectors.noteVideo);
+                        var frame = document.querySelector(elementSelectors.noteFrame);
+                        if (video) {
+                            if (typeof video.pause === "function") {
+                                video.pause();
+                            }
+                            video.src = "";
+                        }
+                        if (frame) {
+                            frame.src = "";
+                        }
+                        if (presenterVideoSelect) {
+                            presenterVideoSelect.selectedIndex = -1;
+                        }
+                    });
+                    Log.ret(Log.l.trace);
+                },
+                changedPresenterVideoSelect: function(eventObject) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (presenterVideoSelect) {
+                        var videoModalInput = document.querySelector(elementSelectors.videoModalInput);
+                        if (videoModalInput) {
+                            var url = presenterVideoSelect.value;
+                            videoModalInput.value = url;
+                            for (var prop in videoModalInput) {
+                                if (videoModalInput.hasOwnProperty(prop)) {
+                                    if (prop.indexOf("__reactEventHandlers") >= 0) {
+                                        var reactEventHandlers = videoModalInput[prop];
+                                        if (typeof reactEventHandlers.onChange === "function") {
+                                            reactEventHandlers.onChange(eventObject);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                            if (typeof videoModalInput.onChange === "function") {
+                                var isValid = videoModalInput.checkValidity();
+                            }
+                            var isVideo = false;
+                            var isFrame = false;
+                            if (typeof url === "string" &&
+                                (url.indexOf("https://") === 0 || url.indexOf("http://") === 0)) {
+                                var extPos = url.lastIndexOf(".");
+                                if (extPos > 0) {
+                                    var ext = url.substr(extPos + 1);
+                                    if (Conference.videoExtList.indexOf(ext) >= 0) {
+                                        isVideo = true;
+                                    }
+                                }
+                                if (!isVideo) {
+                                    var posServer = url.indexOf("://");
+                                    var server = url.substr(posServer + 3).split("/")[0];
+                                    if (server === "www.youtube.com" || server === "youtu.be") {
+                                        var videoId = getVideoId(url);
+                                        if (videoId) {
+                                            url = "https://www.youtube.com/embed/" + videoId;
+                                            isFrame = true;
+                                        }
+                                    }
+                                }
+                            }
+                            var video = document.querySelector(elementSelectors.noteVideo);
+                            var frame = document.querySelector(elementSelectors.noteFrame);
+                            if (isVideo) {
+                                that.binding.showPresenterVideo = true;
+                                that.binding.showPresenterFrame = false;
+                                if (video) {
+                                    video.src = url;
+                                }
+                                if (frame) {
+                                    frame.src = "";
+                                }
+                            } else if (isFrame) {
+                                that.binding.showPresenterVideo = false;
+                                that.binding.showPresenterFrame = true;
+                                if (video) {
+                                    if (typeof video.pause === "function") {
+                                        video.pause();
+                                    }
+                                    video.src = "";
+                                }
+                                if (frame) {
+                                    frame.src = url;
+                                }
+                            } else {
+                                that.binding.showPresenterVideo = false;
+                                that.binding.showPresenterFrame = false;
+                                if (video) {
+                                    if (typeof video.pause === "function") {
+                                        video.pause();
+                                    }
+                                    video.src = "";
+                                }
+                                if (frame) {
+                                    frame.src = "";
+                                }
+                            }
+                        }
+                    }
+                    Log.ret(Log.l.trace);
+                },
+                closedShareExternalVideo: function (eventObject) {
+                    Log.call(Log.l.trace, "Conference.Controller.");
+                    if (presenterVideoSelectContainer && presenterVideoSelectParent) {
+                        presenterVideoSelectContainer.appendChild(presenterVideoSelectParent);
+                        clickShareExternalVideoBound = false;
+                        that.binding.showPresenterVideo = false;
+                        that.binding.showPresenterFrame = false;
+                        var video = document.querySelector(elementSelectors.noteVideo);
+                        var frame = document.querySelector(elementSelectors.noteFrame);
+                        if (video) {
+                            if (typeof video.pause === "function") {
+                                video.pause();
+                            }
+                            video.src = "";
+                        }
+                        if (frame) {
+                            frame.src = "";
+                        }
+                    }
                     Log.ret(Log.l.trace);
                 }
             }

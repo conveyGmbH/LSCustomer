@@ -20,6 +20,22 @@
                 <div class="contentarea content-noscroll win-type-body">
                     <div class="doc-container">
                         <div id="conference" class="mediaview"></div>
+                        <div class="presenter-video-select-container">
+                            <div data-win-bind="style.display: showPresenterVideoSelect Binding.Converter.toDisplay">
+                                <select id="presenterVideoSelect"
+                                        class="presenter-video-select win-dropdown"
+                                        data-win-control="WinJS.UI.Repeater"
+                                        onchange="AppBar.handleEvent('change', 'changedPresenterVideoSelect', event)">
+                                    <option data-win-bind="value: Url; textContent: Title"></option>
+                                </select>
+                                <div class="doc-container" data-win-bind="style.display: showPresenterFrame Binding.Converter.toDisplay">
+                                    <iframe id="noteFrame" class="player" src=""></iframe>
+                                </div>
+                                <div class="doc-container" data-win-bind="style.display: showPresenterVideo Binding.Converter.toDisplay">
+                                    <video controls src="" id="noteVideo" class="player"></video>
+                                </div>
+                            </div>
+                        </div>
                         <div class="video-item-container">
                             <div data-win-bind="className: presentationVideoItem.videoItemClassName; name: presentationVideoItem.key;">
                                 <video class="video-item" data-win-bind="srcObject: presentationVideoItem.mediaStream" autoplay playsinline disablePictureInPicture></video>
