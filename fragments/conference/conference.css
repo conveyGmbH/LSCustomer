@@ -3434,6 +3434,27 @@ c
     font-family: Barlow;
 }
 
+#conference.mediaview #video-player .jckrMj {
+    border-radius: 2px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    font-size: calc(0.85rem) !important;
+    padding: 0.45rem 1rem !important;
+    color: var(--btn-primary-color,var(--color-white,#FFF)) !important;
+    background-color: var(--color-transparent,#ff000000) !important;
+    border: none !important;
+}
+
+#conference.mediaview #video-player .pgwqo {
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+
+#conference.mediaview #video-player .iktuQt > i {
+    color: var(--btn-primary-color,var(--color-white,#FFF)) !important;
+}
+
 .hide-ui-elements #conference.mediaview #layout > section[role="region"],
 .hide-ui-elements button[data-test="whiteboardOptionsButton"],
 .hide-ui-elements button[data-test="presentationFullscreenButton"],
