@@ -6510,33 +6510,20 @@ var __meteor_runtime_config__;
                                 // Get last participated incident of userToken 
                                 var result = json.d.results[0];
                                 //var incidentMs = null;
+                                var incidentDate = null;
                                 if (result.IncidentTSUTC) {
-                                    var msString = result.IncidentTSUTC.replace("\/Date(", "").replace(")\/", "");
-                                    var timeZoneAdjustment = AppData.appSettings.odata.timeZoneAdjustment || 0;
-                                    //var milliseconds = parseInt(msString) - timeZoneAdjustment * 60000;
-                                    result.IncidentMs = parseInt(msString);
-                                } else {
-                                    result.IncidentMs = null;
+                                    incidentDate = getDateObject(result.IncidentTSUTC);
                                 }
 
                                 if (!confirmedCheckJoinedSession &&
                                     AppData._persistentStates.registerData.joinedSessionDate &&
-                                    result.IncidentMs &&
-                                    AppData._persistentStates.registerData.joinedSessionDate > result.IncidentMs) {
-                                    alert(getResourceText("conference.attentionMessage1"), function () {
+                                    incidentDate &&
+                                    AppData._persistentStates.registerData.joinedSessionDate.getTime() < incidentDate.getTime()) {
+                                    alert(getResourceText("conference.attentionMessage2"), function () {
                                         Log.print(Log.l.trace, "Confirmed!");
                                         confirmedCheckJoinedSession = true;
                                     }, conference);
                                 }
-                                if (prevParticipatedIncident &&
-                                    prevParticipatedIncident.IncidentMs &&
-                                    result.IncidentMs &&
-                                    prevParticipatedIncident.IncidentMs < result.IncidentMs) {
-                                    alert(getResourceText("conference.attentionMessage2"), function () {
-                                        Log.print(Log.l.trace, "Confirmed!");
-                                    }, conference);
-                                }
-                                prevParticipatedIncident = result;
                             }
                             Log.print(Log.l.trace, "PRC_CheckJoinedToSession success!");
                         },

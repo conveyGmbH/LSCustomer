@@ -647,11 +647,6 @@
                             : AppData._persistentStates.registerData.eventId;
                         Log.print(Log.l.trace, "calling PRC_RegisterContact... eventId=" + eventId);
                         // save date time in ms when joined to conference
-                        if (AppData._persistentStates.registerData.userToken) {
-                            AppData._persistentStates.registerData.joinedSessionDate =
-                                new Date().getTime(); /*+ new Date().getTimezoneOffset() * 60 * 1000*/
-                            Application.pageframe.savePersistentStates();
-                        }
                         return AppData.call("PRC_RegisterContact",
                             {
                                 pVeranstaltungID: eventId,
@@ -936,6 +931,9 @@
                             } else {
                                 // Remember clock time when joined to conference
                                 // AppData._persistentStates.registerData.joinedSessionDate = new Date();
+                                AppData._persistentStates.registerData.joinedSessionDate = new Date(); /*+ new Date().getTimezoneOffset() * 60 * 1000*/
+                                Application.pageframe.savePersistentStates();
+
                                 that.binding.showCountdown = false;
                                 that.binding.showConference = true;
                                 that.binding.showTeaser = false;
