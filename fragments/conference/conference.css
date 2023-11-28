@@ -3435,15 +3435,15 @@ c
 }
 
 #conference.mediaview #video-player .jckrMj {
-    border-radius: 2px !important;
+    border-radius: 0 !important;
     font-weight: 600 !important;
     line-height: 1 !important;
     cursor: pointer !important;
     font-size: calc(0.85rem) !important;
-    padding: 0.45rem 1rem !important;
     color: var(--btn-primary-color,var(--color-white,#FFF)) !important;
-    background-color: var(--color-transparent,#ff000000) !important;
     border: none !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    padding: 5px !important;
 }
 
 #conference.mediaview #video-player .pgwqo {
