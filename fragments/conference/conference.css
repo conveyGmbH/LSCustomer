@@ -1277,6 +1277,28 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: 100% !important;
 }
 
+.ReactModalPortal header[data-test="videoModalHeader"] {
+    position: absolute;
+    top: 12px;
+}
+
+.ReactModalPortal .doc-container {
+    float: right;
+    width: 50%;
+    height: 50%;
+}
+
+#noteFrame.player,
+#noteVideo.player,
+#noteAudio.player {
+    width: 100%;
+    height: 100%;
+}
+
+#conferenceController .presenter-video-select-container {
+    display: none;
+}
+
 #conferenceController .video-item-container {
     display: none;
 }
