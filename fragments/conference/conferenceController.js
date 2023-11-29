@@ -1832,7 +1832,8 @@ var __meteor_runtime_config__;
                         var videoModalInput = document.querySelector(elementSelectors.videoModalInput);
                         if (videoModalInput && videoModalInput.parentElement &&
                             videoModalInput.parentElement.style) {
-                            videoModalInput.parentElement.style.display = "none";
+                            //videoModalInput.parentElement.style.display = "none";
+                            videoModalInput.parentElement.style.height = "8em";
                         }
                     }
                 } else {

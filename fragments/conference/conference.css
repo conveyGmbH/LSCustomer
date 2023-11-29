@@ -1284,8 +1284,9 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 
 .ReactModalPortal .doc-container {
     float: right;
-    width: 50%;
+    width: auto;
     height: 50%;
+    max-width: 50%;
 }
 
 #noteFrame.player,
