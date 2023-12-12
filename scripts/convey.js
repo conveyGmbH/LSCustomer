@@ -224,6 +224,7 @@
                 barHorizontalTemplate.style.display = "none";
                 var barHorizontalItem = document.createElement("DIV");
                 barHorizontalItem.setAttribute("class", "navigationbar-item navigationbar-horizontal-item win-type-subtitle");
+                barHorizontalItem.setAttribute("data-win-bind", "disabled: disabled");
                 var barHorizontalText = document.createElement("DIV");
                 barHorizontalText.setAttribute("class", "navigationbar-text navigationbar-horizontal-text");
                 barHorizontalText.setAttribute("data-win-bind", "style.display: disabled Binding.Converter.toDisplayNone");
@@ -249,6 +250,7 @@
                 barVerticalTemplate.style.display = "none";
                 var barVerticalItem = document.createElement("DIV");
                 barVerticalItem.setAttribute("class", "navigationbar-item navigationbar-vertical-item win-type-subtitle");
+                barVerticalItem.setAttribute("data-win-bind", "disabled: disabled");
                 var barVerticalText = document.createElement("DIV");
                 barVerticalText.setAttribute("class", "navigationbar-text navigationbar-vertical-text");
                 barVerticalText.setAttribute("data-win-bind", "style.display: disabled Binding.Converter.toDisplayNone");
