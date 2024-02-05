@@ -2,15 +2,6 @@
     margins/paddings for all screens
 */
 
-:root {
-    --e-global-color-accent: #c2d63e;
-    --e-global-color-primary: #2a2f3d;
-    --e-global-color-buttontext: #ffffff;
-    --background-item: #7f7f7f;
-    --border-color: #b5b5b5;
-    --font-family-default: "Barlow";
-}
-
 .events .bold {
     font-weight: 600;
 }

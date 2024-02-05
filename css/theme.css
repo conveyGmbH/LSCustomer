@@ -183,3 +183,25 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
 }
 
 
+
+:root {
+    --e-global-color-accent: #c2d63e;
+    --e-global-color-primary: #2a2f3d;
+    --e-global-color-buttontext: #ffffff;
+    --background-item: #7f7f7f;
+    --border-color: #b5b5b5;
+    --font-family-default: "Open Sans";
+
+    --e-global-color-background: #FFFFFF;
+    --e-global-color-secondary: #07B9CB;
+    --e-global-color-text: #2A2F3D;
+    --e-global-color-d4faeed: #F3FBFC;
+    --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
+    --outline-focus: 1px solid var(--color-gray-lighter);
+
+    --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    --box-shadow-button: none;
+    --outline-focus: none;
+}
+
