@@ -391,9 +391,11 @@
         var js = [];
         var css = [];
         include("lib/crc32/scripts/crc32.js").then(function() {
-            return extraStartup();
-        }).then(function() {
             js.push(include("lib/WinJS/scripts/base.min.js"));
+            js.push(extraStartup());
+            return includeJoined(js);
+        }).then(function() {
+            js = [];
             js.push(include("lib/WinJS/scripts/ui.js"));
             js.push(include("lib/jquery/scripts/jquery.min.js"));
             js.push(include("lib/moment/scripts/moment-with-locales.min.js"));
