@@ -1051,6 +1051,9 @@ section.elementor-inner-section > div {
     -moz-border-radius: 54px !important;
 }
 
+.field_line .register-email {
+    padding-top: 20px;
+}
 
 .register .centerarea .field_line_full,
 .register .centerarea .field_line_odd,
@@ -1083,6 +1086,7 @@ section.elementor-inner-section > div {
     width: 99% !important;
     padding-top: 10px !important;
     background-color: transparent !important;
+    border-radius: 12px;
 }
 
 .register .register_title {
@@ -1614,7 +1618,23 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 .view-size-small .event .countdown-fragmenthost {
     grid-column: 1/span 6 !important;
     position: fixed !important;
+    background-color: var(--e-global-color-background, #ffffff) !important;
 }
+
+/*********countdown centered**********/
+
+.view-size-small .countdown .countdown-line,
+.view-size-small .countdown .field_line_full {
+    text-align: center !important;
+}
+
+/*********countdown blinker*********************/
+
+.view-size-small .countdown .count {
+    padding-top: 5px !important;
+}
+
+/*********************************************/
 
 .view-size-small .countdown .field_line_full {
     margin: 5px;
