@@ -1141,13 +1141,13 @@
                     Log.call(Log.l.trace, "Home.Controller.");
                     if (listView && listView.winControl) {
                         Log.print(Log.l.trace, "loadingState=" + listView.winControl.loadingState);
-                        // single list selection
-                        if (listView.winControl.selectionMode !== WinJS.UI.SelectionMode.single) {
-                            listView.winControl.selectionMode = WinJS.UI.SelectionMode.single;
+                        // no list selection
+                        if (listView.winControl.selectionMode !== WinJS.UI.SelectionMode.none) {
+                            listView.winControl.selectionMode = WinJS.UI.SelectionMode.none;
                         }
-                        // direct selection on each tap
-                        if (listView.winControl.tapBehavior !== WinJS.UI.TapBehavior.directSelect) {
-                            listView.winControl.tapBehavior = WinJS.UI.TapBehavior.directSelect;
+                        // invoke item on each tap
+                        if (listView.winControl.tapBehavior !== WinJS.UI.TapBehavior.invokeOnly) {
+                            listView.winControl.tapBehavior = WinJS.UI.TapBehavior.invokeOnly;
                         }
                         // Double the size of the buffers on both sides
                         if (!maxLeadingPages) {
