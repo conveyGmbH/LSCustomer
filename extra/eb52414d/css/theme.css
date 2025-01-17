@@ -813,12 +813,12 @@ section.elementor-inner-section > div {
 }
 
 .home .expander-button {
-    border: 1px solid var(--e-global-color-primary, #ad4829) !important;
+    border: 1px solid var(--e-global-color-accent, #ad4829) !important;
     font-family: var(--font-family-default) !important;
 }
 
 .home .expander-icon {
-    color: var(--e-global-color-primary, #c95d3c) !important;
+    color: var(--e-global-color-accent, #ad4829) !important;
 }
 
 .home .win-listview .win-vertical .win-footercontainer {
@@ -1052,12 +1052,6 @@ section.elementor-inner-section > div {
 }
 
 
-.centerarea .registerEmail {
-    width: 99% !important;
-    padding-top: 10px !important;
-    background-color: transparent !important;
-}
-
 .register .centerarea .field_line_full,
 .register .centerarea .field_line_odd,
 .register .centerarea .field_line_even {
@@ -1085,11 +1079,10 @@ section.elementor-inner-section > div {
     margin-top: 56% !important;
 }
 
-.centerarea.registerEmail {
+.centerarea .registerEmail {
     width: 99% !important;
     padding-top: 10px !important;
     background-color: transparent !important;
-    border: 2px solid var(--e-global-color-secondary, #3d4d61) !important;
 }
 
 .register .register_title {
@@ -1099,7 +1092,7 @@ section.elementor-inner-section > div {
 .register .input_field {
     background-color: transparent !important;
     width: inherit !important;
-    border: 2px solid var(--e-global-color-secondary, #3d4d61) !important;
+    border: 1px solid var(--e-global-color-secondary, #3d4d61) !important;
 }
 
 .event .logOff-container {
