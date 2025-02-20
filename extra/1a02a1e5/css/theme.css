@@ -171,13 +171,6 @@
     margin-bottom: 0 !important;
 }
 
-.home .win-headercontainer,
-.events .top-header {
-    background-image: url("../img/Line.svg");
-    background-repeat: repeat-x;
-    background-position: left bottom;
-}
-
 .home .win-listview .win-itembox {
     background-color: transparent !important;
 }
@@ -194,9 +187,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .home .win-listview .win-gridlayout .win-container, .events .win-listview .win-gridlayout .win-container {
     border: 1px transparent !important;
-    border-radius: 12px !important;
-    -moz-border-radius: 12px !important;
-    -webkit-border-radius: 12px !important;
+    border-radius: 20px !important;
+    -moz-border-radius: 20px !important;
+    -webkit-border-radius: 20px !important;
 }
 
 .home #more_Button {
@@ -218,31 +211,18 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: var(--e-global-color-primary, #070023) !important;
 }
 
-    .event button.win-button: hover {
-        color: var(--e-global-color-buttontext, #ffffff) !important;
-        background-color: var(--e-global-color-accent, #7100CA) !important;
-        border-color: var(--e-global-color-accent, #7100ca) !important;
-    }
+.event button.win-button: hover {
+    color: var(--e-global-color-buttontext, #ffffff) !important;
+    background-color: var(--e-global-color-accent, #7100CA) !important;
+    border-color: var(--e-global-color-accent, #7100ca) !important;
+}
 /****Beginning Changes****/
 .events .button-tip .action-image, .event .button-tip .action-image {
     display: none !important;
 }
 
-.events button#homeButton {
-    padding: 14px 0 !important;
-    color: inherit;
-    border: none !important;
-    background: none !important;
-    text-align: left !important;
-}
-
 .event button .win-type-title {
     color: var(--e-global-color-text, #070023) !important;
-}
-
-.event .calenderButton {
-    color: var(--e-global-color-accent, #7100ca) !important;
-    font-family: var(--font-family-default);
 }
 
 .events .button-tip .win-tooltip {
@@ -260,9 +240,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     text-transform: none !important;
     background: var(--e-global-color-text, #070023);
     border-color: var(--e-global-color-text, #070023);
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
     transition: opacity 0.3s;
     -webkit-transition: opacity 0.3s;
     -moz-transition: opacity 0.3s;
@@ -325,27 +305,6 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-primary, #070023) !important;
 }
 
-.event .section-4 .caption-field {
-    color: var(--e-global-color-primary, #070023) !important;
-}
-
-.event .speakerblock {
-    background-color: inherit;
-}
-
-.event button#calenderButton:not(:hover):not(:active):not(:focus) {
-    border-color: var(--e-global-color-accent, #7100ca) !important;
-}
-
-.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-button {
-    color: var(--e-global-color-accent, #7100ca) !important;
-}
-
-.event button#calenderButton:hover .win-button{
-    color: var(--e-global-color-buttontext, #ffffff) !important;
-    background-color: var(--e-global-color-accent, #7100ca) !important;
-}
-
 .register #loginButton, .register #re_registerEvent {
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -354,7 +313,6 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     border-width: 1px;
     border-color: var(--e-global-color-primary, #070023) !important;
     background-color: var(--e-global-color-primary, #070023) !important;
-    cursor: pointer;
     color: var(--e-global-color-buttontext, #ffffff) !important;
     display: flex;
     flex-direction: row;
@@ -377,6 +335,16 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .register #loginButton:hover > div > span, .register #re_registerEvent:hover > span {
     color: var(--e-global-color-buttontext, #ffffff) !important;
+}
+
+.text-lightcolor.win-button {
+    background-color: var(--e-global-color-background) !important;
+    cursor: pointer;
+}
+
+.text-lightcolor.win-button:disabled {
+    background-color: var(--e-global-color-background, #ffffff) !important;
+    cursor: default;
 }
 
 .register .win-type-body,
@@ -438,18 +406,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-primary, #070023) !important;
 }
 
-    .linkedin:hover, .xing:hover, .twitter:hover, .mail:hover {
-        color: var(--e-global-color-accent, #7100ca) !important;
-    }
-
-.text-lightcolor.win-button {
-    background-color: var(--e-global-color-background) !important;
-    cursor: pointer;
-}
-
-.text-lightcolor.win-button:disabled {
-    background-color: var(--e-global-color-background, #ffffff) !important;
-    cursor: default;
+.linkedin:hover, .xing:hover, .twitter:hover, .mail:hover {
+    color: var(--e-global-color-accent, #7100ca) !important;
 }
 
 .countdown .countdown-line {
@@ -523,15 +481,6 @@ section.elementor-inner-section > div {
     cursor: pointer;
 }
 
-.text-lightcolor.win-button {
-    background-color: Window;
-}
-
-.text-lightcolor.win-button:disabled {
-    background-color: #dcdcE4 !important;
-    cursor: default;
-}
-
 .event .contentarea {
     background-color: var(--e-global-color-background) !important;
 }
@@ -599,10 +548,11 @@ section.elementor-inner-section > div {
 .speakerSession .win-type-body {
     color: var(--e-global-color-text, #070023) !important;
     font-family: var(--font-family-default);
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 160%; /* 28.8px */
+    line-height: 150%;
+    letter-spacing: 1px;
 }
 
 .teaser .centerarea {
@@ -651,23 +601,11 @@ section.elementor-inner-section > div {
     background-color: transparent !important;
 }
 
-.event .calenderButton,
-.event .homeButton {
-    color: var(--e-global-color-accent, #7100ca) !important;
-    font-family: var(--font-family-default) !important;
-    font-size: 16px !important;
-    font-style: normal !important;
-    font-weight: 700 !important;
-    line-height: 120% !important; /* 19.2px */
-    letter-spacing: 0.48px !important;
-    text-transform: uppercase !important;
-}
-
 .event button .win-type-title,
 .modSession button .win-type-title,
 .speakerSession button .win-type-title {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-primary, #070023) !important;
+    color: var(--e-global-color-accent, #7100ca) !important;
 }
 
 .event .teaser-fragmenthost {
@@ -798,21 +736,6 @@ section.elementor-inner-section > div {
     padding: 15px 0 !important;
 }
 
-.event .homeButton,
-.modSession .homeButton,
-.speakerSession .homeButton {
-    margin-left: 0 !important;
-    padding: 0 !important;
-    font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-primary) !important;
-    font-size: 16px !important;
-    font-style: normal !important;
-    font-weight: 700 !important;
-    line-height: 120% !important; /* 19.2px */
-    letter-spacing: 0.48px !important;
-    text-transform: uppercase !important;
-}
-
 .event .logOff-container,
 .modSession .logOff-container,
 .speakerSession .logOff-container {
@@ -872,7 +795,7 @@ section.elementor-inner-section > div {
     min-height: 800px;
 }
 
-/**************No  Left Margin/Border/Padding for event boxes new MP webpage************************/
+/**************No  Left Margin/Border/Padding for event boxes new AUMA webpage************************/
 .home .win-listview .win-groupheader {
     padding: 5px 0 0 0 !important;
     width: calc(100% - 70px) !important;
@@ -881,7 +804,7 @@ section.elementor-inner-section > div {
 .home .win-itemsblock, .events .win-itemsblock {
     margin-left: 0 !important;
 }
-/**************ENDE No Border for series new MP webpage************************/
+/**************ENDE No Border for series new AUMA webpage************************/
 .events .list-footer {
     margin-top: 65px;
 }
@@ -897,6 +820,8 @@ section.elementor-inner-section > div {
 .event .register-fragmenthost {
     margin-top: calc(100% - 355px) !important;
 }
+
+/******************************* Home and Calendar Buttons ***************************************/
 
 .events button#homeButton {
     font-family: var(--font-family-default) !important;
@@ -928,19 +853,57 @@ section.elementor-inner-section > div {
     -webkit-border-radius: 4px !important;
 }
 
-    .event button#homeButton:hover,
-    .modSession button#homeButton:hover,
-    .speakerSession button#homeButton:hover {
-        color: var(--e-global-color-buttontext, #ffffff) !important;
-        background-color: var(--e-global-color-secondary, #b961ff) !important;
-        border: 1px solid var(--e-global-color-secondary, #b961ff) !important;
-    }
+.event button#homeButton:hover,
+.modSession button#homeButton:hover,
+.speakerSession button#homeButton:hover {
+    color: var(--e-global-color-buttontext, #ffffff) !important;
+    background-color: var(--e-global-color-secondary, #b961ff) !important;
+    border: 1px solid var(--e-global-color-secondary, #b961ff) !important;
+}
 
+.event button#calenderButton:not(:hover):not(:active):not(:focus),
+.event button#homeButton:not(:hover):not(:active):not(:focus) {
+    background-color: var(--e-global-color-buttontext) !important;
+    border: 1px solid var(--e-global-color-accent, #7100ca) !important;
+}
 
-    .event .button-tip {
-        display: flex !important;
-        align-items: center !important;
-    }
+.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title,
+.event button#homeButton:not(:hover):not(:active):not(:focus) .win-type-title {
+    color: var(--e-global-color-accent, #7100ca) !important;
+}
+
+.event button#calenderButton:hover,
+.event button#homeButton:hover {
+    color: var(--e-global-color-buttontext, #ffffff) !important;
+    border-color: var(--e-global-color-secondary, #b961ff) !important;
+    background-color: var(--e-global-color-secondary, #b961ff) !important;
+    cursor: pointer;
+    border-radius: 4px !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+}
+
+.event .calenderButton,
+.event .homeButton,
+.modSession .homeButton,
+.speakerSession .homeButton {
+    color: var(--e-global-color-accent, #7100ca) !important;
+    font-family: var(--font-family-default) !important;
+    font-size: 24px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: 150% !important; /* 19.2px */
+    letter-spacing: 1px !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+}
+
+/******************************************End home and calendar buttons******************************************/
+
+.event .button-tip {
+    display: flex !important;
+    align-items: center !important;
+}
 
 .event .button-tip .action-image {
     top: 3px !important;
@@ -1004,9 +967,15 @@ section.elementor-inner-section > div {
     margin-left: 0 !important;
 }
 
+/******************************* Speaker Block ***********************************/
+
 .event .section-4 .caption-field {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-primary, #070023) !important;
+}
+
+.event .speakerblock {
+    background-color: inherit;
 }
 
 .event .speaker-lines-container {
@@ -1040,33 +1009,7 @@ section.elementor-inner-section > div {
     font-weight: 400 !important;
 }
 
-.event .homeButton,
-.modSession .homeButton,
-.speakerSession .homeButton {
-    color: var(--e-global-color-accent, #7100ca) !important;
-}
-
-.event button#calenderButton:not(:hover):not(:active):not(:focus),
-.event button#homeButton:not(:hover):not(:active):not(:focus) {
-    background-color: transparent !important;
-    border: 1px solid var(--e-global-color-accent, #7100ca) !important;
-}
-
-.event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title,
-.event button#homeButton:not(:hover):not(:active):not(:focus) .win-type-title {
-     color: var(--e-global-color-accent, #7100ca) !important;
-}
-
-.event button#calenderButton:hover,
-.event button#homeButton:hover {
-    color: var(--e-global-color-buttontext, #ffffff) !important;
-    border-color: var(--e-global-color-secondary, #b961ff) !important;
-    background-color: var(--e-global-color-secondary, #b961ff) !important;
-    cursor: pointer;
-    border-radius: 4px !important;
-    -webkit-border-radius: 4px !important;
-    -moz-border-radius: 4px !important;
-}
+/******************************** End Speaker Block*************************************/
 
 .field_line .register-email {
     padding-top: 20px;
@@ -1080,12 +1023,7 @@ section.elementor-inner-section > div {
 }
 
 .win-link {
-    color: var(--e-global-color-primary, #070023) !important;
     text-decoration: underline !important;
-}
-
-.win-link:hover {
-    color: var(--e-global-color-accent, #7100ca) !important;
 }
 
 .event #logOffbutton .win-link {
@@ -1096,7 +1034,7 @@ section.elementor-inner-section > div {
     color: var(--e-global-color-text, #070023) !important;
 }
 
-.modSession .win-link:hover, .speakerSession .win-link:hover {
+.win-link:hover, .modSession .win-link:hover, .speakerSession .win-link:hover {
     color: var(--e-global-color-accent, #7100ca) !important;
 }
 
@@ -1107,34 +1045,24 @@ section.elementor-inner-section > div {
     margin: 0 auto !important;
 }
 
-.text-lightcolor.win-button {
-    background-color: var(--e-global-color-buttontext);
-    cursor: pointer;
-}
-
-.text-lightcolor.win-button:disabled {
-    background-color: var(--e-global-color-buttontext);
-    cursor: default;
-}
-
 .body-content-bottom {
     visibility: hidden;
 }
 
-    .body-content-bottom section:not(.elementor-inner-section) {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        left: var(--max-content-margin-left) !important;
-        width: var(--max-content-width) !important;
-        position: absolute !important;
-        padding: 0 15px !important;
-    }
+.body-content-bottom section:not(.elementor-inner-section) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: var(--max-content-margin-left) !important;
+    width: var(--max-content-width) !important;
+    position: absolute !important;
+    padding: 0 15px !important;
+}
 
-        .body-content-bottom section:not(.elementor-inner-section) > div {
-            margin: 0 !important;
-            width: 100% !important;
-            max-width: 100% !important;
-        }
+.body-content-bottom section:not(.elementor-inner-section) > div {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
 
 .view-size-biggest .body-content-bottom section:not(.elementor-inner-section) {
     left: 20px !important;
@@ -1172,15 +1100,6 @@ section.elementor-inner-section > div {
 
 .win-button {
     cursor: pointer;
-}
-
-.text-lightcolor.win-button {
-    background-color: Window;
-}
-
-.text-lightcolor.win-button:disabled {
-    color: var(--e-global-color-primary, #070023) !important;
-    cursor: default;
 }
 
 /* conference: slide number selector */
