@@ -320,12 +320,6 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     justify-content: center;
 }
 
-.register #loginButton:hover, .register #re-registerEvent:hover {
-    background-color: var(--e-global-color-accent, #7100ca) !important;
-    border-color: var(--e-global-color-accent, #7100ca) !important;
-    color: var(--e-global-color-buttontext, #ffffff) !important;
-}
-
 .register #loginButton > div > span, .register #re_registerEvent > span {
     color: var(--e-global-color-buttontext, #ffffff) !important;
     font-family: var(--font-family-default) !important;
@@ -343,8 +337,20 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     cursor: pointer;
 }
 
+.text-lightcolor.win-button:hover {
+    background-color: var(--e-global-color-accent, #7100ca) !important;
+    border-color: var(--e-global-color-accent, #7100ca) !important;
+    color: var(--e-global-color-buttontext, #ffffff) !important;
+}
+
 .text-lightcolor.win-button:disabled {
-    background-color: var(--e-global-color-background, #ffffff) !important;
+    cursor: default;
+}
+
+.text-lightcolor.win-button:disabled:hover {
+    border-color: var(--e-global-color-primary, #070023) !important;
+    background-color: var(--e-global-color-primary, #070023) !important;
+    color: var(--e-global-color-buttontext, #ffffff) !important;
     cursor: default;
 }
 
@@ -676,6 +682,16 @@ section.elementor-inner-section > div {
     padding: 20px 0;
 }
 
+.home .event-item,
+.events .event-item {
+    background-color: var(--e-global-color-background, #faf6f3) !important;
+}
+
+.home .event-image-container,
+.events .event-image-container {
+    background-color: inherit !important;
+}
+
 .home .event-detail,
 .events .event-detail {
     height: calc(100% - 250px) !important;
@@ -713,10 +729,11 @@ section.elementor-inner-section > div {
 .events .event-item .event-comment {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-text, #070023) !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
     font-style: normal !important;
     font-weight: 400 !important;
-    line-height: 1.4 !important;
+    line-height: 1.6 !important;
+    letter-spacing: 1px !important;
 }
 
 .event .ev-text,
@@ -727,6 +744,10 @@ section.elementor-inner-section > div {
     font-style: normal !important;
     font-weight: 400 !important;
     line-height: 160% !important;
+}
+
+.event .ev-text * {
+    margin: 0;
 }
 
 /*****Changes******/
@@ -883,6 +904,7 @@ section.elementor-inner-section > div {
     color: var(--e-global-color-buttontext, #ffffff) !important;
     border-color: var(--e-global-color-secondary, #b961ff) !important;
     background-color: var(--e-global-color-secondary, #b961ff) !important;
+    border-radius: 4px !important;
     cursor: pointer;
 }
 
