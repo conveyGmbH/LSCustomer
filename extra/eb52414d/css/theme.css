@@ -719,7 +719,6 @@ section.elementor-inner-section > div {
 
 .home .event-detail,
 .events .event-detail {
-    height: calc(100% - 250px) !important;
     padding-left: 20px !important;
 }
 
@@ -727,7 +726,6 @@ section.elementor-inner-section > div {
 .events .event-item .event-title {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-primary, #c95d3c) !important;
-    padding: 20px 0 10px 0 !important;
     font-size: 22px !important;
     line-height: 120% !important;
     font-style: normal !important;
@@ -738,9 +736,7 @@ section.elementor-inner-section > div {
 .events .event-item .event-subtitle {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-secondary, #3D4D61) !important;
-    padding-bottom: 5px !important;
     letter-spacing: 0.14px !important;
-    padding: 5px 0 20px 0 !important;
     font-size: 14px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -1086,7 +1082,7 @@ section.elementor-inner-section > div {
     width: 99% !important;
     padding-top: 10px !important;
     background-color: transparent !important;
-    border-radius: 12px;
+    border-radius: 12px !important;
 }
 
 .register .register_title {

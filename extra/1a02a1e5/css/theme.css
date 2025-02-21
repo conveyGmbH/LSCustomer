@@ -34,8 +34,8 @@
 
 @font-face {
     font-family: "Soehne";
-    src: url(../fonts/soehne-kraftig.woff2) format("woff2"),
-         url(../fonts/Söhne-Kräftig.otf) format("truetype");
+    src: url(../fonts/soehne-buch.woff2) format("woff2"),
+         url(../fonts/Söhne-Buch.otf) format("truetype");
     font-style: normal;
     font-weight: 400;
 }
@@ -56,6 +56,7 @@
     --outline-focus: 1px solid var(--color-gray-lighter);
     --font-family-default: 'Soehne' !important;
     --font-family-header: 'Soehne Breit' !important;
+    --font-family-header-leicht: 'Soehne Breit Extraleicht' !important;
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
@@ -89,8 +90,7 @@
 .event .win-tooltip,
 .event .content-header {
     font-family: var(--font-family-default);
-    font-weight: 600 !important;
-    line-height: 140% !important;
+    line-height: 1.5 !important;
     letter-spacing: 1px !important;
 }
 
@@ -187,9 +187,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .home .win-listview .win-gridlayout .win-container, .events .win-listview .win-gridlayout .win-container {
     border: 1px transparent !important;
-    border-radius: 20px !important;
-    -moz-border-radius: 20px !important;
-    -webkit-border-radius: 20px !important;
+    border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    -webkit-border-radius: 4px !important;
 }
 
 .home #more_Button {
@@ -298,6 +298,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .event .share-block {
+    padding: 20px 0;
     height: 80px !important;
 }
 
@@ -399,7 +400,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .circle {
     background-color: var(--e-global-color-background, #faf6f3) !important;
-    padding: 25px 35px !important;
+    padding: 7px 15px !important;
 }
 
 .linkedin, .xing, .twitter, .mail {
@@ -548,9 +549,9 @@ section.elementor-inner-section > div {
 .speakerSession .win-type-body {
     color: var(--e-global-color-text, #070023) !important;
     font-family: var(--font-family-default);
-    font-size: 16px;
+    font-size: 16px !important;
     font-style: normal;
-    font-weight: 400;
+   
     line-height: 150%;
     letter-spacing: 1px;
 }
@@ -629,17 +630,18 @@ section.elementor-inner-section > div {
     color: var(--e-global-color-primary, #070023) !important;
     font-size: 20px !important;
     font-style: normal !important;
-    font-weight: var(--e-global-typography-8dd2c1e-font-weight) !important;
-    line-height: 140% !important; /* 28.8px */
+    line-height: 1.5 !important;
+    letter-spacing: 1px;
     text-transform: none !important;
 }
 
 .home .content-header-line > h1,
 .events .content-header-line > h1 {
-    font-family: var(--font-family-header ), Sans-serif !important;
+    font-family: var(--font-family-header-leicht) !important;
     font-size: 42px !important;
-    margin-top: 20px !important;
-    line-height: 130% !important;
+    margin-top: 35px !important;
+    line-height: 1.3 !important;
+    letter-spacing: 2px;
 }
 
 .modSession .content-header-line > h1,
@@ -652,7 +654,7 @@ section.elementor-inner-section > div {
 .event .win-h2, .event .win-h3,
 .modSession .win-h2, .modSession .win-h3,
 .speakerSession .win-h2, .speakerSession .win-h3 {
-    font-family: var(--font-family-default) !important;
+    font-family: var(--font-family-header) !important;
     font-size: 24px !important;
     color: var(--e-global-color-primary, #070023) !important;
 }
@@ -667,7 +669,7 @@ section.elementor-inner-section > div {
 .event .content-header-line > .win-h2,
 .modSession .content-header-line > .win-h2,
 .speakerSession .content-header-line > .win-h2 {
-    font-family: var(--font-family-default) !important;
+    font-family: var(--font-family-header) !important;
     font-size: 40px !important;
     line-height: 140% !important;
     font-weight: 600 !important;
@@ -682,36 +684,39 @@ section.elementor-inner-section > div {
 
 .home .event-item .event-title,
 .events .event-item .event-title {
-    font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-buttontext, #ffffff) !important;
-    padding: 20px 0 10px 0 !important;
+    font-family: var(--font-family-header) !important;
+    color: var(--e-global-color-text, #070023) !important;
     font-size: 22px !important;
-    line-height: 120% !important;
+    line-height: 1.4 !important;
     font-style: normal !important;
-    font-weight: 700 !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+}
+
+.home .event-item .event-title:hover,
+.events .event-item .event-title:hover {
+    text-decoration: underline;
 }
 
 .home .event-item .event-subtitle,
 .events .event-item .event-subtitle {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-buttontext, #ffffff) !important;
-    padding-bottom: 5px !important;
-    letter-spacing: 0.14px !important;
-    padding: 5px 0 20px 0 !important;
+    color: var(--e-global-color-text, #070023) !important;
+    letter-spacing: 1px !important;
     font-size: 14px !important;
     font-style: normal !important;
     font-weight: 400 !important;
-    line-height: 160% !important; /* 22.4px */
+    line-height: 1.4 !important;
 }
 
 .home .event-item .event-comment,
 .events .event-item .event-comment {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-text, #070023) !important;
-    font-size: 16px !important;
+    font-size: 14px !important;
     font-style: normal !important;
     font-weight: 400 !important;
-    line-height: 160% !important; /* 25.6px */
+    line-height: 1.4 !important;
 }
 
 .event .ev-text,
@@ -865,6 +870,7 @@ section.elementor-inner-section > div {
 .event button#homeButton:not(:hover):not(:active):not(:focus) {
     background-color: var(--e-global-color-buttontext) !important;
     border: 1px solid var(--e-global-color-accent, #7100ca) !important;
+    border-radius: 4px !important;
 }
 
 .event button#calenderButton:not(:hover):not(:active):not(:focus) .win-type-title,
@@ -878,9 +884,6 @@ section.elementor-inner-section > div {
     border-color: var(--e-global-color-secondary, #b961ff) !important;
     background-color: var(--e-global-color-secondary, #b961ff) !important;
     cursor: pointer;
-    border-radius: 4px !important;
-    -webkit-border-radius: 4px !important;
-    -moz-border-radius: 4px !important;
 }
 
 .event .calenderButton,
@@ -896,6 +899,13 @@ section.elementor-inner-section > div {
     letter-spacing: 1px !important;
     margin-left: 0 !important;
     padding: 0 !important;
+}
+
+.event .calenderButton:hover,
+.event .homeButton:hover,
+.modSession .homeButton:hover,
+.speakerSession .homeButton:hover {
+    color: var(--e-global-color-buttontext, #ffffff) !important;
 }
 
 /******************************************End home and calendar buttons******************************************/
@@ -952,6 +962,10 @@ section.elementor-inner-section > div {
     transition: opacity 0.3s;
     -webkit-transition: opacity 0.3s;
     -moz-transition: opacity 0.3s;
+}
+
+.event .win-h1 {
+    font-size: 42px !important;
 }
 
 .event .caption-field,
@@ -1234,6 +1248,31 @@ section.elementor-inner-section > div {
     margin: 0 auto !important;
 }
 
+.view-size-bigger .home .content-header-line > h1,
+.view-size-bigger .events .content-header-line > h1 {
+    font-size: 28px !important;
+    margin-top: 20px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 2px;
+}
+
+.view-size-bigger .home .content-header-line > h2,
+.view-size-bigger .events .content-header-line > h2,
+.view-size-bigger .event .content-header-line > .win-h2,
+.view-size-bigger .modSession .content-header-line > .win-h2,
+.view-size-bigger .speakerSession .content-header-line > .win-h2 {
+    font-size: 28px !important;
+    font-style: normal !important;
+    text-transform: none !important;
+}
+
+.view-size-bigger .home .content-header-line > span,
+.view-size-bigger .events .content-header-line > span,
+.view-size-bigger .event .content-header-line > span {
+    font-size: 18px !important;
+}
+
+
 .view-size-bigger .event .content-header {
     width: calc(100% - 20px - 20px) !important;
     margin: 0 !important;
@@ -1313,12 +1352,27 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 .view-size-medium .event .content-header-line > h1,
 .view-size-medium .modSession .content-header-line > h1,
 .view-size-medium .speakerSession .content-header-line > h1 {
-    font-size: 42px !important;
+    font-size: 28px !important;
+}
+
+.view-size-medium .event .win-h1 {
+    font-size: 28px !important;
+    padding-right: 20px !important;
+    overflow-wrap: break-word;
 }
 
 .view-size-medium .modSession .content-header-line > h1,
 .view-size-medium .speakerSession .content-header-line > h1 {
     width: 80% !important;
+}
+
+.view-size-medium .home .event-detail,
+.view-size-medium .events .event-detail {
+    padding-left: 10px !important;
+}
+
+.view-size-medium .home .event-item .event-subtitle {
+    padding: 10px 0 !important;
 }
 
 .view-size-medium .events button#homeButton,
@@ -1328,7 +1382,10 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 }
 
 .view-size-medium .home .content-header-line > h2,
-.view-size-medium .events .content-header-line > h2 {
+.view-size-medium .events .content-header-line > h2,
+.view-size-bigger .event .content-header-line > .win-h2,
+.view-size-bigger .modSession .content-header-line > .win-h2,
+.view-size-bigger .speakerSession .content-header-line > .win-h2 {
     font-size: 28px !important;
 }
 
@@ -1408,12 +1465,23 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 .view-size-medium-small .event .content-header-line > h1,
 .view-size-medium-small .modSession .content-header-line > h1,
 .view-size-medium-small .speakerSession .content-header-line > h1 {
-    font-size: 32px !important;
+    font-size: 28px !important;
 }
+
+.view-size-medium-small .home .content-header-line > span,
+.view-size-medium-small .events .content-header-line > span,
+.view-size-medium-small .event .content-header-line > span {
+    font-size: 16px !important;
+}
+
 
 .view-size-medium-small .modSession .content-header-line > h1,
 .view-size-medium-small .speakerSession .content-header-line > h1 {
     width: 90% !important;
+}
+
+.view-size-medium-small .event .win-h1 {
+    padding-right: 0 !important;
 }
 
 .view-size-medium-small .event .register-fragmenthost {
