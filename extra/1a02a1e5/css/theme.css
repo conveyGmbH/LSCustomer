@@ -42,7 +42,7 @@
 
 
 :root {
-    --max-content-margin-left: calc(50% - 720px);
+    --max-content-margin-left: calc(50% - 700px);
     --max-content-width: 1410px;
     --max-content-width-surface: 1460px !important;
     --e-global-color-buttontext: #FFFFFF;
