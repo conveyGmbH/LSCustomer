@@ -5,8 +5,19 @@
     function saveBodyContent() {
         var customerElement = document.querySelector("#"+rootElementId);
         if (customerElement && customerElement.parentElement) {
+            var mainBottomElement = null;
             var customerRootElement = customerElement;
             while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
+                if (customerRootElement.parentElement.parentElement === document.body &&
+                    customerRootElement.nextElementSibling) {
+                    var nextElementSibling = customerRootElement.nextElementSibling;
+                    mainBottomElement = document.createElement(customerRootElement.parentElement.tagName);
+                    if (mainBottomElement)
+                        while (nextElementSibling) {
+                            mainBottomElement.appendChild(nextElementSibling);
+                            nextElementSibling = nextElementSibling.nextElementSibling;
+                        }
+                }
                 customerRootElement = customerRootElement.parentElement;
             }
             // save customer page content
@@ -25,6 +36,9 @@
                     bodyContentTop.appendChild(curBodyChild);
                 }
                 curBodyChild = nextBodyChild;
+            }
+            if (mainBottomElement) {
+                bodyContentBottom.appendChild(mainBottomElement);
             }
             curBodyChild = customerRootElement.nextElementSibling;
             while (curBodyChild) {
