@@ -450,7 +450,7 @@
                 if (!onLoadCalled && --retryCounter > 0) {
                     window.setTimeout(function () {
                         checkForRootElement();
-                    }, 50);
+                    }, 10);
                 }
                 return;
             }
