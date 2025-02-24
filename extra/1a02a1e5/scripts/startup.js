@@ -5,6 +5,7 @@
     function saveBodyContent() {
         var customerElement = document.querySelector("#"+rootElementId);
         if (customerElement && customerElement.parentElement) {
+            var mainTopElement = null;
             var mainBottomElement = null;
             var customerRootElement = customerElement;
             while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
@@ -17,8 +18,12 @@
                             mainBottomElement.appendChild(nextElementSibling);
                             nextElementSibling = nextElementSibling.nextElementSibling;
                         }
+                    mainTopElement = customerRootElement;
+                    customerRootElement = customerRootElement.parentElement;
+                    customerRootElement.removeChild(mainTopElement);
+                } else {
+                    customerRootElement = customerRootElement.parentElement;
                 }
-                customerRootElement = customerRootElement.parentElement;
             }
             // save customer page content
             var bodyContentTop = document.createElement("DIV");
@@ -36,13 +41,7 @@
                     curBodyChild.tagName.toLowerCase() !== "link" &&
                     curBodyChild.className !== "skip-navigation") {
                     var main = curBodyChild.querySelector("#main");
-                    if (main) {
-                        main.parentElement.removeChild(main);
-                    }
                     bodyContentTop.appendChild(curBodyChild);
-                    if (main) {
-                        bodyContentTop.appendChild(main);
-                    }
                 }
                 curBodyChild = nextBodyChild;
             }
@@ -62,6 +61,9 @@
             document.body.insertBefore(bodyContentTop, customerRootElement);
             document.body.appendChild(bodyContentBottom);
             bodyContentTop.appendChild(customerRootElement);
+            if (mainTopElement) {
+                bodyContentTop.appendChild(mainTopElement);
+            }
         }
     }
 
