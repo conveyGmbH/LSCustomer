@@ -27,7 +27,12 @@
             bodyContentBottom.setAttribute("class", "saved-body-content-bottom");
             bodyContentBottom.setAttribute("style", "visibility: hidden");
             var nextBodyChild;
-            var curBodyChild = document.body.firstElementChild;
+            var curBodyChild = document.body.querySelector("#app");
+            if (curBodyChild && curBodyChild.firstElementChild) {
+                curBodyChild = curBodyChild.firstElementChild;
+            } else {
+                curBodyChild = document.body.firstElementChild;
+            }
             while (curBodyChild && curBodyChild !== customerRootElement) {
                 nextBodyChild = curBodyChild.nextElementSibling;
                 if (curBodyChild.tagName && 
