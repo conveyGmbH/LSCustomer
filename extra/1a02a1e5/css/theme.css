@@ -634,7 +634,7 @@ section.elementor-inner-section > div {
 .event .content-header-line > span {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-primary, #070023) !important;
-    font-size: 1.8em !important;
+    font-size: 18px !important;
     font-style: normal !important;
     line-height: 1.5 !important;
     /*letter-spacing: 1px;*/
@@ -649,7 +649,7 @@ section.elementor-inner-section > div {
     font-family: var(--font-family-header) !important;
     margin-top: 35px !important;
     /*letter-spacing: 2px;*/
-    font-size: 4.2rem !important;
+    font-size: 42px !important;
     font-weight: 700 !important;
     line-height: 1.3 !important;
 }
