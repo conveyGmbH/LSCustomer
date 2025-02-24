@@ -21,13 +21,13 @@
             // TODO: Initialize the page here.
 
             // insert body-content
-            var hasFixedChild = false;
             var sibling,nextSibling,firstElementChild,styles;
             var appHeader = element.firstElementChild.firstElementChild || element.firstElementChild || element;
             var savedBodyContentTop = document.querySelector(".saved-body-content-top");
             if (savedBodyContentTop) {
                 sibling = savedBodyContentTop.firstElementChild;
                 while (sibling) {
+                    var hasFixedChild = false;
                     nextSibling = sibling.nextElementSibling;
                     firstElementChild = sibling;
                     while (firstElementChild) {
