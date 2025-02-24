@@ -31,8 +31,10 @@
             while (curBodyChild && curBodyChild !== customerRootElement) {
                 nextBodyChild = curBodyChild.nextElementSibling;
                 if (curBodyChild.tagName && 
+                    curBodyChild.tagName.toLowerCase() !== "noscript" &&
                     curBodyChild.tagName.toLowerCase() !== "script" &&
-                    curBodyChild.tagName.toLowerCase() !== "link") {
+                    curBodyChild.tagName.toLowerCase() !== "link" &&
+                    curBodyChild.className !== "skip-navigation") {
                     bodyContentTop.appendChild(curBodyChild);
                 }
                 curBodyChild = nextBodyChild;
