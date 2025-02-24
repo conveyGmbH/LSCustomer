@@ -442,7 +442,7 @@
 
     var onLoadCalled = false;
     var loadApplicationCalled = false;
-    var retryCounter = 100;
+    var retryCounter = 500;
     function checkForRootElement() {
         if (!loadApplicationCalled) {
             if (!document.querySelector("#" + rootElementId)) {
@@ -468,5 +468,5 @@
     }
     window.setTimeout(function () {
         checkForRootElement();
-    }, 50);
+    }, 10);
 })();
