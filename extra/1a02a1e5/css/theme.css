@@ -211,7 +211,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: var(--e-global-color-primary, #070023) !important;
 }
 
-.event button.win-button: hover {
+.event button.win-button:hover {
     color: var(--e-global-color-buttontext, #ffffff) !important;
     background-color: var(--e-global-color-accent, #7100CA) !important;
     border-color: var(--e-global-color-accent, #7100ca) !important;
@@ -367,7 +367,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .register .mandatory {
     font-size: 16px !important;
     line-height: 150% !important;
-    letter-spacing: 1% !important;
+    letter-spacing: 1px !important;
 }
 
 .register input::placeholder {
