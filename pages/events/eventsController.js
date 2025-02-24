@@ -580,9 +580,15 @@
                                 if (!WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "headerup")) {
                                     WinJS.Utilities.addClass(stickyHeaderPinnedFixed, "headerup");
                                 }
+                                if (!WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "header--small")) {
+                                    WinJS.Utilities.addClass(stickyHeaderPinnedFixed, "header--small");
+                                }
                             } else {
                                 if (WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "headerup")) {
                                     WinJS.Utilities.removeClass(stickyHeaderPinnedFixed, "headerup");
+                                }
+                                if (WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "header--small")) {
+                                    WinJS.Utilities.removeClass(stickyHeaderPinnedFixed, "header--small");
                                 }
                             }
                         }
