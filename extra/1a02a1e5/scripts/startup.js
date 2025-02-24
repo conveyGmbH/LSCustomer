@@ -27,12 +27,7 @@
             bodyContentBottom.setAttribute("class", "saved-body-content-bottom");
             bodyContentBottom.setAttribute("style", "visibility: hidden");
             var nextBodyChild;
-            var curBodyChild = document.body.querySelector("#app");
-            if (curBodyChild && curBodyChild.firstElementChild) {
-                curBodyChild = curBodyChild.firstElementChild;
-            } else {
-                curBodyChild = document.body.firstElementChild;
-            }
+            var curBodyChild = document.body.firstElementChild;
             while (curBodyChild && curBodyChild !== customerRootElement) {
                 nextBodyChild = curBodyChild.nextElementSibling;
                 if (curBodyChild.tagName && 
@@ -40,7 +35,14 @@
                     curBodyChild.tagName.toLowerCase() !== "script" &&
                     curBodyChild.tagName.toLowerCase() !== "link" &&
                     curBodyChild.className !== "skip-navigation") {
+                    var main = curBodyChild.querySelector("#main");
+                    if (main) {
+                        main.parentElement.removeChild(main);
+                    }
                     bodyContentTop.appendChild(curBodyChild);
+                    if (main) {
+                        bodyContentTop.appendChild(main);
+                    }
                 }
                 curBodyChild = nextBodyChild;
             }
