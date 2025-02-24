@@ -440,19 +440,33 @@
         });
     }
 
+    var onLoadCalled = false;
+    var loadApplicationCalled = false;
+    var retryCounter = 100;
     function checkForRootElement() {
-        if (!document.querySelector("#" + rootElementId)) {
-            //cancel processing if no root element present!
-            return;
+        if (!loadApplicationCalled) {
+            if (!document.querySelector("#" + rootElementId)) {
+                //cancel processing if no root element present!
+                if (!onLoadCalled && --retryCounter > 0) {
+                    window.setTimeout(function () {
+                        checkForRootElement();
+                    }, 50);
+                }
+                return;
+            }
+            loadApplicationCalled = true;
+            loadApplication();
         }
-        loadApplication();
     }
-
     var prevOnLoadHandler = window.onload;
-    window.onload = function(event) {
+    window.onload = function (event) {
+        onLoadCalled = true;
         if (typeof prevOnLoadHandler === "function") {
             prevOnLoadHandler(event);
         }
         checkForRootElement();
     }
+    window.setTimeout(function () {
+        checkForRootElement();
+    }, 50);
 })();
