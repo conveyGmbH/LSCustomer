@@ -198,24 +198,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .events button.win-button, .events button.win-button:focus {
-    border-radius: 40px 40px 40px 40px;
-    -moz-border-radius: 40px 40px 40px 40px;
-    -webkit-border-radius: 40px;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px;
     outline-style: none;
 }
 
-.event button.win-button,
-.event button.win-button:focus {
-    border-color: var(--e-global-color-primary, #070023) !important;
-    color: var(--e-global-color-buttontext, #ffffff) !important;
-    background-color: var(--e-global-color-primary, #070023) !important;
-}
-
-.event button.win-button:hover {
-    color: var(--e-global-color-buttontext, #ffffff) !important;
-    background-color: var(--e-global-color-accent, #7100CA) !important;
-    border-color: var(--e-global-color-accent, #7100ca) !important;
-}
 /****Beginning Changes****/
 .events .button-tip .action-image, .event .button-tip .action-image {
     display: none !important;
@@ -306,20 +294,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-primary, #070023) !important;
 }
 
-.register #loginButton, .register #re_registerEvent {
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--e-global-color-primary, #070023) !important;
-    background-color: var(--e-global-color-primary, #070023) !important;
-    color: var(--e-global-color-buttontext, #ffffff) !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
+/******************************* Anmeldung Button *********************************************/
 .register #loginButton > div > span, .register #re_registerEvent > span {
     color: var(--e-global-color-buttontext, #ffffff) !important;
     font-family: var(--font-family-default) !important;
@@ -343,9 +318,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-buttontext, #ffffff) !important;
 }
 
-.text-lightcolor.win-button:disabled {
-    cursor: default;
-}
+.text-lightcolor.win-button:disabled { cursor: default; }
 
 .text-lightcolor.win-button:disabled:hover {
     border-color: var(--e-global-color-primary, #070023) !important;
@@ -353,6 +326,23 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-buttontext, #ffffff) !important;
     cursor: default;
 }
+
+.event button.win-button,
+.event button.win-button:focus {
+    border-color: var(--e-global-color-primary, #070023) !important;
+    color: var(--e-global-color-buttontext, #ffffff) !important;
+    background-color: var(--e-global-color-primary, #070023) !important;
+    border-radius: 4px !important;
+}
+
+.event button.win-button:hover {
+    color: var(--e-global-color-buttontext, #ffffff) !important;
+    background-color: var(--e-global-color-accent, #7100CA) !important;
+    border-color: var(--e-global-color-accent, #7100ca) !important;
+    border-radius: 4px !important;
+}
+
+/******************************* Anmeldung Button Ende*********************************************/
 
 .register .win-type-body,
 .register .win-type-title,
@@ -367,7 +357,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .register .mandatory {
     font-size: 16px !important;
     line-height: 150% !important;
-    letter-spacing: 1px !important;
+    letter-spacing: 1% !important;
 }
 
 .register input::placeholder {
@@ -555,7 +545,7 @@ section.elementor-inner-section > div {
 .speakerSession .win-type-body {
     color: var(--e-global-color-text, #070023) !important;
     font-family: var(--font-family-default);
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-style: normal;
    
     line-height: 150%;
@@ -634,24 +624,20 @@ section.elementor-inner-section > div {
 .event .content-header-line > span {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-primary, #070023) !important;
-    font-size: 18px !important;
+    font-size: 20px !important;
     font-style: normal !important;
     line-height: 1.5 !important;
-    /*letter-spacing: 1px;*/
+    letter-spacing: 1px;
     text-transform: none !important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
 }
 
 .home .content-header-line > h1,
 .events .content-header-line > h1 {
-    font-family: var(--font-family-header) !important;
-    margin-top: 35px !important;
-    /*letter-spacing: 2px;*/
+    font-family: var(--font-family-header-leicht) !important;
     font-size: 42px !important;
-    font-weight: 700 !important;
+    margin-top: 35px !important;
     line-height: 1.3 !important;
+    letter-spacing: 2px;
 }
 
 .modSession .content-header-line > h1,
@@ -786,11 +772,12 @@ section.elementor-inner-section > div {
 
 .home .expander-button {
     border: 1px solid var(--e-global-color-accent, #7100ca) !important;
+    background-color: var(--e-global-color-accent, #7100ca) !important;
     font-family: var(--font-family-default) !important;
 }
 
 .home .expander-icon {
-    color: var(--e-global-color-accent, #7100ca) !important;
+    color: var(--e-global-color-accent, #ffffff) !important;
 }
 
 .home .expander-button:hover {
@@ -811,7 +798,7 @@ section.elementor-inner-section > div {
 .home .win-listview .win-vertical .win-headercontainer,
 .events .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
-    margin-top: 40px !important;
+    margin-top: 0 !important;
     width: 100% !important;
     padding: 102px 0 0 0 !important;
 }
