@@ -321,7 +321,7 @@
                             }
                             var stickyHeaderPinnedFixed = headerHost.firstElementChild.querySelector(".sticky-header-pinned-fixed");
                             if (stickyHeaderPinnedFixed) {
-                                if (listView.winControl.scrollPosition > Math.max(prevScrollPosition, 15)) {
+                                if (contentArea.scrollTop > Math.max(prevScrollPosition, 15)) {
                                     if (!WinJS.Utilities.hasClass(stickyHeaderPinnedFixed, "headerup")) {
                                         WinJS.Utilities.addClass(stickyHeaderPinnedFixed, "headerup");
                                     }
