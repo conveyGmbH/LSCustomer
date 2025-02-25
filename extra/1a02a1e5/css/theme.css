@@ -42,9 +42,9 @@
 
 
 :root {
-    --max-content-margin-left: calc(50% - 700px);
-    --max-content-width: 1410px;
-    --max-content-width-surface: 1460px !important;
+    --max-content-margin-left: calc(50% - 904px) !important;
+    --max-content-width: 1808px;
+    --max-content-width-surface: 1808px !important;
     --e-global-color-buttontext: #FFFFFF;
     --e-global-color-background: #FAF6F3;
     --e-global-color-primary: #070023;
@@ -177,6 +177,10 @@
 
 html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: transparent !important;
+}
+
+.event .customer-top-header {
+    display: none !important;
 }
 /************ENDE Change bg AUMA webpage ***************/
 
@@ -562,9 +566,8 @@ section.elementor-inner-section > div {
 
 .home .content-header, .events .top-header {
     margin: 0 auto !important;
-    max-width: 1400px !important;
-    padding-bottom: 0 !important;
-    width: calc(100% - 30px - 30px) !important;
+    max-width: 1808px !important;
+    padding-inline: 25.4rem !important;
 }
 
 .event .content-grid {
@@ -750,6 +753,7 @@ section.elementor-inner-section > div {
 .modSession .hero-header,
 .speakerSession .hero-header {
     padding: 15px 0 !important;
+    height: auto;
 }
 
 .event .logOff-container,
@@ -774,6 +778,9 @@ section.elementor-inner-section > div {
     border: 1px solid var(--e-global-color-accent, #7100ca) !important;
     background-color: var(--e-global-color-accent, #7100ca) !important;
     font-family: var(--font-family-default) !important;
+    border-radius: 4px !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
 }
 
 .home .expander-icon {
@@ -808,8 +815,9 @@ section.elementor-inner-section > div {
     margin-left: var(--max-content-margin-left) !important;
     max-width: var(--max-content-width-surface) !important;
     margin-top: 10px !important;
-    width: calc(100% - 30px - 30px) !important;
+    width: 100% !important;
     min-height: 800px;
+    padding-inline: 25.4rem;
 }
 
 /**************No  Left Margin/Border/Padding for event boxes new AUMA webpage************************/
@@ -1152,6 +1160,11 @@ section.elementor-inner-section > div {
     contentarea is less than 1500px**/
 @media (min-width: 1300px) and (max-width: 1499px) {
 
+    .home .content-header,
+    .home .win-listview .win-vertical .win-gridlayout.win-surface  {
+        padding-inline: 13.4rem !important;
+    }
+
     .event .content-grid,
     .modSession .content-grid,
     .speakerSession .content-grid {
@@ -1188,8 +1201,9 @@ section.elementor-inner-section > div {
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     max-width: var(--max-content-width-surface) !important;
-    margin: 0 30px 0 30px !important;
+    margin: 0 !important;
     width: 100% !important;
+    padding-inline: 13.4rem !important;
 }
 
 .view-size-biggest .event .content-grid {
@@ -1232,6 +1246,8 @@ section.elementor-inner-section > div {
 
     use: .view-size-bigger
 */
+
+
 .view-size-bigger .speakerSession .content-grid,
 .view-size-bigger .modSession .content-grid {
     margin: 0 !important;
@@ -1257,7 +1273,7 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .home .content-header,
 .view-size-bigger .events .content-header {
-    width: calc(100% - 20px - 20px) !important;
+    padding-inline: 7.4rem !important;
     margin: 0 auto !important;
 }
 
@@ -1308,8 +1324,7 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    width: calc(100% - 20px - 20px) !important;
-    margin: 0 20px !important;
+    padding-inline: 7.4rem !important;
 }
 
 .view-size-bigger .home .win-listview .win-groupheader {
