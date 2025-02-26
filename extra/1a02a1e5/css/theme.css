@@ -177,6 +177,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .event .customer-top-header {
+    background-color: var(--e-global-color-buttontext, #FFFFFF) !important;
+}
+.event .customer-top-header .social-share {
     display: none !important;
 }
 /************ENDE Change bg AUMA webpage ***************/
@@ -826,19 +829,28 @@ section.elementor-inner-section > div {
 .modSession button#homeButton,
 .speakerSession button#homeButton {
     font-family: var(--font-family-default) !important;
-    position: sticky !important;
+    position: relative !important;
     margin-top: 20px !important;
     margin-left: 0 !important;
-    padding: 20px 32px;
-    border-radius: 0 !important;
-    -moz-border-radius:0 !important;
-    -webkit-border-radius: 0 !important;
+    padding: 0;
+    border: none !important;
  }
 
-.event .calenderButton,
 .event .homeButton,
 .modSession .homeButton,
 .speakerSession .homeButton {
+    font-family: var(--font-family-default) !important;
+    font-size: 1.6rem !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important; /* 19.2px */
+    letter-spacing: 0 !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+    color: var(--e-global-color-primary, #070023) !important;
+    text-decoration: underline;
+}
+.event .calenderButton {
     font-family: var(--font-family-default) !important;
     font-size: 1.8rem !important;
     font-style: normal !important;
@@ -850,12 +862,15 @@ section.elementor-inner-section > div {
     padding: 0 !important;
 }
 
-.event .calenderButton:hover,
 .event .homeButton:hover,
 .modSession .homeButton:hover,
 .speakerSession .homeButton:hover {
+    color: var(--e-global-color-accent, #7100ca) !important;
+}
+.event .calenderButton:hover {
     color: var(--e-global-color-buttontext, #ffffff) !important;
 }
+
 
 /******************************************End home and calendar buttons******************************************/
 
