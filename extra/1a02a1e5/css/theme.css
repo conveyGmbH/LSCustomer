@@ -1258,6 +1258,17 @@ section.elementor-inner-section > div {
     margin: 0 !important;
 }
 
+.view-size-bigger .home .content-header,
+.view-size-bigger .events .content-header {
+    padding-inline: 7.4rem !important;
+}
+
+.view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
+.view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
+    margin-left: 7.4rem !important;
+    width: calc(100% - 7.4rem - 7.4rem) !important;
+}
+
 .view-size-bigger .home .content-header-line > h1,
 .view-size-bigger .events .content-header-line > h1 {
     font-size: 28px !important;
