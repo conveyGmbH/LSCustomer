@@ -495,10 +495,6 @@ section.elementor-inner-section > div {
     background-color: var(--e-global-color-background) !important;
 }
 
-.event .color_container4 {
-    background-color: var(--e-global-color-background, #faf6f3) !important;
-}
-
 .register .checkbox {
     padding: 12px 0 !important;
     font-size: 1.6rem !important;
@@ -805,10 +801,6 @@ section.elementor-inner-section > div {
     margin-top: 65px;
 }
 
-.event .color_container4 {
-    background-color: var(--e-global-color-background, #faf6f3) !important;
-}
-
 .event .hero-footer {
     margin-top: 65px;
 }
@@ -966,10 +958,10 @@ section.elementor-inner-section > div {
 }
 
 .event .speaker-name, .event .speaker-vorname {
-    font-size: 36px !important;
+    font-size: 1.8rem !important;
     font-style: normal;
     font-weight: 600;
-    line-height: 50px !important;
+    line-height: 1.4 !important;
 }
 
 .event .speaker-text {
@@ -982,16 +974,18 @@ section.elementor-inner-section > div {
     font-weight: 400 !important;
 }
 
-.event .speaker-cv .win-type-caption {
+.event .speaker-cv {
     font-family: var(--font-family-default) !important;
     font-weight: 400 !important;
     font-size: 1.4rem !important;
     line-height: 1.4 !important;
     letter-spacing: 0 !important;
 }
-
+.event .speaker-image-container > img {
+    height: 92px !important;
+    width: 92px !important;
+}
 /******************************** End Speaker Block*************************************/
-
 .field_line .register-email {
     padding-top: 20px;
 }
