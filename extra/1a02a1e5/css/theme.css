@@ -309,8 +309,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .register #loginButton > div > span, .register #re_registerEvent > span {
     color: var(--e-global-color-buttontext, #ffffff) !important;
     font-family: var(--font-family-default) !important;
-    font-size: 20px !important;
-    line-height: 150% !important;
+    font-size: 1.8rem !important;
+    line-height: 1.5 !important;
     letter-spacing: 0 !important;
 }
 
@@ -632,7 +632,7 @@ section.elementor-inner-section > div {
 .speakerSession .content-header-line > .win-h2 {
     font-family: var(--font-family-header) !important;
     font-size: 2.6rem !important;
-    line-height: 140% !important;
+    line-height: 1.4 !important;
     font-weight: 400 !important;
     padding: 20px 0;
 }
@@ -700,7 +700,7 @@ section.elementor-inner-section > div {
     font-size: 1.8rem !important;
     font-style: normal !important;
     font-weight: 400 !important;
-    line-height: 150% !important;
+    line-height: 1.5 !important;
 }
 
 .event .ev-text * {
@@ -840,11 +840,11 @@ section.elementor-inner-section > div {
 .modSession .homeButton,
 .speakerSession .homeButton {
     font-family: var(--font-family-default) !important;
-    font-size: 24px !important;
+    font-size: 1.8rem !important;
     font-style: normal !important;
     font-weight: 600 !important;
     color: var(--e-global-color-buttontext, #ffffff) !important;
-    line-height: 150% !important; /* 19.2px */
+    line-height: 1.5 !important; /* 19.2px */
     letter-spacing: 0 !important;
     margin-left: 0 !important;
     padding: 0 !important;
@@ -922,8 +922,8 @@ section.elementor-inner-section > div {
 .speakerSession caption-field {
     font-family: var(--font-family-header) !important;
     color: var(--e-global-color-primary, #070023) !important;
-    line-height: 140% !important;
-    font-size: 26px !important;
+    line-height: 1.4 !important;
+    font-size: 2rem !important;
     text-transform: none !important;
 }
 
@@ -961,7 +961,7 @@ section.elementor-inner-section > div {
     font-size: 1.8rem !important;
     font-style: normal;
     font-weight: 600;
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
 }
 
 .event .speaker-text {
@@ -969,8 +969,8 @@ section.elementor-inner-section > div {
 }
 
 .event .speaker-title, .event .speaker-link {
-    font-size: 16px !important;
-    line-height: 24px !important;
+    font-size: 1.6rem !important;
+    line-height: 1.4 !important;
     font-weight: 400 !important;
 }
 
@@ -978,7 +978,7 @@ section.elementor-inner-section > div {
     font-family: var(--font-family-default) !important;
     font-weight: 400 !important;
     font-size: 1.4rem !important;
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
     letter-spacing: 0 !important;
 }
 .event .speaker-image-container > img {
@@ -1305,7 +1305,7 @@ section.elementor-inner-section > div {
 .view-size-bigger .event .content-header-line > .win-h2,
 .view-size-bigger .modSession .content-header-line > .win-h2,
 .view-size-bigger .speakerSession .content-header-line > .win-h2 {
-    font-size: 28px !important;
+    font-size: 2.8rem !important;
     font-style: normal !important;
     text-transform: none !important;
 }
@@ -1423,7 +1423,7 @@ section.elementor-inner-section > div {
 .view-size-bigger .event .content-header-line > .win-h2,
 .view-size-bigger .modSession .content-header-line > .win-h2,
 .view-size-bigger .speakerSession .content-header-line > .win-h2 {
-    font-size: 28px !important;
+    font-size: 2.8rem !important;
 }
 
 .view-size-medium .event .content-container,
@@ -1508,7 +1508,7 @@ section.elementor-inner-section > div {
 .view-size-medium-small .home .content-header-line > span,
 .view-size-medium-small .events .content-header-line > span,
 .view-size-medium-small .event .content-header-line > span {
-    font-size: 16px !important;
+    font-size: 1.6rem !important;
 }
 
 
@@ -1622,11 +1622,11 @@ section.elementor-inner-section > div {
 }
 
 .view-size-small .countdown .win-h5 {
-    font-size: 10px !important;
+    font-size: 1.17rem !important;
 }
 
 .view-size-small .countdown .win-h3 {
-    font-size: 20px !important;
+    font-size: 1.8rem !important;
 }
 
 .view-size-small .event .content-grid {
