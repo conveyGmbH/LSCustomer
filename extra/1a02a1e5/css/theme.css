@@ -1095,7 +1095,7 @@ section.elementor-inner-section > div {
 
 @media (min-width: 1521px) and (max-width:1820px) {
     .home .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: calc(var(--max-content-margin-left) + 20rem) !important;
+        margin-left: 25.4rem !important;
         width: calc(100% - 25.4rem - 25.4rem) !important;
         max-width: inherit;
     }
