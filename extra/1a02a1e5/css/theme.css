@@ -112,7 +112,7 @@
 
 .countdown .win-type-body,
 .countdown .field_line_full {
-    font-family: var(--font-family-default);
+    font-family: var(--font-family-default) !important;
     font-weight: 400 !important;
 }
 
@@ -428,9 +428,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     width: 100%;
     text-align: center;
     background-color: var(--e-global-color-background, #faf6f3) !important;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
     -webkit-transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
@@ -1587,15 +1587,21 @@ section.elementor-inner-section > div {
 }
 
 .view-size-small .home .content-header,
-.view-size-small .events .content-header,
-.view-size-small .event .content-header {
+.view-size-small .events .content-header {
     margin: 0 auto !important;
+}
+
+.view-size-small .event .content-header {
+    margin: 20px auto !important;
 }
 
 .view-size-small .event .countdown-fragmenthost {
     grid-column: 1/span 6 !important;
     position: fixed !important;
     background-color: var(--e-global-color-background, #ffffff) !important;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
 }
 
 /*********countdown centered**********/
