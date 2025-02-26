@@ -64,17 +64,14 @@
 }
 .home .win-type-title,
 .home .win-type-subtitle,
-.home .win-type-caption,
 .home .content-header-line > h2,
 .events .content-header-line > h2,
 .events .win-type-title,
 .events .win-type-subtitle,
-.events .win-type-caption,
 .event .win-type-title,
 .event .win-type-subtitle,
 .event .win-h1,
 .event .win-h2,
-.event .win-type-caption,
 .event .caption-field {
     font-family: var(--font-family-header) !important;
     font-weight: 700 !important;
@@ -90,7 +87,7 @@
 .event .win-tooltip,
 .event .content-header {
     font-family: var(--font-family-default);
-    line-height: 1.5 !important;
+    line-height: 1.4 !important;
     letter-spacing: 0 !important;
 }
 
@@ -123,7 +120,7 @@
 }
 
 .countdown .win-h3 {
-    font-size: 24px !important;
+    font-size: 2.6rem !important;
 }
 
 .countdown .win-h5 {
@@ -504,7 +501,8 @@ section.elementor-inner-section > div {
 
 .register .checkbox {
     padding: 12px 0 !important;
-    font-size: small !important;
+    font-size: 1.6rem !important;
+    line-height: 1.4 !important;
 }
 /******** Ende Fonts for AUMA*********/
 
@@ -519,7 +517,7 @@ section.elementor-inner-section > div {
     font-family: var(--font-family-default);
     font-size: 1.8rem !important;
     font-style: normal;
-    line-height: 150%;
+    line-height: 1.5;
     letter-spacing: 0;
 }
 
@@ -622,7 +620,7 @@ section.elementor-inner-section > div {
 .modSession .win-h2, .modSession .win-h3,
 .speakerSession .win-h2, .speakerSession .win-h3 {
     font-family: var(--font-family-header) !important;
-    font-size: 24px !important;
+    font-size: 2.6rem !important;
     color: var(--e-global-color-primary, #070023) !important;
 }
 
@@ -934,6 +932,7 @@ section.elementor-inner-section > div {
     color: var(--e-global-color-primary, #070023) !important;
     line-height: 140% !important;
     font-size: 26px !important;
+    text-transform: none !important;
 }
 
 .event .section-3 {
@@ -986,7 +985,7 @@ section.elementor-inner-section > div {
 .event .speaker-cv .win-type-caption {
     font-family: var(--font-family-default) !important;
     font-weight: 400 !important;
-    font-size: 1.8rem !important;
+    font-size: 1.4rem !important;
     line-height: 1.4 !important;
     letter-spacing: 0 !important;
 }
