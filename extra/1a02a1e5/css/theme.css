@@ -1093,7 +1093,7 @@ section.elementor-inner-section > div {
     }
 }
 
-@media (min-width: 1500px) and (max-width:1820px) {
+@media (min-width: 1520px) and (max-width:1820px) {
     .home .win-listview .win-vertical .win-gridlayout.win-surface {
         margin-left: calc(var(--max-content-margin-left) + 20rem) !important;
         width: calc(100% - 25.4rem - 25.4rem) !important;
@@ -1107,16 +1107,16 @@ section.elementor-inner-section > div {
     }
 }
 
-/**contentarea is more than 1500px**/
-@media (min-width: 1500px) {
+/**contentarea is more than 1520px**/
+@media (min-width: 1520px) {
     .event .section-3 {
         padding-left: 0 !important;
     }
 }
 
 /**margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 1500px**/
-@media (min-width: 1300px) and (max-width: 1499px) {
+    contentarea is less than 1520px**/
+@media (min-width: 1300px) and (max-width: 1519px) {
 
     .home .content-header,
     .events .top-header,
@@ -1150,7 +1150,7 @@ section.elementor-inner-section > div {
         padding-left: 0 !important;
     }
 }
-@media (min-width: 1200px) and (max-width: 1499px) {
+@media (min-width: 1200px) and (max-width: 1519px) {
     .view-size-biggest .home .content-header,
     .view-size-biggest .events .content-header {
         padding-inline: 13.4rem !important;
