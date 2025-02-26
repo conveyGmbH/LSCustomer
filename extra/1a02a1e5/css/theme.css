@@ -922,6 +922,7 @@ section.elementor-inner-section > div {
 .modSession .hero-header .win-h1,
 .speakerSession .hero-header .win-h1 {
     font-size: 4.2rem !important;
+    word-break: break-word;
 }
 
 .event .caption-field,
