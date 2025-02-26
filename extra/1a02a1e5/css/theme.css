@@ -1304,7 +1304,7 @@ section.elementor-inner-section > div {
     font-size: 28px !important;
     margin-top: 20px !important;
     line-height: 1.4 !important;
-    letter-spacing: 2px;
+    letter-spacing: 0 !important;
 }
 
 .view-size-bigger .home .content-header-line > h2,
