@@ -773,12 +773,11 @@ section.elementor-inner-section > div {
 
 .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: var(--max-content-margin-left) !important;
+    margin-left: calc(var(--max-content-margin-left) + 25.4rem) !important;
+    width: calc(100% - 25.4rem - 25.4rem) !important;
     max-width: var(--max-content-width-surface) !important;
     margin-top: 10px !important;
-    width: 100% !important;
     min-height: 800px;
-    padding-inline: 25.4rem;
 }
 
 /**************No  Left Margin/Border/Padding for event boxes new AUMA webpage************************/
@@ -1075,6 +1074,7 @@ section.elementor-inner-section > div {
 @media (min-width: 1500px) and (max-width:1820px) {
     .home .win-listview .win-vertical .win-gridlayout.win-surface {
         margin-left: 0 !important;
+        width: 100% !important;
     }
 
     .event .content-grid {
@@ -1099,7 +1099,8 @@ section.elementor-inner-section > div {
     .events .top-header,
     .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        padding-inline: 13.4rem !important;
+        margin-left: calc(var(--max-content-margin-left) + 13.4rem) !important;
+        width: calc(100% - 13.4rem - 13.4rem) !important;
     }
 
     .event .content-grid,
@@ -1142,10 +1143,8 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    max-width: var(--max-content-width-surface) !important;
-    margin: 0 !important;
-    width: 100% !important;
-    padding-inline: 13.4rem !important;
+    margin-left: 13.4rem !important;
+    width: calc(100% - 13.4rem - 13.4rem) !important;
 }
 
 .view-size-biggest .event .content-grid {
@@ -1266,7 +1265,8 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    padding-inline: 7.4rem !important;
+    margin-left: 7.4rem !important;
+    width: calc(100% - 7.4rem - 7.4rem) !important;
 }
 
 .view-size-bigger .home .win-listview .win-groupheader {
@@ -1285,7 +1285,7 @@ section.elementor-inner-section > div {
 */
 .view-size-medium .home .win-listview .win-vertical .win-gridlayout .win-surface,
 view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surface {
-    margin: 0 5px !important;
+    margin-left: 5px !important;
     width: calc(100% - 10px) !important;
 }
 
@@ -1465,9 +1465,8 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 
 .view-size-medium-small .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-medium-small .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    width: 100% !important;
-    margin: 0 !important;
-    padding-inline: 2.4rem !important;
+    margin-left: 2.4rem !important;
+    width: calc(100% - 2.4rem - 2.4rem) !important;
 }
 
 .view-size-medium-small .event .content-grid {
