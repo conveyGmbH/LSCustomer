@@ -637,9 +637,9 @@ section.elementor-inner-section > div {
 .modSession .content-header-line > .win-h2,
 .speakerSession .content-header-line > .win-h2 {
     font-family: var(--font-family-header) !important;
-    font-size: 40px !important;
+    font-size: 2.6rem !important;
     line-height: 140% !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
     padding: 20px 0;
 }
 
@@ -924,7 +924,7 @@ section.elementor-inner-section > div {
 }
 
 .event .win-h1 {
-    font-size: 42px !important;
+    font-size: 4.2rem !important;
 }
 
 .event .caption-field,
