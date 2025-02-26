@@ -754,7 +754,7 @@ section.elementor-inner-section > div {
 }
 
 .home .expander-container {
-    padding: 0;
+    padding: 0 !important;
 }
 
 .home .expander-icon {
