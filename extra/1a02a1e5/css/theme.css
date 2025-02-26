@@ -196,6 +196,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     -webkit-border-radius: 0 !important;
     box-shadow: none !important;
     height: 600px !important;
+    margin: 0 32px 32px 0 !important;
 }
 
 .home .win-listview .win-gridlayout .win-container:hover, .events .win-listview .win-gridlayout .win-container:hover {
@@ -1184,7 +1185,7 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .home .win-listview .win-gridlayout .win-container {
     width: auto !important;
-    margin: 0 15px 15px 1px !important;
+    margin: 0 32px 32px 0 !important;
 }
 
 .view-size-biggest .modSession .hero-header,
