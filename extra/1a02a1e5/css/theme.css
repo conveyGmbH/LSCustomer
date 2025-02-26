@@ -814,15 +814,18 @@ section.elementor-inner-section > div {
 
 /******************************* Home and Calendar Buttons ***************************************/
 
+.event .body-content-top a[aria-current="page"] {
+    margin-left: 90px;
+}
+
 .events button#homeButton {
     font-family: var(--font-family-default) !important;
-    position: sticky !important;
+    position: relative !important;
     margin-top: 20px !important;
-    margin-bottom: 20px !important;
-    padding: 20px 32px;
-    border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-    -webkit-border-radius: 0 !important;
+    margin-left: 0 !important;
+    padding: 0;
+    border: none !important;
+    background: none !important;
 }
 
 .event button#homeButton,
@@ -834,7 +837,8 @@ section.elementor-inner-section > div {
     margin-left: 0 !important;
     padding: 0;
     border: none !important;
- }
+    background: none !important;
+}
 
 .event .homeButton,
 .modSession .homeButton,
