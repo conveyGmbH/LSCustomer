@@ -1150,6 +1150,19 @@ section.elementor-inner-section > div {
         padding-left: 0 !important;
     }
 }
+@media (min-width: 1200px) and (max-width: 1299px) {
+    .home .content-header,
+    .events .content-header {
+        padding-inline: 7.4rem !important;
+        margin: 0 auto !important;
+    }
+
+    .home .win-listview .win-vertical .win-gridlayout.win-surface,
+    .events .win-listview .win-vertical .win-gridlayout.win-surface {
+        margin-left: 7.4rem !important;
+        width: calc(100% - 7.4rem - 7.4rem) !important;
+    }
+}
 
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1299px 
@@ -1235,12 +1248,6 @@ section.elementor-inner-section > div {
     margin: 0 !important;
 }
 
-.view-size-bigger .home .content-header,
-.view-size-bigger .events .content-header {
-    padding-inline: 7.4rem !important;
-    margin: 0 auto !important;
-}
-
 .view-size-bigger .home .content-header-line > h1,
 .view-size-bigger .events .content-header-line > h1 {
     font-size: 28px !important;
@@ -1301,7 +1308,7 @@ section.elementor-inner-section > div {
     use: .view-size-medium
 */
 .view-size-medium .home .win-listview .win-vertical .win-gridlayout .win-surface,
-view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surface {
+.view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surface {
     margin-left: 5px !important;
     width: calc(100% - 10px) !important;
 }
