@@ -913,7 +913,14 @@ section.elementor-inner-section > div {
     -moz-transition: opacity 0.3s;
 }
 
-.event .win-h1 {
+.event .win-h1,
+.modSession .win-h1,
+.speakerSession .win-h1 {
+    font-size: 4rem !important;
+}
+.event .hero-header .win-h1,
+.modSession .hero-header .win-h1,
+.speakerSession .hero-header .win-h1 {
     font-size: 4.2rem !important;
 }
 
