@@ -192,6 +192,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: var(--e-global-color-buttontext, #FFFFFF) !important;
     position: relative;
     z-index: -3;
+    padding-top: 102px;
 }
 .event .customer-top-header .social-share {
     display: none !important;
@@ -586,7 +587,7 @@ section.elementor-inner-section > div {
 .modSession .contentarea,
 .speakerSession .contentarea {
     background-color: transparent !important;
-    padding-top: 102px !important;
+    padding-top: 0 !important;
 }
 
 .event button .win-type-title,
