@@ -545,9 +545,18 @@ section.elementor-inner-section > div {
 .speakerSession .win-type-body {
     color: var(--e-global-color-text, #070023) !important;
     font-family: var(--font-family-default);
-    font-size: 1.8rem !important;
+    font-size: 1.8rem;
     font-style: normal;
     line-height: 1.5;
+    letter-spacing: 0;
+}
+
+.event .conference .win-type-body,
+.modSession .conference .win-type-body,
+.speakerSession .conference .win-type-body {
+    font-size: 16px;
+    font-style: normal;
+    line-height: 1;
     letter-spacing: 0;
 }
 
