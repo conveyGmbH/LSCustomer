@@ -582,6 +582,11 @@ section.elementor-inner-section > div {
     background-color: transparent !important;
     padding-top: 102px !important;
 }
+.event .contentarea .contentarea,
+.modSession .contentarea .contentarea,
+.speakerSession .contentarea .contentarea {
+    padding-top: 0 !important;
+}
 
 .event button .win-type-title,
 .modSession button .win-type-title,
