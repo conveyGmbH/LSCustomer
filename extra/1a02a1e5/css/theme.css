@@ -155,6 +155,11 @@ div#ls-customer-host {
 /*************ENDE Remove border for AUMA webpage***************/
 
 /************Change bg AUMA webpage ***************/
+
+.event .color_container2 .content-grid {
+    padding-top: 0 !important;
+}
+
 .home #events.listview, .events #events.listview, .event .color_container2 {
     background-color: var(--e-global-color-buttontext, #FFFFFF) !important;
 }
@@ -185,6 +190,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .event .customer-top-header {
     background-color: var(--e-global-color-buttontext, #FFFFFF) !important;
+    position: relative;
+    z-index: -3;
 }
 .event .customer-top-header .social-share {
     display: none !important;
@@ -861,7 +868,7 @@ section.elementor-inner-section > div {
     text-decoration: underline;
     position: absolute;
     top: -42px;
-    left: 48px;
+    left: 42px;
 }
 .event .calenderButton {
     font-family: var(--font-family-default) !important;
