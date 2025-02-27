@@ -564,6 +564,9 @@ section.elementor-inner-section > div {
 .conference .cZgmWB {
     line-height: 1.6;
 }
+#conferenceController .action-button-container > .win-button .show-button-image > svg {
+    margin-top: 0 !important;
+}
 
 .teaser .centerarea {
     background-color: var(--e-global-color-background, #EFF4F8) !important;
