@@ -560,6 +560,16 @@ section.elementor-inner-section > div {
     letter-spacing: 0;
 }
 
+.conference .display,
+.conference h1,
+.conference h2,
+.conference h3,
+.conference h4,
+.conference h5,
+.conference h6 {
+    font-family: var(--font-family-default), sans-serif !important;
+}
+
 .conference .gPlGA-D,
 .conference .cZgmWB {
     line-height: 1.6;
