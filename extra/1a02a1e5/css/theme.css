@@ -239,6 +239,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     display: none !important;
 }
 
+.event .conference #app {
+    border: none !important;
+    display: block !important;
+    flex-direction: initial !important;
+}
+
 .event button .win-type-title {
     color: var(--e-global-color-text, #070023) !important;
 }
