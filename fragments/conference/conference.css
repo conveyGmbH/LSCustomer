@@ -3270,6 +3270,7 @@ c
     right: 2px;
     height: 26px;
     pointer-events: initial;
+    display: block;
 }
 
 #conferenceController div[data-test="webcamItem"] > div .video-item-button,
