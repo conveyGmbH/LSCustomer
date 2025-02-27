@@ -560,6 +560,11 @@ section.elementor-inner-section > div {
     letter-spacing: 0;
 }
 
+.conference .gPlGA-D,
+.conference .cZgmWB {
+    line-height: 1.6;
+}
+
 .teaser .centerarea {
     background-color: var(--e-global-color-background, #EFF4F8) !important;
 }
