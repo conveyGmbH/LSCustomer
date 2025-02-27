@@ -62,6 +62,11 @@
     --box-shadow-button: none;
     --outline-focus: none;
 }
+
+div#ls-customer-host {
+    margin: 0;
+}
+
 .home .win-type-title,
 .home .win-type-subtitle,
 .home .content-header-line > h2,
@@ -174,6 +179,8 @@
 
 html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: transparent !important;
+    z-index: -3;
+    position: relative;
 }
 
 .event .customer-top-header {
@@ -853,6 +860,9 @@ section.elementor-inner-section > div {
     padding: 0 !important;
     color: var(--e-global-color-primary, #070023) !important;
     text-decoration: underline;
+    position: absolute;
+    top: -42px;
+    left: 48px;
 }
 .event .calenderButton {
     font-family: var(--font-family-default) !important;
