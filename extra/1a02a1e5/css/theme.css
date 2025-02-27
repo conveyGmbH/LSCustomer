@@ -322,6 +322,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-primary, #070023) !important;
 }
 
+#conferenceController .action-button-container > .win-button,
+#conferenceController .emoji-button-container > .win-button {
+    border-radius: 50% !important;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+}
 /******************************* Anmeldung Button *********************************************/
 .register #loginButton > div > span, .register #re_registerEvent > span {
     color: var(--e-global-color-buttontext, #ffffff) !important;
