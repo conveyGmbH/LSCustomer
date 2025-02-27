@@ -976,6 +976,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     color: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
+    margin: inherit !important;
 }
 #conference.mediaview .presentationTitle--1LT79g,
 #conference.mediaview h1[data-test="presentationTitle"] {
@@ -988,6 +989,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     color: inherit !important;
     font-size: inherit !important;
     line-height: inherit !important;
+    margin: inherit !important;
 }
 
 #conferenceController .win-type-body {
