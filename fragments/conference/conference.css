@@ -3142,7 +3142,7 @@ c
     font-size: 0.85rem !important;
     text-transform: uppercase !important;
     padding: var(--sm-padding-x) 0 0 var(--sm-padding-x) !important;
-    margin: 0 !important;
+    margin: 0.4rem 0 0 0 !important;
     color: var(--color-gray) !important;
     line-height: inherit !important;
 }
