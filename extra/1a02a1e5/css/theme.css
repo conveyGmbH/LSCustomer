@@ -346,12 +346,17 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-buttontext, #ffffff) !important;
 }
 
-.text-lightcolor.win-button:disabled { cursor: default; }
+.text-lightcolor.win-button:disabled {
+    border-color: var(--color-gray-lighter, #a7b3bd) !important;
+    background-color: var(--color-gray-lighter, #a7b3bd) !important;
+    color: var(--e-global-color-primary, #070023) !important;
+    cursor: default;
+}
 
 .text-lightcolor.win-button:disabled:hover {
-    border-color: var(--e-global-color-primary, #070023) !important;
-    background-color: var(--e-global-color-primary, #070023) !important;
-    color: var(--e-global-color-buttontext, #ffffff) !important;
+    border-color: var(--color-gray-lighter, #a7b3bd) !important;
+    background-color: var(--color-gray-lighter, #a7b3bd) !important;
+    color: var(--e-global-color-primary, #070023) !important;
     cursor: default;
 }
 
@@ -869,6 +874,9 @@ section.elementor-inner-section > div {
     position: absolute;
     top: -42px;
     left: 42px;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+    text-underline-offset: 0.2rem;
 }
 .event .calenderButton {
     font-family: var(--font-family-default) !important;
