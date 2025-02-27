@@ -568,6 +568,10 @@ section.elementor-inner-section > div {
     margin-top: 0 !important;
 }
 
+#conferenceController p[data-test="chatWelcomeMessageText"] {
+    display: none;
+}
+
 .teaser .centerarea {
     background-color: var(--e-global-color-background, #EFF4F8) !important;
 }
