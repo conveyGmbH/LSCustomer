@@ -32,10 +32,6 @@
             bodyContentBottom.setAttribute("class", "saved-body-content-bottom");
             bodyContentBottom.setAttribute("style", "visibility: hidden");
             var nextBodyChild;
-            var app = document.body.querySelector("#app");
-            if (app) {
-                app.id = "app3";
-            }
             var curBodyChild = document.body.firstElementChild;
             while (curBodyChild && curBodyChild !== customerRootElement) {
                 nextBodyChild = curBodyChild.nextElementSibling;

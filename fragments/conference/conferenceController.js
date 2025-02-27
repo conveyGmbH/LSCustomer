@@ -581,6 +581,9 @@ var __meteor_runtime_config__;
                 conference = null;
                 videoListDefaults = {};
                 userListDefaults = {};
+                if (this.app) {
+                    this.app.id = "app";
+                }
                 Log.ret(Log.l.trace);
             }
 
@@ -6779,6 +6782,11 @@ var __meteor_runtime_config__;
                 Log.ret(Log.l.trace);
             }
             this.endCheckJoinedToSession = endCheckJoinedToSession;
+
+            this.app = document.body.querySelector("#app");
+            if (this.app) {
+                this.app.id = "app3";
+            }
 
             that.processAll().then(function () {
                 AppBar.notifyModified = false;
