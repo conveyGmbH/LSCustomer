@@ -77,7 +77,17 @@ div#ls-customer-host {
 .event .win-type-subtitle,
 .event .win-h1,
 .event .win-h2,
-.event .caption-field {
+.event .caption-field,
+.modSession .win-type-title,
+.modSession .win-type-subtitle,
+.modSession .win-h1,
+.modSession .win-h2,
+.modSession .caption-field,
+.speakerSession .win-type-title,
+.speakerSession .win-type-subtitle,
+.speakerSession .win-h1,
+.speakerSession .win-h2,
+.speakerSession .caption-field {
     font-family: var(--font-family-header) !important;
     font-weight: 700 !important;
     line-height: 1.4 !important;
@@ -90,7 +100,17 @@ div#ls-customer-host {
 .event .win-h3,
 .event .win-h5,
 .event .win-tooltip,
-.event .content-header {
+.event .content-header,
+.modSession .win-type-body,
+.modSession .win-h3,
+.modSession .win-h5,
+.modSession .win-tooltip,
+.modSession .content-header,
+.speakerSession .win-type-body,
+.speakerSession .win-h3,
+.speakerSession .win-h5,
+.speakerSession .win-tooltip,
+.speakerSession .content-header {
     font-family: var(--font-family-default);
     line-height: 1.4 !important;
     letter-spacing: 0 !important;
@@ -584,7 +604,7 @@ section.elementor-inner-section > div {
 .event #conference.mediaview,
 .modSession #conference.mediaview,
 .speakerSession #conference.mediaview {
-    font-size: 14x;
+    font-size: 14px;
     font-style: normal;
     line-height: 1;
     letter-spacing: 0;
