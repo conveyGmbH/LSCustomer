@@ -346,7 +346,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     width: auto !important;
     position: absolute !important;
     top: 0;
-    right: 67em;
+    right: 67rem;
     margin-top: -70px;
     padding: 0 !important;
     height: auto !important;
@@ -499,7 +499,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .svg-inline--fa {
-    width: 1em;
+    width: 1rem;
 }
 
 .countdown .countdown-line {
@@ -595,7 +595,7 @@ section.elementor-inner-section > div {
 .speakerSession .win-type-body {
     color: var(--e-global-color-text, #070023) !important;
     font-family: var(--font-family-default);
-    font-size: 1.8em;
+    font-size: 1.8rem;
     font-style: normal;
     line-height: 1.5;
     letter-spacing: 0;
@@ -975,7 +975,7 @@ section.elementor-inner-section > div {
     left: 42px;
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;
-    text-underline-offset: 0.2em;
+    text-underline-offset: 0.2rem;
 }
 .event .calenderButton {
     font-family: var(--font-family-default) !important;

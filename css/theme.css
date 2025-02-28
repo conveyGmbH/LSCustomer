@@ -232,7 +232,7 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
     --font-size-xs: .575em;
     --font-size-smallest: .35em;
   
-    --line-height-base: 1.25; // 20/16
+    --line-height-base: 1.25; 
     --line-height-computed: 1em;
 
     --headings-font-family: inherit;
@@ -273,10 +273,10 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
 
     --color-gray-label: var(--color-gray);
 
-    --color-transparent: #ff000000;
+    --color-transparent: rgba(255,0,0,0);
     --color-tip-bg: #333333;
 
-    --color-white-with-transparency: #ffffff40;
+    --color-white-with-transparency: rgba(255,255,255,0.4);
 
     --loader-bg: var(--color-gray-dark);
     --loader-bullet: var(--color-white);
