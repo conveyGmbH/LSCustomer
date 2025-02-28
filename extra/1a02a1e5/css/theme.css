@@ -214,13 +214,17 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     position: relative;
 }
 
-.event .customer-top-header {
+.event .customer-top-header,
+.modSession .customer-top-header,
+.speakerSession .customer-top-header {
     background-color: var(--e-global-color-buttontext, #FFFFFF) !important;
     position: relative;
     z-index: -3;
     padding-top: 102px;
 }
-.event .customer-top-header .social-share {
+.event .customer-top-header .social-share,
+.modSession .customer-top-header .social-share,
+.speakerSession .customer-top-header .social-share {
     display: none !important;
 }
 
@@ -261,7 +265,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 /****Beginning Changes****/
-.events .button-tip .action-image, .event .button-tip .action-image {
+.events .button-tip .action-image,
+.event .button-tip .action-image {
     display: none !important;
 }
 
@@ -362,7 +367,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin-top: 5%;
 }
 
-.event .caption-field {
+.event .caption-field,
+.modSession .caption-field,
+.speakerSession .caption-field {
     color: var(--e-global-color-primary, #070023) !important;
 }
 
@@ -707,7 +714,9 @@ section.elementor-inner-section > div {
 
 .home .content-header-line > span,
 .events .content-header-line > span,
-.event .content-header-line > span {
+.event .content-header-line > span,
+.modSession .content-header-line > span,
+.speakerSession .content-header-line > span {
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-primary, #070023) !important;
     font-size: 1.8rem !important;
@@ -719,7 +728,9 @@ section.elementor-inner-section > div {
 }
 
 .home .content-header-line > h1,
-.events .content-header-line > h1 {
+.events .content-header-line > h1,
+.modSession .content-header-line > h1,
+.speakerSession .content-header-line > h1 {
     font-family: var(--font-family-header) !important;
     font-size: 4.2rem !important;
     margin-top: 35px !important;
@@ -923,7 +934,9 @@ section.elementor-inner-section > div {
     margin-top: 65px;
 }
 
-.event .hero-footer {
+.event .hero-footer,
+.modSession .hero-footer,
+.speakerSession .hero-footer {
     margin-top: 65px;
 }
 
