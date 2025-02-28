@@ -177,9 +177,11 @@ div#ls-customer-host {
 /************Change bg AUMA webpage ***************/
 
 html {
-  font-size: 10px !important;
+    font-size: 10px !important;
 }
-
+.MuiPopover-root {
+    font-size: 14px !important;
+}
 .event .color_container2 .content-grid {
     padding-top: 0 !important;
 }
