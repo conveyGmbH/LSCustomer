@@ -156,6 +156,10 @@ div#ls-customer-host {
 
 /************Change bg AUMA webpage ***************/
 
+html {
+  font-size: 10px !important;
+}
+
 .event .color_container2 .content-grid {
     padding-top: 0 !important;
 }
@@ -322,7 +326,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     width: auto !important;
     position: absolute !important;
     top: 0;
-    right: 67rem;
+    right: 67em;
     margin-top: -70px;
     padding: 0 !important;
     height: auto !important;
@@ -571,16 +575,16 @@ section.elementor-inner-section > div {
 .speakerSession .win-type-body {
     color: var(--e-global-color-text, #070023) !important;
     font-family: var(--font-family-default);
-    font-size: 1.8rem;
+    font-size: 1.8em;
     font-style: normal;
     line-height: 1.5;
     letter-spacing: 0;
 }
 
-.event .conference .win-type-body,
-.modSession .conference .win-type-body,
-.speakerSession .conference .win-type-body {
-    font-size: 16px;
+.event #conference.mediaview,
+.modSession #conference.mediaview,
+.speakerSession #conference.mediaview {
+    font-size: 14x;
     font-style: normal;
     line-height: 1;
     letter-spacing: 0;
@@ -951,7 +955,7 @@ section.elementor-inner-section > div {
     left: 42px;
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;
-    text-underline-offset: 0.2rem;
+    text-underline-offset: 0.2em;
 }
 .event .calenderButton {
     font-family: var(--font-family-default) !important;
@@ -1869,3 +1873,53 @@ section.elementor-inner-section > div {
     word-wrap: break-word;
     white-space: normal;
 }
+
+.body-content-bottom {
+    z-index: 1000;
+    position: relative;
+}
+
+#app3 {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100%;
+    position: relative;
+    border-top: 15.7rem solid #faf6f3
+}
+
+#app3.no-js {
+    display: none
+}
+
+#app3::after {
+    background-color: transparent;
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: background-color .4s ease-in-out
+}
+
+body[data-menu-panel=open] #app3::after {
+    background-color: rgba(7,0,35,.3)
+}
+
+#app3>.header {
+    background-color: #faf6f3;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1035
+}
+
+
+@media (max-width: 991.8px) {
+    #app3 {
+        border-top-width:6.8rem
+    }
+
+}
+
+
