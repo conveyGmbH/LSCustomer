@@ -442,30 +442,30 @@
 
     var onLoadCalled = false;
     var loadApplicationCalled = false;
-    var retryCounter = 500;
+    var retryCounter = 50;
     function checkForRootElement() {
-        if (!loadApplicationCalled) {
-            if (!document.querySelector("#" + rootElementId)) {
-                //cancel processing if no root element present!
-                if (!onLoadCalled && --retryCounter > 0) {
-                    window.setTimeout(function () {
+        window.setTimeout(function () {
+            if (!loadApplicationCalled) {
+                if (!document.querySelector("#" + rootElementId)) {
+                    //cancel processing if no root element present!
+                    if (!onLoadCalled && --retryCounter > 0) {
                         checkForRootElement();
-                    }, 10);
+                    }
+                    return;
                 }
-                return;
+                loadApplicationCalled = true;
+                loadApplication();
             }
-            loadApplicationCalled = true;
-            loadApplication();
-        }
+        }, 150);
     }
-    var prevOnLoadHandler = window.onload;
+    /*var prevOnLoadHandler = window.onload;
     window.onload = function (event) {
         onLoadCalled = true;
         if (typeof prevOnLoadHandler === "function") {
             prevOnLoadHandler(event);
         }
         checkForRootElement();
-    }
+    }*/
     window.setTimeout(function () {
         checkForRootElement();
     }, 10);
