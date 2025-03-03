@@ -461,14 +461,14 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 
 .ReactModalPortal h1 {
     font-weight: 400 !important;
-    font-size: 1.25rem !important;
+    font-size: 1.25em !important;
     color: var(--color-gray-dark,#06172A) !important;
     line-height: 1.2 !important;
 }
 
 .ReactModalPortal h2 {
     font-weight: 400 !important;
-    font-size: 1.3rem !important;
+    font-size: 1.3em !important;
     color: var(--color-gray-dark,#06172A) !important;
     line-height: 1.2 !important;
 }
@@ -481,7 +481,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .ReactModalPortal button[aria-label="Echo ist nicht hörbar"],
 .ReactModalPortal button[aria-label="Audio wiedergeben"],
 .ReactModalPortal button[aria-label="Play audio"] {
-    margin: 0 1.5rem !important;
+    margin: 0 1.5em !important;
     background: none;
 }
 .portal--27FHYi .circle--Z2c8umk,
@@ -575,7 +575,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 /* input elements */
 #conference.mediaview #pollPanel input[type="text"] {
     border-radius: var(--border-radius) !important;
-    padding: 0.3rem 0.075rem !important;
+    padding: 0.3em 0.075em !important;
     padding-left: var(--lg-padding-y) !important;
     line-height: 1.5;
 }
@@ -610,7 +610,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: #f1f8ff !important;
     box-shadow: none !important;
     border: 5px solid #f1f8ff !important;
-    font-size: 3.5rem !important;
+    font-size: 3.5em !important;
 }
 .ReactModalPortal div[data-test="audioModal"] button[aria-label="Audio wiedergeben"]:last-child,
 .ReactModalPortal div[data-test="audioModal"] button[aria-label="Play audio"]:last-child {
@@ -715,7 +715,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     flex-direction: column !important;
     -webkit-box-pack: center !important;
     justify-content: center !important;
-    margin: 0px 0.8rem 0px 0px !important;
+    margin: 0px 0.8em 0px 0px !important;
     position: absolute !important;
     inset: 0px 0px 0px auto !important;
     pointer-events: none !important;
@@ -739,7 +739,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarButtonWrapper > button {
     padding: 0 !important;
     font-size: var(--toolbar-button-font-size) !important;
-    outline-offset: -0.19rem !important;
+    outline-offset: -0.19em !important;
     border-left: 0 !important;
     border-right: 0 !important;
     border-top: 0 !important;
@@ -998,7 +998,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 }
 
 #conference.mediaview div[data-test="userListContent"] h2 {
-    font-size: 0.85rem !important;
+    font-size: 0.85em !important;
     text-transform: uppercase !important;
     padding: var(--sm-padding-x) 0 0 var(--sm-padding-x) !important;
     margin: 0 !important;
@@ -1945,7 +1945,7 @@ button[data-test="optionsButton"] {
 #conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH button {
     background-color: var(--btn-primary-bg) !important;
     border-radius: var(--border-radius);
-    padding: .5rem 1em;
+    padding: .5em 1em;
     opacity: 0.8;
 }
 #conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH button:hover {
@@ -3139,10 +3139,10 @@ c
 #conferenceController .unpinned-video-list-title {
     height: 0;
     visibility: hidden;
-    font-size: 0.85rem !important;
+    font-size: 0.85em !important;
     text-transform: uppercase !important;
     padding: var(--sm-padding-x) 0 0 var(--sm-padding-x) !important;
-    margin: 0.4rem 0 0 0 !important;
+    margin: 0.4em 0 0 0 !important;
     color: var(--color-gray) !important;
     line-height: inherit !important;
 }
@@ -3223,7 +3223,7 @@ c
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 1px;
     color: var(--color-off-white);
-    padding: 0 1rem 0 .5rem !important;
+    padding: 0 1em 0 .5em !important;
     font-size: 80%;
     top: 188px;
 }
@@ -3238,7 +3238,7 @@ c
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 1px;
     color: var(--color-off-white);
-    padding: 0 1rem 0 .5rem !important;
+    padding: 0 1em 0 .5em !important;
     font-size: 80%;
 }
 
@@ -3486,7 +3486,7 @@ c
     cursor: pointer;
     user-select: none;
     font-size: calc(0.85rem);
-    padding: 0.45rem 1em;
+    padding: 0.45em 1em;
     color: var(--btn-default-color,var(--color-gray,#4E5A66));
     background-color: var(--btn-default-bg,var(--color-white,#FFF));
     border: 3px solid transparent;
