@@ -465,8 +465,14 @@
             prevOnLoadHandler(event);
         }
         checkForRootElement();
-    }*/
+    }
     window.setTimeout(function () {
         checkForRootElement();
     }, 10);
+    */
+    document.addEventListener("readystatechange", function (event) {
+        if (document.readyState === "complete") {
+            checkForRootElement();
+        }
+    });
 })();
