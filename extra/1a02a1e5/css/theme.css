@@ -645,7 +645,7 @@ section.elementor-inner-section > div {
     background-color: var(--e-global-color-background, #EFF4F8) !important;
 }
 
-.teaser .ITbackground {
+.teaser .ITbackground, .teaser .ipadImg {
     border-radius: 0 !important;
     -webkit-border-radius: 0 !important;
     -moz-border-radius: 0 !important;
