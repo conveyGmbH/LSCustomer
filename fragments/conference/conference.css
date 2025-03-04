@@ -412,6 +412,18 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding: inherit !important;
 }
 
+.ReactModalPortal {
+    font-size: 14px !important;
+}
+.eympNN {
+    font-size: 1.4em !important;
+}
+.dVVlqb {
+    padding: 1em 0 !important;
+}
+.fAvtgs {
+    font-size: 0.85em !important;
+}
 /* protect button */
 .portal--27FHYi button,
 .ReactModalPortal button {
@@ -601,7 +613,9 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     letter-spacing: normal;
 }
 
-
+.ReactModalPortal div[data-test="audioModal"] button:not([aria-describedby="modalDismissDescription"]) > span:last-child {
+    font-size: 1.5em !important;
+}
 /* Audio selection dialog buttons */
 .portal--27FHYi .modal--Z1mfLi .audioBtn--1H6rCK span:first-child,
 .ReactModalPortal div[data-test="audioModal"] button[aria-describedby="mic-description"] > span:first-child,
@@ -612,6 +626,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border: 5px solid #f1f8ff !important;
     font-size: 3.5em !important;
 }
+
 .ReactModalPortal div[data-test="audioModal"] button[aria-label="Audio wiedergeben"]:last-child,
 .ReactModalPortal div[data-test="audioModal"] button[aria-label="Play audio"]:last-child {
     margin: 0;
@@ -3511,3 +3526,5 @@ c
 li[data-test="guestPolicyLabel"] {
     display: none;
 }
+
+
