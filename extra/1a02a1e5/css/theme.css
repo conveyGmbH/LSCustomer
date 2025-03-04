@@ -966,7 +966,7 @@ section.elementor-inner-section > div {
 .speakerSession button#homeButton {
     font-family: var(--font-family-default) !important;
     position: relative !important;
-    margin-top: 20px !important;
+    margin-top: 0 !important;
     margin-left: 0 !important;
     padding: 0 0 1px 0;
     border: none !important;
