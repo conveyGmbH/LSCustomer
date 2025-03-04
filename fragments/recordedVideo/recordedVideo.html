@@ -14,9 +14,9 @@
                 <div class="contentarea content-noscroll win-type-body">
                     <div class="delay-container" 
                          data-win-bind="style.display: showDelayContent Binding.Converter.toDisplay">
-                        <div class="ITbackground">
-                            <img class="ipadImg" data-win-bind="src: dataDoc.off_doc_delay; alt: dataDocText.off_doc_delay_alt" />
-                        </div>
+	                    <div class="ITbackground">
+		                    <img class="ipadImg" data-win-bind="src: dataDoc.off_doc_delay; alt: dataDocText.off_doc_delay_alt; style.display: dataDoc.off_doc_delay Binding.Converter.toDisplay"/>
+	                    </div>
                         <div class="field_line_full">
                             <span class="large_field" data-win-bind="innerHTML: dataText.off_text_delay_title"></span>
                         </div>
