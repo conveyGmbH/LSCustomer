@@ -228,6 +228,11 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     display: none !important;
 }
 
+.event .recordedVideo-fragmenthost {
+    margin-left: 0 !important;
+    padding: 15px 15px 15px 0 !important;
+}
+
 /************ENDE Change bg AUMA webpage ***************/
 
 
@@ -1426,12 +1431,6 @@ section.elementor-inner-section > div {
     margin-left: 0 !important;
 }
 
-.view-size-biggest .event recordedVideo-fragmenthost {
-    margin-left: 0 !important;
-    padding: 15px 10px !important;
-}
-
-
 .view-size-biggest .event .content-container,
 .view-size-biggest .event .speakerblock {
     margin: 0 auto !important;
@@ -1445,6 +1444,17 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .event .speaker-text {
     width: 800px !important;
+}
+
+@media (min-width: 1100px) and (max-width: 1199px) {
+    .view-size-biggest .event .recordedVideo-fragmenthost {
+        margin-left: 20px !important;
+        padding: 15px 0 !important;
+    }
+
+    .view-size-biggest .event .share-block {
+        right: 6rem !important;
+    }
 }
 
 
@@ -1478,6 +1488,11 @@ section.elementor-inner-section > div {
     .event button#homeButton {
         margin-left: 17% !important;
     }
+}
+
+.view-size-bigger .event .recordedVideo-fragmenthost {
+    margin-left: 20px !important;
+    padding: 15px 0 !important;
 }
 
 .view-size-bigger .speakerSession .content-grid,
@@ -1704,6 +1719,11 @@ section.elementor-inner-section > div {
     margin: 0 10px 32px 0 !important;
 }
 
+.view-size-medium .event .recordedVideo-fragmenthost {
+    margin-left: 20px !important;
+    padding: 15px 0 !important;
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
 
@@ -1802,9 +1822,9 @@ section.elementor-inner-section > div {
     width: calc(100% - 20px) !important;
 }
 
-.view-size-medium-small .event recordedVideo-fragmenthost {
+.view-size-medium-small .event .recordedVideo-fragmenthost {
     margin-left: 0 !important;
-    padding: 15px 0 !important;
+    padding: 15px 5px !important;
 }
 
 
