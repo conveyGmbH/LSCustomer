@@ -67,6 +67,10 @@
                 return ret;
             },
             defaultValue: {
+                ev_doc: "",
+                on_doc: "",
+                off_doc: "",
+                off_doc_delay: "",
                 ev_doc_mod1: "",
                 ev_doc_mod2: "",
                 ev_doc_mod3: ""
