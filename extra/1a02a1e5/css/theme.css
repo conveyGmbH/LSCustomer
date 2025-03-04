@@ -947,9 +947,6 @@ section.elementor-inner-section > div {
 
 /******************************* Home and Calendar Buttons ***************************************/
 
-.event .body-content-top a[aria-current="page"] {
-    margin-left: 90px;
-}
 
 .events button#homeButton {
     font-family: var(--font-family-default) !important;
