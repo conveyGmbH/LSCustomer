@@ -32,8 +32,8 @@
     background-color: transparent !important;
     overflow-x: visible !important;
     /*
-    overflow-y: clip !important;
-    */
+overflow-y: clip !important;
+*/
     top: 0 !important;
 }
 
@@ -61,6 +61,7 @@
 #conference.mediaview #layout > header:first-of-type {
     height: 0 !important;
 }
+
 #conference.mediaview #layout > header:first-of-type > div:first-child {
     height: 0 !important;
 }
@@ -101,10 +102,12 @@
 #conference.mediaview #layout #user-list-virtualized-scroll div[role="button"] {
     width: calc(100% - 0.5em) !important;
 }
+
 .event #conference.mediaview #layout #user-list-virtualized-scroll div[role="button"],
 .speakerSession #conference.mediaview #layout #user-list-virtualized-scroll div[role="button"] {
     pointer-events: none !important;
 }
+
 li[data-test="startPrivateChat"] {
     display: none !important;
 }
@@ -160,11 +163,13 @@ li[data-test="startPrivateChat"] {
 .show-videolist-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-thumb {
     background-color: var(--btn-primary-bg);
 }
+
 .show-selfie-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-on .win-toggleswitch-clickregion .win-toggleswitch-track {
     opacity: 0.8;
 }
+
 .show-selfie-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-off .win-toggleswitch-clickregion .win-toggleswitch-track {
@@ -181,12 +186,14 @@ li[data-test="startPrivateChat"] {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
 }
+
 .show-selfie-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
 .show-presentation-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track,
 .show-videolist-toggle-container .win-toggleswitch-off:not(.win-toggleswitch-disabled):not(.win-toggleswitch-pressed) .win-toggleswitch-clickregion:hover .win-toggleswitch-track {
     border-color: var(--btn-primary-bg) !important;
     opacity: 1;
 }
+
 .win-toggleswitch-pressed .win-toggleswitch-track {
     background-color: rgba(128,128,128,0.4);
 }
@@ -196,14 +203,17 @@ li[data-test="startPrivateChat"] {
     background-color: var(--btn-default-bg) !important;
     padding: 1px 6px !important;
 }
+
 div[aria-label="Virtual background settings"] > div:not([aria-label="None"]),
 div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div:not([aria-label="Kein Hintergrund"]) {
     background-color: transparent !important;
 }
+
 div[aria-label="Virtual background settings"] > div[aria-label="None"],
 div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kein Hintergrund"] {
     background-color: var(--btn-default-bg) !important;
 }
+
 #conference.mediaview div[data-test="presentationContainer"] button[data-test="whiteboardOptionsButton"],
 #conference.mediaview div[data-test="presentationContainer"] button[data-test="presentationFullscreenButton"] {
     color: var(--btn-muted-color) !important;
@@ -213,6 +223,7 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
     font-size: var(--btn-sm-font-size) !important;
     padding: var(--btn-sm-padding) !important;
 }
+
 #conference.mediaview #layout button[data-test="switchButton"] {
     padding: var(--btn-sm-padding) !important;
 }
@@ -229,8 +240,9 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
 /* dark fullscreen button */
 .dark--Z1Y80Wt,
 .bocihD {
-     background-color: rgba(0, 0, 0, 0.5) !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
 }
+
 .bocihD {
     top: -5px !important;
     right: -5px !important;
@@ -262,6 +274,7 @@ div[aria-label="Einstellungen zum virtuellen Hintergrund"] > div[aria-label="Kei
 div[data-test="recordingIndicator"] {
     z-index: 11;
 }
+
 .recordingIndicator--Z1hMjfp > div,
 div[data-test="recordingIndicator"] > div {
     background-color: var(--btn-primary-bg) !important;
@@ -341,16 +354,19 @@ div[data-test="recordingIndicator"] #recording-description + span {
     font-weight: var(--btn-font-weight) !important;
     float: left;
 }
+
 #conferenceController .presenter-button-container > button.win-button:hover,
 #conferenceController .presenter-button-container > button.win-button:active {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
     color: var(--btn-primary-color) !important;
 }
+
 #conferenceController .presenter-button-container > button.win-button:hover .presenter-mode-image,
 #conferenceController .presenter-button-container > button.win-button:active .presenter-mode-image {
     opacity: 0.8;
 }
+
 #conferenceController .presenter-button-container > button.win-button[aria-checked=true] {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
@@ -372,6 +388,7 @@ div[data-test="recordingIndicator"] #recording-description + span {
     border: none;
     padding: 0;
 }
+
 #conferenceController .presenter-button-container > button#presenterModeTiled.win-button .button-tip .win-tooltip,
 #conferenceController .presenter-button-container > button#videoListLeft.win-button .button-tip .win-tooltip {
     left: -32px;
@@ -381,6 +398,7 @@ div[data-test="recordingIndicator"] #recording-description + span {
     top: -50px;
     opacity: 1;
 }
+
 #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
@@ -392,6 +410,7 @@ div[data-test="recordingIndicator"] #recording-description + span {
     bottom: 4px;
     border-radius: 3px;
 }
+
 #conferenceController .presenter-button-container > button#presenterModeTiled.win-button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .presenter-button-container > button#videoListLeft.win-button .button-tip .win-tooltip .bubble-arrow {
     margin-left: calc(50% - 54px);
@@ -415,14 +434,22 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .ReactModalPortal {
     font-size: 14px !important;
 }
+
 .eympNN {
     font-size: 1.4em !important;
 }
+
 .dVVlqb {
     padding: 1em 0 !important;
 }
-.fAvtgs {
+
+.fAvtgs,
+.dkOsrB {
     font-size: 0.85em !important;
+}
+
+.iukCpB {
+    font-size: 0.875em !important;
 }
 /* protect button */
 .portal--27FHYi button,
@@ -433,6 +460,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     line-height: 1 !important;
     font-weight: var(--btn-font-weight) !important;
 }
+
 #conference.mediaview #layout > header:first-of-type > div:first-child div:not(.presenter-button-container) > button:not(.win-button),
 #conference.mediaview #layout > section[aria-label="Actions bar"] button:not(.gjwodI):not(.win-button),
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not(.gjwodI):not(.win-button),
@@ -454,6 +482,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     order: 0;
     flex-grow: 0;
 }
+
 #conference.mediaview #layout > header:first-of-type > div:first-child button:focus,
 #conference.mediaview #layout > section[aria-label="Actions bar"] button:focus,
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:focus {
@@ -496,6 +525,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     margin: 0 1.5em !important;
     background: none;
 }
+
 .portal--27FHYi .circle--Z2c8umk,
 .portal--27FHYi .jumbo--Z12Rgj4,
 .ReactModalPortal button[aria-describedby="mic-description"] > span:first-child,
@@ -515,6 +545,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     padding: var(--btn-jumbo-padding-x) !important;
     margin-bottom: 5px;
 }
+
 #conference.mediaview #layout .primary--1IbqAO,
 .portal--27FHYi .primary--1IbqAO,
 .ReactModalPortal button[color="primary"] {
@@ -528,6 +559,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background: none;
     padding: 2px !important;
 }
+
 .portal--27FHYi .dismiss--1zWwpv .default--Z19H5du,
 .ReactModalPortal button[data-test="closeModal"] > span {
     box-shadow: none !important;
@@ -550,6 +582,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     box-shadow: none !important;
     border-radius: var(--border-radius) !important;
 }
+
 #conference.mediaview #pollPanel header ~ div button[data-test="startPoll"] {
     text-transform: uppercase !important;
     padding: var(--btn-md-padding) !important;
@@ -560,6 +593,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: var(--border-radius) !important;
     font-size: var(--btn-lg-font-size) !important;
 }
+
 #conference.mediaview #pollPanel header ~ div button.default--Z19H5du {
     text-transform: uppercase !important;
     padding: var(--btn-md-padding) !important;
@@ -570,6 +604,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: var(--border-radius) !important;
     font-size: var(--btn-lg-font-size) !important;
 }
+
 #conference.mediaview #pollPanel header ~ div button.default--Z19H5du.pollBtn--119tJ5 {
     margin: var(--lg-padding-y) var(--lg-padding-x) !important;
 }
@@ -579,6 +614,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview #pollPanel .resultRight--129A0v {
     padding: var(--sm-padding-y);
 }
+
 #conference.mediaview #pollPanel .resultLeft--Z1r23fc {
     word-break: break-word;
     overflow-wrap: break-word;
@@ -592,6 +628,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     line-height: 1.5;
 }
 
+[class*=" icon-bbb-"], [class^=icon-bbb-] {
+    width: 1.12em !important;
+    height: 1.12em !important;
+}
 
 [class*=" icon-bbb-"]:before, [class^=icon-bbb-]:before {
     font-family: inherit !important;
@@ -631,6 +671,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 .ReactModalPortal div[data-test="audioModal"] button[aria-label="Play audio"]:last-child {
     margin: 0;
 }
+
 .ReactModalPortal div[data-test="audioModal"] button[aria-label="Audio wiedergeben"] > span:first-child,
 .ReactModalPortal div[data-test="audioModal"] button[aria-label="Play audio"] > span:first-child {
     display: inline-block !important;
@@ -643,10 +684,12 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     min-height: 30px;
 }
 
+.ReactModalPortal div[aria-label="Webcam settings"] select,
 .ReactModalPortal div[aria-label="Webcameinstellungen"] select {
     font-family: var(--font-family-default);
     font-size: var(--font-size-md);
     border-color: var(--color-gray-lighter);
+    height: 1.75em;
 }
 
 .portal--27FHYi div[aria-label="Webcam settings"] > header + div > div:last-child button.default--Z19H5du,
@@ -660,6 +703,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-color);
 }
+
 .portal--27FHYi div[aria-label="Webcam settings"] > header + div > div:last-child button.danger--Z2aBq0k,
 .ReactModalPortal div[aria-label="Webcam settings"] > header + div > div:last-child button[color="danger"],
 .portal--27FHYi div[aria-label="Webcameinstellungen"] > header + div > div:last-child button.danger--Z2aBq0k,
@@ -673,6 +717,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     color: var(--btn-default-color,var(--color-gray,#4E5A66)) !important;
     background-color: var(--btn-default-bg,var(--color-white,#FFF)) !important;
 }
+
 .ReactModalPortal div[aria-label="Webcam settings"] button[aria-describedby="vr-cam-btn-blur"],
 .ReactModalPortal div[aria-label="Webcameinstellungen"] button[aria-describedby="vr-cam-btn-blur"],
 .ReactModalPortal div[aria-label="Webcam settings"] button[aria-describedby="vr-cam-btn-0"],
@@ -735,6 +780,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     inset: 0px 0px 0px auto !important;
     pointer-events: none !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] > div:first-child,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] > div:first-child {
     box-shadow: var(--toolbar-box-shadow) !important;
@@ -748,6 +794,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: 5px !important;
     pointer-events: all !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT > button,
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper > button,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT > button,
@@ -766,24 +813,28 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarButtonWrapper > button[aria-expanded="true"]:not(:hover):not(:active) {
     background-color: var(--toolbar-list-bg) !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT > button:not([aria-expanded="true"]):not(:hover):not(:active),
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper > button:not([aria-expanded="true"]):not(:hover):not(:active),
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT > button:not([aria-expanded="true"]):not(:hover):not(:active),
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarButtonWrapper > button:not([aria-expanded="true"]):not(:hover):not(:active) {
     background-color: var(--toolbar-button-bg) !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT > button[aria-disabled="true"],
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper > button[aria-disabled="true"],
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT > button[aria-disabled="true"],
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarButtonWrapper > button[aria-disabled="true"] {
     background-color: var(--toolbar-button-bg) !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT > button:hover:not(:active):not([aria-disabled="true"]),
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper > button:hover:not(:active):not([aria-disabled="true"]),
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT > button:hover:not(:active):not([aria-disabled="true"]),
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarButtonWrapper > button:hover:not(:active):not([aria-disabled="true"]) {
     background-color: var(--toolbar-list-bg) !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT > button:active:not([aria-disabled="true"]),
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper > button:active:not([aria-disabled="true"]),
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT > button:active:not([aria-disabled="true"]),
@@ -800,36 +851,42 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: 0 !important;
     padding: initial !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarListButton--1pCqT3:not(.selectedListButton--Zre3AC):not(:hover),
 #conference.mediaview div[aria-label="Presentation tools"] div[data-test="toolbarToolsList"] button:not([state="selected"]):not(:hover),
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarListButton--1pCqT3:not(.selectedListButton--Zre3AC):not(:hover),
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] div[data-test="toolbarToolsList"] button:not([state="selected"]):not(:hover) {
     background-color: var(--toolbar-list-bg) !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarListButton--1pCqT3:not(.selectedListButton--Zre3AC):hover,
 #conference.mediaview div[aria-label="Presentation tools"] div[data-test="toolbarToolsList"] button:not([state="selected"]):hover,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarListButton--1pCqT3:not(.selectedListButton--Zre3AC):hover,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] div[data-test="toolbarToolsList"] button:not([state="selected"]):hover {
     background-color: var(--toolbar-button-bg) !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarListButton--1pCqT3.selectedListButton--Zre3AC,
 #conference.mediaview div[aria-label="Presentation tools"] div[data-test="toolbarToolsList"] button[state="selected"],
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarListButton--1pCqT3.selectedListButton--Zre3AC,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] div[data-test="toolbarToolsList"] button[state="selected"] {
     background-color: var(--toolbar-list-color) !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT:not(last-child) > button,
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper:not(last-child) > button,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT:not(last-child) > button,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarButtonWrapper:not(last-child) > button {
     border-bottom: 1px solid var(--toolbar-button-border-color) !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT:not(:first-child):not(last-child) > button,
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper:not(:first-child):not(laszt-child) > button,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT:not(:first-child):not(last-child) > button,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .toolbarButtonWrapper:not(:first-child):not(laszt-child) > button {
     border-radius: 0 !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT:first-child > button,
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper:first-child > button,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT:first-child > button,
@@ -839,6 +896,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT:last-child > button,
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper:last-child > button,
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT:last-child > button,
@@ -849,6 +907,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-bottom-right-radius: var(--toolbar-button-border-radius) !important;
     border-bottom: 0 !important;
 }
+
 #conference.mediaview div[aria-label="Presentation tools"] .buttonWrapper--2kvywT > button[aria-expanded="true"],
 #conference.mediaview div[aria-label="Presentation tools"] .toolbarButtonWrapper > button[aria-expanded="true"],
 #conference.mediaview div[aria-label="Präsentationswerkzeuge"] .buttonWrapper--2kvywT > button[aria-expanded="true"],
@@ -910,24 +969,29 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     opacity: 1;
     color: var(--btn-primary-color) !important;
 }
+
 #conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN,
 #conference.mediaview div[data-test="userList"] > div:first-child button {
     padding: 0;
     background-color: var(--btn-primary-bg) !important;
     opacity: 0.8;
 }
+
 #conference.mediaview div[data-test="publicChat"] form button > span {
     opacity: 0.8;
 }
+
 #conference.mediaview div[data-test="publicChat"] form button:not([aria-disabled="true"]):hover > span,
 #conference.mediaview div[data-test="publicChat"] form button:not([aria-disabled="true"]):active > span {
-     opacity: 1;
+    opacity: 1;
 }
+
 #conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN > i.icon-bbb-settings,
 #conference.mediaview div[data-test="userList"] > div:first-child button > i.icon-bbb-settings {
     margin: 0;
     color: var(--btn-primary-color) !important;
 }
+
 #conference.mediaview .dropdown--Z10dYoc.dropdown--1yLtov .ghost--Z136aiN:not([aria-disabled="true"]):hover,
 #conference.mediaview .dropdown--Z10dYoc.dropdown--1yLtov:not([aria-disabled="true"]) .ghost--Z136aiN:hover,
 #conference.mediaview div[data-test="userList"] > div:first-child button:not([aria-disabled="true"]):hover {
@@ -939,6 +1003,7 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview #conference.mediaview #layout > header:first-of-type > div:first-child > div:last-child .dropdown--Z10dYoc .button--Z2dosza .icon--2q1XXw {
     color: var(--btn-default-color) !important;
 }
+
 #conference.mediaview .chat--111wNM .header--W8C2z .dropdown--Z10dYoc .button--Z2dosza:not([aria-disabled="true"]):hover .icon--2q1XXw,
 #conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza:not([aria-disabled="true"]):hover .icon--2q1XXw,
 #conference.mediaview #layout > header:first-of-type > div:first-child > div:last-child .dropdown--Z10dYoc .button--Z2dosza:not([aria-disabled="true"]):hover .icon--2q1XXw,
@@ -952,12 +1017,13 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     background-color: transparent !important;
     box-shadow: none !important;
 }
-#conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza:not([aria-disabled="true"]):focus,
-#conference.mediaview .chat--111wNM .header--W8C2z .default--Z19H5du:not([aria-disabled="true"]):focus,
-#conference.mediaview .chat--111wNM .header--W8C2z .buttonWrapper--x8uow:not([aria-disabled="true"]):focus .default--Z19H5du,
-#conference.mediaview .chat--111wNM .header--W8C2z .buttonWrapper--x8uow:focus .default--Z19H5du:not([aria-disabled="true"]) {
-    box-shadow: none;
-}
+
+    #conference.mediaview .userListColumn--6vKQL .dropdown--Z10dYoc .button--Z2dosza:not([aria-disabled="true"]):focus,
+    #conference.mediaview .chat--111wNM .header--W8C2z .default--Z19H5du:not([aria-disabled="true"]):focus,
+    #conference.mediaview .chat--111wNM .header--W8C2z .buttonWrapper--x8uow:not([aria-disabled="true"]):focus .default--Z19H5du,
+    #conference.mediaview .chat--111wNM .header--W8C2z .buttonWrapper--x8uow:focus .default--Z19H5du:not([aria-disabled="true"]) {
+        box-shadow: none;
+    }
 
 
 /* buttons in bottom actionsbar area */
@@ -965,14 +1031,16 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button[aria-disabled="true"]:not(.win-button) {
     opacity: 0.64;
 }
+
 #conference.mediaview #layout > section[aria-label="Actions bar"] button:not([aria-disabled="true"]):not(.win-button),
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not([aria-disabled="true"]):not(.win-button) {
     opacity: 0.8;
 }
-#conference.mediaview #layout > section[aria-label="Actions bar"] button:not([aria-disabled="true"]):not(.win-button):hover,
-#conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not([aria-disabled="true"]):not(.win-button):hover {
-    opacity: 1;
-}
+
+    #conference.mediaview #layout > section[aria-label="Actions bar"] button:not([aria-disabled="true"]):not(.win-button):hover,
+    #conference.mediaview #layout > section[aria-label="Aktionsmenü"] button:not([aria-disabled="true"]):not(.win-button):hover {
+        opacity: 1;
+    }
 
 button[aria-label="Microphone"]:hover span:first-child,
 button[aria-label="Microphone"]:focus span:first-child,
@@ -993,12 +1061,13 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     line-height: inherit !important;
     margin: inherit !important;
 }
-#conference.mediaview .presentationTitle--1LT79g,
-#conference.mediaview h1[data-test="presentationTitle"] {
-    font-weight: 200 !important;
-    color: var(--color-white) !important;
-    font-size: var(--font-size-base) !important;
-}
+
+    #conference.mediaview .presentationTitle--1LT79g,
+    #conference.mediaview h1[data-test="presentationTitle"] {
+        font-weight: 200 !important;
+        color: var(--color-white) !important;
+        font-size: var(--font-size-base) !important;
+    }
 /* protect h2 */
 #conference.mediaview h2 {
     color: inherit !important;
@@ -1020,10 +1089,12 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     color: var(--color-gray) !important;
     max-width: calc(100% - 24px);
 }
+
 #conference.mediaview .userList--Z2q1D0p,
 #conference.mediaview div[data-test="userListContent"] {
     color: var(--user-list-text) !important;
 }
+
 .resizeSidebarNavWrapper,
 .resizeSidebarContentWrapper {
     display: none;
@@ -1036,19 +1107,23 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     border-right: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
 }
+
 #conference.mediaview #layout.show-selfie-unpinned > div:first-child {
     border-top: 1px solid var(--color-gray-lightest);
     border-right: 1px solid var(--color-gray-lightest);
 }
+
 #conference.mediaview #layout.show-selfie-unpinned > .pane-tools {
     border-right: 1px solid var(--color-gray-lightest);
     border-bottom: 1px solid var(--color-gray-lightest);
 }
+
 #conference.mediaview #layout > div:first-child,
 #conference.mediaview #layout > div:first-child + div {
     top: 0 !important;
     height: calc(100% - 150px) !important;
 }
+
 .pagecontrol:not(.view-size-medium-small) #conference.mediaview #layout > div:first-child,
 .pagecontrol:not(.view-size-medium-small) #conference.mediaview #layout > div:first-child + div {
     width: 320px;
@@ -1057,6 +1132,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     height: calc(100% - 64px) !important;
     z-index: 2 !important;
 }
+
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > div:first-child,
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > div:first-child + div {
     width: 320px;
@@ -1069,11 +1145,13 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview #layout.show-selfie-unpinned > div:first-child {
     max-height: calc(100% - 304px) !important;
 }
+
 #conference.mediaview #layout > div:first-child + div {
     width: 320px;
     min-width: 320px !important;
     max-width: 320px !important;
 }
+
 .view-size-medium #conference.mediaview #layout > div:first-child,
 .view-size-medium #conference.mediaview #layout > div:first-child + div {
     box-shadow: rgba(0, 0, 0, 0.133) 1.6px -2px 3.6px 0.6px, rgba(0, 0, 0, 0.11) 0.6px -1px 0.9px 0px;
@@ -1111,7 +1189,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 */
 /* protect speaking bar */
 #conference.mediaview .bottom--2oxmox,
-#conference.mediaview #layout > header:first-of-type > div:first-child + div{
+#conference.mediaview #layout > header:first-of-type > div:first-child + div {
     display: block;
     position: absolute;
     width: calc(100% - 120px);
@@ -1165,11 +1243,12 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Aktionsmenü"] {
     top: calc(100% - 110px) !important;
 }
-.view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Actions bar"] > div:first-child,
-.view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Aktionsmenü"] > div:first-child {
-    flex-direction: column-reverse;
-    height: auto !important;
-}
+
+    .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Actions bar"] > div:first-child,
+    .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Aktionsmenü"] > div:first-child {
+        flex-direction: column-reverse;
+        height: auto !important;
+    }
 
 #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:first-child,
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child {
@@ -1178,12 +1257,14 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     display: flex !important;
     height: 40px;
 }
+
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Actions bar"] > div:first-child > div:first-child,
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child {
     position: absolute;
     top: 10px;
     align-items: normal;
 }
+
 #conference.mediaview #layout > section[aria-label="Actions bar"] > div:first-child > div:first-child + div,
 #conference.mediaview #layout > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child + div {
     justify-content: center;
@@ -1194,6 +1275,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     display: flex !important;
     height: 40px;
 }
+
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Actions bar"] > div:first-child > div:first-child + div,
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Aktionsmenü"] > div:first-child > div:first-child + div {
     flex: 0;
@@ -1209,12 +1291,14 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     display: flex !important;
     height: 40px;
 }
+
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Actions bar"] > div:first-child > div:last-child,
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded > section[aria-label="Aktionsmenü"] > div:first-child > div:last-child {
     width: 50% !important;
     margin-left: 50% !important;
     align-items: normal;
 }
+
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded.extra-small-width > section[aria-label="Actions bar"] > div:first-child > div:last-child,
 .view-size-medium-small #conference.mediaview #layout.actions-menu-expanded.extra-small-width > section[aria-label="Aktionsmenü"] > div:first-child > div:last-child {
     margin-top: 50px;
@@ -1288,6 +1372,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: 100% !important;
     height: 100% !important;
 }
+
 #conference.mediaview .svgContainer--Z1z3wO0,
 #conference.mediaview div[data-test="presentationContainer"] > div:first-child > div:last-child {
     height: 100% !important;
@@ -1388,6 +1473,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     height: calc(100% - 90px) !important;
     position: absolute;
 }
+
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-bigger:not(.view-size-medium) #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1399,6 +1485,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: calc(100% - 100px) !important;
     position: absolute;
 }
+
 .view-size-medium #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 .view-size-medium #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1410,6 +1497,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: 100% !important;
     position: absolute;
 }
+
 .view-size-medium-small #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 .view-size-medium-small #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1419,6 +1507,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 .view-size-medium-small #conference.mediaview .videoplayer-open.video-overlay-is-default:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     padding-bottom: 60px;
 }
+
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-video-open.video-overlay-is-hidden .video-item-container,
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .pagecontrol:not(.view-size-medium) #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1438,6 +1527,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     width: calc(100% - 110px) !important;
     height: calc(100% - 110px) !important;
 }
+
 .view-size-medium #conference.mediaview .presentation-video-open.video-overlay-is-hidden .video-item-container,
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1456,6 +1546,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 0 !important;
     width: 100% !important;
 }
+
 .view-size-medium-small #conference.mediaview .presentation-video-open.video-overlay-is-hidden .video-item-container,
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-medium-small #conference.mediaview .presentation-open.video-overlay-is-hidden .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1472,6 +1563,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 .view-size-medium-small #conference.mediaview .videoplayer-open.video-overlay-is-empty > span {
     padding-bottom: 60px;
 }
+
 #conference.mediaview .presentation-video-open:not(.presentation-is-hidden):not(.video-overlay-is-top):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .video-item-container,
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-top):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-top):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1483,6 +1575,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     height: calc(100% - 110px) !important;
     position: absolute;
 }
+
 #conference.mediaview .presentation-video-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) .video-item-container,
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1492,6 +1585,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-full):not(.presenter-mode-small) > span {
     top: 30px !important;
 }
+
 #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1502,6 +1596,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 400px !important;
     width: calc(100% - 450px) !important;
 }
+
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-biggest #conference.mediaview .video-overlay-is-left:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1512,6 +1607,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 200px !important;
     width: calc(100% - 250px) !important;
 }
+
 #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1522,6 +1618,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     top: 180px !important;
     height: calc(100% - 280px) !important;
 }
+
 .pagecontrol:not(view-size-bigger) #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 .pagecontrol:not(view-size-bigger) #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .pagecontrol:not(view-size-bigger) #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1532,6 +1629,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 50px !important;
     width: calc(100% - 100px) !important;
 }
+
 .view-size-bigger #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 .view-size-bigger #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-bigger #conference.mediaview .video-overlay-is-top:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1558,6 +1656,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     left: 50px !important;
     width: calc(100% - 450px) !important;
 }
+
 .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .video-item-container,
 .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 .view-size-biggest #conference.mediaview .video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty):not(.presenter-mode) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1618,12 +1717,14 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     right: 392px;
     width: calc(calc(100% - 100px) * 0.62) !important;
 }
+
 #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     left: 50px !important;
     right: 392px;
     width: calc(calc(100% - 100px) * 0.54) !important;
 }
+
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presenter-mode-tiled.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1636,6 +1737,7 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     right: calc(100% - 30px) !important;
     height: calc(100% - 150px) !important;
 }
+
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container,
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presenter-mode-small.video-overlay-is-right:not(.presentation-is-hidden):not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1653,12 +1755,14 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     z-index: 10;
 }
+
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:fullscreen) > div,
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:fullscreen) > div,
 #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
     z-index: 10;
 }
+
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container:not(:fullscreen),
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1671,10 +1775,12 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
     box-shadow: var(--box-shadow-popup) !important;
     background-color: white !important;
 }
+
 #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
 #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span video:not(:fullscreen) {
     box-shadow: var(--box-shadow-popup) !important;
 }
+
 #conference.mediaview .presentation-video-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .video-item-container:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationPlaceholder--Z1hmVeX:not(:fullscreen),
 #conference.mediaview .presentation-open:not(.presentation-is-hidden).presenter-mode-full:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .presentationContainer--1wqUYG:not(:fullscreen),
@@ -1752,23 +1858,23 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
             z-index: 10;
         }
 
-        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) > div,
-        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) > div,
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
-        #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
-            z-index: 10;
-        }
+            #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) > div,
+            #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) > div,
+            #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+            #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span {
+                z-index: 10;
+            }
 
-        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]),
-        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) div[aria-label="Presentation tools"] > div,
-        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) div[aria-label="Präsentationswerkzeuge"] > div,
-        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]),
-        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) div[aria-label="Presentation tools"] > div,
-        #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) div[aria-label="Präsentationswerkzeuge"] > div,
-        #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
-        #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span video:not(:-webkit-full-screen) {
-            box-shadow: var(--box-shadow-popup) !important;
-        }
+                #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]),
+                #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) div[aria-label="Presentation tools"] > div,
+                #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .svgContainer--Z1z3wO0:not(:-webkit-full-screen) div[aria-label="Präsentationswerkzeuge"] > div,
+                #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) > div:not([aria-label="Presentation tools"]):not([aria-label="Präsentationswerkzeuge"]),
+                #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) div[aria-label="Presentation tools"] > div,
+                #conference.mediaview .presenter-mode-small:not(.presentation-is-hidden).video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) div[data-test="presentationContainer"] > div:first-child > div:last-child:not(:-webkit-full-screen) div[aria-label="Präsentationswerkzeuge"] > div,
+                #conference.mediaview .deskshare-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > div:not(.video-overlay-pane):not(.video-item-container):not(.presentationPlaceholder--Z1hmVeX):not(.presentationContainer--1wqUYG):not([data-test="presentationPlaceholder"]):not([data-test="presentationContainer"]):not(.Toastify):not(.pane-tools):not(.opened-pane),
+                #conference.mediaview .videoplayer-open:not(.presentation-is-hidden).presenter-mode-small.video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) > span video:not(:-webkit-full-screen) {
+                    box-shadow: var(--box-shadow-popup) !important;
+                }
     }
 }
 
@@ -1929,7 +2035,7 @@ button[data-test="optionsButton"] {
     height: 100% !important;
 }
 
-    
+
 /* polling flyout */
 #conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH {
     border-color: var(--color-gray-lightest) !important;
@@ -1957,12 +2063,14 @@ button[data-test="optionsButton"] {
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(.16,1,.29,.99);
 }
+
 #conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH button {
     background-color: var(--btn-primary-bg) !important;
     border-radius: var(--border-radius);
     padding: .5em 1em;
     opacity: 0.8;
 }
+
 #conference.mediaview .overlay--Arkp5 .pollingContainer--1xRnAH button:hover {
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
@@ -2024,9 +2132,9 @@ button[data-test="optionsButton"] {
     transform: translate(0, 0) !important;
 }
 
-#conference.mediaview .video-overlay-default .videoCanvas--Z1giNVE {
-    align-items: flex-start !important;
-}
+    #conference.mediaview .video-overlay-default .videoCanvas--Z1giNVE {
+        align-items: flex-start !important;
+    }
 
 #conference.mediaview .video-overlay-left,
 #conference.mediaview .video-overlay-right {
@@ -2108,6 +2216,7 @@ button[data-test="optionsButton"] {
     top: calc(100% - 400px) !important;
     left: 10px !important;
 }
+
 #conference.mediaview .presenter-mode-full .video-overlay-right {
     width: 384px !important;
     min-width: 384px !important;
@@ -2118,6 +2227,7 @@ button[data-test="optionsButton"] {
     top: calc(100% - 400px) !important;
     right: 10px !important;
 }
+
 #conference.mediaview .presenter-mode-full:not(.video-overlay-is-empty) .video-overlay-left,
 #conference.mediaview .presenter-mode-full:not(.video-overlay-is-empty) .video-overlay-right {
     box-shadow: var(--box-shadow-popup) !important;
@@ -2131,21 +2241,24 @@ button[data-test="optionsButton"] {
     width: 100% !important;
     height: 100% !important;
 }
-#conference.mediaview .video-list-horizontal.video-list-double-columns {
-    grid-template-columns: repeat(auto-fill, 96px) !important;
-    grid-template-rows: 50% 50% !important;
-    width: 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
-    min-height: 100% !important;
-    max-height: 100% !important;
-}
+
+    #conference.mediaview .video-list-horizontal.video-list-double-columns {
+        grid-template-columns: repeat(auto-fill, 96px) !important;
+        grid-template-rows: 50% 50% !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 100% !important;
+        max-height: 100% !important;
+    }
+
 #conference.mediaview .video-list-vertical {
     grid-template-columns: 100% !important;
     grid-template-rows: repeat(auto-fill, 288px) !important;
     width: 100% !important;
     height: 100% !important;
 }
+
 #conference.mediaview .video-list-vertical.video-list-double-columns {
     grid-template-columns: 50% 50% !important;
     grid-template-rows: repeat(auto-fill, 144px) !important;
@@ -2155,12 +2268,14 @@ button[data-test="optionsButton"] {
     min-height: 100% !important;
     max-height: 100% !important;
 }
+
 .view-size-biggest #conference.mediaview .video-list-vertical {
     grid-template-rows: repeat(auto-fill, 144px) !important;
 }
-.view-size-biggest #conference.mediaview .video-list-vertical.video-list-double-columns {
-    grid-template-rows: repeat(auto-fill, 72px) !important;
-}
+
+    .view-size-biggest #conference.mediaview .video-list-vertical.video-list-double-columns {
+        grid-template-rows: repeat(auto-fill, 72px) !important;
+    }
 
 #conference.mediaview .presenter-mode-tiled .video-list-horizontal,
 #conference.mediaview .presenter-mode-small .video-list-horizontal,
@@ -2202,86 +2317,102 @@ button[data-test="optionsButton"] {
     width: 100% !important;
 }
 
-#conference.mediaview .presenter-mode-full .video-list-horizontal.video-list-double-columns,
-#conference.mediaview .presenter-mode-full .video-list-vertical.video-list-double-columns {
-    grid-template-rows: repeat(auto-fill, 144px) !important;
-    width: 100% !important;
-    min-width: 100% !important;
-    max-width: 100% !important;
-}
+    #conference.mediaview .presenter-mode-full .video-list-horizontal.video-list-double-columns,
+    #conference.mediaview .presenter-mode-full .video-list-vertical.video-list-double-columns {
+        grid-template-rows: repeat(auto-fill, 144px) !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
 
-#conference.mediaview .presenter-mode-full .video-list-horizontal video[data-test="videoContainer"],
-#conference.mediaview .presenter-mode-full .video-list-vertical video[data-test="videoContainer"] {
-    height: 100%;
-    width: auto !important;
-    display: inline-block;
-    position: absolute;
-}
+    #conference.mediaview .presenter-mode-full .video-list-horizontal video[data-test="videoContainer"],
+    #conference.mediaview .presenter-mode-full .video-list-vertical video[data-test="videoContainer"] {
+        height: 100%;
+        width: auto !important;
+        display: inline-block;
+        position: absolute;
+    }
 
 #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-1 {
     grid-template-columns: repeat(1, 1fr) !important;
     width: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-2 {
     grid-template-columns: repeat(2, 1fr) !important;
     width: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-3 {
     grid-template-columns: repeat(3, 1fr) !important;
     width: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-4 {
     grid-template-columns: repeat(4, 1fr) !important;
     width: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-5 {
     grid-template-columns: repeat(5, 1fr) !important;
     width: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-6 {
     grid-template-columns: repeat(6, 1fr) !important;
     width: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-7 {
     grid-template-columns: repeat(7, 1fr) !important;
     width: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .column-count-8 {
     grid-template-columns: repeat(8, 1fr) !important;
     width: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-1 {
     grid-template-rows: repeat(1, 1fr) !important;
     height: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-2 {
     grid-template-rows: repeat(2, 1fr) !important;
     height: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-3 {
     grid-template-rows: repeat(3, 1fr) !important;
     height: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-4 {
     grid-template-rows: repeat(4, 1fr) !important;
     height: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-5 {
     grid-template-rows: repeat(5, 1fr) !important;
     height: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-6 {
     grid-template-rows: repeat(6, 1fr) !important;
     height: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-7 {
     grid-template-rows: repeat(7, 1fr) !important;
     height: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default .row-count-8 {
     grid-template-rows: repeat(8, 1fr) !important;
     height: 100% !important;
 }
+
 #conference.mediaview .presentation-is-hidden .video-overlay-default div[data-test="webcamItem"]:not(.fullscreen--Z2dWit1) video,
 #conference.mediaview .presentation-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) div[data-test="webcamItem"]:not(.fullscreen--Z2dWit1) video,
 #conference.mediaview .deskshare-open:not(.presentation-is-hidden):not(.video-overlay-is-default):not(.presenter-mode-tiled):not(.presenter-mode-small) div[data-test="webcamItem"]:not(.fullscreen--Z2dWit1) video,
@@ -2301,11 +2432,12 @@ button[data-test="optionsButton"] {
 .video-resolution-label {
     color: #ffffff;
     background-color: rgba(0,0,0,0.5);
-    font-size: 8pt;
+    font-size: 10px;
     text-align: center;
     position: relative;
-    top: -4px;
+    top: -2px;
 }
+
 .video-label-container .video-resolution-label {
     top: 0;
 }
@@ -2317,10 +2449,12 @@ button[data-test="optionsButton"] {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+
 #conferenceController #unpinnedVideos.listview video,
 #conferenceController .video-item-container .video-itembox:not(.video-item-contain) video {
     object-fit: cover;
 }
+
 #conferenceController .video-item-container .video-itembox.video-item-contain video {
     object-fit: contain;
 }
@@ -2338,25 +2472,31 @@ button[data-test="optionsButton"] {
 #conference.mediaview div[data-test="chatMessages"] {
     padding-right: var(--sm-padding-y);
 }
+
 #conference.mediaview div[data-test="chatMessages"] .ReactVirtualized__Grid.ReactVirtualized__List {
     padding-right: 0;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .content--BYIui,
 #conference.mediaview div[data-test="chatMessages"] .hTQoHF {
     margin-top: -2px;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .meta--ZfU5fg,
 #conference.mediaview div[data-test="chatMessages"] .hMdvHn {
     line-height: 1.33 !important;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .offline--Z2kz2gi,
 #conference.mediaview div[data-test="chatMessages"] .eFtDft {
     display: none !important;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .logout--Z1DfGNI,
 #conference.mediaview div[data-test="chatMessages"] .eSeSln {
     font-style: normal !important;
 }
+
 #conference.mediaview div[data-test="chatMessages"] p[data-test="chatUserMessageText"] {
     font-family: var(--font-family-default), "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji" !important;
     width: fit-content !important;
@@ -2365,12 +2505,14 @@ button[data-test="optionsButton"] {
     overflow-wrap: break-word;
     user-select: text;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .wrapper--1nuR8g,
 #conference.mediaview div[data-test="chatMessages"] .kBgPyl {
     margin: 0;
     padding: 4px;
     border-radius: 5px;
 }
+
 .modSession #conference.mediaview div[data-test="chatMessages"] .wrapper--1nuR8g:hover,
 .modSession #conference.mediaview div[data-test="chatMessages"] .wrapper--1nuR8g:active,
 .modSession #conference.mediaview div[data-test="chatMessages"] .kBgPyl:hover,
@@ -2378,14 +2520,24 @@ button[data-test="optionsButton"] {
     background-color: var(--list-item-bg-hover);
     box-shadow: inset 0 0 0 var(--border-size) var(--item-focus-border), inset 1px 0 0 1px var(--item-focus-border);
 }
+
 .modSession #conference.mediaview div[data-test="chatMessages"] .wrapper--1nuR8g *,
 .modSession #conference.mediaview div[data-test="chatMessages"] .kBgPyl * {
     pointer-events: none;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .item--ZfUxvS,
 #conference.mediaview div[data-test="chatMessages"] .gnkpEu {
     margin-bottom: 0 !important;
+    font-size: 0.85em !important;
 }
+
+#conference.mediaview div[data-test="chatMessages"] .dJzrIY {
+    font-size: 1em !important;
+    height: 2.25em;
+    min-width: 2.25em;
+}
+
 #conference.mediaview div[data-test="chatMessages"] .item--ZfUxvS .messages--ZTkmon,
 #conference.mediaview div[data-test="chatMessages"] .gnkpEu .egPlQd {
     padding: 0;
@@ -2404,6 +2556,7 @@ button[data-test="optionsButton"] {
     padding: var(--sm-padding-x);
     margin-block-start: 2px;
 }
+
 #conference.mediaview div[data-test="chatMessages"] p[data-test="chatWelcomeMessageText"] {
     font-weight: var(--btn-font-weight) !important;
     margin: var(--line-height-computed) 0 !important;
@@ -2415,15 +2568,18 @@ button[data-test="optionsButton"] {
 #conference.mediaview div[data-test="chatMessages"] .from-myself .eSeSln {
     display: none;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .from-myself .messages--ZTkmon,
 #conference.mediaview div[data-test="chatMessages"] .from-myself .egPlQd {
     margin-left: 40px;
     justify-items: right;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .item--ZfUxvS .messages--ZTkmon > p:last-child,
 #conference.mediaview div[data-test="chatMessages"] .gnkpEu .egPlQd > p:last-child {
     border-bottom-left-radius: 10px;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .from-myself p[data-test="chatUserMessageText"] {
     border-radius: 10px 0 0 10px;
 }
@@ -2432,13 +2588,16 @@ button[data-test="optionsButton"] {
 #conference.mediaview div[data-test="chatMessages"] .from-myself .egPlQd > p:first-child {
     border-top-right-radius: 10px;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .from-myself .meta--ZfU5fg,
 #conference.mediaview div[data-test="chatMessages"] .from-myself .hMdvHn {
     justify-content: flex-end;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .from-myself time {
     flex-basis: auto;
 }
+
 #conference.mediaview div[data-test="chatMessages"] .from-myself .avatarWrapper--22Egh5,
 #conference.mediaview div[data-test="chatMessages"] .from-myself .gCqYyO {
     display: none;
@@ -2454,6 +2613,7 @@ button[data-test="optionsButton"] {
     padding: calc(var(--sm-padding-y) * 2.5) calc(var(--sm-padding-x) * 1.25) !important;
     border-radius: var(--border-radius) !important;
     font-family: var(--font-family-default), color-emoji !important;
+    font-size: 1em !important;
 }
 
 #conference.mediaview .float-container div * {
@@ -2498,6 +2658,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     order: 0;
     flex-grow: 0;
 }
+
 #conferenceController .close-connection-button-container > .win-button {
     background-color: var(--color-danger) !important;
     border-color: var(--color-danger) !important;
@@ -2553,10 +2714,12 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     height: 20px;
     left: calc(50% - 24px);
 }
+
 #conferenceController #layout.actions-menu-expanded .action-button-container.expand-actions-toggle-container .settings-container > .win-button {
     top: 30px;
     z-index: 10;
 }
+
 #conferenceController #layout.actions-menu-expanded.extra-small-width .action-button-container.expand-actions-toggle-container .settings-container > .win-button {
     left: 10px;
     top: 70px;
@@ -2575,6 +2738,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .action-button-container .settings-container > .win-button:active {
     opacity: 1;
 }
+
 #conferenceController .action-button-container > .win-button:hover,
 #conferenceController .action-button-container > .win-button:active,
 #conferenceController .emoji-button-container > .win-button:hover,
@@ -2582,6 +2746,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     background-color: var(--btn-primary-bg) !important;
     opacity: 1;
 }
+
 #conferenceController .close-connection-button-container > .win-button:hover,
 #conferenceController .close-connection-button-container > .win-button:active {
     background-color: var(--color-danger) !important;
@@ -2612,9 +2777,11 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     font-family: "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 130%;
 }
-#conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
-    content: "\1f642";
-}
+
+    #conferenceController .emoji-button-container > .win-button .button-tip .emoji-button-icon:before {
+        content: "\1f642";
+    }
+
 #conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip,
 #conferenceController .action-button-container > .win-button .button-tip .win-tooltip {
     top: -15px;
@@ -2635,12 +2802,15 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     padding: 0;
     z-index: -1;
 }
+
 #conferenceController .show-userlist-button-container > .win-button .button-tip .win-tooltip {
     left: calc(50% + 40px);
 }
+
 #conferenceController .close-connection-button-container > .win-button .button-tip .win-tooltip {
     left: calc(50% - 40px);
 }
+
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip {
     top: -55px;
     left: -106px;
@@ -2675,6 +2845,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     text-align: center;
     vertical-align: middle;
 }
+
 #conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .action-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
@@ -2687,14 +2858,17 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     top: 2px;
     border-radius: 3px;
 }
+
 #conferenceController .show-userlist-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .show-userlist-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     margin-left: -50px;
 }
+
 #conferenceController .close-connection-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-arrow,
 #conferenceController .close-connection-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     margin-left: 30px;
 }
+
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-arrow {
     width: 20px;
     height: 20px;
@@ -2706,6 +2880,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     top: 34px;
     border-radius: 3px;
 }
+
 #conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-body,
 #conferenceController .action-button-container > .win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 4px;
@@ -2720,10 +2895,11 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     left: -50%;
     width: fit-content;
 }
-#conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-body > span,
-#conferenceController .action-button-container > .win-button .button-tip .win-tooltip .bubble-body > span {
-    display: inline;
-}
+
+    #conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-body > span,
+    #conferenceController .action-button-container > .win-button .button-tip .win-tooltip .bubble-body > span {
+        display: inline;
+    }
 
 #conferenceController .action-button-container .new-message {
     position: absolute;
@@ -2786,23 +2962,29 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 @keyframes tool-box-collapse {
     from {
         width: 330px;
-    } to {
+    }
+
+    to {
         width: 40px;
     }
 }
+
 @keyframes tool-box-expand {
     from {
         width: 40px;
     }
+
     to {
         width: 330px;
     }
 }
+
 #conferenceController .tool-box.box-is-minimized {
     width: 40px;
     padding: 0;
     animation: 0.2s ease-in 1 0s normal tool-box-collapse
 }
+
 #conferenceController .tool-box:not(.box-is-minimized) {
     animation: 0.2s ease-out 1 0s normal tool-box-expand
 }
@@ -2823,9 +3005,9 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     transform: scale(1);
 }
 
-#conferenceController .tool-box .emoji:hover {
-    transform: scale(1.2);
-}
+    #conferenceController .tool-box .emoji:hover {
+        transform: scale(1.2);
+    }
 
 #conferenceController .tool-box > button.win-button .button-tip {
     margin: 0;
@@ -2842,6 +3024,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conference.mediaview .userList--Z2q1D0p .chatNameMain--Z1S9hh4 {
     padding: 0 0 0 var(--sm-padding-x);
 }
+
 #conference.mediaview .userList--Z2q1D0p .noteTitle--DWw20,
 #conference.mediaview .userList--Z2q1D0p .icon-bbb-polling ~ span {
     padding: 0;
@@ -2876,16 +3059,19 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     z-index: 100;
     max-width: 70%;
 }
+
 #conference.mediaview .video-overlay-is-right:not(.video-overlay-is-hidden):not(.video-overlay-is-empty) .notification-popup {
     left: 20px;
     right: auto;
 }
+
 c
 .post-notification-popup .notification-title {
     font-weight: 600;
     text-transform: uppercase;
     margin: 10px
 }
+
 .post-notification-popup .notification-content,
 .notification-popup .notification-content {
     margin: 10px;
@@ -2899,10 +3085,12 @@ c
     flex-direction: column;
     letter-spacing: 0.1em;
 }
+
 .post-notification-popup .notification-meta,
 .notification-popup .notification-meta {
     flex: 25px;
 }
+
 .post-notification-popup .notification-name,
 .notification-popup .notification-name {
     font-weight: 600;
@@ -2915,6 +3103,7 @@ c
     text-overflow: ellipsis;
     vertical-align: middle;
 }
+
 .post-notification-popup .notification-time,
 .notification-popup .notification-time {
     font-weight: 400;
@@ -2927,14 +3116,17 @@ c
     height: 18px;
     vertical-align: middle;
 }
-.post-notification-popup .notification-time:before,
-.notification-popup .notification-time:before {
-    content: "(";
-}
-.post-notification-popup .notification-time:after,
-.notification-popup .notification-time:after {
-    content: ")";
-}
+
+    .post-notification-popup .notification-time:before,
+    .notification-popup .notification-time:before {
+        content: "(";
+    }
+
+    .post-notification-popup .notification-time:after,
+    .notification-popup .notification-time:after {
+        content: ")";
+    }
+
 .post-notification-popup .notification-text,
 .notification-popup .notification-text {
     font-size: 16px;
@@ -2943,20 +3135,23 @@ c
     font-family: var(--font-family-default), "color-emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji";
     white-space: pre-line;
 }
+
 .post-notification-popup .notification-action {
     margin: 10px;
 }
-.post-notification-popup .notification-action button {
-    border-radius: var(--border-radius);
-    color: var(--btn-primary-color);
-    background-color: var(--btn-primary-bg);
-    opacity: 0.8;
-    font-family: Barlow;
-}
-.post-notification-popup .notification-action button:hover,
-.post-notification-popup .notification-action button:active {
-    opacity: 1;
-}
+
+    .post-notification-popup .notification-action button {
+        border-radius: var(--border-radius);
+        color: var(--btn-primary-color);
+        background-color: var(--btn-primary-bg);
+        opacity: 0.8;
+        font-family: Barlow;
+    }
+
+        .post-notification-popup .notification-action button:hover,
+        .post-notification-popup .notification-action button:active {
+            opacity: 1;
+        }
 
 /* chat menu */
 :root {
@@ -2970,6 +3165,7 @@ c
 #conferenceController .chat-menu-container {
     display: none
 }
+
 .chat-menu {
     box-shadow: var(--box-shadow-popup);
     border-radius: var(--border-radius);
@@ -2989,14 +3185,17 @@ c
     letter-spacing: normal !important;
     transition: none;
 }
+
 .chat-menu button:first-child {
     border-top-left-radius: var(--border-radius) !important;
     border-top-right-radius: var(--border-radius) !important;
 }
+
 .chat-menu button:last-child {
     border-bottom-right-radius: var(--border-radius) !important;
     border-bottom-left-radius: var(--border-radius) !important;
 }
+
 .chat-menu button .win-toggleicon,
 .chat-menu button .win-flyouticon,
 .chat-menu button .win-label {
@@ -3004,18 +3203,22 @@ c
     color: var(--color-gray-dark) !important;
     font-weight: 400 !important;
 }
+
 .chat-menu button .win-label {
     font-family: var(--font-family-default) !important;
 }
+
 .chat-menu button:disabled .win-toggleicon,
 .chat-menu button:disabled .win-flyouticon,
 .chat-menu button:disabled .win-label {
     color: var(--color-gray-lighter) !important;
 }
+
 .chat-menu button:hover:not(:disabled),
 .chat-menu button:active:not(:disabled) {
     background-color: var(--btn-primary-bg) !important;
 }
+
 .chat-menu button:hover:not(:disabled) .win-toggleicon,
 .chat-menu button:active:not(:disabled) .win-toggleicon,
 .chat-menu button:hover:not(:disabled) .win-flyouticon,
@@ -3028,9 +3231,11 @@ c
 .win-menu-containsicon button.win-command .win-menucommand-liner .win-toggleicon {
     display: inline-block;
 }
+
 .win-menu-containsicon button.win-command.win-command-icon .win-menucommand-liner .win-toggleicon {
     visibility: visible;
 }
+
 .win-menu-containsicon button.win-command .win-menucommand-liner .win-toggleicon:before {
     content: attr(data-before);
 }
@@ -3044,11 +3249,12 @@ c
 #conferenceController .poll-question-container {
     display: none
 }
+
 #conferenceController .poll-question-and-answers {
     width: 100%;
     font-family: var(--font-family-default);
-
 }
+
 #conferenceController .poll-question-and-answers select.poll-question {
     width: 100%;
     font-family: var(--font-family-default);
@@ -3056,6 +3262,7 @@ c
     border-color: var(--color-gray-lighter);
     border-radius: var(--border-radius);
 }
+
 #conferenceController .poll-question-and-answers select.poll-question > * {
     font-family: var(--font-family-default);
     font-size: var(--font-size-md);
@@ -3065,6 +3272,7 @@ c
     width: 100%;
     /*counter-reset: answer-counter 0;*/
 }
+
 #conferenceController .poll-question-and-answers .selected-answer {
     width: 100%;
     padding: var(--md-padding-y);
@@ -3073,6 +3281,7 @@ c
     font-weight: 600;
     font-size: var(--btn-lg-font-size);
 }
+
 #conferenceController .poll-question-and-answers .answer-counter {
     flex: 1;
     text-align: right;
@@ -3088,6 +3297,7 @@ c
 #conferenceController .poll-question-and-answers .selected-answer > span {
     flex: 10;
 }
+
 #conferenceController .poll-results .poll-question-and-answers {
     display: none;
 }
@@ -3109,6 +3319,7 @@ c
     transition-property: left, top, right, width, min-width, max-width, height, min-height, max-height;
     transition-duration: 300ms;
 }
+
 #conference.mediaview:not(.session-state-complete) #layout > div:first-child,
 #conference.mediaview:not(.session-state-complete) #layout > div:first-child + div,
 #conference.mediaview:not(.session-state-complete) #layout > header,
@@ -3127,10 +3338,12 @@ c
     background-color: var(--user-list-bg,var(--color-off-white,#F3F6F9));
     color: var(--user-list-text,var(--color-gray,#4E5A66));
 }
+
 .view-size-medium #conferenceController .pane-tools {
     left: 0;
     box-shadow: rgba(0, 0, 0, 0.133) 1.6px -2px 3.6px 0.6px, rgba(0, 0, 0, 0.11) 0.6px -1px 0.9px 0px;
 }
+
 .view-size-medium-small #conferenceController #layout.actions-menu-expanded .pane-tools {
     bottom: 110px;
 }
@@ -3139,6 +3352,7 @@ c
     height: calc(100% - 64px);
     z-index: 1;
 }
+
 .view-size-medium-small .modSession #conferenceController #layout.actions-menu-expanded .pane-tools {
     height: calc(100% - 110px);
 }
@@ -3161,6 +3375,7 @@ c
     color: var(--color-gray) !important;
     line-height: inherit !important;
 }
+
 .modSession #conferenceController .unpinned-video-list-title {
     height: 40px;
     visibility: visible;
@@ -3185,6 +3400,7 @@ c
     height: 210px;
     margin: 10px 5px 0 5px;
 }
+
 .modSession #conferenceController #unpinnedVideos.listview .win-container {
     width: 136px;
     height: 102px;
@@ -3194,16 +3410,19 @@ c
 #conferenceController .video-item-container .video-itembox {
     background-color: var(--btn-dark-bg);
 }
+
 #conferenceController #unpinnedVideos.listview .win-itembox:hover::before,
 #conferenceController .video-item-container .video-itembox:hover::before {
     display: none;
 }
+
 #conferenceController #unpinnedVideos.listview .video-list-item {
     width: 280px;
     height: 210px;
     display: flex;
     justify-content: center;
 }
+
 #conferenceController .video-item-container .video-itembox {
     width: 100%;
     height: 100%;
@@ -3211,18 +3430,22 @@ c
     display: flex;
     overflow: hidden;
 }
+
 .modSession #conferenceController #unpinnedVideos.listview .video-list-item {
     width: 136px;
     height: 102px;
 }
+
 #conferenceController #unpinnedVideos.listview .video-item {
     width: 100%;
     max-height: 210px;
 }
+
 #conferenceController .video-item-container .video-itembox:not(.video-item-contain) .video-item {
     height: 100%;
     width: 100%;
 }
+
 #conferenceController .video-item-container .video-itembox.video-item-contain .video-item {
     width: 100%;
     height: auto;
@@ -3231,6 +3454,7 @@ c
 .modSession #conferenceController #unpinnedVideos.listview .video-item {
     max-height: 102px;
 }
+
 #conferenceController #unpinnedVideos.listview .video-label {
     position: absolute;
     height: 15px;
@@ -3242,11 +3466,13 @@ c
     font-size: 80%;
     top: 188px;
 }
+
 #conferenceController .video-item-container .video-label-container {
     position: absolute;
     left: 2px;
     bottom: 4px;
 }
+
 #conferenceController .video-item-container .video-label {
     position: relative;
     height: 15px;
@@ -3260,6 +3486,7 @@ c
 .modSession #conferenceController #unpinnedVideos.listview .video-label {
     top: 86px;
 }
+
 #conferenceController div[data-test="webcamItem"] > div .video-item-button,
 #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button,
 #conferenceController #unpinnedVideos.listview .video-item-button,
@@ -3275,12 +3502,13 @@ c
     border: none;
 }
 
-#conferenceController .video-item-container .video-item-button.video-item-button-contain {
-    right: 28px;
-}
-#conferenceController .video-item-container .video-item-button.video-item-button-unpin {
-    right: 2px;
-}
+    #conferenceController .video-item-container .video-item-button.video-item-button-contain {
+        right: 28px;
+    }
+
+    #conferenceController .video-item-container .video-item-button.video-item-button-unpin {
+        right: 2px;
+    }
 
 #conferenceController div[data-test="webcamItem"] > div button[data-test="presentationFullscreenButton"],
 #conferenceController div[data-test="webcamItemTalkingUser"] > div button[data-test="presentationFullscreenButton"] {
@@ -3296,15 +3524,18 @@ c
     height: 26px;
     pointer-events: initial;
 }
+
 #conferenceController #unpinnedVideos.listview .video-item-button {
     height: 24px;
 }
-#conferenceController #unpinnedVideos.listview .video-item-button.video-item-button-pin {
-    right: 2px;
-}
-#conferenceController #unpinnedVideos.listview .video-item-button.video-item-button-presentation {
-    right: 28px;
-}
+
+    #conferenceController #unpinnedVideos.listview .video-item-button.video-item-button-pin {
+        right: 2px;
+    }
+
+    #conferenceController #unpinnedVideos.listview .video-item-button.video-item-button-presentation {
+        right: 28px;
+    }
 
 .speakerSession #conferenceController div[data-test="webcamItem"] > div .video-item-button,
 .speakerSession #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button,
@@ -3323,12 +3554,14 @@ c
     font-weight: normal;
     content: "\E78B"
 }
+
 #conferenceController #unpinnedVideos.listview .video-item-button .pin::before {
     font-size: 14px;
     font-family: "Segoe MDL2 Assets", "Symbols";
     font-weight: normal;
     content: "\E141"
 }
+
 #conferenceController .video-item-container .video-item-button .unpin::before,
 #conferenceController div[data-test="webcamItem"] > div .video-item-button .unpin::before,
 #conferenceController div[data-test="webcamItemTalkingUser"] > div .video-item-button .unpin::before {
@@ -3337,53 +3570,63 @@ c
     font-weight: normal;
     content: "\E196";
 }
+
 #conferenceController .video-item-container .video-itembox:not(.video-item-contain) .video-item-button .fitpage::before {
     font-size: 14px;
     font-family: "Segoe MDL2 Assets", "Symbols";
     font-weight: normal;
     content: "\E9A6";
 }
+
 #conferenceController .video-item-container .video-itembox.video-item-contain .video-item-button .fitpage::before {
     font-size: 14px;
     font-family: "Segoe MDL2 Assets", "Symbols";
     font-weight: normal;
     content: "\E799";
 }
+
 #conference.mediaview #cameraDock {
     pointer-events: none;
 }
+
 #conference.mediaview .video-overlay-default #cameraDock {
     margin-bottom: 40px !important;
 }
+
 #conference.mediaview .video-overlay-default #cameraDock + span > div {
     height: 40px !important;
     bottom: -40px !important;
 }
-#conference.mediaview .video-overlay-default #cameraDock + span > div:active {
-    background-color: rgba(255, 255, 255, 0.3);
-}
 
-#conference.mediaview .video-overlay-default #cameraDock div[data-test="webcamVideoItem"] {
-    pointer-events: none;
-}
+        #conference.mediaview .video-overlay-default #cameraDock + span > div:active {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+    #conference.mediaview .video-overlay-default #cameraDock div[data-test="webcamVideoItem"] {
+        pointer-events: none;
+    }
 
 #conference.mediaview #cameraDock > * {
     pointer-events: auto;
 }
+
 #conference.mediaview #cameraDock > div > div.win-dragover > div {
     transform: scale(0.86);
     -webkit-transform: scale(0.86);
 }
+
 #conference.mediaview #cameraDock > div > div > div.win-dragsource {
     opacity: 0.5;
     transition: opacity cubic-bezier(0.1, 0.9, 0.2, 1) 167ms, transform cubic-bezier(0.1, 0.9, 0.2, 1) 220ms;
     -webkit-transition: opacity cubic-bezier(0.1, 0.9, 0.2, 1) 167ms, transform cubic-bezier(0.1, 0.9, 0.2, 1) 220ms;
 }
+
 #conference.mediaview #cameraDock > div > div.win-dragover > div.win-dragsource {
     opacity: 0;
     transition: none;
     -webkit-transition: none;
 }
+
 #conference.mediaview #cameraDock > div > div.win-dragover > div:hover {
     outline: none;
 }
@@ -3392,10 +3635,12 @@ c
     transition: translate cubic-bezier(0.1, 0.9, 0.2, 1) 167ms;
     -webkit-transition: translate cubic-bezier(0.1, 0.9, 0.2, 1) 167ms;
 }
+
 #conference.mediaview #cameraDock > div > div.win-dragover .win-dragtarget.win-dragbefore {
     transform: scale(0.86) translate(10%, 0);
     -webkit-transform: scale(0.86) translate(10%, 0);
 }
+
 #conference.mediaview #cameraDock > div > div.win-dragover .win-dragtarget.win-dragafter {
     transform: scale(0.86) translate(-10%, 0);
     -webkit-transform: scale(0.86) translate(-10%, 0);
@@ -3415,12 +3660,15 @@ c
     top: auto !important;
     bottom: 64px !important;
 }
+
 #conference.mediaview button[aria-label="Lernanalyse-Dashboard öffnen"], button[aria-label="Open Learning Analytics Dashboard"] {
     display: none;
 }
+
 .meeting-end-message {
     display: none;
 }
+
 .session-ended .meeting-end-message {
     position: absolute;
     display: block;
@@ -3526,5 +3774,3 @@ c
 li[data-test="guestPolicyLabel"] {
     display: none;
 }
-
-
