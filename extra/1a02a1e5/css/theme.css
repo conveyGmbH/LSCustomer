@@ -954,7 +954,7 @@ section.elementor-inner-section > div {
 .events button#homeButton {
     font-family: var(--font-family-default) !important;
     position: relative !important;
-    margin-top: 20px !important;
+    margin-top: 0 !important;
     margin-left: 0 !important;
     padding: 0;
     border: none !important;
@@ -987,7 +987,7 @@ section.elementor-inner-section > div {
     color: var(--e-global-color-primary, #070023) !important;
     text-decoration: underline;
     position: absolute;
-    top: -42px;
+    top: 0px;
     left: 0px;
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;
@@ -1468,18 +1468,6 @@ section.elementor-inner-section > div {
     }
 }
 
-@media (min-width: 1100px) and (max-width: 1520px) {
-    .event button#homeButton {
-        margin-left: 10px !important;
-    }
-}
-
-@media (min-width: 991px) and (max-width: 1099px) {
-    .event button#homeButton {
-        margin-left: 17% !important;
-    }
-}
-
 .view-size-bigger .speakerSession .content-grid,
 .view-size-bigger .modSession .content-grid {
     margin: 0 !important;
@@ -1643,12 +1631,6 @@ section.elementor-inner-section > div {
 
 .view-size-medium .home .event-item .event-subtitle {
     padding: 10px 0 !important;
-}
-
-.view-size-medium .events button#homeButton,
-.view-size-medium .event button#homeButton {
-    margin-left: 0 !important;
-    left: 0 !important;
 }
 
 .view-size-medium .home .content-header-line > h2,
