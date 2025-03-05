@@ -296,7 +296,7 @@
 .modSession .countdown-container {
     position: relative;
     width: 180px;
-    top: 24px;
+    top: 20px;
     left: 0;
     z-index: 10;
     overflow: hidden;

@@ -1094,6 +1094,23 @@ button[aria-label="Nur zuhören"]:focus span:first-child {
 #conference.mediaview div[data-test="userListContent"] {
     color: var(--user-list-text) !important;
 }
+#conference.mediaview div[data-test="userList"] div[data-test="userAvatar"] > div {
+    font-size: 0.85em !important;
+    height: 2.25em;
+    min-width: 2.25em;
+}
+
+#conference.mediaview div[data-test="userList"] div[data-test="userAvatar"] .dnmfql::before,
+#conference.mediaview div[data-test="userList"] div[data-test="userAvatar"] .jeoKyU::before {
+    padding: 0.5rem !important;
+}
+#conference.mediaview div[data-test="userList"] div[data-test="userAvatar"] .hQNvor {
+    font-size: 0.75em !important;
+}
+#conference.mediaview div[data-test="userList"] div[data-test="userAvatar"] + div .hQNvor i {
+    font-size: 1.12em !important;
+    line-height: 1.12em !important;
+}
 
 .resizeSidebarNavWrapper,
 .resizeSidebarContentWrapper {
@@ -2536,6 +2553,9 @@ button[data-test="optionsButton"] {
     font-size: 1em !important;
     height: 2.25em;
     min-width: 2.25em;
+}
+#conference.mediaview div[data-test="chatMessages"] .qsldB {
+    font-size: 75%;
 }
 
 #conference.mediaview div[data-test="chatMessages"] .item--ZfUxvS .messages--ZTkmon,
