@@ -189,21 +189,15 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
     --border-size: 2px;
     --border-size-large: 3px;
     --border-radius: .2em;
-
     --sm-padding-x: .75em;
     --sm-padding-y: .3em;
-
     --md-padding-x: 1em;
     --md-padding-y: .45em;
-
     --lg-padding-x: 1.25em;
     --lg-padding-y: 0.6em;
-
     --jumbo-padding-x: 3.025em;
     --jumbo-padding-y: 1.5em;
-
     --indicator-padding: .45em;
-
     --user-indicators-offset: -5px;
     --mobile-swap-offset: 3.5em;
     --min-modal-height: 20em;
@@ -214,35 +208,28 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
     --toast-icon-side: 40px;
     --innerToastWidth: 17em;
     --iconWrapperSize: 2em;
-
     --font-family-sans-serif: "Source Sans Pro", Helvetica, Arial, sans-serif;
     --font-family-serif: Georgia, "Times New Roman", Times, serif;
     --font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
-
     --font-family-base: var(--font-family-sans-serif);
-
     --font-size-base: 1em;
     --font-size-xxl: 2.75em;
     --font-size-xl: 1.75em;
     --font-size-larger: 1.5em;
     --font-size-large: 1.25em;
-    --font-size-md: 0.95em; 
+    --font-size-md: 0.95em;
     --font-size-small: 0.875em;
     --font-size-smaller: .75em;
     --font-size-xs: .575em;
     --font-size-smallest: .35em;
-  
-    --line-height-base: 1.25; 
+    --line-height-base: 1.25;
     --line-height-computed: 1em;
-
     --headings-font-family: inherit;
     --headings-font-weight: 500;
     --headings-line-height: 1.1;
     --headings-color: inherit;
-
     --color-white: #FFF;
     --color-off-white: #F3F6F9;
-
     --color-black: #000000;
     --color-gray: #4E5A66;
     --color-gray-dark: #06172A;
@@ -250,121 +237,105 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
     --color-gray-darkest: #111111;
     --color-gray-lighter: #a7b3bd;
     --color-gray-lightest: #d4d9df;
-
     --color-blue-light: #54a1f3;
     --color-blue-lighter: #92BCEA;
     --color-blue-lightest: #E4ECF2;
-
     --color-primary: #0F70D7;
     --color-success: #008081;
     --color-danger: #DF2721;
     --color-warning: purple;
     --color-offline: var(--color-gray-light);
-
     --color-background: var(--color-gray-dark);
-
     --color-content-background: #1b2a3a;
-
     --color-text: var(--color-gray);
     --color-heading: var(--color-gray-dark);
-
     --color-link: var(--color-primary);
     --color-link-hover: #2687ef;
-
     --color-gray-label: var(--color-gray);
-
     --color-transparent: rgba(255,0,0,0);
     --color-tip-bg: #333333;
-
     --color-white-with-transparency: rgba(255,255,255,0.4);
-
     --loader-bg: var(--color-gray-dark);
     --loader-bullet: var(--color-white);
     --user-list-bg: var(--color-off-white);
-
     --unread-messages-bg: var(--color-danger);
     --user-list-text: var(--color-gray);
-
     --user-thumbnail-border: var(--color-gray-light);
     --user-thumbnail-text: var(--user-thumbnail-border);
-
     --voice-user-bg: var(--color-success);
     --voice-user-text: var(--color-white);
-
     --moderator-text: var(--color-white);
     --moderator-bg: var(--color-primary);
-
     --sub-name-color: var(--color-gray-light);
-
     --user-icons-color: var(--color-gray-light);
     --user-icons-color-hover: var(--color-gray);
-
     --list-item-bg-hover: #dce4ed;
     --item-focus-border: var(--color-blue-lighter);
-
     --btn-default-color: var(--color-gray);
     --btn-default-bg: var(--color-white);
     --btn-default-border: var(--color-white);
-
     --btn-primary-color: var(--color-white);
     --btn-primary-bg: var(--color-primary);
     --btn-primary-border: var(--color-primary);
-
     --btn-success-color: var(--color-white);
     --btn-success-bg: var(--color-success);
     --btn-success-border: var(--color-success);
-
     --btn-warning-color: var(--color-white);
     --btn-warning-bg: var(--color-warning);
     --btn-warning-border: var(--color-warning);
-
     --btn-danger-color: var(--color-white);
     --btn-danger-bg: var(--color-danger);
     --btn-danger-border: var(--color-danger);
-
     --btn-dark-color: var(--color-white);
     --btn-dark-bg: var(--color-gray-dark);
     --btn-dark-border: var(--color-danger);
-
     --btn-offline-color: var(--color-white);
     --btn-offline-bg: var(--color-offline);
     --btn-offline-border: var(--color-offline);
-
     --btn-border-size: var(--border-size);
     --btn-border-radius: var(--border-radius);
     --btn-font-weight: 600;
     --btn-spacing: .35em;
-
     --btn-sm-font-size: calc(var(--font-size-small) * .85);
     --btn-sm-padding: var(--sm-padding-y) var(--sm-padding-x);
-
     --btn-md-font-size: calc(var(--font-size-base) * .85);
     --btn-md-padding: var(--md-padding-y) var(--md-padding-x);
-
     --btn-lg-font-size: calc(var(--font-size-large) * .85);
     --btn-lg-padding: var(--lg-padding-y) var(--lg-padding-x);
-
     --btn-jumbo-font-size: 3em;
     --btn-jumbo-padding: var(--jumbo-padding-y) var(--jumbo-padding-x);
-
-
     --e-global-color-accent: #c2d63e;
     --e-global-color-primary: #2a2f3d;
     --e-global-color-buttontext: #ffffff;
     --background-item: #7f7f7f;
     --border-color: #b5b5b5;
     --font-family-default: "Open Sans";
-
     --e-global-color-background: #FFFFFF;
     --e-global-color-secondary: #07B9CB;
     --e-global-color-text: #2A2F3D;
     --e-global-color-d4faeed: #F3FBFC;
     --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
     --outline-focus: 1px solid var(--color-gray-lighter);
-
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
     --outline-focus: none;
+    --toolbar-box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 10px -2px;
+    --btn-muted-color: #06172A;
+    --btn-muted-bg: transparent;
+    --toolbar-button-font-size: 1.75rem;
+    --toolbar-button-color: var(--btn-default-color, var(--color-gray, #4E5A66));
+    --toolbar-list-color: var(--toolbar-button-color);
+    --toolbar-button-bg: var(--btn-default-bg, var(--color-white, #FFF));
+    --toolbar-list-bg: var(--toolbar-button-bg);
+    --toolbar-button-border-color: var(--color-gray-lighter, #A7B3BD);
+    --toolbar-button-border-radius: var(--border-radius);
+    --talker-height: 22px;
+    --talker-border-radius: 11px;
+    --talker-font-weight: normal;
+    --talker-padding-xsm: 1px;
+    --talker-padding-lg: 10px;
+    --systemMessage-background-color: var(--btn-default-bg, var(--color-white, #FFF));
+    --systemMessage-border-color: var(--color-gray-lighter, #A7B3BD);
 }
 

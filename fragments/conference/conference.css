@@ -735,6 +735,10 @@ input[type=date], input[type=email], input[type=number], input[type=password], i
     border-radius: 0.2em;
 }
 
+.ReactModalPortal div[data-test="connectionStatusModal"] .jHwlRc {
+    padding: 10px 0px !important; 
+}
+
 #conference.mediaview div[data-test="talkingIndicator"] {
     display: none;
 }
