@@ -1086,7 +1086,9 @@ section.elementor-inner-section > div {
     -webkit-transition: opacity 0.3s;
     -moz-transition: opacity 0.3s;
 }
-
+#conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip {
+    color: var(--e-global-color-buttontext, #ffffff) !important;
+}
 .event .win-h1,
 .modSession .win-h1,
 .speakerSession .win-h1 {
