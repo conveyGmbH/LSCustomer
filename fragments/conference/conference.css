@@ -2874,14 +2874,14 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .action-button-container > .win-button:active .button-tip .win-tooltip,*/
 #conferenceController .action-button-container .settings-container > .win-button:hover .button-tip .win-tooltip,
 #conferenceController .action-button-container > .win-button:hover .button-tip .win-tooltip {
-    top: -34px;
+    top: -40px;
     opacity: 1;
     text-align: center;
     vertical-align: middle;
 }
 /*#conferenceController .emoji-button-container > .win-button:active .button-tip .win-tooltip,*/
 #conferenceController .emoji-button-container > .win-button:hover .button-tip .win-tooltip {
-    top: -64px;
+    top: -70px;
     opacity: 1;
     text-align: center;
     vertical-align: middle;
@@ -2896,7 +2896,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
     position: relative;
-    top: 2px;
+    top: 6px;
     border-radius: 3px;
 }
 
@@ -2918,7 +2918,7 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     background: var(--e-global-color-text, #2A2F3D);
     border-color: var(--e-global-color-text, #2A2F3D);
     position: absolute;
-    top: 34px;
+    top: 38px;
     border-radius: 3px;
 }
 
