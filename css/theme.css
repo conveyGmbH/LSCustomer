@@ -337,5 +337,7 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
     --talker-padding-lg: 10px;
     --systemMessage-background-color: var(--btn-default-bg, var(--color-white, #FFF));
     --systemMessage-border-color: var(--color-gray-lighter, #A7B3BD);
+    --tooltip-bubble-color: #FFFFFF;
+    --tooltip-bubble-background-color: #333333;
 }
 

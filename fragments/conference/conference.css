@@ -404,8 +404,8 @@ div[data-test="recordingIndicator"] #recording-description + span {
     height: 20px;
     margin-left: calc(50% - 10px);
     transform: rotate(45deg);
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
+    background: var(--tooltip-bubble-background-color) !important;
+    border-color: var(--tooltip-bubble-background-color) !important;
     position: absolute;
     bottom: 4px;
     border-radius: 3px;
@@ -418,8 +418,8 @@ div[data-test="recordingIndicator"] #recording-description + span {
 
 #conferenceController .presenter-button-container > button.win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 4px;
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
+    background: var(--tooltip-bubble-background-color) !important;
+    border-color: var(--tooltip-bubble-background-color) !important;
     padding: 4px 7px 6px;
     position: absolute;
     bottom: 8px;
@@ -2893,8 +2893,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     height: 20px;
     margin-left: -10px;
     transform: rotate(45deg);
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
+    background: var(--tooltip-bubble-background-color) !important;
+    border-color: var(--tooltip-bubble-background-color) !important;
     position: relative;
     top: 6px;
     border-radius: 3px;
@@ -2915,8 +2915,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
     height: 20px;
     margin-left: calc(50% - 10px);
     transform: rotate(45deg);
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
+    background: var(--tooltip-bubble-background-color) !important;
+    border-color: var(--tooltip-bubble-background-color) !important;
     position: absolute;
     top: 38px;
     border-radius: 3px;
@@ -2925,8 +2925,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 #conferenceController .action-button-container .settings-container > .win-button .button-tip .win-tooltip .bubble-body,
 #conferenceController .action-button-container > .win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 4px;
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
+    background: var(--tooltip-bubble-background-color) !important;
+    border-color: var(--tooltip-bubble-background-color) !important;
     color: var(--btn-primary-color) !important;
     padding: 6px;
     position: relative;
@@ -2959,8 +2959,8 @@ button[aria-disabled="true"] > .label--Z12LMR3:hover, div[aria-disabled="true"] 
 
 #conferenceController .emoji-button-container > .win-button .button-tip .win-tooltip .bubble-body {
     border-radius: 4px;
-    background: var(--e-global-color-text, #2A2F3D);
-    border-color: var(--e-global-color-text, #2A2F3D);
+    background: var(--tooltip-bubble-background-color) !important;
+    border-color: var(--tooltip-bubble-background-color) !important;
     color: var(--btn-primary-color) !important;
     padding: 4px 7px 6px;
     position: absolute;
