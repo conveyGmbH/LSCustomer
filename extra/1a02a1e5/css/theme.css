@@ -334,11 +334,11 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .event .share-block .win-tooltip {
     visibility: hidden;
-    position: relative;
+    position: absolute !important;
     opacity: 0;
     width: 200px;
     text-align: center;
-    left: 0;
+    left: -110% !important;
     font-family: var(--font-family-default) !important;
     top: 0 !important;
     color: var(--e-global-color-text, rgba(0, 0, 0, 0.6)) !important;
@@ -859,14 +859,6 @@ section.elementor-inner-section > div {
     height: auto;
 }
 
-.event .logOff-container,
-.modSession .logOff-container,
-.speakerSession .logOff-container {
-    margin-left: 0 !important;
-    padding: 15px 0 !important;
-    font-family: var(--font-family-default) !important;
-}
-
 .event .intersection {
     padding: 15px 15px 0 0 !important;
 }
@@ -950,7 +942,7 @@ section.elementor-inner-section > div {
     margin-top: calc(100% - 355px) !important;
 }
 
-/******************************* Home and Calendar Buttons ***************************************/
+/******************************* Home, Calendar, LogOff Buttons ***************************************/
 
 
 .events button#homeButton {
@@ -1007,9 +999,31 @@ section.elementor-inner-section > div {
     padding: 0 !important;
 }
 
+.event #logOffButton,
+.modSession #logOffButton,
+.speakerSession #logOffButton {
+    font-family: var(--font-family-default) !important;
+    font-size: 1.6rem !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important; /* 19.2px */
+    letter-spacing: 0 !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+    color: var(--e-global-color-primary, #070023) !important;
+    text-decoration: underline;
+    position: absolute;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+    text-underline-offset: 0.2rem;
+}
+
 .event .homeButton:hover,
 .modSession .homeButton:hover,
-.speakerSession .homeButton:hover {
+.speakerSession .homeButton:hover,
+.event #logOffButton:hover,
+.modSession #logOffButton:hover,
+.speakerSession #logOffButton:hover {
     color: var(--e-global-color-accent, #7100ca) !important;
 }
 .event .calenderButton:hover {
@@ -1017,7 +1031,7 @@ section.elementor-inner-section > div {
 }
 
 
-/******************************************End home and calendar buttons******************************************/
+/******************************************End home, calendar and logoff buttons******************************************/
 
 .event .button-tip {
     display: flex !important;
@@ -1083,6 +1097,7 @@ section.elementor-inner-section > div {
 .speakerSession .hero-header .win-h1 {
     font-size: 4.2rem !important;
     word-break: break-word;
+    margin-top: 10%;
 }
 
 .event .caption-field,
@@ -1165,8 +1180,21 @@ section.elementor-inner-section > div {
 .event .logOff-container {
     float: none !important;
     height: auto;
-    width: calc(1300px - 50px - 50px) !important;
     margin: 0 auto !important;
+}
+
+.event .logOff-container,
+.modSession .logOff-container,
+.speakerSession .logOff-container {
+    margin-left: 0 !important;
+    padding: 15px 0 !important;
+    font-family: var(--font-family-default) !important;
+    height: auto;
+    width: auto !important;
+    position: absolute;
+    top: 0;
+    right: -60%;
+    font-size: 1.6rem !important;
 }
 
 .win-link {
@@ -1191,6 +1219,8 @@ section.elementor-inner-section > div {
     float: none !important;
     right: 0;
     margin: 0 auto !important;
+    top: 35%;
+    height: min-content !important;
 }
 
 .body-content-bottom {
@@ -1341,6 +1371,12 @@ section.elementor-inner-section > div {
         padding-inline: 6.4rem !important;
     }
 
+    .view-size-biggest .event .logOff-container,
+    .view-size-biggest .modSession .logOff-container,
+    .view-size-biggest .speakerSession .logOff-container {
+        right: -52%;
+    }
+
     .view-size-biggest .event .hero-header, .event .intersection {
         margin-left: 0 !important;
     }
@@ -1481,6 +1517,12 @@ section.elementor-inner-section > div {
     }
 }
 
+.view-size-bigger .event .logOff-container,
+.view-size-bigger .modSession .logOff-container,
+.view-size-bigger .speakerSession .logOff-container {
+    right: -52%;
+}
+
 .view-size-bigger .speakerSession .content-grid,
 .view-size-bigger .modSession .content-grid {
     margin: 0 !important;
@@ -1552,11 +1594,6 @@ section.elementor-inner-section > div {
     padding-top: 25px !important;
 }
 
-.view-size-bigger .event .logOff-container {
-    width: calc(100% - 20px - 20px) !important;
-    margin-left: 0 !important;
-}
-
 .view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: 7.4rem !important;
@@ -1620,6 +1657,13 @@ section.elementor-inner-section > div {
     padding: 0 !important;
 }
 
+.view-size-medium .event .logOff-container,
+.view-size-medium .modSession .logOff-container,
+.view-size-medium .speakerSession .logOff-container {
+    right: -48%;
+    padding: 12px 0 !important;
+}
+
 .view-size-medium .event .content-header-line > h1,
 .view-size-medium .modSession .content-header-line > h1,
 .view-size-medium .speakerSession .content-header-line > h1 {
@@ -1678,6 +1722,14 @@ section.elementor-inner-section > div {
     width: 100% !important;
 }
 
+.view-size-medium .countdown .win-h3 {
+    font-size: 1.8rem !important;
+}
+
+.view-size-medium .countdown .win-h5 {
+    font-size: 0.75em !important;
+}
+
 .view-size-medium .countdown .count {
     padding-top: 15px !important;
 }
@@ -1704,6 +1756,12 @@ section.elementor-inner-section > div {
     padding: 15px 0 !important;
 }
 
+.view-size-medium .event .hero-header .win-h1,
+.view-size-medium .modSession .hero-header .win-h1,
+.view-size-medium .speakerSession .hero-header .win-h1 {
+    margin-top: 5%;
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 699px 
 
@@ -1718,7 +1776,7 @@ section.elementor-inner-section > div {
 }
 
 .view-size-medium-small .event .share-block {
-    right: 30% !important;
+    right: 35% !important;
 }
 
 .view-size-medium-small .event .section-1,
@@ -1747,6 +1805,12 @@ section.elementor-inner-section > div {
 
 .view-size-medium-small .body-content-top {
     width: auto;
+}
+
+.view-size-medium-small .event .logOff-container,
+.view-size-medium-small .modSession .logOff-container,
+.view-size-medium-small .speakerSession .logOff-container {
+    right: -5%;
 }
 
 .view-size-medium-small .event .content-header-line > h1,
@@ -1802,9 +1866,21 @@ section.elementor-inner-section > div {
     width: calc(100% - 20px) !important;
 }
 
+.view-size-medium-small .event .intersection {
+    margin-left: 0 !important;
+}
+
 .view-size-medium-small .event .recordedVideo-fragmenthost {
     margin-left: 0 !important;
     padding: 15px 5px !important;
+}
+
+.view-size-medium-small .event .countdown-fragmenthost {
+    top: 22%;
+}
+
+.view-size-medium-small .countdown .field_line_full {
+    text-align: center !important;
 }
 
 
@@ -1852,6 +1928,9 @@ section.elementor-inner-section > div {
 .view-size-small .event .countdown-fragmenthost {
     grid-column: 1/span 6 !important;
     position: fixed !important;
+    top: 8%;
+    left: 30% !important;
+    margin: 0 auto !important;
     background-color: var(--e-global-color-background, #ffffff) !important;
     border-radius: 0 !important;
     -webkit-border-radius: 0 !important;
@@ -1880,14 +1959,6 @@ section.elementor-inner-section > div {
 
 .view-size-small .countdown .count-block {
     width: 13% !important;
-}
-
-.view-size-small .countdown .win-h5 {
-    font-size: 1.17rem !important;
-}
-
-.view-size-small .countdown .win-h3 {
-    font-size: 1.8rem !important;
 }
 
 .view-size-small .event .content-grid {
