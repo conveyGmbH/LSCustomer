@@ -2495,8 +2495,12 @@ button[data-test="optionsButton"] {
     margin-top: 0.5em !important;
 }
 #conference.mediaview .Toastify .iXJGZJ {
-    font-size: calc(0.85em) !important;
+    font-size: 0.85em !important;
     padding: 0.45em 1em !important;
+}
+#conference.mediaview .Toastify .toastIcon {
+    font-size: 0.85em !important;
+    padding-left: 3.75px !important;
 }
 /* Chat List */
 #conference.mediaview div[data-test="publicChat"] {
