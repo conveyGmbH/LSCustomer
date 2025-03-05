@@ -195,8 +195,8 @@ body.cnv-ui-dark, body.cnv-ui-dark * {
     --md-padding-y: .45em;
     --lg-padding-x: 1.25em;
     --lg-padding-y: 0.6em;
-    --jumbo-padding-x: 3.025em;
-    --jumbo-padding-y: 1.5em;
+    --jumbo-padding-x: 1.5em;
+    --jumbo-padding-y: 0.75em;
     --indicator-padding: .45em;
     --user-indicators-offset: -5px;
     --mobile-swap-offset: 3.5em;
