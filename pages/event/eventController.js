@@ -141,6 +141,7 @@
                     var row = results[i];
                     if (row.LabelTitle) {
                         if (row.DocContentDOCCNT1) {
+                            newDataDoc.showDoc = true;
                             var sub = row.DocContentDOCCNT1.search("\r\n\r\n");
                             if (sub >= 0) {
                                 var data = row.DocContentDOCCNT1.substr(sub + 4);
@@ -153,7 +154,7 @@
                                 row.DocContentDOCCNT1 = "";
                             }
                         } else {
-                            row.DocContentDOCCNT1 = "";
+                            row.DocContentDOCCNT1 = "images/dotclear.gif";
                         }
                         newDataDoc[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
                     }

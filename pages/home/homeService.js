@@ -185,11 +185,12 @@
                 return ret;
             },
             defaultValue: {
-                ov_doc: "",
-                ov_doc_event: ""
+                showDoc: false,
+                ov_doc: "images/dotclear.gif",
+                ov_doc_event: "images/dotclear.gif"
             },
             defaultGroupValue: {
-                ser_doc: ""
+                ser_doc: "images/dotclear.gif"
             }
         },
         textDocView: {

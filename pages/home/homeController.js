@@ -26,7 +26,7 @@
                     ov_text_free_body: ""
                 },
                 dataDoc: {
-                    ov_doc: ""
+                    ov_doc: "images/dotclear.gif"
                 },
                 dataDocText: {
                     ov_doc_alt: "",
@@ -197,6 +197,7 @@
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle && row.DocFormat && row.DocContentDOCCNT1) {
+                        newDataDoc.showDoc = true;
                         var labelTitle = row.LabelTitle;
                         var labelWidth = labelTitle + "_width";
                         var labelHeight = labelTitle + "_height";
@@ -224,6 +225,10 @@
                         }
                         newDataDoc[labelWidth] = row.Width;
                         newDataDoc[labelHeight] = row.Height;
+                    } else {
+                        newDataDoc.showDoc = false,
+                        newDataDoc.ov_doc = "images/dotclear.gif",
+                        newDataDoc.ov_doc_event = "images/dotclear.gif"
                     }
                 }
                 if (item) {
