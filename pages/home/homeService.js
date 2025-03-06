@@ -190,7 +190,7 @@
                 ov_doc_event: "images/dotclear.gif"
             },
             defaultGroupValue: {
-                ser_doc: ""
+                ser_doc: "images/dotclear.gif"
             }
         },
         textDocView: {

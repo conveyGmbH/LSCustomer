@@ -26,7 +26,7 @@
                     ov_text_free_body: ""
                 },
                 dataDoc: {
-                    ov_doc: ""
+                    ov_doc: "images/dotclear.gif"
                 },
                 dataDocText: {
                     ov_doc_alt: "",
