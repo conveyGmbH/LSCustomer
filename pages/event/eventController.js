@@ -157,6 +157,7 @@
                             row.DocContentDOCCNT1 = "images/dotclear.gif";
                         }
                         newDataDoc[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
+                        newDataDoc[row.LabelTitle] = row.LabelTitle.startsWith("ev_doc_mod") && row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
                     }
                 }
                 that.binding.dataDoc = newDataDoc;
