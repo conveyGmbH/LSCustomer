@@ -359,7 +359,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     position: absolute !important;
     top: 0;
     right: 67rem;
-    margin-top: -60px;
+    margin-top: -160px;
     padding: 0 !important;
     height: auto !important;
 }
