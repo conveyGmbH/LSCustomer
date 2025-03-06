@@ -67,10 +67,11 @@
                 return ret;
             },
             defaultValue: {
-                ev_doc: "",
-                on_doc: "",
-                off_doc: "",
-                off_doc_delay: "",
+                showDoc: false,
+                ev_doc: "images/dotclear.gif",
+                on_doc: "images/dotclear.gif",
+                off_doc: "images/dotclear.gif",
+                off_doc_delay: "images/dotclear.gif",
                 ev_doc_mod1: "",
                 ev_doc_mod2: "",
                 ev_doc_mod3: ""
