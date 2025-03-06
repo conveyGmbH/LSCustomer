@@ -14,7 +14,7 @@
                 <div class="contentarea win-type-body">
                     <div class="headerFooterPlaceholder">
                         <div class="list-header">
-                            <div class="hero-image-container" data-win-bind="style.display: dataDoc.ov_doc Binding.Converter.toDisplay">
+                            <div class="hero-image-container" data-win-bind="style.display: dataDoc.showDoc Binding.Converter.toDisplay">
                                 <img data-win-bind="src: dataDoc.ov_doc; alt: dataDocText.ov_doc_alt; title: dataDocText.ov_doc_title; longdesc: dataDocText.ov_doc_descr" />
                             </div>
                             <div class="content-header">
@@ -75,7 +75,7 @@
                          data-win-control="WinJS.Binding.Template" style="display: none">
                         <div class="event-item">
                             <div class="event-image-container"
-                                 data-win-bind="style.visibility: dataDoc.ov_doc_event Binding.Converter.toVisibility">
+                                 data-win-bind="style.visibility: dataDoc.showDoc Binding.Converter.toVisibility">
                                 <img data-win-bind="src: dataDoc.ov_doc_event; alt: dataDocText.ov_doc_event_alt; title: dataDocText.ov_doc_event_title; longdesc: dataDocText.ov_doc_event_descr" />
                             </div>
                             <div class="event-detail">

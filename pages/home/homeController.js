@@ -197,6 +197,7 @@
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle && row.DocFormat && row.DocContentDOCCNT1) {
+                        newDataDoc.showDoc = true;
                         var labelTitle = row.LabelTitle;
                         var labelWidth = labelTitle + "_width";
                         var labelHeight = labelTitle + "_height";
