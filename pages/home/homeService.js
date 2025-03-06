@@ -185,6 +185,7 @@
                 return ret;
             },
             defaultValue: {
+                showDoc: false,
                 ov_doc: "images/dotclear.gif",
                 ov_doc_event: "images/dotclear.gif"
             },
