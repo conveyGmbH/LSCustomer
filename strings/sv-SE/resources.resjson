@@ -51,6 +51,7 @@
     "tooltip.videoSettings" : "Video camera settings",
     "tooltip.expandActions" : "Show additional functions",
     "tooltip.compressActions" : "Hide additional functions",
+	"tooltip.logOff" : "Leave event",
 
     "events.title"          : "Serie",
 

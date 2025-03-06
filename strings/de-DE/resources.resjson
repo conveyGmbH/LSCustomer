@@ -51,6 +51,7 @@
     "tooltip.videoSettings" : "Videokamera-Einstellungen",
 	"tooltip.expandActions" : "Zusätzliche Funktionen anzeigen",
     "tooltip.compressActions" : "Zusätzliche Funktionen ausblenden",
+	"tooltip.logOff" : "Veranstaltung verlassen",
 
     "events.title"          : "Serie",
 
