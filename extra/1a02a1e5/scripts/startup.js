@@ -7,6 +7,11 @@
         if (customerElement && customerElement.parentElement) {
             var mainTopElement = null;
             var mainBottomElement = null;
+            var headerLogoA = document.querySelector(".header__logo.logo > a");
+            var footerLogoA = document.querySelector(".footer__logo.logo > a");
+            if (headerLogoA && footerLogoA) {
+                footerLogoA.href = headerLogoA.href;
+            }
             var customerRootElement = customerElement;
             while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
                 if (customerRootElement.parentElement.parentElement === document.body &&
