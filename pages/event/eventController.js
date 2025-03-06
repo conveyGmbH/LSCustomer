@@ -52,7 +52,7 @@
                 eventId: AppData.getRecordId("Veranstaltung"),
                 dataEvent: {},
                 dataText: {},
-                dataDoc: getEmptyDefaultValue(Event.medienView.defaultValue),
+                dataDoc: copyByValue(Event.medienView.defaultValue),
                 dataDocText: {},
                 link: window.location.href,
                 registerEmail: null,
@@ -136,11 +136,12 @@
 
             var setDataDoc = function (results) {
                 Log.call(Log.l.trace, "Event.Controller.");
-                var newDataDoc = getEmptyDefaultValue(Event.medienView.defaultValue);
+                var newDataDoc = copyByValue(Event.medienView.defaultValue);
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle) {
                         if (row.DocContentDOCCNT1) {
+                            newDataDoc.showDoc = true;
                             var sub = row.DocContentDOCCNT1.search("\r\n\r\n");
                             if (sub >= 0) {
                                 var data = row.DocContentDOCCNT1.substr(sub + 4);
@@ -155,8 +156,11 @@
                         } else {
                             row.DocContentDOCCNT1 = "";
                         }
-                        newDataDoc[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
+                        newDataDoc[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "images/dotclear.gif";
+                        if (row.LabelTitle.startsWith("ev_doc_mod")) {
+                        newDataDoc[row.LabelTitle] = row.LabelTitle.startsWith("ev_doc_mod") && row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
                     }
+                }
                 }
                 that.binding.dataDoc = newDataDoc;
                 Log.ret(Log.l.trace);
