@@ -123,7 +123,7 @@
                 item.dataText.done = false;
                 item.dataGroupText = getEmptyDefaultValue(Home.textView.defaultGroupValue);
                 item.dataGroupText.done = false;
-                item.dataDoc = getEmptyDefaultValue(Home.docView.defaultValue);
+                item.dataDoc = copyByValue(Home.docView.defaultValue);
                 item.dataDoc.done = false;
                 item.dataGroupDoc = getEmptyDefaultValue(Home.docView.defaultGroupValue);
                 item.dataGroupDoc.done = false;
@@ -192,8 +192,8 @@
             var setDataDoc = function (results, item, isGroup) {
                 Log.call(Log.l.trace, "Home.Controller.");
                 var newDataDoc = isGroup ?
-                    item ? copyByValue(item.dataGroupDoc) : getEmptyDefaultValue(Home.docView.defaultGroupValue) :
-                    item ? copyByValue(item.dataDoc) : getEmptyDefaultValue(Home.docView.defaultValue);
+                    item ? copyByValue(item.dataGroupDoc) : copyByValue(Home.docView.defaultGroupValue) :
+                    item ? copyByValue(item.dataDoc) : copyByValue(Home.docView.defaultValue);
                 for (var i = 0; i < results.length; i++) {
                     var row = results[i];
                     if (row.LabelTitle && row.DocFormat && row.DocContentDOCCNT1) {
@@ -212,23 +212,23 @@
                                     if (data && data !== "null") {
                                         newDataDoc[labelTitle] = imgSrcDataType + data;
                                     } else {
-                                        newDataDoc[labelTitle] = "";
+                                        newDataDoc[labelTitle] = "images/dotclear.gif";
                                     }
                                 } else {
-                                    newDataDoc[labelTitle] = "";
+                                    newDataDoc[labelTitle] = "images/dotclear.gif";
                                 }
                             } else {
-                                newDataDoc[labelTitle] = "";
+                                newDataDoc[labelTitle] = "images/dotclear.gif";
                             }
                         } else {
-                            newDataDoc[labelTitle] = "";
+                            newDataDoc[labelTitle] = "images/dotclear.gif";
                         }
                         newDataDoc[labelWidth] = row.Width;
                         newDataDoc[labelHeight] = row.Height;
                     } else {
-                        newDataDoc.showDoc = false,
-                        newDataDoc.ov_doc = "images/dotclear.gif",
-                        newDataDoc.ov_doc_event = "images/dotclear.gif"
+                        newDataDoc.showDoc = false;
+                        newDataDoc.ov_doc = "images/dotclear.gif";
+                        newDataDoc.ov_doc_event = "images/dotclear.gif";
                     }
                 }
                 if (item) {

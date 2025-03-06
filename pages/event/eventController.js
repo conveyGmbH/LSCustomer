@@ -148,10 +148,10 @@
                                 if (data && data !== "null") {
                                     row.DocContentDOCCNT1 = "data:image/jpeg;base64," + data;
                                 } else {
-                                    row.DocContentDOCCNT1 = "";
+                                    row.DocContentDOCCNT1 = "images/dotclear.gif";
                                 }
                             } else {
-                                row.DocContentDOCCNT1 = "";
+                                row.DocContentDOCCNT1 = "images/dotclear.gif";
                             }
                         } else {
                             row.DocContentDOCCNT1 = "images/dotclear.gif";
