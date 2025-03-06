@@ -1181,7 +1181,6 @@ section.elementor-inner-section > div {
 
 .event .logOff-container {
     float: none !important;
-    height: auto;
     margin: 0 auto !important;
 }
 
@@ -1195,7 +1194,7 @@ section.elementor-inner-section > div {
     width: auto !important;
     position: absolute;
     top: 0;
-    right: -60%;
+    right: -48%;
     font-size: 1.6rem !important;
 }
 
@@ -1376,7 +1375,7 @@ section.elementor-inner-section > div {
     .view-size-biggest .event .logOff-container,
     .view-size-biggest .modSession .logOff-container,
     .view-size-biggest .speakerSession .logOff-container {
-        right: -52%;
+        right: -42%;
     }
 
     .view-size-biggest .event .hero-header, .event .intersection {
@@ -1496,16 +1495,15 @@ section.elementor-inner-section > div {
     .view-size-biggest .event .share-block {
         right: 6rem !important;
     }
-}
 
-
-/*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 1099px 
-    @media (max-width:1099px) {
+    .view-size-biggest .event .logOff-container,
+    .view-size-biggest .modSession .logOff-container,
+    .view-size-biggest .speakerSession .logOff-container {
+        right: -42%;
     }
 
-    use: .view-size-bigger
-*/
+}
+
 @media (min-width: 1100px) and (max-width: 1200px) {
     .view-size-biggest .home .content-header,
     .view-size-biggest .events .content-header {
@@ -1519,10 +1517,18 @@ section.elementor-inner-section > div {
     }
 }
 
+
+/*margins/paddings for medium size screens or orientation landscape
+    contentarea is less than 1099px 
+    @media (max-width:1099px) {
+    }
+
+    use: .view-size-bigger
+*/
 .view-size-bigger .event .logOff-container,
 .view-size-bigger .modSession .logOff-container,
 .view-size-bigger .speakerSession .logOff-container {
-    right: -52%;
+    right: -33%;
 }
 
 .view-size-bigger .speakerSession .content-grid,
@@ -1662,7 +1668,7 @@ section.elementor-inner-section > div {
 .view-size-medium .event .logOff-container,
 .view-size-medium .modSession .logOff-container,
 .view-size-medium .speakerSession .logOff-container {
-    right: -48%;
+    right: -30%;
     padding: 12px 0 !important;
 }
 
@@ -1812,7 +1818,7 @@ section.elementor-inner-section > div {
 .view-size-medium-small .event .logOff-container,
 .view-size-medium-small .modSession .logOff-container,
 .view-size-medium-small .speakerSession .logOff-container {
-    right: -5%;
+    right: 15%;
 }
 
 .view-size-medium-small .event .content-header-line > h1,
