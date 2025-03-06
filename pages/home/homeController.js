@@ -225,6 +225,10 @@
                         }
                         newDataDoc[labelWidth] = row.Width;
                         newDataDoc[labelHeight] = row.Height;
+                    } else {
+                        newDataDoc.showDoc = false,
+                        newDataDoc.ov_doc = "images/dotclear.gif",
+                        newDataDoc.ov_doc_event = "images/dotclear.gif"
                     }
                 }
                 if (item) {
