@@ -664,9 +664,10 @@ section.elementor-inner-section > div {
 }
 
 .event .content-grid {
-    width: var(--max-content-width) !important;
-    margin-left: var(--max-content-margin-left) !important;
-    padding-inline: 8rem !important;
+    width: 100% !important;
+    max-width: 1808px;
+    margin-left: calc(50% - 904px) !important;
+    padding-inline: 25.4rem !important;
 }
 
 .modSession .content-grid,
@@ -1292,7 +1293,7 @@ section.elementor-inner-section > div {
 @media (min-width: 1521px) and (max-width:1820px) {
 
     .event .customer-top-header #main > .container {
-        padding-inline: 7.4rem !important;
+        padding-inline: 25.4rem !important;
     }
     .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
@@ -1303,11 +1304,11 @@ section.elementor-inner-section > div {
     .event .content-grid {
         width: 100% !important;
         margin: 0 auto !important;
-        padding-inline: 8rem !important;
+        padding-inline: 25.4rem !important;
     }
 
     .event .share-block {
-        right: 6rem !important;
+        right: 25.4rem !important;
     }
 }
 
@@ -1323,7 +1324,7 @@ section.elementor-inner-section > div {
 @media (min-width: 1500px) and (max-width: 1520px) {
 
     .event .customer-top-header #main > .container {
-        padding-inline: 6.4rem !important;
+        padding-inline: 13.4rem !important;
     }
 
     .event .content-grid,
@@ -1331,7 +1332,7 @@ section.elementor-inner-section > div {
     .speakerSession .content-grid {
         width: 100% !important;
         margin: 0 auto !important;
-        padding-inline: 6.4rem !important;
+        padding-inline: 13.4rem !important;
     }
 
     .event .hero-header, .event .intersection {
@@ -1351,17 +1352,17 @@ section.elementor-inner-section > div {
     }
 
     .event .share-block {
-        right: 8rem !important;
+        right: 13.4rem !important;
     }
 }
 @media (min-width: 1201px) and (max-width: 1499px) {
 
     .view-size-biggest .event .customer-top-header #main > .container {
-        padding-inline: 6.4rem !important;
+        padding-inline: 13.4rem !important;
     }
 
     .view-size-biggest .event .share-block {
-        right: 8rem !important;
+        right: 13.4rem !important;
     }
 
     .view-size-biggest .event .content-grid,
@@ -1369,7 +1370,7 @@ section.elementor-inner-section > div {
     .view-size-biggest .speakerSession .content-grid {
         width: 100% !important;
         margin: 0 auto !important;
-        padding-inline: 6.4rem !important;
+        padding-inline: 13.4rem !important;
     }
 
     .view-size-biggest .event .logOff-container,
@@ -1407,7 +1408,7 @@ section.elementor-inner-section > div {
     }
 
     .event .share-block {
-        right: 6rem !important;
+        right: 13.4rem !important;
     }
 }
 @media (min-width: 1201px) and (max-width: 1499px) {
@@ -1446,7 +1447,7 @@ section.elementor-inner-section > div {
 .view-size-biggest .event .content-grid {
     width: 100% !important;
     margin: 0 auto !important;
-    padding-inline: 6.4rem !important;
+    padding-inline: 7.4rem !important;
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
@@ -1475,7 +1476,7 @@ section.elementor-inner-section > div {
 .view-size-biggest .event .speakerblock {
     margin: 0 auto !important;
     width: 100% !important;
-    padding-inline: 6.4rem !important;
+    padding-inline: 7.4rem !important;
 }
 
 .view-size-biggest .home .win-listview .win-groupheader {
@@ -1493,7 +1494,7 @@ section.elementor-inner-section > div {
     }
 
     .view-size-biggest .event .share-block {
-        right: 6rem !important;
+        right: 7.4rem !important;
     }
 
     .view-size-biggest .event .logOff-container,
@@ -1539,11 +1540,11 @@ section.elementor-inner-section > div {
 }
 
 .view-size-bigger .event .content-grid {
-    padding-inline: 5rem !important;
+    padding-inline: 7.4rem !important;
 }
 
 .view-size-bigger .event .share-block {
-    right: 7rem !important;
+    right: 7.4rem !important;
 }
 
 .view-size-bigger .event .register-fragmenthost {
@@ -1619,6 +1620,66 @@ section.elementor-inner-section > div {
 .view-size-bigger .event .speaker-text {
     width: 600px !important;
 }
+
+@media (min-width:993px) and (max-width: 1200px) {
+    .view-size-bigger .event .customer-top-header #main > .container {
+        padding-inline: 7.4rem !important;
+    }
+    .view-size-bigger .event .content-grid {
+        padding-inline: 7.4rem !important;
+    }
+
+    .view-size-bigger .event .share-block {
+        right: 7.4rem !important;
+    }
+
+    .view-size-bigger .event .hero-header {
+        margin-left: 0 !important;
+    }
+
+    .view-size-bigger .teaser .ITbackground {
+        margin: 0 !important;
+    }
+
+    .view-size-bigger .event .intersection {
+        margin-left: 0 !important;
+    }
+
+    .view-size-bigger .event .section-3 {
+        padding: 10px 0 !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .view-size-bigger .event .customer-top-header #main > .container {
+        padding-inline: 2.4rem !important;
+    }
+
+    .view-size-bigger .event .content-grid {
+        padding-inline: 2.4rem !important;
+    }
+
+    .view-size-bigger .event .share-block {
+        right: 40% !important;
+    }
+
+    .view-size-bigger .event .hero-header {
+        margin-left: 0 !important;
+    }
+
+    .view-size-bigger .teaser .ITbackground {
+        margin: 0 !important;
+    }
+
+    .view-size-bigger .event .intersection {
+        margin-left: 0 !important;
+    }
+
+    .view-size-bigger .event .section-3 {
+        padding: 10px 0 !important;
+    }
+}
+
 /*margins/paddings for medium size screens or orientation landscape
     contentarea is less than 899px 
     @media (max-width:899px) {
@@ -1634,10 +1695,6 @@ section.elementor-inner-section > div {
 
 .view-size-medium .event .share-block {
     right: 40% !important;
-}
-
-.view-size-medium .event .content-grid {
-    padding-inline: 2rem !important;
 }
 
 .view-size-medium .home .content-header-line,
@@ -1857,11 +1914,6 @@ section.elementor-inner-section > div {
     width: calc(100% - 2.2rem - 2.2rem + 32px) !important;
 }
 
-.view-size-medium-small .event .content-grid {
-    width: calc(100% - 15px - 15px) !important;
-    margin: 0 15px !important;
-}
-
 .view-size-medium-small .event .speaker-line {
     flex: 100% !important;
 }
@@ -1935,14 +1987,26 @@ section.elementor-inner-section > div {
 
 .view-size-small .event .countdown-fragmenthost {
     grid-column: 1/span 6 !important;
-    position: fixed !important;
-    top: 8%;
-    left: 30% !important;
+    position: absolute !important;
+    width: auto !important;
+    margin-inline: 2.4rem !important;
+    padding: 0 10px;
+    top: -2.5%;
     margin: 0 auto !important;
+    box-shadow: none !important;
     background-color: var(--e-global-color-background, #ffffff) !important;
     border-radius: 0 !important;
     -webkit-border-radius: 0 !important;
     -moz-border-radius: 0 !important;
+}
+
+.view-size-small .register_button {
+    margin: 3px 18px !important;
+}
+
+.view-size-small .countdown .field_line_full {
+    line-height: 1.0 !important;
+    min-height: auto !important;
 }
 
 /*********countdown centered**********/
@@ -1967,11 +2031,6 @@ section.elementor-inner-section > div {
 
 .view-size-small .countdown .count-block {
     width: 13% !important;
-}
-
-.view-size-small .event .content-grid {
-    width: calc(100% - 15px - 15px) !important;
-    margin: 0 15px !important;
 }
 
 .view-size-small .event .speaker-line {
