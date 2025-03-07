@@ -338,7 +338,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     opacity: 0;
     width: 200px;
     text-align: center;
-    left: -110% !important;
+    left: -220% !important;
     font-family: var(--font-family-default) !important;
     top: 0 !important;
     color: var(--e-global-color-text, rgba(0, 0, 0, 0.6)) !important;
@@ -940,7 +940,7 @@ section.elementor-inner-section > div {
 }
 
 .event .register-fragmenthost {
-    margin-top: calc(100% - 355px) !important;
+    margin-top: calc(100% - 385px) !important;
 }
 
 /******************************* Home, Calendar, LogOff Buttons ***************************************/
@@ -1314,6 +1314,10 @@ section.elementor-inner-section > div {
         right: 25.4rem !important;
     }
 
+    .event .register-fragmenthost {
+        margin-top: calc(100% - 345px) !important;
+    }
+
     .event .speakerblock {
         margin: 0 auto !important;
         width: 100% !important;
@@ -1353,7 +1357,7 @@ section.elementor-inner-section > div {
     }
 
     .event .register-fragmenthost {
-        margin-top: calc(100% - 325px) !important;
+        margin-top: calc(100% - 355px) !important;
     }
 
     .event .section-3 {
@@ -1574,6 +1578,10 @@ section.elementor-inner-section > div {
         width: 100% !important;
         padding-inline: 7.4rem !important;
     }
+
+    .view-size-biggest .event .register-fragmenthost {
+        margin-top: calc(100% - 255px) !important;
+    }
 }
 
 
@@ -1607,7 +1615,7 @@ section.elementor-inner-section > div {
 }
 
 .view-size-bigger .event .register-fragmenthost {
-    margin-top: 25% !important;
+    margin-top: 45% !important;
 }
 
 
@@ -1757,6 +1765,10 @@ section.elementor-inner-section > div {
         width: 100% !important;
         padding-inline: 2.4rem !important;
     }
+
+    .view-size-bigger .event .register-fragmenthost {
+        margin-top: 25% !important;
+    }
 }
 
 /*margins/paddings for medium size screens or orientation landscape
@@ -1855,6 +1867,10 @@ section.elementor-inner-section > div {
 
 .view-size-medium .event .speaker-text {
     width: 60% !important;
+}
+
+.view-size-medium .event .register-fragmenthost {
+    margin-top: 25% !important;
 }
 
 .view-size-medium .event .countdown-fragmenthost {
