@@ -26,12 +26,14 @@
                     ov_text_free_body: ""
                 },
                 dataDoc: {
-                    ov_doc: "images/dotclear.gif"
+                    ov_doc: "images/dotclear.gif",
+                    ov_doc_event: "images/dotclear.gif"
                 },
                 dataDocText: {
                     ov_doc_alt: "",
                     ov_doc_title: "",
-                    ov_doc_descr: ""
+                    ov_doc_descr: "",
+                    ov_doc_event_descr: ""
                 },
                 count: 0
             }, commandList, false, Home.eventView, null, listView]);

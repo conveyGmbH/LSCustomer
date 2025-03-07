@@ -80,7 +80,7 @@
     "register.nameParctipation"          : "Cognome",
     "register.position"     : "Position",
     "register.formOf"       : "Saluto",
-    "register.company"      : "nome azienda",
+    "register.company"      : "nome azienda *",
     "register.phone"        : "Telephone",
     "register.register"     : "Registrati",
     "register.resend"       : "Invia di nuovo email",

@@ -118,7 +118,7 @@
             var loadData = function () {
                 Log.call(Log.l.trace, "Register.Controller.");
                 AppData.setErrorMsg(AppBar.scope.binding);
-                var ret = new WinJS.Promise.as().then(function () {
+                var ret = new WinJS.Promise.as()/*.then(function () {
                     Log.print(Log.l.trace, "calling select initAnredeData...");
                     //load the list of INITAnrede for Checkbox
                     return AppData.initAnredeView.select(function (json) {
@@ -144,7 +144,7 @@
                         // or server returns response with an error status.
                         AppData.setErrorMsg(that.binding, errorResponse);
                     });
-                }).then(function () {
+                })*/.then(function () {
                     if (AppData._persistentStates.registerData &&
                         AppData._persistentStates.registerData.Email) {
                         that.binding.dataRegister = copyByValue(AppData._persistentStates.registerData);
@@ -166,9 +166,9 @@
                         that.binding.registerStatus = AppBar.scope.binding.registerStatus;
                     }
                     Application.pageframe.savePersistentStates();
-                }).then(function () {
+                })/*.then(function () {
                     that.loadInitSelection();
-                });
+                })*/;
                 Log.ret(Log.l.trace);
                 return ret;
             }
@@ -329,7 +329,7 @@
                 },
                 clickEmailShare: function(event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    window.open('mailto:?subject=' + that.binding.dataText.ev_text_detail_name_h1 + '&body=' + encodeURIComponent(that.eventLinkToShare()));
+                    window.open('mailto:' + 'info@auma.de'+ '?subject=' + that.binding.dataText.ev_text_detail_name_h1 + '&body=' + encodeURIComponent(that.eventLinkToShare()));
                     Log.ret(Log.l.trace);
                 },
                 clickFacebookLogout: function (event) {
@@ -365,6 +365,7 @@
                     that.binding.loginDisabled = AppBar.busy || 
                         !that.binding.dataRegister.Vorname || 
                         !that.binding.dataRegister.Name || 
+                        !that.binding.dataRegister.Firmenname ||
                         !that.binding.dataRegister.Email || 
                         typeof that.binding.dataRegister.Email === "string" &&
                         !that.binding.dataRegister.Email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) || 
