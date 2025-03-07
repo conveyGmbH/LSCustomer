@@ -297,7 +297,7 @@
                     Log.call(Log.l.trace, "Event.Controller.");
                     var cal = ics();
                     var urlToShare = that.binding.conferenceLink || that.binding.recordedLink || window.location.href || "";
-                    var description = that.binding.dataText && that.binding.dataText["ev_text_calender_iCALdetail"] ? that.binding.dataText["ev_text_calender_iCALdetail"] : urlToShare;
+                    var description = that.binding.dataText && that.binding.dataText["ev_text_calender_iCALdetail"] ? that.binding.dataText["ev_text_calender_iCALdetail"].replace(/\n/g, "\\n") : urlToShare;
                     var eventType = that.binding.dataEvent.LiveTyp ? " " + that.binding.dataEvent.LiveTyp + " - " : "";
                     cal.addEvent(eventType + that.binding.dataEvent.Name, description, "", that.binding.dataEvent.dateStartDatum, that.binding.dataEvent.dateEndDatum);
                     cal.calendar();

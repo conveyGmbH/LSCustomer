@@ -307,26 +307,27 @@
                 },
                 clickLinkedInShare: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
+                    //https://www.linkedin.com/company/auma-ausstellungs-und-messe-ausschuss-der-deutschen-wirtschaft/
                     window.open('https://www.linkedin.com/sharing/share-offsite/?url=' +
                         encodeURIComponent(that.eventLinkToShare()));
                     Log.ret(Log.l.trace);
                 },
-                clickXingShare: function (event) {
+                /*clickXingShare: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     window.open('https://www.xing.com/spi/shares/new?url=' +
                         encodeURIComponent(that.eventLinkToShare()));
                     Log.ret(Log.l.trace);
-                }/*,
+                },
                 clickGooglePlusShare: function (event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     window.open('https://plus.google.com/share?url={' + encodeURIComponent(that.shareEventLink) + '}');
                     Log.ret(Log.l.trace);
-                }*/,
+                },
                 clickTwitterShare: function(event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     window.open('https://twitter.com/share?url=' + encodeURIComponent(that.eventLinkToShare()));
                     Log.ret(Log.l.trace);
-                },
+                }*/
                 clickEmailShare: function(event) {
                     Log.call(Log.l.trace, "Register.Controller.");
                     window.open('mailto:' + 'info@auma.de'+ '?subject=' + that.binding.dataText.ev_text_detail_name_h1 + '&body=' + encodeURIComponent(that.eventLinkToShare()));
