@@ -330,7 +330,7 @@
                 }*/
                 clickEmailShare: function(event) {
                     Log.call(Log.l.trace, "Register.Controller.");
-                    window.open('mailto:' + 'info@auma.de'+ '?subject=' + that.binding.dataText.ev_text_detail_name_h1 + '&body=' + encodeURIComponent(that.eventLinkToShare()));
+                    window.open('mailto:' + '?subject=' + that.binding.dataText.ev_text_detail_name_h1 + '&body=' + encodeURIComponent(that.eventLinkToShare()));
                     Log.ret(Log.l.trace);
                 },
                 clickFacebookLogout: function (event) {
