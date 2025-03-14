@@ -158,9 +158,9 @@
                         }
                         newDataDoc[row.LabelTitle] = row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "images/dotclear.gif";
                         if (row.LabelTitle.startsWith("ev_doc_mod")) {
-                        newDataDoc[row.LabelTitle] = row.LabelTitle.startsWith("ev_doc_mod") && row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
+                            newDataDoc[row.LabelTitle] = row.LabelTitle.startsWith("ev_doc_mod") && row.DocContentDOCCNT1 ? row.DocContentDOCCNT1 : "";
+                        }
                     }
-                }
                 }
                 that.binding.dataDoc = newDataDoc;
                 Log.ret(Log.l.trace);
@@ -297,11 +297,12 @@
                     Log.call(Log.l.trace, "Event.Controller.");
                     var cal = ics();
                     var urlToShare = that.binding.conferenceLink || that.binding.recordedLink || window.location.href || "";
-                    var description = that.binding.dataText && that.binding.dataText["ev_text_calender_iCALdetail"] ? that.binding.dataText["ev_text_calender_iCALdetail"].replace(/\n/g, "\\n") : urlToShare;
+                    var description = urlToShare && that.binding.dataText && that.binding.dataText["ev_text_calender_iCALdetail"] ? that.binding.dataText["ev_text_calender_iCALdetail"].replace(/\n/g, "\\n")  + "\\n" + urlToShare + "\\n" : urlToShare;
                     var eventType = that.binding.dataEvent.LiveTyp ? " " + that.binding.dataEvent.LiveTyp + " - " : "";
-                    cal.addEvent(eventType + that.binding.dataEvent.Name, description, "", that.binding.dataEvent.dateStartDatum, that.binding.dataEvent.dateEndDatum);
+                    var icsEvent = cal.addEvent(eventType + that.binding.dataEvent.Name, description, "", that.binding.dataEvent.dateStartDatum, that.binding.dataEvent.dateEndDatum);
                     cal.calendar();
                     cal.download(that.binding.dataEvent.Name);
+					//window.open("data:text/calendar;charset=utf8," + escape(icsEvent));
                     Log.ret(Log.l.trace);
                 },
                 onScroll: function (event) {
