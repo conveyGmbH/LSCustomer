@@ -2216,3 +2216,6 @@ body[data-menu-panel=open] #app3::after {
     }
 }
 
+::selection, .win-button.win-button-primary, .win-dropdown option:checked, select[multiple].win-dropdown option:checked {
+    background-color: #7100ca;
+}
