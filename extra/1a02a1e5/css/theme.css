@@ -284,10 +284,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     visibility: hidden;
     position: relative;
     opacity: 0;
-    width: fit-content !important;
-    max-width: fit-content !important;
-    max-width: -moz-fit-content !important;
-    width: -moz-fit-content !important;
+    width: 170% !important;
+    max-width: max-content !important;
     text-align: center;
     right: -25%;
     top: 30px;
@@ -310,10 +308,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     visibility: hidden;
     position: relative;
     opacity: 0;
-    width: fit-content !important;
-    max-width: fit-content !important;
-    max-width: -moz-fit-content !important;
-    width: -moz-fit-content !important;
+    width: 170% !important;
+    max-width: max-content !important;
     text-align: center;
     right: -25%;
     top: 30px;
@@ -336,10 +332,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     visibility: hidden;
     position: absolute;
     opacity: 0;
-    width: fit-content !important;
-    max-width: fit-content !important;
-    max-width: -moz-fit-content !important;
-    width: -moz-fit-content !important;
+    width: 170% !important;
+    max-width: max-content !important;
     text-align: center;
     right: -25%;
     top: 30px;

@@ -97,13 +97,18 @@
                                                 class="text-lightcolor win-button"
                                                 onclick="AppBar.handleEvent('click', 'clickOk', event)"
                                                 data-win-bind="disabled: loginDisabled">
-                                            <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
+                                            <div class="button-tip" data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
                                                 <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_button_registration_text"></span>
+                                                <div data-win-bind="style.display: loginDisabled Binding.Converter.toDisplayNone">
+	                                                <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>
+                                                </div>
                                             </div>
-                                            <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                            <div class="button-tip" data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
                                                 <span class="win-type-title" data-win-bind="textContent: dataText.off_text_button_registration_text"></span>
+                                                <div data-win-bind="style.display: loginDisabled Binding.Converter.toDisplayNone">
+	                                                <span class="win-tooltip" data-win-bind="textContent: dataText.off_text_button_registration_tooltip"></span>
+                                                </div>
                                             </div>
-                                            <!--<span data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>-->
                                         </button>
                                     </div>
                                 </div>
@@ -132,13 +137,18 @@
                                                 class="text-lightcolor win-button"
                                                 onclick="AppBar.handleEvent('click', 'clickOk', event)"
                                                 data-win-bind="disabled: loginDisabled">
-                                            <div data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
-                                                <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_button_registration_text"></span>
+                                            <div class="button-tip" data-win-bind="style.display: showEvText Binding.Converter.toDisplay">
+	                                            <span class="win-type-title" data-win-bind="textContent: dataText.ev_text_button_registration_text"></span>
+	                                            <div data-win-bind="style.display: loginDisabled Binding.Converter.toDisplayNone">
+		                                            <span class="win-tooltip" data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>
+	                                            </div>
                                             </div>
-                                            <div data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
+                                            <div class="button-tip" data-win-bind="style.display: showOffText Binding.Converter.toDisplay">
                                                 <span class="win-type-title" data-win-bind="textContent: dataText.off_text_button_registration_text"></span>
+                                                <div data-win-bind="style.display: loginDisabled Binding.Converter.toDisplayNone">
+                                                    <span class="win-tooltip" data-win-bind="textContent: dataText.off_text_button_registration_tooltip"></span>
+                                                </div>
                                             </div>
-                                            <!--<span data-win-bind="textContent: dataText.ev_text_button_registration_tooltip"></span>-->
                                         </button>
                                     </div>
                                 </div>
