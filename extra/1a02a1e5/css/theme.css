@@ -1072,10 +1072,8 @@ section.elementor-inner-section > div {
     visibility: hidden;
     position: absolute;
     opacity: 0;
-    width: fit-content !important;
-    max-width: fit-content !important;
-    max-width: -moz-fit-content !important;
-    width: -moz-fit-content !important;
+    width: 170% !important;
+    max-width: max-content !important;
     text-align: center;
     color: var(--e-global-color-text, rgba(0, 0, 0, 0.6)) !important;
     background: var(--e-global-color-buttontext, #ffffff);
