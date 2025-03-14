@@ -280,6 +280,32 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-text, #070023) !important;
 }
 
+.home .button-tip .win-tooltip {
+    visibility: hidden;
+    position: relative;
+    opacity: 0;
+    width: fit-content !important;
+    max-width: fit-content !important;
+    max-width: -moz-fit-content !important;
+    width: -moz-fit-content !important;
+    text-align: center;
+    right: -50px;
+    top: 20px;
+    color: var(--e-global-color-text, rgba(0, 0, 0, 0.6)) !important;
+    background: var(--e-global-color-buttontext, #ffffff);
+    border-color: var(--e-global-color-text, rgba(0, 0, 0, 0.6));
+    text-transform: none !important;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    z-index: 99;
+    word-wrap: break-word;
+    white-space: normal !important;
+}
+
 .events .button-tip .win-tooltip {
     visibility: hidden;
     position: relative;
@@ -2202,4 +2228,21 @@ body[data-menu-panel=open] #app3::after {
 
 }
 
+.home .button-tip .win-tooltip,
+.events .button-tip .win-tooltip,
+.event .button-tip .win-tooltip,
+.event .share-block .win-tooltip {
+    font-family: sans-serif !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .home .button-tip .win-tooltip,
+    .events .button-tip .win-tooltip,
+    .event .button-tip .win-tooltip,
+    .event .share-block .win-tooltip {
+        color: #ffffff !important;
+        border-color: #ffffff;
+        background-color: #4a4a4a;
+    }
+}
 
