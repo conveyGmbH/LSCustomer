@@ -259,9 +259,9 @@
     right: -50px;
     top: 20px;
     text-transform: none;
-    transition: opacity 1.3s;
-    -webkit-transition: opacity 1.3s;
-    -moz-transition: opacity 1.3s;
+    transition: opacity 0.3s ease-in-out 1.3s;
+    -webkit-transition: opacity 0.3s ease-in-out 1.3s;
+    -moz-transition: opacity 0.3s ease-in-out 1.3s;
     z-index: 99;
     word-wrap: break-word;
     white-space: normal;
@@ -385,9 +385,9 @@
     text-align: center;
     left: 0;
     top: 100%;
-    transition: opacity 1.3s;
-    -webkit-transition: opacity 1.3s;
-    -moz-transition: opacity 1.3s;
+    transition: opacity 0.3s ease-in-out 1.3s;
+    -webkit-transition: opacity 0.3s ease-in-out 1.3s;
+    -moz-transition: opacity 0.3s ease-in-out 1.3s;
     padding: 6px;
 }
 
