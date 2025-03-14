@@ -1194,7 +1194,7 @@ section.elementor-inner-section > div {
 .modSession .logOff-container,
 .speakerSession .logOff-container {
     margin-left: 0 !important;
-    padding: 15px 0 !important;
+    padding: 16px 0 !important;
     font-family: var(--font-family-default) !important;
     height: auto;
     width: auto !important;
@@ -1822,7 +1822,7 @@ section.elementor-inner-section > div {
 .view-size-medium .modSession .logOff-container,
 .view-size-medium .speakerSession .logOff-container {
     right: -30%;
-    padding: 12px 0 !important;
+    padding: 16px 0 !important;
 }
 
 .view-size-medium .event .content-header-line > h1,
