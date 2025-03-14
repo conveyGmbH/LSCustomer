@@ -2043,7 +2043,7 @@ section.elementor-inner-section > div {
 }
 
 .view-size-medium-small .event .countdown-fragmenthost {
-    top: 22%;
+    top: 20%;
 }
 
 .view-size-medium-small .countdown .field_line_full {
@@ -2098,7 +2098,7 @@ section.elementor-inner-section > div {
     width: auto !important;
     margin-inline: 2.4rem !important;
     padding: 0 10px;
-    top: -2.5%;
+    top: -5em;
     box-shadow: none !important;
     background-color: var(--e-global-color-background, #ffffff) !important;
     border-radius: 0 !important;
