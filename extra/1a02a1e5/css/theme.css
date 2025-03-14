@@ -999,6 +999,7 @@ section.elementor-inner-section > div {
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;
     text-underline-offset: 0.2rem;
+    width: 80px !important;
 }
 .event .calenderButton {
     font-family: var(--font-family-default) !important;
@@ -1627,7 +1628,6 @@ section.elementor-inner-section > div {
 
 
 .view-size-bigger .event .homeButton {
-    width: calc(100% - 20px - 20px) !important;
     margin: 0 !important;
     left: 0 !important;
 }
