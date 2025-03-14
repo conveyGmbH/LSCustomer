@@ -115,6 +115,7 @@
 
 .register .button_line {
     text-align: left;
+    height: 150px;
 }
 
 .register #loginButton {

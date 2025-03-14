@@ -1055,7 +1055,7 @@ section.elementor-inner-section > div {
 /******************************************End home, calendar and logoff buttons******************************************/
 
 .event .button-tip {
-    display: flex !important;
+    display: flex;
     align-items: center !important;
 }
 
