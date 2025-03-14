@@ -239,6 +239,7 @@
 .event .button-tip {
     position: relative;
     display: inline-block;
+    width: 100%;
 }
 
 .event .button-tip .action-image {
