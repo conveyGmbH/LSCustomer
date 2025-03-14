@@ -364,9 +364,9 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     opacity: 0;
     width: 200px;
     text-align: center;
-    left: -220% !important;
+    left: -50%;
     font-family: var(--font-family-default) !important;
-    top: 0 !important;
+    top: 80%;
     color: var(--e-global-color-text, rgba(0, 0, 0, 0.6)) !important;
     background: var(--e-global-color-buttontext, #ffffff);
     border-color: var(--e-global-color-text, rgba(0, 0, 0, 0.6));
@@ -1070,31 +1070,29 @@ section.elementor-inner-section > div {
     padding-right: 18px;
 }
 
-    .events .button-tip .win-tooltip,
-    .event .button-tip .win-tooltip,
-    .modSession .button-tip .win-tooltip,
-    .speakerSession .button-tip .win-tooltip {
-        font-family: var(--font-family-default) !important;
-        visibility: hidden;
-        position: absolute;
-        opacity: 0;
-        width: fit-content !important;
-        max-width: fit-content !important;
-        max-width: -moz-fit-content !important;
-        width: -moz-fit-content !important;
-        text-align: center;
-        left: 90px;
-        top: 0;
-        color: var(--e-global-color-text, rgba(0, 0, 0, 0.6)) !important;
-        background: var(--e-global-color-buttontext, #ffffff);
-        border-color: var(--e-global-color-text, rgba(0, 0, 0, 0.6));
-        transition: opacity 0.3s;
-        -webkit-transition: opacity 0.3s;
-        -moz-transition: opacity 0.3s;
-        z-index: 99;
-        word-wrap: break-word;
-        white-space: normal !important;
-    }
+.events .button-tip .win-tooltip,
+.event .button-tip .win-tooltip,
+.modSession .button-tip .win-tooltip,
+.speakerSession .button-tip .win-tooltip {
+    font-family: var(--font-family-default) !important;
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    width: fit-content !important;
+    max-width: fit-content !important;
+    max-width: -moz-fit-content !important;
+    width: -moz-fit-content !important;
+    text-align: center;
+    color: var(--e-global-color-text, rgba(0, 0, 0, 0.6)) !important;
+    background: var(--e-global-color-buttontext, #ffffff);
+    border-color: var(--e-global-color-text, rgba(0, 0, 0, 0.6));
+    transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    z-index: 99;
+    word-wrap: break-word;
+    white-space: normal !important;
+}
 
 .modSession .share-block .win-tooltip,
 .speakerSession .share-block .win-tooltip {
@@ -1104,8 +1102,6 @@ section.elementor-inner-section > div {
     opacity: 0;
     width: 200px;
     text-align: center;
-    left: 0;
-    top: 100%;
     color: var(--e-global-color-text, rgba(0, 0, 0, 0.6)) !important;
     background: var(--e-global-color-buttontext, #ffffff);
     border-color: var(--e-global-color-text, rgba(0, 0, 0, 0.6));
