@@ -446,7 +446,8 @@
     function checkForRootElement() {
         window.setTimeout(function () {
             if (!loadApplicationCalled) {
-                if (!document.querySelector("#" + rootElementId)) {
+                if (!document.querySelector("#" + rootElementId) ||
+                    !(document.readyState === "complete")) {
                     //cancel processing if no root element present!
                     if (!onLoadCalled && --retryCounter > 0) {
                         checkForRootElement();
