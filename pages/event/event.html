@@ -33,11 +33,10 @@
                       data-win-bind="textContent: email; style.fontWeight: email Binding.Converter.toBold"></span><!--registerMessage
                 </div>-->
                                         <div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
-                                            <div id="logOffButton"
-                                                 class="win-link"
-                                                 onclick="AppBar.handleEvent('click', 'clickLogOffEvent', event)">
-                                                <span data-win-res="{textContent: 'register.logOffEvent'}"></span>
-                                                <span class="win-tooltip" data-win-res="{title: 'tooltip.logOff'}"></span>
+                                            <div id="logOffButton" class="win-link"
+                                                 onclick="AppBar.handleEvent('click', 'clickLogOffEvent', event)"
+                                                 data-win-res="{title: 'tooltip.logOff'}">
+	                                            <span data-win-res="{textContent: 'register.logOffEvent'}"></span>
                                             </div>
                                             <!--<span class="large_field"
                               data-win-bind="textContent: registerEmail"></span>-->
