@@ -457,7 +457,7 @@
                 loadApplicationCalled = true;
                 loadApplication();
             }
-        }, 350);
+        }, 50);
     }
     /*var prevOnLoadHandler = window.onload;
     window.onload = function (event) {
