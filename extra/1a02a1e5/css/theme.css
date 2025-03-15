@@ -255,6 +255,8 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 }
 
 .home .win-listview .win-gridlayout .win-container:hover .event-title > span,
+.home .win-listview .win-gridlayout .win-container:hover .event-subtitle > span,
+.events .win-listview .win-gridlayout .win-container:hover .event-title > span,
 .events .win-listview .win-gridlayout .win-container:hover .event-subtitle > span {
     text-decoration: underline;
 }
