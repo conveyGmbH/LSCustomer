@@ -312,6 +312,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: var(--e-global-color-accent, #ad4829) !important;
 }
 
+.register .centerarea .registerEmail {
+    border-radius: 12px !important;
+    -webkit-border-radius: 12px !important;
+    -moz-border-radius: 12px !important;
+}
+
 .register #loginButton, .register #re_registerEvent {
     border-radius: 40px;
     -webkit-border-radius: 40px;
