@@ -897,7 +897,7 @@ section.elementor-inner-section > div {
 }
 
 .event .button-tip {
-    display: flex !important;
+    /*display: flex !important;*/
     align-items: center !important;
 }
 
