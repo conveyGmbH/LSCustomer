@@ -1232,6 +1232,10 @@ section.elementor-inner-section > div {
     color: var(--e-global-color-primary, #c95d3c) !important;
     cursor: default;
 }
+/* conference: webcam video list */
+.conference [role=region] {
+    position: initial;
+}
 
 /* conference: slide number selector */
 .dafGPL select {
