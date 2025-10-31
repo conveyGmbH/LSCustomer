@@ -190,7 +190,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: var(--e-global-color-background, #ffffff) !important;
 }
 
-.event button.win-button: hover {
+.event button.win-button:hover {
     color: var(--e-global-color-buttontext, #ffffff) !important;
     background-color: var(--e-global-color-accent, #ad4829) !important;
 }
