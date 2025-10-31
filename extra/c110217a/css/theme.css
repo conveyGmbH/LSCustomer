@@ -1,5 +1,11 @@
 ﻿/* styles theme for customizations */
 
+/* AHK styles*/
+.page-layout {
+    grid-template-rows: auto;
+    min-block-size: 200px;
+}
+
 /********Start Fonts for convey Webinars*********/
 @font-face {
     font-family: "Symbols";
