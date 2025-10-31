@@ -3,10 +3,21 @@
     "use strict";
 
     function saveBodyContent() {
-        var customerElement = document.querySelector("#"+rootElementId);
+        var customerElement = document.querySelector("#" + rootElementId);
         if (customerElement && customerElement.parentElement) {
+            var mainBottomElement = null;
             var customerRootElement = customerElement;
             while (customerRootElement.parentElement && customerRootElement.parentElement !== document.body) {
+                if (customerRootElement.parentElement.parentElement === document.body &&
+                    customerRootElement.nextElementSibling) {
+                    var nextElementSibling = customerRootElement.nextElementSibling;
+                    mainBottomElement = document.createElement(customerRootElement.parentElement.tagName);
+                    if (mainBottomElement)
+                        while (nextElementSibling) {
+                            mainBottomElement.appendChild(nextElementSibling);
+                            nextElementSibling = nextElementSibling.nextElementSibling;
+                        }
+                }
                 customerRootElement = customerRootElement.parentElement;
             }
             // save customer page content
@@ -19,7 +30,7 @@
             var curBodyChild = document.body.firstElementChild;
             while (curBodyChild && curBodyChild !== customerRootElement) {
                 nextBodyChild = curBodyChild.nextElementSibling;
-                if (curBodyChild.tagName && 
+                if (curBodyChild.tagName &&
                     curBodyChild.tagName.toLowerCase() !== "svg" &&
                     curBodyChild.tagName.toLowerCase() !== "script" &&
                     curBodyChild.tagName.toLowerCase() !== "link") {
@@ -27,10 +38,13 @@
                 }
                 curBodyChild = nextBodyChild;
             }
+            if (mainBottomElement) {
+                bodyContentBottom.appendChild(mainBottomElement);
+            }
             curBodyChild = customerRootElement.nextElementSibling;
             while (curBodyChild) {
                 nextBodyChild = curBodyChild.nextElementSibling;
-                if (curBodyChild.tagName && 
+                if (curBodyChild.tagName &&
                     curBodyChild.tagName.toLowerCase() !== "svg" &&
                     curBodyChild.tagName.toLowerCase() !== "script" &&
                     curBodyChild.tagName.toLowerCase() !== "link") {
