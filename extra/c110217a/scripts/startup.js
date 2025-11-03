@@ -61,7 +61,7 @@
     saveBodyContent();
 
     window.LiveBridgeSettings = {
-        buttonSymbolColor: "#AD4829",
+        buttonSymbolColor: "#00286c",
         homeSymbolName: "vector_left",
         homeSymbolOptions: {
             useFillColor: false,
