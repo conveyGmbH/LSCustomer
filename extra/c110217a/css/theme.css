@@ -200,6 +200,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     border-color: var(--e-global-color-accent) !important;
     color: var(--e-global-color-accent) !important;
     background-color: var(--e-global-color-background, #ffffff) !important;
+    border-radius: 12px !important;
 }
 
 .event button.win-button:hover {
@@ -322,6 +323,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 .event button#calenderButton:hover .win-button{
     color: var(--e-global-color-buttontext, #ffffff) !important;
     background-color: var(--e-global-color-accent) !important;
+    border-width: 1px !important;
 }
 
 .register #loginButton, .register #re_registerEvent {
@@ -1103,6 +1105,7 @@ section.elementor-inner-section > div {
     border-color: var(--e-global-color-primary) !important;
     background-color: transparent !important;
     cursor: pointer;
+    border-width: 1px !important;
 }
 
 .field_line .register-email {
@@ -1116,7 +1119,7 @@ section.elementor-inner-section > div {
     background-color: var(--stage-container-bg-color, #e6eaf3) !important;
 }
 
-.centerarea .registerEmail {
+.register .centerarea .registerEmail {
     width: 99% !important;
     padding-top: 10px !important;
     background-color: var(--stage-container-bg-color, #e6eaf3) !important;
