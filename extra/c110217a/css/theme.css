@@ -1112,18 +1112,13 @@ section.elementor-inner-section > div {
     padding-top: 20px;
 }
 
-.register .centerarea .registerEmail {
+.centerarea {
     border-radius: 12px !important;
     -webkit-border-radius: 12px !important;
     -moz-border-radius: 12px !important;
     background-color: var(--stage-container-bg-color, #e6eaf3) !important;
-}
-
-.register .centerarea .registerEmail {
     width: 99% !important;
     padding-top: 10px !important;
-    background-color: var(--stage-container-bg-color, #e6eaf3) !important;
-    border-radius: 12px !important;
 }
 
 .register .centerarea .field_line_full,
