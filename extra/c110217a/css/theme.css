@@ -416,6 +416,10 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     left: 20px !important;
     width: calc(100% - 70px) !important;
 }
+.view-size-bigger .body-content-bottom section:not(.elementor-inner-section) {
+    left: 10px !important;
+    width: calc(100% - 30px) !important;
+}
 .view-size-medium .body-content-bottom section:not(.elementor-inner-section) {
     left: 5px !important;
     width: calc(100% - 30px) !important;
@@ -801,7 +805,7 @@ section.elementor-inner-section > div {
 .home .event-item .event-comment,
 .events .event-item .event-comment {
     font-family: var(--font-family-default) !important;
-    color: var(--e-global-color-secondary, #515151) !important;
+    color: var(--e-global-color-text, #515151) !important;
     font-size: 1.4rem !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -833,6 +837,12 @@ section.elementor-inner-section > div {
 .speakerSession .hero-header {
     margin-left: 0 !important;
     padding: 15px 0 !important;
+}
+
+.event .hero-footer,
+.modSession .hero-footer,
+.speakerSession .hero-footer {
+    background-color: #003882;
 }
 
 .event .homeButton,
@@ -1068,7 +1078,8 @@ section.elementor-inner-section > div {
 }
 
 .event .speaker-name, .event .speaker-vorname {
-    font-size: 36px !important;
+    font-size: var(--font-size-h4) !important;
+    color: var(--e-global-color-accent) !important;
     font-style: normal;
     font-weight: 600;
     line-height: 50px !important;
@@ -1079,9 +1090,9 @@ section.elementor-inner-section > div {
 }
 
 .event .speaker-title, .event speaker-link {
-    font-size: 16px !important;
-    line-height: 24px !important;
-    font-weight: 400 !important;
+    font-size: var(--bs-body-font-size) !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
 }
 
 .event .homeButton,
@@ -1238,6 +1249,14 @@ section.elementor-inner-section > div {
     margin: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
+}
+
+.view-size-biggest .body-content-bottom section:not(.elementor-inner-section) > div {
+    padding-inline: 4rem;
+}
+
+.view-size-bigger .body-content-bottom section:not(.elementor-inner-section) > div {
+    padding-inline: 4rem;
 }
 
 .view-size-biggest .body-content-bottom section:not(.elementor-inner-section) {
@@ -1704,7 +1723,7 @@ section.elementor-inner-section > div {
 .view-size-small .event .speakerblock {
     width: calc(100% - 15px - 15px) !important;
     margin: 0 !important;
-    padding: 40px 0 0 0 !important;
+    padding: 40px 0 0 15px !important;
 }
 
 .view-size-small .event .countdown-fragmenthost {
