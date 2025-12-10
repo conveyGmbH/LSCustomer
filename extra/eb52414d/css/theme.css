@@ -53,7 +53,7 @@
 
     --box-shadow-button: 0 2px 5px 0 rgba(0, 0, 0, 0.6);
     --outline-focus: 1px solid var(--color-gray-lighter);
-    --font-family-default: 'Open Sans' !important;
+    --font-family-default: 'Open Sans', sans-serif !important;
     --box-shadow-popup: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     --box-shadow-popup-lifted: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
     --box-shadow-button: none;
@@ -307,15 +307,17 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     color: var(--e-global-color-accent, #ad4829) !important;
 }
 
-.event button#calenderButton:hover .win-button{
+.event button#calenderButton:hover .win-button {
     color: var(--e-global-color-buttontext, #ffffff) !important;
     background-color: var(--e-global-color-accent, #ad4829) !important;
+    border: 1px solid var(--e-global-color-accent, #ad4829) !important;
 }
 
-.register .centerarea .registerEmail {
+.centerarea.registerEmail {
     border-radius: 12px !important;
     -webkit-border-radius: 12px !important;
     -moz-border-radius: 12px !important;
+    padding-top: 20px;
 }
 
 .register #loginButton, .register #re_registerEvent {
@@ -505,7 +507,8 @@ section.elementor-inner-section > div {
     use: .view-size-small
 */
 .view-size-small .home .content-header {
-    width: calc(100% - 20px);
+    width: 100% !important;
+    padding-bottom: 10px !important;
 }
 
 /***********Changes for convey Webinars***********/
@@ -1600,7 +1603,7 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 .view-size-small .modSession .content-header-line > h1,
 .view-size-small .speakerSession .content-header-line > h1 {
     font-size: 22px !important;
-    word-wrap: break-word;
+    
 }
 
 .view-size-medium-small .modSession .content-header-line > h1,

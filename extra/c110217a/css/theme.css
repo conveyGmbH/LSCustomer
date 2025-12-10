@@ -868,6 +868,11 @@ section.elementor-inner-section > div {
     font-family: var(--font-family-default) !important;
 }
 
+.event .recordedVideo-fragmenthost {
+    margin-left: 0 !important;
+    padding: 15px 0 !important;
+}
+
 .event .intersection {
     padding: 15px 15px 0 0 !important;
 }
