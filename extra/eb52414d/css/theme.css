@@ -1094,10 +1094,6 @@ section.elementor-inner-section > div {
     border-radius: 12px !important;
 }
 
-.register .register_title {
-    display: none !important;
-}
-
 .register .input_field {
     background-color: transparent !important;
     width: inherit !important;
