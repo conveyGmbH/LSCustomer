@@ -199,12 +199,14 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     display: none !important;
 }
 
+.events .homeButton,
 .events button#homeButton {
-    padding: 14px 0 !important;
+    display: none;
+    /*padding: 14px 0 !important;
     color: inherit;
     border: none !important;
     background: none !important;
-    text-align: left !important;
+    text-align: left !important;*/
 }
 
 .event button .win-type-title {
@@ -875,8 +877,10 @@ section.elementor-inner-section > div {
     margin-top: calc(100% - 355px) !important;
 }
 
+.events .homeButton,
 .events button#homeButton {
-    font-family: var(--font-family-default) !important;
+    display: none;
+    /*font-family: var(--font-family-default) !important;
     position: sticky !important;
     margin-top: 20px !important;
     margin-bottom: 20px !important;
@@ -886,7 +890,7 @@ section.elementor-inner-section > div {
     border: 1px solid var(--e-global-color-accent, #ad4829) !important;
     border-radius: 54px !important;
     -moz-border-radius: 54px !important;
-    -webkit-border-radius: 54px !important;
+    -webkit-border-radius: 54px !important;*/
 }
 
 .event button#homeButton,
