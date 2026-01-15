@@ -91,7 +91,10 @@
     Application.navigationMasterDetail = [
     ];
 
-    Application.query = getQueryStringParameters();
+    var newQuery = getQueryStringParameters();
+    if (newQuery && newQuery.pageId) {
+        Application.query = newQuery;
+    }
 
     // init page for app startup
     //Application.initPage = Application.getPagePath("dbinit");

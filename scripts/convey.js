@@ -204,6 +204,14 @@
                     if (typeof extraPath === "string") {
                         Application.extraPath = extraPath;
                     }
+                    if (typeof data.query === "string") {
+                        try {
+                            Application.query = getQueryStringParameters("?" + data.query);
+                            Log.print(Log.l.info, "query=" + data.query);
+                        } catch (ex) {
+                            Log.print(Log.l.error, "exception occured in data.query=" + data.query);
+                        }
+                    }
                     Log.print(Log.l.info, "customer=" + AppData.customer + 
                         "customerId=" + AppData.customerId + 
                         " language=" + Application.language + 
