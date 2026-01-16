@@ -1469,6 +1469,11 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
     padding: 0 !important;
 }
 
+.view-size-medium .event .logOff-container {
+    width: auto !important;
+    margin-left: 0 !important;
+}
+
 .view-size-medium .event .content-header-line > h1,
 .view-size-medium .modSession .content-header-line > h1,
 .view-size-medium .speakerSession .content-header-line > h1 {
@@ -1620,6 +1625,11 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
     margin: 10px !important;
 }
 
+.view-size-small .event .logOff-container {
+    width: auto !important;
+    margin-left: 15px !important;
+}
+
 .view-size-small .event .content-header-line > h1,
 .view-size-small .modSession .content-header-line > h1,
 .view-size-small .speakerSession .content-header-line > h1 {
@@ -1637,6 +1647,10 @@ view-size-medium .events .win-listview .win-vertical .win-gridlayout .win-surfac
 .view-size-small .event .content-header {
     width: calc(100% - 15px - 15px) !important;
     margin: 0 auto !important;
+}
+
+.view-size-small .event .intersection {
+    margin-left: 15px !important;
 }
 
 .view-size-small .event .content-container,
