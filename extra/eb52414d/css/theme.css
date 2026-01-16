@@ -123,9 +123,12 @@
     background-color: var(--e-global-color-55851b8, #EFF4F8) !important;
 }
 
-.home .win-headercontainer,
+.home .win-headercontainer {
+    background-color: var(--e-global-color-buttontext, #ffffff) !important;
+}
+
 .events .top-header {
-    background-color: var(--e-global-color-background, #ffffff) !important;
+    background-color: transparent;
 }
 
 .home .list-header {
@@ -169,6 +172,12 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     border-radius: 12px !important;
     -moz-border-radius: 12px !important;
     -webkit-border-radius: 12px !important;
+}
+
+.events .win-listview .win-vertical .win-footercontainer {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
 }
 
 .home #more_Button {
@@ -606,9 +615,16 @@ section.elementor-inner-section > div {
     background-color: var(--e-global-color-55851b8, #EFF4F8) !important;
 }
 
-.home .content-header, .events .top-header {
+.home .content-header {
     margin: 0 auto !important;
     max-width: 1400px !important;
+    padding-bottom: 0 !important;
+    width: calc(100% - 30px - 30px) !important;
+}
+
+.events .top-header {
+    margin: 0 auto !important;
+    max-width: 1440px !important;
     padding-bottom: 0 !important;
     width: calc(100% - 30px - 30px) !important;
 }
@@ -689,11 +705,16 @@ section.elementor-inner-section > div {
     text-transform: var(--e-global-typography-8dd2c1e-text-transform) !important;
 }
 
-.home .content-header-line > h1,
-.events .content-header-line > h1 {
+.home .content-header-line > h1 {
     font-family: var(--font-family-default ), Sans-serif !important;
     font-size: var(--e-global-typography-73a9cb8-font-size );
     margin-top: 20px !important;
+}
+
+.events .content-header-line > h1 {
+    font-family: var(--font-family-default ), Sans-serif !important;
+    font-size: var(--e-global-typography-73a9cb8-font-size );
+    margin-top: 60px !important;
 }
 
 .modSession .content-header-line > h1,
