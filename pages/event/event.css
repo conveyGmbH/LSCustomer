@@ -139,14 +139,14 @@
 
 .event .color_container2 {
     position: relative;
-    z-index: -2;
+    /*z-index: -2;*/
     height: auto;
     width: 100%;
     top: 0;
 }
 .event .color_container4 {
     position: relative;
-    z-index: -2;
+    /*z-index: -2;*/
     height: auto;
     width: 100%;
 }
