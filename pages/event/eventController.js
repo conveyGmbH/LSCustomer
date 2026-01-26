@@ -58,7 +58,9 @@
                 registerEmail: null,
                 conferenceLink: null,
                 recordedLink: null,
-                emptySpeakerList: false
+                emptySpeakerList: false,
+                canGoBack: false,
+                showHomeButton: false
             }, commandList]);
 
             var onScrollResizePromise = null;
@@ -450,11 +452,9 @@
             // page command disable handler
             this.disableHandlers = {
                 clickBack: function () {
-                    if (WinJS.Navigation.canGoBack === true) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                    that.binding.canGoBack = WinJS.Navigation.canGoBack;
+                    that.binding.showHomeButton = that.binding.canGoBack && !that.binding.showConference;
+                    return !that.binding.canGoBack;
                 }
             };
 
@@ -846,6 +846,7 @@
                     that.binding.showTeaser = false;
                     that.binding.showCountdown = false;
                     that.binding.showConference = false;
+                    that.binding.showHomeButton = that.binding.canGoBack;
                     that.binding.showMaintenance = false;
                     that.binding.showRecordedContent = false;
                     that.binding.showRecordedVideo = false;
@@ -929,6 +930,7 @@
                         if (timeleft > 0) {
                             that.binding.showCountdown = true;
                             that.binding.showConference = false;
+                            that.binding.showHomeButton = that.binding.canGoBack;
                             that.binding.showTeaser = true;
                             return that.getFragmentByName("countdown");
                         } else {
@@ -939,6 +941,7 @@
 
                                 that.binding.showCountdown = false;
                                 that.binding.showConference = false;
+                                that.binding.showHomeButton = that.binding.canGoBack;
                                 that.binding.showTeaser = false;
                                 that.binding.showMaintenance = true;
                                 return that.getFragmentByName("maintenance");
@@ -950,6 +953,7 @@
 
                                 that.binding.showCountdown = false;
                                 that.binding.showConference = true;
+                                that.binding.showHomeButton = false;
                                 that.binding.showTeaser = false;
                                 that.binding.showEventDetails = false;
                                 return that.getFragmentByName("conference");
@@ -961,6 +965,7 @@
                         that.binding.showTeaser = false;
                         that.binding.showCountdown = false;
                         that.binding.showConference = false;
+                        that.binding.showHomeButton = that.binding.canGoBack;
                         that.binding.showMaintenance = false;
                         //that.binding.showRecordedContent = true;
                         that.binding.showRecordedVideo = true;
@@ -982,6 +987,7 @@
                         that.binding.showTeaser = false;
                         that.binding.showCountdown = false;
                         that.binding.showConference = false;
+                        that.binding.showHomeButton = that.binding.canGoBack;
                         that.binding.showEventDetails = true;
                         // option set in portal - eventgensettings
                         if (that.binding.dataEvent.RecordSession) {
@@ -1048,6 +1054,7 @@
                           that.binding.showRegister = false;
                           that.binding.showCountdown = false;
                           that.binding.showConference = true;
+                          that.binding.showHomeButton = false;
                           that.binding.showTeaser = false;
                     } */else {
                         that.binding.showEventDetails = true;
@@ -1063,6 +1070,7 @@
 
                             that.binding.showCountdown = false;
                             that.binding.showConference = false;
+                            that.binding.showHomeButton = that.binding.canGoBack;
                             that.binding.showTeaser = false;
                             that.binding.showMaintenance = true;
                             return that.getFragmentByName("maintenance");

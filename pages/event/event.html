@@ -17,9 +17,9 @@
                         <div class="content-grid">
                             <div class="section-1">
                                 <div class="hero-header">
-                                    <div class="homeButton" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
+                                    <div class="homeButton" data-win-bind="style.display: showHomeButton Binding.Converter.toDisplay">
                                         <button id="homeButton" class="win-button"
-                                                onclick="AppBar.handleEvent('click', 'clickHome', event)">
+                                                onclick="AppBar.handleEvent('click', 'clickBack', event)">
                                             <div class="button-tip">
                                                 <div class="action-image" id="home"></div>
                                                 <span class="homeButton" data-win-res="{textContent: 'label.home'}"></span>
@@ -29,17 +29,16 @@
                                     </div>
                                     <div class="logOff-container" data-win-bind="style.display: showConference Binding.Converter.toDisplayNone">
                                         <!--<div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
-                <span class="large_field"
-                      data-win-bind="textContent: email; style.fontWeight: email Binding.Converter.toBold"></span><!--registerMessage
-                </div>-->
+						                <span class="large_field"
+						                      data-win-bind="textContent: email; style.fontWeight: email Binding.Converter.toBold"></span><!--registerMessage
+						                </div>-->
                                         <div class="field_line_full" data-win-bind="style.display: showLogOffEventMail Binding.Converter.toDisplay">
                                             <div id="logOffButton" class="win-link"
                                                  onclick="AppBar.handleEvent('click', 'clickLogOffEvent', event)"
                                                  data-win-res="{title: 'tooltip.logOff'}">
 	                                            <span data-win-res="{textContent: 'register.logOffEvent'}"></span>
                                             </div>
-                                            <!--<span class="large_field"
-                              data-win-bind="textContent: registerEmail"></span>-->
+                                            <!--<span class="large_field" data-win-bind="textContent: registerEmail"></span>-->
                                         </div>
                                     </div>
                                     <div class="content-header">
