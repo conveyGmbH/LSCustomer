@@ -1002,7 +1002,13 @@
                             that.binding.showRecordedContent = false;
                             that.binding.showRecordedVideo = false;
                         }
+                        // #8702 Nur wenn es eine Registrierung gibt und Zusammenhang mit recordingVideo 
+                        if (that.binding.registerEmail) {
                         that.binding.showLogOffEventMail = true;
+                        } else {
+                            that.binding.showLogOffEventMail = false;
+                        }
+
                         if (that.binding.recordedLink.includes("playback")) {
                             return that.getFragmentByName("recordedContent").then(function (fragment) {
                                 if (fragment &&
