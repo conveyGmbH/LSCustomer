@@ -514,7 +514,7 @@
                         that.binding.recordedLink = null;
                     }
                     // Status 20 -> session beendet und recordedContent da
-                    if (result.ConfirmStatusID === 20) {
+                    if (result.ConfirmStatusID === 20 || result.ConfirmStatusID === -20) {
                         that.binding.conferenceLink = null;
                         that.binding.recordedLink = result.ConferenceLink;
                         if (that.binding.recordedLink) {
@@ -982,7 +982,7 @@
                                 }
                             }
                         });
-                    } else if (AppData._persistentStates.registerData.confirmStatusID === 20) {
+                    } else if (AppData._persistentStates.registerData.confirmStatusID === 20 || AppData._persistentStates.registerData.confirmStatusID === -20) {
                         that.binding.showRegister = false;
                         that.binding.showTeaser = false;
                         that.binding.showCountdown = false;
