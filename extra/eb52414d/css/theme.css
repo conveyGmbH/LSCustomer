@@ -766,6 +766,7 @@ section.elementor-inner-section > div {
 
 .home .event-item .event-subtitle,
 .events .event-item .event-subtitle {
+    display: none !important;
     font-family: var(--font-family-default) !important;
     color: var(--e-global-color-secondary, #3D4D61) !important;
     letter-spacing: 0.14px !important;
@@ -783,6 +784,7 @@ section.elementor-inner-section > div {
     font-style: normal !important;
     font-weight: 400 !important;
     line-height: 160% !important; /* 25.6px */
+    padding: 10px 0 !important;
 }
 
 .event .ev-text,
