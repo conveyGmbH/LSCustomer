@@ -495,7 +495,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     margin-top: 56% !important;
 }
 
-.centerarea .registerEmail {
+.centerarea.registerEmail {
     width: 99% !important;
     padding-top: 10px !important;
     background-color: var(--e-global-color-background, #faf6f3) !important;
@@ -508,6 +508,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
 
 .register .input_field {
     width: inherit !important;
+    background-color: var(--e-global-color-buttontext, #ffffff) !important;
     border: 1px solid var(--e-global-color-placeholdertext, #807b7b) !important;
 }
 
