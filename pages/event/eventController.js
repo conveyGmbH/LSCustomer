@@ -661,12 +661,18 @@
                             : AppData._persistentStates.registerData.eventId;
                         Log.print(Log.l.trace, "calling PRC_RegisterContact... eventId=" + eventId);
                         // save date time in ms when joined to conference
+                        var adressData = null;
+                        var email = null;
+                        if (!AppData._persistentStates.registerData.userToken) {
+                            adressData = JSON.stringify(AppData._persistentStates.registerData);
+                            email = AppData._persistentStates.registerData.Email;
+                        }
                         return AppData.call("PRC_RegisterContact",
                             {
                                 pVeranstaltungID: eventId,
                                 pUserToken: AppData._persistentStates.registerData.userToken,
-                                pEMail: null, //wenn über Link bestätigt, dann übergebe Email null 
-                                pAddressData: null,
+                                pEMail: email, //wenn über Link bestätigt, dann übergebe Email null 
+                                pAddressData: adressData,
                                 pBaseURL: window.location.href,
                                 pCopyToken: null
                             },
@@ -894,7 +900,8 @@
                 }).then(function (registerFragment) {
                     if (AppData._persistentStates.registerData.resultCode === 21 ||
                         AppData._persistentStates.registerData.confirmStatusID === 1 ||
-                        AppData._persistentStates.registerData.confirmStatusID === 2) {
+                        AppData._persistentStates.registerData.confirmStatusID === 2 ||
+                        AppData._persistentStates.registerData.confirmStatusID === 3) {
                         that.binding.showRegister = true;
                         that.binding.showTeaser = true;
                         if (registerFragment &&
