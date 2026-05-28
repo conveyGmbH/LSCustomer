@@ -146,6 +146,12 @@
                         AppData.setErrorMsg(that.binding, errorResponse);
                     });
                 })*/.then(function () {
+                    that.binding.dataText = AppBar.scope.binding.dataText;
+                    that.binding.dataDoc = AppBar.scope.binding.dataDoc;
+                    that.binding.dataDocText = AppBar.scope.binding.dataDocText;
+                    that.binding.showEvText = AppBar.scope.binding.showEvText;
+                    that.binding.showOffText = AppBar.scope.binding.showOffText;
+                    that.binding.showNoConfirmText = AppBar.scope.binding.showNoConfirmText;
                     if (AppData._persistentStates.registerData &&
                         AppData._persistentStates.registerData.Email) {
                         that.binding.dataRegister = copyByValue(AppData._persistentStates.registerData);

@@ -470,6 +470,10 @@
                             return WinJS.Promise.as();
                         }
                     } else {
+                        if (fragmentController.controller && 
+                            typeof fragmentController.controller.loadData === "function") {
+                            fragmentController.controller.loadData();
+                        }
                         return WinJS.Promise.as();
                     }
                 }).then(function () {
@@ -777,6 +781,7 @@
                     if (contentArea && contentArea.scrollTop > 0) {
                         contentArea.scrollTop = 0;
                     }
+                    return that.updateFragment();
                 });
                 Log.ret(Log.l.trace);
                 return ret;
