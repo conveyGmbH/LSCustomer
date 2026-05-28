@@ -830,14 +830,20 @@
                             that.refreshMaintenanceTimeMs = 10000 + (Math.random() * 20 * 1000);
                         }
                     }
-
-                    remainderTime = dateEnd - now;
-                    if (remainderTime > 0) {
-                        that.binding.showEvText = true;
+                    if (AppData._persistentStates.registerData.confirmStatusID === 3) {
+                        that.binding.showNoConfirmText = true;
+                        that.binding.showEvText = false;
                         that.binding.showOffText = false;
                     } else {
-                        that.binding.showEvText = false;
-                        that.binding.showOffText = true;
+                        that.binding.showNoConfirmText = false;
+                        remainderTime = dateEnd - now;
+                        if (remainderTime > 0) {
+                            that.binding.showEvText = true;
+                            that.binding.showOffText = false;
+                        } else {
+                            that.binding.showEvText = false;
+                            that.binding.showOffText = true;
+                        }
                     }
                 }).then(function () {
                     return that.getFragmentByName("teaser");
@@ -1111,17 +1117,24 @@
                     that.removeDisposablePromise(that.refreshResultsPromise);
                 }
                 var ret = new WinJS.Promise.as().then(function () {
-                    var dateEnd = that.binding.dataEvent.dateEndDatum;
-                    var now = new Date().getTime();
-                    var timeleft = dateEnd - now;
-                    if (timeleft < 0) {
-                        /* AppData._persistentStates.registerData.confirmStatusID = 15;
-                        Application.pageframe.savePersistentStates();*/
+                    if (AppData._persistentStates.registerData.confirmStatusID === 3) {
+                        that.binding.showNoConfirmText = true;
                         that.binding.showEvText = false;
-                        that.binding.showOffText = true;
-                    } else {
-                        that.binding.showEvText = true;
                         that.binding.showOffText = false;
+                    } else {
+                        that.binding.showNoConfirmText = false;
+                        var dateEnd = that.binding.dataEvent.dateEndDatum;
+                        var now = new Date().getTime();
+                        var timeleft = dateEnd - now;
+                        if (timeleft < 0) {
+                            /* AppData._persistentStates.registerData.confirmStatusID = 15;
+                            Application.pageframe.savePersistentStates();*/
+                            that.binding.showEvText = false;
+                            that.binding.showOffText = true;
+                        } else {
+                            that.binding.showEvText = true;
+                            that.binding.showOffText = false;
+                        }
                     }
                 }).then(function () {
                     that.inLoadData = false;

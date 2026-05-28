@@ -156,8 +156,10 @@
                         </div>
                         <div class="resend-editable-mail-container" data-win-bind="style.display: showResendEditableMail Binding.Converter.toDisplay">
                             <div class="field_line register-email">
+	                            <span class="large_field"
+	                                  data-win-bind="textContent: dataText.on_text_reg_noconfirm; style.display: showNoConfirmText Binding.Converter.toDisplay"></span><!--registerMessage-->
                                 <span class="large_field"
-                                      data-win-bind="textContent: dataText.on_text_reg_confirm; style.display: showEvText Binding.Converter.toDisplay"></span><!--registerMessage-->
+	                                  data-win-bind="textContent: dataText.on_text_reg_confirm; style.display: showEvText Binding.Converter.toDisplay"></span><!--registerMessage-->
                                 <span class="large_field"
                                       data-win-bind="textContent: dataText.off_text_reg_confirm; style.display: showOffText Binding.Converter.toDisplay"></span>
                             </div>
@@ -165,8 +167,6 @@
                                 <span class="large_field"
                                       data-win-bind="textContent: dataRegister.Email; style.fontWeight: dataRegister.Email Binding.Converter.toBold"></span><!--registerMessage-->
                             </div>
-                            <!--<div class="field_line_full register_button">
-                                <span data-win-bind="textContent: dataText.on_text_reg_noconfirm"></span><!--registerStatus-->
                             <!--<span id="statustext">Connecting to Facebook...</span>
                             </div>-->
                             <div class="field_line register-email">

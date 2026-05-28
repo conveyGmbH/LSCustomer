@@ -45,7 +45,8 @@
                 dataDoc: AppBar.scope.binding.dataDoc,
                 dataDocText: AppBar.scope.binding.dataDocText,
                 showEvText: AppBar.scope.binding.showEvText,
-                showOffText: AppBar.scope.binding.showOffText
+                showOffText: AppBar.scope.binding.showOffText,
+                showNoConfirmText: AppBar.scope.binding.showNoConfirmText
             }, commandList]);
 
 
