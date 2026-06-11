@@ -41,8 +41,8 @@
     --max-content-width: 1280px;
     --max-content-width-surface: 1280px !important;
     --max-content-margin-left: calc(50% - var(--max-content-width) / 2) !important; /* hier = calc(50% - 640px);*/
-    /*--container-max: 1280px;             aus Quell-Website */
-    /*--container-padding: 32px;           aus Quell-Website (Mobile: 20px) */
+    --container-max: 1280px; /* aus Quell-Website */
+    --container-padding: 32px; /* aus Quell-Website (Mobile: 20px) */
     /* ===== fairconcept Brand-Tokens (Single Source of Truth) ===== */
     --brand-deep: #131E3E; /* Tiefes Navy – Hauptmarkenfarbe        */
     --brand-olive: #9EB028; /* Helles Oliv/Lime – Pop-/Sekundaerakzent*/
@@ -713,14 +713,14 @@ section.elementor-inner-section > div {
 .home .content-header, .events .top-header {
     margin: 0 auto !important;
     max-width: 1808px !important;
-    padding-inline: 25.4rem !important;
+    padding-inline: var(--container-padding) !important;
 }
 
 .event .content-grid {
     width: 100% !important;
     max-width: 1808px;
     margin-left: calc(50% - 904px) !important;
-    padding-inline: 25.4rem !important;
+    padding-inline: var(--container-padding) !important;
 }
 
 .modSession .content-grid,
@@ -966,7 +966,7 @@ section.elementor-inner-section > div {
 .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: calc(var(--max-content-margin-left) + 7rem) !important;
-    width: calc(100% - 25.4rem - 25.4rem + 32px) !important;
+    width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     max-width: var(--max-content-width) !important;
     margin-top: 10px !important;
     min-height: 800px;
@@ -1176,7 +1176,7 @@ section.elementor-inner-section > div {
     margin-left: calc(50% - 904px) !important;
     width: 100%;
     max-width: 1808px !important;
-    padding-inline: 25.4rem !important;
+    padding-inline: var(--container-padding) !important;
 }
 
 .event .speaker-lines-container {
@@ -1336,38 +1336,38 @@ section.elementor-inner-section > div {
 }
 
 /**contentarea is more than 1460px**/
-@media (min-width:1821px) {
+@media (min-width: 1081px) {
     .body-content-top {
         width: 100%;
     }
 }
 
-@media (min-width: 1821px) and (max-width: 2559px) {
+@media (min-width: 1081px) {
     .event .share-block {
         right: 36rem !important;
     }
 }
 
-@media (min-width: 1521px) and (max-width:1820px) {
+@media (min-width: 1081px) {
 
     .event .customer-top-header #main > .container {
-        padding-inline: 25.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: 25.4rem !important;
-        width: calc(100% - 25.4rem - 25.4rem + 32px) !important;
+        margin-left: var(--container-padding) !important;
+        width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     }
 
     .event .content-grid {
         width: 100% !important;
         margin: 0 auto !important;
-        padding-inline: 25.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .event .share-block {
-        right: 25.4rem !important;
+        right: var(--container-padding) !important;
     }
 
     .event .register-fragmenthost {
@@ -1377,12 +1377,12 @@ section.elementor-inner-section > div {
     .event .speakerblock {
         margin: 0 auto !important;
         width: 100% !important;
-        padding-inline: 25.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 }
 
 /**contentarea is more than 1520px**/
-@media (min-width: 1521px) {
+@media (min-width: 1081px) {
     .event .section-3 {
         padding-left: 0 !important;
     }
@@ -1390,10 +1390,10 @@ section.elementor-inner-section > div {
 
 /**margins/paddings for medium size screens or orientation landscape
     contentarea is less than 1520px**/
-@media (min-width: 1500px) and (max-width: 1520px) {
+@media (min-width: 1081px) {
 
     .event .customer-top-header #main > .container {
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .event .content-grid,
@@ -1401,7 +1401,7 @@ section.elementor-inner-section > div {
     .speakerSession .content-grid {
         width: 100% !important;
         margin: 0 auto !important;
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .event .hero-header, .event .intersection {
@@ -1421,24 +1421,24 @@ section.elementor-inner-section > div {
     }
 
     .event .share-block {
-        right: 13.4rem !important;
+        right: var(--container-padding) !important;
     }
 
     .event .speakerblock {
         margin: 0 auto !important;
         width: 100% !important;
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 }
 
-@media (min-width: 1201px) and (max-width: 1499px) {
+@media (min-width: 1081px) {
 
     .view-size-biggest .event .customer-top-header #main > .container {
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-biggest .event .share-block {
-        right: 13.4rem !important;
+        right: var(--container-padding) !important;
     }
 
     .view-size-biggest .event .content-grid,
@@ -1446,7 +1446,7 @@ section.elementor-inner-section > div {
     .view-size-biggest .speakerSession .content-grid {
         width: 100% !important;
         margin: 0 auto !important;
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-biggest .event .logOff-container,
@@ -1474,55 +1474,55 @@ section.elementor-inner-section > div {
     .event .speakerblock {
         margin: 0 auto !important;
         width: 100% !important;
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 }
 
-@media (min-width: 1500px) and (max-width: 1520px) {
+@media (min-width: 1081px) {
     .home .content-header,
     .events .content-header {
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: 13.4rem !important;
-        width: calc(100% - 13.4rem - 13.4rem + 32px) !important;
+        margin-left: var(--container-padding) !important;
+        width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     }
 
     .event .share-block {
-        right: 13.4rem !important;
+        right: var(--container-padding) !important;
     }
 }
 
-@media (min-width: 1201px) and (max-width: 1499px) {
+@media (min-width: 1081px) {
     .view-size-biggest .home .content-header,
     .view-size-biggest .events .content-header {
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: 13.4rem !important;
-        width: calc(100% - 13.4rem - 13.4rem + 32px) !important;
+        margin-left: var(--container-padding) !important;
+        width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     }
 
     .view-size-biggest .event .content-grid {
         width: 100% !important;
         margin: 0 auto !important;
-        padding-inline: 13.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-biggest .event .speakerblock {
         margin: 0 auto !important;
         width: 100% !important;
-        padding-inline: 7.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 }
 
 /*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 1299px 
-    @media (max-width:1299px) {
+    contentarea is less than 1080px 
+    @media (max-width: 1080px) {
     }
 
     use: .view-size-biggest
@@ -1530,14 +1530,14 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .home .content-header,
 .view-size-biggest .events .top-header {
-    padding-inline: 13.4rem !important;
+    padding-inline: var(--container-padding) !important;
 }
 
 
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 13.4rem !important;
-    width: calc(100% - 13.4rem - 13.4rem + 32px) !important;
+    margin-left: var(--container-padding) !important;
+    width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
@@ -1566,7 +1566,7 @@ section.elementor-inner-section > div {
 .view-size-biggest .event .speakerblock {
     margin: 0 auto !important;
     width: 100% !important;
-    padding-inline: 13.4rem !important;
+    padding-inline: var(--container-padding) !important;
 }
 
 .view-size-biggest .home .win-listview .win-groupheader {
@@ -1577,14 +1577,14 @@ section.elementor-inner-section > div {
     width: 800px !important;
 }
 
-@media (min-width: 1100px) and (max-width: 1199px) {
+@media (min-width: 1081px) {
     .view-size-biggest .event .recordedVideo-fragmenthost {
         margin-left: 20px !important;
         padding: 15px 0 !important;
     }
 
     .view-size-biggest .event .share-block {
-        right: 7.4rem !important;
+        right: var(--container-padding) !important;
     }
 
     .view-size-biggest .event .logOff-container,
@@ -1594,25 +1594,25 @@ section.elementor-inner-section > div {
     }
 }
 
-@media (min-width: 1100px) and (max-width: 1200px) {
+@media (min-width: 1081px) {
     .view-size-biggest .home .content-header,
     .view-size-biggest .events .content-header {
-        padding-inline: 7.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: 7.4rem !important;
-        width: calc(100% - 7.4rem - 7.4rem + 32px) !important;
+        margin-left: var(--container-padding) !important;
+        width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     }
 
     .view-size-biggest .event .content-grid {
-        padding-inline: 7.4rem !important;
+        padding-inline: var(--container-padding) !important;
         margin: 0 auto !important;
     }
 
     .view-size-biggest .event .share-block {
-        right: 7.4rem !important;
+        right: var(--container-padding) !important;
     }
 
     .view-size-biggest .event .hero-header {
@@ -1634,7 +1634,7 @@ section.elementor-inner-section > div {
     .view-size-biggest .event .speakerblock {
         margin: 0 auto !important;
         width: 100% !important;
-        padding-inline: 7.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-biggest .event .register-fragmenthost {
@@ -1644,8 +1644,8 @@ section.elementor-inner-section > div {
 
 
 /*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 1099px 
-    @media (max-width:1099px) {
+    contentarea is less than 1080px 
+    @media (max-width: 1080px) {
     }
 
     use: .view-size-bigger
@@ -1664,12 +1664,12 @@ section.elementor-inner-section > div {
 }
 
 .view-size-bigger .event .content-grid {
-    padding-inline: 7.4rem !important;
+    padding-inline: var(--container-padding) !important;
     margin: 0 auto !important;
 }
 
 .view-size-bigger .event .share-block {
-    right: 7.4rem !important;
+    right: var(--container-padding) !important;
 }
 
 .view-size-bigger .event .register-fragmenthost {
@@ -1684,13 +1684,13 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .home .content-header,
 .view-size-bigger .events .content-header {
-    padding-inline: 7.4rem !important;
+    padding-inline: var(--container-padding) !important;
 }
 
 .view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 7.4rem !important;
-    width: calc(100% - 7.4rem - 7.4rem + 32px) !important;
+    margin-left: var(--container-padding) !important;
+    width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
 }
 
 .view-size-bigger .home .content-header-line > h1,
@@ -1728,8 +1728,8 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 7.4rem !important;
-    width: calc(100% - 7.4rem - 7.4rem + 32px) !important;
+    margin-left: var(--container-padding) !important;
+    width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
 }
 
 .view-size-bigger .home .win-listview .win-groupheader {
@@ -1747,21 +1747,21 @@ section.elementor-inner-section > div {
 .view-size-bigger .event .speakerblock {
     margin: 0 auto !important;
     width: 100% !important;
-    padding-inline: 7.4rem !important;
+    padding-inline: var(--container-padding) !important;
 }
 
-@media (min-width:993px) and (max-width: 1200px) {
+@media (max-width: 1080px) {
     .view-size-bigger .event .customer-top-header #main > .container {
-        padding-inline: 7.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-bigger .event .content-grid {
-        padding-inline: 7.4rem !important;
+        padding-inline: var(--container-padding) !important;
         margin: 0 auto !important;
     }
 
     .view-size-bigger .event .share-block {
-        right: 7.4rem !important;
+        right: var(--container-padding) !important;
     }
 
     .view-size-bigger .event .hero-header {
@@ -1783,17 +1783,17 @@ section.elementor-inner-section > div {
     .view-size-bigger .event .speakerblock {
         margin: 0 auto !important;
         width: 100% !important;
-        padding-inline: 7.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1080px) {
     .view-size-bigger .event .customer-top-header #main > .container {
-        padding-inline: 2.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-bigger .event .content-grid {
-        padding-inline: 2.4rem !important;
+        padding-inline: var(--container-padding) !important;
         margin: 0 auto !important;
     }
 
@@ -1820,7 +1820,7 @@ section.elementor-inner-section > div {
     .view-size-bigger .event .speakerblock {
         margin: 0 auto !important;
         width: 100% !important;
-        padding-inline: 2.4rem !important;
+        padding-inline: var(--container-padding) !important;
     }
 
     .view-size-bigger .event .register-fragmenthost {
@@ -1829,8 +1829,8 @@ section.elementor-inner-section > div {
 }
 
 /*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 899px 
-    @media (max-width:899px) {
+    contentarea is less than 860px 
+    @media (max-width: 860px) {
     }
 
     use: .view-size-medium
@@ -1912,7 +1912,7 @@ section.elementor-inner-section > div {
 
 .view-size-medium .event .content-container,
 .view-size-medium .event .speakerblock {
-    padding-inline: 2.4rem !important;
+    padding-inline: var(--container-padding) !important;
     margin: 0 auto !important;
     width: 100% !important;
 }
@@ -1980,7 +1980,7 @@ section.elementor-inner-section > div {
 }
 
 /*margins/paddings for medium size screens or orientation landscape
-    contentarea is less than 699px 
+    contentarea is less than 760px 
 
     use: .view-size-medium-small
 */
@@ -2011,7 +2011,7 @@ section.elementor-inner-section > div {
 .view-size-medium-small .events .content-header {
     width: 100% !important;
     margin: 0 auto !important;
-    padding-inline: 2.2rem !important;
+    padding-inline: var(--container-padding) !important;
 }
 
 .view-size-medium-small .event .content-header {
@@ -2061,8 +2061,8 @@ section.elementor-inner-section > div {
 
 .view-size-medium-small .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-medium-small .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: 2.2rem !important;
-    width: calc(100% - 2.2rem - 2.2rem + 32px) !important;
+    margin-left: var(--container-padding) !important;
+    width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
 }
 
 .view-size-medium-small .event .speaker-line {
@@ -2100,7 +2100,7 @@ section.elementor-inner-section > div {
 
 
 /*margins/paddings for small screens and orientation vertical
-        @media (max-width:499px) {
+        @media (max-width: 600px) {
         }
     use: .view-size-small
 */
@@ -2144,7 +2144,7 @@ section.elementor-inner-section > div {
     grid-column: 1/span 6 !important;
     position: absolute !important;
     width: auto !important;
-    margin-inline: 2.4rem !important;
+    margin-inline: var(--container-padding) !important;
     padding: 0 10px;
     top: -5em;
     box-shadow: none !important;
@@ -2243,7 +2243,7 @@ body[data-menu-panel=open] #app3::after {
 }
 
 
-@media (max-width: 991.8px) {
+@media (max-width: 1080px) {
     #app3 {
         border-top-width: 6.8rem
     }
@@ -2273,4 +2273,24 @@ body[data-menu-panel=open] #app3::after {
 
 #conferenceController button#showNotes {
     display: none !important;
+}
+
+/* =====================================================================
+   Quell-Breakpoint 760px: container-padding 32px -> 20px.
+   Steuert über var(--container-padding) ALLE Gutter-Maße responsive.
+   ===================================================================== */
+@media (max-width: 760px) {
+    :root {
+        --container-padding: 20px;
+    }
+}
+
+/* A11y: Bewegung reduzieren (aus der Quelle übernommen) */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
