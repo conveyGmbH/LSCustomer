@@ -718,7 +718,7 @@ section.elementor-inner-section > div {
 
 .event .content-grid {
     width: 100% !important;
-    max-width: 1808px;
+    max-width: 1280px;
     margin-left: calc(50% - 904px) !important;
     padding-inline: var(--container-padding) !important;
 }
@@ -924,6 +924,7 @@ section.elementor-inner-section > div {
 }
 
 .home .expander-button {
+    display: none !important;
     border: 1px solid var(--e-global-color-primary, #131E3E) !important;
     background-color: var(--e-global-color-primary, #131E3E) !important;
     font-family: var(--font-family-default) !important;
@@ -1017,8 +1018,6 @@ section.elementor-inner-section > div {
     margin-top: 0 !important;
     margin-left: 0 !important;
     padding: 0 0 1px 0;
-    border: none !important;
-    background: none !important;
 }
 
 .event .homeButton,
@@ -1032,11 +1031,7 @@ section.elementor-inner-section > div {
     letter-spacing: 0 !important;
     margin-left: 0 !important;
     padding: 0 !important;
-    color: var(--e-global-color-primary, #131E3E) !important;
-    text-decoration: underline;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    position: relative;
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;
     text-underline-offset: 0.2rem;
@@ -1073,15 +1068,6 @@ section.elementor-inner-section > div {
     text-size-adjust: 100%;
     text-underline-offset: 0.2rem;
 }
-
-    .event .homeButton:hover,
-    .modSession .homeButton:hover,
-    .speakerSession .homeButton:hover,
-    .event #logOffButton:hover,
-    .modSession #logOffButton:hover,
-    .speakerSession #logOffButton:hover {
-        color: var(--e-global-color-accent, #7A892E) !important;
-    }
 
 .event .calenderButton:hover {
     color: var(--e-global-color-buttontext, #ffffff) !important;
@@ -1356,7 +1342,7 @@ section.elementor-inner-section > div {
 
     .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: var(--container-padding) !important;
+        margin-left: var(--max-content-margin-left) !important;
         width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     }
 
