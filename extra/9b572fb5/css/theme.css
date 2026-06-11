@@ -37,7 +37,7 @@
 
 
 :root {
-    /* ===== Layout-Vorlage ===== */
+    /* ===== Layout ===== */
     --max-content-width: 1280px;
     --max-content-width-surface: 1280px !important;
     --max-content-margin-left: calc(50% - var(--max-content-width) / 2) !important; /* hier = calc(50% - 640px);*/
@@ -1027,6 +1027,7 @@ section.elementor-inner-section > div {
     font-size: 1.6rem !important;
     font-style: normal !important;
     font-weight: 400 !important;
+    color: var(--e-global-color-buttontext, #ffffff) !important;
     line-height: 1.5 !important; /* 19.2px */
     letter-spacing: 0 !important;
     margin-left: 0 !important;
@@ -1472,7 +1473,7 @@ section.elementor-inner-section > div {
 
     .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: var(--container-padding) !important;
+        margin-left: var(--max-content-margin-left) !important;
         width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     }
 
@@ -1489,7 +1490,7 @@ section.elementor-inner-section > div {
 
     .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: var(--container-padding) !important;
+        margin-left: var(--max-content-margin-left) !important;
         width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     }
 
@@ -1522,7 +1523,7 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: var(--container-padding) !important;
+    margin-left: var(--max-content-margin-left) !important;
     width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
 }
 
@@ -1588,7 +1589,7 @@ section.elementor-inner-section > div {
 
     .view-size-biggest .home .win-listview .win-vertical .win-gridlayout.win-surface,
     .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
-        margin-left: var(--container-padding) !important;
+        margin-left: var(--max-content-margin-left) !important;
         width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
     }
 
@@ -1650,8 +1651,11 @@ section.elementor-inner-section > div {
 }
 
 .view-size-bigger .event .content-grid {
+    width: auto !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     padding-inline: var(--container-padding) !important;
-    margin: 0 auto !important;
 }
 
 .view-size-bigger .event .share-block {
@@ -1742,8 +1746,11 @@ section.elementor-inner-section > div {
     }
 
     .view-size-bigger .event .content-grid {
+        width: auto !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
         padding-inline: var(--container-padding) !important;
-        margin: 0 auto !important;
     }
 
     .view-size-bigger .event .share-block {
@@ -1776,11 +1783,6 @@ section.elementor-inner-section > div {
 @media (max-width: 1080px) {
     .view-size-bigger .event .customer-top-header #main > .container {
         padding-inline: var(--container-padding) !important;
-    }
-
-    .view-size-bigger .event .content-grid {
-        padding-inline: var(--container-padding) !important;
-        margin: 0 auto !important;
     }
 
     .view-size-bigger .event .share-block {
