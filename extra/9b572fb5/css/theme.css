@@ -1160,10 +1160,10 @@ section.elementor-inner-section > div {
 
 .event .speakerblock {
     background-color: inherit;
-    margin-left: calc(50% - 904px) !important;
+    margin-left: var(--max-content-margin-left) !important;
     width: 100%;
-    max-width: 1808px !important;
-    padding-inline: var(--container-padding) !important;
+    max-width: 1280px !important;
+    
 }
 
 .event .speaker-lines-container {
@@ -1362,9 +1362,9 @@ section.elementor-inner-section > div {
     }
 
     .event .speakerblock {
-        margin: 0 auto !important;
-        width: 100% !important;
-        padding-inline: var(--container-padding) !important;
+        margin-left: var(--max-content-margin-left) !important;
+        width: 100%;
+        max-width: 1280px !important;
     }
 }
 
@@ -1412,9 +1412,9 @@ section.elementor-inner-section > div {
     }
 
     .event .speakerblock {
-        margin: 0 auto !important;
-        width: 100% !important;
-        padding-inline: var(--container-padding) !important;
+        margin-left: var(--max-content-margin-left) !important;
+        width: 100%;
+        max-width: 1280px !important;
     }
 }
 
@@ -1459,9 +1459,9 @@ section.elementor-inner-section > div {
     }
 
     .event .speakerblock {
-        margin: 0 auto !important;
-        width: 100% !important;
-        padding-inline: var(--container-padding) !important;
+        margin-left: var(--max-content-margin-left) !important;
+        width: auto !important;
+        max-width: var(--max-content-width) !important;
     }
 }
 
@@ -1501,9 +1501,9 @@ section.elementor-inner-section > div {
     }
 
     .view-size-biggest .event .speakerblock {
-        margin: 0 auto !important;
-        width: 100% !important;
-        padding-inline: var(--container-padding) !important;
+        margin-left: var(--max-content-margin-left) !important;
+        width: auto !important;
+        max-width: var(--max-content-width) !important;
     }
 }
 
@@ -1551,9 +1551,10 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .event .content-container,
 .view-size-biggest .event .speakerblock {
-    margin: 0 auto !important;
-    width: 100% !important;
+    margin-left: var(--max-content-margin-left) !important;
+    width: auto !important;
     padding-inline: var(--container-padding) !important;
+    max-width: var(--max-content-width) !important;
 }
 
 .view-size-biggest .home .win-listview .win-groupheader {
@@ -1619,9 +1620,10 @@ section.elementor-inner-section > div {
     }
 
     .view-size-biggest .event .speakerblock {
-        margin: 0 auto !important;
-        width: 100% !important;
+        margin-left: var(--max-content-margin-left) !important;
+        width: auto !important;
         padding-inline: var(--container-padding) !important;
+        max-width: var(--max-content-width) !important;
     }
 
     .view-size-biggest .event .register-fragmenthost {
@@ -1736,7 +1738,7 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .event .speakerblock {
     margin: 0 auto !important;
-    width: 100% !important;
+    width: auto !important;
     padding-inline: var(--container-padding) !important;
 }
 
