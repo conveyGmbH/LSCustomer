@@ -20,6 +20,7 @@
             while (curBodyChild && curBodyChild !== customerRootElement) {
                 nextBodyChild = curBodyChild.nextElementSibling;
                 if (curBodyChild.tagName && 
+                    curBodyChild.tagName.toLowerCase() !== "nav" &&
                     curBodyChild.tagName.toLowerCase() !== "script" &&
                     curBodyChild.tagName.toLowerCase() !== "link") {
                     bodyContentTop.appendChild(curBodyChild);
