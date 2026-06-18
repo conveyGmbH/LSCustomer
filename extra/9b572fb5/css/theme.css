@@ -209,6 +209,7 @@ html {
 }
 section[role="main"] {
     height: calc(100% - 90px);
+    padding: 0;
 }
 
 .MuiPopover-root {
