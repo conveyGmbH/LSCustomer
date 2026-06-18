@@ -40,9 +40,10 @@
     /* ===== Layout ===== */
     --max-content-width: 1280px;
     --max-content-width-surface: 1280px !important;
-    --max-content-margin-left: calc(50% - var(--max-content-width) / 2) !important; /* hier = calc(50% - 640px);*/
     --container-max: 1280px; /* aus Quell-Website */
     --container-padding: 32px; /* aus Quell-Website (Mobile: 20px) */
+    --max-content-margin-left: max(var(--container-padding), calc(50% - var(--max-content-width) / 2)) !important;
+    /* vorher: --max-content-margin-left: calc(50% - var(--max-content-width) / 2) !important; /* hier = calc(50% - 640px);*/ */
     /* ===== fairconcept Brand-Tokens ===== */
     --brand-deep: #131E3E; /* Tiefes Navy – Hauptmarkenfarbe        */
     --brand-olive: #9EB028; /* Helles Oliv/Lime – Pop-/Sekundaerakzent*/
@@ -2012,7 +2013,6 @@ section.elementor-inner-section > div {
 
 .view-size-medium-small .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-medium-small .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: var(--container-padding) !important;
     width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
 }
 
