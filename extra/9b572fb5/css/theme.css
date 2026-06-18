@@ -207,6 +207,9 @@ div#ls-customer-host {
 html {
     font-size: 10px !important;
 }
+section[role="main"] {
+    height: calc(100% - 90px);
+}
 
 .MuiPopover-root {
     font-size: 14px !important;
