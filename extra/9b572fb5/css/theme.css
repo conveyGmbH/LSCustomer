@@ -1341,6 +1341,7 @@ section.elementor-inner-section > div {
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
         margin-left: var(--max-content-margin-left) !important;
         width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
+        padding: 0 0 0 var(--container-padding);
     }
 
     .event .content-grid {
@@ -1459,6 +1460,7 @@ section.elementor-inner-section > div {
     .events .win-listview .win-vertical .win-gridlayout.win-surface {
         margin-left: var(--max-content-margin-left) !important;
         width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
+        padding: 0 0 0 var(--container-padding);
     }
 
 }
@@ -1473,6 +1475,7 @@ section.elementor-inner-section > div {
     .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
         margin-left: var(--max-content-margin-left) !important;
         width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
+        padding: 0 0 0 var(--container-padding);
     }
 
     .view-size-biggest .event .content-grid {
@@ -1690,7 +1693,7 @@ section.elementor-inner-section > div {
 
 .view-size-bigger .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .view-size-bigger .events .win-listview .win-vertical .win-gridlayout.win-surface {
-    margin-left: var(--container-padding) !important;
+    margin: 0 !important;
     width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
 }
 
@@ -1941,7 +1944,8 @@ section.elementor-inner-section > div {
 }
 
 .view-size-medium-small .home .win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
-    margin-bottom: 60px !important;
+    margin-bottom: 0px !important;
+    margin-top: 0 !important;
 }
 
 .view-size-medium-small .event .section-1,
