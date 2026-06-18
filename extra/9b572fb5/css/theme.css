@@ -283,7 +283,7 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     -webkit-border-radius: 0 !important;
     box-shadow: none !important;
     height: 600px !important;
-    margin: 0 32px 32px 0 !important;
+    margin: 0 16px 32px 0 !important;
 }
 
     .home .win-listview .win-gridlayout .win-container:hover, .events .win-listview .win-gridlayout .win-container:hover {
@@ -1506,6 +1506,7 @@ section.elementor-inner-section > div {
 .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
     margin-left: var(--max-content-margin-left) !important;
     width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
+    padding: 0 0 0 var(--container-padding);
 }
 
 .view-size-biggest .events .win-listview .win-vertical .win-footercontainer,
@@ -1516,7 +1517,7 @@ section.elementor-inner-section > div {
 
 .view-size-biggest .home .win-listview .win-gridlayout .win-container {
     width: auto !important;
-    margin: 0 32px 32px 0 !important;
+    margin: 0 16px 32px 0 !important;
 }
 
 .view-size-biggest .modSession .hero-header,
@@ -1569,6 +1570,7 @@ section.elementor-inner-section > div {
     .view-size-biggest .events .win-listview .win-vertical .win-gridlayout.win-surface {
         margin-left: var(--max-content-margin-left) !important;
         width: calc(100% - var(--container-padding) - var(--container-padding) + 32px) !important;
+        padding: 0 0 0 var(--container-padding);
     }
 
     .view-size-biggest .event .content-grid {
