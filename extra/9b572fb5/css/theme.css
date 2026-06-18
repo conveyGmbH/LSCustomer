@@ -955,6 +955,7 @@ section.elementor-inner-section > div {
     padding: 0 !important;
 }
 
+.event .customer-top-header,
 .home .win-listview .win-vertical .win-headercontainer,
 .events .win-listview .win-vertical .win-headercontainer {
     margin-left: 0 !important;
@@ -963,6 +964,7 @@ section.elementor-inner-section > div {
     height: 0 !important;
     padding: 0 !important;
 }
+
 
 .home .win-listview .win-vertical .win-gridlayout.win-surface,
 .events .win-listview .win-vertical .win-gridlayout.win-surface {
