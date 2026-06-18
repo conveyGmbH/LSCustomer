@@ -208,10 +208,10 @@ html {
     font-size: 10px !important;
 }
 #root-split-view {
-    height: calc(100% - 90px);
+    height: calc(100% - 90px) !important;
 }
 section[role="main"] {
-    padding: 0;
+    padding-top: 0 !important;
 }
 .MuiPopover-root {
     font-size: 14px !important;
