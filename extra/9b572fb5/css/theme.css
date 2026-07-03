@@ -43,7 +43,7 @@
     --container-max: 1280px; /* aus Quell-Website */
     --container-padding: 32px; /* aus Quell-Website (Mobile: 20px) */
     --max-content-margin-left: max(var(--container-padding), calc(50% - var(--max-content-width) / 2)) !important;
-    /* vorher: --max-content-margin-left: calc(50% - var(--max-content-width) / 2) !important; /* hier = calc(50% - 640px);*/ */
+    /* vorher: --max-content-margin-left: calc(50% - var(--max-content-width) / 2) !important; /* hier = calc(50% - 640px);*/
     /* ===== fairconcept Brand-Tokens ===== */
     --brand-deep: #131E3E; /* Tiefes Navy – Hauptmarkenfarbe        */
     --brand-olive: #9EB028; /* Helles Oliv/Lime – Pop-/Sekundaerakzent*/
