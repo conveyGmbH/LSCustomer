@@ -313,6 +313,63 @@ html.win-hoverable .win-selectionstylefilled .win-container:hover .win-itembox {
     background-color: var(--e-global-color-primary, #131E3E) !important;
 }
 
+/* == "Zurück zur Programmübersicht" – Back-Button (fixiert, unter Header)
+   Element wird in startup.js erzeugt: <a id="fc-back-to-overview"> == */
+
+#fc-back-to-overview {
+    position: fixed;
+    top: 168px; /* knapp unter dem Header (Desktop 157px) */
+    left: 32px; /* = --container-padding (Desktop) */
+    z-index: 1030; /* unter dem Plattform-Header (1035), über Content */
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    font-family: var(--font-family-default, 'Inter'), sans-serif !important;
+    font-size: 1.6rem !important;
+    font-weight: 600 !important;
+    line-height: 1.5;
+    letter-spacing: 0;
+    white-space: nowrap;
+    text-decoration: none !important;
+    color: var(--e-global-color-buttontext, #FFFFFF) !important;
+    background-color: var(--e-global-color-primary, #131E3E) !important;
+    border: 1px solid var(--e-global-color-primary, #131E3E) !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+    /* Zurueck-Pfeil */
+    #fc-back-to-overview::before {
+        content: "\2190"; /* arrow to the left */
+        font-size: 1.8rem;
+        line-height: 1;
+    }
+
+    #fc-back-to-overview:hover,
+    #fc-back-to-overview:focus {
+        color: var(--e-global-color-buttontext, #FFFFFF) !important;
+        background-color: var(--e-global-color-accent, #7A892E) !important;
+        border-color: var(--e-global-color-accent, #7A892E) !important;
+    }
+
+    #fc-back-to-overview:focus-visible {
+        outline: var(--outline-focus, 2px solid #586631);
+        outline-offset: 2px;
+    }
+
+@media (max-width: 1080px) {
+    #fc-back-to-overview {
+        top: 78px; /* knapp unter dem Header (Mobil 68px) */
+        left: 20px; /* = --container-padding (Mobil) */
+        padding: 10px 16px;
+        font-size: 1.4rem !important;
+    }
+}
+
+
 /****Beginning Changes****/
 .events .button-tip .action-image,
 .event .button-tip .action-image {
