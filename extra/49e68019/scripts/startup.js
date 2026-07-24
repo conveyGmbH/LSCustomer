@@ -43,20 +43,7 @@
         }
     }
 
-    // "Zurück zur Programmübersicht" – Button (#fc-back-to-overview)
-    function addBackToOverviewLink() {
-        if (document.getElementById("fc-back-to-overview")) {
-            return;
-        }
-        var link = document.createElement("a");
-        link.id = "fc-back-to-overview";
-        link.href = "https://fairconcept.de/exhibitor-success/gitex-global-2026";
-        link.textContent = "Zurück zur Programmübersicht";
-        document.body.appendChild(link);
-    }
-
     saveBodyContent();
-    addBackToOverviewLink();
 
     window.LiveBridgeSettings = {
         buttonSymbolColor: "#AD4829",
